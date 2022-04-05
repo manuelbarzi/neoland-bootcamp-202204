@@ -1,1 +1,1 @@
-My GitHubaccount [this](https://github.com/abousiyd)
+My GitHub account [this](https://github.com/abousiyd)
