@@ -1,0 +1,34 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.button {
+    width: 50%;
+    border-radius: .5rem;
+    border-width: 1px;
+    padding: .75rem;
+    background-color: lightgray;
+}   
+
+.button_light {
+    background-color: white;
+}
+
+.button, .input {
+    border-radius: .5rem;
+    border-width: 1px;
+    padding: .75rem;
+}
