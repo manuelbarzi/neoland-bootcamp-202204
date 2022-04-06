@@ -1,0 +1,19 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+body {
+    box-sizing: border-box;
+}
+
+.signin {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+}
+.signin button {
+    width: 200px;
+}
+
