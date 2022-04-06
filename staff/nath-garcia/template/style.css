@@ -1,0 +1,40 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    
+}
+
+body {
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 2em;
+    font-family: 'Parisienne', cursive;
+    }
+
+
+.page{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;   
+}
+figure{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.star{
+    top: 10px;
+}
+.button{
+    width: 25%;
+    border-width: 2px;
+    padding: .50rem;
+    font-family: 'Parisienne', cursive;
+    font-size: 2rem;
+    cursor: pointer;
+}
