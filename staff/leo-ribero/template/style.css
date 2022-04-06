@@ -17,6 +17,12 @@ html, body {
     justify-content: space-around;
     margin: 0;
 }
+fieldset, button {
+    border: none;
+}
+figure, fieldset {
+    margin: 0;
+}
 .brand-1, .content-centered {
     width: 90%;
 }
