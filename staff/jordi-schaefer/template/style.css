@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Baloo:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700;800&display=swap');
+
 html, body {
     margin: 0;
     height: 100%;
@@ -44,6 +47,7 @@ fieldset{
     color: #E2E9FF;
     width: 180px;
     height: 45px;
+    cursor: pointer;
     
     font-family: 'Baloo';
     font-weight: 400;
@@ -55,7 +59,8 @@ fieldset{
     border: none;
     background-color: transparent;
     color: #E2E9FF;
-    margin-bottom: 4rem;
+    margin-bottom: 3rem;
+    cursor: pointer;
 
     font-family: 'Baloo';
     font-style: normal;
@@ -69,13 +74,18 @@ fieldset{
     border: none;
     padding: .2rem;
     background-color: #E2E9FF;
-    width: 70%;
+    width: 80%;
 
     font-family: 'Baloo 2';
     font-style: normal;
     font-weight: 400;
-    font-size: 22px;
+    font-size: 20px;
     text-align: center;
+    outline: none;
+    cursor: text;
+}
+.input::placeholder{
+    color: #749FC7;
 }
 a {
     text-decoration:none;
