@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Primo App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="page" id="landing-page" style="display: none;">
+        <figure>
+            <img class="logo" src="media/logo.svg" alt="primo logo">
+        </figure>    
+        <div class="page" id="welcome">
+            <h1>Welcome to Primo!</h1>
+            <p>We don't already know what this app will be used for</p>
+        </div>
+        <div class="page page_buttons">
+            <button class="button" id="sign-up-button">Sign up</button>
+            <button class="button button_light" id="Log-in-button">Log in</button>
+        </div>
+    </div>
+
+    <div class="page page_sign-up" id="page-sign-up" style="display: none;">
+        <form class="form">   
+            <fieldset class="container-inputs">
+                <label for="email"><h4>What's your e-mail?</h4></label>
+                <input type="text" id="email" name="email" placeholder="primo.neoland@gmail.com">
+            </fieldset>
+            <fieldset class="container-inputs">
+                <label for="name-selected"><h4>How should we call you?</h4></label>
+                <input type="text" id="name-selected" name="name-selected" placeholder="Jane Appleseed"></input>
+            </fieldset>
+            <fieldset class="container-inputs">
+                <label for="password"><h4>Set a password</h4></label>
+                <input type="password" id="password" name="password" placeholder="********"></input>
+            </fieldset>
+            <div class="container-inputs">
+                <button class="submit" type="submit">CONTINUE</button>
+            </div>
+        </form>
+    </div>
+    <div class="footer-terms" id="footer-terms" style="display: none;">
+        <p>By signing up, you accept our Terms and Privacy Policy. <br>
+        You can delete your account in your settings
+        </p>
+    </div>
+
+    <div class="page page_login" id="page-log-in" >
+        <figure>
+            <img class="logo logo_login" src="media/logo.svg" alt="primo logo">
+        </figure>
+        <div>
+            <h2>Log in</h2>
+        </div>
+        <form class="form form_login">   
+            <fieldset class="container-inputs">
+                <label for="e-mail"><h4>Enter your e-mail</h4></label>
+                <input type="text" id="e-mail" name="e-mail" placeholder="primo.neoland@gmail.com">
+            </fieldset>
+            <fieldset class="container-inputs">
+                <label for="password"><h4>Password</h4></label>
+                <input type="password" id="password" name="password" placeholder="********"></input>
+            </fieldset>
+            <div class="container-inputs">
+                <button class="submit" type="submit">CONTINUE</button>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>

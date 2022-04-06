@@ -1,0 +1,100 @@
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+html, body {
+    margin: 0 auto;
+    height: 100%;
+    background-color: #F9FAFE;
+}
+.page {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.logo {
+    margin: 5rem 0 1rem;
+    width: 15rem;
+    height: 15rem;
+}
+
+.logo_login {
+    width: 11.25rem;
+    height: 11.25rem;
+}
+
+h1 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    font-size: 0.75rem;
+    margin-top: 0;
+}
+
+.page_buttons {
+    gap: 1.5rem;
+}
+
+.button {
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    background-color: #4D4E84;
+    border: 1px solid #000000;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1.5rem;
+}
+
+.button_light {
+    background-color: white;
+    color: black;
+}
+
+.page_sign-up {
+    justify-content: center;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+}
+
+.form_login {
+    gap: 1.25rem;
+}
+
+.container-inputs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin: 0 auto;
+}
+
+.submit {
+    padding: 0.6rem 6.25rem;
+    background-color: #D2D4DA;
+    border-radius: 1.5rem;
+    border: 1px solid #D2D4DA;
+    color: white;
+}
+
+.footer-terms {
+    width: 100%;
+    position: relative;
+    bottom: 3rem;
+    text-align: center;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
