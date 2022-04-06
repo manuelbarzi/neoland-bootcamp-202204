@@ -1,0 +1,82 @@
+html, body {
+    margin: 0;
+    height: 100%;
+}
+
+body {
+    background-color:#749FC7;
+    box-sizing: border-box;
+    width: 100%;    
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+.sub_page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.6rem; 
+}
+figure {
+    height: 100%;
+    display: flex;
+}
+fieldset{
+    border: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 25px;
+}
+
+.button {
+    border: none;
+    border-radius: 10rem;
+    background-color: #1D3B67;
+    color: #E2E9FF;
+    width: 180px;
+    height: 45px;
+    
+    font-family: 'Baloo';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 22px;
+}
+
+.but_light {
+    border: none;
+    background-color: transparent;
+    color: #E2E9FF;
+    margin-bottom: 4rem;
+
+    font-family: 'Baloo';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 36px;
+}
+
+.input {
+    border-radius: .5rem;
+    border: none;
+    padding: .2rem;
+    background-color: #E2E9FF;
+    width: 70%;
+
+    font-family: 'Baloo 2';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22px;
+    text-align: center;
+}
+a {
+    text-decoration:none;
+}
