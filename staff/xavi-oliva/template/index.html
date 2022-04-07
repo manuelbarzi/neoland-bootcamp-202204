@@ -10,17 +10,20 @@
 <body>
 
     <!-- landing page -->
-    <section class="page" style="display: flex">
+    <section class="landing page off" >
         <div class="title">
             <h1>Welcome!</h1>
             <h2>Lets not<br>waste time</h2>
         </div>
-        <a class="button" href="">Login</a>
-        <a class="button" href="">Sign up</a>
+        <!-- <a class="login-button button" href="">Login</a>
+        <a class="button" href="">Sign up</a> -->
+
+        <button class="login-button button_light button">Login</button>
+        <button class="signup-button button">Sign Up</button>
     </section>
 
     <!-- login page -->
-    <section class="page" style="display: none">
+    <section class="login page off" >
         <form class="page">
     
             <fieldset>
@@ -30,12 +33,12 @@
             
             <button type="submit" class="button">Login</button>
     
-            <a class="back" href="">Back</a>
+            <a class="back-button back" href="#">Back</a>
         </form>
     </section>
 
     <!-- signup page -->
-    <section class="page" style="display: none">
+    <section class="signup page off">
         <form class="page">
             
             <fieldset>
@@ -46,10 +49,12 @@
             </fieldset>
             
             <button class="button">Sign Up</button>
+
+            <a class="back-button back" href="#">Back</a>
     
-            <a class="back" href="">Back</a>
         </form>
     </section>
 
+    <script src="main.js"></script>
 </body>
 </html>

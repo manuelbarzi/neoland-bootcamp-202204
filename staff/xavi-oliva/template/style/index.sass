@@ -1,0 +1,85 @@
+@use 'resets'
+
+
+.page
+  display: flex
+  flex-direction: column
+  height: 100%
+  justify-content: center
+  gap: 1rem
+  width: 95%
+  max-width: 500px
+  margin: 0 auto
+  padding: 0 0.75rem
+  font-family: 'Montserrat', sans-serif
+
+.off
+  display: none
+
+fieldset
+  padding: 0
+  border: 0
+
+.title
+  margin-bottom: 10em
+
+  h1, h2
+    color: white
+    text-align: center
+    font-family: 'Open Sans', sans-serif
+
+  h1
+    font-size: 48px
+
+  h2
+    font-size: 28px
+
+.input
+  box-sizing: border-box
+  background-color: rgba(255, 255, 255, 0.28)
+  margin: 0
+  margin-bottom: .75rem
+
+  &:last-child
+    margin-bottom: 0
+
+.button
+  border-radius: .5rem
+  border-width: 1px
+  width: 100%
+  border: 0 none
+  color: white
+  background-color: #4AB2C9
+  cursor: pointer
+  box-sizing: content-box
+  padding: 1.175rem 0 !important
+  font-size: 1rem
+  font-weight: 600
+
+.button_light
+  background-color: white
+  color: #4AB2C9
+
+.input
+  border-radius: .5rem
+  border-width: 1px
+  padding: 1.25rem
+  width: 100%
+  border: 0 none
+  color: white
+
+  &::placeholder
+    color: white
+
+  &:focus
+    outline: 0 none
+
+a
+  &.button
+    text-decoration: none
+    text-align: center
+
+  &.back
+    text-decoration: none
+    color: white
+    text-align: center
