@@ -4,21 +4,45 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>Demo app</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body style="border: 5px solid green">
-    <div class="page" style="display: none;">
-        <button class="button">Sign In</button>
-        <button class="button button_light">Sign Up</button>
+<body>
+    <!-- LANDING PAGE -->
+    <div class="landing">
+        <p class="bienvenido">Bienvenido</p>
+        <i class="fa-solid fa-lock icon"></i>
+        <div class="button-landing">
+            <button class="button-log button">Entrar</button>
+            <button class="button-reg button">Registro</button>
+        </div>
     </div>
-
-    <div class="page">
+    <!-- LOGIN PAGE -->
+    <form class="off login">
+        <a class="back-button back" href="#">Back</a>
+        <fieldset>
+            <input class="input" type="text" name="username" placeholder="Nombre de usuario">
+            <input class="input" type="password" name="password" placeholder="Contraseña">
+        </fieldset>
+        <button type="submit" class="button-login button">Entrar</button>
+    </form>
+    <!-- REGISTER PAGE -->
+    <div class="off register">
         <form class="page">
-            <input class="input" type="text" name="username" placeholder="username">
-            <input class="input" type="password" name="password" placeholder="password">
-            
+            <a class="back-reg" href="#">Back</a>
+            <input class="input" type="text" name="username" placeholder="Nombre de Usuario">
+            <input class="input" type="email" name="email" placeholder="Email">
+            <input class="input" type="password" name="password" placeholder="Contraseña">
+            <input class="input" type="password" name="r-password" placeholder="Repite Contraseña">
+            <button class="button-register button"> <span>Registrarme</span> </button>
+        
         </form>
     </div>
+
+    <script src="main.js"></script>
 </body>
 </html>

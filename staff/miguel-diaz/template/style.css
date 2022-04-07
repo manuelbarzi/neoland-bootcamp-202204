@@ -1,34 +1,129 @@
-html, body {
-    margin: 0;
-    height: 100%;
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  margin: 0;
+  height: 100%;
+  background-color: #ffbcd1;
 }
 
 body {
-    box-sizing: border-box;
+  margin: 0;
+  height: 100%;
+  background-color: #ffbcd1;
+  box-sizing: border-box;
 }
 
-.page {
+.off {
+  display: none !important;
+}
+
+.button-landing {
+  width: 100%;
+  border-radius: 0.5rem;
+  border-width: 0;
+  padding: 1.25;
+  background-color: lightgray;
+  border: 0;
+  color: black;
+  display: flex;
+  justify-content: center;
+}
+
+.button-landing .button:hover {
+   color: white;
+   background-color: rebeccapurple; 
+}
+
+.button-landing .input {
+  border-radius: 0.5rem;
+  border-width: 0;
+  padding: 0.75rem;
+}
+
+
+.button {
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 0.75rem;
+  justify-content: center;
+  margin: 0;
+  border-width: 0;
+} 
+
+
+
+.back {
+  color: #46244C;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+.icon {
+  font-size: 30px;
+  display: flex;
+}
+
+.bienvenido {
+  font-size: 40px;
+  margin-bottom: 2em;
+}
+
+fieldset {
+  padding: 0;
+  border: 0;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 0.75rem;
+  resize: vertical;
+}
+
+input:last-child {
+  margin-bottom: 0;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: fit-content;
+  padding: 0 0.75rem;
+}
+
+.register {
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: center;
+    align-items: center;
     gap: 1rem;
-}
+    width: 100%;
+    margin: 0 auto;
+    max-width: fit-content;
+    padding: 0 0.75rem;
+  }
 
-.button {
-    width: 50%;
-    border-radius: .5rem;
-    border-width: 1px;
-    padding: .75rem;
-    background-color: lightgray;
-}   
-
-.button_light {
-    background-color: white;
-}
-
-.button, .input {
-    border-radius: .5rem;
-    border-width: 1px;
-    padding: .75rem;
-}
+/*# sourceMappingURL=style.css.map */
