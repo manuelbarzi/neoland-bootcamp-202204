@@ -7,32 +7,49 @@ body {
   box-sizing: border-box;
 }
 
-.off {
-  display: none !important;
-}
-
-.page {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  justify-content: center;
-  gap: 1rem;
-  align-items: center;
-  background-color: yellow;
-}
-
 .button {
   background-color: lightgray;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  padding: 0.75rem;
+  cursor: pointer;
 }
 
 .button_light {
   background-color: white;
 }
 
-.button, .input {
+.input {
   border-radius: 0.5rem;
   border-width: 1px;
   padding: 0.75rem;
+}
+
+.container {
+  display: flex;
+  gap: 0.5rem;
+  background-color: white;
+}
+
+.container_column {
+  flex-direction: column;
+}
+
+.container_spread {
+  justify-content: space-between;
+}
+
+.container_height_100 {
+  height: 100%;
+}
+
+.container_center {
+  justify-content: center;
+  align-items: center;
+}
+
+.off {
+  display: none !important;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -10,18 +10,35 @@
 </head>
 
 <body>
-    <div id="page-1" class="page off" _style="display: none;">
-        <button class="button">Sign In</button>
+    <div class="off landing container container_height_100 container_center container_column">
+        <button class="login-button button">Sign In</button>
         <button class="button button_light">Sign Up</button>
     </div>
 
-    <form class="page">
-        <input class="input" type="text" name="username" placeholder="username">
-        <input class="input" type="password" name="password" placeholder="password">
-        <!-- TODO place buttons -->
-    </form>
+    <div class="off login container container_height_100 container_column container_center">
+        <form class="container container_column">
+            <input class="input" type="text" name="username" placeholder="username">
+            <input class="input" type="password" name="password" placeholder="password">
+            <div class="container container_spread">
+                <button class="button button_light">Sign Up</button>
+                <button class="button">Sign In</button>
+            </div>
+        </form>
+    </div>
 
-    <!-- TODO implement signup page -->
+    <div class="off register container container_height_100 container_column container_center">
+        <form class="container container_column">
+            <input class="input" type="text" name="name" placeholder="name">
+            <input class="input" type="text" name="username" placeholder="username">
+            <input class="input" type="password" name="password" placeholder="password">
+            <div class="container container_spread">
+                <button class="button button_light">Sign In</button>
+                <button class="button">Sign Up</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="main.js"></script>
 </body>
 
 </html>
