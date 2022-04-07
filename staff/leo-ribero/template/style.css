@@ -50,9 +50,7 @@ figure, fieldset {
     font-weight: 900;
     padding: 0 0 30px;
 }
-form {
-    /* background-color: red; */
-}
+
 form .normal-text {
     font-size: 16px;
     font-weight: 400;
