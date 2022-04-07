@@ -8,37 +8,38 @@
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <div class="auth_login">
+    <section class="auth_login off">
         <h1 class="auth__title">Login Form</h1>
         <form class="auth__form">
             <input class="auth__form__input" type="email" name="email" placeholder="Email Address">
             <input class="auth__form__input" type="password" name="password" placeholder="Password">
             <button class="auth__form__btn" type="submit" class="">Login</button>
-            <p class="auth__form__link">Not a member? <a href="#">Sign up now</a></p>
+            <p class="auth__form__link">Not a member? <a href="#">Register now</a></p>
         </form>
-    </div>
+    </section>
 
-    <div class="auth_register">
+    <section class="auth_register off">
         <h1 class="auth__title">Register Form</h1>
         <form class="auth__form">
-            <input class="auth__form__input" type="text" name="username" placeholder="Username">
-            <input class="auth__form__input" type="email" name="email" placeholder="Email Address">
-            <input class="auth__form__input" type="password" name="password" placeholder="Password">
-            <input class="auth__form__input" type="password" name="password" placeholder="Confirm Password">
+            <fieldset>
+                <input class="auth__form__input" type="text" name="username" placeholder="Username">
+                <input class="auth__form__input" type="email" name="email" placeholder="Email Address">
+                <input class="auth__form__input" type="password" name="password" placeholder="Password">
+                <input class="auth__form__input" type="password" name="password" placeholder="Confirm Password">
+            </fieldset>
             <button class="auth__form__btn" type="submit" class="">Register</button>
-            <p class="auth__form__link">Already have an account? <a href="#">Sign in </a></p>
+            <p class="auth__form__link_register">Already have an account? <a href="#">Login now</a></p>
         </form>
-    </div>
+    </section>
 
-    <div class="home">
-        <section class="content">
+    <section class="home off">
+        <div class="content">
             <h1 class="content__title">Welcome</h1>
-            <div>
-            <button class="content__btn__login" type="submit" class="">Login</button>
-            <button class="content__btn__register" type="submit" class="">Register</button>
+                <a class="content__btn__login" class="">Login</a>
+                <a class="content__btn__register">Register</a>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
     
 </body>
 
