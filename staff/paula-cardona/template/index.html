@@ -9,40 +9,35 @@
     <link rel="stylesheet" href="./style.css" >
 </head>
 <body>
-    <div class="page" style="display:none">
+    <div class="page off">
         <figure>
             <img src="./imagenes/3225187_app_logo_media_popular_reddit_icon.png" alt="">
         </figure>
         <p class="title">BIENVENIDO</p>
-        <button class="button">Iniciar sesión</button>
-        <button class="button">Registrarse</button>
+        <button class="button login-btn">Iniciar sesión</button>
+        <button class="button register-btn">Registrarse</button>
     </div>
-    <div class="page" style="display:none">
+    <div class="page off vista-login">
         <p class="iniciar">Iniciar sesión</p>
         <input type="text" placeholder="Correo electrónico" >
         <input type="text" placeholder="Contraseña">
         <button class="button">Iniciar sesión</button>
-        <p class="pregunta1">¿No tienes cuenta?
-            <a href="#" >Regístrate. </a>  
+        <p class="question">¿No tienes cuenta?
+            <a class="blue login-to-register" >Regístrate. </a>  
         </p>
         
     </div>
-    <form class="page">
+    <form class="page off vista-register">
         <p class="entrar">Registrarse</p>
-        <input type="text" name="Nombre y apellidos" >
+        <input type="text" placeholder="Nombre y apellidos" >
         <input type="text" placeholder="Correo electrónico" >
-        <input type="text" placeholder="Contraseña">
+        <input class="password" type="password" placeholder="Contraseña">
         <button class="button">Registrarse</button>
-        <p classe="preguna">¿Ya tienes cuenta?
-            <a href="#" >Inicia sesión. </a>  
-        </p>
-        
+        <p class="question"> ¿Ya tienes cuenta?
+            <a class="blue register-to-login" >Inicia sesión. </a>  
+        </p>  
     </form>
-
-
-
-
-
-    
 </body>
+<script src="main.js"></script>
+
 </html>
