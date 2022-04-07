@@ -49,6 +49,10 @@ h1 {
     margin-bottom: 0.5rem;
 }
 
+h2 {
+    margin: .5rem
+}
+
 h4 {
     height: 100%;
 }
@@ -105,10 +109,15 @@ p {
     justify-content: center;
 }
 
+.container__form__buttons {
+    justify-content: space-between;
+    gap: 1rem;
+}
 
 .form_login {
-    gap: 1.25rem;
+    gap: 1rem;
 }
+
 
 .container__form__fieldset {
     width: 100%;
@@ -151,7 +160,7 @@ fieldset {
 
 .submit_change {
     background-color: #4D4E84;
-    width: 100%;
     text-align: center;
     text-transform: uppercase;
+    display: inline-block;
 }
