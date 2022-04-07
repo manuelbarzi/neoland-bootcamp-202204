@@ -40,7 +40,7 @@
     height: 100%;
 } */
 
-.form-inputs {
+.form__inputs {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,17 +48,17 @@
 
 }
 
-.form-inputs-title {
+.form__inputs-title {
     text-align: center;
     font-size: 16px;
     margin-bottom: 8px;
 }
 
-.form-inputs-input  {
+.form__inputs-input  {
     margin: 8px;
 }
 
-.form-buttons {
+.form__buttons {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -66,7 +66,7 @@
     justify-content: center;
 }
 
-.form-buttons-button {
+.form__buttons-button {
     margin: 8px;
 }
 
