@@ -12,13 +12,14 @@ body {
     margin-bottom: 20px;
 }
 img{
-    margin: 20px;
-    width: 30%;
+    width: 100%;
     border-radius: 5px;
     box-shadow: 10px 12px 18px -2px rgba(0,0,0,0.51);
 }
-
-.container{
+.landing-img {
+    width: 350px;
+}
+.container, .landing{
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -26,6 +27,7 @@ img{
     align-items: center;
     height: 100%;
     background-color: #ffffff;
+    width: 300px;
 }
 
 .form {
@@ -36,14 +38,6 @@ img{
     align-items: center;
 }
 
-fieldset {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    border: none;
-    width: 300px;
-    background-color: #2b95d6;
-}
 .btns  {
     display: flex;
     justify-content: center;
@@ -77,9 +71,6 @@ button {
     border-radius: 5px;
     background: #3eaaed;
 }
-.container-btn {
-    width: 15%;
-}
 button:hover{
     background: #2b95d6;
 }
@@ -91,9 +82,10 @@ button:nth-child(2n):hover {
     background-color: #d5d5e9;
 }
 
-round-color: #E7E7FF;
-}
 button:nth-child(2n):hover {
     background-color: #d5d5e9;
 }
 
+.off{
+    display: none;
+}
