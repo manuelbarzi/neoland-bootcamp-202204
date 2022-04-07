@@ -1,9 +1,9 @@
 html, body {
     margin: 0;
     height: 100%;
+    border: none;
     
 }
-
 body {
     box-sizing: border-box;
 }
@@ -13,7 +13,6 @@ h1 {
     font-family: 'Parisienne', cursive;
     }
 
-
 .page{
     display: flex;
     flex-direction: column;
@@ -22,13 +21,52 @@ h1 {
     gap: 1rem;
     align-items: center;   
 }
+
+.page2{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100px;
+    gap: 1rem;
+    align-items: center;
+}
+
 figure{
     display: flex;
     justify-content: center;
     align-items: center;
 }
+.box-form{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    gap: 1rem;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
+
+}
+
 .star{
-    top: 10px;
+    width: 400px;
+    justify-items: flex-end;
+}
+
+.headset{
+    width: 200px;
+    display: flex;
+    justify-content: flex-start;
+}
+.last-img{
+    width: 100px;
+    height: 100px;
 }
 .button{
     width: 25%;
@@ -37,4 +75,7 @@ figure{
     font-family: 'Parisienne', cursive;
     font-size: 2rem;
     cursor: pointer;
+}
+a{
+  display: flex;  
 }

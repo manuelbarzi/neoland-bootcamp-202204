@@ -9,18 +9,19 @@
     <title>first app</title>
 </head>
 <body>
-    <div class="page" style="-display:none;">
+    <div class="page">
         <figure>
-            <img class="star" src="img/logo.svg" alt="star" >
+            <img class="logo" src="img/logo.svg" alt="star" >
         </figure>
        
         <h1>Bienvenido</h1>
         <button class="button" type="button" >Log in</button>
         <button class="button" type="button" >Register</button>
     </div>
-    <div class="page2">
+
+    <div class="page" style="display:none;" >
         <form action="#">
-            <fieldset>
+            <fieldset class="box-form">
                 <input type="text" name="username" id="username">
                 <input type="email" name="email" id="email">
                 <input type="password" name="password id="password>
@@ -28,6 +29,25 @@
             <button type="submit">REGISTRAME</button>
             <a href="#">INICIAR SESIÓN</a>
         </form>
+       <figure class="star">
+           <img src="img/Star.svg" alt="">
+        </figure>
+    </div>
+
+    <div class="page" style="display:none;">
+        <figure class="star">
+            <img  src="img/Star.svg" alt="">
+        </figure>
+        <form action="">
+            <fieldset class="box-form">
+                <input type="email" name="email" id="">
+                <input type="password" name="password" id="">
+                <a href="#">ENTRAR</a>
+            </fieldset>
+        </form>
+        <figure class="headset">
+            <img class="last-img" src="img/headset.svg" alt="">
+        </figure>
     </div>
 </body>
 </html>
