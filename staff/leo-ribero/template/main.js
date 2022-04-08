@@ -40,6 +40,22 @@ registerLoginAnchor.addEventListener('click', function(){
 } )
 
 
+// > ACCEDIENDO A LA VISTA HOME DESDE LA VISTA LOGIN
+// El usuario accede a la vista home haciendo login. El botón por defecto tiene un evento 'submit'
+// que tiene varios comportamientos por defecto, uno de los cuales es recargar la página si esta 'tonto' o 
+// eso creo entender, de ahí que usemos preventDefault.
+
+// La idea es que a través de el botón vaya a la home pero antes, de momento, validaremos una única combinación correcta 
+// de usuario + contraseña que si no es correcta muestra un alert "wrong credentials"
+
+// Entonces:
+// declaro una variable que llamaré "loginViewloginForm", estando en loginView que a través de
+// querySelector encuentre mi objeto "form" que exista en la vista login y le añado un "escuchador de evento" para "submit"
+
+var loginViewloginForm = loginView.querySelector('form')
+
+// A continuación 
+
 
 // ESTA ES LA VISTA ACTIVA INICIAL
 landingView.classList.remove('off')
