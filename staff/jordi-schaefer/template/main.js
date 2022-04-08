@@ -44,6 +44,8 @@ loginForm.addEventListener('submit', function(event){
     var usernameInput = loginForm.querySelector('input[name=username]')
     var passwordInput = loginForm.querySelector('input[name=password]')
     
+    var password = event.target.password.value
+
     console.log(usernameInput.value, passwordInput.value)
 
     if (username !== 'user' || password !== '1234')
@@ -60,5 +62,5 @@ registerForm.addEventListener('submit', function(event){
     event.preventDefault()
     //alert("register!")
     registerView.classList.add('off')
-    homeView.classList.remove('off')
+    loginView.classList.remove('off')
 })
