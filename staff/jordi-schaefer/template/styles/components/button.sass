@@ -1,0 +1,36 @@
+@use '../config'
+@use '../utils'
+
+.button
+    // --- Utilizo un paquete de variables de estilo creadas en el archivo utils  ---
+    //border: none
+    //border-radius: 10rem
+    //background-color: config.$color_fondo
+    //color: config.$color_letra
+    @include utils.boton-componentes(none, 10rem, config.$color_boton, config.$color_letra)
+    
+    //font-family: 'Baloo'
+    //font-weight: 400
+    //font-style: normal
+    //font-size: config.$font-size
+    @include utils.boton-letra('Baloo', 400 , normal, config.$font_tamano)
+    
+    width: 180px
+    text-align: center
+    padding: 6px 0px
+    cursor: pointer
+
+
+    &_light
+        border: none
+        background-color: transparent
+        color: #E2E9FF
+        margin-bottom: 2.5rem
+        cursor: pointer
+        
+        //font-family: 'Baloo'
+        //font-weight: 400
+        //font-style: normal
+        //font-size: 22px
+        @include utils.boton-letra('Baloo', 400, normal, config.$font_tamano)
+        
