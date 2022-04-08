@@ -6,13 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page</title>
     <link rel="stylesheet" href="./styles.css">
+    <script src="./main.js" defer></script>
 </head>
 <body>
     <section class="auth_login off">
         <h1 class="auth__title">Login Form</h1>
         <form class="auth__form">
-            <input class="auth__form__input" type="email" name="email" placeholder="Email Address">
-            <input class="auth__form__input" type="password" name="password" placeholder="Password">
+            <input class="auth__form__input" type="email" name="email" placeholder="Email Address" required>
+            <input class="auth__form__input" type="password" name="password" placeholder="Password" required>
             <button class="auth__form__btn" type="submit" class="">Login</button>
             <p class="auth__form__link">Not a member? <a href="#">Register now</a></p>
         </form>
@@ -20,13 +21,13 @@
 
     <section class="auth_register off">
         <h1 class="auth__title">Register Form</h1>
-        <form class="auth__form">
-            <fieldset>
-                <input class="auth__form__input" type="text" name="username" placeholder="Username">
-                <input class="auth__form__input" type="email" name="email" placeholder="Email Address">
-                <input class="auth__form__input" type="password" name="password" placeholder="Password">
-                <input class="auth__form__input" type="password" name="password" placeholder="Confirm Password">
-            </fieldset>
+        <form class="auth__form__register">
+            <!-- <fieldset> -->
+                <input class="auth__form__input" type="text" name="username__register" placeholder="Username" required >
+                <input class="auth__form__input" type="email" name="email" placeholder="Email Address" required >
+                <input class="auth__form__input" type="password" name="password" placeholder="Password" required >
+                <input class="auth__form__input" type="password" name="password__confirm" placeholder="Confirm Password" required >
+            <!-- </fieldset> -->
             <button class="auth__form__btn" type="submit" class="">Register</button>
             <p class="auth__form__link_register">Already have an account? <a href="#">Login now</a></p>
         </form>
@@ -40,9 +41,13 @@
             </div>
         </div>
     </section>
+
+    <section class="user off">
+            <h1 class="content__title">Welcome User</h1>
+    </section>
     
 </body>
 
-<script src="./main.js"></script>
+
 
 </html>
