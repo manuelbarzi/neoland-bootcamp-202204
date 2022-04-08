@@ -1,4 +1,7 @@
+@use '../config'
+@use '../utils'
+
 .input
-    border-radius: .5rem
-    border-width: 1px
+    @include utils.round-border(1px, solid, config.$fore-color, .5rem)
     padding: .75rem
+    font-size: 1rem
