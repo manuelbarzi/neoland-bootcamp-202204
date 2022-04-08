@@ -11,6 +11,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+
+<!------------- LANDING VIEW  ------------>
+
     <section class="off landing-view container">
         <figure class="container__logo logo">
             <img src="media/logo.svg" alt="primo logo">
@@ -20,13 +23,17 @@
             <p>We don't already know what this app will be used for</p>
         </div>
         <div class="container__buttons buttons">
-            <button class="button-sign-up-landing-view container__buttons__button button">Sign up</button>
-            <button class="botton-log-in-landing-view container__buttons__button button button_light" id="Log-in-button">Log in</button>
+            <a class="button-sign-up-landing-view container__buttons__button button">Sign up</a>
+            <a class="botton-log-in-landing-view container__buttons__button button button_light" id="Log-in-button">Log in</a>
         </div>
     </section>
 
+<!------------- SIGN UP VIEW  ------------>
+
     <section class="off sign-up-view container container_sign-up">
+
         <form class="container__form form">   
+
             <div class="container__form__inputs">
                 <fieldset class="container__form__fieldset fieldset">
                     <label class="label" for="email"><h4>What's your e-mail?</h4></label>
@@ -41,6 +48,7 @@
                     <input type="password" id="password" name="password" placeholder="********" required></input>
                 </fieldset>
             </div>
+            
             <div class="container__form__buttons">
                 <div class="fieldset">
                     <button class="submit" type="submit">CONTINUE</button>
@@ -57,8 +65,9 @@
         </footer>
     </section>
 
+<!------------- LOG IN VIEW  ------------>
 
-    <section class="log-in-view container">
+    <section class="off log-in-view container">
         <figure class="container__logo">
             <img class="logo_login" src="media/logo.svg" alt="primo logo">
         </figure>
@@ -68,12 +77,12 @@
         <form class="container__form form form_login"> 
             <div class="container__form__inputs">
                 <fieldset class="container__form__fieldset fieldset">
-                    <label class="label" for="e-mail"><h4>Enter your e-mail</h4></label>
-                    <input type="text" id="e-mail" name="e-mail" placeholder="primo.neoland@gmail.com" required>
+                    <label class="label" for="email"><h4>Enter your e-mail</h4></label>
+                    <input type="text" name="email" if="email" placeholder="primo.neoland@gmail.com" required>
                 </fieldset>
                 <fieldset class="container__form__fieldset fieldset">
                     <label class="label" for="password"><h4>Password</h4></label>
-                    <input type="password" name="password" placeholder="********" required></input>
+                    <input type="password" name="password" id="password" placeholder="********" required></input>
                 </fieldset>
             </div>  
             <div class="container__form__buttons">
@@ -90,6 +99,23 @@
             You can delete your account in your settings
             </p>
         </footer>
+    </section>
+
+<!------------- HOME VIEW  ------------>
+
+    <section class="off home container-home">
+        <h1>Welcome home</h1>
+        <div class="container-home__container-cards container-cards container">
+            <div class="container-cards__item">1</div>
+            <div class="container-cards__item">2</div>
+            <div class="container-cards__item">3</div>
+            <div class="container-cards__item">4</div>
+            <div class="container-cards__item">5</div>
+            <div class="container-cards__item">6</div>
+            <div class="container-cards__item">7</div>
+            <div class="container-cards__item">8</div>
+            <div class="container-cards__item">9</div>
+        </div>
     </section>
 
     <script src="main.js"></script>
