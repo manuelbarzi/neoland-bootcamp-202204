@@ -12,19 +12,22 @@
 
     <!-- LOGIN -->
     
-    <div class="container page-login off">
-        <div class="form">
+    <form class="container page-login ">
+        <div class="form form-login">
+
+            <div class="page-login__error"></div>
+
             <i class="fa-solid fa-lock icon"></i>
 
-            <input type="text" placeholder="Username">
-            <input type="password" placeholder="Password">
+            <input class="username" name="username" type="text" placeholder="Username">
+            <input class="password" name="password" type="password" placeholder="Password">
     
             <div class="btns">
-                <button class="button" type="button">Login</button>
+                <button type="submit" class="button" type="button">Login</button>
                 <button class="button login-btn-register" type="button">Register</button>
             </div>
         </div>
-    </div>
+    </form>
 
 <!-- REGISTER -->
 
@@ -53,6 +56,14 @@
             <button class="button register-btn" type="button">Register</button>
         </div>
     </div>
+
+    <!-- HOME PAGE -->
+
+    <div class="home off">
+        <h1>HOLA HOME PAGE</h1>
+    </div>
+
+
     <script src="./main.js"></script>
 </body>
 </html>
