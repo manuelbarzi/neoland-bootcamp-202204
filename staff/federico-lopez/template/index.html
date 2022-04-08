@@ -6,23 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Primo App</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <!------------- LANDING VIEW  ------------>
 
     <section class="off landing-view container">
-        <figure class="container__logo logo">
+        <figure class="container__logo">
             <img src="media/logo.svg" alt="primo logo">
         </figure>    
-        <div class="container__text" id="welcome">
+        <div class="container__text">
             <h1>Welcome to Primo!</h1>
             <p>We don't already know what this app will be used for</p>
         </div>
-        <div class="container__buttons buttons">
+        <div class="container__buttons container__buttons_gap">
             <a class="button-sign-up-landing-view container__buttons__button button">Sign up</a>
             <a class="botton-log-in-landing-view container__buttons__button button button_light" id="Log-in-button">Log in</a>
         </div>
@@ -67,14 +64,14 @@
 
 <!------------- LOG IN VIEW  ------------>
 
-    <section class="off log-in-view container">
+    <section class="off log-in-view container gap">
         <figure class="container__logo">
-            <img class="logo_login" src="media/logo.svg" alt="primo logo">
+            <img class="container__logo_login" src="media/logo.svg" alt="primo logo">
         </figure>
         <div>
             <h2>Log in</h2>
         </div>
-        <form class="container__form form form_login"> 
+        <form class="container__form form form_gap"> 
             <div class="container__form__inputs">
                 <fieldset class="container__form__fieldset fieldset">
                     <label class="label" for="email"><h4>Enter your e-mail</h4></label>
@@ -103,18 +100,36 @@
 
 <!------------- HOME VIEW  ------------>
 
-    <section class="off home container-home">
+    <section class="off home container container-home">
         <h1>Welcome home</h1>
         <div class="container-home__container-cards container-cards container">
-            <div class="container-cards__item">1</div>
-            <div class="container-cards__item">2</div>
-            <div class="container-cards__item">3</div>
-            <div class="container-cards__item">4</div>
-            <div class="container-cards__item">5</div>
-            <div class="container-cards__item">6</div>
-            <div class="container-cards__item">7</div>
-            <div class="container-cards__item">8</div>
-            <div class="container-cards__item">9</div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
+            <div class="container-cards__item">
+                <div class="container-cards__item__subitem subitem"><h4>Hello World!</h4></div>
+            </div>
         </div>
     </section>
 
