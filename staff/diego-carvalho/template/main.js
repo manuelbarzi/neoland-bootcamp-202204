@@ -62,9 +62,15 @@ registerForm.addEventListener('submit', function (event) {
     var contraseña = passInput.value
     var rcontraseña = rpasswordInput.value
 
-        if (usuario !== 'diego'|| mail !== 'diego@gmail.com' || contraseña !== '1234' || rcontraseña !== '1234')
+        if (usuario !== 'diego'|| mail !== 'diego@gmail.com' || contraseña !== '1234' || rcontraseña !== '1234') {
+            alert('Something is wrong!')
 
-        return
+            return
+
+            
+        }
+
+        
 
     registerView.classList.add('off')
 
@@ -72,7 +78,7 @@ registerForm.addEventListener('submit', function (event) {
 
 })
 
-//TODO make navegation from register to home
+
 
 
 
