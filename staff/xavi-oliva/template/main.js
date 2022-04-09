@@ -1,6 +1,8 @@
 var landingView = document.querySelector('.landing')
 var loginView = document.querySelector('.login')
 var signupView = document.querySelector('.signup')
+var homeView = document.querySelector('.home')
+
 
 landingView.classList.remove('off')
 
@@ -20,18 +22,61 @@ landingSignupButton.addEventListener('click', function() {
     signupView.classList.remove('off')
 })
 
-var backButtonA = loginView.querySelector('.back-button')
+var loginSignupAnchor = loginView.querySelector('.signup-button')
 
-backButtonA.addEventListener('click', function() {
+loginSignupAnchor.addEventListener('click', function() {
     loginView.classList.add('off')
 
-    landingView.classList.remove('off')
+    signupView.classList.remove('off')
 })
 
-var backButtonB = signupView.querySelector('.back-button')
+var signupLoginAnchor = signupView.querySelector('.login-button')
 
-backButtonB.addEventListener('click', function() {
+signupLoginAnchor.addEventListener('click', function() {
     signupView.classList.add('off')
 
-    landingView.classList.remove('off')
+    loginView.classList.remove('off')
+})
+
+var loginForm = loginView.querySelector('form')
+
+loginForm.addEventListener('submit', function(event) {
+    event.preventDefault()
+    // debugger
+    // event
+    // event.target
+    // event.target.username
+    // event-target.username.value
+    var usernameInput = loginForm.querySelector('input[name=username]')
+    var passwordInput = loginForm.querySelector('input[name=password]')
+    
+    var username = usernameInput.value
+    var password = passwordInput.value
+    
+    if(username !== 'Xavi' || password !== '123') {
+        alert('Hey wrong credentials! \nTry again')
+
+        return
+    }
+
+    // event.target.username
+    // event.target.password
+
+    // debugger
+
+    loginView.classList.add('off')
+    homeView.classList.remove('off')
+})
+
+var signupForm = signupView.querySelector('form')
+
+signupForm.addEventListener('submit', function (event) {
+    event.preventDefault()
+
+    var usernameInput   = signupForm.querySelector('input[name=username]')
+    var emailInput      = signupForm.querySelector('input[name=email]')
+    var passwordInput   = signupForm.querySelector('input[name=password]')
+
+    signupView.classList.add('off')
+    loginView.classList.remove('off')
 })
