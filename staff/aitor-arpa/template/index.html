@@ -8,44 +8,61 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="style.css" >
+    <script src="main.js" defer></script>
     <title>Landing</title>
 </head>
 <body>
-    <!--login -->
-    <section>
-    <div class="logo" >
-        <div class="marco">
-        <button type="button" class="login"> <a href="#">Login</a></button>
-        <button type="button" class="singin"><a href="#"> Sing In</a> </button>
+
+
+    <!--       LANDIG     -->
+    <section class="off landing">
+        <div class="entrada logo" >
+         <div class="marco">
+        <button class="register-btn">Register</button>
+        <button class="singin">Sing In</button> 
         </div>
-    </div>   
-</section>
-    <!--
+        </div>
+      </section>
 
-        LANDIG
-     -->
 
-     <section>
-        <figure class="log" >
-            <img src="img/LOGO.svg" >
-        </figure>
-    </section>
-<section>
-        <!--REGISTER -->
-
-        <figure class="log logoreg" >
-            <img src="img/LOGO.svg" >
-        </figure>
-        <form class="env" > 
-      
-    <fieldset class="form">
-        <input class="inp" type="text" placeholder="Nombre">
-        <input class="inp" type="email" placeholder="Ingresa tu coreo">
-        <input class="inp" type="password" placeholder="Contraseña">
-        
-    </fieldset>
-            <button class="inp submit" type="submit">ENVIAR</button>
+    <!--       REGISTER       -->
+<section class="off registro-page ">     
+    <figure class="log logoreg "  >
+        <img src="img/LOGO.svg" >
+    </figure>
+    <form class="registro send" action="">          
+        <fieldset class="form">
+            <input class="inp" type="text" name="username" placeholder="Nombre">
+            <input class="inp" type="email" name="pasword" placeholder="Ingresa tu coreo">
+            <input class="inp" type="password" placeholder="Contraseña">       
+        </fieldset>
+        <button class="inp submit" type="submit">ENVIAR</button>
+        <button class="inp go-login" type="button">LOGIN</button>
     </form>
+</section>
+
+
+   <!--       LOGIN       -->
+<section class="off login-inicio">
+    <figure class="log logoreg"  >
+        <img src="img/LOGO.svg" >
+    </figure>
+    <form class="send">      
+        <fieldset class="form">
+            <input class="inp" name="username" type="text" placeholder="Nombre">
+            <input class="inp" name="password" type="password" placeholder="Contraseña">
+        </fieldset>
+        <button class="inp submit btn-singin" type="submit">SING IN</button>
+        <p>No tienes cuenta <a  class="backRegister" href="#">Registrate</a></a></p>
+    </form>
+</section>
+
+  <!--        HOME       -->
+
+  <section class="off home">
+    <figure class="log" >
+        <img src="img/LOGO.svg" >
+    </figure>
 </section>
 </body>
 </html>
