@@ -1,0 +1,7 @@
+main {
+    max-width: 80%;
+    margin: auto;
+  }
+  .off {
+    display: none !important;
+  }
