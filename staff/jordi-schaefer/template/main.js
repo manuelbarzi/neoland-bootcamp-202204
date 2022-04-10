@@ -3,8 +3,8 @@ var loginView = document.querySelector('.login')
 var registerView = document.querySelector('.register')
 var homeView = document.querySelector('.home')
 
-landingView.classList.remove('off')
-//homeView.classList.remove('off')
+//landingView.classList.remove('off')
+homeView.classList.remove('off')
 
 
 //     -- Movimiento inicial entre paginas --
@@ -34,7 +34,7 @@ registerBackButton.addEventListener('click', function() {
 // si en la consola escribes una variable, te deberia mostrar lo que selecciona
 
 //     -- funciones de login y Registro--
-var loginForm = loginView.querySelector('form')
+var loginForm = loginView.querySelector('.form')
 var registerForm = registerView.querySelector('form')
 loginForm.addEventListener('submit', function(event){
     event.preventDefault()
