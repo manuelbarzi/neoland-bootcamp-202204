@@ -1,4 +1,4 @@
-html, body {
+* {
     margin: 0;
     height: 100%;
     border: none;
@@ -13,7 +13,7 @@ h1 {
     font-family: 'Parisienne', cursive;
     }
 
-.page{
+.page, .login, .register{
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -68,7 +68,8 @@ form{
     width: 100px;
     height: 100px;
 }
-.button{
+
+.button_login, .button_register{
     width: 25%;
     border-width: 2px;
     padding: .50rem;
@@ -76,6 +77,58 @@ form{
     font-size: 2rem;
     cursor: pointer;
 }
+
+.off{
+    display: none !important;
+}
 a{
   display: flex;  
+}
+
+.gallery{
+    border: 1px solid black;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+@media (min-width: 668px){
+    .gallery {
+        display: grid;
+        grid-template-areas: "a b b" "a c c" "d d e" "f f e" "g h h" "g i i";
+    }
+}
+.gallery__item{
+    border: 1px solid purple;
+    min-height: 7vh;
+    background-color: orange;
+}
+@media(min-width: 668px){
+.gallery__item:nth-child(1){
+    grid-area: a;
+}
+.gallery__item:nth-child(2){
+    grid-area: b;
+}
+.gallery__item:nth-child(3){
+    grid-area: c;
+}
+.gallery__item:nth-child(4){
+    grid-area: d;
+}
+.gallery__item:nth-child(5){
+    grid-area: e;
+}
+.gallery__item:nth-child(6){
+    grid-area: f;
+}
+.gallery__item:nth-child(7){
+    grid-area: g;
+}
+.gallery__item:nth-child(8){
+    grid-area: h;
+}
+.gallery__item:nth-child(9){
+    grid-area: i;
+}    
 }
