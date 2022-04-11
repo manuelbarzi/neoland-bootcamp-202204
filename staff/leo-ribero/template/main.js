@@ -69,8 +69,8 @@ loginViewloginForm.addEventListener('submit', function(event){
     // luego, declaro dos variables para gestionar los datos almacenados tanto en:
     // el input con clase "inputcls" cuyo "name" es "userName"
     // como en el input con clase "inputcls" y cuyo "name" es "yourPassword"
-    var inputUserName = loginViewloginForm.querySelector('inputc[name=yourusername]')
-    var inputYourPassword = loginViewloginForm.querySelector('inputc[name=yourpassword]')
+    var inputUserName = loginViewloginForm.querySelector('input[name=yourusername]')
+    var inputYourPassword = loginViewloginForm.querySelector('input[name=yourpassword]')
 
     var user = inputUserName.value 
     var key = inputYourPassword.value
