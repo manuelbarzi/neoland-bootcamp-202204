@@ -1,0 +1,3 @@
+function extractStats(list) {
+    // TODO
+}
