@@ -1,0 +1,164 @@
+html, body {
+    height: 100%;
+  }
+  
+body {
+    background-color: #247881;
+    box-sizing: border-box;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+  }
+  
+.logo {
+    background-image: url(img/LOGO.svg);
+    background-position: center;
+    height: 26rem;
+    width: 37rem;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.marco {
+    display: flex;
+    align-items: center;
+    background: rgba(196, 196, 196, 0.3);
+    width: 24rem;
+    height: 4.5rem;
+    gap: 3rem;
+    text-decoration: none;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+.login ,.singin {
+    background-color: #00FFC6;
+    width: 40%;
+  }
+  .login-logo {
+    display: flex;
+    flex-direction: column;
+  
+  }
+.env {
+    margin-top: 10px;
+  }
+ 
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 80%;
+    align-content: center;
+    align-items: center;
+    text-decoration: none;
+    border: none;
+  }
+  
+.inp {
+    width: 100%;
+    background-color: #247881;
+    text-decoration-line: underline;
+      border: none;
+    width: 200px;
+  }
+  
+.logoreg {
+    display: flex;
+    margin-bottom: 30px;
+    width: 209px;
+    height: 150px;
+  }
+  
+.off {
+    display: none;
+  }
+
+submit {
+    display: flex 
+    margin-top: 10px
+    width: 55px
+    background-color: #00FFC6
+    padding: 3px
+  }
+::placeholder
+   text-align: center
+   color: white
+
+   
+   
+   html, body 
+       height: 100%
+   
+   body 
+       background-color: #247881
+       box-sizing: border-box
+       border: 1px solid
+       display: flex
+       align-items: center
+   
+   
+   .logo 
+       background-image: url(img/LOGO.svg)
+       background-position: center
+       height: 26rem
+       width: 37rem
+       background-repeat: no-repeat
+       display: flex
+       align-items: center
+   
+   .marco  
+       display: flex
+       align-items: center
+       background: rgba(196, 196, 196, 0.3)
+       width: 24rem
+       height: 4.5rem
+       gap: 3rem
+       text-decoration: none
+   
+   
+   .login, .singin 
+       background-color: #00FFC6
+       width: 40%
+   
+   
+   
+   .env
+    margin-top: 10px
+   
+   
+   .form 
+       display: flex
+       flex-direction: column
+       gap: 10px 
+       width: 80%
+       align-content: center
+       align-items: center
+       text-decoration: none
+       border: none
+   
+   
+   .inp 
+       width: 100%
+       background-color: #247881
+       text-decoration-line: underline
+       border: none
+       width: 200px
+       
+   
+   
+   
+   
+   .logoreg
+       display: flex
+       margin-bottom: 30px
+       width: 209px
+       height: 150px
+   
+   .off
+       display: none   
+   

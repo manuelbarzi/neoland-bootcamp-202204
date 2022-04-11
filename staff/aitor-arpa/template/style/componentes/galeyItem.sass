@@ -1,0 +1,95 @@
+.gallery
+    border: 1px solid black
+    width: 80%
+    height: 100%
+    display: flex
+    flex-direction: column
+    gap: .5rem
+    background-color: white
+        
+    
+                  
+       
+
+    @media (min-width: 541px)
+            display: grid
+            grid-template-areas: 'a b c' 'd e f' 'g h i'            
+                    
+       
+                                  
+    @media (min-width: 668px)
+        display: grid
+        grid-template: 'a b b' 'a c c' 'd d e' 'f f e' 'g g h' 'i i h'
+        
+        
+  
+    &__item
+        background-image: url(https://fakeimg.pl/756x373/5580ff/000/)
+        border: 1px solid black 
+        
+
+
+        @media (min-width: 1035px)          
+                                         
+            &:nth-child(1)
+                background-image: url(https://static3.marialunarillos.com/media/wysiwyg/moldesdereposteria.jpg)
+                grid-area: a
+                border-bottom:  50px solid #271f1fcc
+                border-right: 80px solid transparent
+                margin-bottom: 0
+                               
+                                
+            &:nth-child(2)
+                grid-area: b
+                background-image: url(https://static3.marialunarillos.com/media/wysiwyg/utensiliosbasicos.jpg)
+                border-bottom: 150px solid #271f1fcc
+                border-right: 100px solid transparent
+                margin-bottom: 0
+                
+            &:nth-child(3)
+                grid-area: c
+                display: flex
+                align-items: flex-end
+            &:nth-child(4)
+                grid-area: d
+                display: flex
+                align-items: flex-end
+            &:nth-child(5)
+                grid-area: e
+                display: flex
+                
+                align-items: flex-end
+                height: 100%
+            &:nth-child(6)
+                grid-area: f
+                display: flex
+                align-items: flex-end
+                
+            &:nth-child(7)
+                grid-area: g
+                display: flex
+                align-items: flex-end
+                
+            &:nth-child(8)
+                grid-area: h
+                display: flex
+                align-items: flex-end
+                height: 100%
+            &:nth-child(9)
+                grid-area: i
+                display: flex
+                align-items: flex-end
+
+             
+                
+            
+       
+            
+
+      
+          
+    
+                   
+            
+
+            

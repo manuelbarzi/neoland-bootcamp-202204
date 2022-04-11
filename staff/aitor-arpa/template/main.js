@@ -3,7 +3,14 @@ var registerView = document.querySelector(".registro-page")
 var loginView = document.querySelector(".login-inicio")
 var homeView = document.querySelector ('.home')
 
-landigView.classList.remove('off')
+//       Work Views 
+
+//loginView.classList.remove('off')
+//registerView.classList.remove ('off')
+homeView.classList.remove ('off')
+
+
+ //landigView.classList.remove('off')
 
 // Click on Register-Btn go to Register
 
@@ -24,7 +31,7 @@ loginButoon.onclick = function() {
   landigView.classList.add ('off')
   loginView.classList.remove ('off') 
 }
-
+ 
 // Click on Login-btn in to RegisterView go to LoginView
 
 var backLogin = registerView.querySelector ('.go-login')
@@ -33,6 +40,15 @@ var backLogin = registerView.querySelector ('.go-login')
         registerView.classList.add ('off')
         loginView.classList.remove ('off')
 }
+
+var go_reg = registerView.querySelector ('.go-reg')
+
+  
+  go_reg.onclick = function() {
+    registerView.classList.add ('off')
+    loginView.classList.remove ('off')
+}
+
 
 // Click on  AncorRegister  in to RegisterView  go to LoginView 
 
@@ -44,7 +60,9 @@ var backRegister = loginView.querySelector ('.backRegister')
 
     }
 
-/* TODO login submit */
+/*  Click on Sumbit  in to LoginView  go to HomeView and validate the one User*/
+
+
 var registerclick = loginView.querySelector ('form')
 
 registerclick.addEventListener ('submit', function(event){

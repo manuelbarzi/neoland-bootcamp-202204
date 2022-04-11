@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="style.css" >
+    <link rel="stylesheet" type="text/css" href="style/style.css" >
     <script src="main.js" defer></script>
     <title>Landing</title>
 </head>
@@ -15,55 +15,72 @@
 
 
     <!--       LANDIG     -->
-    <section class="off landing">
+    <main class="off landing">
         <div class="entrada logo" >
          <div class="marco">
-        <button class="register-btn">Register</button>
+        <button class="login register-btn">Register</button>
         <button class="singin">Sing In</button> 
         </div>
         </div>
-      </section>
+      </main>
 
 
     <!--       REGISTER       -->
-<section class="off registro-page ">     
+<main class="off registro-page register ">     
     <figure class="log logoreg "  >
         <img src="img/LOGO.svg" >
     </figure>
-    <form class="registro send" action="">          
+    <form class="registro send inp_login" action="">          
         <fieldset class="form">
             <input class="inp" type="text" name="username" placeholder="Nombre">
             <input class="inp" type="email" name="pasword" placeholder="Ingresa tu coreo">
             <input class="inp" type="password" placeholder="Contraseña">       
         </fieldset>
-        <button class="inp submit" type="submit">ENVIAR</button>
-        <button class="inp go-login" type="button">LOGIN</button>
+    <div class="btn_registers_sub">    
+        <button class="singin submit go-reg" type="button">SIGN IN</button>
+        <button class="singin go-login" >LOGIN</button>
+    </div>
     </form>
-</section>
+</main>
 
 
    <!--       LOGIN       -->
-<section class="off login-inicio">
-    <figure class="log logoreg"  >
+<main class="off login-inicio">
+    <figure class="log logoreg" >
         <img src="img/LOGO.svg" >
     </figure>
-    <form class="send">      
-        <fieldset class="form">
+    <form class="send inp_login">      
+        <fieldset class="form ">
             <input class="inp" name="username" type="text" placeholder="Nombre">
             <input class="inp" name="password" type="password" placeholder="Contraseña">
         </fieldset>
-        <button class="inp submit btn-singin" type="submit">SING IN</button>
+        <button class="submit singin btn-singin" type="submit">SING IN</button>
         <p>No tienes cuenta <a  class="backRegister" href="#">Registrate</a></a></p>
     </form>
-</section>
+</main>
 
   <!--        HOME       -->
 
-  <section class="off home">
-    <figure class="log" >
-        <img src="img/LOGO.svg" >
-    </figure>
-</section>
+  <main class="off home">
+   <!-- <figure class="log" >
+        <img src="img/LOGO.svg">
+            </figure> -->
+
+        <div class="gallery">
+
+            <div class="gallery__item"> <h2>hellow word</h2><p>Lorem</p></div>
+            <div class="gallery__item"><div class="trapecio">Lorem 2</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 3</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 4</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 5</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 6</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 7</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 8</div></div>
+            <div class="gallery__item"><div class="trapecio"> Lorem 9</div></div>
+        </div>
+
+        
+</main>
 </body>
 </html>
 

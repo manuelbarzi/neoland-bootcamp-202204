@@ -1,74 +1,116 @@
-@use "compo"
-@use "config"
-
+@use 'componentes/reset.sass'
+@use 'componentes/config'
+@use 'componentes/galeyItem'    
+    
+    
 
 html, body 
     height: 100%
-
+  
+  
 body 
-    background-color: #247881
-    box-sizing: border-box
-    border: 1px solid
+    
+    background: #8360c3 
+    background: -webkit-liear-gradient(to left, #23639b, #8360c3)  
+    background: linear-gradient(to left, #23639b81, #8360c3) 
     display: flex
     align-items: center
-
-
+    width: 100%
+    justify-content: center
+  
+  
 .logo 
-    background-image: url(img/LOGO.svg)
+    background-image: url(../img/LOGO.svg)
     background-position: center
     height: 26rem
     width: 37rem
     background-repeat: no-repeat
     display: flex
     align-items: center
-
-.marco  
+    justify-content: center
+  
+  
+.marco 
     display: flex
     align-items: center
+    justify-content: space-around
     background: rgba(196, 196, 196, 0.3)
     width: 24rem
     height: 4.5rem
     gap: 3rem
     text-decoration: none
-
-
-.login, .singin 
-    background-color: #00FFC6
+    flex-direction: row
+   
+     
+ 
+.login , .singin 
+    background-color: #689fcf
     width: 40%
-
-
-
-.env
- margin-top: 10px
-
-
+  
+.login-logo 
+    display: flex
+    flex-direction: column
+  
+.register
+    display: flex
+    flex-direction: column  
+  
+.env 
+    margin-top: 10px
+  
+  
 .form 
     display: flex
     flex-direction: column
-    gap: 10px 
+    gap: 10px
     width: 80%
     align-content: center
     align-items: center
     text-decoration: none
     border: none
-
-
+  
+  
 .inp 
+    display: flex
     width: 100%
     background-color: #247881
     text-decoration-line: underline
     border: none
     width: 200px
-    
+    gap: 4rem
+    justify-content: center
 
+.inp_login
+    display: flex    
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    gap: 1rem
 
+.btn_registers_sub
+    display: flex
+    flex-direction: row
+    align-content: space-between
+    gap:1rem  
 
-
-.logoreg
+  
+.logoreg 
     display: flex
     margin-bottom: 30px
     width: 209px
     height: 150px
 
-.off
-    display: none   
+   
+  
+  
+.off 
+    display: none
+  
+
+
+::placeholder
+   text-align: center
+   color: white
+
+
+
