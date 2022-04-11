@@ -178,7 +178,7 @@ input::placeholder {
   @media (min-width: 668px) {
     .gallery {
       display: grid;
-      grid-template-areas: "a b b" "a c c" "d d e" "f f e" "g h h" "g i i";
+      grid-template-areas: "a a b" " c c b" "d d e" "f f e" "g h h" "g i i";
     }
   }
   .gallery__item {
