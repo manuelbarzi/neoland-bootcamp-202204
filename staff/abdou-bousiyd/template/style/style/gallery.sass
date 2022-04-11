@@ -1,0 +1,49 @@
+.gallery
+    border: 1px solid black
+    width: 80%
+    display: flex
+    flex-direction: column
+    gap: .5rem
+
+    @media (min-width: 668px)
+        display: grid
+        grid-template-areas: 'a b b' 'a c c' 'd d e' 'f f e' 'g h h' 'g i i'
+                // 'a b b'
+                // 'a c c'
+                // 'd d e'
+                // 'f f e'
+                // 'g h h'
+                // 'g i i'
+
+    &__item
+        border: 1px solid red
+        min-height: 7vh
+        background: orange
+
+        @media (min-width: 668px)
+            &:nth-child(1)
+                grid-area: a
+
+            &:nth-child(2)
+                grid-area: b
+
+            &:nth-child(3)
+                grid-area: c
+
+            &:nth-child(4)
+                grid-area: d
+
+            &:nth-child(5)
+                grid-area: e
+
+            &:nth-child(6)
+                grid-area: f
+
+            &:nth-child(7)
+                grid-area: g
+
+            &:nth-child(8)
+                grid-area: h
+
+            &:nth-child(9)
+                grid-area: i
