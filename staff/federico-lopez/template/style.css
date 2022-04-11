@@ -149,8 +149,6 @@ html, body {
 @media (min-width: 1024px) {
   .container-cards__item::after {
     content: "";
-    display: flex;
-    box-shadow: border-box;
     margin: 0;
     padding: 0;
     border-bottom: 169px solid rgba(255, 255, 255, 0.8);

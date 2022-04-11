@@ -3,8 +3,8 @@ var registerView = document.querySelector('.sign-up-view')
 var logInView = document.querySelector('.log-in-view')
 var homeView = document.querySelector('.home')
 
-landingView.classList.remove('off')
-// homeView.classList.remove('off')
+// landingView.classList.remove('off')
+homeView.classList.remove('off')
 
 var landingRegisterButton = document.querySelector('.button-sign-up-landing-view')
 var landingLogInButton = document.querySelector('.botton-log-in-landing-view')
