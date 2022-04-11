@@ -3,8 +3,8 @@ var loginView = document.querySelector('.login')
 var registerView = document.querySelector('.register')
 var homeView = document.querySelector('.home')
 
-//landingView.classList.remove('off')
-homeView.classList.remove('off')
+landingView.classList.remove('off')
+// homeView.classList.remove('off')
 
 var landingLoginAnchor = landingView.querySelector('.login-anchor')
 

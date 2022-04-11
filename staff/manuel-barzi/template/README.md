@@ -1,5 +1,5 @@
 - to run sass
 
 ```sh
-$ sass --watch style/index.sass style.css
+$ sass --watch src/index.sass style.css
 ```
