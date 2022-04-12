@@ -59,11 +59,6 @@ loginForm.addEventListener('submit', function(event) {
         return
     }
 
-    // event.target.username
-    // event.target.password
-
-    // debugger
-
     loginView.classList.add('off')
     homeView.classList.remove('off')
 })
