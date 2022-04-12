@@ -1,3 +1,0 @@
-function extractStats(list) {
-    // TODO
-}
