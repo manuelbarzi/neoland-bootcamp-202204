@@ -3,6 +3,8 @@ console.log('TEST concat')
 const array1 = ['a', 'b', 'c']
 const array2 = ['d', 'e', 'f']
 
+console.assert(result.length === array1.length + array2.length)
+
 {
 	console.log('CASE 1')
 
