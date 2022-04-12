@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./style.css" >
 </head>
 <body>
-    <div class="page off">
+    <div class="page off vista-landing">
         <figure>
             <img src="./imagenes/3225187_app_logo_media_popular_reddit_icon.png" alt="">
         </figure>
@@ -17,26 +17,30 @@
         <button class="button login-btn">Iniciar sesión</button>
         <button class="button register-btn">Registrarse</button>
     </div>
-    <div class="page off vista-login">
+    <form class="page off vista-login">
         <p class="iniciar">Iniciar sesión</p>
-        <input type="text" placeholder="Correo electrónico" >
-        <input type="text" placeholder="Contraseña">
-        <button class="button">Iniciar sesión</button>
+        <input class="username" type="text" placeholder="Correo electrónico" >
+        <input class="password" type="password" placeholder="Contraseña">
+        <button type="submit"  class="button">Iniciar sesión</button>
         <p class="question">¿No tienes cuenta?
             <a class="blue login-to-register" >Regístrate. </a>  
         </p>
-        
-    </div>
-    <form class="page off vista-register">
+    </form>
+
+    <form class="page vista-register off">
         <p class="entrar">Registrarse</p>
-        <input type="text" placeholder="Nombre y apellidos" >
-        <input type="text" placeholder="Correo electrónico" >
-        <input class="password" type="password" placeholder="Contraseña">
-        <button class="button">Registrarse</button>
+        <input class="name" type="text" placeholder="Nombre y apellidos" >
+        <input class="mail" type="text" placeholder="Correo electrónico" >
+        <input class="password-register" type="password" placeholder="Contraseña">
+        <button type="submit" class="button">Registrarse</button>
         <p class="question"> ¿Ya tienes cuenta?
             <a class="blue register-to-login" >Inicia sesión. </a>  
         </p>  
     </form>
+
+    <div class="off home"> 
+        <p>Hola Home</p>
+    </div>
 </body>
 <script src="main.js"></script>
 

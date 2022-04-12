@@ -42,7 +42,7 @@
     font-weight: bolder;
 }
 .button:hover {
-    background-color: brown;
+    background-color: rgb(42, 165, 67);
 }
 input {
     font-family: 'Montserrat', sans-serif;
@@ -81,7 +81,7 @@ a:link, a:visited, a:active, .p {
 }
 
 .blue{
-    color: brown;
+    color: rgb(42, 165, 58);
 }
 
 .off {
@@ -90,3 +90,4 @@ a:link, a:visited, a:active, .p {
   .login-to-register, .register-to-login {
       cursor: pointer;
   }
+
