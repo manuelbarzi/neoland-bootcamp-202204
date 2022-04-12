@@ -7,8 +7,6 @@
 // la guardamos a continuacion de la array 3  
 
 
-
-
 function concat(uno , dos ){
     let array3 = []
     for (i=0; i < uno.length; i++) {
@@ -26,4 +24,4 @@ uno declaramos que la varible pos que empieza en el final de la posicion de la a
     return array3
 
 }
-let newarray = concat (array1,array2)
+

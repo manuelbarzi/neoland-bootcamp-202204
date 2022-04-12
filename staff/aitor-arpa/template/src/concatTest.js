@@ -1,5 +1,5 @@
-console.log('TEST concat')
-
+{console.log('TEST concat')
+}
 const array1 = ['a', 'b', 'c']
 const array2 = ['d', 'e', 'f']
 
