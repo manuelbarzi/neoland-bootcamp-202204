@@ -3,10 +3,19 @@
 - llamar a la funcion callback con cada elemento
 */
 
-function forEach(array, callback) {
-    for (let i = 0; i < array.length; i++) {
-        const currElem = array[i]
+// function forEach(array, callback) {
+//     for (let i = 0; i < array.length; i++) {
+//         const currElem = array[i]
 
-        callback(currElem)
+//         callback(currElem)
+//     }
+// }
+
+
+function forEach(array, callback){
+    for (let i = 0; i < array.length; i++){
+        const currentElement = array[i]
+
+        callback(currentElement)
     }
 }

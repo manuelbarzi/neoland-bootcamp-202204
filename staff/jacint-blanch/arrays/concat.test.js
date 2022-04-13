@@ -1,3 +1,5 @@
+console.log('TEST concat')
+
 {
     console.log('CASE 1')
 
