@@ -6,7 +6,7 @@ function extractTodoHours(list) {
                 let list1 = Number(list[j])
                 let list2 = Number(list[j+1])
                 if (list[j] <= 9 && list[j] >= 0 && list[j] !== ' ') {
-                    if (list[j+1] <= 9 || list[j+1 >= 0]) {
+                    if (list[j+1] <= 9 || list[j+1] >= 0) {
                         if (list[j+2] === 'm') {
                             todoHours += (list1 * 10 + list2) / 60
                             j = list.length
