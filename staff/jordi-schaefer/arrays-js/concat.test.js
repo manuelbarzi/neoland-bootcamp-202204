@@ -35,3 +35,37 @@ const array3 = ['g', 'h', 'i']
     console.assert(result[7]===array3[1])
     console.assert(result[8]===array3[2])
 }
+
+{
+    console.log('CASE 3')
+    const result = concat(array1, array2, array3, 'q')
+    console.assert(result.length === array1.length + array2.length + array3.length +1)
+    //console.assert(result==='a', 'b', 'c', 'd', 'e', 'f')
+    console.assert(result[0]===array1[0])
+    console.assert(result[1]===array1[1])
+    console.assert(result[2]===array1[2])
+    console.assert(result[3]===array2[0])
+    console.assert(result[4]===array2[1])
+    console.assert(result[5]===array2[2])
+    console.assert(result[6]===array3[0])
+    console.assert(result[7]===array3[1])
+    console.assert(result[8]===array3[2])
+    console.assert(result[9]==='q')
+}
+
+{
+    console.log('CASE 4')
+    const result = concat(array1, array2, array3, 10)
+    console.assert(result.length === array1.length + array2.length + array3.length +1)
+    //console.assert(result==='a', 'b', 'c', 'd', 'e', 'f')
+    console.assert(result[0]===array1[0])
+    console.assert(result[1]===array1[1])
+    console.assert(result[2]===array1[2])
+    console.assert(result[3]===array2[0])
+    console.assert(result[4]===array2[1])
+    console.assert(result[5]===array2[2])
+    console.assert(result[6]===array3[0])
+    console.assert(result[7]===array3[1])
+    console.assert(result[8]===array3[2])
+    console.assert(result[9]===10)
+}
