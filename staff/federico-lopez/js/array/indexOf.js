@@ -15,3 +15,4 @@ function indexOf(array, searchElement, fromIndex = 0) {
 
    return -1
 }
+
