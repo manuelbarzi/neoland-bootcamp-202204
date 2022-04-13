@@ -1,34 +1,57 @@
-// function concat() {
-// 	
-// }
+/*
+PLANTEAMIENTO DEL EJERCICIO CASO1:
 
-// creamos una funcion que le llegan dos 2 array 
-// creamos una array vacia
-// recoremos la arry para extraer los objetos
-// la guardamos en el array vacia
-// recoremos la segunda array 
-// la guardamos a continuacion de la array 3  
+el método Array.prototype.concat() concatena dos arrays
+devolviendo un tercer Array con los valores de los dos anteriores
+sin modificar los dos primeros Arrays. 
+
+PASOS:
+1- Para emular este método (StandAlone)lo primero es crear
+un nuevo Array vacio.
+
+2- Creamos una funcion "concat" que recibe dos Arrays
+y dentro de "concat" recorremos con un primer bucle el primer Array asignando los
+valores que vaya recorriendo al Array vacio que, al finalizar el bucle, 
+tendrá los mismos valores que este primer Array.
+
+3- Recorremos el segundo Array asignando sus valores al Array que
+inicialmente estaba vacio, y antes de pasar el segundo bucle contiene los mismos
+valores del primer Array. Para que no reemplace los valores le decimos que comience a contar desde 
+la posición final, es decir desde el actual valor de "i" o también podriamos usar "arrayNuevo.lenght"
+
+*/
 
 // const array1 = ['a', 'b', 'c']
 // const array2 = ['d', 'e', 'f']
 
-let arreglo3 = []
+let result = []
+
 function concat(uno, dos){
-	
+    // PRIMER BUCLE
 	for (i=0; i < uno.length; i++) {
-		arreglo3[i] = uno[i]                
-	   
+		result[i] = uno[i]                
 	}
-	
-	let pos = arreglo3.length
-/*// para no remplazar los valores de la array 
-uno declaramos que la varible pos que empieza en el final de la posicion de la array uno y no sobrescriba*/
-	for (j=0; j < dos.length; j++) {
-		arreglo3[pos] = dos[j] 
+    // Antes de hacer el siguiente bucle declaramos nuevaVariable que recoge la posición de "i"
+	// let pos = result.length
+    let pos = i
+    
+	for (i=0; i < dos.length; i++) {
+		result[pos] = dos[i] 
 		pos++ 
 	} 
-	return arreglo3
+	return result
 }
-let arregloResultado = concat(array1,array2)
+/*
+// Comprobación
+let result = concat(array1,array2)
+*/
 
-// console.log(arregloResultado)
+// console.log(result)
+
+/*
+PLANTEAMIENTO DEL EJERCICIO CASO2:
+
+
+
+
+*/
