@@ -15,8 +15,8 @@ function concat(uno , dos ){
     }
     
     let pos = array3.length
-/*// para no remplazar los valores de la array 
-uno declaramos que la varible pos que empieza en el final de la posicion de la array uno y no sobrescriba*/
+//para no remplazar los valores de la array 
+//uno declaramos que la varible pos que empieza en el final de la posicion de la array uno y no sobrescriba
     for (j=0; j < dos.length; j++) {
         array3[pos] = dos[j] 
         pos++         
@@ -24,4 +24,10 @@ uno declaramos que la varible pos que empieza en el final de la posicion de la a
     return array3
 
 }
+
+
+
+
+
+
 
