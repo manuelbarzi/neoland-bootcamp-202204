@@ -27,8 +27,6 @@
 
     const result = push(animals, 'elefante', 'gallina', 'pato', 'pajaro')
 
-    console.log(animals)
-    console.log(result)
     console.assert(result === 9)
     console.assert(typeof result === 'number')
     console.assert(animals[7]==='pato')
