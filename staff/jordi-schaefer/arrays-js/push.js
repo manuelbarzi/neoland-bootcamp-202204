@@ -1,8 +1,23 @@
+/*   VERSION para CASO 1
 
 function push(array, element){
     array[array.length]=element
     return array.length
 }
+
+*/
+
+
+function push(){
+    array=arguments[0]
+    for(let i=0; i<arguments.length-1; i++)
+        array[array.length]=arguments[i+1]
+
+    return array.length
+}
+
+
+
 
 /*
 IMPORTANTE !
