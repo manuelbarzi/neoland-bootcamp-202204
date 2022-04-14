@@ -1,29 +1,31 @@
-console.log('TEST forEach')
-
-const nums = [1, 2, 3]
-
 {
-    console.log('CASE 1')
+    console.log('TEST forEach')
 
-    let sum = 0
+    const nums = [1, 2, 3]
 
-    forEach(nums, function(num) {
-        sum += num
-    })
+    {
+        console.log('CASE 1')
 
-    console.assert(sum === 6)
-}
+        let sum = 0
 
-const chars = ['h', 'e', 'l', 'l', 'o']
+        forEach(nums, function (num) {
+            sum += num
+        })
 
-{
-    console.log('CASE 2')
+        console.assert(sum === 6)
+    }
 
-    let word = ''
+    const chars = ['h', 'e', 'l', 'l', 'o']
 
-    forEach(chars, function(char) {
-        word += char
-    })
+    {
+        console.log('CASE 2')
 
-    console.assert(word === 'hello')
+        let word = ''
+
+        forEach(chars, function (char) {
+            word += char
+        })
+
+        console.assert(word === 'hello')
+    }
 }
