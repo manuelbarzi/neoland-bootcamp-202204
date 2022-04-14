@@ -17,30 +17,50 @@
         <p class="bienvenido">Bienvenido</p>
         <i class="fa-solid fa-lock icon"></i>
         <div class="button-landing">
-            <button class="button-log button">Entrar</button>
-            <button class="button-reg button">Registro</button>
+            <button class="button-log button-1">Entrar</button>
+            <button class="button-reg button-2">Registro</button>
+
         </div>
     </div>
     <!-- LOGIN PAGE -->
-    <form class="off login">
-        <a class="back-button back" href="#">Back</a>
-        <fieldset>
-            <input class="input" type="text" name="username" placeholder="Nombre de usuario">
-            <input class="input" type="password" name="password" placeholder="Contraseña">
-        </fieldset>
-        <button type="submit" class="button-login button">Entrar</button>
-    </form>
+    <section class="off login">
+        <form class="login-form">
+            <i class="back-button back flecha-login fa-solid fa-arrow-left-long" href="#"></i>
+            <h2 class="login-title">Login</h2>
+            <fieldset>
+                <input class="input-user" type="text" name="username" placeholder="Nombre de usuario">
+                <input class="input-pass" type="password" name="password" placeholder="Contraseña">
+            </fieldset>
+            <button type="submit" class="button-login button">Entrar</button>
+            <button type="submit" class="button-registro button">Registrarse</button>
+        </form>
+    </section>
     <!-- REGISTER PAGE -->
     <div class="off register">
         <form class="page">
-            <a class="back-reg" href="#">Back</a>
-            <input class="input" type="text" name="username" placeholder="Nombre de Usuario">
-            <input class="input" type="email" name="email" placeholder="Email">
-            <input class="input" type="password" name="password" placeholder="Contraseña">
-            <input class="input" type="password" name="r-password" placeholder="Repite Contraseña">
+            <i class="back-reg back-button back flecha-register fa-solid fa-arrow-left-long" href="#"></i>
+            <h2 class="registro-title">Registro</h2>
+            <input class="input-u" type="text" name="username" placeholder="Nombre de Usuario" required>
+            <input class="input-e" type="email" name="email" placeholder="Email" required>
+            <input class="input-p" type="password" name="password" placeholder="Contraseña" required>
+            <input class="input-rp" type="password" name="r-password" placeholder="Repita Contraseña" required>
             <button class="button-register button"> <span>Registrarme</span> </button>
-        
         </form>
+    </div>
+    <div class="off home-page">
+        <h1>Pagina de Inicio</h1>
+        <section class="gallery">
+            <div class="gallery__item">1</div>
+            <div class="gallery__item">2</div>
+            <div class="gallery__item">3</div>
+            <div class="gallery__item">4</div>
+            <div class="gallery__item">5</div>
+            <div class="gallery__item">6</div>
+            <div class="gallery__item">7</div>
+            <div class="gallery__item">8</div>
+            <div class="gallery__item">9</div>
+        </section>  
+
     </div>
 
     <script src="main.js"></script>
