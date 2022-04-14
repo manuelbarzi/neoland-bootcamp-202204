@@ -58,3 +58,33 @@ const paises = ['España','Argentina','Francia','Alemania','Brasil','Rusia','Chi
     console.assert(result[6]==='CH')
 }
 
+
+{
+    console.log('CASE 4')
+
+    const boxes = [
+        {w: 10, h:10, d:10},
+        {w:20, h:20, d:20},
+        {w:5, h:5, d:5}
+    ]
+
+    const calculateVolume = box =>  {
+        return box.w * box.h * box.d
+    }
+    //const calculateVolume = () =>  {return box.w * box.h * box.d}
+    //const calculateVolume = () =>  {box.w * box.h * box.d}
+    //const calculateVolume = () =>  box.w * box.h * box.d
+    //const calculateVolume = box =>  {return box.w * box.h * box.d}
+    //const calculateVolume = (box, cube) =>  {return box.w * box.h * box.d}
+    
+    
+    const volumns = map(boxes, calculateVolume)
+
+    const expected = [1000, 8000, 125]
+
+    console.assert(volumns.length===expected.length)
+
+    for (let i = 0; i < volumns.length; i++)
+        console.assert(volumns[i] === expected[i])
+
+}
