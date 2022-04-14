@@ -4,15 +4,11 @@
 -
 - si no lo encuentra, retornar -1*/
 
-function lastIndexOf(array, searchElement, fromIndex = 0) {
-    for (var i = fromIndex; i < array.length; i++) {
-        var currentElement = array[i]
-
-        if (currentElement === searchElement)
-           return i
-    }
-
-   return -1
-}
-
 //the last index at which a given element can be found in the array
+
+ function lastIndexOf(array, value, fromIndex = array.length - 1) {
+    for (let i = fromIndex; i >= 0; i--)
+        if (array[i] === value)
+            return i
+    return -1
+}
