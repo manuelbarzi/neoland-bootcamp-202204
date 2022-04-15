@@ -11,7 +11,7 @@ console.log('TEST every')
 
 
     })
-    console.assert(result === true)
+    console.assert(result === false)
 }
 
 {
@@ -24,6 +24,32 @@ console.log('TEST every')
         return element < num
 
 
+    })
+    console.assert(result === true)
+}
+
+{
+    console.log('CASE 3')
+
+    const nombres  = ['jorde', 'diego', 'carlos', 'nath', 'federico', 'yassin'];
+
+    const result = every(nombres, function(nombre) {
+
+        const num = 5
+        return nombre.length > num
+    })
+    console.assert(result === true)
+}
+
+{
+    console.log('CASE 4')
+
+    const nombres  = ['jorde', 'diego', 'carlos', 'nath', 'federico', 'yassin'];
+
+    const result = every(nombres, function(nombre) {
+
+        const num = 2
+        return nombre.length < num
     })
     console.assert(result === false)
 }
