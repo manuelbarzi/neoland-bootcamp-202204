@@ -1,8 +1,8 @@
 
 function flat (array, niveles=1){  // recivo el array y los sub niveles que quiero profundizar
     const new_array = [] // creo el nuevo array que devolvere
-    let n=0 // creo una constante para el nuevo array
-    let c=1
+    let n=0 // creo una variable para el nuevo array
+    let c=1 // creo una variable para contar los niveles
     for (let i=0; i<array.length; i++){ //recorro el array que he recivido
 
         /*
