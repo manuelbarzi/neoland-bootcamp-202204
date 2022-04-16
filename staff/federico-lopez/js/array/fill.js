@@ -1,10 +1,12 @@
 function fill(arr, value, start = 0, end = arr.length) {
-    const arrFilled = []
-    for (let i = 0; i < start; i++)
-        arrFilled[i] = arr[i]
+
+    if (start < 0)
+        start = arr.length + start
+    if (end < 0)
+        end = arr.length + end
+
     for (let i = start; i < end; i++)
-        arrFilled[i] = value
-    for (let i = end; i < arr.length; i++)
-        arrFilled[i] = arr[i]
-    return arrFilled
+        arr[i] = value
+    return arr
+    
 }

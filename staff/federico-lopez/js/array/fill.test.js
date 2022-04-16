@@ -13,9 +13,10 @@ console.log('TEST FILL')
 
         console.assert(result.length === expectedResult.length)
 
-        for(let i = 0; i < expectedResult.length; i++) 
+        for(let i = 0; i < expectedResult.length; i++) {
             console.assert(expectedResult[i] === result[i])
-        
+            console.assert(expectedResult[i] === array123[i])
+        }
 
     }
 
@@ -28,14 +29,16 @@ console.log('TEST FILL')
 
         console.assert(result.length === expectedResult.length)
 
-        for(let i = 0; i < expectedResult.length; i++) 
+        for(let i = 0; i < expectedResult.length; i++) {
             console.assert(expectedResult[i] === result[i])
+            console.assert(expectedResult[i] === array123[i])
+        }
 
     }
 
     {
 
-        console.log('CASE 2')
+        console.log('CASE 3')
 
         const result = fill(array123, 6)
 
@@ -43,9 +46,11 @@ console.log('TEST FILL')
 
         console.assert(result.length === expectedResult.length)
 
-        for(let i = 0; i < expectedResult.length; i++) 
+        for(let i = 0; i < expectedResult.length; i++) {
             console.assert(expectedResult[i] === result[i])
-
+            console.assert(expectedResult[i] === array123[i])
+        }
+        
     }
 
 }
