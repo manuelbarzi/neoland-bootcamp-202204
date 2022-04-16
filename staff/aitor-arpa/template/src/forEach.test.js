@@ -3,4 +3,4 @@
 -llamar a la funcion callvack con cada elemento
 */
 
-fuction forEach (array,callback)
+function forEach (array,callback)

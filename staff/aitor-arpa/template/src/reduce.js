@@ -1,0 +1,1 @@
+// TODO recore todo el array y sumara los elementos internos
