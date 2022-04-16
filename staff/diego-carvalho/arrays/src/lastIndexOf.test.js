@@ -1,20 +1,22 @@
 
-const result = lastIndexOf(['Dodo', 'Tiger', 'Penguin', 'Dodo', 'lorem'])
-console.log('TEST LAST INDEX')
+console.log('TEST lastIndexOf')
 
-const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', undefined]
 
 {
     console.log('CASE 1')
 
+    const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', 'lorem']
+
     const result = lastIndexOf(animals, 'Dodo')
-    
+
     console.assert(result === 3)
 }
 
 
 {
     console.log('CASE 2')
+
+    const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', undefined]
 
     const result = lastIndexOf(animals, 'Tiger')
 
@@ -23,6 +25,8 @@ const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', undefined]
 
 {
     console.log('CASE 3')
+
+    const animals = ['Tarzan', 'fish', 'Penguin', 'cat', undefined]
 
     const result = lastIndexOf(animals, undefined)
 

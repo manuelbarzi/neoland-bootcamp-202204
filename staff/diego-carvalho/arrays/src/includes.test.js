@@ -1,26 +1,37 @@
 console.log('TEST INCLUDES')
 
-const array4 = [1, 2, 3];
+
 
 {
     console.log('CASE 1')
+
+    const array4 = [2, 3, 4];
+
     console.assert(includes(array4, 2) === true)
 }
 
-const pets = ['cat', 'dog', 'bat', 'elephant', 'bird'];
 {
     console.log('CASE 2')
+
+    const pets = ['cat', 'dog', 'bat', 'elephant', 'bird'];
+
     console.assert(includes(pets, 'cat') === true)
 }
 
 {
     console.log('CASE 3')
+
+    const pets = ['cat', 'rabbit', 'lion', 'tiger', 'bison'];
+    
     console.assert(includes(pets, 'at') === false)
 }
 
 {
     console.log('CASE 4')
-    console.assert(includes(pets, 'monkey') === false)
+
+    const vegetables = ['carrot','letuce','tomato']
+
+    console.assert(includes(vegetables, 'carrot') === true)
 }
 
 

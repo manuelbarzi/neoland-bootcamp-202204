@@ -1,5 +1,6 @@
-console.log('TEST concat')
 
+console.log('TEST concat')
+{
 const array1 = ['a', 'b', 'c']
 const array2 = ['d', 'e', 'f']
 
@@ -34,4 +35,5 @@ const array3 = ['g', 'h', '1']
     console.assert(result[6] === array3[0])
     console.assert(result[7] === array3[1])
     console.assert(result[8] === array3[2])
+}
 }
