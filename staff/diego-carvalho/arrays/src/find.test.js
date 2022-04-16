@@ -10,8 +10,6 @@ console.log('TEST find')
 
     // expected output: 12
 
-
-
 }
 {
     console.log('CASE 02')
@@ -22,8 +20,5 @@ console.log('TEST find')
 
         return num.array2 === 5
     }
-
-  
-
 
 }

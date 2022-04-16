@@ -28,15 +28,8 @@ console.log('TEST pop')
 
     const number = [10, 14, 20, 24, 30, 34];
 
-    function pop() {
-        const remove = number [number.length -1]
+    const result = pop(number)
 
-        return remove 
-
-    
-    }
-
-    console.assert(pop())
-
+    console.assert(result===34)
 
 }
