@@ -27,6 +27,26 @@ console.log('TEST FLAT')
     console.assert(result[0] === 0)
     console.assert(result[1] === 1)
     console.assert(result[2] === 2)
-    console.assert(result[3] === [3, 4])
+    console.assert(result[3][0] === 3)
+    console.assert(result[3][1] === 4)
+
+}
+
+{
+
+    console.log('CASE 3')
+    
+    const arr2 = [0, [1, 2], 3, 4, [[[[3, 4]], 5]]]
+
+    const result = flat(arr2, 3)
+
+    console.assert(result[0] === 0)
+    console.assert(result[1] === 1)
+    console.assert(result[2] === 2)
+    console.assert(result[3] === 3)
+    console.assert(result[4] === 4)
+    console.assert(result[5][0] === 3)
+    console.assert(result[5][1] === 4)
+    console.assert(result[6] === 5)
 
 }
