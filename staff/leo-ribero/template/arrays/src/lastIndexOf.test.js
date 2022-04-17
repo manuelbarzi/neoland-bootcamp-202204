@@ -1,11 +1,12 @@
 {
     console.log('TEST lastIndexOf')
+    const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo']
 
-    const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'];
-    
-    console.assert(lastIndexOf(animals, 'Penguin' -1) === 2)
-    console.assert(lastIndexOf(animals, 'Dodo') === 3)
-    console.assert(lastIndexOf(animals, 'Dodo', 0) === 0)
+    {
+        console.log('CASE 1')
+        const result = lastIndexOf(animals, 'Dodo')
+        console.assert(result === 3)
+    }
 
 }
 
