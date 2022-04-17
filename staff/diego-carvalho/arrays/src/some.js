@@ -9,3 +9,17 @@
     }
     return false
 }
+/* function find(array,finder){
+     for (let i = 0; i < array.length; i++) {
+         const result = finder(array[i]);
+
+         if (result === true) {
+
+            return true
+         }
+         
+     }
+return false
+     
+ }
+ */

@@ -1,48 +1,50 @@
 
 console.log('TEST push')
 
+//El método push() añade uno o más elementos al final de un array 
+// devuelve la nueva longitud del array.
 {
     console.log('CASO 1')
 
-    let valors = [1, 2, 3]
-    valors.push(4)
+    var vegetable = ['tomato'] //array
+    var newVegetable = 'letuce' //elemento que deseo añadir en al final del array
 
-    // [1, 2, 3, 4]
+    push(vegetable, newVegetable)
+
+    console.assert(vegetable[0] === 'tomato')
+    console.assert(vegetable[1] === 'letuce')
+
 }
 
 {
     console.log('CASO 2')
 
-    let numbers = [3, 4]
-    numbers.push(5)
-    console.assert(numbers[0] === 3)
-    console.assert(numbers[1] === 4)
-    console.assert(numbers[2] === 5)
- // [3, 4, 5]
+    var num = [1, 2, 3]
+    var newNum = 4,
+
+    push(num, newNum)
+
+    console.assert(num [0] === 1 )
+    console.assert(num [1] === 2 )
+    console.assert(num [2] === 3 )
+    console.assert(num [3] === 4 )
+    
 }
-
+//function push 
 {
-    console.log('CASO 3')
-
-    const animals = ['dog','cat','monkey','bird']
-    animals.push('camel')
-    console.assert(animals[0] === 'dog')
-    console.assert(animals[1] === 'cat')
-    console.assert(animals[2] === 'monkey')
-    console.assert(animals[3] === 'bird')
-    console.assert(animals[4] === 'camel')
-     //['dog','cat','monkey','bird', 'camel']
-
-}
-
-{
-    const array1 = [1, 2, 3]
-    const num = 4
-
-    const union = push(array1, num) 
-
-    console.assert(union === 4)
-    console.assert(array1[3] === 4)
+    function push(array, element) {
+        array.lenght = array.length + element//array.length(tomato) + element(letuce)
+        return array.lenght//devolve el array con element(letuce) añadido
 
     }
+}
 
+/*
+function push(){
+    array=arguments[0]
+    for(let i=0; i<arguments.length-1; i++)
+        array[array.length]=arguments[i+1]
+
+    return array.length
+}
+ */

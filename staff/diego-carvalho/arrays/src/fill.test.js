@@ -36,7 +36,7 @@ console.log('TEST fill')
     console.log('CASE 03')
 
     const array3 = [1, 2, 3, 4, 5, 8, 7]
-   
+
     fill(array3, 6, 2, 5)//array(array3),elemente(6),start(2) y end(5)
 
     console.assert(array3[0] === 1)
@@ -46,17 +46,18 @@ console.log('TEST fill')
     console.assert(array3[4] === 6)
     console.assert(array3[5] === 8)
     console.assert(array3[6] === 7)
-     // [1, 2, 6, 6, 6, 8, 7])
+    // [1, 2, 6, 6, 6, 8, 7])
 }
 
+{
+    function fill(array3, element, start = 2, end = array3.length) {
 
-function fill(array3, element, start=2, end=array3.length) { 
+        const newArr = [] // creo un nuevo array vacio
 
-    const newArr = [] // creo un nuevo array vacio
-
-    for (let i = start; i < end; i++) { // recorre desde la i= al valor START(2), hasta el valor END(5), de 1 en 1
-        newArr[i] = element  //el newArr[i] es igual a element (6) (newAR = [1, 2, 6, 6, 6, 6, 7])
+        for (let i = start; i < end; i++) { // recorre desde la i= al valor START(2), hasta el valor END(5), de 1 en 1
+            newArr[i] = element  //el newArr[i] es igual a element (6) (newAR = [1, 2, 6, 6, 6, 6, 7])
+        }
+        return newArr  // devuelto el nuevo array ENTERO, con los cambios ya hechos
+        // [1, 2, 6, 6, 6, 8, 7]
     }
-    return newArr  // devuelto el nuevo array ENTERO, con los cambios ya hechos
-     // [1, 2, 6, 6, 6, 8, 7]
 }

@@ -1,55 +1,97 @@
 
 console.log('TEST every')
 
-{
-    console.log('CASE 01')
-
-    let biggerthan10 = [20, 25, 15, 200]
-
-    function isBigger(element, index, array) {
-        return element > 10
-
-    }
-    console.assert(biggerthan10.every(isBigger))
-}
 
 {
-    console.log('CASE 02')
+    console.log('Test 01')
 
-    let biggerthan15 = [20, 25, 44, 5]
+    const numbers = [2, 4, 6, 0]
 
-    function isBigger15(element, index, array) {
-        if (biggerthan15.array > 15) {
+
+    function isSmallerThanOne(value) {
+        if (value < 6) {
             return true
+        } else {
+            return false
         }
-        return false
     }
-  
 
-}
-{
-    console.log('CASE 03')
 
-    const age = [32, 33, 19, 40]
+    function customEvery(array, comparer) {
+        for (let i = 0; i < array.length; i++) {
+            const result = comparer(array[i])
 
-    age.every(checkAge)
+            if (result === false) {
+                return false
 
-    function checkAge(age) {
-        return age > 18;
+            }
 
+        }
+
+        return true
     }
+
+    customEvery(test, isSmallerThanOne)
 }
-//comprobar si todos los elementos del array pasan por el test implementado por la función.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
-function every(element, index, array) {
-    for (let i = 0; i < array.length; i++) {
-        if (element >= element.array) {
-            return true
-        }
+// Is every age bigger than 1
+function isBiggerThanOne(value) {
+    if (value > 1) {
+        return true
+    } else {
         return false
-
     }
 }
-*/
 
+function customEvery (array, comparer) {
+    for (let i = 0; i < array.length; i++) {
+        const isFalse = comparer(array[i]) === false
+        if (isFalse ) {
+            return false
+        } else{
 
+            return true
+        }
+        
+    }
+
+}
+
+const areAgesMoreThanOne = customEvery(age, isBiggerThanOne)
+
+// every(function() {
+    
+// })
+
+// const biggerThan1 = [2, 3, 4]
+
+// every(1, biggerThan1)
+
+// console.assert(biggerThan1 === true)
+}
+
+// function every (maxCap, array){
+//     for (let i = 0; i < array.length; i++) {
+//         if (array[i] < maxCap) {
+//             return false
+//         }
+    
+//     }
+// }*/

@@ -24,8 +24,6 @@ console.log('TEST some')
     })
 
     console.assert(myName === true)
-
-
 }
 
 {
@@ -40,20 +38,3 @@ console.log('TEST some')
 
     console.assert(n === true)
 }
-
-
-/*
-function some() {
-    for (let i = 0; i < myName.length; i++) {
-       if (myName[3] === 'leo') {
-
-           return true
-
-       } else {
-           return false
-       }
-        
-    }
-    
-}
-*/
