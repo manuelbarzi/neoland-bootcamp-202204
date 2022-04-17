@@ -19,3 +19,4 @@
         console.assert(result === 130)
     }
 }
+// para probar en consola, volver a copiar el array nums
