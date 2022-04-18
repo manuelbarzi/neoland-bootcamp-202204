@@ -2,22 +2,27 @@
 {
     console.log('TEST push')
 
-
-    const animals = ['vaca', 'cabra', 'obeja', 'cerdo', 'caballo']
-    
     {
-    console.log('CASE: 1')
-    // utilizacion del metodo push existente
-    // const total = animals.push('elefante')
+        console.log('CASE: 1')
 
-    // replicar la linea de codigo de arriba para usarlo con nuestra funcion push
-    const result = push(animals, 'elefante')
+        const animals = ['pigs', 'goats', 'sheep']
 
+        const addone = push(animals, 'gulls')
 
-    console.assert(result === 6)
-    console.assert(typeof result === 'number')
-    console.assert(animals[5]==='elefante')
-    console.assert(typeof animals[5] ==='string')
+        console.assert(animals.length === 4)
+        console.assert(animals[3] === 'gulls')
+
+    }
+    {
+        console.log('CASE: 2')
+
+        const animals = ['pigs', 'goats', 'sheep']
+
+        const addsome = push(animals, 'gulls', 'cats', 'dolphins')
+
+        console.assert(animals.length === 6)
+        console.assert(animals[4] === 'cats')
+
     }
 
 
