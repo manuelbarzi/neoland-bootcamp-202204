@@ -1,17 +1,11 @@
-function map(array, callback){
+function map(array, callback) {
+  const result = []
 
-  // creo un nuevo Array vacio
-    let newArray = []
+  for (let i = 0; i < array.length; i++) {
+      const element = array[i]
 
-  // recorro el array que le doy como primer parámetro
-  // enviando en cada pasada la primera letra de cada string dentro de este array
-  // como parámetro de la funcion callback()
-    for (i=0; i < array.length; i++) {
-      newArray[i] = callback(array[i])
-    }
-    return newArray
-   }
-   
-   const acronim = map(words, function (element) {
-    return element[0]
-   })
+      result[i] = callback(element)
+  }
+
+  return result
+}
