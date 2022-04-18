@@ -1,4 +1,4 @@
-console.log('INCLUDES TEST')
+console.log('INCLUDE TEST')
 
 const animales = ['leon', 'gato', 'perro', 'cuervo']
 

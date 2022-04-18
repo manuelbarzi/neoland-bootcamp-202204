@@ -1,28 +1,28 @@
-console.log('TEST join')
+console.log('JOIN TEST')
 
 const elements = ['Fire', 'Air', 'Water'];
 
 {
     console.log('CASO 1')
 
-    const resultado = join(elements)
+    const result = join(elements)
 
-    console.assert(resultado === 'Fire,Air,Water')
+    console.assert(result === 'Fire,Air,Water')
 }
 
 {
     console.log('CASO 2')
 
-    const resultado = join(elements, '')
+    const result = join(elements, '')
 
-    console.assert(resultado === 'FireAirWater')
+    console.assert(result === 'FireAirWater')
 }
 
 {
     console.log('CASO 3')
 
-    const resultado = join(elements, '-')
+    const result = join(elements, '-')
 
-    console.assert(resultado === 'Fire-Air-Water')
+    console.assert(result === 'Fire-Air-Water')
 }
 
