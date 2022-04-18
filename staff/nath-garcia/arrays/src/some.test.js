@@ -11,8 +11,6 @@
         })
         
         console.assert(n === true)
-        // expected output: true
-
     }
 
     const element = ['fire', 'air', 'water']
