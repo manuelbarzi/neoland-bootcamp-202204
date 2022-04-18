@@ -19,3 +19,7 @@ function map(array, callback) {
     }
     return newArray
 }
+
+/* TODO hacer función hecha por Manu 14/4 10.18
+function 
+ */

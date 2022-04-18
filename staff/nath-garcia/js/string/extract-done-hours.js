@@ -33,3 +33,4 @@ function extractDoneHours(string){
             }
         } 
     } return doneHours
+}

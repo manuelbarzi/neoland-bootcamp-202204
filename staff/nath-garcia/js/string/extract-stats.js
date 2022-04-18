@@ -1,4 +1,4 @@
-function extractStats(list) {
+/*function extractStats(list) {
     var todos = 0
     var doings = 0
     var dones = 0
@@ -19,4 +19,15 @@ function extractStats(list) {
         done: dones
     }
     return newObject
+}*/
+
+//Function hecha por Manu
+function extractStats(list) {
+    var stats = {} //object literal (= new Object)
+
+    stats.todo = countPattern(list, 'TODO')
+    stats.doing = countPattern(list, 'DOING')
+    stats.done = countPattern(list, 'DONE')
+
+    return stats
 }
