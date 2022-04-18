@@ -22,7 +22,7 @@ console.log('TEST FLAT')
     
     const array2 = [0, 1, 2, [[[3, 4]]]]
 
-    const result = flat(array2, 2) // expected output: [0, 1, 2, [3, 4]]
+    const result = flat(array2, 2) 
 
     console.assert(result[0] === 0)
     console.assert(result[1] === 1)
