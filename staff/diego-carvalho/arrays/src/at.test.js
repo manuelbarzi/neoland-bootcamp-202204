@@ -22,7 +22,6 @@
 
 }
 
-
 /*let index = 2;
 
 console.log(`Using an index of ${index} the item returned is ${array1.at(index)}`);

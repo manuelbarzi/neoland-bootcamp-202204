@@ -1,50 +1,39 @@
 
 console.log('TEST push')
-
 //El método push() añade uno o más elementos al final de un array 
 // devuelve la nueva longitud del array.
+
 {
     console.log('CASO 1')
 
-    var vegetable = ['tomato'] //array
-    var newVegetable = 'letuce' //elemento que deseo añadir en al final del array
+    let vegetable = ['tomato','letuce'] //array
 
-    push(vegetable, newVegetable)
+    const result = customPush(vegetable, 'potato')
 
-    console.assert(vegetable[0] === 'tomato')
-    console.assert(vegetable[1] === 'letuce')
-
-}
-
-{
-    console.log('CASO 2')
-
-    var num = [1, 2, 3]
-    var newNum = 4,
-
-    push(num, newNum)
-
-    console.assert(num [0] === 1 )
-    console.assert(num [1] === 2 )
-    console.assert(num [2] === 3 )
-    console.assert(num [3] === 4 )
+    console.assert(result === 3)
     
-}
-//function push 
-{
-    function push(array, element) {
-        array.lenght = array.length + element//array.length(tomato) + element(letuce)
-        return array.lenght//devolve el array con element(letuce) añadido
 
-    }
+
 }
+
+
+
+   
 
 /*
-function push(){
-    array=arguments[0]
-    for(let i=0; i<arguments.length-1; i++)
-        array[array.length]=arguments[i+1]
+    const animals = ['vaca', 'cabra', 'oveja', 'cerdo', 'caballo']
+    
+    
+    console.log('CASE: 1')
+    // utilizacion del metodo push existente
+    // const total = animals.push('elefante')
 
-    return array.length
-}
- */
+    // replicar la linea de codigo de arriba para usarlo con nuestra funcion push
+    const result = push(animals, 'elefante')
+
+
+    console.assert(result === 6)
+    console.assert(typeof result === 'number')
+    console.assert(animals[5]==='elefante')
+    console.assert(typeof animals[5] ==='string')
+     */

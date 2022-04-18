@@ -6,24 +6,9 @@ console.log('TEST unshift')
 {
     console.log('CASE 01')
 
-    const num = [1, 2]
-
-    num.unshift(0)
-
-    console.assert(num[0]=== 0)
-    console.assert(num[1]=== 1)
-    console.assert(num[2]=== 2)
- 
-}
-
-{
-    console.log('CASE 02')
-
     const vegetable = ['letuce', 'carrot']
 
     elem = 'tomato'
-
-
 
 
 }

@@ -1,11 +1,8 @@
 
+function customPush(){
+    array=arguments[0]
+    for(let i=0; i<arguments.length-1; i++)
+        array[array.length]=arguments[i+1]
 
-//añadir un numero al final del array
-//devolver un nuevo numero largo del array 
-{
-    function push(array, elemento) {
-        array[array.length] = elemento
-        return array.length
-
-    }
+    return array.length
 }

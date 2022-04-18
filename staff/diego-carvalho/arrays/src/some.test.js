@@ -25,16 +25,9 @@ console.log('TEST some')
 
     console.assert(myName === true)
 }
-
-{
-    console.log('CASE: 3')
-
-    const num = [1, 2, 3, 4, 5, 6]
-
-
-    const n = some(num, function (elem) {
-        return elem % 2 == 0
-    })
-
-    console.assert(n === true)
-}
+ /*function checkValue(value) {
+        if (value === array) {
+            return true 
+        }
+    }
+*/
