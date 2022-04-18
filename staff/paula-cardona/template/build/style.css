@@ -20,10 +20,11 @@
   
     img {
        border-radius: 50px;
-       background-color: aqua;
+       background-color: rgb(0, 204, 255);
        height: 80px;
        width: 80px;
    }         
+
    .title {
        font-family: 'Montserrat', sans-serif;
         font-size: 20px;
@@ -32,7 +33,7 @@
 
    }
 
-   .button {
+.button {
     font-family: 'Montserrat', sans-serif;
     background-color: rgba(6, 189, 251, 0.898);
     font-size: larger;
