@@ -12,10 +12,16 @@
 // }
 
 
-function forEach(array, callback){
-    for (let i = 0; i < array.length; i++){
-        const currentElement = array[i]
+// function forEach(array, callback){
+//     for (let i = 0; i < array.length; i++){
+//         const currentElement = array[i]
 
-        callback(currentElement)
-    }
-}
+//         callback(currentElement)
+//     }
+// }
+
+// function forEach(array, callback) {
+
+//     for(let i = 0; i < array.length; i++) callback(array[i], array)
+
+// }
