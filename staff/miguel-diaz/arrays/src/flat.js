@@ -5,7 +5,7 @@ function flat(array, deepth = 1) {
         newArray.push(element)
     
     for (let i = 0; i < newArray.length; i++) {
-        for (let j = 1; j <= deepth; j++) {
+        for (let d = 1; d <= deepth; d++) {
             if (newArray[i] instanceof Array) {
                 for (let k = newArray[i].length - 1; k >= 0; k--) {
                     newArray.splice(i + 1, 0, newArray[i][k])

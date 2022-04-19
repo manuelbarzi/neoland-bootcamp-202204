@@ -12,7 +12,7 @@ function copyWithin(array, target, start = 0, end = array.length) {
     }
 
     for (let i = start; i < end; i++) {
-        newArray[target] = arr[i]
+        newArray[target] = array[i]
         target++
         if (target === array.length) {
             for (let j = 0; j < newArray.length; j++) {
