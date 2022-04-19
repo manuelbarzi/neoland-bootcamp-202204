@@ -5,3 +5,4 @@ function push() {
     }
     return array.length
 }
+
