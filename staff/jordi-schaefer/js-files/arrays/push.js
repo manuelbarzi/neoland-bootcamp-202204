@@ -23,7 +23,7 @@ function push(){
 IMPORTANTE !
 
 aun teniendo dentro de la funcion push otros nombres, dentro de la funcion siempre hacen referencia al original y modifical el original 
-la referencia ha referencia ( o apunta ) en los dos casos a la misma memoria
+la referencia hace referencia ( o apunta ) en los dos casos a la misma memoria
 para crear uno nuevo no puedo crearlo sin mas
 ¡¡ NO !!  new_array=array ¡¡ NO !!
 de este modo estoy haciendo una copia de la direccion
