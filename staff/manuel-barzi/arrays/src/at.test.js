@@ -1,21 +1,15 @@
-{
-    console.log('TEST at')
-
+describe('at', function() {
     const nums = [5, 12, 8, 130, 44]
 
-    {
-        console.log('CASE 1')
-
+    test('positive index', function() {
         const result = at(nums, 2)
 
-        console.assert(result === 8)
-    }
+        expect(result).toBe(8)
+    })
 
-    {
-        console.log('CASE 2')
-
+    test('negative index', function() {
         const result = at(nums, -2)
-
-        console.assert(result === 130)
-    }
-}
+    
+        expect(result).toBe(130)
+    })
+})
