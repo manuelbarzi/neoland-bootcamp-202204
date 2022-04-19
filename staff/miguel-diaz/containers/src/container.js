@@ -12,5 +12,3 @@ Container.prototype.open = function() {
 Container.prototype.close = function() {
     this.status = "🔒"
 }
-
-
