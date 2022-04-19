@@ -17,9 +17,6 @@ console.log('TEST push')
 }
 
 
-
-   
-
 /*
     const animals = ['vaca', 'cabra', 'oveja', 'cerdo', 'caballo']
     
