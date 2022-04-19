@@ -1,22 +1,17 @@
 // crea un nuevo array eliminando los elementos indicados entre los parametros indicados  (str y fin)
+// aislar en otra array los valores a eliminiar y recorer el resto de la array con el indice nuevo
 
-
-function slice(array, str, fin) {
+function slice (array , str = 0 , fin){
     debugger
-    let newarr = [] // Declaro una array nueva donde se guardaran los elementos de la array anterior 
-    let final = fin
-    let newi = 0 // Declaro un nuevo indice ya que el de la array anterior seguramente no sera el mismo en algunso casos
-    if (str < 0) // Si el el parametro no viene definido 
-        final = array.length + fin
-}
-
-for (let i = inicio; i < final; i++) {  // paso los valores solo de inicio a fin
-    new_array[n] = array[i]
-    n++                          // subo contador del nuevo array
-}
-return new_array  
-      
-            
-
-         
+    let n = 0
+    let newarray = [] 
+    let newarray2 = []
+    for (i= 0; i < array.length; i++) { // recoro el array y voy incrementadno 
+         if ( str >= i ) { // mientras str sea mayor al indice hacemos la replica
+             newarray[n] = array[i] // Donde le puedo incrementar el valor de n cada vez ¿? con i la replica 
+              n++  //no incrementa
+         } if (fin >= i) { newarray2[n] = array[i]} // mientras sea mayor o igual el ultimo elemento a eliminar del indice añadire el contenido a la nueva array
+            n++
+    } return newarray + newarray2 // devuelvo el array modificado 
 } 
+         

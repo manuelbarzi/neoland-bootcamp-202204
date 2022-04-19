@@ -10,5 +10,6 @@ console.log ('Test pop')
     console.assert(array[2] === 'cabbage')
     console.assert(array[3] === 'kale')
     console.assert(array[4] === undefined)
+    console.assert (elementDel === 'tomato')
 
 }
