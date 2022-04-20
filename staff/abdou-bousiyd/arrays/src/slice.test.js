@@ -45,6 +45,3 @@ console.log('TEST slice')
         console.assert(animals[i] === result[i])
     }
 }
-
-
-

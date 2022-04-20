@@ -1,17 +1,24 @@
-console.log('TEST at')
+describe('at', function() {
+    const nums = [5, 12, 8, 130, 44]
 
-{
-    const foo = ['a', 'c', 'b','e','c']
-    const index = 2
-    console.log('CASE 1')
-    const res1 = at(foo, index)
-    console.assert(res1 === 'b')
-}
+    test('positive index', function() {
+        const result = at(nums, 2)
+        expect(result).toBe(8)
+    })
 
-{
-    const foo = ['a', 'c', 'b','e','c']
-    const index = -2
-    console.log('CASE 2')
-    const res1 = at(foo, index)
-    console.assert(res1 === 'e')
-}
+    test('negative index', function() { 
+        const foo = ['a', 'c', 'b','e','c']
+        const index = -2
+        const res1 = at(foo, index)
+        expect(res1).toBe('e')
+    })
+
+    test('should returns element from position', function() { 
+        const foo = ['a', 'c', 'b','e','c']
+        const index = 2
+        const res1 = at(foo, index)
+        expect(res1).toBe('b')
+    })
+
+    
+})

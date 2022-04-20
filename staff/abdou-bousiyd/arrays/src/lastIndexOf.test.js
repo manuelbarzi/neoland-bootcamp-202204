@@ -1,4 +1,4 @@
-console.log('TEST at')
+console.log('TEST lastIndexOf')
 
 {
     console.log('CASE 1')
