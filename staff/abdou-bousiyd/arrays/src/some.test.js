@@ -1,5 +1,3 @@
-console.log('TEST some')
-
 describe('some', function() {
     test('return true on element matching', () => {
         const numeros = [1, 2, 3, 4, 5] 

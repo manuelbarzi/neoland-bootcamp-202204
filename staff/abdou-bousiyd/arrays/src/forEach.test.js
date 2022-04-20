@@ -1,29 +1,24 @@
-console.log('TEST forEach')
-
-{
-    console.log('CASE 1')
+describe('forEach', function() {
+    test('should add 10 to each element', () => {
+        const array = [1, 2, 3, 4, 5] 
     
-    const array = [1, 2, 3, 4, 5] 
+        forEach(array, (value, index) => {
+            const sum = value + 10
+            const result = array[index] = sum
+
+            expect(result).toBe(value +10)
+            
+        })
+    })
     
-    forEach(array, (value, index) => {
-        const sum = value + 10
-        const result = array[index] = sum
-        
-        console.assert(result === value + 10)
+    test('should return array to a string', () => {
+        const fruits = ["orange","apple","cherry"];
+    
+        let word = ''
+
+        forEach(fruits, function(fruits){
+            word += fruits
+        })
+        expect(word).toBe('orangeapplecherry')
     })
-}
-
-
-
-{  
-    console.log('Case 2')
-
-    const fruits = ["orange","apple","cherry"];
-    let word = ''
-
-    forEach(fruits, function(fruits){
-        word += fruits
-    })
-    console.assert(word === 'orangeapplecherry')
-}
-
+})
