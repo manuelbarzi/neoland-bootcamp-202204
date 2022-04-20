@@ -1,58 +1,57 @@
-{
-    console.log('TEST slice')
-    // slice(inicio, fin) devuelve un nuevo array que es el recorte del original desde y hasta las posiciones dadas (final NO incluido)
+// slice(inicio, fin) devuelve un nuevo array que es el recorte del original desde y hasta las posiciones dadas (final NO incluido)
 
-
+describe('slice', function() {
     
-    {
-        console.log('CASE 1')
-        
+    it('without indexes', function() {
         const palabras = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         // expected = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         
         const result = slice(palabras) // si no le doy numero devuelve el mismo array
-        console.assert(result.length===7)
-        console.assert(result[0]==='silla')
-        console.assert(result[6]==='sofa')
-    }
+        expect(result.length).toBe(7)
+        expect(result[0]).toBe('silla')
+        expect(result[6]).toBe('sofa')
+    })
 
-
-    {
-        console.log('CASE 2')
-        
+    it('with start index', function() {
         const palabras = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         // expected = ['lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         
         const result = slice(palabras, 2) // si le doy 1 numero indica solo el inicio del nuevo array que devolvera
-        console.assert(result.length===5)
-        console.assert(result[0]==='lampara')
-        console.assert(result[4]==='sofa')
-    }
+        expect(result.length).toBe(5)
+        expect(result[0]).toBe('lampara')
+        expect(result[4]).toBe('sofa')
+    })
 
-
-    {
-        console.log('CASE 3')
-        
+    it('with start and end indexes', function() {
         const palabras = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         // expected = ['lampara', 'ordenador', 'puerta']
         
         const result = slice(palabras, 2, 5) // si le doy 2 numeros indica el inicio y el final que no estara incluido
-        console.assert(result.length===3)
-        console.assert(result[0]==='lampara')
-        console.assert(result[2]==='puerta')
-    }
+        expect(result.length).toBe(3)
+        expect(result[0]).toBe('lampara')
+        expect(result[2]).toBe('puerta')
+    })
 
-    
-    {
-        console.log('CASE 4')
-        
+    it('with negative startd index', function() {
         const palabras = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         // expected = ['mesa', 'lampara', 'ordenador', 'puerta']
         
         const result = slice(palabras, 1, -2) // si le doy 2 numeros indica el inicio y el final que no estara incluido
-        console.assert(result.length===4)
-        console.assert(result[0]==='mesa')
-        console.assert(result[3]==='puerta')
-    }
+        expect(result.length).toBe(4)
+        expect(result[0]).toBe('mesa')
+        expect(result[3]).toBe('puerta')
+    })
 
-}
+    it('with negative start and end indexes', function() {
+        const palabras = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
+        // expected = ['lampara', 'ordenador', 'puerta']
+        
+        const result = slice(palabras, -5, -2)
+        expect(result.length).toBe(3)
+        expect(result[0]).toBe('lampara')
+        expect(result[1]).toBe('ordenador')
+        expect(result[2]).toBe('puerta') 
+    })
+
+
+})
