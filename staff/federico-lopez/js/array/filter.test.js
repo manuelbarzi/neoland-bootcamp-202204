@@ -1,87 +1,74 @@
-console.log('TEST FILTER')
+describe('filter', () => {
 
-{
+    test('filter words with length more than 6', () => {
+        
+        const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+        
+        const result = filter(words, function (word) {
+            return word.length > 6;
+        })
 
-    console.log('CASE 1')
+        const expectedResult = ["exuberant", "destruction", "present"];
 
-    const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
+        checkArrays(result, expectedResult);
 
-    const result = filter(words, function (word) {
-        return word.length > 6
-    }
-    )
+    })
 
-    console.assert(result[0] === "exuberant")
-    console.assert(result[1] === "destruction")
-    console.assert(result[2] === "present")
+    test('filter word === \'limit\'', () => {
 
-}
+        const words = ['spray', 'limit', 'elite', 'limit', 'destruction', 'present'];
+        
+        const result = filter(words, function (word) {
+            return word === 'limit'
+        })
+        
+        const expectedResult = ['limit', 'limit'];
+        
+        checkArrays(result, expectedResult);
 
-{
-    console.log('CASE 2')
+    })
 
-    const words = ['spray', 'limit', 'elite', 'limit', 'destruction', 'present'];
-
-    const result = filter(words, function (word) {
-        return word === 'limit'
-    }
-    )
-
-    console.assert(result[0] === "limit")
-    console.assert(result[1] === "limit")
-}
-
-console.log('CASE 3')
-
-const people = [
-    { name: "Leo", edad: 50, gender: "m" },
-    { name: "Aitor", edad: 32, gender: "m" },
-    { name: "Jordi", edad: 30, gender: "m" },
-    { name: "Manu", edad: 44, gender: "m" },
-    { name: "Naty", edad: 37, gender: "f" },
-    { name: "Paula", edad: 23, gender: "f" },
-    { name: "Wendy", edad: 203, gender: "f" }
-]
-
-function moreThan30(person) {
-    return person.edad > 30
-}
-
-const peopleAbove30 = filter(people, moreThan30)
-// console.log(peopleAbove30)
-console.assert(peopleAbove30.length === 5)
-console.assert(peopleAbove30[0] === people[0])
-console.assert(peopleAbove30[1] === people[1])
-console.assert(peopleAbove30[2] === people[3])
-console.assert(peopleAbove30[3] === people[4])
-console.assert(peopleAbove30[4] === people[6])
-
-
-
-console.log('CASE 4')
-
-/*
-const containsALetter = person => person.name.toLowerCase().includes("a")
-
-    */
-
-function containsALetter(person) {
+    const people = [
+        { name: "Leo", edad: 50, gender: "m" },
+        { name: "Aitor", edad: 32, gender: "m" },
+        { name: "Jordi", edad: 30, gender: "m" },
+        { name: "Manu", edad: 44, gender: "m" },
+        { name: "Naty", edad: 37, gender: "f" },
+        { name: "Paula", edad: 23, gender: "f" },
+        { name: "Wendy", edad: 203, gender: "f" }
+    ]
     
-    return person.name.toLowerCase().includes("a")
-    
-   /*
-   return person.name.includes("a") || person.name.includes("A")
-   */
-}
+    function moreThan30(person) {
+        return person.edad > 30;
+    }
 
+    function containsALetter(person) {
+        return person.name.toLowerCase().includes("a");
+    }
 
-const peopleWithA = filter(people, containsALetter)
-// console.log(peopleWithA)
+    test('filter array of objects', () => {
 
+        const peopleAbove30 = filter(people, moreThan30);
+        // console.log(peopleAbove30)
+        expect(peopleAbove30.length).toBe(5);
+        expect(peopleAbove30[0]).toBe(people[0]);
+        expect(peopleAbove30[1]).toBe(people[1]);
+        expect(peopleAbove30[2]).toBe(people[3]);
+        expect(peopleAbove30[3]).toBe(people[4]);
+        expect(peopleAbove30[4]).toBe(people[6]);
 
+    })
 
-console.assert(peopleWithA.length === 4)
-console.assert(peopleWithA[0] === people[1])
-console.assert(peopleWithA[1] === people[3])
-console.assert(peopleWithA[2] === people[4])
-console.assert(peopleWithA[3] === people[5])
+    test('filter persons who contains a letter', () => {       
+        
+        const peopleWithA = filter(people, containsALetter);
+
+        expect(peopleWithA.length).toBe(4);
+        expect(peopleWithA[0]).toBe(people[1]);
+        expect(peopleWithA[1]).toBe(people[3]);
+        expect(peopleWithA[2]).toBe(people[4]);
+        expect(peopleWithA[3]).toBe(people[5]);
+
+    })
+
+})

@@ -1,91 +1,65 @@
-console.log('TEST SLICE')
-
-{
-
+describe('slice', () => {
+    
     const animals = ['ant', 'bison', 'camel', 'duck', 'elephant'];
 
-    {
+    test('with start positive and without end', () => {
 
-        console.log('TEST 1')
-
-        const result = slice(animals, 2)
-
-        const expectedResult = ["camel", "duck", "elephant"]
+        const result = slice(animals, 2);
         
-        for (let i = 0; i < expectedResult.length; i++) {
-            console.assert(result[i] === expectedResult[i])
-        }
-
-    }
-
-    {
-
-        console.log('TEST 2')
-
-        const result = slice(animals, 2, 4)
-
-        const expectedResult = ["camel", "duck"]
+        const expectedResult = ["camel", "duck", "elephant"];
         
-        for (let i = 0; i < expectedResult.length; i++) {
-            console.assert(result[i] === expectedResult[i])
-        }
-
-    }
-
-    {
-
-        console.log('TEST 3')
-
-        const result = slice(animals, 1, 5)
-
-        const expectedResult = ["bison", "camel", "duck", "elephant"]
+        checkArrays(result, expectedResult);
         
-        for (let i = 0; i < expectedResult.length; i++) {
-            console.assert(result[i] === expectedResult[i])
-        }
+    })
 
-    }
+    test('with start positive and end', () => {
 
-    {
+        const result = slice(animals, 2, 4);
+        
+        const expectedResult = ["camel", "duck"];
+        
+        checkArrays(result, expectedResult);
 
-        console.log('TEST 4')
+    })
 
+    test('with start positive and end equal to array.length', () => {
+
+        const result = slice(animals, 1, 5);
+        
+        const expectedResult = ["bison", "camel", "duck", "elephant"];
+
+        checkArrays(result, expectedResult);
+
+    })
+
+    test('with start negative and without end', () => {
+        
         const result = slice(animals, -2)
 
         const expectedResult = ["duck", "elephant"]
         
-        for (let i = 0; i < expectedResult.length; i++) {
-            console.assert(result[i] === expectedResult[i])
-        }
+        checkArrays(result, expectedResult);
 
-    }
+    })
 
-    {
+    test('with start positive and end negative', () => {
 
-        console.log('TEST 5')
-
-        const result = slice(animals, 2, -1)
-
-        const expectedResult = ["camel", "duck"]
+        const result = slice(animals, 2, -1);
         
-        for (let i = 0; i < expectedResult.length; i++) {
-            console.assert(result[i] === expectedResult[i])
-        }
+        const expectedResult = ["camel", "duck"];
 
-    }
+        checkArrays(result, expectedResult);
 
-    {
+    })
 
-        console.log('TEST 6')
+    test('slice empty', () => {
 
-        const result = slice(animals)
-
-        const expectedResult = ["ant", "bison", "camel", "duck", "elephant"]
+        const result = slice(animals);
         
-        for (let i = 0; i < expectedResult.length; i++) {
-            console.assert(result[i] === expectedResult[i])
-        }
+        const expectedResult = ["ant", "bison", "camel", "duck", "elephant"];
 
-    }
+        checkArrays(result, expectedResult);
 
-}
+    })
+
+})

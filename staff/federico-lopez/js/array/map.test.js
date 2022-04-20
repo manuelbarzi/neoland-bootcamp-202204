@@ -1,29 +1,28 @@
-console.log('TEST map')
+describe('map', () => {
+    const numbers = [1, 4, 9, 16]
 
-const numbers = [1, 4, 9, 16]
+    test('Array multiplied for 2', () => {
+       
+        const doubles = map(numbers, function(elem){
+            return elem * 2
+        })
+        
+        const expectedResult = [2, 8, 18, 32]
 
-{
-    console.count('Case map')
+        checkArrays(doubles, expectedResult);
 
-    let doubles = map(numbers, function(elem){
-        return elem * 2
     })
 
-    console.assert(doubles[0] === 2)
-    console.assert(doubles[1] === 8)
-    console.assert(doubles[2] === 18)
-    console.assert(doubles[3] === 32)
-}
+    test('Array sum 10', () => {
+        
+        const doubles = map(numbers, function(elem){
+            return elem + 10
+        })
+        
+        const expectedResult = [11, 14, 19, 26]
 
-{
-    console.count('Case map')
+        checkArrays(doubles, expectedResult);  
 
-    let doubles = map(numbers, function(elem){
-        return elem + 10
     })
 
-    console.assert(doubles[0] === 11)
-    console.assert(doubles[1] === 14)
-    console.assert(doubles[2] === 19)
-    console.assert(doubles[3] === 26)
-}
+})

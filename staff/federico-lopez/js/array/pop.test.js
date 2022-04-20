@@ -1,37 +1,28 @@
-console.log('TEST POP')
-
-
-
-{
-
-    console.log('CASE 1')
-
-    const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
-
-    const result = pop(plants);
+describe('pop', () => {
     
-    const arrayExpected = ["broccoli", "cauliflower", "cabbage", "kale"]
+    test('1', () => {
 
-    console.assert(result === 'tomato')
-
-    for (i in plants) {
-        console.assert(plants[i] === arrayExpected[i])
-    }
+        const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato'];
     
-}
+        const result = pop(plants);
+        
+        const arrayExpected = ["broccoli", "cauliflower", "cabbage", "kale"];
+    
+        expect(result).toBe('tomato');
+    
+       
 
-{
+    })
 
-    console.log('CASE 2')
+    test('2', () => {
+        
+        const plants = ["broccoli", "cauliflower", "cabbage", "kale"];
 
-    const plants = ["broccoli", "cauliflower", "cabbage", "kale"]
+        const result = pop(plants);
 
-    const result = pop(plants)
+        const arrayExpected = ["broccoli", "cauliflower", "cabbage"];
 
-    const arrayExpected = ["broccoli", "cauliflower", "cabbage"]
+        checkArrays(arrayExpected, plants);
+    })
 
-    for (i in plants) {
-        console.assert(plants[i] === arrayExpected[i])
-    }
-
-}
+})

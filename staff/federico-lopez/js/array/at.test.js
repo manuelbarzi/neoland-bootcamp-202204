@@ -1,14 +1,14 @@
-console.log('TEST AT')
+describe('At', () =>{
+    const array7 = [5, 12, 8, 130, 44];
+    
+    test('postive index', () => {
+        let index = 2;
+        expect(at(array7, index)).toBe(8);
+    })
 
-const array7 = [5, 12, 8, 130, 44];
-
-{
-    let index = 2;
-    console.assert(at(array7, index) === 8)
-}
-
-{
-    let index = -2;
-    console.assert(at(array7, index) === 130)
-
-}
+    test('negative index', () => {
+        let index = -2;
+        expect(at(array7, index)).toBe(130);
+    })
+    
+})

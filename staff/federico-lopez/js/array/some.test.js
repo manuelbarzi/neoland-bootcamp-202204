@@ -1,43 +1,37 @@
-console.log('TEST SOME')
+describe('some', () => {
+    
+    test('nums array check is some is pair', () => {
+        
+        const nums = [1, 2, 3, 4, 5];
+        
+        const even = element => element % 2 === 0;
+        
+        const result = some(nums, even);
+        
+        expect(result).toBe(true);
 
-{
+    })
 
-    console.log('CASE 1')
+    test('look for a string not included', () => {
+        
+        const pets = ['dog', 'cat', 'bird', 'elephant'];
+        
+        const isThereATiger = element => element === "tiger";
+        
+        const result = some(pets, isThereATiger);
+        
+        expect(result).toBe(false);
 
-    const nums = [1, 2, 3, 4, 5]
+    })
 
-    const even = element => element % 2 === 0
+    test('lo for a string included', () => {
 
-    const result = some(nums, even)
+        const pets = ['cat', 'dog', 'bird', 'elephant'];
 
-    console.assert(result === true)
-
-}
-
-{
-
-    console.log('CASE 2')
-
-    const pets = ['dog', 'cat', 'bird', 'elephant']
-
-    const isThereATiger = element => element === "tiger"
-
-    const result = some(pets, isThereATiger)
-
-    console.assert(result === false)
-
-}
-
-{
-
-    console.log('CASE 3 - With index')
-
-    const pets = ['cat', 'dog', 'bird', 'elephant']
-
-    const isThereACat = element => element === "cat"
-
-    const result = some(pets, isThereACat, 1)
-
-    console.assert(result === false)
-
-}
+        const isThereACat = element => element === "cat";
+    
+        const result = some(pets, isThereACat, 1);
+    
+        expect(result).toBe(false);
+    })
+})

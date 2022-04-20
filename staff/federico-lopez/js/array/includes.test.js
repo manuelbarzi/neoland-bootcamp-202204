@@ -1,24 +1,26 @@
-console.log('TEST INCLUDES')
+describe('includes', () => {
+    const array4 = [1, 2, 3];
 
-const array4 = [1, 2, 3];
+    test('Look for a number', () => {
+        
+        expect(includes(array4, 2)).toBe(true);
 
-{
-    console.log('CASE 1')
-    console.assert(includes(array4, 2) === true)
-}
+    })
 
-const pets = ['cat', 'dog', 'bat', 'elephant', 'bird'];
-{
-    console.log('CASE 2')
-    console.assert(includes(pets, 'cat') === true)
-}
+    const pets = ['cat', 'dog', 'bat', 'elephant', 'bird'];
 
-{
-    console.log('CASE 3')
-    console.assert(includes(pets, 'at') === false)
-}
+    test('Look for a string', () => {
+        expect(includes(pets, 'cat')).toBe(true);
 
-{
-    console.log('CASE 4')
-    console.assert(includes(pets, 'cat', 3) === false)
-}
+    })
+    
+    test('A string not included', () =>{
+        expect(includes(pets, 'at')).toBe(false);
+
+    })
+
+    test('A string included in a previous index', () => {
+        expect(includes(pets, 'cat', 3)).toBe(false);
+    })
+
+})

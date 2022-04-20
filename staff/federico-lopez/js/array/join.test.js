@@ -1,27 +1,20 @@
-console.log('TEST join')
+describe('join', () => {
+    
+    const elements = ['Fire', 'Air', 'Water'];
+    
+    test('join with \',\'', () => {
+        const result = join(elements);
+        expect(result).toBe('Fire,Air,Water');
+    })
 
-const elements = ['Fire', 'Air', 'Water'];
+    test('join with empty string', () => {
+        const result = join(elements, '');
+        expect(result).toBe('FireAirWater');
+    })
 
-{
-    console.log('CASE 1')
+    test('join with \'-\'', () => {
+        const result = join(elements, '-')
+        expect(result).toBe('Fire-Air-Water')
+    })
 
-    const result = join(elements)
-
-    console.assert(result === 'Fire,Air,Water')
-}
-
-{
-    console.log('CASE 2')
-
-    const result = join(elements, '')
-
-    console.assert(result === 'FireAirWater')
-}
-
-{
-    console.log('CASE 3')
-
-    const result = join(elements, '-')
-
-    console.assert(result === 'Fire-Air-Water')
-}
+})

@@ -1,35 +1,30 @@
-console.log('TEST PUSH')
+describe('push', () => {
 
-{
-
-    console.log('CASE 1')
-
-    const animals = ['pigs', 'goats', 'sheep'];
-
-    const count = push(animals, 'cows');
+    test('push one string', () => {
         
-    const expectedResult = ['pigs', 'goats', 'sheep', 'cows']
+        const animals = ['pigs', 'goats', 'sheep'];
+        
+        const count = push(animals, 'cows');
+            
+        const expectedResult = ['pigs', 'goats', 'sheep', 'cows'];
+        
+        expect(count).toBe(4);
+        
 
-    console.assert(count === 4)
 
-    for (i in animals)
-        console.assert(animals[i] === expectedResult[i])
+    })
 
-}
+    test('push three strings', () => {
 
-{
+        const animals = ['pigs', 'goats', 'sheep', 'cows'];
 
-    console.log('CASE 2')
-
-    const animals = ['pigs', 'goats', 'sheep', 'cows'];
-
-    const count = push(animals, 'chickens', 'cats', 'dogs');
-
-    const expectedResult = ['pigs', 'goats', 'sheep', 'cows', 'chickens', 'cats', 'dogs']
+        const count = push(animals, 'chickens', 'cats', 'dogs');
     
-    console.assert(count === 7)
-    
-    for (i in animals)
-        console.assert(animals[i] === expectedResult[i])
-    
-}
+        const expectedResult = ['pigs', 'goats', 'sheep', 'cows', 'chickens', 'cats', 'dogs']
+        
+        expect(count).toBe(7);
+        
+        checkArrays(animals, expectedResult);
+
+    })
+})

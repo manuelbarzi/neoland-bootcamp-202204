@@ -1,33 +1,29 @@
-console.log('TEST REDUCE')
+describe('reduce', () => {
 
-{
+    test('sum all the elements', () => {
 
-    console.log('TEST 1')
+        const array1 = [1, 2, 3, 4];
+        
+        const sumWithoutInitial = reduce(array1, 
+            (previousValue, currentValue) => previousValue + currentValue);
+
+            expect(sumWithoutInitial).toBe(10);
+            
+            
+        })
+        
+    })
     
-    const array1 = [1, 2, 3, 4];
+    test('sum using initial value', () => {
+        
+        const array1 = [1, 2, 3, 4];
+        
+        
+        const sumWithInitial = reduce(array1, 
+            (previousValue, currentValue) => previousValue + currentValue,
+            2
+        );
+        
+        expect(sumWithInitial.toBe(12);
 
-    
-    const sumWithoutInitial = reduce(array1, 
-        (previousValue, currentValue) => previousValue + currentValue);
-
-    console.assert(sumWithoutInitial === 10)
-
-
-}
-
-{
-
-    console.log('TEST 2')
-    
-    const array1 = [1, 2, 3, 4];
-
-    
-    const sumWithInitial = reduce(array1, 
-        (previousValue, currentValue) => previousValue + currentValue,
-        2
-    );
-
-    console.assert(sumWithInitial === 12)
-
-
-}
+})

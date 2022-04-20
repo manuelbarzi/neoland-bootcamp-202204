@@ -5,7 +5,7 @@ function reverse(arr) {
         arr[i] = lastItem
         arr[arr.length - 1 - i] = firstItem 
         if (i === arr.length - 1 - i || i + 1 === arr.length / 2)
-            i = arr.length
+            break;
     }
     return arr
 }
