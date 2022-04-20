@@ -1,27 +1,25 @@
-console.log('TEST join')
+describe('join', function() {
 
-const elements = ['Fire', 'Air', 'Water'];
+    const elements = ['Fire', 'Air', 'Water'];
 
-{
-    console.log('CASE 1')
+    test('should return string separated by comma', () => {
 
-    const result = join(elements)
+        const result = join(elements)
+        
+        expect(result).toBe('Fire,Air,Water') 
+    })
 
-    console.assert(result === 'Fire,Air,Water')
-}
+    test('should return array in a string', () => {
 
-{
-    console.log('CASE 2')
+        const result = join(elements, '')
+        
+        expect(result).toBe('FireAirWater') 
+    })
 
-    const result = join(elements, '')
+    test('should return string separated by -', () => {
 
-    console.assert(result === 'FireAirWater')
-}
-
-{
-    console.log('CASE 3')
-
-    const result = join(elements, '-')
-
-    console.assert(result === 'Fire-Air-Water')
-}
+        const result = join(elements, '-')
+        
+        expect(result).toBe('Fire-Air-Water') 
+    })
+})

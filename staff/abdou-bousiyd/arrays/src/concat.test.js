@@ -1,5 +1,3 @@
-console.log('TEST concat')
-
 describe('concat', function() {
 
     const array1 = ['a', 'b', 'c'];

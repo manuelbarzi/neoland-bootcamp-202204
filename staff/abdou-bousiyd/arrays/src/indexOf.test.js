@@ -1,19 +1,15 @@
-console.log('TEST indexOf')
 
-const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
+describe('indexOf', function() {
 
-{
-    console.log('CASE 1')
+    const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-    const result = indexOf(beasts, 'bison')
+    test('return position of element', () => {
+        const result = indexOf(beasts, 'bison')
+        expect(result).toBe(1)
+    })
 
-    console.assert(result === 1)
-}
-
-{
-    console.log('CASE 2')
-
-    const result = indexOf(beasts, 'bison', 2)
-
-    console.assert(result === 4)
-}
+    test('return the second assigned element', () => {
+        const result = indexOf(beasts, 'bison', 2)
+        expect(result).toBe(4)
+    })
+})

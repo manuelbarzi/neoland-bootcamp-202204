@@ -1,16 +1,18 @@
-console.log('TEST includes')
+describe('includes', function() {
+    test('should return true', () => {
 
+        const array = [1, 2, 3];
+        const result = includes(array, 2)
+        expect(result).toBe(true) 
+    })
 
-{
-    console.log('CASE 1')
-    const array = [1, 2, 3];
-    console.assert(includes(array, 2) === true );
-}
+    test('should return false', () => {
 
-// expected output: true
-{
-    console.log('CASE 2')
-    const pets = ['cat', 'dog', 'bat'];
-    console.assert(includes(pets, 'at') === false);
-}
+        const pets = ['cat', 'dog', 'bat'];
+
+        const result = includes(pets, 'at')
+        expect(result).toBe(false)
+
+    })
+})
 
