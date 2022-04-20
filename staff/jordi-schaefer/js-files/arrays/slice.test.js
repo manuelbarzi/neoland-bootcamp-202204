@@ -32,7 +32,7 @@ describe('slice', function() {
         expect(result[2]).toBe('puerta')
     })
 
-    it('with negative startd index', function() {
+    it('with negative start index', function() {
         const palabras = ['silla', 'mesa', 'lampara', 'ordenador', 'puerta', 'armario', 'sofa']
         // expected = ['mesa', 'lampara', 'ordenador', 'puerta']
         

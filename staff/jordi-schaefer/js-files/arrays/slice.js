@@ -4,8 +4,8 @@ function slice(array, inic = 0, fin = array.length) { // recivo el array, el ini
 
     let inicio = inic  // los valores de inicio fin los dejo tal cual llegan
     let final = fin
-    if (inic<0)               // pero si son negativos
-        inicio = array.length + inic   // se lo resto al largo total del array
+    if (inic<0)                       // pero si son negativos
+        inicio = array.length + inic  // se lo resto al largo total del array
     if (fin < 0)                      // empezando desde el final le quito lo que reste
         final = array.length+fin
 

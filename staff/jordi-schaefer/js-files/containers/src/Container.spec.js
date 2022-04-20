@@ -3,7 +3,7 @@ describe('Container', () => {
         const cont = new Container
 
         expect(cont instanceof Container).toBe(true)
-        expect(cont.status).toBe('close')
+        expect(cont.status).toBe('🔐')
     })
 
     it('should assign dimensions', () => {
@@ -11,21 +11,21 @@ describe('Container', () => {
 
         expect(cont.width).toBe(100)
         expect(cont.height).toBe(50)
-        expect(cont.depth).toBe(150)
+        expect(cont.length).toBe(150)
     })
 
     it('should open doors', () => {
         const cont = new Container
 
         cont.open()
-        expect(cont.status).toBe('open')
+        expect(cont.status).toBe('🔓')
     })
 
     it('should close doors', () => {
         const cont = new Container
 
         cont.close()
-        expect(cont.status).toBe('close')
+        expect(cont.status).toBe('🔐')
     })
 
     it('double size', () => {
@@ -34,6 +34,6 @@ describe('Container', () => {
         cont.doble()
         expect(cont.width).toBe(200)
         expect(cont.height).toBe(100)
-        expect(cont.depth).toBe(300)
+        expect(cont.length).toBe(300)
     })
 })
