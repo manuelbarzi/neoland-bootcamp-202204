@@ -1,3 +1,20 @@
+describe('map', function() {
+    test('sum 2 to all the elements', function(){
+        const list_nums = [1, 2, 3, 4]
+        let s = 2
+        const result = map(list_nums, function(elem){
+            return elem +=s
+        })
+        expect(result[0]).toBe(3)
+        expect(result[1]).toBe(4)
+        expect(result[2]).toBe(5)
+        expect(result[3]).toBe(6)
+    })
+})
+
+
+
+/*
 
 console.log('TEST map')
 
@@ -88,3 +105,5 @@ const paises = ['España','Argentina','Francia','Alemania','Brasil','Rusia','Chi
         console.assert(volumns[i] === expected[i])
 
 }
+
+*/

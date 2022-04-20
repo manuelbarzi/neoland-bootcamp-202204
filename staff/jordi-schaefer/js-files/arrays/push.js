@@ -10,11 +10,12 @@ function push(array, element){
 
 function push(){
     array=arguments[0]
-    for(let i=0; i<arguments.length-1; i++)
-        array[array.length]=arguments[i+1]
+    for(let i=1; i<arguments.length; i++)
+        array[array.length]=arguments[i]
 
     return array.length
 }
+
 
 
 

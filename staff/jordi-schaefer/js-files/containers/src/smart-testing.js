@@ -1,4 +1,4 @@
-console.log('%cSmart testing V1.1', 'font-size: 18px; color: white; background: blue')
+console.log('%cSmart testing V1', 'font-size: 20px; color: white; background: linear-gradient(to left, #30CFD0 0%, #330867 100%)')
 
 
 function describe(testDesc, callback) {
@@ -19,7 +19,7 @@ function expect(value) {
     return {
         toBe(expected){ // closure
             if (value !== expected)
-                console.error('expected' + value + ' to be ' + expected)
+                console.error('expected ' + value + ' to be ' + expected)
         }
     }
 }

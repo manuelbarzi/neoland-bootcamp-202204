@@ -1,31 +1,27 @@
-console.log('TEST includes')
+describe('includes', function() {
+    
+    it('includes specific char (true)', function() {
+        const chars = ['a', 'b', 'c', 'd', 'e', 'f']
+        const result = includes(chars, 'd')
+        expect(result).toBe(true)
+    })
 
-const chars = ['a', 'b', 'c', 'd', 'e', 'f']
+    it('includes specific char (false)', function() {
+        const chars = ['a', 'b', 'c', 'd', 'e', 'f']
+        const result = includes(chars, 'j')
+        expect(result).toBe(false)
+    })
 
-{
-    console.log('CASE 1')
-    const result = includes(chars, 'd')
-    //console.assert(result === true)
-    console.assert(result)
-}
+    it('includes specific number (true)', function() {
+        const nums = [100, 104, 203, 506]
+        const result = includes(nums, 203)
+        expect(result).toBe(true)
+    })
 
-{
-    console.log('CASE 2')
-    const result = includes(chars, 'j')
-    //console.assert(result === false)
-    console.assert(!result)
-}
+    it('includes specific number (false)', function() {
+        const nums = [100, 104, 203, 506]
+        const result = includes(nums, 1000)
+        expect(result).toBe(false) 
+    })
 
-const nums = [100, 104, 203, 506]
-
-{
-    console.log('CASE 3')
-    const result = includes(nums, 1000)
-    console.assert(result === false)
-}
-
-{
-    console.log('CASE 4')
-    const result = includes(nums, 203)
-    console.assert(result === true)
-}
+})

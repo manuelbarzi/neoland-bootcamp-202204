@@ -2,7 +2,7 @@
 describe('at', function () {
     const list = [5, 11, 8, 130, 42, 56, 3, 24]
 
-    test('1, positive index', function() {
+    it('positive index', function() {
         const result = at(list, 3)
         //console.assert(result === 130)
         expect(result).toBe(130)
@@ -11,7 +11,7 @@ describe('at', function () {
         console.assert(at(list, 7) === 24)
     })
 
-    test('2, negative index', function() {
+    it('negative index', function() {
         console.assert(at(list, -1) === 24)
         console.assert(at(list, -3) === 56)
         console.assert(at(list, -6) === 8)

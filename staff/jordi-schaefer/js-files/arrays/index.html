@@ -7,135 +7,133 @@
     <title>Metodos de arrays</title>
 </head>
 <body>
-
+    
     <h2>Ejercicios arrays</h2>
-
+    
     
     <h3>Funciones testing</h3>
     <script src="smart-testing.js" ></script>
-
-
-
-    <h3>indexOf</h3>
-    <h4>devuelve el primer indice en el que se encuentra el valor deseado, o en su defecto devuelve -1</h4>
-    <script src="indexOf.js" ></script>
-    <script src="indexOf.test.js" ></script>
-
-    <h3>lastindexOf</h3>
-    <h4>devuelve el ultimo indice en el que se encuentra el elemento que quiere ser encontrado</h4>
-    <script src="lastindexOf.js" ></script>
-    <script src="lastindexOf.test.js" ></script>
-
-    <h3>join</h3>
-    <h4>devuelve un string que contiene lso elementos del array separado por el elemento deseado, o en su defecto comas</h4>
-    <script src="join.js" ></script>
-    <script src="join.test.js" ></script>
+    
+    
+    <h3>at</h3>
+    <h4>recive un indice y devuelve el item que se encuentra en el index deseado</h4>
+    <script src="at.js" ></script>
+    <script src="at.test.js" ></script>
 
     <h3>concat</h3>
     <h4>devuelve la union de 2 o mas arrays</h4>
     <script src="concat.js" ></script>
     <script src="concat.test.js" ></script>
-
-    <h3>includes</h3>
-    <h4>determina si un array incluye un valor especifico o no, devolviendo true o false</h4>
-    <script src="includes.js" ></script>
-    <script src="includes.test.js" ></script>
-
-    <h3>at</h3>
-    <h4>recive un indice y devuelve el item que se encuentra en el index deseado</h4>
-    <script src="at.js" ></script>
-    <script src="at.test.js" ></script>
+    
+    <h3>copyWithin</h3>
+    <h4>copia partes del array dentro lugar del array, sin modificar longitud (X, Y ,Z) x=donde copio, y=inicio tramo, z=final tramo</h4>
+    <script src="copyWithin.js" ></script>
+    <script src="copyWithin.test.js" ></script>
+    
+    <h3>every</h3>
+    <h4>devuelve true si todos los elementoscumplken la funcion callback</h4>
+    <script src="every.js" ></script>
+    <script src="every.test.js" ></script>
+    
+    <h3>fill</h3>
+    <h4>fill(value, start, end) / cambia los elementos del array desde y/o hasta una posicion definida</h4>
+    <script src="fill.js" ></script>
+    <script src="fill.test.js" ></script>
+    
+    <h3>filter</h3>
+    <h4>crea un nuevo array con todos los elementos que cumplan la condicion deseada</h4>
+    <script src="filter.js" ></script>
+    <script src="filter.test.js" ></script>
+    
+    <h3>find</h3>
+    <h4>devuelve el valor del primer elemento que cumple la funcion</h4>
+    <script src="find.js" ></script>
+    <script src="find.test.js" ></script>
+    
+    <h3>flat</h3>
+    <h4>crea un nuevo array uniendo los sub-elementos de cada objeto (si se especifica un numero es el nivel de sub-elemento que concatena)</h4>
+    <script src="flat.js" ></script>
+    <script src="flat.test.js" ></script>
 
     <h3>forEach</h3>
     <h4>modifica un array implementando en cada valor la funcion deseada</h4>
     <script src="forEach.js" ></script>
     <script src="forEach.test.js" ></script>
 
+    <h3>includes</h3>
+    <h4>determina si un array incluye un valor especifico o no, devolviendo true o false</h4>
+    <script src="includes.js" ></script>
+    <script src="includes.test.js" ></script>
+    
+    <h3>indexOf</h3>
+    <h4>devuelve el primer indice en el que se encuentra el valor deseado, o en su defecto devuelve -1</h4>
+    <script src="indexOf.js" ></script>
+    <script src="indexOf.test.js" ></script>
+    
+    <h3>join</h3>
+    <h4>devuelve un string que contiene lso elementos del array separado por el elemento deseado, o en su defecto comas</h4>
+    <script src="join.js" ></script>
+    <script src="join.test.js" ></script>
+    
+    <h3>lastindexOf</h3>
+    <h4>devuelve el ultimo indice en el que se encuentra el elemento que quiere ser encontrado</h4>
+    <script src="lastindexOf.js" ></script>
+    <script src="lastindexOf.test.js" ></script>
+    
     <h3>map</h3>
     <h4>crea un nuevo array implementando en cada valor la funcion deseada</h4>
     <script src="map.js" ></script>
     <script src="map.test.js" ></script>
-
-    <h3>filter</h3>
-    <h4>crea un nuevo array con todos los elementos que cumplan la condicion deseada</h4>
-    <script src="filter.js" ></script>
-    <script src="filter.test.js" ></script>
-
-    <h3>find</h3>
-    <h4>devuelve el valor del primer elemento que cumple la funcion</h4>
-    <script src="find.js" ></script>
-    <script src="find.test.js" ></script>
-
-    <h3>push</h3>
-    <h4>añade elementos al final del array</h4>
-    <script src="push.js" ></script>
-    <script src="push.test.js" ></script>
-
+    
     <h3>pop</h3>
     <h4>elimina el ultimo elemento del array y lo devuelve</h4>
     <script src="pop.js" ></script>
     <script src="pop.test.js" ></script>
-
-    <h3>some</h3>
-    <h4>devuelve true si hay algun valor que cumpla la funcion callback</h4>
-    <script src="some.js" ></script>
-    <script src="some.test.js" ></script>
-
-    <h3>every</h3>
-    <h4>devuelve true si todos los elementoscumplken la funcion callback</h4>
-    <script src="every.js" ></script>
-    <script src="every.test.js" ></script>
-
-    <h3>fill</h3>
-    <h4>fill(value, start, end) / cambia los elementos del array desde y/o hasta una posicion definida</h4>
-    <script src="fill.js" ></script>
-    <script src="fill.test.js" ></script>
-
-    <h3>flat</h3>
-    <h4>crea un nuevo array uniendo los sub-elementos de cada objeto (si se especifica un numero es el nivel de sub-elemento que concatena)</h4>
-    <script src="flat.js" ></script>
-    <script src="flat.test.js" ></script>
-
-    <h3>slice</h3>
-    <h4>slice(inicio, fin) devuelve un nuevo array que es el recorte del original desde y hasta las posiciones dadas</h4>
-    <script src="slice.js" ></script>
-    <script src="slice.test.js" ></script>
-
-    <h3>splice</h3>
-    <h4>slice(X, Y, Z): a partir de la posicion X (incluida) remplaza Y elementos por el Z elemento</h4>
-    <script src="splice.js" ></script>
-    <script src="splice.test.js" ></script>
-
-    <h3>shift</h3>
-    <h4>elimina el primer elemento del array y lo devuelve, acortando la longitud del array original</h4>
-    <script src="shift.js" ></script>
-    <script src="shift.test.js" ></script>
-
-    <h3>unshift</h3>
-    <h4>añade 1 o mas elementos al principio del array, y devuelve el nuevo largo del array</h4>
-    <script src="unshift.js" ></script>
-    <script src="unshift.test.js" ></script>
-
-    <h3>reverse</h3>
-    <h4>devuelve un array nuevo con las posiciones inversidas</h4>
-    <script src="reverse.js" ></script>
-    <script src="reverse.test.js" ></script>
-
+    
+    <h3>push</h3>
+    <h4>añade elementos al final del array</h4>
+    <script src="push.js" ></script>
+    <script src="push.test.js" ></script>
+    
     <h3>reduce</h3>
     <h4>ejecuta una funcion callback para cada valor del array y su total anterior, devuelve el total de la funcion</h4>
     <script src="reduce.js" ></script>
     <script src="reduce.test.js" ></script>
 
-    <h3>copyWithin</h3>
-    <h4>copia partes del array dentro lugar del array, sin modificar longitud (X, Y ,Z) x=donde copio, y=inicio tramo, z=final tramo</h4>
-    <script src="copyWithin.js" ></script>
-    <script src="copyWithin.test.js" ></script>
+    <h3>reverse</h3>
+    <h4>devuelve un array nuevo con las posiciones inversidas</h4>
+    <script src="reverse.js" ></script>
+    <script src="reverse.test.js" ></script>
+    
+    <h3>shift</h3>
+    <h4>elimina el primer elemento del array y lo devuelve, acortando la longitud del array original</h4>
+    <script src="shift.js" ></script>
+    <script src="shift.test.js" ></script>
+    
+    <h3>slice</h3>
+    <h4>slice(inicio, fin) devuelve un nuevo array que es el recorte del original desde y hasta las posiciones dadas</h4>
+    <script src="slice.js" ></script>
+    <script src="slice.test.js" ></script>
+    
+    <h3>some</h3>
+    <h4>devuelve true si hay algun valor que cumpla la funcion callback</h4>
+    <script src="some.js" ></script>
+    <script src="some.test.js" ></script>
 
     <h3>sort</h3>
     <h4>orderna un array</h4>
     <script src="sort.js" ></script>
     <script src="sort.test.js" ></script>
-
+    
+    <h3>splice</h3>
+    <h4>slice(X, Y, Z): a partir de la posicion X (incluida) remplaza Y elementos por el Z elemento</h4>
+    <script src="splice.js" ></script>
+    <script src="splice.test.js" ></script>
+    
+    <h3>unshift</h3>
+    <h4>añade 1 o mas elementos al principio del array, y devuelve el nuevo largo del array</h4>
+    <script src="unshift.js" ></script>
+    <script src="unshift.test.js" ></script>
 
 
 </body>
