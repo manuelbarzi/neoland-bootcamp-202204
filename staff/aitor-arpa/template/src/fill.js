@@ -3,7 +3,7 @@
 
 
 function fill( array, value, str = 0, end = array.length -1 ){ 
-        debugger
+        
        for (i= str; i<=end; i++){ // igualo la posicion del elemento con el parametro que envie el usuario ( si no se declara empieza desde la posicion inicial) 
         //mientras la posicion sea menor a la introducida por el usuario seguira cambiando el valor origial por el indicado 
         array[i]=value // cambio el elemento en la posicon i por el valor que el usuario introduce

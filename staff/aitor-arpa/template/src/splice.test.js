@@ -6,8 +6,7 @@ describe('Splice', function () {
 
         let meses = ['Jan', 'March', 'April', 'June']
         
-        splice(meses, 1, 0, 'Feb')
-        
+        splice(meses, 1, 0, 'Feb')       
         
         
         expect(meses[0]).toBe('Jan')

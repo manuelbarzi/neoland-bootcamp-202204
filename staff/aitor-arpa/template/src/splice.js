@@ -5,19 +5,18 @@
 // Donde esta el error de sintaxi ¿?
 
 function splice(array, inicio = 0, del, item) {
-debugger
 
-    
-    for (let i = array.length-1; i >= inicio ; i--){
-        array[i+1] = array[i]
+
+    for (let i = array.length - 1; i >= inicio; i--) {
+        array[i + 1] = array[i]
         if (i === inicio)
-        array[inicio] = item
-        
-    }   
-    
-    for (let i = inicio ; i > array.length-1; i++)
-        array[i] = array[i+1]
-        
+            array[inicio] = item
+
+    }
+
+    for (let i = inicio; i > array.length - 1; i++)
+        array[i] = array[i + 1]
+
 
 
 
