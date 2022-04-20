@@ -1,36 +1,48 @@
-
-console.log('TEST push')
-//El método push() añade uno o más elementos al final de un array 
-// devuelve la nueva longitud del array.
-
-{
-    console.log('CASO 1')
-
-    let vegetable = ['tomato','letuce'] //array
-
-    const result = customPush(vegetable, 'potato')
-
-    console.assert(result === 3)
+describe('push', function() {
+    test('push one element', function() {
+        const animals = ['pigs', 'goats', 'sheep']
+        
+        let count = push(animals, 'cows')
+        
+        expect(count).toBe(4)
+        expect(animals[0]).toBe('pigs')
+        expect(animals[1]).toBe('goats')
+        expect(animals[2]).toBe('sheep')
+        expect(animals[3]).toBe('cows')
     
-
-
-}
-
-
-/*
-    const animals = ['vaca', 'cabra', 'oveja', 'cerdo', 'caballo']
+        count = push(animals, 'elephants')
     
-    
-    console.log('CASE: 1')
-    // utilizacion del metodo push existente
-    // const total = animals.push('elefante')
+        expect(count).toBe(5)
+        expect(animals[0]).toBe('pigs')
+        expect(animals[1]).toBe('goats')
+        expect(animals[2]).toBe('sheep')
+        expect(animals[3]).toBe('cows')
+        expect(animals[4]).toBe('elephants')
+    })
 
-    // replicar la linea de codigo de arriba para usarlo con nuestra funcion push
-    const result = push(animals, 'elefante')
+    test('push multiple elements', function() {
+        const animals = ['pigs', 'goats', 'sheep']
 
+        let count = push(animals, 'cows', 'koalas', 'lions')
 
-    console.assert(result === 6)
-    console.assert(typeof result === 'number')
-    console.assert(animals[5]==='elefante')
-    console.assert(typeof animals[5] ==='string')
-     */
+        expect(count).toBe(6)
+        expect(animals[0]).toBe('pigs')
+        expect(animals[1]).toBe('goats')
+        expect(animals[2]).toBe('sheep')
+        expect(animals[3]).toBe('cows')
+        expect(animals[4]).toBe('koalas')
+        expect(animals[5]).toBe('lions')
+
+        count = push(animals, 'elephants', 'gazelles')
+
+        expect(count).toBe(8)
+        expect(animals[0]).toBe('pigs')
+        expect(animals[1]).toBe('goats')
+        expect(animals[2]).toBe('sheep')
+        expect(animals[3]).toBe('cows')
+        expect(animals[4]).toBe('koalas')
+        expect(animals[5]).toBe('lions')
+        expect(animals[6]).toBe('elephants')
+        expect(animals[7]).toBe('gazelles')
+    })
+})

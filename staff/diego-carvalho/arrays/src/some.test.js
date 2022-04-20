@@ -1,30 +1,24 @@
+describe('some', function () {
+    test('returns true on element matching callback condition', function () {
+        const nums = [1, 2, 3, 4, 5]
 
-console.log('TEST some')
+        const even = element => element % 2 === 0
 
-{
-    console.log('CASE 01')
+        const contains = some(nums, even)
 
-    let numbers = [ 1, 5, 7, 12, 26 ]
-
-    const biggerThan20 = some(numbers, function(elem){
-        return elem > 20
+        expect(contains).toBe(true)
     })
 
-    console.assert(biggerThan20 === true)
+    test('returns false on element not matching callback condition', function () {
+        const nums = [1, 2, 3, 4, 5]
 
-}
+        const greaterThan7 = element => element > 7 === 0
 
-{ 
-    console.log('CASE 02')
+        const contains = some(nums, greaterThan7)
 
-    let names = ['miguel','juan ','leo','jordi', 'diego']
-
-    const myName = some(names, function(elem){
-        return elem === 'diego'
+        expect(contains).toBe(false)
     })
-
-    console.assert(myName === true)
-}
+})
  /*function checkValue(value) {
         if (value === array) {
             return true 
