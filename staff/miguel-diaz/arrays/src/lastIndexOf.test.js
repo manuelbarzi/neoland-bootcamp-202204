@@ -1,14 +1,11 @@
-console.log('LASTINDEXOF TEST')
+describe('lastIndexOf', () => {
+    test('return last position of existing', () => {
+        const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo'] 
 
-const colores = ['rojo', 'verde', 'azul', 'amarillo'] 
+        let index = lastIndexOf(animals, 'Dodo')
+        expect(index).toBe(3)
 
-{
-    console.log('EJERCICIO 1')
-    console.assert(colores, 'amarillo' === 3)
-}
-
-{
-    console.log('EJERCICIO 2')
-    console.assert(colores, 'verde' === 1)
-}
-
+        index = lastIndexOf(animals, 'Tiger')
+        expect(index).toBe(1)
+    })
+})

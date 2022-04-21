@@ -1,43 +1,58 @@
-console.log('SOME TEST')
+describe('SOME' function() {
+    test('Comprobar si se cumple la condicion con un elmento' function() {
+        const numeros = [1,2,3,4,5]
+        const even = element => element % 2 === 0
+        
+    })
+})
 
-{
 
-    console.log('CASO 1')
 
-    const numeros = [1, 2, 3, 4, 5]
 
-    const even = element => element % 2 === 0
 
-    const result = some(numeros, even)
 
-    console.assert(result === true)
 
-}
 
-{
+// console.log('SOME TEST')
 
-    console.log('CASO 2')
+// {
 
-    const animales = ['perro', 'unicornio', 'jirafa', 'mariposa']
+//     console.log('CASO 1')
 
-    const hayUnMamut = element => element === "mamut"
+//     const numeros = [1, 2, 3, 4, 5]
 
-    const result = some(animales, hayUnMamut)
+//     const even = element => element % 2 === 0
 
-    console.assert(result === false)
+//     const result = some(numeros, even)
 
-}
+//     console.assert(result === true)
 
-{
+// }
 
-    console.log('CASO 3 - INDICE')
+// {
 
-    const animales = ['perro', 'unicornio', 'jirafa', 'mariposa']
+//     console.log('CASO 2')
 
-    const hayUnPerro = element => element === "perro"
+//     const animales = ['perro', 'unicornio', 'jirafa', 'mariposa']
 
-    const result = some(animales, hayUnPerro, 1)
+//     const hayUnMamut = element => element === "mamut"
 
-    console.assert(result === false)
+//     const result = some(animales, hayUnMamut)
 
-}
+//     console.assert(result === false)
+
+// }
+
+// {
+
+//     console.log('CASO 3 - INDICE')
+
+//     const animales = ['perro', 'unicornio', 'jirafa', 'mariposa']
+
+//     const hayUnPerro = element => element === "perro"
+
+//     const result = some(animales, hayUnPerro, 1)
+
+//     console.assert(result === false)
+
+// }

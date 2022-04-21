@@ -1,8 +1,14 @@
-function reduce(arr, callback, initialValue = 0) {
-    let accumulator = initialValue
-    accumulator += callback(arr[0], arr[1])
+function reduce(array, callback, initialValue) {
+    let initialValue
+    if (initialValue) {
+        let accumulator = initialValue
+    accumulator += callback(accumulator, array[i])
     for (let i = 2; i < arr.length; i++) {
-        accumulator = callback(accumulator, arr[i])
+        accumulator = callback(accumulator, array[i])
+    }
+    
     }
     return accumulator
 }
+
+function reduce(array, callback, initialValue)

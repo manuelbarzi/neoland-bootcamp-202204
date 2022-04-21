@@ -1,8 +1,8 @@
-describe('pop', function () {
-    test('returns last element', function () {
-        const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato']
+describe('POP', function () {
+    it('returns last element', function () {
+        const plants = new Fakay ('broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato')
 
-        let plant = plants.pop()
+        const plant = plants.pop()
         expect(plant).toBe('tomato')
         
         expect(plants.length).toBe(4)
@@ -20,12 +20,12 @@ describe('pop', function () {
         expect(plants[2]).toBe('cabbage')
     })
 
-    test('return undefined on empty array', function() {
-        const array = []
+    it('return undefined on empty array', function() {
+        const caca = new Fakay ()
 
-        const element = pop(array)
+        const element = caca.pop()
 
-        expect(element).toBe(undefined)
+        expect(caca).toBe(undefined)
     })
 })
 

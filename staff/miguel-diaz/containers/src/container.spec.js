@@ -11,7 +11,7 @@ describe('Container', () => {
 
         expect(cont.width).toBe(100)
         expect(cont.height).toBe(50)
-        expect(cont.depth).toBe(150)
+        expect(cont.length).toBe(150)
     })
 
     test('should open doors', () => {

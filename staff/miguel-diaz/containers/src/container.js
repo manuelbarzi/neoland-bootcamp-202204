@@ -1,7 +1,7 @@
 function Container(width, height, depth) {
     this.width = width
     this.height = height
-    this.depth = depth
+    this.length = length
     this.status = "🔒"
 }
 
@@ -11,4 +11,4 @@ Container.prototype.open = function() {
 
 Container.prototype.close = function() {
     this.status = "🔒"
-}
+} 
