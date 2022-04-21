@@ -9,7 +9,7 @@ describe('Human', () => {
 
 
     it('should eat', () => {
-        const h = new Human // crea un humano vacio, sin especificar propiedades
+        const h = new Human // h es un objeto de tipo human, sin especificar propiedades
         h.stomach = ['🥤'] // a la propiedad stomach del humano h, le pongo una bebida 
 
         h.eat('🍔') // llama la funcion eat sobre el humano h y le pasa comida
