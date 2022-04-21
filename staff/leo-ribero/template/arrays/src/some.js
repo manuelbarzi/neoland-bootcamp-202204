@@ -16,3 +16,17 @@ function some(array, callback){
     }
     return false
 }
+
+
+// vers semantica
+
+function some(array, callback){
+    for (let i = 0; i < array.length; i++){
+        
+        const element = array[i]
+
+        const matches = callback(element)
+        if (matches) return true
+    }
+    return false
+}
