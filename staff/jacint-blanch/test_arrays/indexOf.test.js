@@ -1,15 +1,15 @@
-console.log("Test indexOf")
+describe('indexOf', function() {
+    test('returns first index', function(){
 
-{
-    console.log("Case")
+        const fruits = ["melon", "fresa", "sandia", "manzana","melocoton"]
+        const firstFruit = indexOf(fruits, "sandia")
+        const theresNot = indexOf(fruits, "aguacate")
+        const positionFruit = indexOf(fruits, "manzana", -2)
 
-    const fruits = ["melon", "fresa", "sandia", "manzana","melocoton"]
+        expect(firstFruit).toBe(2)
+        expect(theresNot).toBe(-1)
+        expect(positionFruit).toBe(3)
 
-    const firstFruit = indexOf(fruits, "sandia")
-    const theresNot = indexOf(fruits, "aguacate")
-    const positionFruit = indexOf(fruits, "manzana", -2)
+    })
+})
 
-    console.assert(firstFruit === 2)
-    console.assert(theresNot === -1)
-    console.assert(positionFruit === 3)
-}

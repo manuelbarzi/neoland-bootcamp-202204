@@ -12,7 +12,6 @@ function test(caseDesc, callback) {
     callback()
 }
 
-
 const it = test
 
 function expect(value) {
@@ -23,4 +22,3 @@ function expect(value) {
         }
     }
 }
-

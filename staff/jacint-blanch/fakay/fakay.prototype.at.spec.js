@@ -1,4 +1,4 @@
-describe('at', function() {
+describe('Fakay.prototype.at', function() {
     const nums = [5, 12, 8, 130, 44]
 
     test('positive index', function() {
