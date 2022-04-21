@@ -1,16 +1,14 @@
-
-
 describe ('push', function() {
     test('push one element', function() {
 
         const animals = ['vaca', 'cabra', 'oveja', 'cerdo', 'caballo']
         const result = push(animals, 'elefante')
 
-        //console.assert(result === 6)
+        //expect(result).toBe(6)
         expect(result).toBe(6)
-        console.assert(typeof result === 'number')
-        console.assert(animals[5]==='elefante')
-        console.assert(typeof animals[5] ==='string')
+        expect(typeof result).toBe('number')
+        expect(animals[5]).toBe('elefante')
+        expect(typeof animals[5] ).toBe('string')
 
     })
 
@@ -20,10 +18,10 @@ describe ('push', function() {
         const animals = ['vaca', 'cabra', 'oveja', 'cerdo', 'caballo']
         const result = push(animals, 'elefante', 'gallina', 'pato', 'pajaro')
 
-        console.assert(result === 9)
-        console.assert(typeof result === 'number')
-        console.assert(animals[7]==='pato')
-        console.assert(typeof (animals[5] && animals[6]) ==='string')
+        expect(result).toBe(9)
+        expect(typeof result).toBe('number')
+        expect(animals[7]).toBe('pato')
+        expect(typeof (animals[5] && animals[6]) ).toBe('string')
 
     })
 

@@ -1,16 +1,9 @@
-{
-    console.log('TEST pop')
-
-    
-    {
-        console.log('CASE: 1')
+describe ('pop', function () {
+    it('pop one element', function () {
         const animals = ['vaca', 'cabra', 'oveja', 'cerdo', 'caballo']
         
         const result = pop(animals)
-
-        console.assert(result === 'caballo')
-        console.assert(animals.length === 4)
-    }
-
-
-}
+        expect(result).toBe('caballo')
+        expect(animals.length).toBe(4)
+    })
+})

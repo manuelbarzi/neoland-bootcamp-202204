@@ -1,83 +1,75 @@
-{
-    console.log('TEST sort')
+describe ('sort', function() {
 
-
-    {
-        console.log('CASE: 1')
+    it('sort array of numbers', function () {
         const numbers = [4, 3, 7, 1, 5, 6, 2, 10, 9, 8]
         // expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         
         sort(numbers) // ordenar el array
-        console.assert(numbers.length === 10) // el array debe ser igual de largo
-        console.assert(numbers[0] === 1) 
-        console.assert(numbers[1] === 10)
-        console.assert(numbers[2] === 2) 
-        console.assert(numbers[3] === 3)
-        console.assert(numbers[4] === 4)
-        console.assert(numbers[5] === 5)
-        console.assert(numbers[6] === 6)
-        console.assert(numbers[7] === 7)
-        console.assert(numbers[8] === 8)
-        console.assert(numbers[9] === 9)
-    }
+        expect(numbers.length).toBe(10) // el array debe ser igual de largo
+        expect(numbers[0]).toBe(1) 
+        expect(numbers[1]).toBe(10)
+        expect(numbers[2]).toBe(2) 
+        expect(numbers[3]).toBe(3)
+        expect(numbers[4]).toBe(4)
+        expect(numbers[5]).toBe(5)
+        expect(numbers[6]).toBe(6)
+        expect(numbers[7]).toBe(7)
+        expect(numbers[8]).toBe(8)
+        expect(numbers[9]).toBe(9)
+    })
 
-    
-    {
-        console.log('CASE: 2')
+    it('sort array of strings', function () {
         let stringArray = ['Bbbblue', 'Humpback', 'Bbbblue', 'Bbbbeluga'];
         // ['Beluga', 'Blue', 'Humpback']
 
         sort(stringArray)
 
-        console.assert(stringArray[0] === 'Bbbbeluga') 
-        console.assert(stringArray[1] === 'Bbbblue')
-        console.assert(stringArray[2] === 'Bbbblue')
-        console.assert(stringArray[3] === 'Humpback')
-    }
+        expect(stringArray[0]).toBe('Bbbbeluga') 
+        expect(stringArray[1]).toBe('Bbbblue')
+        expect(stringArray[2]).toBe('Bbbblue')
+        expect(stringArray[3]).toBe('Humpback')
+    })
 
-
-    {
-        console.log('CASE: 3')
+    it('sort array of big numbers', function () {
         let numberArray = [40, 1, 5, 200];
         // [1, 200, 40, 5]
 
         sort(numberArray)
 
-        console.assert(numberArray[0] === 1) 
-        console.assert(numberArray[1] === 200)
-        console.assert(numberArray[2] === 40)
-        console.assert(numberArray[3] === 5)
-    }
+        expect(numberArray[0]).toBe(1) 
+        expect(numberArray[1]).toBe(200)
+        expect(numberArray[2]).toBe(40)
+        expect(numberArray[3]).toBe(5)
+    })
 
-
-    {
-        console.log('CASE: 4')
+    it('sort array of string-numbers', function () {
         let numericStringArray = ['80', '9', '700'];
         // ['700', '80', '9']
 
         sort(numericStringArray)
 
-        console.assert(numericStringArray[0] === '700') 
-        console.assert(numericStringArray[1] === '80')
-        console.assert(numericStringArray[2] === '9')
-    }
+        expect(numericStringArray[0]).toBe('700') 
+        expect(numericStringArray[1]).toBe('80')
+        expect(numericStringArray[2]).toBe('9')
+    })
 
-
-    {
-        console.log('CASE: 5')
+    it('sort array of string-numbers and numbers', function () {
         let mixedNumericArray = ['80', '9', '700', 40, 1, 5, 200];
         // [1, 200, 40, 5, '700', '80', '9']
 
         sort(mixedNumericArray)
 
-        console.assert(mixedNumericArray[0] === 1) 
-        console.assert(mixedNumericArray[1] === 200)
-        console.assert(mixedNumericArray[2] === 40)
-        console.assert(mixedNumericArray[3] === 5) 
-        console.assert(mixedNumericArray[4] === '700')
-        console.assert(mixedNumericArray[5] === '80')
-        console.assert(mixedNumericArray[6] === '9')
-    }
+        expect(mixedNumericArray[0]).toBe(1) 
+        expect(mixedNumericArray[1]).toBe(200)
+        expect(mixedNumericArray[2]).toBe(40)
+        expect(mixedNumericArray[3]).toBe(5) 
+        expect(mixedNumericArray[4]).toBe('700')
+        expect(mixedNumericArray[5]).toBe('80')
+        expect(mixedNumericArray[6]).toBe('9')
+    })
+
+
+})
 
     
 
@@ -88,17 +80,17 @@
         // expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
         
         sort(numbers) // ordenar el array
-        console.assert(numbers.length === 10) // el array debe ser igual de largo
-        console.assert(numbers[0] === 1) 
-        console.assert(numbers[1] === 2) 
-        console.assert(numbers[2] === 3)
-        console.assert(numbers[3] === 4)
-        console.assert(numbers[4] === 5)
-        console.assert(numbers[5] === 6)
-        console.assert(numbers[6] === 7)
-        console.assert(numbers[7] === 8)
-        console.assert(numbers[8] === 9)
-        console.assert(numbers[9] === 10)
+        expect(numbers.length).toBe(10) // el array debe ser igual de largo
+        expect(numbers[0]).toBe(1) 
+        expect(numbers[1]).toBe(2) 
+        expect(numbers[2]).toBe(3)
+        expect(numbers[3]).toBe(4)
+        expect(numbers[4]).toBe(5)
+        expect(numbers[5]).toBe(6)
+        expect(numbers[6]).toBe(7)
+        expect(numbers[7]).toBe(8)
+        expect(numbers[8]).toBe(9)
+        expect(numbers[9]).toBe(10)
     }
 
 
@@ -108,20 +100,18 @@
         // expected = [1, 1, 2, 2, 3, 3, 4, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 9, 9, 10, 10, 10]
         
         sort(numbers) // ordenar el array
-        console.assert(numbers.length === 25) // el array debe ser igual de largo
-        console.assert(numbers[0] === 1) 
-        console.assert(numbers[1] === 1) 
-        console.assert(numbers[2] === 2)
-        console.assert(numbers[3] === 2)
-        console.assert(numbers[4] === 3)
-        console.assert(numbers[5] === 3)
-        console.assert(numbers[6] === 4)
-        console.assert(numbers[7] === 4)
-        console.assert(numbers[8] === 4)
-        console.assert(numbers[9] === 5)
+        expect(numbers.length).toBe(25) // el array debe ser igual de largo
+        expect(numbers[0]).toBe(1) 
+        expect(numbers[1]).toBe(1) 
+        expect(numbers[2]).toBe(2)
+        expect(numbers[3]).toBe(2)
+        expect(numbers[4]).toBe(3)
+        expect(numbers[5]).toBe(3)
+        expect(numbers[6]).toBe(4)
+        expect(numbers[7]).toBe(4)
+        expect(numbers[8]).toBe(4)
+        expect(numbers[9]).toBe(5)
 
         console.log(numbers)
     }
 */
-
-}

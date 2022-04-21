@@ -1,41 +1,38 @@
+describe('lastindexOf', function () {
+    it('without start index', function () {
+        const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+        const result = lastindexOf(animals, 'bison')
+        expect(result).toBe(4)
+    })
 
-console.log('TEST lastindexOf')
+    it('without start index', function () {
+        const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+        const result = lastindexOf(animals, 'camel')
+        expect(result).toBe(2)
+    })
 
+    it('without start index', function () {
+        const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+        const result = lastindexOf(animals, 'ant')
+        expect(result).toBe(0)
+    })
 
-const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+    it('with start index', function () {
+        const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+        const result = lastindexOf(animals, 'bison', 2)
+        expect(result).toBe(4)
+    })
 
-{
-    console.log('CASE 1')
-    const result = lastindexOf(animals, 'bison')
-    console.assert(result === 4)
-}
+    it('with negative start index', function () {
+        const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+        const result = lastindexOf(animals, 'bison', -1)
+        expect(result).toBe(1)
+    })
 
-{
-    console.log('CASE 2')
-    const result = lastindexOf(animals, 'camel')
-    console.assert(result === 2)
-}
+    it('with negative start index', function () {
+        const animals = ['ant', 'bison', 'camel', 'duck', 'bison']
+        const result = lastindexOf(animals, 'bison', -3)
+        expect(result).toBe(1)
+    })
 
-{
-    console.log('CASE 3')
-    const result = lastindexOf(animals, 'ant')
-    console.assert(result === 0)
-}
-
-{
-    console.log('CASE 4')
-    const result = lastindexOf(animals, 'bison', 2)
-    console.assert(result === 4)
-}
-
-{
-    console.log('CASE 5')
-    const result = lastindexOf(animals, 'bison', -1)
-    console.assert(result === 1)
-}
-
-{
-    console.log('CASE 6')
-    const result = lastindexOf(animals, 'bison', -3)
-    console.assert(result === 1)
-}
+})
