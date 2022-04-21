@@ -1,35 +1,30 @@
+describe('pop', function () {
+    test('returns last element', function () {
+        const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato']
 
-console.log('TEST pop')
+        let plant = pop(plants)
+        expect(plant).toBe('tomato')
+        
+        expect(plants.length).toBe(4)
+        expect(plants[0]).toBe('broccoli')
+        expect(plants[1]).toBe('cauliflower')
+        expect(plants[2]).toBe('cabbage')
+        expect(plants[3]).toBe('kale')
 
-{
-    console.log('CASO 1')
+        plant = pop(plants)
+        expect(plant).toBe('kale')
 
-    let myPets = ['dog', 'cat', 'fish', 'bird'];
+        expect(plants.length).toBe(3)
+        expect(plants[0]).toBe('broccoli')
+        expect(plants[1]).toBe('cauliflower')
+        expect(plants[2]).toBe('cabbage')
+    })
 
-    let myPetsPop = myPets.pop();
+    test('return undefined on empty array', function() {
+        const array = []
 
-    console.assert(myPetsPop === 'bird'); // 'bird'
-}
+        const element = pop(array)
 
-{
-    console.log('CASO 2')
-
-    let number = [10, 14, 20, 24, 30, 34];
-
-    let myAge = number.pop();
-
-    console.assert(myAge === 34)
-
-    console.assert(number.length === 5)
-}
-
-{
-    console.log('CASO 3')
-
-    const number = [10, 14, 20, 24, 30, 34];
-
-    const result = pop(number)
-
-    console.assert(result===34)
-
-}
+        expect(element).toBe(undefined)
+    })
+})

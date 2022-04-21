@@ -1,23 +1,32 @@
+describe('unshift', () => {
+    test('adds one or more elements to the beginning of an array and returns the new length of the array', () => {
+        const nums = [1, 2, 3]
 
-console.log('TEST unshift')
+        const length = unshift(nums, 4)
 
-//El método unshift() agrega uno o más elementos al inicio del array, y devuelve la nueva longitud del array.
+        expect(length).toBe(4)
+        expect(nums.length).toBe(4)
+        expect(nums[0]).toBe(4)
+        expect(nums[1]).toBe(1)
+        expect(nums[2]).toBe(2)
+        expect(nums[3]).toBe(3)
+    })
 
-{
-    console.log('CASE 01')
+    test('adds one or more elements to the beginning of an array and returns the new length of the array', () => {
+        const nums = [1, 2, 3]
 
-    const vegetable = ['letuce', 'carrot']
+        const length = unshift(nums, 4, 5)
 
-    elem = 'tomato'
+        expect(length).toBe(5)
+        expect(nums.length).toBe(5)
+        expect(nums[0]).toBe(4)
+        expect(nums[1]).toBe(5)
+        expect(nums[2]).toBe(1)
+        expect(nums[3]).toBe(2)
+        expect(nums[4]).toBe(3)
+    })
 
-
-}
-//agregar un element al inicio del array
-//devolver un nuevo length del array
-{
-    function unshift(elem, array){
-        vegetable[0] = elem
+    test('...empty array', () => {
         
-    }
-
-}
+    })
+})

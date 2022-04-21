@@ -1,27 +1,21 @@
-console.log('TEST join')
+describe('join', function() {
+    
+    it('join without parameters', function() {
+        const elements = ['fire', 'air', 'water']
+        const result = join(elements)
+        expect(result).toBe('fire,air,water')
+    })
 
-const elements = ['Fire', 'Air', 'Water'];
+    it('join with space', function() {
+        const elements = ['fire', 'air', 'water']
+        const result = join(elements,'')
+        expect(result).toBe('fireairwater')
+    })
 
-{
-    console.log('CASE 1')
+    it('join with  - ', function() {
+        const elements = ['fire', 'air', 'water']
+        const result = join(elements,'-')
+        expect(result).toBe('fire-air-water')
+    })
 
-    const result = join(elements)
-
-    console.assert(result === 'Fire,Air,Water')
-}
-
-{
-    console.log('CASE 2')
-
-    const result = join(elements, '')
-
-    console.assert(result === 'FireAirWater')
-}
-
-{
-    console.log('CASE 3')
-
-    const result = join(elements, '-')
-
-    console.assert(result === 'Fire-Air-Water')
-}
+})

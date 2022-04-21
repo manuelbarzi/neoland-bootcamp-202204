@@ -1,7 +1,5 @@
 console.log('TEST INCLUDES')
 
-
-
 {
     console.log('CASE 1')
 

@@ -1,35 +1,28 @@
-
-console.log('TEST lastIndexOf')
-
-
-{
-    console.log('CASE 1')
-
-    const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', 'lorem']
-
-    const result = lastIndexOf(animals, 'Dodo')
-
-    console.assert(result === 3)
-}
-
-
-{
-    console.log('CASE 2')
-
+describe('last index', () => {
     const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', undefined]
 
-    const result = lastIndexOf(animals, 'Tiger')
+    test('Look for an element that is repeated', () => {
+        
+        const result = lastIndexOf(animals, 'Dodo')
+        
+        expect(result).toBe(3)
 
-    console.assert(result === 1)
-}
+    })
 
-{
-    console.log('CASE 3')
+    test('Look for an element that is only once', () =>{
+        
+        const result = lastIndexOf(animals, 'Tiger')
+        
+        expect(result).toBe(1);
 
-    const animals = ['Tarzan', 'fish', 'Penguin', 'cat', undefined]
+    })    
 
-    const result = lastIndexOf(animals, undefined)
+    test('Look for undefined', () => {
+        
+        const result = lastIndexOf(animals, undefined)
+        
+        expect(result).toBe(4);
 
-    console.assert(result === 4)
+    })
 
-}
+})

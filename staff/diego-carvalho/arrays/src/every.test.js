@@ -1,23 +1,42 @@
 
-console.log('TEST every')
+describe('every', function () {
+    const numbers = [2, 4, 6, 0]
 
-{
-    console.log('Test 01')
+    test('check is every number is bigger than one', function () {
 
-    const numbers = [2, 4, 6, 0]//array numbers
-
-    //here is the function that will check if every value inside of the array is bigger than 1
-    function isBiggerThanOne(value) {
-        if (value > 1) {
-            return true //if every value is bigger than 1 it will return true
-        } else {
-            return false//if one value is smaller than 1 it will return false
+        //here is the function that will check if every value inside of the array is bigger than 1
+        function isBiggerThanOne(value) {
+            if (value > 1) {
+                return true //if every value is bigger than 1 it will return true
+            } else {
+                return false//if one value is smaller than 1 it will return false
+            }
         }
-    }
 
-    console.assert(isBiggerThanOne)
+        const every = customEvery(numbers, isBiggerThanOne)
 
-}
+        expect(every).toBe(false)
+
+
+    })
+
+    test('check if every are numbers', () => {
+
+        const array = [1, 30, 39, 'hola', 29, 10, 13];
+        
+        const allAreNumbers = currentValue => typeof currentValue === 'number';
+        
+        const result = customEvery(array, allAreNumbers);
+        
+        expect(result).toBe(false);
+
+    })
+
+
+
+
+})
+
 /*
 // Is every bigger than 1
 function isBiggerThanOne(value) {

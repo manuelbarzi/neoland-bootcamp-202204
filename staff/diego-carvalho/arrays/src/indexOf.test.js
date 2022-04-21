@@ -1,35 +1,25 @@
-console.log('TEST indexOf')
+describe('lastIndexOf', () => {
+    test('returns last position of existing elements', () => {
+        const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo']
 
-const beasts = ['ant', 'bison', 'camel', 'duck', 'bison', 'camel']
+        let index = lastIndexOf(animals, 'Dodo')
+        expect(index).toBe(3)
 
-{
-    console.log('CASE 1')
+        index = lastIndexOf(animals, 'Tiger')
+        expect(index).toBe(1)
+    })
 
-    const result = indexOf(beasts, 'bison')
+    test('gets last position of matching element starting from positive index', () => {
+        const nums = [1, 2, 3, 4, 1, 4, 4, 3, 2, 1]
+            
+        const index = lastIndexOf(nums, 4, 3)
+        expect(index).toBe(3)
+    })
 
-    console.assert(result === 1)
-}
+    test('gets last position of matching element starting from negative index', () => {
+        const nums = [1, 2, 3, 4, 1, 4, 4, 3, 2, 1]
 
-{
-    console.log('CASE 2')
-
-    const result = indexOf(beasts, 'bison', 2)
-
-    console.assert(result === 4)
-}
-
-{
-    console.assert('CASE 3')
-
-    const result = indexOf(beasts, 'camel', 1)
-
-    console.assert( result === 2)
-}
-
-{
-    console.assert('CASE 4')
-
-    const result = indexOf(beasts, 'camel', -2)
-
-    console.assert( result === 2)
-}
+        const index = lastIndexOf(nums, 4, -5)
+        expect(index).toBe(5)
+    })
+})

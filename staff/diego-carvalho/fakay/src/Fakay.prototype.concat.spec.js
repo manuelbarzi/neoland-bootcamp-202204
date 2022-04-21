@@ -1,10 +1,12 @@
-describe('concat', function() {
-    const array1 = ['a', 'b', 'c']
-    const array2 = ['d', 'e', 'f']
+describe('Fakay.prototype.concat', function() {
+    const obj1 = new Fakay ('a', 'b', 'c')
+    const obj2 = new Fakay ('d', 'e', 'f')
+
+    
 
 
-    test('concating arrays', function () {
-        const result = concat(array1, array2)
+    it('concating arrays', function () {
+        const result = obj1.concat(obj2)
 
         expect(result.length).toBe(6)
         expect(result[0]).toBe('a')
@@ -15,11 +17,12 @@ describe('concat', function() {
         expect(result[5]).toBe('f')
 
     })
+    /*
 
-    const array3 = ['g', 'h', '1']
+    const array3 = new Fakay('g', 'h', '1')
 
-    test('contating multiples arrays', function(){
-        const result = concat(array1, array2, array3)
+    it('contating multiples arrays', function(){
+        const result = array3.concat(array1, array2, array3)
 
         expect(result.length).toBe(9)
         expect(result[0]).toBe('a')
@@ -33,10 +36,6 @@ describe('concat', function() {
         expect(result[8]).toBe('1')
 
     })
-
+*/
 })
-
-
-
-
 
