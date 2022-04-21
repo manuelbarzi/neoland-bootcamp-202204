@@ -36,4 +36,5 @@ describe('Developer', () => {
 
         expect(developer.status).toBe('coding')
     })
+
 })
