@@ -1,4 +1,4 @@
-console.log('TEST fill')
+/*console.log('TEST fill')
 {
     const nums = [1, 2, 3, 4];
 
@@ -16,4 +16,4 @@ console.log('TEST fill')
         console.assert(resultExpected[2] === 0)
         console.assert(resultExpected[3] === 0)
     }
-}
+}*/

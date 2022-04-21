@@ -1,4 +1,4 @@
-function concat(){
+/*function concat(){
     /*
     - definir array result vacio
     - iterar los arguments (arrays)
@@ -6,7 +6,7 @@ function concat(){
     - retornar result
     */
 
-
+/*
 const result = []
 let index = 0
 
@@ -22,4 +22,4 @@ for (let i = 0; i < arguments.length; i++){
     }
 }
 return result
-}
+}*/

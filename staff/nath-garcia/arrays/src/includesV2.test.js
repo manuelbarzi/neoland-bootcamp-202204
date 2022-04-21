@@ -1,4 +1,4 @@
-console.log('TEST includesV2')
+/*console.log('TEST includesV2')
 
 const array5 = [1, 2, 3];
 {
@@ -15,4 +15,4 @@ const pets = ['cat', 'dog', 'bat', 'elephant', 'bird'];
 {
     console.log('CASE 3')
     console.assert(includesV2(pets, 'at') === false)
-}
+}*/
