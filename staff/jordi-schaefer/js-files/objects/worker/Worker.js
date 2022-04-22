@@ -4,7 +4,7 @@ function Worker(name, email, SEC, id, birthDate) {
     this.socialSecurityNumber = SEC
     this.id = id
     this.birthDate = birthDate
-    this.status = 'at house'
+    this.status = 'pause'
 }
 
 Worker.prototype.work = function (){
