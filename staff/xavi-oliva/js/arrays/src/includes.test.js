@@ -1,21 +1,21 @@
-console.log('TEST includes')
+describe('includes', function () {
 
-const array = [1, 2, 3];
+    
+    test('return true if the element is included', function() {
+        
+        const array = [1, 2, 3]
 
-{
-    console.log('CASE 1')
+        expect(includes(array, 2)).toBe(true)
 
-    console.assert(includes(array, 2) === true );
+    })
 
-}
+    
+    test('return false if it is not included', function() {
+        
+        const pets = ['cat', 'dog', 'bat']
 
-// expected output: true
-{
-    console.log('CASE 2')
+        expect(includes(pets, 'at')).toBe(false)
 
-    const pets = ['cat', 'dog', 'bat'];
+    })
 
-    console.assert(includes(pets, 'at') === false);
-}
-
-console.log()
+})

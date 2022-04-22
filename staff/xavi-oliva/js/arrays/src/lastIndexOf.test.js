@@ -1,24 +1,25 @@
-console.log('TEST lastIndexOf')
+describe('lastIndexOf', () => {
+    test('returns last position of existing elements', () => {
+        const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo']
 
-const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', undefined];
+        let index = lastIndexOf(animals, 'Dodo')
+        expect(index).toBe(3)
 
-{
-    console.log('CASE 1')
+        index = lastIndexOf(animals, 'Tiger')
+        expect(index).toBe(1)
+    })
 
-    const result = lastIndexOf(animals, 'Dodo')
-    console.assert(result === 3)
-}
+    test('gets last position of matching element starting from positive index', () => {
+        const nums = [1, 2, 3, 4, 1, 4, 4, 3, 2, 1]
+            
+        const index = lastIndexOf(nums, 4, 3)
+        expect(index).toBe(3)
+    })
 
-{
-    console.log('CASE 2')
+    test('gets last position of matching element starting from negative index', () => {
+        const nums = [1, 2, 3, 4, 1, 4, 4, 3, 2, 1]
 
-    const result = lastIndexOf(animals, 'Tiger')
-    console.assert(result === 1)
-}
-
-{
-    console.log('CASE 3')
-
-    const result = lastIndexOf(animals, undefined)
-    console.assert(result === 4)
-}
+        const index = lastIndexOf(nums, 4, -5)
+        expect(index).toBe(5)
+    })
+})

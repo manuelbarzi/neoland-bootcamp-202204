@@ -10,8 +10,8 @@ function indexOf(array, searchElement, fromIndex = 0) {
         var currentElement = array[i]
 
         if (currentElement === searchElement)
-        return i
+            return i
     }
 
-   return -1
+    return -1
 }

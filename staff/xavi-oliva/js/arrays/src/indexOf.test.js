@@ -1,19 +1,18 @@
-console.log('TEST indexOf')
+describe('indexOf', function(){
 
-const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
+    const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-{
-    console.log('CASE 1')
+    test('Indexa a partir del primer elemento dado', function() {
 
-    const result = indexOf(beasts, 'bison')
+        const result = indexOf(beasts, 'bison')
 
-    console.assert(result === 1)
-}
+        expect(result).toBe(1)
+    })
 
-{
-    console.log('CASE 2')
+    test('Indexa a partir del segundo elemento dado', function() {
 
-    const result = indexOf(beasts, 'bison', 2)
+        const result = indexOf(beasts, 'bison', 2)
 
-    console.assert(result === 4)
-}
+        expect(result).toBe(4)
+    })
+})

@@ -1,6 +1,4 @@
-/*
-TODO define steps to solve the function
-*/
+
 
 function join(array, separator = ',') {
     let string = ''

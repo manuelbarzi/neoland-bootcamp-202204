@@ -1,27 +1,26 @@
-console.log('TEST join')
+describe('join', function(){
 
-const elements = ['Fire', 'Air', 'Water'];
+    const elements = ['Fire', 'Air', 'Water']
 
-{
-    console.log('CASE 1')
+    test('Returns a new array with the elements concatenated on a string separated by commas', function(){
 
-    const result = join(elements)
+        const result = join(elements, ',')
 
-    console.assert(result === 'Fire,Air,Water')
-}
+        expect(result).toBe('Fire,Air,Water')
+    })
 
-{
-    console.log('CASE 2')
+    test('Returns a new array with the elements concatenated on a string with no separation', function(){
 
-    const result = join(elements, '')
+        const result = join(elements, '')
 
-    console.assert(result === 'FireAirWater')
-}
+        expect(result).toBe('FireAirWater')
+    })
 
-{
-    console.log('CASE 3')
+    test('Returns a new array with the elements concatenated on a string separated by hyphens', function(){
 
-    const result = join(elements, '-')
+        const result = join(elements, '-')
 
-    console.assert(result === 'Fire-Air-Water')
-}
+        expect(result).toBe('Fire-Air-Water')
+    })
+
+})

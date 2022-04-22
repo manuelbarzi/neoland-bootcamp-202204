@@ -1,4 +1,5 @@
 function concat() {
+    
     const result = []
     let index = 0
 

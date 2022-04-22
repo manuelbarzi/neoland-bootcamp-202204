@@ -1,29 +1,32 @@
-console.log('TEST forEach')
+describe('forEach', function(){
 
-const nums = [1, 2, 3]
+    
+    test('launch a callback to sum the elements', function(){
+        
+        const nums = [1, 2, 3]
 
-{
-    console.log('CASE 1')
+        let sum = 0
 
-    let sum = 0
+        forEach(nums, function(num) {
+            sum += num
+        })
 
-    forEach(nums, function(num) {
-        sum += num
+        expect(sum).toBe(6)
+        
     })
 
-    console.assert(sum === 6)
-}
+    test('launch a callback to sum the elements', function(){
 
-const chars = ['h', 'e', 'l', 'l', 'o']
+        const chars = ['h', 'e', 'l', 'l', 'o']
 
-{
-    console.log('CASE 2')
+        let word = ''
 
-    let word = ''
+        forEach(chars, function(char) {
+            word += char
+        })
 
-    forEach(chars, function(char) {
-        word += char
+        expect(word).toBe('hello')
+        
     })
 
-    console.assert(word === 'hello')
-}
+})
