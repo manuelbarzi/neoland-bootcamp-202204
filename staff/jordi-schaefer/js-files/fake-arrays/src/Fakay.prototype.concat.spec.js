@@ -1,11 +1,12 @@
-describe ('concat', function() {
+describe ('Fakar.constructor.concat', function() {
 
-    it ('sum 2 arrays', function() {
-        const array1 = ['a', 'b', 'c']
-        const array2 = ['d', 'e', 'f']
-        const result = concat(array1, array2)
+    it ('should sum 2 arrays', function() {
+        const array1 = new Fakay('a', 'b', 'c')
+        const array2 = new Fakay('d', 'e', 'f')
+        const result = array1.concat(array2)
+        // expect(result instanceof Fakay).toBe(true)
+        expect(result).toBeInstanceOf(Fakay)
         expect(result.length).toBe(array1.length+array2.length)
-        expect(result.toString()).toBe(['a','b','c','d','e','f'].toString())
         expect(result[0]).toBe(array1[0])
         expect(result[1]).toBe(array1[1])
         expect(result[2]).toBe(array1[2])
@@ -14,11 +15,11 @@ describe ('concat', function() {
         expect(result[5]).toBe(array2[2])
     })
 
-    it ('sum 3 arrays', function() {
-        const array1 = ['a', 'b', 'c']
-        const array2 = ['d', 'e', 'f']
-        const array3 = ['g', 'h', 'i']
-        const result = concat(array1, array2, array3)
+    it ('should sum 3 arrays', function() {
+        const array1 = new Fakay('a', 'b', 'c')
+        const array2 = new Fakay('d', 'e', 'f')
+        const array3 = new Fakay('g', 'h', 'i')
+        const result = array1.concat(array2, array3)
         expect(result.length).toBe(array1.length + array2.length + array3.length)
         expect(result[0]).toBe(array1[0])
         expect(result[1]).toBe(array1[1])
@@ -31,13 +32,12 @@ describe ('concat', function() {
         expect(result[8]).toBe(array3[2])
     })
 
-    it ('sum of 3 arryas and string', function() {
-        const array1 = ['a', 'b', 'c']
-        const array2 = ['d', 'e', 'f']
-        const array3 = ['g', 'h', 'i']
-        const result = concat(array1, array2, array3, 'q')
-        expect(result.length ).toBe( array1.length + array2.length + array3.length +1)
-        //expect(result).toBe('a', 'b', 'c', 'd', 'e', 'f')
+    it ('should sum of 3 arryas and string', function() {
+        const array1 = new Fakay('a', 'b', 'c')
+        const array2 = new Fakay('d', 'e', 'f')
+        const array3 = new Fakay('g', 'h', 'i')
+        const result = array1.concat(array2, array3, 'q')
+        expect(result.length ).toBe( array1.length + array2.length + array3.length + 1)
         expect(result[0]).toBe(array1[0])
         expect(result[1]).toBe(array1[1])
         expect(result[2]).toBe(array1[2])
@@ -50,12 +50,12 @@ describe ('concat', function() {
         expect(result[9]).toBe('q')
     })
 
-    it ('sum of 3 aerrays and number', function() {
-        const array1 = ['a', 'b', 'c']
-        const array2 = ['d', 'e', 'f']
-        const array3 = ['g', 'h', 'i']
-        const result = concat(array1, array2, array3, 10)
-        expect(result.length ).toBe( array1.length + array2.length + array3.length +1)
+    it ('should sum of 3 arrays and number', function() {
+        const array1 = new Fakay('a', 'b', 'c')
+        const array2 = new Fakay('d', 'e', 'f')
+        const array3 = new Fakay('g', 'h', 'i')
+        const result = array1.concat(array2, array3, 10)
+        expect(result.length ).toBe( array1.length + array2.length + array3.length + 1)
         //expect(result).toBe('a', 'b', 'c', 'd', 'e', 'f')
         expect(result[0]).toBe(array1[0])
         expect(result[1]).toBe(array1[1])
