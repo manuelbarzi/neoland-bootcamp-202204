@@ -7,7 +7,7 @@ function Developer(name, email, SEC, id, birthDate) {
     // this.status = 'pause'
 
     Worker.call(this, name, email, SEC, id, birthDate)
-    // a este objeto (this) pasale todas las propiedades a continuacion
+    //ejecuta worker como funcion y a este objeto (this) pasale todas las propiedades a continuacion
 }
 
 // hacer que developer extienda de worker

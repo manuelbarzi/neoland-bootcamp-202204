@@ -1,10 +1,11 @@
 function FullStackDeveloper(name, email, SEC, id, birthDate) {
-    this.name = name
+/*     this.name = name
     this.email = email
     this.socialSecurityNumber = SEC
     this.id = id
     this.birthDate = birthDate
-    this.status = 'pause'
+    this.status = 'pause' */
+    Worker.call(this, name, email, SEC, id, birthDate)
 }
 
 // hacer que developer extienda de worker
