@@ -1,19 +1,17 @@
-console.log('TEST indexOf')
+describe('indexOf', function () {
 
-const beasts = ['ant', 'bison', 'camel', 'duck','bizon']
+    test('returns the first index', function () {
+        const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-{
-    console.log('CASE 1')
+        const result = indexOf(beasts, 'bison')
 
-    const result = indexOf(beasts, 'bison')
+        expect(result).toBe(1)
+    })
+    test('returns the first of another element', function () {
+        const beasts = ['ant', 'bison', 'camel', 'duck', 'bison']
 
-    console.assert(result === 1)
-}
+        const result = indexOf(beasts, 'bison', 2)
 
-{
-    console.log('CASE 2')
-
-    const result = indexOf(beasts, 'bison', 2)
-
-    console.assert(result === 4)
-}
+        expect(result).toBe(4)
+    })
+})
