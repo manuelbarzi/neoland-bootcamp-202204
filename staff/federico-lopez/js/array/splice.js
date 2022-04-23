@@ -47,7 +47,7 @@ function splice(arr, start, deleteCount = 0) {
 
         //Muevo una posición a la derecha los elementos anteriores del array desde start
 
-        for (let j = arr.length; j >= start; j--) {
+        for (let j = arr.length - 1; j >= start; j--) {
             arr[j+1] = arr[j] 
         }
 

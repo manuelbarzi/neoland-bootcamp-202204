@@ -21,9 +21,8 @@ describe('reduce', () => {
         
         const sumWithInitial = reduce(array1, 
             (previousValue, currentValue) => previousValue + currentValue,
-            2
-        );
+            2);
         
-        expect(sumWithInitial.toBe(12);
+        expect(sumWithInitial).toBe(12);
 
 })

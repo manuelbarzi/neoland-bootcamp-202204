@@ -9,6 +9,7 @@ function shift(arr) {
         arr[i] = arr[i + 1]
     
     arr.pop()
+    //arr.length = arr.length - 1
     return deletedElement
 
 }

@@ -1,37 +1,31 @@
-console.log('TEST REVERSE')
+describe('reverse', () => {
 
-{
+    test('reverse an array', () => {
 
-    console.log('TEST 1')
+        const array1 = ['one', 'two', 'three'];
+        
+        const reversed = reverse(array1)
+        
+        const expectedArray = ["three", "two", "one"]
 
-    const array1 = ['one', 'two', 'three'];
+        checkArrays(array1, expectedArray)
+        checkArrays(reversed, expectedArray)
+        checkArrays(array1, reversed)
 
-    const reversed = reverse(array1)
+    })
 
-    const expectedArray = ["three", "two", "one"]
+    test('reverse a longer array', () => {
 
-    for (let i = 0; i < expectedArray.length; i++) {
-        console.assert(array1[i] === expectedArray[i])
-        console.assert(reversed[i] === expectedArray[i])
-        console.assert(array1[i] === reversed[i])
-    }
+        const array1 = [1, 2, 3, 4, 5, 6]
+        
+        const reversed = reverse(array1)
+        
+        const expectedArray = [6, 5, 4, 3, 2, 1]
 
-}
+        checkArrays(array1, expectedArray)
+        checkArrays(reversed, expectedArray)
+        checkArrays(array1, reversed)
 
-{
+    })
 
-    console.log('TEST 2')
-
-    const array1 = [1, 2, 3, 4, 5, 6];
-
-    const reversed = reverse(array1)
-
-    const expectedArray = [6, 5, 4, 3, 2, 1]
-
-    for (let i = 0; i < expectedArray.length; i++) {
-        console.assert(array1[i] === expectedArray[i])
-        console.assert(reversed[i] === expectedArray[i])
-        console.assert(array1[i] === reversed[i])
-    }
-
-}
+})

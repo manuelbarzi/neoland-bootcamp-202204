@@ -1,61 +1,51 @@
-console.log('TEST SHIFT')
+describe('shift', () => {
 
-{
+    test('shift one element', () => {
 
-    console.log('TEST 1')
+        const array1 = [1, 2, 3];
+        
+        const result = shift(array1);
+        
+        const arrayExpected = [2, 3]
+        
+        const resultExpected = 1
+        
+        expect(result).toBe(resultExpected)
+        
+        checkArrays(array1, arrayExpected)
 
-    const array1 = [1, 2, 3];
+    })
 
-    const result = shift(array1);
+    test('shift and empty array', () => {
 
-    const arrayExpected = [2, 3]
+        const array1 = [];
+        
+        const result = shift(array1);
+        
+        const arrayExpected = []
+        
+        const resultExpected = undefined
+        
+        expect(result).toBe(resultExpected)
+        
+        checkArrays(array1, arrayExpected)
 
-    const resultExpected = 1
+        test('shift one element', () => {
 
-    console.assert(result === resultExpected)
+            const myFish = ['angel', 'clown', 'mandarin', 'surgeon']
+            
+            const result = shift(myFish);
+            
+            const arrayExpected = ['clown', 'mandarin', 'surgeon']
+            
+            const resultExpected = 'angel'
 
-    for (let i = 0; i < arrayExpected.length; i++) {
-        console.assert(array1[i] === arrayExpected[i])
-    }
+            expect(result).toBe(resultExpected)
+        
+            checkArrays(array1, arrayExpected)
 
-}
+        })
 
-{
-    
-    console.log('TEST 2')
+    })
 
-    const array1 = [];
-
-    const result = shift(array1);
-
-    const arrayExpected = []
-
-    const resultExpected = undefined
-
-    console.assert(result === resultExpected)
-
-    for (let i = 0; i < arrayExpected.length; i++) {
-        console.assert(array1[i] === arrayExpected[i])
-    }
-
-}
-
-{
-    
-    console.log('TEST 3')
-
-    const myFish = ['angel', 'clown', 'mandarin', 'surgeon']
-
-    const result = shift(myFish);
-
-    const arrayExpected = ['clown', 'mandarin', 'surgeon']
-
-    const resultExpected = 'angel'
-
-    console.assert(result === resultExpected)
-
-    for (let i = 0; i < arrayExpected.length; i++) {
-        console.assert(myFish[i] === arrayExpected[i])
-    }
-
-}
+})
