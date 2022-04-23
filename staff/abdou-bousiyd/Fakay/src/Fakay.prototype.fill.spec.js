@@ -1,6 +1,7 @@
+console.log('TEST fill')
 
-describe('TEST fill', function() {
-    test('should fill with 1 from position 1 until position 3', () => {
+describe('Fakay fill', function() {
+    it('should fill with 1 from position 1 until position 3', () => {
 
         const numeros = [1, 2, 3, 4, 5]
         
@@ -8,7 +9,7 @@ describe('TEST fill', function() {
         const start = 1
         const end = 3
         
-        fill(numeros, value, start, end)
+        numeros.fill(value, start, end)
         
         const array2 = [1, 1, 1, 4, 5]
         expect(numeros.length).toBe(array2.length) 
@@ -17,12 +18,12 @@ describe('TEST fill', function() {
         }
     })
 
-    test('should fill with fives from 1', () => {
+    it('should fill with fives from 1', () => {
         const numeros = [1, 2, 3, 4, 5]
         const value = 5
         const start = 1
 
-        fill(numeros, value, start)
+        numeros.fill(value, start)
         
         const array2 = [1, 5, 5, 5, 5]
         expect(numeros.length).toBe(array2.length)
@@ -32,11 +33,11 @@ describe('TEST fill', function() {
         }
     })
 
-    test('should fill all the array with 7', () => {
+    it('should fill all the array with 7', () => {
         const numeros = [1, 2, 3, 4, 5]
         const value = 7
 
-        fill(numeros, value)
+        numeros.fill(value)
         const array2 = [7, 7, 7, 7, 7]
         expect(numeros.length).toBe(array2.length)
 

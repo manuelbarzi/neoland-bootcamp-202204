@@ -1,11 +1,13 @@
 
 function fill(array, value, start = 0, end = array.length) { 
     
-   // TODO 
-   
+   if (start < 0)
+        start = array.length + start
+    if (end < 0)
+        end = array.length + end
 
     for(let i = start; i < end; i++) {
-        return array[i] = value
+        array[i] = value
     }
     return array
 }

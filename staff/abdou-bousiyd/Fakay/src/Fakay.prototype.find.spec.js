@@ -1,25 +1,26 @@
 
-describe('find', () => {
-    test('should returns the first element in the array that satisfies function', () => {
+describe('Fakay find', () => {
+    it('should returns the first element in the array that satisfies function', () => {
         const numeros = [1, 2, 3, 4, 5, 6]
         
-        const result = find(numeros, function(numero) {
+        const result = numeros.find(function(numero) {
             return numero > 3
         })
         expect(result).toBe(4)
     })
 
-    test('should should returns the first element in the array that satisfies function', () => {
+    it('should should returns the first element in the array that satisfies function', () => {
 
         const numeros = [11, 32, 83, 40, 2, 16]
 
-        const result = find(numeros, function(numero) {
+        const result = numeros.find(function(numero) {
             return numero < 3
         })
+        console.log(result)
         expect(result).toBe(2)
     })
 
-    test('should should returns the first element in the array that satisfies function', () => {
+    it('should should returns the first element in the array that satisfies function', () => {
 
         const cars = [
             { name: 'Seat Ibiza', color: 'yellow' },
@@ -38,13 +39,13 @@ describe('find', () => {
             return car.color === 'red'
         }
 
-        const car = find(cars, isRed)
+        const car = cars.find(isRed)
 
         expect(car).toBe(cars[3])
 
     })
 
-    test('should should returns the first element in the array that satisfies function', () => {
+    it("should It should return undefined if it doesn't find the element", () => {
 
         const cars = [
             { name: 'Seat Ibiza', color: 'yellow' },
@@ -58,12 +59,12 @@ describe('find', () => {
             { name: 'Citroen AX 3', color: 'yellow' }
         ]
 
-        function isRed(car) {
+        function isBlack(car) {
             //return car['color'] === 'red'
             return car.color === 'black'
         }
 
-        const car = find(cars, isRed)
+        const car = cars.find(isBlack)
 
         expect(car).toBe(undefined)
     })

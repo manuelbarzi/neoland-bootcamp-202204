@@ -9,7 +9,7 @@ function Developer(name, email, socialSecurityNumber, id, birthDate) {
 
 
 Developer.prototype = Object.create(Worker.prototype)
-// Developer.prototype.constructor = Developer
+Developer.prototype.constructor = Developer
 // console.log(Developer.prototype)
 
 
