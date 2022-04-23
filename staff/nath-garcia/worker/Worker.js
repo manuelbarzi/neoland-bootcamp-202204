@@ -1,11 +1,10 @@
 function Worker(name, email,socialSecurityNumber, id, birthDate ){
-
     this.name = name
     this.email = email
     this.socialSecurityNumber = socialSecurityNumber
     this.id = id
     this.birthDate  = birthDate
-   this.status = ''
+   this.status = 'pause'
 }
 
 Worker.prototype.work = function(){

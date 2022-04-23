@@ -1,4 +1,4 @@
-function Developer(name, email,socialSecurityNumber, id, birthDate){
+function FullStackDeveloper(name, email,socialSecurityNumber, id, birthDate){
    // this.name = name;
    // this.email = email;
    // this.socialSecurityNumber = socialSecurityNumber
@@ -8,9 +8,9 @@ function Developer(name, email,socialSecurityNumber, id, birthDate){
 Developer.call(this, name, email, socialSecurityNumber, id, birthDate)
 }
 
-FullStackDeveloper.prototype.constructor = Developer
-FullStackDeveloper.prototype = Object.create(Worker.prototype)
+FullStackDeveloper.prototype = Object.create(Developer.prototype)
+FullStackDeveloper.prototype.constructor = FullStackDeveloper
 
-Developer.prototype.code= function(){
+FullStackDeveloper.prototype.code= function(){ //method overriding
     this.status = 'coding full stack'
 }
