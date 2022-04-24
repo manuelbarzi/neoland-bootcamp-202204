@@ -1,10 +1,10 @@
 function join(array, separator = ',') {
     let string = ''
 
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.lenght; i++) {
         const currentElement = array[i]
 
-        string += currentElement;
+        string += currentElement
 
         if (i < array.length - 1)
             string += separator
