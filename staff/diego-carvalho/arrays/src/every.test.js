@@ -1,22 +1,14 @@
+describe('every', () => {
 
-describe('every', function () {
-    const numbers = [2, 4, 6, 0]
+    test('check is every number is less than 40', () => {
 
-    test('check is every number is bigger than one', function () {
-
-        //here is the function that will check if every value inside of the array is bigger than 1
-        function isBiggerThanOne(value) {
-            if (value > 1) {
-                return true //if every value is bigger than 1 it will return true
-            } else {
-                return false//if one value is smaller than 1 it will return false
-            }
-        }
-
-        const every = customEvery(numbers, isBiggerThanOne)
-
-        expect(every).toBe(false)
-
+        const numbs = [1, 30, 39, 29, 10, 13];
+        
+        const isBelowThreshold = (currentValue) => currentValue < 40;
+        
+        const result = every(numbs, isBelowThreshold);
+        
+        expect(result).toBe(true);
 
     })
 
@@ -26,17 +18,13 @@ describe('every', function () {
         
         const allAreNumbers = currentValue => typeof currentValue === 'number';
         
-        const result = customEvery(array, allAreNumbers);
+        const result = every(array, allAreNumbers);
         
         expect(result).toBe(false);
 
     })
 
-
-
-
 })
-
 /*
 // Is every bigger than 1
 function isBiggerThanOne(value) {

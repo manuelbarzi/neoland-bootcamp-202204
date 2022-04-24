@@ -1,13 +1,19 @@
-/*- recorrer elementos del array
-- comprobar si alguno de ellos es igual al element
-- retornar la ultima vez que el elemente ha sido encontrado en la array.
-- si no lo encuentra, retornar -1*/
+function lastIndexOf(array, searchElement, fromIndex = array.length - 1) {
+    if (fromIndex >= 0)
+        for (let i = fromIndex; i > -1; i--) {
+            const currElem = array[i]
 
-//the last index at which a given element can be found in the array
+            if (currElem === searchElement) return i
+        }
+    else
+        /*
+        - i starts from array.length + fromIndex
+        */
+        for (let i = array.length + fromIndex; i > -1; i--) {
+            const currElem = array[i]
 
-function lastIndexOf(array, value, fromIndex = array.length - 1) {
-    for (let i = fromIndex; i >= 0; i--)
-        if (array[i] === value)
-            return i
+            if (currElem === searchElement) return i
+        }
+
     return -1
 }

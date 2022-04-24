@@ -1,16 +1,16 @@
-function lastIndexOf(array, searchElement) {
-    /*
-    - iterate array from last index
-    - check each position and see whether it matches the target element
-    - if it matches, then return index
-    - if it doesn't then return -1
-    */
 
-    for (let i = array.length - 1; i > -1; i--) {
-        const currElem = array[i]
+/*
+- recorrer elementos del array
+- comprobar si alguno de ellos es igual al element
+- retornar el indice del element dentro del array
+- si no lo encuentra, retornar -1
+*/
 
-        if (currElem === searchElement) return i
+function indexOf(array, valor, fromIndex = 0){
+    for (i=fromIndex; i<array.length; i++){
+        if(array[i]===valor){
+            return i
+        }
     }
-
     return -1
 }

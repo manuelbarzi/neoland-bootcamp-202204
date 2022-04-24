@@ -4,9 +4,10 @@ function Developer(name, email, socialSecurityNumber,id , birthDate ) {
     this.socialSecurityNumber = socialSecurityNumber
     this.id = id
     this.birthDate = birthDate
-    this.status = ''
+    this.status = 'pause'
 
 }
+
 Developer.prototype = Object.create(Worker.prototype)
 Developer.prototype.constructor = Developer
 

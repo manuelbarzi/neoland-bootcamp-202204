@@ -1,16 +1,26 @@
-Fakay.prototype.concat = function contac(){
-    result = []
-    n=0
-    for (j=0; j < arguments.length; j++){
-        if (arguments[j] instanceof Fakay)
-            for (i=0; i<arguments[j].length; i++){
-                result[n]=arguments[j][i]
-                n++
+Fakay.prototype.concat = function() {
+    const result = new Fakay
+
+    for (let i = 0; i < this.length; i++) {
+        result[i] = this[i]
+        result.length++
+    }
+
+    for (let i = 0; i < arguments.length; i++) {
+        const argument = arguments[i]
+
+        if (argument instanceof Fakay)
+            for (let j = 0; j < argument.length; j++) {
+                const currElem = argument[j]
+
+                result[result.length] = currElem
+                result.length++
             }
         else {
-            result[n]=arguments[j]
-            n++
+            result[result.length] = argument
+            result.length++
         }
     }
+
     return result
 }

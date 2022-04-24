@@ -1,13 +1,11 @@
-function reverse(array) {
-    const elem1 = array[0]
-    const elem2 = array[1]
-    const elem3 = array[array.length - 2]
-    const elem4 = array[array.length - 1]
-
-    array[0] = elem4
-    array[1] = elem3
-    array[array.length - 2] = elem2
-    array[array.length - 1] = elem1
-
-    return array
+function reverse(arr) {
+    for (let i = 0; i < arr.length; i++) {
+        const lastItem = arr[arr.length - 1 - i]
+        const firstItem = arr[i]
+        arr[i] = lastItem
+        arr[arr.length - 1 - i] = firstItem 
+        if (i === arr.length - 1 - i || i + 1 === arr.length / 2)
+            break;
+    }
+    return arr
 }

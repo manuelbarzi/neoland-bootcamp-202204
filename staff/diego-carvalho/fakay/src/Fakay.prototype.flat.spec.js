@@ -1,10 +1,8 @@
 describe('flat', function() {
-    test(' flating array', function() {
-        /*The flat() method creates a new array with all sub-array elements
-         concatenated into it recursively up to the specified depth.  */
-     const array1 = [0, 1, 2, [3, 4]]
+    it(' flating array', function() {
+     const numbers1 = new Fakay (0, 1, 2, new Fakay(3, 4))
 
-     let result1 = flat(array1) // expected output: [0, 1, 2, 3, 4]
+     let result1 = numbers1.flat() // expected output: [0, 1, 2, 3, 4]
 
      expect(result1.length).toBe(5)
      expect(result1[0]).toBe(0)
@@ -51,5 +49,6 @@ describe('flat', function() {
 
     
 })
+
 
 

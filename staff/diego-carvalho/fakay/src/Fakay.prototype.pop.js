@@ -1,9 +1,8 @@
-Fakay.prototype.pop = function pop() {
-    const lastElem = this[this.length - 1]
+Fakay.prototype.pop = function () {
+    const last = this[--this.length]
 
-    if (this.length)
-        //this.length = this.length - 1
-        this.length--
+    //this[this.length] = undefined // WARN it does not remove the key, just the value
+    delete this[this.length]
 
-    return lastElem
+    return last
 }

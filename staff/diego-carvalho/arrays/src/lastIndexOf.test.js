@@ -1,4 +1,4 @@
-describe('last index', () => {
+describe('lastIndexOf', () => {
     const animals = ['Dodo', 'Tiger', 'Penguin', 'Dodo', undefined]
 
     test('Look for an element that is repeated', () => {
