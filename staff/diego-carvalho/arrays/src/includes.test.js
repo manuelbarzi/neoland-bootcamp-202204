@@ -1,35 +1,41 @@
-console.log('TEST INCLUDES')
+describe('includes', function(){
+    test('looking for 2 inside of array4', function(){
+        const array4 = [2, 3, 4]
 
-{
-    console.log('CASE 1')
+        includes(array4, 2)
 
-    const array4 = [2, 3, 4];
+        expect(true).toBe(true)
 
-    console.assert(includes(array4, 2) === true)
-}
+    }) 
+    test('looking cat inside pets', function(){
+        const pets = ['cat', 'dog', 'bat', 'elephant', 'bird']
 
-{
-    console.log('CASE 2')
+        pets.includes(pets, 'cat')
 
-    const pets = ['cat', 'dog', 'bat', 'elephant', 'bird'];
+        expect(true).toBe(true)
 
-    console.assert(includes(pets, 'cat') === true)
-}
+    })
+    test('looking for at inside of pets', function(){
+        const pets = ['cat', 'rabbit', 'lion', 'tiger', 'bison']
 
-{
-    console.log('CASE 3')
+        pets.includes(pets, 'at')
 
-    const pets = ['cat', 'rabbit', 'lion', 'tiger', 'bison'];
-    
-    console.assert(includes(pets, 'at') === false)
-}
+        expect(false).toBe(false)
 
-{
-    console.log('CASE 4')
+    })
+    test('looking for carrot inside of vegetables',function(){
+        const vegetables = ['carrot','letuce','tomato']
 
-    const vegetables = ['carrot','letuce','tomato']
+        includes(vegetables, 'carrot')
 
-    console.assert(includes(vegetables, 'carrot') === true)
-}
+        expect(true).toBe(true)
+
+    })
+
+
+})
+
+
+
 
 

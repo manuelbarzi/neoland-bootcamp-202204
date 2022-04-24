@@ -1,30 +1,31 @@
 describe('filter', () => {
 
     test('filter words with length more than 6', () => {
-        
+
         const words = ['spray', 'limit', 'elite', 'exuberant', 'destruction', 'present'];
-        
+
         const result = filter(words, function (word) {
             return word.length > 6;
         })
 
-        const expectedResult = ["exuberant", "destruction", "present"];
-
-        checkArrays(result, expectedResult);
+        expect(result[0]).toBe("exuberant")
+        expect(result[1]).toBe("destruction")
+        expect(result[2]).toBe("present")
+     
 
     })
 
     test('filter word === \'limit\'', () => {
 
         const words = ['spray', 'limit', 'elite', 'limit', 'destruction', 'present'];
-        
+
         const result = filter(words, function (word) {
             return word === 'limit'
         })
-        
-        const expectedResult = ['limit', 'limit'];
-        
-        checkArrays(result, expectedResult);
+
+        expect(result[0]).toBe('limit')
+        expect(result[1]).toBe('limit')
+
 
     })
 
@@ -37,7 +38,7 @@ describe('filter', () => {
         { name: "Paula", edad: 23, gender: "f" },
         { name: "Wendy", edad: 203, gender: "f" }
     ]
-    
+
     function moreThan30(person) {
         return person.edad > 30;
     }
@@ -59,8 +60,8 @@ describe('filter', () => {
 
     })
 
-    test('filter persons who contains a letter', () => {       
-        
+    test('filter persons who contains a letter', () => {
+
         const peopleWithA = filter(people, containsALetter);
 
         expect(peopleWithA.length).toBe(4);

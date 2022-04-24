@@ -20,3 +20,4 @@ function flat(arr, deepth = 1) {
     }
     return newArray
 }
+
