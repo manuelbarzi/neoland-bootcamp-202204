@@ -1,4 +1,23 @@
-console.log("TEST map")
+describe('map', function(){
+    test ('map to UpperCase', function(){
+    
+    const array = ["hola", "que", "tal"]
+    const result = map(array, function(element){
+        return element.toUpperCase()
+    })
+    expect(result[0]).toBe('HOLA')
+    expect(result[1]).toBe('QUE')
+    expect(result[2]).toBe('TAL')
+
+})
+})
+
+
+
+
+
+
+/*console.log("TEST map")
 
 
 
@@ -9,6 +28,6 @@ console.log("TEST map")
          return result.toUpperCase()
     })
 } 
-console.assert(result.toUpperCase()) === ["HOLA", "QUE", "TAL"]
+console.assert(result) === ["HOLA", "QUE", "TAL"]*/
 
 

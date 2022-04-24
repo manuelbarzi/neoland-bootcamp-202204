@@ -1,25 +1,32 @@
-{
-    console.log('TEST pop')
+//El método pop() elimina el último elemento de un array y lo devuelve. Este método cambia la longitud del array.
 
-    {
-        console.log('CASE 1')
-
+describe('pop', function () {
+    test('returns last element', function () {
         const plants = ['broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato']
-        const result = pop(plants)
 
-        console.assert(result === 'tomato')
-        console.assert(plants.length === 4)
+        let plant = pop(plants)
+        expect(plant).toBe('tomato')
+        
+        expect(plants.length).toBe(4)
+        expect(plants[0]).toBe('broccoli')
+        expect(plants[1]).toBe('cauliflower')
+        expect(plants[2]).toBe('cabbage')
+        expect(plants[3]).toBe('kale')
 
-    }
-    {
-        console.log('CASE 2')
+        plant = pop(plants)
+        expect(plant).toBe('kale')
 
-        const vegetables = []
-        const result = pop(vegetables)
+        expect(plants.length).toBe(3)
+        expect(plants[0]).toBe('broccoli')
+        expect(plants[1]).toBe('cauliflower')
+        expect(plants[2]).toBe('cabbage')
+    })
 
-        console.assert(result === undefined)
+    test('return undefined on empty array', function() {
+        const array = []
 
-    }
+        const element = pop(array)
 
-
-}
+        expect(element).toBe(undefined)
+    })
+})
