@@ -5,8 +5,17 @@ function Worker(name, email, socialSecurityNumber, id, birthDate) {
     this.birthDate = birthDate
     this.id = id
     this.birthDate = birthDate
-    this.status = ''
+    this.status = 'pause'
 } 
+
+
+Worker.prototype.work = function() {
+    this.status = 'working'
+}
+
+Worker.prototype.break = function() {
+    this.status = 'pause'
+}
 
 // Worker.prototype.name = function(name) {
 //     this.name.name(name)
@@ -16,9 +25,9 @@ function Worker(name, email, socialSecurityNumber, id, birthDate) {
 //     this.name.email(email)
 // }
 
-Worker.prototype.socialSecutiryNumber = function(socialSecurityNumber) {
-    this.socialSecurityNumber.socialSecurityNumber(socialSecurityNumber)    
-}
+// Worker.prototype.socialSecutiryNumber = function(socialSecurityNumber) {
+//     this.socialSecurityNumber.socialSecurityNumber(socialSecurityNumber)    
+// }
 
 // Worker.prototype.id = function(id) {
 //     this.id.id(id)
