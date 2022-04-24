@@ -1,11 +1,19 @@
-console.log('TEST lastIndexOf')
+console.log("lastIndexOf")
 
+{
+    console.log("Case")
 
-const res1 = lastIndexOf(['a', 'c', 'b','e','c'], 'c')
-const res2 = lastIndexOf(['a', 'b', 'c', 'e'], 'abc')
-const res3 = lastIndexOf(['d', 'l', 'j', 'r',  'j', 'n'], 'j', 3)
+    const ropa = ["camisa", "zapatos", "camisa", "zapatos", "sudadera", "pantalon"]
 
-console.assert(res1 === 4)
-console.assert(res2 === -1)
-console.assert(res3 === 2)
-console.log('CASE 1')
+    const ropaPosition = lastIndexOf(ropa, "zapatos")
+    const noRopaPosition = lastIndexOf(ropa, "jersei")
+    const startRightRopa = lastIndexOf(ropa, "camisa", 2)
+    const fromRightRopa = lastIndexOf(ropa, "camisa", -2)
+
+    
+    console.assert(ropaPosition === 3)
+    console.assert(noRopaPosition === -1)
+    console.assert(startRightRopa === 2)
+    console.assert(fromRightRopa === 2)
+
+}

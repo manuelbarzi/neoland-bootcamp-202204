@@ -1,11 +1,24 @@
-// console.log('Test at')
+describe('at', function() {
+    const nums = [5, 12, 8, 130, 44]
 
-// {
-// const numbers = [1,15,20,9]
+    test('positive index', function() {
+        const result = at(nums, 2)
+        expect(result).toBe(8)
+    })
 
-// let newNumber = 15
+    test('negative index', function() { 
+        const foo = ['a', 'c', 'b','e','c']
+        const index = -2
+        const res1 = at(foo, index)
+        expect(res1).toBe('e')
+    })
 
-// console.assert(newNumber[1] === 15)
+    test('should returns element from position', function() { 
+        const foo = ['a', 'c', 'b','e','c']
+        const index = 2
+        const res1 = at(foo, index)
+        expect(res1).toBe('b')
+    })
 
-// console.log('Test 1')
-// }
+    
+})

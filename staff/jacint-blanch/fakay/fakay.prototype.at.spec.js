@@ -1,24 +1,23 @@
-describe('Fakay.prototype.at', function() {
-    const nums = [5, 12, 8, 130, 44]
-
-    test('positive index', function() {
-        const result = at(nums, 2)
+describe('at', function() {
+    const nums = new Fakay(5, 12, 8, 130, 44)
+    // console.log(nums, 888)
+    it('positive index', () => {
+        const result = nums.at(2)
         expect(result).toBe(8)
     })
 
-    test('negative index', function() { 
-        const foo = ['a', 'c', 'b','e','c']
+    it('negative index', function() { 
+        const foo = new Fakay('a', 'c', 'b','e','c')
         const index = -2
-        const res1 = at(foo, index)
+        const res1 = foo.at(index)
         expect(res1).toBe('e')
     })
 
-    test('should returns element from position', function() { 
-        const foo = ['a', 'c', 'b','e','c']
+    it('should returns element from position', function() { 
+        const foo = new Fakay('a', 'c', 'b','e','c')
         const index = 2
-        const res1 = at(foo, index)
+        const res1 = foo.at(index)
         expect(res1).toBe('b')
     })
 
-    
 })

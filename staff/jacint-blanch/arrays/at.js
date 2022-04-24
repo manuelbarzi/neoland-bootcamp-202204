@@ -1,8 +1,18 @@
-// function at(index){
-//     const newNumber = []
-//     for(let i = 0; i < numbers.length; i++){
-//         newNumber[i] = numbers[i]
+function at(array, position){
 
-//         return newNumber
-//     }
-// }
+
+    if (position >= 0) {
+        return array[position]
+    } else {
+        return array[(array.length) + position]
+    }
+
+    // if(array[array.length - 1] === array[position]){
+    //     return array[position]
+    // }
+    // return array[position]
+    
+//   array[array.length] === array[3]
+//   return array[3]
+}  
+

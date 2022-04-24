@@ -1,20 +1,35 @@
+Fakay.prototype.at = function(index) {
 
-Fakay.prototype.at = function (position){
-    if (position >= 0) {
-        return array[position]
-    } else {
-        return array[(array.length) + position]
+    if(index >= 0) {
+        return this[index]
+    }else{
+        return this[this.length + index]
     }
 }
 
-// function at(array, position){
+Fakay.prototype.at = function(index) {
+
+    if(index >= 0) {
+        return this[index]
+    }else{
+        return this[this.length + index]
+    }
+}
 
 
-//     if (position >= 0) {
-//         return array[position]
-//     } else {
-//         return array[(array.length) + position]
-//     }
 
-// }  
 
+
+
+
+
+
+// Fakay.prototype.at = function(index) {
+
+//     if (index < 0)
+//         index = this.length + index
+
+//     const element = this[index]
+// console.log(element)
+//     return element
+// }

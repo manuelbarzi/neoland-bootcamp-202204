@@ -1,16 +1,34 @@
-console.log('TEST includes')
+// console.log("Test includes")
 
-const array = [1, 2, 3];
+// {
+//     console.log("Case")
 
-{
-    console.log('CASE 1')
+//     const primos = ["khaula", "isma", "yassin","abdo"]
 
-}
+//     const estan = includes(primos, "yassin")
+//     const noEstan = includes(primos, "abdou")
+//     const isThere = includes(primos, "isma", 2)
 
-// expected output: true
-{
-    console.log('CASE 2')
 
-    const pets = ['cat', 'dog', 'bat']
+//     console.assert(estan === true)
+//     console.assert(noEstan === false)
+//     console.assert(isThere === false)
 
-}
+// }
+
+
+describe('Test includes', function() {
+    test('Should return true if elememt exists in the array', function() {
+        const primos = ["khaula", "isma", "yassin","abdo"]
+
+        expect(includes(primos, "yassin"), true)
+        expect(includes(primos, "abdou"), true)
+    })
+
+    test('Should return false if no exist', function() {
+        const primos = ["khaula", "isma", "yassin","abdo"]
+
+        expect(includes(primos, "melon"), false)
+        expect(includes(primos, "bacalao"), false)
+    })
+})
