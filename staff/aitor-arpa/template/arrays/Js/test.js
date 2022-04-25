@@ -6,7 +6,7 @@ DONE meditate (1h)
 TODO meet friends (3h)`
 
 printList(list) // expected output: undefined, prints: TODO buy milk (30m)
-// TODO visit grandma (1d) DONE go to gym (3h) DOING learn js (6h)
+
 // DONE meditate (1h) TODO meet friends (3h)
 
 console.log('extractStats')

@@ -5,6 +5,7 @@ function Worker (name, email, ss, Id, birthDate) {
     this.socialSecurityNumber = ss
     this.id = Id
     this.birthDate = birthDate
+    this.status = 'pause'
 }
 
 Worker.prototype.work = function() {

@@ -7,6 +7,7 @@ function Developer (name, email, ss, Id, birthDate) {
     this.socialSecurityNumber = ss
     this.id = Id
     this.birthDate = birthDate
+    this.status = 'pause'
 }
 
 
