@@ -1,0 +1,18 @@
+/*
+data- sitio donde almaceno los datos
+vendor- contiene todas nuestras dependencias de un sitio web, mi libreria a partir de librerias externas cn la q construyo mi app
+utils. chainPrototype- automatiza el proceso de copiar el prototipo de un padre a un hijo
+index.html- pagina para cargar las cosas: librerias, herramientas, datos
+index.js- donde esta la logica de mi app
+
+root.append(helloWorld.container,logim.container)
+root añade la propiedad del container helloworld i la del container de login
+form guarda element for html
+usernamee- es string
+
+dentro del contenedor voy a buscar el formulario con queryselector buscar en html id, css, o elementos
+addeventlistener cuando se haga el submit se pasa una funcion que es un evento que será el event.prevenDefault para que no se dispare solo()
+
+valor de dentro de los inputs
+ on submit de register pasará un callback donde recibo el name, username i password
+
