@@ -1,8 +1,8 @@
-.Login {
+.login {
     background-color: yellowgreen;
 }
 
-.Login__form {
+.login__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
