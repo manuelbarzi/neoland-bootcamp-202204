@@ -1,15 +1,23 @@
-describe ('at', function(){
-    test ('positive index', function(){
-    
-    const array = [5, 12, 8, 130, 44];
-    const result= at(array, 2)
-    expect(result).toBe(8)
+/*method takes an integer value and returns the item at that index, 
+allowing for positive and negative integers. Negative integers count back from the last item in the array.*/
+
+
+
+
+describe('at', function () {
+    it('positive index', function () {
+
+        const array = [5, 12, 8, 130, 44];
+        let index=2
+        const result = at(array, 2)
+        expect(result).toBe(8)
     })
 
-    test ('negative index', function(){
-    
+    it('negative index', function () {
+
         const array = [5, 12, 8, 130, 44];
-        const result= at(array, -2)
+        let index= -2
+        const result = at(array, -2)
         expect(result).toBe(130)
     })
 })

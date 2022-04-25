@@ -1,4 +1,4 @@
-describe ('find', function(){
+describe ('Fakay.prototype.find', function(){
 
     it ('element appears', function(){
     const array = new Fakay ('hola', 'silla', 1, 'playa')
