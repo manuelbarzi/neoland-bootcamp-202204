@@ -5,7 +5,7 @@ Fakay.prototype.groupBy = function(callback) {
         if (!result[property]) {
             result[property] = new Fakay(this[i])
         } else {
-            result[property].push(this[i])
+            result[property][result[property].length++] = this[i]
         } 
     } 
     return result

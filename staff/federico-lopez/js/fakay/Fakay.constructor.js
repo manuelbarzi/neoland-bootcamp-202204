@@ -6,3 +6,9 @@ function Fakay() {
     }
     this.length = arguments.length
 }
+
+// Object.defineProperty(Fakay.prototype, "length", {
+//     get: function length() {
+//         this.length = this.keys().length
+//     }
+// })
