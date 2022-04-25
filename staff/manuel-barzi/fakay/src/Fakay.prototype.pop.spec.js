@@ -1,4 +1,4 @@
-describe('pop', function () {
+describe('Fakay.prototype.pop', function () {
     it('returns last element', function () {
         const plants = new Fakay('broccoli', 'cauliflower', 'cabbage', 'kale', 'tomato')
 

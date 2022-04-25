@@ -1,4 +1,4 @@
-describe('push', function() {
+describe('Fakay.prototype.push', function() {
     it('should push one element', function() {
         const animals = new Fakay('pigs', 'goats', 'sheep')
         
