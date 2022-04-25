@@ -26,7 +26,5 @@ describe('Fakay.prototype.unshift', function (){
         expect(nums[4]).toBe(3)
     })
 
-    it('...empty array', () => {
-        
-    })
+  
 })

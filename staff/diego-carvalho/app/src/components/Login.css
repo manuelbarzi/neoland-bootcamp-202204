@@ -1,0 +1,10 @@
+.Login {/*styling Login*/
+    background-color: lightcyan
+}
+
+.Login__form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+}
