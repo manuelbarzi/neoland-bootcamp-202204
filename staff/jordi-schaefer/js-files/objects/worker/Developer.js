@@ -14,7 +14,7 @@ function Developer(name, email, SEC, id, birthDate) {
 // developer es un nuevo objeto creado a partir de worker
 Developer.prototype = Object.create(Worker.prototype) // creo un constructor de worker
 Developer.prototype.constructor = Developer // se lo pongo a developer
-// solo sirve para heredar la funciones/metodos, pero NO sus propiedades
+// solo sirve para heredar la funciones/metodos, pero NO sus propiedades, por eso hay que llamar tambien a worker.call
 
 
 Developer.prototype.code = function (){
