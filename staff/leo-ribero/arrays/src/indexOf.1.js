@@ -6,5 +6,4 @@ function indexOf(array, searchElement, fromIndex = 0){
 		return i
 	}
 	return -1
-
 }

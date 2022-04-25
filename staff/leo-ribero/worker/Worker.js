@@ -1,14 +1,16 @@
-function Worker(name, mail, inss, idn, birthDate ) {
+function Worker(name, email, socialSecurityNumber, id, birthDate) {
     this.name = name
-    this.email = mail
-    this.socialSecurityNumber = inss
-    this.id = idn 
+    this.email = email
+    this.socialSecurityNumber = socialSecurityNumber
+    this.id = id
     this.birthDate = birthDate
+    this.status = 'pause'
 }
-Worker.prototype.work = function(){
+
+Worker.prototype.work = function() {
     this.status = 'working'
 }
 
-Worker.prototype.break = function(){
+Worker.prototype.break = function() {
     this.status = 'pause'
 }

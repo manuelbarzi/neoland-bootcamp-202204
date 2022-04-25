@@ -10,6 +10,7 @@ describe('Worker', () => {
 		expect(worker.birthDate.getFullYear()).toBe(2000)
 		expect(worker.birthDate.getMonth()).toBe(11)
 		expect(worker.birthDate.getDate()).toBe(31)
+		//refactor. poner status por defecto
 		expect(worker.status).toBe('pause')
 	})
 

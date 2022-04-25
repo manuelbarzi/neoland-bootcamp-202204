@@ -2,22 +2,18 @@ function Human() {
 	const random = Math.random()
 
 	this.gender =  random > .49 && random < .51? 'intersex' : random >= .51? 'female' : 'male'
-	// que tipo de dato guarda random? > número, número aleatorio 
-	// :  se debe entender como "si no". y "?" como "entonces"
 	//<
 	this.stomach = []//>>
-
-	// (This*) (*A mi mismo) mi mismo, que me estoy creando, añado la propiedad… 
 }
 
 Human.prototype.drink = function(drink) {
 	//<
-	this.stomach.unshift(drink)//  array.prototype.unshift>
+	this.stomach.unshift(drink)//  array.prototype.unshift> añade los elementos delante
 }
 
 Human.prototype.eat = function(meal) {
 	//<
-	this.stomach.unshift(meal)//  array.prototype.unshift>
+	this.stomach.unshift(meal)//  array.prototype.unshift> añade los elementos delante
 	
 }
 

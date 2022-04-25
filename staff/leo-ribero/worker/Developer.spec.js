@@ -4,13 +4,14 @@ describe('Developer', () => {
 
 		expect(developer instanceof Developer).toBe(true)
 		expect(developer instanceof Worker).toBe(true)
-		// expect(developer.name).toBe('Peter Pan')
-		// expect(developer.email).toBe('peter@pan.com')
-		// expect(developer.socialSecurityNumber).toBe('SEC-123123123')
-		// expect(developer.id).toBe('ID-123123123')
-		// expect(developer.birthDate.getFullYear()).toBe(2000)
-		// expect(developer.birthDate.getMonth()).toBe(11)
-		// expect(developer.birthDate.getDate()).toBe(31)
+		expect(developer.name).toBe('Peter Pan')
+		expect(developer.email).toBe('peter@pan.com')
+		expect(developer.socialSecurityNumber).toBe('SEC-123123123')
+		expect(developer.id).toBe('ID-123123123')
+		expect(developer.birthDate.getFullYear()).toBe(2000)
+		expect(developer.birthDate.getMonth()).toBe(11)
+		expect(developer.birthDate.getDate()).toBe(31)
+		expect(developer.status).toBe('pause')
 	})
 
 	it('should work', () => {
