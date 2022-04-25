@@ -1,11 +1,15 @@
 function shift(array){
 
-    const removed = array[0]
+    if(array.length){
 
-    for(let i = 0; i < array.length; i++) {
-
-        array[i] = array[i +1] 
+        const removed = array[0]
+    
+        for(let i = 0; i < array.length; i++) {
+    
+            array[i] = array[i +1] 
+        }
+        array.length = array.length -1
+        return removed
     }
-    array.length = array.length -1
-    return removed
+
 }
