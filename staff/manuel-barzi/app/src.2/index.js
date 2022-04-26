@@ -50,3 +50,26 @@ login.onRegisterClick(function() {
     login.removeFrom(app)
     register.addTo(app)
 })
+
+home.onSearchSubmit(function(query) {
+    const results = newspapers.filter(newspaper => newspaper.name.toLowerCase().includes(query.toLowerCase()))
+
+    const ul = home.container.querySelector('ul')
+
+    ul.innerHTML = ''
+
+    results.forEach(result => {
+        const li = document.createElement('li')
+
+        //li.innerText = result.name
+
+        const a = document.createElement('a')
+        a.innerText = result.name
+        a.href = result.url
+        a.target = '_blank'
+
+        li.appendChild(a)
+
+        ul.appendChild(li)
+    })
+})
