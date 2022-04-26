@@ -1,34 +1,30 @@
-function Register() {
-    Component.call(this, `<div class="Register">
-        <form class="Register__form">
-            <input type="text" name="name" placeholder="name">
+function Login() {
+    Component.call(this, `<div class="Login">
+        <form class="Login__form">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
-            <button>Register</button>
-            <a href="#">Login</a>
+            <button>Login</button>
+            <a href="#">Register</a>
         </form>
     </div>`)
 }
 
-chainPrototypes(Component, Register)
+chainPrototypes(Component, Login)
 
-Register.prototype.onSubmit = function(callback) {
+Login.prototype.onSubmit = function(callback) {
     const form = this.container.querySelector('form')
 
     form.addEventListener('submit', function(event) {
         event.preventDefault()
 
-        const name = form.name.value
         const username = form.username.value
         const password = form.password.value
 
-        callback(name, username, password)
+        callback(username, password)
     })
 }
 
-// TODO implement onLoginClick method (SEE Login.prototype.onRegisterClick for inspiration)
-
-Register.prototype.onLoginClick = function(callback) {
+Login.prototype.onRegisterClick = function(callback) {
     const anchor = this.container.querySelector('a')
 
     anchor.addEventListener('click', function(event) {
