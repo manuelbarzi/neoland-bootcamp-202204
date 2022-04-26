@@ -28,4 +28,5 @@ register.onSubmit(function(name, username, password){
 })
 
 
+
 root.append(register.container)

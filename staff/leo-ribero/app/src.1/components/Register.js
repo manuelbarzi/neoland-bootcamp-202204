@@ -13,7 +13,7 @@
 
 /*
 aquí creo la p´gina Register mediante una función
-que construye el html mediante .call
+que construye el html mediante .call a partir del template "Component"
 */
 function Register(){
     Component.call(this, `<div class="Register">
