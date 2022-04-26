@@ -1,11 +1,15 @@
 const root = document.querySelector('#root')
 
+
+const app = new App
 const helloWorld = new HelloWorld
 
 const register = new Register
 const login = new Login
 const home = new Home
 
+app.add(helloWorld, login)
+root.appendChild(app.container)
 
 register.onSubmit( (name, username, password) => {
     const user = {
@@ -13,11 +17,10 @@ register.onSubmit( (name, username, password) => {
         username: username, 
         password: password
     }
-
     users.push(user)
 
-    root.removeChild(register.container)
-    root.appendChild(login.container)
+    register.removeFrom(app)
+    login.addTo(app)
 })
 
 login.onSubmit(function(username, password) {
@@ -27,29 +30,24 @@ login.onSubmit(function(username, password) {
     
     if (matches) {
         const user = users.find(user => user.username === username)
-        console.log(user)
 
         home.setName(user.name)
 
-        root.removeChild(login.container)
+        login.removeFrom(app)
+        home.addTo(app)
 
-        root.appendChild(home.container)
     } else alert('wrong credentials')
 })
 
 
-login.onRegisterClick( ()=> {
-    root.removeChild(login.container)
-
-    root.appendChild(register.container)
+login.onRegisterClick( function() {
+    login.removeFrom(app)
+    register.addTo(app)
 })
 
-register.onLoginClick( ()=> {
-    root.removeChild(register.container)
-    root.appendChild(login.container )
+register.onLoginClick( function() {
+    register.removeFrom(app)
+    login.addTo(app)
 
 })
-
-
-root.append(helloWorld.container, login.container)
 

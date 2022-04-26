@@ -13,7 +13,7 @@ chainPrototypes(Component, Login)
 
 Login.prototype.onSubmit = function(callbalck) {
     const form = this.container.querySelector('form')
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', function(e) {
         e.preventDefault()
         
         const username = form.username.value

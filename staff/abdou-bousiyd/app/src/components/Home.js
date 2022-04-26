@@ -16,6 +16,5 @@ chainPrototypes(Component, Home)
 Home.prototype.setName = function(name) {
     const title = this.container.querySelector('h2')
     title.innerText = `Hello, ${name}`
-    console.log(title)
 }
 
