@@ -1,17 +1,10 @@
 const root = document.querySelector('#root')
 
-const app = new App
 const helloWorld = new HelloWorld
+
 const register = new Register
 const login = new Login
 const home = new Home
-
-//app.add(helloWorld)
-//app.add(login)
-app.add(helloWorld, login)
-//app.add(helloWorld, home)
-
-root.appendChild(app.container)
 
 register.onSubmit(function(name, username, password){
     const user = {
@@ -22,13 +15,13 @@ register.onSubmit(function(name, username, password){
 
     users.push(user)
 
-    register.removeFrom(app) //la Página register se va a eliminar del módulo app
-    login.addTo(app) //La página Login se va a añadir al módulo app
+    root.removeChild(register.container)
+    root.appendChild(login.register)
 })
 
-register.onLoginClick (function () {
-    register.removeFrom(app) //root remueve este hijo //La página se va a eliminar del módulo app
-    login.addTo(app) //root añade este hijo //La página Login se va a añadir al módulo app
+register.onLoginClick(function(){
+    root.removeChild(register.container) //root remueve este hijo
+    root.appendChild(login.container) //root añade este hijo
 })
 
 login.onSubmit(function(username, password){
@@ -41,12 +34,16 @@ login.onSubmit(function(username, password){
 
         home.setName(user.name)
 
-       login.removeFrom(app)
-       home.addTo(app)
+       root.removeChild(login.container)
+       
+       root.appendChild(home.container)
     } else alert('wrong credentials')
 })
 
 login.onRegisterClick(function() {
-    login.removeFrom(app)
-    register.addTo(app)
+    root.removeChild(login.container)
+
+    root.appendChild(register.container)
 })
+
+root.append(helloWorld.container, login.container) //PRIMER RENDERIZADO si o quietas no devuelve error pero a la vez no muestra nada

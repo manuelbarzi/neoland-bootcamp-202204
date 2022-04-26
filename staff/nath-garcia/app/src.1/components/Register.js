@@ -12,10 +12,10 @@ function Register() {
 
 chainPrototypes(Component, Register)
 
-Register.prototype.onSubmit = function (callback) {
+Register.prototype.onSubmit = function(callback){
     const form = this.container.querySelector('form')
 
-    form.addEventListener('submit', function (event) {
+    form.addEventListener('submit', function(event) {
         event.preventDefault()
 
         const name = form.name.value
@@ -24,15 +24,5 @@ Register.prototype.onSubmit = function (callback) {
 
         callback(name, username, password)
     })
-
-}
-
-
-Register.prototype.onLoginClick = function (callback) {
-    const anchor = this.container.querySelector('a')
-
-    anchor.addEventListener('click', function (event) {
-
-        callback()
-    })
+    
 }
