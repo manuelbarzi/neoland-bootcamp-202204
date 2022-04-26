@@ -10,7 +10,7 @@ function Register(){//constructor function Register with attributes.
     <div>` )
 }
 
-chainPrototypes(Component, Register)//??
+chainPrototypes(Component, Register)//calling the chainprototype with parent(Component) and child(Register)
 
 Register.prototype.onSubmit = function (callback){
     const form = this.container.querySelector('form')
@@ -24,5 +24,15 @@ Register.prototype.onSubmit = function (callback){
         const password= form.password.value
 
         callback(name, username, password)//callback the values that will be save on data file.
+    })
+}
+
+Register.prototype.onLoginClick = function(callback) {
+    const anchor = this.container.querySelector('a')
+
+    anchor.addEventListener('click', function(event){//function callback that add the eventListener to the click funtion on the anchor (<a>)
+        event.preventDefault()
+
+        callback()
     })
 }

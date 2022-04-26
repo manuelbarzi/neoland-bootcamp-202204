@@ -1,17 +1,17 @@
 const users = [
     {
-        name: 'Diego Carvalho',
-        username: 'diego',
+        name: 'Pepito Grillo',
+        username: 'pepito',
         password: '1234'
     },
     {
-        name: 'Bruno Lira',
-        username: 'bruno',
+        name: 'Peter Pan',
+        username: 'peter',
         password: '1234'
     },
     {
-        name: 'Cris Reto',
-        username: 'cris',
+        name: 'Wendy Bread',
+        username: 'wendy',
         password: '1234'
     }
 ]
@@ -30,21 +30,12 @@ const newspapers = [
         url: 'https://lavanguardia.com'
     },
     {
-        name: 'CNN Español',
-        url: 'https://cnnespanol.cnn.com/'
+        name: 'El Pais',
+        url: 'https://elpais.com'
     },
     {
-        name: '',
-        url: ''
-    },
-    {
-        name: '',
-        url: ''
-    },
-    {
-        name: '',
-        url: ''
-    },
-
+        name: 'El Periódico',
+        url: 'https://elperiodico.com'
+    }
     // TODO add more news sources
 ]

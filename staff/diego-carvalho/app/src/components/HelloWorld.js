@@ -3,4 +3,4 @@ function HelloWorld() {// constructor function HelloWorld with attributes
     <h1>Hello, World!</h1>
     </div>`)
 }
-chainPrototypes(Component, HelloWorld)
+chainPrototypes(Component, HelloWorld)//calling the chainprototype with parent(Component) and child(HelloWorld)

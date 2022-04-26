@@ -1,9 +1,10 @@
-.Register {/*styling register*/
-    background-color: bisque;
+.Register {
+    background-color: yellowgreen;
 }
- .Register__form {
+
+.Register__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
- }
+}

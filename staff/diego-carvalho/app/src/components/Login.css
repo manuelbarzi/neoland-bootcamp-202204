@@ -1,10 +1,10 @@
-.Login {/*styling Login*/
-    background-color: lightcyan
+.Login {
+    background-color: yellowgreen;
 }
 
-.Login__form{
+.Login__form {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items:center;
+    align-items: center;
 }

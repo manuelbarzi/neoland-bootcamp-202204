@@ -1,4 +1,4 @@
-function Login() {// function Login with attributes
+function Login() {// constructor function Login with attributes
     Component.call(this, `<div class="Login">
         <form class="Login__form">
             <input type="text" name="username" placeholder="username">
@@ -11,10 +11,10 @@ function Login() {// function Login with attributes
 
 chainPrototypes(Component, Login)//calling the chainprototype with parent(Component) and child(Login)
 
-Login.prototype.onSumit = function(callback) {//onSumit
+Login.prototype.onSubmit = function (callback) {//onSumit
     const form = this.container.querySelector('form')
 
-    form.addEventListener('sumit', function(event){//The method addEventListener() works by adding a function, to the list of event listeners .
+    form.addEventListener('submit', function (event) {//The method addEventListener() works by adding a function, to the list of event listeners .
         event.preventDefault()
 
         const username = form.username.value
@@ -22,16 +22,15 @@ Login.prototype.onSumit = function(callback) {//onSumit
 
         callback(username, password)
     })
+}
 
-    Login.prototype.onRegisterClick = function(callback) {//function callback that add the eventListener to the click funtion on the anchor (<a>)
-        const anchor = this.container.querySelector('a')
+Login.prototype.onRegisterClick = function (callback) {//function callback that add the eventListener to the click funtion on the anchor (<a>)
+    const anchor = this.container.querySelector('a')
+    
+    anchor.addEventListener('click', function (event) {
+        event.preventDefault()
 
-        anchor.addEventListener('click', function(event){
-            event.preventDefault()
+        callback()
+    })
 
-            callback()
-        })
-
-
-    }
 }
