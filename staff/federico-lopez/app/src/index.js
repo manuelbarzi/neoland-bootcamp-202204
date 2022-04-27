@@ -1,10 +1,17 @@
 const root = document.querySelector('#root')
 
+const app = new App
 const helloWorld = new HelloWorld
-
 const register = new Register
 const login = new Login
 const home = new Home
+
+//app.add(helloWorld)
+//app.add(login)
+app.add(helloWorld, login)
+// app.add(helloWorld, home)
+
+root.appendChild(app.container)
 
 register.onSubmit(function(name, username, password) {
     const user = { 
@@ -15,8 +22,13 @@ register.onSubmit(function(name, username, password) {
 
     users.push(user)
 
-    root.removeChild(register.container)
-    root.appendChild(login.container)
+    register.removeFrom(app)
+    login.addTo(app)
+})
+
+register.onLoginClick(function() {
+    register.removeFrom(app)
+    login.addTo(app)
 })
 
 login.onSubmit(function(username, password) {
@@ -29,48 +41,12 @@ login.onSubmit(function(username, password) {
 
         home.setName(user.name)
 
-        root.removeChild(login.container)
-
-        root.appendChild(home.container)
+        login.removeFrom(app)
+        home.addTo(app)
     } else alert('wrong credentials')
 })
 
 login.onRegisterClick(function() {
-    root.removeChild(login.container)
-
-    root.appendChild(register.container)
+    login.removeFrom(app)
+    register.addTo(app)
 })
-
-register.onLoginClick(function() {
-    root.removeChild(register.container)
-
-    root.appendChild(login.container)
-})
-
-home.onSubmitSearch(function(textSearch) {
-
-    const listOfLinks = newspapers.map(newspaper => {
-        const text = textSearch.split(' ').join(newspaper.separator)
-        return newspaper.url + newspaper.add + text
-    })
-
-    const listOfNewspapers = newspapers.map(newspaper => {
-        return `search ${textSearch} in ${newspaper.name}`
-    })
-
-    const listHTMLElement = document.querySelector('ul')
-
-    listOfLinks.forEach(link => {
-        const elementLi = document.createElement('li')
-        const elementAnchor = document.createElement('a')
-        elementAnchor.innerText = link
-        elementAnchor.href = link
-        elementAnchor.target = "_blank"
-        listHTMLElement.appendChild(elementLi)
-        elementLi.appendChild(elementAnchor)
-    })
-    
-
-})
-
-root.append(helloWorld.container, login.container)

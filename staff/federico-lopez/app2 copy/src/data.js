@@ -19,23 +19,28 @@ const users = [
 const newspapers = [
     {
         name: 'El Diario',
-        url: 'https://eldiario.es'
+        url: 'https://eldiario.es',
+        add: '/busqueda/',
+        separator: '%20'
     },
     {
         name: 'El Mundo',
-        url: 'https://elmundo.es'
+        url: 'https://ariadna.elmundo.es',
+        add: '//buscador/archivo.html?q=',
+        separator: '+'
     },
     {
         name: 'La Vanguardia',
-        url: 'https://lavanguardia.com'
+        url: 'https://lavanguardia.com',
+        add: '/search?q=',
+        separator: '%20'
+
     },
     {
         name: 'El Pais',
-        url: 'https://elpais.com'
+        url: 'https://elpais.com',
+        add: '/buscador/?q=',
+        separator: '+'
     },
-    {
-        name: 'El Periódico',
-        url: 'https://elperiodico.com'
-    }
     // TODO add more news sources
 ]

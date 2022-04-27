@@ -31,9 +31,6 @@ function splice(arr, start, deleteCount = 0) {
 
     //Itero buscando cada uno de los items a agregar y los agrego desde start en orden descendente
 
-
-    //
-
     while (deleteCount > 0) {
         deletedElements.push(arr[start])
         for (let i = start; i < arr.length; i++) {
