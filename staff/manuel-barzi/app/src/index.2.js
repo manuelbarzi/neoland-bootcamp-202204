@@ -13,6 +13,26 @@ app.add(helloWorld, login)
 
 root.appendChild(app.container)
 
+function registerUser(name, username, password, callback) {
+    const exists = users.some(user => user.username === username)
+
+    if (exists) {
+        callback(new Error('username already exists'))
+
+        return
+    }
+
+    const user = {
+        name: name,
+        username: username,
+        password: password
+    }
+
+    users.push(user)
+
+    callback(null)
+}
+
 register.onSubmit(function (name, username, password) {
     registerUser(name, username, password, function (error) {
         if (error) {
@@ -32,27 +52,18 @@ register.onLoginClick(function () {
 })
 
 login.onSubmit(function (username, password) {
-    authenticateUser(username, password, function (error) {
-        if (error) {
-            alert(error.message)
-
-            return
-        }
-
-        retrieveUser(username, function(error, user) {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            home.setName(user.name)
-    
-            login.removeFrom(app)
-            home.addTo(app)
-        })
+    const matches = users.some(function (user) {
+        return user.username === username && user.password === password
     })
 
+    if (matches) {
+        const user = users.find(user => user.username === username)
+
+        home.setName(user.name)
+
+        login.removeFrom(app)
+        home.addTo(app)
+    } else alert('wrong credentials')
 })
 
 login.onRegisterClick(function () {

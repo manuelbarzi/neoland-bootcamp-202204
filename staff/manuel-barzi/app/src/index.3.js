@@ -31,6 +31,32 @@ register.onLoginClick(function () {
     login.addTo(app)
 })
 
+function authenticateUser(username, password, callback) {
+    const matches = users.some(function (user) {
+        return user.username === username && user.password === password
+    })
+
+    if (!matches) {
+        callback(new Error('wrong credentials'))
+
+        return
+    }
+
+    callback(null)
+}
+
+function retrieveUser(username, callback) {
+    const user = users.find(user => user.username === username)
+
+    if (!user) {
+        callback(new Error(`user with username ${username} not found`))
+
+        return
+    }
+
+    callback(null, user)
+}
+
 login.onSubmit(function (username, password) {
     authenticateUser(username, password, function (error) {
         if (error) {

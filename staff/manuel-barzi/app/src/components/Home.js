@@ -7,31 +7,36 @@ function Home() {
 
     let results
 
-    search.onSubmit(function(query) {
-        const newspaperResults = newspapers.filter(newspaper => newspaper.name.toLowerCase().includes(query.toLowerCase()))
+    search.onSubmit(function (query) {
+        searchNewspapers(query, function (error, newspapers) {
+            if (error) {
+                alert(error.message)
 
-        if (results)
-            //results.removeFrom(this)
-            this.remove(results)
+                return
+            }
 
-        results = new Results
+            if (results)
+                this.remove(results)
 
-        results.container.innerHTML = ''
-    
-        newspaperResults.forEach(result => {
-            const li = document.createElement('li')
-    
-            const a = document.createElement('a')
-            a.innerText = result.name
-            a.href = result.url
-            a.target = '_blank'
-    
-            li.appendChild(a)
-    
-            results.container.appendChild(li)
-        })
+            results = new Results
 
-        this.add(results)
+            results.container.innerHTML = ''
+
+            newspapers.forEach(result => {
+                const li = document.createElement('li')
+
+                const a = document.createElement('a')
+                a.innerText = result.name
+                a.href = result.url
+                a.target = '_blank'
+
+                li.appendChild(a)
+
+                results.container.appendChild(li)
+            })
+
+            this.add(results)
+        }.bind(this))
     }.bind(this))
 
     this.add(search)
@@ -39,7 +44,7 @@ function Home() {
 
 chainPrototypes(Component, Home)
 
-Home.prototype.setName = function(name) {
+Home.prototype.setName = function (name) {
     const title = this.container.querySelector('h2')
 
     title.innerText = `Hello, ${name}!`
