@@ -26,12 +26,14 @@ Register.prototype.onSubmit = function(callback) {
     })
 }
 
+// TODO implement onLoginClick method (SEE Login.prototype.onRegisterClick for inspiration)
+
 Register.prototype.onLoginClick = function(callback) {
     const anchor = this.container.querySelector('a')
 
     anchor.addEventListener('click', function(event) {
+        event.preventDefault()
+
         callback()
     })
 }
-
-// TODO implement onLoginClick method (SEE Login.prototype.onRegisterClick for inspiration)

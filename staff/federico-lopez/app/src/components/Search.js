@@ -11,7 +11,7 @@ Search.prototype.onSubmit = function(callback) {
     this.container.addEventListener('submit', function(event) {
         event.preventDefault()
 
-        const query = event.target.query.value
+        const query = this.query.value
 
         callback(query)
     })
