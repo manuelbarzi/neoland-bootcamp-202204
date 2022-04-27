@@ -32,7 +32,7 @@ describe('retrieveUser', function () {
             expect(error.message).toBe('user with username aitor not found')
         })
 
-        user.length = 0
+        users.length = 0
     })
 
 })

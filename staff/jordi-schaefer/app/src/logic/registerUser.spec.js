@@ -1,4 +1,4 @@
-describe(' REGISTER  USER' , () => {
+describe('registerUser' , () => {
     it ('Registrando nuevo User (que aun no este Registrado) ', () => {
         users.length = 0 // Utilizamos el .length para limpar el valor 
         
