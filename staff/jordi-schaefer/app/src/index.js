@@ -12,43 +12,55 @@ const home = new Home
 
 
 // añado hello y login dentro de app con una funcion propia creada en smart-components
-//app.add(helloWorld, login)
-app.add(helloWorld, home)
+app.add(helloWorld, login)
+//app.add(helloWorld, home)
 
 root.appendChild(app.container)
 
 
 
 register.onSubmit(function(name, username, password) {
-    const user = { 
-        name: name, 
-        username: username, 
-        password: password 
-    }
 
-    users.push(user)
-    
-    // elmino y añado pantallas de la app con la funcion propia creada
-    register.removeFrom(app)
-    login.addTo(app)
+    // llamo a la funcion register, registra el usuario o en caso contrario envia error
+    registerUser(name, username, password, function (error) {
+        if (error) {
+            alert(error.message)  // si hay error me salgo
+            return 
+        }
+
+        // si no hay error continuo con cambio de pantallas
+        register.removeFrom(app)
+        login.addTo(app)
+    })
 })
+
 
 
 login.onSubmit(function(username, password) {
-    const matches = users.some(function(user) { 
-        return user.username === username && user.password === password
+
+    // autentifico el usuario, y si no cuadra envio error
+    authenticateUser(username, password, function (error) {
+        if (error) {
+            alert(error.message)   // si hay error me salgo
+            return
+        }
+
+        // si no hay error --------------------------------------------------------------- ??
+        retrieveUser(username, function(error, user) {
+            if (error) {
+                alert(error.message)  // si hay error me salgo
+                return
+            }
+
+            // continuo con la entrada a home
+            home.setName(user.name)
+            login.removeFrom(app)
+            home.addTo(app)
+        })
     })
-
-    if (matches) {
-        const user = users.find(user => user.username === username)
-
-        home.setName(user.name)
-
-        login.removeFrom(app)
-        home.addTo(app)
-
-    } else alert('wrong credentials')
 })
+
+
 
 // en caso de clicar register, sobre la pagina login: ejecuta la siguiente funcion
 login.onRegisterClick(function() {

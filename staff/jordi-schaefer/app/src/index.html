@@ -18,7 +18,6 @@
 
 <body>
 
-    
     <!-- creo un id para referenciar en JS (index.js) y poder pasarle el codigo HTML -->
     <div id="root"> </div> 
 
@@ -26,7 +25,17 @@
     <!-- referencio mis script de componentes y datos -->
     <script src="vendor/smart-components.js"></script>
     <script src="utils.js"></script>
+
+    
+    <!-- data -->
     <script src="data.js"></script>
+
+
+    <!-- business (logic) -->
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/searchNewspapers.js"></script>
 
 
     <!-- referencio mis componentes de js que seran objetos con sus funciones -->
@@ -42,7 +51,6 @@
     
     <!-- referencion mi JS principal donde llamo a las funciones sobre cada pagina -->
     <script src="index.js"></script>
-
 
 </body>
 
