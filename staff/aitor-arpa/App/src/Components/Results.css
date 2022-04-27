@@ -1,4 +1,4 @@
 .Results {
-    background-color: rgb(56, 53, 56);
+    background: linear-gradient(to right, #043763, #b0cde2, #b0cde2,#043763));
     padding: 1rem;
 }

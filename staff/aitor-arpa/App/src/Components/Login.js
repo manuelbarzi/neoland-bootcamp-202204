@@ -1,4 +1,4 @@
-//  MOLDE DE LOGIN + SUS FUNCIONAMIENTOS
+// ------------------------- MOLDE DE LOGIN + SUS FUNCIONAMIENTOS --------------------------
 
 
 
@@ -14,7 +14,7 @@ function Login () {
         </form>
     </div>`)
 }
-// Cadena de prototypo ¿? asignas que Login es hijo de Component ¿?
+
 // en smart-components esta la funcion que asignara el padre y el hijo 
 chainPrototypes(Component,Login)
 

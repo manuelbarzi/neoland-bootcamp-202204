@@ -1,3 +1,5 @@
+//    -------------------------- BASE  DE DATOS EN MEMORIA --------------------------------
+
 const users = [
     {
         name: 'Pepito Grillo',

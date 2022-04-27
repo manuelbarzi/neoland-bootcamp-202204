@@ -1,11 +1,11 @@
-function Search() {   // desponemos el componente para poder reutilizarlo despues 
+function Search() {   // Declaramoscon su contenido  
     Component.call(this, `<form class="Search">
         <input type="text" name="query">
         <button>Search</button>
     </form>`)
 }
 
-chainPrototypes(Component, Search)
+chainPrototypes(Component, Search)  /// --------> Asignamos la Herencia Padre, Hijo
 
 
 

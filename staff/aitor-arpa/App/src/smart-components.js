@@ -12,26 +12,27 @@ function Component(template) {
 
 }
 
+/* ------- ***  Funciona para añadir hijos al padre sobre el que se aplica el metodo  **  -------------
+----------  ***   Estos dos metodo sirve para añadir/remover desde la pagina u compo tonto        *** ------------ */
 
 
-
-// Funcion para añadir y borrar  hijos sobre los que se aplica el motodo, del padre
-// este metodo sirve para remover un compo tonto a una pagina desde el compo tonto
 Component.prototype.addTo = function(parent) {
     parent.container.appendChild(this.container)
 }
+
+
 
 Component.prototype.removeFrom = function(parent) {
     parent.container.removeChild(this.container)
 }
 
-
-// Funciona para añadir hijos al padre sobre el que se aplica el metodo
-// Este metodo sirve para añadir desde la pagina u compo tonto
+/* ------- ***  Funciona para añadir Padre al -Hijo sobre el que se aplica el metodo  **  -------------
+----------  ***   Estos dos metodo sirve para añadir/remover desde la pagina u compo tonto        *** ------------ */
 Component.prototype.add = function(...children) {
     for (const child of children)
         this.container.appendChild(child.container)
 }
+ 
 
 Component.prototype.remove = function(...children) {
     for (const child of children)

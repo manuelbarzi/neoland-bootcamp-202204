@@ -12,6 +12,7 @@ function Register () {
 }
 chainPrototypes(Component, Register)
 
+
 Register.prototype.onSubmit = function( callback) {
     const form = this.container.querySelector ('form') // le paso a la variable form, el paquete HTML del form
 

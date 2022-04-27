@@ -1,5 +1,5 @@
 .Home {
-    background-color: yellowgreen;
+    background: linear-gradient(to right, #043763, #b0cde2, #b0cde2,#043763);
     display: flex;
     flex-direction: column;
     justify-content: center;

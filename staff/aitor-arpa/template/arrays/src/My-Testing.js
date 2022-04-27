@@ -21,3 +21,7 @@ function expect(value) { // introducimos las expectatibas
         }
     }
 }
+
+
+ //EXPECT FEDE   TO BeEcual compara los dos array que sean igual no  mira referencia de memoria
+
