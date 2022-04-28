@@ -8,8 +8,8 @@ const home = new Home
 
 //app.add(helloWorld)
 //app.add(login)
-app.add(helloWorld, login)
-// app.add(helloWorld, home)
+// app.add(helloWorld, login)
+app.add(helloWorld, home)
 
 root.appendChild(app.container)
 

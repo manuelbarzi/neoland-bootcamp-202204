@@ -1,6 +1,7 @@
 function Home() {
 	Component.call(this, `<div class="Home">
 		<h2>Hello, Home!</h2>
+		<button>+</button>
 	</div>`)
 }
 
