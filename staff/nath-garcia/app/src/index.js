@@ -9,44 +9,53 @@ const home = new Home
 //app.add(helloWorld)
 //app.add(login)
 app.add(helloWorld, login)
-//app.add(helloWorld, home)
+// app.add(helloWorld, home)
 
 root.appendChild(app.container)
 
-register.onSubmit(function(name, username, password){
-    const user = {
-        name: name,
-        username: username, 
-        password: password
-    }
+register.onSubmit(function (name, username, password) {
+    registerUser(name, username, password, function (error) {
+        if (error) {
+            alert(error.message)
 
-    users.push(user)
+            return
+        }
 
-    register.removeFrom(app) //la Página register se va a eliminar del módulo app
-    login.addTo(app) //La página Login se va a añadir al módulo app
+        register.removeFrom(app)
+        login.addTo(app)
+    })
 })
 
-register.onLoginClick (function () {
-    register.removeFrom(app) //root remueve este hijo //La página se va a eliminar del módulo app
-    login.addTo(app) //root añade este hijo //La página Login se va a añadir al módulo app
+register.onLoginClick(function () {
+    register.removeFrom(app)
+    login.addTo(app)
 })
 
-login.onSubmit(function(username, password){
-    const matches = users.some(function (user) {
-        return user.username === username && user.password === password
+login.onSubmit(function (username, password) {
+    authenticateUser(username, password, function (error) {
+        if (error) {
+            alert(error.message)
+
+            return
+        }
+
+        retrieveUser(username, function(error, user) {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            home.setName(user.name)
+    
+            login.removeFrom(app)
+            home.addTo(app)
+        })
     })
 
-    if(matches) { 
-        const user = users.find(user => user.username === username)
-
-        home.setName(user.name)
-
-       login.removeFrom(app)
-       home.addTo(app)
-    } else alert('wrong credentials')
 })
 
-login.onRegisterClick(function() {
+login.onRegisterClick(function () {
     login.removeFrom(app)
     register.addTo(app)
 })
