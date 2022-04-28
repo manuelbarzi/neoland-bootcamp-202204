@@ -11,7 +11,7 @@ describe('Faka.prototype.map', function(){
         expect(funcionSecretPassword[2]).toBe(20)
         expect(funcionSecretPassword[3]).toBe(15)
     })
-    /*
+    
     it('maps boxes into volumes', function() {
         const boxes = new Fakay(
             { w: 10, h: 10, d: 10 },
@@ -33,6 +33,6 @@ describe('Faka.prototype.map', function(){
 
         for (let i = 0; i < volumes.length; i++)
             expect(volumes[i]).toBe(expectedVolumes[i])
-    })*/
+    })
     
 })

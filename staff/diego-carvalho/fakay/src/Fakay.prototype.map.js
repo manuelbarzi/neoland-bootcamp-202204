@@ -1,11 +1,15 @@
 Fakay.prototype.map = function map(callback){
  
-    let nuevo_array = new Fakay
+    let newObj = new Fakay
     
     for(let i = 0; i < this.length; i++){
+
+        const element = this[i]
         
-        nuevo_array[i]=callback(this[i]) 
+        newObj[i]=callback(element) 
+
+        newObj.length++
     }
 
-    return nuevo_array
+    return newObj
 }

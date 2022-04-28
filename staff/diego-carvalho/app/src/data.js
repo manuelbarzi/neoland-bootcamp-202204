@@ -13,7 +13,13 @@ const users = [
         name: 'Wendy Bread',
         username: 'wendy',
         password: '1234'
+    },
+    {
+        name: 'Carlinhos',
+        username: 'carlinhos',
+        password: '1234'
     }
+    
 ]
 
 const newspapers = [

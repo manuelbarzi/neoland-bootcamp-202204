@@ -6,7 +6,7 @@ function Home() {//constructor Home with attributes
     const search = new Search
 
     let results
-
+    //logics part  
     search.onSubmit(function (query) {
         const newspaperResults = newspapers.filter(newspaper => newspaper.name.toLowerCase().includes(query.toLowerCase()))
 
@@ -38,6 +38,8 @@ function Home() {//constructor Home with attributes
     this.add(search)
 
 }
+
+//vizualization part
 
 //calling the chainprototype with parent(Component) and child(Home)
 chainPrototypes(Component, Home)

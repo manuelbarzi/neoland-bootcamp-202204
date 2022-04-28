@@ -6,6 +6,7 @@ describe ('splice', function () {
         // expected = ['chair', 'table', 'bed', 'light', 'computer', 'door', 'wardrobe', 'sofa']
         
         splice(palabras, 2, 0, 'bed') 
+
         expect(palabras.length).toBe(8) 
         expect(palabras[2]).toBe('bed') 
         expect(palabras[3]).toBe('light') 
@@ -16,7 +17,9 @@ describe ('splice', function () {
         // expected = ['chair', 'table', 'bed', 'computer', 'door', 'wardrobe', 'sofa']
         
         splice(palabras, 2, 1, 'bed') 
+
         expect(palabras.length).toBe(7)
+
         expect(palabras[2]).toBe('bed') 
         expect(palabras[3]).toBe('computer')
         expect(palabras[6]).toBe('sofa') 
@@ -27,7 +30,9 @@ describe ('splice', function () {
         // expected = ['chair', 'table', 'bed', 'wardrobe', 'sofa']
         
         splice(palabras, 2, 3, 'bed') 
+
         expect(palabras.length).toBe(5) 
+        
         expect(palabras[2]).toBe('bed') 
         expect(palabras[3]).toBe('wardrobe') 
         expect(palabras[4]).toBe('sofa') 

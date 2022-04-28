@@ -11,10 +11,12 @@ function Login() {// constructor function Login with attributes
 
 chainPrototypes(Component, Login)//calling the chainprototype with parent(Component) and child(Login)
 
-Login.prototype.onSubmit = function (callback) {//onSumit
+//calling the function (with callback) will macth the info previous saved on data file.
+Login.prototype.onSubmit = function (callback) {
     const form = this.container.querySelector('form')
-
-    form.addEventListener('submit', function (event) {//The method addEventListener() works by adding a function, to the list of event listeners .
+    
+//The method addEventListener() works by adding a function, to the list of event listeners .
+    form.addEventListener('submit', function (event) {
         event.preventDefault()
 
         const username = form.username.value
@@ -24,7 +26,7 @@ Login.prototype.onSubmit = function (callback) {//onSumit
     })
 }
 
-Login.prototype.onRegisterClick = function (callback) {//function callback that add the eventListener to the click funtion on the anchor (<a>)
+Login.prototype.onRegisterClick = function (callback) {
     const anchor = this.container.querySelector('a')
     
     anchor.addEventListener('click', function (event) {
