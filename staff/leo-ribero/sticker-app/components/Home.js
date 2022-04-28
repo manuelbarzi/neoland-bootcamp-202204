@@ -6,11 +6,16 @@ function Home() {
 
 	const addSticker = this.container.querySelector('button')
 
-		// addSticker.addEventListener('click', function(){
+		// addSticker.a ddEventListener('click', function(){
 		addSticker.addEventListener('click', () => {
-		const sticker = new Sticker
-		// hemos instanciado un objeto, sticker es un componente
- 
+			const sticker = new Sticker
+			// hemos instanciado un objeto, sticker es un componente
+			
+			sticker.onClose(() => {
+				this.remove(sticker)
+			})
+			// cuando te cierras, eliminamos el sticker de la home (this) con
+			// el método remove. Luego tenemos que hacer el closer
 		
 
 		this.add(sticker)  
@@ -21,7 +26,7 @@ function Home() {
 
 chainPrototypes(Component, Home)
  
-Home.prototype.setName = function (name) {
+Home.prototype.setName = function ( name) {
 	const title = this.container.querySelector('h2')
 
 	title.innerText = `Hello, ${name}!`
