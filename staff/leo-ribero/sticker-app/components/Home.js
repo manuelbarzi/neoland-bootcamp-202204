@@ -10,7 +10,11 @@ function Home() {
 	add.addEventListener('click', () => {
 		const sticker = new Sticker
 
-		
+		sticker.onClose(function(){
+			this.remove(sticker)
+		})
+		// justo despues de esto hay que hacer el closer en Sticker.js
+
 
 		this.add(sticker)
 

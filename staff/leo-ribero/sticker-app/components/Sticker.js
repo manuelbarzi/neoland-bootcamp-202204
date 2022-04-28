@@ -8,3 +8,11 @@ function Sticker(){
     }
 
     chainPrototypes(Componente, Home)
+
+    Sticker.prototype.onClose = function(callback){
+        const close = this.container.querySelector('button')
+
+        close.addEventListener('click', function(){
+            callback()
+        })
+    }
