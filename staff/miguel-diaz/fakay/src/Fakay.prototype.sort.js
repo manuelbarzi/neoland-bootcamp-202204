@@ -1,5 +1,14 @@
-
-function sort (array){
+Fakay.prototype.sort = function()  {
+    let current
+    for (let i = 0; i < this.length; i++) {
+        for (let j = i+1; j < this.length; j++)
+        if(this[1] > this[i+1]) {
+            current = this[i]
+            this[1] = this[i+1]
+            this[i+1] = current
+        }
+    }
+}
 
 
     let memoria = 0

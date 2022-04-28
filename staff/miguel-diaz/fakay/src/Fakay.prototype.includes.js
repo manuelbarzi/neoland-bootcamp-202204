@@ -5,3 +5,4 @@ Fakay.prototype.includes = function (searchElement, fromIndex = 0) {
 
     return false
 }
+

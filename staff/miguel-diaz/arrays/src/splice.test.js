@@ -1,4 +1,13 @@
-console.log('SPLICE TEST')
+describe('splice', () => {
+    test('inserts a Feb between Jan and March', () => {
+
+    })
+})
+
+
+
+
+
 
 {
 

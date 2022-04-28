@@ -6,20 +6,35 @@
 - dentro del 2ndo for validar las posiciones negativas
 */
 
-describe('AT', function () {
-    it('caso1', function() {
-    const marcasv2 = new Fakay('nike', 'adidas', 'rebook', 'apple')
-    let indice = 2
-    const resultado = marcasv2.at(indice)
-    console.log(resultado) 
+describe('at', function () {
+    it('...', function () {
+        const marcasv2 = new Fakay('nike', 'adidas', 'rebook', 'apple')
 
+        const indice = 2
+
+        const resultado = marcasv2.at(indice)
+
+        expect(resultado).toBe('rebook')
     })
 
-    it('caso2', function() {
-        const marcasv2 = new Fakay ('nike', 'adidas', 'rebook', 'apple')
-        let indice = -1
+    it('...', function () {
+        const marcasv2 = new Fakay('nike', 'adidas', 'rebook', 'apple')
+
+        const indice = -1
+
         const resultado = marcasv2.at(indice)
-        console.log(resultado) 
+
+        expect(resultado).toBe('apple')
+    })
+
+    it('...', function () {
+        const marcasv2 = new Fakay('nike', 'adidas', 'rebook', 'apple')
+
+        const indice = 10
+
+        const resultado = marcasv2.at(indice)
+
+        expect(resultado).toBeUndefined()
     })
 })
 
