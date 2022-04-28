@@ -1,45 +1,33 @@
 function Home() {
     Component.call(this, `<div class="Home">
         <h2>Hello, Home!</h2>
+        <button>+</button>
     </div>`)
 
-    const search = new Search
+    const add = this.container.querySelector('button')
+    
+    /** la FUNCIÓN DE FLECHA tiene auto-binding
+     * en función normal  }.bind(this)) */     
+    add.addEventListener('click', () => {
+        const sticker = new Sticker
 
-    let results
+        sticker.onClose(() => {
+            this.remove(sticker)
+        })
 
-    search.onSubmit(function (query) {
-        searchNewspapers(query, function (error, newspapers) {
-            if (error) {
+        this.add(sticker)
+    })
+
+    if (sessionStorage.username)
+        retrieveUser(sessionStorage.username, (error, user) => {
+            if(error) {
                 alert(error.message)
 
                 return
             }
 
-            if (results)
-                this.remove(results)
-
-            results = new Results
-
-            results.container.innerHTML = ''
-
-            newspapers.forEach(result => {
-                const li = document.createElement('li')
-
-                const a = document.createElement('a')
-                a.innerText = result.name
-                a.href = result.url
-                a.target = '_blank'
-
-                li.appendChild(a)
-
-                results.container.appendChild(li)
-            })
-
-            this.add(results)
-        }.bind(this))
-    }.bind(this))
-
-    this.add(search)
+            this.setName(user.name)
+        })
 }
 
 chainPrototypes(Component, Home)

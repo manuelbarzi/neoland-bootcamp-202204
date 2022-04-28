@@ -14,6 +14,7 @@ function retrieveUser(username, callback) {
 
     callback(null, copy)
 }
+
     /* OTRAS MANERAS DE CREAR LA COPIA DE USER SIN LA PROPIEDAD PASSWORD: */
 
     //delete user.password        - ERROR! MAL! NO!! (así eliminaríamos el password del user original)

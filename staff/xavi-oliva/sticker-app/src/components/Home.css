@@ -2,7 +2,11 @@
     background-color: yellowgreen;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content:flex-start;
     align-items: center;
     min-height: 86vh;
+}
+
+.Home button {
+    margin-bottom: .75rem
 }
