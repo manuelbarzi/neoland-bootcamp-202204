@@ -1,0 +1,10 @@
+.Register {
+    background-color: yellowgreen;
+}
+
+.Register__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
