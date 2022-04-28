@@ -1,20 +1,21 @@
-const users = [
+const  users = [
     {
-        name: 'Pepito Grillo',
+        name : 'pepito Grillo',
         username: 'pepito',
         password: '123123123'
     },
     {
         name: 'Peter Pan',
-        username: 'Peter',      
+        username: 'peter',
         password: '123123123'
     },
     {
         name: 'Wendy Bread',
-        username: 'wendy',
+        username: 'Wendy',
         password: '123123123'
     }
 ]
+
 
 const newspapers = [
     {
@@ -30,14 +31,8 @@ const newspapers = [
         url: 'https://lavanguardia.com'
     },
     {
-        name: 'El Pais',
+        name: 'El país',
         url: 'https://elpais.com'
     },
+    //TODO add more new sources
 ]
-
-/*
-- El atributo src en una etiqueta es la ruta hacia un archivo externo o recurso 
-que quieres enlazar a tu documento 
-- Vendor se carga en primer lugar
-- Ponemos rood para identificar el div con la etiqueta
-*/
