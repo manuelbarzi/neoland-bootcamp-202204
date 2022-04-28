@@ -5,9 +5,10 @@ function Home() {//constructor Home with attributes
 
     const search = new Search
 
-    let results
-    //logics part  
+    let results 
+ 
     search.onSubmit(function (query) {
+       
         const newspaperResults = newspapers.filter(newspaper => newspaper.name.toLowerCase().includes(query.toLowerCase()))
 
         if (results)
@@ -38,7 +39,6 @@ function Home() {//constructor Home with attributes
     this.add(search)
 
 }
-
 //vizualization part
 
 //calling the chainprototype with parent(Component) and child(Home)
@@ -49,4 +49,5 @@ Home.prototype.setName = function (name) {
     const title = this.container.querySelector('h2')
 
     title.innerText = `Hello, ${name}!`
-} 
+}
+

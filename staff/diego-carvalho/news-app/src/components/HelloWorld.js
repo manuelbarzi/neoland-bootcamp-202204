@@ -1,5 +1,5 @@
 function HelloWorld() {// constructor function HelloWorld with attributes
-    Component.call(this, `<div class="HelloWold">
+    Component.call(this, `<div class="HelloWorld">
     <h1>Hello, World!</h1>
     </div>`)
 }

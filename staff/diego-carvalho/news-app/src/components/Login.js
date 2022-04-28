@@ -9,9 +9,9 @@ function Login() {// constructor function Login with attributes
     <div>` )
 }
 
-chainPrototypes(Component, Login)//calling the chainprototype with parent(Component) and child(Login)
+chainPrototypes(Component, Login)//chainprototype con el padre(Component) y el hijo(Login)
 
-//calling the function (with callback) will macth the info previous saved on data file.
+
 Login.prototype.onSubmit = function (callback) {
     const form = this.container.querySelector('form')
     

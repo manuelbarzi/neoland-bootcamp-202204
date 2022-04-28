@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!--links of CSS files-->
+    <!--links of CSS -->
     <link rel="stylesheet" href="components/HelloWorld.css">
     <link rel="stylesheet" href="components/Register.css">
     <link rel="stylesheet" href="components/Login.css">
@@ -27,16 +27,21 @@
     <!--tool that automate the process of inheritance between parent and child-->
     <script src="utils.js"></script>
 
+    <!--Data-->
     <!--file where the info of the users and link of the web pages will be saved-->
-    <script src="data.js"></script>
+    <script src="data/models/User.js"></script>
+    <script src="data/models/Newspaper.js"></script>
+    <script src="data/users.js"></script>
+    <script src="data/newspaper.js"></script>
 
-    <!--logic-->
+    <!--Business (logic)-->
     <script src="logic/registerUser.js"></script>
-    <script src="logic/registerUser.spec.js"></script>
     <script src="logic/authenticateUser.js"></script>
-    <script src="logic/authenticateUser.spec.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/seachNewspapers.js"></script>
+   
 
-    <!--child element of components-->
+    <!--Presentation-->
     <script src="components/HelloWorld.js"></script>
     <script src="components/Register.js"></script>
     <script src="components/Login.js"></script>

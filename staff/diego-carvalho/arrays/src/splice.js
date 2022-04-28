@@ -1,22 +1,38 @@
+function splice(array, index, deleteCount, ...newElements) {
+    const deletedElements = []
 
-function splice(array, start, deleterCount, element) { // recivo el array, el start del recorte, cantidad a reemplazar y el element
+    if (deleteCount === 1) {
+        deletedElements[0] = array[index]
 
-    if (deleterCount == 0) {    // if deleterCount is 0
-        for (let i = array.length; i > start; i--) {  // empezando por el final, tiro todos los elements 1 posicion para atras
-            array[i] = array[i - 1]
-        }
-        array[start] = element // y pongo el nuevo en la posicion de start
+        for (let i = index; i < array.length - 1; i++)
+            array[i] = array[i + 1]
+
+        // array.length = array.length - 1
+        // array.length -= 1
+        array.length--       
+    } else if (deleteCount > 1) {
+        for (let i = 0; i < deleteCount; i++)
+            deletedElements[i] = array[index + i]
+
+        for (let i = index; i < array.length - deleteCount; i++)
+            array[i] = array[i + deleteCount]
+
+        // array.length = array.length - deleteCount
+        array.length -= deleteCount
+    }
+    
+    if (newElements.length === 1) {
+        for (let i = array.length - 1; i >= index; i--)
+            array[i + 1] = array[i]
+
+        array[index] = newElements[0]
+    } else if (newElements.length > 1) {
+        for (let i = array.length - 1; i >= index; i--)
+            array[i + newElements.length] = array[i]
+        
+        for (let i = 0; i < newElements.length; i++)
+            array[index + i] = newElements[i]
     }
 
-
-    else { // si deleterCount no es 0
-        array[start] = element // y pongo el nuevo en la posicion de start
-        if (deleterCount != 1) { // si es 1 ya lo he reemplazado y no hay que hacer nada, si es mayor los muevo todos
-            for (let i = start + 1; i < array.length - deleterCount + 1; i++) {
-                array[i] = array[i + deleterCount - 1]
-            }
-        }
-        array.length = array.length - deleterCount + 1
-    }
-
+    return deletedElements
 }
