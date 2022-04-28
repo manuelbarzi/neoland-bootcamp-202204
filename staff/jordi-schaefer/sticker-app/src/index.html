@@ -1,59 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App</title>
+    <title>Stickers app</title>
 
     <link rel="stylesheet" href="components/HelloWorld.css">
     <link rel="stylesheet" href="components/Register.css">
     <link rel="stylesheet" href="components/Login.css">
-    <link rel="stylesheet" href="components/Search.css">
-    <link rel="stylesheet" href="components/Results.css">
+    <link rel="stylesheet" href="components/Sticker.css">
+    <link rel="stylesheet" href="components/List.css">
     <link rel="stylesheet" href="components/Home.css">
     <link rel="stylesheet" href="components/App.css">
 </head>
 
-
 <body>
+    <!-- creo una raiz para poder referenciar mis elentos con el documento html -->
+    <div id="root"></div>
 
-    <!-- creo un id para referenciar en JS (index.js) y poder pasarle el codigo HTML -->
-    <div id="root"> </div> 
-
-    
-    <!-- referencio mis script de componentes y datos -->
     <script src="vendor/smart-components.js"></script>
     <script src="utils.js"></script>
 
-    
     <!-- data -->
-    <script src="data/models/models.js"></script>
-    <script src="data/data.js"></script>
+    <script src="data/models/User.js"></script>
+    <script src="data/models/Note.js"></script>
+    <script src="data/users.js"></script>
+    <script src="data/notes.js"></script>
 
-
-    <!-- business (logic) -->
+    <!-- logic -->
     <script src="logic/registerUser.js"></script>
     <script src="logic/authenticateUser.js"></script>
     <script src="logic/retrieveUser.js"></script>
-    <script src="logic/searchNewspapers.js"></script>
+    <script src="logic/retrieveNotes.js"></script>
+    <script src="logic/createNote.js"></script>
 
-
-    <!-- referencio mis componentes de js que seran objetos con sus funciones -->
+    <!-- pages / components -->
     <script src="components/HelloWorld.js"></script>
     <script src="components/Register.js"></script>
     <script src="components/Login.js"></script>
-    <script src="components/Search.js"></script>
-    <script src="components/Results.js"></script>
+    <script src="components/Sticker.js"></script>
+    <script src="components/List.js"></script>
     <script src="components/Home.js"></script>
     <script src="components/App.js"></script>
-    <!--El search esta antes que el home, porque los hijos se cargan antes que los padres -->
 
-    
-    <!-- referencion mi JS principal donde llamo a las funciones sobre cada pagina -->
+    <!-- index -->
     <script src="index.js"></script>
-
 </body>
-
 
 </html>

@@ -1,22 +1,16 @@
 const users = [
-    {
-        name: 'Pepito Grillo',
-        username: 'pepito',
-        password: '123123123'
-    },
-    {
-        name: 'Peter Pan',
-        username: 'peter',
-        password: '123123123'
-    },
-    {
-        name: 'Wendy Bread',
-        username: 'wendy',
-        password: '123123123'
-    }
+    new User ('Pepito Grillo', 'pepito', '123123123'),
+    new User ('Peter Pan', 'peter', '123123123'),
+    new User ('Wengy Bread', 'wendy', '123123123')
+
 ]
 
+
+
+// pendiente lo mismo que arriba con newspapers
 const newspapers = [
+
+    
     {
         name: 'El Diario',
         url: 'https://eldiario.es'
