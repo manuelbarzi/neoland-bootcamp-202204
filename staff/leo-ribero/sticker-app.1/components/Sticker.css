@@ -6,9 +6,10 @@
     justify-content: center;
 }
 
-.Sticker__form {
+.Sticker_form {
+    background-color: yellow;
+    padding: 1rem;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
 
