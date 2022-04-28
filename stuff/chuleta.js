@@ -63,3 +63,5 @@ else{
 
 
 
+/*método- myfish.splice(2,0,angel)
+funcion suelta- splice(myFish, 2, 0 , angel)*/

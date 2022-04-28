@@ -16,6 +16,20 @@ describe('authenticateUser', () => {
         })
 
     })
+    it('authenticateUser should not suceed on valid credentials', () => {
+        users.length = 0
+        
+        users.push({  // le pongo un usuario
+            name: 'Miguel',
+            username: 'miguelito',
+            password: '123123123'  
+        })
+
+        authenticateUser('pepito', '123123123', function(error) {
+            expect(error).toBe(null)
+        })
+        users.length = 0
+    })
 
 
 })

@@ -9,3 +9,10 @@ function retrieveUser(username, callback) {  // recuperar
 
     callback(null, user)
 }
+
+//delete user.password ERROR!
+
+const copy={
+    name: user.name,
+    username: user.username
+}
