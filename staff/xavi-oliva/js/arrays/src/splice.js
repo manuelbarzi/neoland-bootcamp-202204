@@ -1,62 +1,38 @@
-function splice(array, start, deleteCount, item) {
-	
-	
-	for (let i = array.length - 1; i >= start; i--) {
-		array[i + 1] = array[i]
-		if (i === start)
-			array[start] = item
-		
-	}
+function splice(array, index, deleteCount, ...newElements) {
+    const deletedElements = []
 
-	for (let i = start; i < array.length - 1; i++) {
-		
-		array[i] = array[i + 1] 
-		
-	}
-	
-} // NOT FINISHED
+    if (deleteCount === 1) {
+        deletedElements[0] = array[index]
 
+        for (let i = index; i < array.length - 1; i++)
+            array[i] = array[i + 1]
 
+        // array.length = array.length - 1
+        // array.length -= 1
+        array.length--       
+    } else if (deleteCount > 1) {
+        for (let i = 0; i < deleteCount; i++)
+            deletedElements[i] = array[index + i]
 
+        for (let i = index; i < array.length - deleteCount; i++)
+            array[i] = array[i + deleteCount]
 
+        // array.length = array.length - deleteCount
+        array.length -= deleteCount
+    }
+    
+    if (newElements.length === 1) {
+        for (let i = array.length - 1; i >= index; i--)
+            array[i + 1] = array[i]
 
+        array[index] = newElements[0]
+    } else if (newElements.length > 1) {
+        for (let i = array.length - 1; i >= index; i--)
+            array[i + newElements.length] = array[i]
+        
+        for (let i = 0; i < newElements.length; i++)
+            array[index + i] = newElements[i]
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function splice(array, inicio, reemplazo, elemento) { // recivo el array, el inicio del recorte, cantidad a reemplazar y el elemento
-
-//     if (reemplazo == 0) {    // si reemplazo es 0
-//         for (let i = array.length; i > inicio; i--) {  // empezando por el final, tiro todos los elementos 1 posicion para atras
-//             array[i] = array[i - 1]
-//         }
-//         array[inicio] = elemento // y pongo el nuevo en la posicion de inicio
-//     }
-
-
-//     else { // si reemplazo no es 0
-//         array[inicio] = elemento // y pongo el nuevo en la posicion de inicio
-//         if (reemplazo != 1) { // si es 1 ya lo he reemplazado y no hay que hacer nada, si es mayor los muevo todos
-//             for (let i = inicio + 1; i < array.length - reemplazo + 1; i++) {
-//                 array[i] = array[i + reemplazo - 1]
-//             }
-//         }
-//         array.length = array.length - reemplazo + 1
-//     }
-
-// }
+    return deletedElements
+}

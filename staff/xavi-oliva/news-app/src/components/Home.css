@@ -1,0 +1,8 @@
+.Home {
+    background-color: yellowgreen;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 86vh;
+}

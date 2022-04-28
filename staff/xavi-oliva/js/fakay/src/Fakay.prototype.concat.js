@@ -1,6 +1,8 @@
 Fakay.prototype.concat = function () {
-    const result = {}
-    let index = 0
+    const result = new Fakay
+
+    for (let i = 0; i < this.length; i++)
+        result[result.length++] = this[i]
 
     for (let i = 0; i < arguments.length; i++) {
         const argument = arguments[i]
@@ -9,15 +11,10 @@ Fakay.prototype.concat = function () {
             for (let j = 0; j < argument.length; j++) {
                 const currElem = argument[j]
 
-                result[index] = currElem
-
-                index++
+                result[result.length++] = currElem
             }
-        else {
-            result[index] = argument
-
-            index++
-        }
+        else
+            result[result.length++] = argument
     }
 
     return result

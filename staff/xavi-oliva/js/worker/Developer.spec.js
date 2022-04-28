@@ -11,6 +11,7 @@ describe('Developer', () => {
         expect(developer.birthDate.getFullYear()).toBe(2000)
         expect(developer.birthDate.getMonth()).toBe(11)
         expect(developer.birthDate.getDate()).toBe(31)
+        expect(developer.status).toBe('pause')
     })
 
     it('should work', () => {

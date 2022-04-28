@@ -5,6 +5,8 @@ function Worker(name, email, socialSecurityNumber, id, birthDate) {
     this.socialSecurityNumber = socialSecurityNumber
     this.id = id
     this.birthDate = birthDate
+    
+    this.status = 'pause'
 
 }
 

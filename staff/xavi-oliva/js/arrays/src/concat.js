@@ -1,7 +1,5 @@
 function concat() {
-    
     const result = []
-    let index = 0
 
     for (let i = 0; i < arguments.length; i++) {
         const argument = arguments[i]
@@ -10,15 +8,10 @@ function concat() {
             for (let j = 0; j < argument.length; j++) {
                 const currElem = argument[j]
 
-                result[index] = currElem
-
-                index++
+                result[result.length] = currElem
             }
-        else {
-            result[index] = argument
-
-            index++
-        }
+        else
+            result[result.length] = argument
     }
 
     return result
