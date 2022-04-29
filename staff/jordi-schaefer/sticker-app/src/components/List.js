@@ -1,5 +1,3 @@
 function List() {
-    Component.call(this, `<div class="Notes">  </div>`)
+    Component.call(this, `<ul class="paquete__listas">  </ul>`)
 }
-
-// no hace falta ???    chainPrototypes(Component, Sticker)

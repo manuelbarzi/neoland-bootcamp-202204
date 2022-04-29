@@ -1,4 +1,5 @@
 describe('retrieveUser', () => {
+
     it('should succeed on existing user (username)', () => {
         users.length = 0
 
@@ -17,4 +18,5 @@ describe('retrieveUser', () => {
             expect(user.password).toBeUndefined()
         })
     })
+    
 })

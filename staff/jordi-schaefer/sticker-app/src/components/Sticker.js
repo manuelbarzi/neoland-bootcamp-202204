@@ -7,9 +7,33 @@ function Sticker() {
         </form>
     </div>`)
 
+    // este solo funciona en los stickers editables, pero no en los nuevos
+    const form = this.container.querySelector('form')
+
+    form.addEventListener('submit', event => {
+        event.preventDefault()
+
+        const text = form.text.value
+
+        createNote(sessionStorage.username, text, error => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            alert('Sticker saved!')
+        })
+    })
+
 }
 
+
 chainPrototypes(Component, Sticker)
+
+
+
+
 
 
 Sticker.prototype.onClose = function(callback) {
@@ -21,6 +45,7 @@ Sticker.prototype.onClose = function(callback) {
 }
 
 
+// este solo funciona en los nuevos, pero no en los editables
 Sticker.prototype.onSubmit = function(callback) {
     const form = this.container.querySelector('form')
 
