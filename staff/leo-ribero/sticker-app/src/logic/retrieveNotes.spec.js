@@ -1,20 +1,20 @@
 describe('retrieveNotes', () => {
     it('returns user notes when user exits and has notes', () => {
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
 
-        users.push(new User('Lola Loles', 'lolaloles', '123123123'))
-        users.push(new User('Torom Bolo', 'torombolo', '123123123'))
+        db.users.push(new User('Lola Loles', 'lolaloles', '123123123'))
+        db.users.push(new User('Torom Bolo', 'torombolo', '123123123'))
 
-        notes.push(new Note('lolaloles','Primera nota de ll 1'))
-        notes.push(new Note('lolaloles','Primera nota de ll 2'))
-        notes.push(new Note('lolaloles','Primera nota de ll 3'))
-        notes.push(new Note('lolaloles','Primera nota de ll 4'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 1'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 2'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 3'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 4'))
 
-        notes.push(new Note('torombolo','Primera nota de tb 1'))
-        notes.push(new Note('torombolo','Primera nota de tb 2'))
-        notes.push(new Note('torombolo','Primera nota de tb 3'))
-        notes.push(new Note('torombolo','Primera nota de tb 4'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 1'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 2'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 3'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 4'))
 
         retrieveNotes('lolaloles', (error, notes) => {
             // lo primero que tiene que verificar es si el usuario existe
@@ -40,26 +40,26 @@ describe('retrieveNotes', () => {
 
         })
 
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
     })
 
     it('returns user notes when user does not exist', () => {
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
 
-        users.push(new User('Lola Loles', 'lolaloles', '123123123'))
-        users.push(new User('Torom Bolo', 'torombolo', '123123123'))
+        db.users.push(new User('Lola Loles', 'lolaloles', '123123123'))
+        db.users.push(new User('Torom Bolo', 'torombolo', '123123123'))
 
-        notes.push(new Note('lolaloles','Primera nota de ll 1'))
-        notes.push(new Note('lolaloles','Primera nota de ll 2'))
-        notes.push(new Note('lolaloles','Primera nota de ll 3'))
-        notes.push(new Note('lolaloles','Primera nota de ll 4'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 1'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 2'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 3'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 4'))
 
-        notes.push(new Note('torombolo','Primera nota de tb 1'))
-        notes.push(new Note('torombolo','Primera nota de tb 2'))
-        notes.push(new Note('torombolo','Primera nota de tb 3'))
-        notes.push(new Note('torombolo','Primera nota de tb 4'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 1'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 2'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 3'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 4'))
 
         retrieveNotes('gatuna', (error, notes) => {
             expect(error).toBeDefined()
@@ -71,21 +71,21 @@ describe('retrieveNotes', () => {
 
         })
 
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
     })
 
     it('returns empty array of notes when user exists and has no notes', () => {
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
 
-        users.push(new User('Lola Loles', 'lolaloles', '123123123'))
-        users.push(new User('Torom Bolo', 'torombolo', '123123123'))
+        db.users.push(new User('Lola Loles', 'lolaloles', '123123123'))
+        db.users.push(new User('Torom Bolo', 'torombolo', '123123123'))
 
-        notes.push(new Note('lolaloles','Primera nota de ll 1'))
-        notes.push(new Note('lolaloles','Primera nota de ll 2'))
-        notes.push(new Note('lolaloles','Primera nota de ll 3'))
-        notes.push(new Note('lolaloles','Primera nota de ll 4'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 1'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 2'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 3'))
+        db.notes.push(new Note('lolaloles','Primera nota de ll 4'))
 
         retrieveNotes('torombolo', (error, notes) => {
             // lo primero que tiene que verificar es si el usuario existe
@@ -97,7 +97,7 @@ describe('retrieveNotes', () => {
 
         })
 
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
     })
 })

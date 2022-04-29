@@ -1,8 +1,8 @@
 describe('retrieveUser', () => {
 	it('should succeed on existing user (username)', () => {
-		users.length = 0
+		db.users.length = 0
 
-		users.push({
+		db.users.push({
 			name: 'John Smith',
 			username: 'johnsmith',
 			password: '123123123'

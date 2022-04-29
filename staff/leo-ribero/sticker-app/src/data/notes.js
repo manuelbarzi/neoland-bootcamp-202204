@@ -1,4 +1,4 @@
-const notes = [
+ db.notes = [
     new Note('wendy', 'Happy Flower!'),
     new Note('wendy', 'Hellow World!'),
     new Note('pepito', 'Hola, Mundo'),
