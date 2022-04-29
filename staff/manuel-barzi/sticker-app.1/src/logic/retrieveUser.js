@@ -1,5 +1,5 @@
 function retrieveUser(username, callback) {
-    const user = db.users.find(user => user.username === username)
+    const user = users.find(user => user.username === username)
 
     if (!user) {
         callback(new Error(`user with username ${username} not found`))

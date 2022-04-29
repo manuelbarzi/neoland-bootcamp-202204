@@ -1,8 +1,8 @@
 describe('authenticateUser', () => {
     it('should succeed on existing user with correct credentials', () => {
-        db.users.length = 0
+        users.length = 0
 
-        db.users.push({
+        users.push({
             name: 'John Doe',
             username: 'johndoe',
             password: '123123123'
@@ -12,13 +12,13 @@ describe('authenticateUser', () => {
             expect(error).toBeNull()
         })
 
-        db.users.length = 0
+        users.length = 0
     })
 
     it('should fail on existing user with incorrect password', () => {
-        db.users.length = 0
+        users.length = 0
 
-        db.users.push({
+        users.push({
             name: 'John Doe',
             username: 'johndoe',
             password: '123123123'
@@ -29,13 +29,13 @@ describe('authenticateUser', () => {
             expect(error.message).toBe('wrong credentials')
         })
 
-        db.users.length = 0
+        users.length = 0
     })
 
     it('should fail on existing user with incorrect username', () => {
-        db.users.length = 0
+        users.length = 0
 
-        db.users.push({
+        users.push({
             name: 'John Doe',
             username: 'johndoe',
             password: '123123123'
@@ -46,17 +46,17 @@ describe('authenticateUser', () => {
             expect(error.message).toBe('wrong credentials')
         })
 
-        db.users.length = 0
+        users.length = 0
     })
 
     it('should fail on non-existing user', () => {
-        db.users.length = 0
+        users.length = 0
 
         authenticateUser('johndoe', '123123123', error => {
             expect(error).toBeDefined()
             expect(error.message).toBe('wrong credentials')
         })
 
-        db.users.length = 0
+        users.length = 0
     })
 })
