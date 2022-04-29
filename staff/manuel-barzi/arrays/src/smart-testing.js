@@ -23,7 +23,7 @@ function expect(value) {
                 if (value.length === expected.length) {
                     for (let i = 0; i < value.length; i++) 
                         if (value[i] !== expected[i])
-                            console.error('expected' + value[i] + ' to equal ' + expected[i])
+                            console.error('expected ' + value[i] + ' to equal ' + expected[i])
                 } else 
                     console.error('expected array length ' + value.length + ' to equal ' + expected.length)
             } else if (value !== expected) 
