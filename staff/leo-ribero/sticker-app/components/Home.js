@@ -22,6 +22,10 @@ function Home() {
 
 	// }.bind(this))
 	})// no hace falta "bind" porque es un arrow function te hace autobinding. Ver video a las 12:36 37
+
+
+	//13:16
+
 }
 
 chainPrototypes(Component, Home)

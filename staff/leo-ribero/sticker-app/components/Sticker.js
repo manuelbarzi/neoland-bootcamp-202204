@@ -6,6 +6,33 @@
             <button>Save</button>
         </form>
         </div>`)
+        
+        // Thu 28 Apr 1309
+        const form = this.container.querySelector('form')
+
+        form.addEventListener('submit', event => {
+            //para que no se dispare el formulario solo
+            event.preventDefault()
+
+            //ahora recogerá del formulario el text
+            const text = form.text.value
+
+            //y ahora necesitamos el usuario. Para ello usamoes el sessionStorage. Nos vamos al login que manejamos en index 13:11
+            // a buscar donde este authenticateUser
+            // 13:12, ya se ha cargado el usuario en index.js con sessionStorage y podemos hacer la linea siguiente:
+
+            createNote(sessionStorage.username, text, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+
+                }
+                
+                alert('Sticker saved')
+            })
+
+        })
     } 
 
     chainPrototypes(Component, Sticker)

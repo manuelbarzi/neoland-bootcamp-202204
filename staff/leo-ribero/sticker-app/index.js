@@ -6,10 +6,10 @@ const register = new Register
 const login = new Login
 const home = new Home
 
-//app.add(helloWorld)
-//app.add(login)
-// app.add(helloWorld, login)
-app.add(helloWorld, home)
+if (!sessionStorage.username)
+	app.add(helloWorld, login)
+else
+	app.add(helloWorld, home)	
 
 root.appendChild(app.container)
 
@@ -21,7 +21,7 @@ register.onSubmit(function (name, username, password) {
 			return
 		}
 
-		register.removeFrom(app)
+		register.removeFrom(app)  
 		login.addTo(app)
 	})
 })
@@ -39,18 +39,28 @@ login.onSubmit(function (username, password) {
 			return
 		}
 
-		retrieveUser(username, function(error, user) {
-			if (error) {
-				alert(error.message)
+		//13:11 venimos aquí desde Sticker. Ahí descubrimos la necesidad de 
+		//gardar en algún lado el usuario logeado mientras este 
+		//abierta una sesión. 
+		sessionStorage.username = username
+		//al hacer essto ya podemos volver a sticker 13:11
 
-				return
-			}
+		if(sessionStorage.username)
+			retrieveUser(sessionStorage.username, (error, user) => {
+				if (error) {
+					alert(error.message)
+		
+					return
+				}
+		
+				this.setName(user.name)
+		
+				login.removeFrom(app)
+				home.addTo(app)
+			})
 
-			home.setName(user.name)
-	
-			login.removeFrom(app)
-			home.addTo(app)
-		})
+
+ 
 	})
 
 })

@@ -14,3 +14,5 @@ function createNote(username, text, callback) {
 
     callback(null)
 }
+
+// he llegado mas o menos hasta las 13:06 de la sesión del jueves 29
