@@ -1,15 +1,14 @@
 const root = document.querySelector('#root')
 
 const app = new App
-const helloWorld = new HelloWorld
 const register = new Register
 const login = new Login
 const home = new Home
 
 if (!sessionStorage.username)
-	app.add(helloWorld, login)
+	app.add(login)
 else
-	app.add(helloWorld, home)	
+	app.add(home)	
 
 root.appendChild(app.container)
 
