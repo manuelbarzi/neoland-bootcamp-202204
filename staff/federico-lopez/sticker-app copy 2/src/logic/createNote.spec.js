@@ -7,7 +7,7 @@ describe('createNote', () => {
         createNote('john', 'Adiós Mundo Cruel...', function(error) {
             expect(error).toBeNull()
 
-            const note = db.notes[0]
+            const note = notes[0]
 
             expect(note).toBeDefined()
             expect(note).toBeInstanceOf(Note)

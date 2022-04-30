@@ -2,7 +2,7 @@ const root = document.querySelector('#root')
 
 const app = new App
 const register = new Register
-let login = new Login
+const login = new Login
 
 let home
 

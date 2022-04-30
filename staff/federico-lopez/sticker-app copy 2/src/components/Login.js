@@ -20,7 +20,6 @@ Login.prototype.onSubmit = function(callback) {
         const username = form.username.value
         const password = form.password.value
 
-        event.target.reset()
         callback(username, password)
     })
 }

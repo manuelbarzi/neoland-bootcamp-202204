@@ -5,9 +5,9 @@ describe('registerUser', () => {
         registerUser('Tor Tuga', 'tortuga', '123123123', function(error) {
             expect(error).toBeNull()
 
-            expect(db.users).toHaveSize(1)
+            expect(users).toHaveSize(1)
 
-            const user = db.users[0]
+            const user = users[0]
 
             expect(user).toBeDefined()
             expect(user).toBeInstanceOf(User)

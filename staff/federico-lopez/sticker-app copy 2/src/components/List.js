@@ -1,7 +1,7 @@
 function List(username) {
     Component.call(this, `<ul class="List"></ul>`)
 
-    retrieveNotes(username, (error, retrievedNotes) => {
+    retrieveNotes((error, retrievedNotes) => {
         if (error) {
             alert(error.message)
             return
@@ -19,6 +19,7 @@ function List(username) {
                 this.add(stickerToEdit)
             })
         })
+
     })
 }
 
