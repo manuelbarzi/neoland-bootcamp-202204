@@ -10,7 +10,12 @@ function Home() {
 
 
     search.onSubmit(function(query) {
-        const newspaperResults = newspapers.filter(newspaper => newspaper.name.toLowerCase().includes(query.toLowerCase()))
+        searchNewspapers(query, function(error, newspapers) {
+            if(error) {
+                alert(error.message)
+                return
+            }
+        })
     
         if (results)
             this.remove(results)

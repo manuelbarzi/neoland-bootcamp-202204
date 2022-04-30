@@ -6,5 +6,9 @@ function retrieveUser(username, callback) {
         return 
     }
 
-    callback(null, user)
+    const copy = User.copyFrom(user)
+
+    delete copy.password
+
+    callback(null, copy)
 }
