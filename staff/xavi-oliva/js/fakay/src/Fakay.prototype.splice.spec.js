@@ -1,67 +1,92 @@
 describe('Fakay.prototype.splice', () => {
     it('inserts a Feb between Jan and March', () => {
-        const months = ['Jan', 'March', 'April', 'June']
+        const months = new Fakay('Jan', 'March', 'April', 'June')
 
-        const deletedElements = months.splice(1, 0, 'Feb')
+        const removedElements = months.splice(1, 0, 'Feb')
 
-        const expectedMonths = ['Jan', 'Feb', 'March', 'April', 'June']
+        const expectedMonths = new Fakay('Jan', 'Feb', 'March', 'April', 'June')
 
-        const expectedDeletedElements = []
+        const expectedRemovedElements = new Fakay
 
         expect(months).toEqual(expectedMonths)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        expect(removedElements).toEqual(expectedRemovedElements)
     })
 
     it('replaces June by May', () => {
-        const months = ['Jan', 'Feb', 'March', 'April', 'June']
+        const months = new Fakay('Jan', 'Feb', 'March', 'April', 'June')
 
-        const deletedElements = months.splice(4, 1, 'May')
+        const removedElements = months.splice(4, 1, 'May')
 
-        const expectedMonths = ['Jan', 'Feb', 'March', 'April', 'May']
+        const expectedMonths = new Fakay('Jan', 'Feb', 'March', 'April', 'May')
 
-        const expectedDeletedElements = ['June']
+        const expectedRemovedElements = new Fakay('June')
 
         expect(months).toEqual(expectedMonths)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        expect(removedElements).toEqual(expectedRemovedElements)
     })
 
     it('inserts drum and guitar from index 2', () => {
-        const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+        const fishes = new Fakay('angel', 'clown', 'mandarin', 'sturgeon')
 
-        const deletedElements = myFish.splice(2, 0, 'drum', 'guitar')
+        const removedElements = fishes.splice(2, 0, 'drum', 'guitar')
 
-        const expectedMyFish = ['angel', 'clown', 'drum', 'guitar', 'mandarin', 'sturgeon']
+        const expectedFishes = new Fakay('angel', 'clown', 'drum', 'guitar', 'mandarin', 'sturgeon')
 
-        const expectedDeletedElements = []
+        const expectedRemovedElements = new Fakay()
 
-        expect(myFish).toEqual(expectedMyFish)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        expect(fishes).toEqual(expectedFishes)
+        expect(removedElements).toEqual(expectedRemovedElements)
     })
 
-    it('delete one element -mandarin- from index 3', () => {
-        const myFishAndOthers = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon', 'shark', 'dolphin']
+    it('remove one element -mandarin- from index 3', () => {
+        const fishesAndOthers = new Fakay('angel', 'clown', 'drum', 'mandarin', 'sturgeon', 'shark', 'dolphin')
 
-        const deletedElements = myFishAndOthers.splice(3, 1)
-        
-        const expectedMyFishAndOthers = ['angel', 'clown', 'drum', 'sturgeon', 'shark', 'dolphin']
-        
-        const expectedDeletedElements = ['mandarin']
+        const removedElements = fishesAndOthers.splice(3, 1)
 
-        expect(myFishAndOthers).toEqual(expectedMyFishAndOthers)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        const expectedFishesAndOthers = new Fakay('angel', 'clown', 'drum', 'sturgeon', 'shark', 'dolphin')
+
+        const expectedRemovedElements = new Fakay('mandarin')
+
+        expect(fishesAndOthers).toEqual(expectedFishesAndOthers)
+        expect(removedElements).toEqual(expectedRemovedElements)
     })
 
-    it('from index 0, delete 2 elements -angel and clown- and insert 3 elements -parrot, anemone and blue', () => {
-        const myFish = ['angel', 'clown', 'trumpet', 'sturgeon']
+    it('from index 0, remove 2 elements -angel and clown- and insert 3 elements -parrot, anemone and blue', () => {
+        const fishes = new Fakay('angel', 'clown', 'trumpet', 'sturgeon')
 
-        const deletedElements = myFish.splice(1, 2, 'parrot', 'anemone', 'blue')
+        const removedElements = fishes.splice(1, 2, 'parrot', 'anemone', 'blue')
 
-        const expectedMyFish = ['angel', 'parrot', 'anemone', 'blue', 'sturgeon']
+        const expectedFishes = new Fakay('angel', 'parrot', 'anemone', 'blue', 'sturgeon')
 
-        const expectedDeletedElements = ['clown', 'trumpet']
+        const expectedRemovedElements = new Fakay('clown', 'trumpet')
 
-        expect(myFish).toEqual(expectedMyFish)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        expect(fishes).toEqual(expectedFishes)
+        expect(removedElements).toEqual(expectedRemovedElements)
     })
 
+    it('remove 1 item -mandarin- from index -2', () => {
+        const fishes = new Fakay('angel', 'clown', 'mandarin', 'sturgeon')
+
+        const removedElements = fishes.splice(-2, 1)
+
+        const expectedFishes = new Fakay('angel', 'clown', 'sturgeon')
+
+        const expectedRemovedElements = new Fakay('mandarin')
+
+        expect(fishes).toEqual(expectedFishes)
+        expect(removedElements).toEqual(expectedRemovedElements)
+    })
+
+    it('remove all items from index 2 -mandarin and sturgeon-', () => {
+        const fishes = new Fakay('angel', 'clown', 'mandarin', 'sturgeon')
+
+        const removedElements = fishes.splice(2)
+
+        const expectedFishes = new Fakay('angel', 'clown')
+
+        const expectedRemovedElements = new Fakay('mandarin', 'sturgeon')
+
+        expect(fishes).toEqual(expectedFishes)
+        expect(removedElements).toEqual(expectedRemovedElements)
+    })
 })

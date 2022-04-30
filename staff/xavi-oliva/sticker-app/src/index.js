@@ -1,17 +1,19 @@
 const root = document.querySelector('#root')
 
 const app = new App
-const helloWorld = new HelloWorld
 const register = new Register
 const login = new Login
-const home = new Home
+let home
 
 
 /** Primero las vistas: sessionStorage almacena información mientras la pestaña donde se esté utilizando siga abierta. Por lo tanto, si cerramos pestaña veremos el login form; si solo refrescamos, continuaremos en la sesión del usuario.  */
 if (!sessionStorage.username)
-    app.add(helloWorld, login)
-else 
-    app.add(helloWorld, home)
+    app.add(login)
+else {
+    home = new Home
+
+    app.add(home)
+}
 
 root.appendChild(app.container)
 
@@ -49,6 +51,8 @@ login.onSubmit(function (username, password) {
 
                 return
             }
+
+            home = new Home
 
             home.setName(user.name)
 

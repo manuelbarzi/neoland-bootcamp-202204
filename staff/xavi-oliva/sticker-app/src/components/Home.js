@@ -1,26 +1,46 @@
 function Home() {
-    Component.call(this, `<div class="Home">
-        <h2>Hello, Home!</h2>
-        <button>+</button>
+    Component.call(this, `<div class="Home Container">
+        <header class="Home__header">
+            <h2>Hello, Home!</h2>
+            <button class="Home__logout">Logout</button>
+        </header>
+    
+        <ul class="Home__list Container"></ul>
+    
+        <footer class="Home__footer Container">
+            <button class="Home__addSticker">+</button>
+        </footer>
     </div>`)
 
-    const add = this.container.querySelector('button')
-    
+    const logoutButton = this.container.querySelector('.Home__logout')
+
+    logoutButton.addEventListener('click', () => {
+        delete sessionStorage.username
+
+        app.remove(home)
+        app.add(login)
+    })
+
+    const addStickerButton = this.container.querySelector('.Home__addSticker')
+
+
     /** la FUNCIÓN DE FLECHA tiene auto-binding
-     * en función normal  }.bind(this)) */     
-    add.addEventListener('click', () => {
+     * en función normal  }.bind(this)) */
+    addStickerButton.addEventListener('click', () => {
         const sticker = new Sticker
 
         sticker.onClose(() => {
-            this.remove(sticker)
+            this.removeFrom(sticker)
         })
 
-        this.add(sticker)
+        const list = this.container.querySelector('.Home__list')
+
+        list.append(sticker.container)
     })
 
-    if (sessionStorage.username)
+    if (sessionStorage.username) {
         retrieveUser(sessionStorage.username, (error, user) => {
-            if(error) {
+            if (error) {
                 alert(error.message)
 
                 return
@@ -28,6 +48,30 @@ function Home() {
 
             this.setName(user.name)
         })
+
+        retrieveNotes(sessionStorage.username, (error, notes) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            const list = this.container.querySelector('.Home__list')
+
+            const items = notes.map(note => {
+                const item = document.createElement('li')
+
+                const sticker = new Sticker
+                sticker.container.querySelector('textarea').innerText = note.text
+
+                item.appendChild(sticker.container)
+
+                return item
+            })
+
+            list.append(...items) // !!!! spread operator
+        })
+    }
 }
 
 chainPrototypes(Component, Home)
@@ -35,6 +79,5 @@ chainPrototypes(Component, Home)
 Home.prototype.setName = function (name) {
     const title = this.container.querySelector('h2')
 
-    //title.innerText = 'Hello, ' + name + '!'
     title.innerText = `Hello, ${name}!`
 }

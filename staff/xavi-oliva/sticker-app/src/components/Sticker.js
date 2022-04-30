@@ -21,7 +21,7 @@ function Sticker() {
                 return
             }
 
-            alert('Sticker Saved!!')
+            alert('Sticker saved!')
         })
     })
 }

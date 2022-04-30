@@ -1,38 +1,54 @@
-Fakay.prototype.splice = function (index, deleteCount, ...newElements) {
-	const deletedElements = []
+Fakay.prototype.splice = function (start, removeCount = this.length - start, ...newElements) {
+    if (start < 0) {
+        // index = index + this.length
+        start += this.length
+    }
 
-	if (deleteCount === 1) {
-		deletedElements[0] = this[index]
+    const removedElements = new Fakay()
 
-		for (let i = index; i < this.length - 1; i++)
-			this[i] = this[i + 1]
+    if (removeCount === 1) {
+        removedElements[0] = this[start]
+        removedElements.length = 1
 
-		// this.length = this.length - 1
-		// this.length -= 1
-		this.length--
-	} else if (deleteCount > 1) {
-		for (let i = 0; i < deleteCount; i++)
-			deletedElements[i] = this[index + i]
+        for (let i = start; i < this.length - 1; i++)
+            this[i] = this[i + 1]
 
-		for (let i = index; i < this.length - deleteCount; i++)
-			this[i] = this[i + deleteCount]
+        // this.length = this.length - 1
+        // this.length -= 1
+        this.length--
+        delete this[this.length]
+    } else if (removeCount > 1) {
+        for (let i = 0; i < removeCount; i++) {
+            removedElements[i] = this[start + i]
+            removedElements.length++
+        }
 
-		// this.length = this.length - deleteCount
-		this.length -= deleteCount
-	}
+        for (let i = start; i < this.length - removeCount; i++)
+            this[i] = this[i + removeCount]
 
-	if (newElements.length === 1) {
-		for (let i = this.length - 1; i >= index; i--)
-			this[i + 1] = this[i]
 
-		this[index] = newElements[0]
-	} else if (newElements.length > 1) {
-		for (let i = this.length - 1; i >= index; i--)
-			this[i + newElements.length] = this[i]
+        // this.length = this.length - deleteCount
+        for (let i = this.length - removeCount; i < this.length; i++)
+            delete this[i]
 
-		for (let i = 0; i < newElements.length; i++)
-			this[index + i] = newElements[i]
-	}
+        this.length -= removeCount
+    }
 
-	return deletedElements
+    if (newElements.length === 1) {
+        for (let i = this.length - 1; i >= start; i--)
+            this[i + 1] = this[i]
+
+        this[start] = newElements[0]
+        this.length++
+    } else if (newElements.length > 1) {
+        for (let i = this.length - 1; i >= start; i--)
+            this[i + newElements.length] = this[i]
+
+        for (let i = 0; i < newElements.length; i++)
+            this[start + i] = newElements[i]
+
+        this.length += newElements.length
+    }
+
+    return removedElements
 }
