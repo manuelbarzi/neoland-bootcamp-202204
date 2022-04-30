@@ -24,7 +24,20 @@ function Home() {
 	})// no hace falta "bind" porque es un arrow function te hace autobinding. Ver video a las 12:36 37
 
 
-	//13:16
+	// Thu 28 Apr 13:16
+	if (sessionStorage.username) //si existe username entonces cargame el usuario (solo cuando se crea la home)
+		retrieveUser(sessionStorage.username, (error, user) => {
+			if (error) {
+				alert(error.message)
+
+				return
+			}
+
+			this.setName(user.name)
+
+			// login.removeFrom(app)
+			// home.addTo(app)
+		})
 
 }
 

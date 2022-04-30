@@ -1,14 +1,19 @@
 const root = document.querySelector('#root')
 
 const app = new App
+
 const register = new Register
 const login = new Login
-const home = new Home
+// const home = new Home
+let home
 
 if (!sessionStorage.username)
 	app.add(login)
-else
+else {
+	home = new Home
+
 	app.add(home)	
+}
 
 root.appendChild(app.container)
 
@@ -44,6 +49,7 @@ login.onSubmit(function (username, password) {
 		sessionStorage.username = username
 		//al hacer essto ya podemos volver a sticker 13:11
 
+		/*
 		if(sessionStorage.username)
 			retrieveUser(sessionStorage.username, (error, user) => {
 				if (error) {
@@ -57,7 +63,21 @@ login.onSubmit(function (username, password) {
 				login.removeFrom(app)
 				home.addTo(app)
 			})
-
+			*/
+			retrieveUser(username, function (error, user) {
+				if (error) {
+					alert(error.message)
+	 
+					return
+				}
+	
+				home = new Home
+	
+				home.setName(user.name)
+	
+				login.removeFrom(app)
+				home.addTo(app)
+			})
 
  
 	})

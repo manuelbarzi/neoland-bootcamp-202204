@@ -19,9 +19,10 @@
 
             //y ahora necesitamos el usuario. Para ello usamoes el sessionStorage. Nos vamos al login que manejamos en index 13:11
             // a buscar donde este authenticateUser
-            // 13:12, ya se ha cargado el usuario en index.js con sessionStorage y podemos hacer la linea siguiente:
+            // Thu 28 april 13:12, ya se ha cargado el usuario en index.js con sessionStorage y podemos hacer la linea siguiente:
 
             createNote(sessionStorage.username, text, error => {
+                //  un error message no es muy elegante pero por ahora nos vale
                 if (error) {
                     alert(error.message)
 

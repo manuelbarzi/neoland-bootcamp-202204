@@ -1,4 +1,5 @@
 describe('retrieveNotes', () => {
+
     it('returns user notes when user exits and has notes', () => {
         db.users.length = 0
         db.notes.length = 0
@@ -24,6 +25,7 @@ describe('retrieveNotes', () => {
 
             expect(notes).toHaveSize(4)
 
+            // desesctruturando el array notes
             const [post1, post2, post3, post4] = notes
 
             expect(post1).toBeDefined()
@@ -35,7 +37,7 @@ describe('retrieveNotes', () => {
             expect(post3).toBeDefined()
             expect(post3.text).toBe('Primera nota de ll 3')
 
-            expect(post4).toBeDefined()
+            expect(post4).toBeDefined() 
             expect(post4.text).toBe('Primera nota de ll 4')
 
         })
@@ -44,7 +46,7 @@ describe('retrieveNotes', () => {
         db.notes.length = 0
     })
 
-    it('returns user notes when user does not exist', () => {
+    it('fails when user does not exist', () => {
         db.users.length = 0
         db.notes.length = 0
 
@@ -56,19 +58,16 @@ describe('retrieveNotes', () => {
         db.notes.push(new Note('lolaloles','Primera nota de ll 3'))
         db.notes.push(new Note('lolaloles','Primera nota de ll 4'))
 
-        db.notes.push(new Note('torombolo','Primera nota de tb 1'))
-        db.notes.push(new Note('torombolo','Primera nota de tb 2'))
-        db.notes.push(new Note('torombolo','Primera nota de tb 3'))
-        db.notes.push(new Note('torombolo','Primera nota de tb 4'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 5'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 6'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 7'))
+        db.notes.push(new Note('torombolo','Primera nota de tb 8'))
 
         retrieveNotes('gatuna', (error, notes) => {
             expect(error).toBeDefined()
             expect(error).toBeInstanceOf(Error)
-            expect(error.message).toBe('username "elefante" does not exist')
-
+            expect(error.message).toBe('username "gatuna" does not exist')
             expect(notes).toBeUndefined()
-  
-
         })
 
         db.users.length = 0

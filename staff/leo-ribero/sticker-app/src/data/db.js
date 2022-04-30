@@ -1,3 +1,1 @@
-const db = {
-    
-}
+const db = {}

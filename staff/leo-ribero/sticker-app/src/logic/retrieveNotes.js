@@ -7,5 +7,7 @@ function retrieveNotes(username, callback){
         return
     }
 
-    // const no
+    const notes = db.notes.filter(note => note.username === username)
+
+    callback(null, notes)
 }
