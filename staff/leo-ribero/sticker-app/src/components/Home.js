@@ -1,13 +1,28 @@
 function Home() {
-	Component.call(this, `<div class="Home">
-		<h2>Hello, Home!</h2>
-		<button>+</button>
-	</div>`)
+    Component.call(this, `<div class="Home Container">
+        <header class="Home__header">
+            <h2>Hello, Home!</h2>
+            <button class="Home__logout">Logout</button>
+        </header>
+        <ul class="Home__list Container"></ul>
+        <footer class="Home__footer Container">
+            <button class="Home__addSticker">+</button>
+        </footer>
+    </div>`)
 
-	const addSticker = this.container.querySelector('button')
+    const logoutButton = this.container.querySelector('.Home__logout')
 
-		// addSticker.a ddEventListener('click', function(){
-		addSticker.addEventListener('click', () => {
+    logoutButton.addEventListener('click', () => {
+        delete sessionStorage.username
+
+        app.remove(home)
+        app.add(login)
+    })
+
+    const addStickerButton = this.container.querySelector('.Home__addSticker')
+
+		// addSticker.addEventListener('click', function(){
+		addStickerButton.addEventListener('click', () => {
 			const sticker = new Sticker
 			// hemos instanciado un objeto, sticker es un componente
 			
@@ -18,14 +33,16 @@ function Home() {
 			// el método remove. Luego tenemos que hacer el closer
 		
 
-		this.add(sticker)  
+			const list = this.container.querySelector('.Home__list')
+
+			list.append(sticker.container)
 
 	// }.bind(this))
 	})// no hace falta "bind" porque es un arrow function te hace autobinding. Ver video a las 12:36 37
 
 
 	// Thu 28 Apr 13:16
-	if (sessionStorage.username) //si existe username entonces cargame el usuario (solo cuando se crea la home)
+	if (sessionStorage.username) { //si existe username entonces cargame el usuario (solo cuando se crea la home)
 		retrieveUser(sessionStorage.username, (error, user) => {
 			if (error) {
 				alert(error.message)
@@ -38,6 +55,38 @@ function Home() {
 			// login.removeFrom(app)
 			// home.addTo(app)
 		})
+
+		retrieveNotes(sessionStorage.username, (error, notes) => {
+
+			if(error) {
+				alert(error.message)
+
+				return
+			}
+			// Fri 29 Apr 1250. Ahora(siguiente linea), vamos a hacer que se rendericen aqui las notas cuando existan y exista el usuario
+
+				const list = this.container.querySelector('.Home__list')
+
+				const items = notes.map (note => {				
+					const item = document.createElement('li')
+
+					const sticker = new Sticker
+				
+			sticker.container.querySelector('textarea').innerText = note.text
+
+				item.appendChild(sticker.container)
+
+				return item
+				//los items (sticker) no son componenetes, son elementos HTML creados imperativamente con el DOM
+
+			})
+			
+			list.append(...items)
+			//spread operator VER DOCU. te separa los elementos de un array por comas
+
+		})
+
+	}// check Fri 29 Apr 1249
 
 }
 
