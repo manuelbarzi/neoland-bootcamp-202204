@@ -1,11 +1,11 @@
 function Sticker(previousText = '') {
-    Component.call(this, `<li class="Sticker">
+    Component.call(this, `<div class="Sticker">
         <button>x</button>
         <form class="Sticker__form">
             <textarea name="text"></textarea>
             <button>Save</button>
         </form>
-    </li>`)
+    </div>`)
 
     const textarea = this.container.querySelector('textarea')
 
@@ -15,7 +15,7 @@ function Sticker(previousText = '') {
 
 chainPrototypes(Component, Sticker)
 
-Sticker.prototype.onSubmit = function(callback) {
+Sticker.prototype.onSubmit = function (callback) {
     const form = this.container.querySelector('form')
     
     form.addEventListener('submit', event => {
@@ -32,7 +32,7 @@ Sticker.prototype.onSubmit = function(callback) {
 
             alert('Sticker saved!')
         })
-        callback(text)
+        callback()
     })
 }
 

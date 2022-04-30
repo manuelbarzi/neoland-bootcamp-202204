@@ -25,8 +25,3 @@ Component.prototype.remove = function(...children) {
     for (const child of children)
         this.container.removeChild(child.container)
 }
-
-Component.prototype.addFirst = function(...children) {
-    for (const child of children)
-        this.container.prepend(child.container)
-}
