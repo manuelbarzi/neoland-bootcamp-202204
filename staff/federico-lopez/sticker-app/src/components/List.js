@@ -1,7 +1,6 @@
 function List(username, home) {
     Component.call(this, `<ul class="List"></ul>`)
 
-
     retrieveNotes(username, (error, retrievedNotes) => {
         if (error) {
             alert(error.message)
@@ -12,6 +11,13 @@ function List(username, home) {
             noteComponent = new NoteComponent(note.username, note.text)
 
             this.add(noteComponent)
+
+            noteComponent.onClickRemove((text) => {
+                this.remove(noteComponent)
+                
+                deleteNote(sessionStorage.username, text)
+
+            })
 
             noteComponent.onClickEdit((noteToEdit, previousText) => {
                 this.remove(noteToEdit)
@@ -24,7 +30,7 @@ function List(username, home) {
                     this.remove(sticker)
 
                     const noteComponent = new NoteComponent(sessionStorage.username, text)
-        
+
                     this.addFirst(noteComponent)
                 })
 
@@ -41,6 +47,16 @@ function List(username, home) {
         sticker.onSubmit((text) => {
             this.remove(sticker)
 
+            createNote(sessionStorage.username, text, error => {
+                if (error) {
+                    alert(error.message)
+    
+                    return
+                }
+    
+                alert('Sticker saved!')
+            })
+
             noteComponent = new NoteComponent(sessionStorage.username, text)
 
             this.addFirst(noteComponent)
@@ -55,8 +71,20 @@ function List(username, home) {
                 sticker.onSubmit((text) => {
                     this.remove(sticker)
 
+                    deleteNote(sessionStorage.username, previousText)
+
+                    createNote(sessionStorage.username, text, error => {
+                        if (error) {
+                            alert(error.message)
+            
+                            return
+                        }
+            
+                        alert('Sticker saved!')
+                    })
+
                     const noteComponent = new NoteComponent(sessionStorage.username, text)
-        
+
                     this.addFirst(noteComponent)
                 })
 

@@ -1,28 +1,173 @@
-.App {
-  background-color: dodgerblue;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&display=swap");
+* {
+  font-family: "Inter", sans-serif;
+  text-decoration: none;
+  box-sizing: border-box;
 }
 
-.Home {
-  background-color: yellowgreen;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+html, body, #root {
+  height: 100%;
 }
 
-.Login {
-  background-color: yellowgreen;
+body {
+  margin: 0;
 }
 
-.Login__form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+input, button {
+  font-size: 1.5rem;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+  text-align: center;
 }
 
 li {
   list-style: none;
+}
+
+.button {
+  border-radius: 1rem;
+  border: 1px solid black;
+  background-color: white;
+  font-size: 1rem;
+  padding: 0.3rem 0.8rem;
+  width: 7rem;
+  font-weight: bold;
+}
+
+.button__light {
+  font-size: 0.7rem;
+  background-color: black;
+  color: white;
+}
+
+.App {
+  background-color: dodgerblue;
+  height: 100%;
+}
+
+.Home {
+  background-color: #DDE8FB;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.header {
+  position: fixed;
+  top: 0px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  background-color: #4D4E84;
+}
+
+.logout {
+  padding: 0.1rem 0.5rem;
+  height: 2rem;
+  font-size: 0.8rem;
+  border-radius: 0.3rem;
+  background-color: black;
+  color: white;
+  border: 1px black solid;
+  font-weight: bold;
+}
+
+.salute {
+  font-size: 1rem;
+  color: black;
+  margin: 0;
+  padding: 0;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  background-color: #4D4E84;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2.5rem;
+}
+
+.addNote {
+  background-color: white;
+  font-weight: bold;
+  border: 1px solid #DDE8FB;
+}
+
+.LoginAndRegister {
+  background-color: #4D4E84;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.input {
+  border: 3px solid #DDE8FB;
+}
+
+.List {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+  padding: 68px 0 60px 0;
+  overflow: scroll;
+}
+
+.NoteComponent {
+  background-color: #ffff88;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+  width: 70%;
+}
+
+.noteButtons {
+  align-self: flex-end;
+}
+
+.editButton {
+  background-color: #4D4E84;
+  color: white;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  width: 30px;
+}
+
+.removeButton {
+  background-color: darkred;
+  color: white;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  width: 30px;
+  align-self: flex-end;
+}
+
+.noteText {
+  margin: 0.8rem;
 }
 
 .Register {
@@ -37,12 +182,23 @@ li {
 }
 
 .Sticker {
-  background-color: yellow;
-  padding: 1rem;
+  background-color: #ffff88;
+  padding: 0.5rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  border-radius: 1rem;
+  width: 70%;
+}
+
+.xButton {
+  background-color: #4D4E84;
+  color: white;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
+  width: 20px;
+  align-self: flex-end;
+  margin-bottom: 10px;
 }
 
 .Sticker__form {
@@ -50,6 +206,22 @@ li {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 8px;
+}
+
+.textarea {
+  width: 250px;
+  height: 80px;
+  border: 0px;
+  border-radius: 0.4rem;
+}
+
+.saveButton {
+  background-color: #4D4E84;
+  color: white;
+  border-radius: 0.2rem;
+  font-size: 0.8rem;
+  padding: 0.2rem;
 }
 
 /*# sourceMappingURL=index.css.map */

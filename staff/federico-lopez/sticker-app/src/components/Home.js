@@ -1,8 +1,12 @@
 function Home() {
     Component.call(this, `<div class="Home">
-        <button class="logout">Log Out</button>
-        <h2>Hello, Home!</h2>
-        <button class="addNote">+</button>
+        <header class="header">
+            <h2 class="salute">Hello, Home!</h2>
+            <button class="logout">Log Out</button>
+        </header>
+        <footer class="footer">
+            <button class="addNote">+</button>
+        </footer>
     </div>`)
     
     if (sessionStorage.username)

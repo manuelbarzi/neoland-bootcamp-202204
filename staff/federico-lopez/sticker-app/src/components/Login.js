@@ -1,10 +1,10 @@
 function Login() {
-    Component.call(this, `<div class="Login">
-        <form class="Login__form">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button>Login</button>
-            <a href="#">Register</a>
+    Component.call(this, `<div class="LoginAndRegister">
+        <form class="form">
+            <input class="input" type="text" name="username" placeholder="username">
+            <input class="input" type="password" name="password" placeholder="password">
+            <button class="button">Log in</button>
+            <a href="#" class="button button__light">Register</a>
         </form>
     </div>`)
 }

@@ -1,11 +1,11 @@
 function Register() {
-    Component.call(this, `<div class="Register">
-        <form class="Register__form">
-            <input type="text" name="name" placeholder="name">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button>Register</button>
-            <a href="#">Login</a>
+    Component.call(this, `<div class="LoginAndRegister">
+        <form class="form">
+            <input class="input" type="text" name="name" placeholder="name">
+            <input class="input" type="text" name="username" placeholder="username">
+            <input class="input" type="password" name="password" placeholder="password">
+            <button class="button">Register</button>
+            <a class="button button__light" href="#">Login</a>
         </form>
     </div>`)
 }
