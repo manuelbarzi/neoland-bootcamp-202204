@@ -1,38 +1,20 @@
 describe('retrieveUser', function () {
     it('should return the name of the user', function() {
+        db.users.length = 0  // vacio memoria
 
-        users.length = 0  // vacio memoria
-
-        users.push({      // le pongo un usuario
-            name: 'zepe',
-            username: 'zepe',
-            password: '123'  
+        db.users.push({      // le pongo un usuario
+            name: 'John Smith',
+            username: 'johnsmith',
+            password: '123123123'  
         })
 
-        retrieveUser('zepe', function(error, usuario) {
-            expect(error).toBe(null)
-            expect(usuario.username).toBe('zepe')
+        retrieveUser('johnsmith', (error, user) => {
+            expect(error).toBeNull()
+            
+            expect(user).toBeDefined()
+            expect(user.name).toBe('John Smith')
+            expect(user.username).toBe('johnsmith')
+            expect(user.password).toBeUndefined()
         })
-
-        users.length = 0
     })
-
-
-    it('should not found the username', function () {
-        users.length = 0  // vacio memoria
-
-        users.push({      // le pongo un usuario
-            name: 'zepe',
-            username: 'zepe',
-            password: '123'  
-        })
-
-        retrieveUser('aitor', function(error, usuario) {
-            expect(error).toBeDefined()
-            expect(error.message).toBe('user with username aitor not found')
-        })
-
-        users.length = 0
-    })
-
 })

@@ -1,52 +1,81 @@
 function Home() {
-    Component.call(this, `<div class="Home">
-        <h2>no user logged :(</h2>
-        <button>+</button>
+    Component.call(this, `<div class="Home Container">
+        <header class="Home__header">
+        <h2>Hello, Home!(</h2>
+        <button class ="Home__logout">Logout</button>
+        </header>
+
+        <ul class="Home__list Container"></ul>
+
+        <footer class="Home__footer Container">
+            <button class="Home__addSticker">+</button>
+        </footer>
     </div>`)
 
-    
-    const add = this.container.querySelector('button')  // selecciono el boton de html
+    const logoutButton = this.container.querySelector('.Home__logout')
 
-    let creating = false
-    //add.addEventListener('click', function() {
-    add.addEventListener('click', () => {      // en caso de click crea un nuevo sticker
-        
-        if (!creating) {
-            creating=true
-            const sticker = new Sticker
+    logoutButton.addEventListener('click', ()=> {
+        delete sessionStorage.username
 
-
-            sticker.onClose(() => {  // ejecuto la funcion onclose de sticker que esta pendiente del boton close, y hace lo siguiente
-                this.remove(sticker)
-                creating=false
-            })
-
-            sticker.onSubmit(() => {
-                this.remove(sticker)
-                creating=false
-            })
-
-            this.add(sticker)
-        }
-        //}.bind(this))        // no hace flata blind pork es funcion flecha
+        app.remove(home)
+        app.add(login)
     })
 
+    const addStickerButton = this.container.querySelector('.Home__addSticker')
 
+    //add.addEventListener('click', function() {
+    addStickerButton.addEventListener('click', () => {      // en caso de click crea un nuevo sticker
+            const sticker = new Sticker
 
-    if (sessionStorage.username)
+            sticker.onClose(() => { 
+                this.remove(sticker)
+            })
+
+            const list = this.container.querySelector('.Home__list')
+
+            list.append(sticker.container)
+    })
+
+    if (sessionStorage.username) {
         retrieveUser(sessionStorage.username, (error, user) => {
             if (error) {
                 alert(error.message)
+
                 return
             }
+
             this.setName(user.name)
         })
+
+        retrieveNotes(sessionStorage.username, (error, notes) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            const list =this.container.querySelector('.Home__list')
+
+            const items = notes.map(note => {
+                const item = document.createElement('li')
+
+                const sticker = new Sticker 
+                sticker.container.querySelector('textarea').innerText = note.text
+
+                item.appendChild(sticker.container)
+
+                return item
+            })
+
+            list.append(...items) //RTFM spread operator
+        })
+    }
 }
 
 chainPrototypes(Component, Home)
 
-
 Home.prototype.setName = function (name) {
     const title = this.container.querySelector('h2')
-    title.innerText = `Ready to add notes, ${name} ✏🗒`
+
+    title.innerText = `Hello, ${name}!`
 }

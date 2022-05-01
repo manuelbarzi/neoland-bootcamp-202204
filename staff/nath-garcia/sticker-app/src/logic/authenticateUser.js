@@ -1,6 +1,5 @@
-//Hecho por Ventu
-function authenticateUser(username, password, callback) { 
-    const matches = users.some(function  (user) {
+function authenticateUser(username, password, callback) { //Hecho por Ventu
+    const matches = db.users.some(function  (user) {
         return user.username === username && user.password === password
     })
 
