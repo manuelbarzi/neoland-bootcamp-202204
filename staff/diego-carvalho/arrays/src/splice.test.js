@@ -64,4 +64,31 @@ describe('splice', () => {
         expect(deletedElements).toEqual(expectedDeletedElements)
     })
 
+    test('remove 1 item -mandarin- from index -2', function(){
+        const fishes = ['angel', 'clown', 'mandarin', 'sturgeon']
+
+        const removedElements = splice(fishes, -2, 1)
+
+        const expectedFishes = ['angel', 'clown', 'sturgeon']
+
+        const expectedRemovedElements = ['mandarin']
+
+        expect(fishes).toEqual(expectedFishes)
+        expect(removedElements).toEqual(expectedRemovedElements)
+    })
+    
+    test('remove all items from index 2 -mandarin and sturgeon-', function(){
+        const fishes = ['angel', 'clown', 'mandarin', 'sturgeon']
+
+        const removedElements = splice(fishes, 2)
+
+        const expectedFishes = ['angel', 'clown']
+        
+        const  expectRemovedElements = ['mandarin', 'sturgeon']
+
+        expect(fishes).toEqual(expectedFishes)
+        expect(removedElements).toEqual(expectRemovedElements)
+    })
+
+
 })

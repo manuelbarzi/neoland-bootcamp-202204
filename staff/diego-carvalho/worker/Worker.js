@@ -5,15 +5,14 @@ function Worker(name, email, socialSecurityNumber, id, birthDate) {
     this.id = id
     this.birthDate = birthDate
     this.status = 'pause'
-    
 
 }
 
-Worker.prototype.work = function() {
+Worker.prototype.work = function () {
     this.status = 'working'
 }
 
-Worker.prototype.break = function (){
+Worker.prototype.break = function () {
     this.status = 'pause'
 }
 

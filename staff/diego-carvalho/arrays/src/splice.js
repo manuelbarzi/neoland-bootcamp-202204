@@ -1,4 +1,8 @@
-function splice(array, index, deleteCount, ...newElements) {
+function splice(array, index, deleteCount = array.length - start, ...newElements) {
+    if(index < 0){
+        index = index + array.length
+    }
+
     const deletedElements = []
 
     if (deleteCount === 1) {

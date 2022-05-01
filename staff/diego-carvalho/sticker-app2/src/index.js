@@ -1,16 +1,18 @@
 const root = document.querySelector('#root')
 
 const app = new App
-const helloWorld = new HelloWorld
 const register = new Register
 const login = new Login
-const home = new Home
+let home
 
 
 if (!sessionStorage.username)
-    app.add(helloWorld, login)
-else
-    app.add(helloWorld, home)
+    app.add(login)
+else {
+    home = new Home
+
+    app.add(home)
+}
 
 root.appendChild(app.container)
 
@@ -48,6 +50,8 @@ login.onSubmit(function (username, password) {
 
                 return
             }
+
+            home = new Home
 
             home.setName(user.name)
 
