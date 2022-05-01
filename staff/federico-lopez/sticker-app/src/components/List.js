@@ -61,6 +61,13 @@ function List(username, home) {
 
             this.addFirst(noteComponent)
 
+            noteComponent.onClickRemove((text) => {
+                this.remove(noteComponent)
+                
+                deleteNote(sessionStorage.username, text)
+
+            })
+
             noteComponent.onClickEdit((noteToEdit, previousText) => {
                 this.remove(noteToEdit)
 
@@ -93,7 +100,7 @@ function List(username, home) {
                 })
             })
         })
-
+        
         sticker.onClose(() => {
             this.remove(sticker)
         })
