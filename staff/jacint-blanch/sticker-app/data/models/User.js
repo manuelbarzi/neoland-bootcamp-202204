@@ -26,7 +26,3 @@ User.copyFrom = function (user) {
 
     return copy
 }
-
-function(user, passwod, function(){
-    
-})

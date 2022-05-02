@@ -1,6 +1,6 @@
 function Login() {
-    Component.call(this, `<div class="Login">
-        <form class="Login__form">
+    Component.call(this, `<div>
+        <form class="Container">
             <input type="text" name="username" placeholder="username">
             <input type="password" name="password" placeholder="password">
             <button>Login</button>
@@ -9,13 +9,12 @@ function Login() {
     </div>`)
 }
 
-
 chainPrototypes(Component, Login)
 
-Login.prototype.onSubmit = function(callback){
+Login.prototype.onSubmit = function(callback) {
     const form = this.container.querySelector('form')
 
-    form.addEventListener('submit', function(event){
+    form.addEventListener('submit', function(event) {
         event.preventDefault()
 
         const username = form.username.value
@@ -25,13 +24,12 @@ Login.prototype.onSubmit = function(callback){
     })
 }
 
-
 Login.prototype.onRegisterClick = function(callback) {
     const anchor = this.container.querySelector('a')
 
     anchor.addEventListener('click', function(event) {
         event.preventDefault()
 
-        callback
+        callback()
     })
 }

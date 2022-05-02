@@ -1,9 +1,9 @@
 function authenticateUser(username, password, callback) {
-    const matches = users.some(function(user){
-        return user.username === username && user.passwod === password
+    const matches = db.users.some(function (user) {
+        return user.username === username && user.password === password
     })
 
-    if(!matches) {
+    if (!matches) {
         callback(new Error('wrong credentials'))
 
         return
@@ -11,4 +11,3 @@ function authenticateUser(username, password, callback) {
 
     callback(null)
 }
-
