@@ -1,42 +1,57 @@
-function splice(array, index, deleteCount = array.length - start, ...newElements) {
-    if(index < 0){
-        index = index + array.length
-    }
-
-    const deletedElements = []
-
-    if (deleteCount === 1) {
-        deletedElements[0] = array[index]
-
-        for (let i = index; i < array.length - 1; i++)
-            array[i] = array[i + 1]
-
-        // array.length = array.length - 1
-        // array.length -= 1
-        array.length--       
-    } else if (deleteCount > 1) {
-        for (let i = 0; i < deleteCount; i++)
-            deletedElements[i] = array[index + i]
-
-        for (let i = index; i < array.length - deleteCount; i++)
-            array[i] = array[i + deleteCount]
-
-        // array.length = array.length - deleteCount
-        array.length -= deleteCount
-    }
+function splice(arr, start, deleteCount = 0) {
     
-    if (newElements.length === 1) {
-        for (let i = array.length - 1; i >= index; i--)
-            array[i + 1] = array[i]
+    let deletedElements = []
 
-        array[index] = newElements[0]
-    } else if (newElements.length > 1) {
-        for (let i = array.length - 1; i >= index; i--)
-            array[i + newElements.length] = array[i]
-        
-        for (let i = 0; i < newElements.length; i++)
-            array[index + i] = newElements[i]
+    /* Set del Start
+    Máximo: tamaño del array y no se aplica delete
+    Mínimo: 0
+    Negativo: cuenta desde atrás 
+    */
+    
+    if (start > arr.length) {
+        start = arr.length
+        deleteCount = 0
+    } else if (start === -Infinity){
+        start = 0
+    } else if (start < 0) {
+        start = arr.length + start
+    }
+
+    /*
+    Set del deleteCount
+    Mínimo: 0
+    Si no hay items a agregar, se borra desde el start
+    */
+
+    if (deleteCount < 0)
+        deleteCount = 0
+
+    if (arguments.length < 3)
+        deleteCount = arr.length - start
+
+    //Itero buscando cada uno de los items a agregar y los agrego desde start en orden descendente
+
+    while (deleteCount > 0) {
+        deletedElements.push(arr[start])
+        for (let i = start; i < arr.length; i++) {
+            arr[i] = arr[i + 1]
+        }
+        arr.pop()
+        deleteCount--
+    }
+
+    for (let i = arguments.length - 1; i >= 3; i--) {
+
+        //Muevo una posición a la derecha los elementos anteriores del array desde start
+
+        for (let j = arr.length - 1; j >= start; j--) {
+            arr[j+1] = arr[j] 
+        }
+
+        arr[start] = arguments[i]
+
     }
 
     return deletedElements
+        
 }

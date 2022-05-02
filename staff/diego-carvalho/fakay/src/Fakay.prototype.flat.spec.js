@@ -1,54 +1,51 @@
-describe('flat', function() {
-    it(' flating array', function() {
-     const numbers1 = new Fakay (0, 1, 2, new Fakay(3, 4))
+describe('Fakay.prototype.flat', () => {
 
-     let result1 = numbers1.flat() // expected output: [0, 1, 2, 3, 4]
+    it('should flat the fakay with depth one', () => {
 
-     expect(result1.length).toBe(5)
-     expect(result1[0]).toBe(0)
-     expect(result1[1]).toBe(1)
-     expect(result1[2]).toBe(2)
-     expect(result1[3]).toBe(3)
-     expect(result1[4]).toBe(4)
-
-    })
-    
-    test(' flating multiple array', function() {
-
-     const array2 = [0, 1, 2, [[[3, 4]]]]
-
-     const result2 = flat(array2, 2) // expected output: [0, 1, 2, [3, 4]]
-
-     expect(result2.length).toBe(4)
-     expect(result2[0]).toBe(0)
-     expect(result2[1]).toBe(1)
-     expect(result2[2]).toBe(2)
-     expect(result2[3[0]]).toBe(3)
-     expect(result2[3[1]]).toBe(4)
-
-    })
-    
-
-    test(' flating more multiple elements', function() {
-
-     const array3 = [0, [1, 2], 3, 4, [[[[3, 4]], 5]]]
-
-     const result3= flat(array3, 3)
-
-     expect(result3.length).toBe(7)
-     expect(result3[0]).toBe(0)
-     expect(result3[1]).toBe(1)
-     expect(result3[2]).toBe(2)
-     expect(result3[3]).toBe(3)
-     expect(result3[4]).toBe(4)
-     expect(result3[5[0]]).toBe(0)
-     expect(result3[5[1]]).toBe(1)
-     expect(result3[6]).toBe(5)
+        const fakay1 = new Fakay(0, 1, 2, new Fakay(3, 4))
+        
+        const result = fakay1.flat() // expected output: [0, 1, 2, 3, 4]
+        
+        expect(fakay1[0]).toBe(result[0])
+        expect(fakay1[1]).toBe(result[1])
+        expect(fakay1[2]).toBe(result[2])
+        expect(fakay1[3][0]).toBe(result[3])
+        expect(fakay1[3][1]).toBe(result[4])
 
     })
 
-    
+    it('should flat the fakay with depth two', () => {
+        
+        const fakay2 = new Fakay(0, 1, 2, new Fakay(new Fakay(new Fakay(3, 4))))
+        
+        const result = fakay2.flat(2) // expected output: [0, 1, 2, [3, 4]]
+        
+        expect(result[0]).toBe(0)
+        expect(result[1]).toBe(1)
+        expect(result[2]).toBe(2)
+        expect(result[3][0]).toBe(3)
+        expect(result[3][1]).toBe(4)
+
+    })
+
+    it('should flat the fakay with depth three', () => {
+        
+        const fakay3 = new Fakay(0, new Fakay(1, 2), 3, 4, new Fakay(new Fakay(new Fakay(new Fakay(3, 4)), 5)))
+        
+        const result = fakay3.flat(3)
+        
+        expect(result[0]).toBe(0)
+        expect(result[1]).toBe(1)
+        expect(result[2]).toBe(2)
+        expect(result[3]).toBe(3)
+        expect(result[4]).toBe(4)
+        expect(result[5][0]).toBe(3)
+        expect(result[5][1]).toBe(4)
+        expect(result[6]).toBe(5)
+
+    })
+
+
 })
-
 
 

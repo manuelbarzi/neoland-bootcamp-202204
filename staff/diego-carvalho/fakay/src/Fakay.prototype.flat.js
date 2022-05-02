@@ -1,26 +1,24 @@
-Fakay.prototype.flat = function flat(deepth = 1) {
+Fakay.prototype.flat = function(deepth = 1) {
     
-    const newFakay = new Fakay
-    /*for (element of this) {
-        newFakay.push(element)
-    }*/
+    const result = new Fakay   
     for (let i = 0; i < this.length; i++) {
-        newFakay.push(this[i])
-        
+        result.push(this[i])
     }
-    for (let i = 0; i < newFakay.length; i++) {
+    
+    for (let i = 0; i < result.length; i++) {
         for (let j = 1; j <= deepth; j++) {
-            if (newFakay instanceof Fakay) {
-                for (let k = newFakay.length; k >= 0; k--) {
-                    newFakay.splice(i + 1, 0, newFakay[i][k])
+            if (result[i] instanceof Fakay) {
+                for (let k = result[i].length - 1; k >= 0; k--) {
+                    result.splice(i + 1, 0, result[i][k])
                 }
             } else {
-                newFakay.splice(i + 1, 0, newFakay[i])
+                result.splice(i + 1, 0, result[i])
                 j = deepth
             }
-            newFakay.splice(i, 1)
+            result.splice(i, 1)
         }
 
     }
-    return newFakay
+
+return result
 }

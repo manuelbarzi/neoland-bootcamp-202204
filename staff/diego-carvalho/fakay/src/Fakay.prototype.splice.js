@@ -1,26 +1,54 @@
-
-Fakay.prototype.splice = function splice(start, deleteCount, element) { // recivo el this, el inicio del recorte, cantidad a reemplazar y el elemento
-
-    if (deleteCount == 0) {    // si deleteCount es 0
-        for (let i = this.length; i > start; i--) {  // empezando por el final, tiro todos los elementos 1 posicion para atras
-            this[i] = this[i -1]
-        }
-        if (this[start] = element){
-            this.length = this.length + 1
-        }  // y pongo el nuevo en la posicion de start
-
-        //this.length = this.length + 1//y le en el lenght
+Fakay.prototype.splice = function (start, removeCount = this.length - start, ...newElements) {
+    if (start < 0) {
+        // index = index + this.length
+        start += this.length
     }
 
+    const removedElements = new Fakay()
 
-    else { // si deleteCount no es 0
-        this[start] = element // y pongo el nuevo en la posicion de start
-        if (deleteCount != 1) { // si es 1 ya lo he reemplazado y no hay que hacer nada, si es mayor los muevo todos
-            for (let i = start + 1; i < this.length - deleteCount + 1; i++) {
-                this[i] = this[i + deleteCount - 1]
-            }
+    if (removeCount === 1) {
+        removedElements[0] = this[start]
+        removedElements.length = 1
+
+        for (let i = start; i < this.length - 1; i++)
+            this[i] = this[i + 1]
+
+        // this.length = this.length - 1
+        // this.length -= 1
+        this.length--
+        delete this[this.length]
+    } else if (removeCount > 1) {
+        for (let i = 0; i < removeCount; i++) {
+            removedElements[i] = this[start + i]
+            removedElements.length++
         }
-        this.length = this.length - deleteCount + 1
+
+        for (let i = start; i < this.length - removeCount; i++)
+            this[i] = this[i + removeCount]
+
+
+        // this.length = this.length - deleteCount
+        for (let i = this.length - removeCount; i < this.length; i++)
+            delete this[i]
+
+        this.length -= removeCount
     }
 
+    if (newElements.length === 1) {
+        for (let i = this.length - 1; i >= start; i--)
+            this[i + 1] = this[i]
+
+        this[start] = newElements[0]
+        this.length++
+    } else if (newElements.length > 1) {
+        for (let i = this.length - 1; i >= start; i--)
+            this[i + newElements.length] = this[i]
+
+        for (let i = 0; i < newElements.length; i++)
+            this[start + i] = newElements[i]
+
+        this.length += newElements.length
+    }
+
+    return removedElements
 }

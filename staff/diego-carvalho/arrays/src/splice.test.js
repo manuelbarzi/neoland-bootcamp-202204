@@ -1,94 +1,115 @@
 describe('splice', () => {
-    test('inserts a Feb between Jan and March', () => {
-        const months = ['Jan', 'March', 'April', 'June']
 
-        const deletedElements = splice(months, 1, 0, 'Feb')
+    test('adding one element', () => {
 
-        const expectedMonths = ['Jan', 'Feb', 'March', 'April', 'June']
-
-        const expectedDeletedElements = []
-
-        expect(months).toEqual(expectedMonths)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        const months = ['Jan', 'March', 'April', 'June'];
+        
+        const result = splice(months, 1, 0, 'Feb')
+        
+        const expectedMonths = ["Jan", "Feb", "March", "April", "June"]
+        
+        const expectedResult = []
     })
 
-    test('replaces June by May', () => {
-        const months = ['Jan', 'Feb', 'March', 'April', 'June']
+    test('adding one element and deleting one element', () => {
 
-        const deletedElements = splice(months, 4, 1, 'May')
-
-        const expectedMonths = ['Jan', 'Feb', 'March', 'April', 'May']
-
-        const expectedDeletedElements = ['June']
-
-        expect(months).toEqual(expectedMonths)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        const months = ["Jan", "Feb", "March", "April", "June"]
+        
+        const result = splice(months, 4, 1, 'May')
+        
+        const expectedMonths = ["Jan", "Feb", "March", "April", "May"]
+        
+        const expectedResult = ['June']
     })
 
-    test('inserts drum and guitar from index 2', () => {
+    test('adding one element, no delete', () => {
+
         const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
-
-        const deletedElements = splice(myFish, 2, 0, 'drum', 'guitar')
-
-        const expectedMyFish = ['angel', 'clown', 'drum', 'guitar', 'mandarin', 'sturgeon']
-
-        const expectedDeletedElements = []
-
-        expect(myFish).toEqual(expectedMyFish)
-        expect(deletedElements).toEqual(expectedDeletedElements)
+        
+        const result = splice(myFish, 2, 0, 'drum')
+        
+        const expectedFish = ["angel", "clown", "drum", "mandarin", "sturgeon"]
+        
+        const expectedResult = []
     })
 
-    test('delete one element -mandarin- from index 3', () => {
-        const myFishAndOthers = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon', 'shark', 'dolphin']
+    test('adding two elements, no deleting', () => {
 
-        const deletedElements = splice(myFishAndOthers, 3, 1)
+        const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
         
-        const expectedMyFishAndOthers = ['angel', 'clown', 'drum', 'sturgeon', 'shark', 'dolphin']
+        const result = splice(myFish, 2, 0, 'drum', 'guitar')
         
-        const expectedDeletedElements = ['mandarin']
+        const expectedFish = ["angel", "clown", "drum", "guitar", "mandarin", "sturgeon"]
+        
+        const expectedResult = []
 
-        expect(myFishAndOthers).toEqual(expectedMyFishAndOthers)
-        expect(deletedElements).toEqual(expectedDeletedElements)
     })
 
-    test('from index 0, delete 2 elements -angel and clown- and insert 3 elements -parrot, anemone and blue', () => {
+    test('no adding, deleting one element', () => {
+
+        const myFish = ['angel', 'clown', 'drum', 'mandarin', 'sturgeon']
+        
+        const result = splice(myFish, 3, 1)
+        
+        const expectedFish = ["angel", "clown", "drum", "sturgeon"]
+        
+        const expectedResult = ["mandarin"]
+    })
+
+    test('adding one element, deleting one element', () => {
+
+        const myFish = ['angel', 'clown', 'drum', 'sturgeon']
+        
+        const result = splice(myFish, 2, 1, 'trumpet')
+        
+        const expectedFish = ["angel", "clown", "trumpet", "sturgeon"]
+        
+        const expectedResult = ["drum"]
+    })
+
+    test('adding three elements, deleting two elements', () => {
+
         const myFish = ['angel', 'clown', 'trumpet', 'sturgeon']
-
-        const deletedElements = splice(myFish, 1, 2, 'parrot', 'anemone', 'blue')
-
-        const expectedMyFish = ['angel', 'parrot', 'anemone', 'blue', 'sturgeon']
-
-        const expectedDeletedElements = ['clown', 'trumpet']
-
-        expect(myFish).toEqual(expectedMyFish)
-        expect(deletedElements).toEqual(expectedDeletedElements)
-    })
-
-    test('remove 1 item -mandarin- from index -2', function(){
-        const fishes = ['angel', 'clown', 'mandarin', 'sturgeon']
-
-        const removedElements = splice(fishes, -2, 1)
-
-        const expectedFishes = ['angel', 'clown', 'sturgeon']
-
-        const expectedRemovedElements = ['mandarin']
-
-        expect(fishes).toEqual(expectedFishes)
-        expect(removedElements).toEqual(expectedRemovedElements)
-    })
-    
-    test('remove all items from index 2 -mandarin and sturgeon-', function(){
-        const fishes = ['angel', 'clown', 'mandarin', 'sturgeon']
-
-        const removedElements = splice(fishes, 2)
-
-        const expectedFishes = ['angel', 'clown']
         
-        const  expectRemovedElements = ['mandarin', 'sturgeon']
-
-        expect(fishes).toEqual(expectedFishes)
-        expect(removedElements).toEqual(expectRemovedElements)
+        const result = splice(myFish, 0, 2, 'parrot', 'anemone', 'blue')
+        
+        const expectedFish = ["parrot", "anemone", "blue", "trumpet", "sturgeon"]
+        
+        const expectedResult = ["angel", "clown"]
     })
 
+    test('only deleting two elements', () => {
 
+        const myFish = ['parrot', 'anemone', 'blue', 'trumpet', 'sturgeon']
+        
+        const result = splice(myFish, 2, 2)
+        
+        const expectedFish = ["parrot", "anemone", "sturgeon"]
+        
+        const expectedResult = ["blue", "trumpet"]
+
+    })
+
+    test('negative index', () => {
+
+        const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+        
+        const result = splice(myFish, -2, 1)
+        
+        const expectedFish = ["angel", "clown", "sturgeon"]
+        
+        const expectedResult = ["mandarin"]
+    })
+
+    test('remove all elements, from index 2', () => {
+
+        const myFish = ['angel', 'clown', 'mandarin', 'sturgeon']
+        
+        const result = splice(myFish, 2)
+        
+        const expectedFish = ["angel", "clown"]
+        
+        const expectedResult = ["mandarin", "sturgeon"]
+
+    })
 })
