@@ -1,4 +1,4 @@
-function createNote(username, text, callback) {
+function retrieveNotes(username, callback) {
     const userExists = db.users.some(user => user.username === username)
 
     if (!userExists) {
@@ -7,9 +7,7 @@ function createNote(username, text, callback) {
         return
     }
 
-    const note = new Note(username, text)
+    const notes = db.notes.filter(note => note.username === username)
 
-    db.notes.push(note)
-
-    callback(null, note.id)
+    callback(null, notes)
 }

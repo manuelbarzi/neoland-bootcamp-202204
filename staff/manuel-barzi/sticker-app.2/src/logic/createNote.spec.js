@@ -4,16 +4,13 @@ describe('createNote', () => {
         db.users.push(new User('John Doe', 'john', '123123123'))
         db.notes.length = 0
 
-        createNote('john', 'Adiós Mundo Cruel...', function(error, noteId) {
+        createNote('john', 'Adiós Mundo Cruel...', function(error) {
             expect(error).toBeNull()
-            expect(noteId).toBeDefined()
-            expect(noteId).toBeInstanceOf(String)
 
             const note = db.notes[0]
 
             expect(note).toBeDefined()
             expect(note).toBeInstanceOf(Note)
-            expect(note.id).toBe(noteId)
             expect(note.username).toBe('john')
             expect(note.text).toBe('Adiós Mundo Cruel...')
             expect(note.date).toBeDefined()

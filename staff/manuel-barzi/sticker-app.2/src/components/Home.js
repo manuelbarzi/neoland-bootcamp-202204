@@ -23,14 +23,15 @@ function Home() {
 
     const addStickerButton = this.container.querySelector('.Home__addSticker')
 
+    //add.addEventListener('click', function() {
     addStickerButton.addEventListener('click', () => {
-        const list = this.container.querySelector('.Home__list')
-        
         const sticker = new Sticker
 
         sticker.onClose(() => {
-            list.removeChild(sticker.container)
+            this.remove(sticker)
         })
+
+        const list = this.container.querySelector('.Home__list')
 
         list.append(sticker.container)
     })
@@ -59,17 +60,14 @@ function Home() {
                 const item = document.createElement('li')
 
                 const sticker = new Sticker
-                sticker.setText(note.text)
-                sticker.setId(note.id)
-
-                sticker.onClose(() => list.removeChild(item))
+                sticker.container.querySelector('textarea').innerText = note.text
                 
                 item.appendChild(sticker.container)
 
                 return item
             })
 
-            list.append(...items)
+            list.append(...items) // RTFM spread operator
         })
     }
 }
