@@ -1,7 +1,6 @@
 
 describe('Fake at', function() {
     const nums = new Fakay(5, 12, 8, 130, 44)
-    // console.log(nums, 888)
     it('positive index', () => {
         const result = nums.at(2)
         expect(result).toBe(8)

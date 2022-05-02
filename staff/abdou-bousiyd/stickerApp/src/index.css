@@ -1,0 +1,121 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+}
+textarea { 
+  border: 0;
+  outline: 0;
+  border-radius: 20px;
+  padding:20px;
+  font-size: 1.4em;
+  color: #343434;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+input, button {
+  margin: 0.5rem;
+  font-size: inherit;
+  _font-size: 0.75rem;
+}
+
+a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+.App {
+  height: 100%;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home__header {
+  position: fixed;
+  display: flex;
+  justify-content: space-between;
+  /* padding: 0 0 0 10px; */
+  top: 0;
+  background-color: ghostwhite;
+  width: 100%;
+}
+.Home__header__username{
+  margin-left: 5px;
+}
+.Home__footer {
+  position: fixed;
+  bottom: 0;
+  background-color: ghostwhite;
+  width: 100%;
+}
+
+.Home__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
+}
+.Home__addSticker, .sticker__close {
+  color: #8CC152;
+  border: 3px solid #8CC152;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 50px;
+  height: 50px;
+  font-size: 40px;
+  border-radius: 50%;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.sticker__close {
+  color: #e47f63;
+  border: 3px solid #e47f63;
+}
+
+.sticker__form__save{
+  height: 40px;
+  width: 130px;
+  border-radius:40px;
+  background: #fff;
+  border: 2px solid  #8CC152;
+  color: #8CC152;
+  font-size:16px;
+  font-weight:bold;
+}
+.sticker__form__save:hover {
+	background-color:#24221f;
+  color: #fff;
+}
+
+.Sticker {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Sticker__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

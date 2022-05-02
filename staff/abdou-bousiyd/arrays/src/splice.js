@@ -1,5 +1,7 @@
 
-function splice(array, deleteCount = 0) {
+function splice(array, index, deleteCount, newElement) {
+
+    const deleteCount = []
 
     for(let i = deleteCount; i < array.length ; i++) {
 
