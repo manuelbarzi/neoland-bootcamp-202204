@@ -77,6 +77,6 @@ describe('deleteNote', () => {
 
         db.users.length = 0
         db.notes.length = 0
-    })
+    }) 
 
 })

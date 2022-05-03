@@ -1,11 +1,14 @@
 function Sticker() {
     Component.call(this, `<div class="Sticker">
         <button>x</button>
+        <p class="Sticker__id"></p>
         <form class="Sticker__form">
             <textarea name="text"></textarea>
             <button>Save</button>
         </form>
     </div>`)
+
+    this.id = null
 
     const form = this.container.querySelector('form')
 
@@ -14,26 +17,43 @@ function Sticker() {
 
         const text = form.text.value
 
-            if (!this.id)
-                createNote(sessionStorage.username, text, error => {
-            if (error) {
-                alert(error.message)
+        if (!this.id)
+            createNote(sessionStorage.username, text, (error, noteId) => {
+                if (error) {
+                    alert(error.message)
 
-                return
-            }
+                    return
+                }
 
-            alert('Sticker saved!')
-        })
-            else
-                updateNote(sessionStorage.username, this.id, text, error => {
-                    if(error){
-                        alert(error.message)
+                //this.id = noteId
+                this.setId(noteId)
 
-                        return
-                    }
+                alert('Sticker saved!')
+            })
+        else
+            updateNote(sessionStorage.username, this.id, text, error => {
+                if (error) {
+                    alert(error.message)
 
-                    alert('Sticker updated!')
-                })
+                    return
+                }
+
+                alert('Sticker updated!')
+            })
+    })
+
+    const close = this.container.querySelector('button')
+
+    close.addEventListener('click', () => {
+        if (this.id) {
+            deleteNote(sessionStorage.username, this.id, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+            })
+        }
     })
 }
 
@@ -53,4 +73,6 @@ Sticker.prototype.setText = function(text) {
 
 Sticker.prototype.setId = function(id) {
     this.id = id
+
+    this.container.querySelector('.Sticker__id').innerText = `ID #${id}`
 }
