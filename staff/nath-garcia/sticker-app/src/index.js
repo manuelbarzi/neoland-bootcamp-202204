@@ -6,12 +6,12 @@ const login = new Login
 let home
 
 
-if (!sessionStorage.username) 
+if (!sessionStorage.username)
     app.add(login)
 else {
     home = new Home
 
-    app.add(home) // si hay entro directo al home
+    app.add(home)
 }
 
 root.appendChild(app.container)
@@ -42,24 +42,13 @@ login.onSubmit(function (username, password) {
             return
         }
 
-        sessionStorage.username = username // guardo el username en sessionStorage
-        
-        retrieveUser(username, function(error, user) {
-            if (error) {
-                alert(error.message)
+        sessionStorage.username = username
 
-                return
-            }
+        home = new Home
 
-            home = new Home
-
-            home.setName(user.name)
-    
-            login.removeFrom(app)
-            home.addTo(app)
-        })
+        login.removeFrom(app)
+        home.addTo(app)
     })
-
 })
 
 login.onRegisterClick(function () {

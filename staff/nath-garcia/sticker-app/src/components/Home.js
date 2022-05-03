@@ -1,7 +1,7 @@
 function Home() {
     Component.call(this, `<div class="Home Container">
         <header class="Home__header">
-        <h2>Hello, Home!(</h2>
+        <h2>Hello, Home!</h2>
         <button class ="Home__logout">Logout</button>
         </header>
 
@@ -14,7 +14,7 @@ function Home() {
 
     const logoutButton = this.container.querySelector('.Home__logout')
 
-    logoutButton.addEventListener('click', ()=> {
+    logoutButton.addEventListener('click', () => {
         delete sessionStorage.username
 
         app.remove(home)
@@ -23,17 +23,16 @@ function Home() {
 
     const addStickerButton = this.container.querySelector('.Home__addSticker')
 
-    //add.addEventListener('click', function() {
-    addStickerButton.addEventListener('click', () => {      // en caso de click crea un nuevo sticker
-            const sticker = new Sticker
+    addStickerButton.addEventListener('click', () => {
+        const list = this.container.querySelector('.Home__list')
 
-            sticker.onClose(() => { 
-                this.remove(sticker)
-            })
+        const sticker = new Sticker
 
-            const list = this.container.querySelector('.Home__list')
+        sticker.onClose(() => {
+            this.removeChild(sticker.container)
+        })
 
-            list.append(sticker.container)
+        list.append(sticker.container)
     })
 
     if (sessionStorage.username) {
@@ -54,20 +53,23 @@ function Home() {
                 return
             }
 
-            const list =this.container.querySelector('.Home__list')
+            const list = this.container.querySelector('.Home__list')
 
             const items = notes.map(note => {
                 const item = document.createElement('li')
 
-                const sticker = new Sticker 
-                sticker.container.querySelector('textarea').innerText = note.text
+                const sticker = new Sticker
+                sticker.setText(note.text)
+                sticker.setId(note.id)
+
+                sticker.onClose(() => list.removeChild(item))
 
                 item.appendChild(sticker.container)
 
                 return item
             })
 
-            list.append(...items) //RTFM spread operator
+            list.append(...items)
         })
     }
 }

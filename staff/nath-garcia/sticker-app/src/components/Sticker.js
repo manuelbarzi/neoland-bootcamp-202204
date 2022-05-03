@@ -7,36 +7,68 @@ function Sticker() {
         </form>
     </div>`)
 
-}
+    this.id = null
 
-chainPrototypes(Component, Sticker)
-
-
-Sticker.prototype.onClose = function(callback) {
-    const close = this.container.querySelector('button')
-
-    close.addEventListener('click', function() {
-        callback()
-    })
-}
-
-
-Sticker.prototype.onSubmit = function(callback) {
     const form = this.container.querySelector('form')
 
     form.addEventListener('submit', event => {
         event.preventDefault()
-        // AQUI COGIDO PARA GUARDAR EL STICKER
-        const text = form.text.value  // guardo el texto
 
-        createNote(sessionStorage.username, text, error => { // y creo una nota enviandole el usuario y el texto de la nota
-            if (error) {
-                alert(error.message)
-                return
-            }
+        const text = form.text.value
 
-            alert('Sticker saved!')
-            callback()
-        })
+
+        if (!this.id)
+            createNote(sessionStorage.username, text, (error, noteId) => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                this.id = noteId
+                alert('Sticker saved!')
+            })
+        else
+            updateNote(sessionStorage.username, this.id, text, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                alert('Sticker updated!')
+            })
     })
+
+    const close = this.container.querySelector('button')
+
+    close.addEventListener('click', () => { //debugger
+        if (this.id) {
+            deleteNote(sessionStorage.username, this.id, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+            })
+        }
+    })
+}
+
+chainPrototypes(Component, Sticker)
+
+Sticker.prototype.onClose = function (callback) {
+    const close = this.container.querySelector('button')
+
+    close.addEventListener('click', function () {
+        callback()
+    })
+}
+
+Sticker.prototype.setText = function(text) {
+    this.container.querySelector('textarea').innerText = text
+}
+
+Sticker.prototype.setId = function(id) {
+    this.id = id
 }
