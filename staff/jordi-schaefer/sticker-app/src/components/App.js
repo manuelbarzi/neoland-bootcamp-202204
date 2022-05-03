@@ -1,5 +1,5 @@
 function App() {
-    Component.call(this, `<main class="App"></main>`)
+    Component.call(this, `<div class="App"></div>`)
 }
 
 chainPrototypes(Component, App)

@@ -1,6 +1,6 @@
 function Sticker() {
     Component.call(this, `<div class="Sticker">
-        <button>x</button>
+        <button class="Transparent">❌</button>
         <form class="Sticker__form">
             <textarea name="text"></textarea>
             <button type="submit" class="save-button">Save</button>

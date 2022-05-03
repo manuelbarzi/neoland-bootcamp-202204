@@ -13,14 +13,22 @@ function StickerList() {
             sticker.setText(result.text)  // le añado el texto a la caasilla
             sticker.setId(result.id)    // le añado el id de la nota al objeto sticker
 
+            const item = new StickerItem(sticker)
+
             sticker.onClose(() => {   // le doy funcion en caso de cierre
                 this.remove(sticker)  // que me lo quite
             })
 
-            this.add(sticker)   // se lo pongo al list
+            this.add(item)   // se lo pongo al list
         })
     })
 } 
 
 
 chainPrototypes(Component, StickerList)
+
+StickerList.prototype.addSticker = function(sticker) {
+    const item = new StickerItem(sticker)
+
+    this.add(item)
+}
