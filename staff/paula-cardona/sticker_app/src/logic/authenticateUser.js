@@ -5,7 +5,7 @@ los casos de uso son los posibles retornos que nos da nuestra funcion
 */
 
 function authenticateUser(username, password, callback) {
-    const matches = users.some(function(user){
+    const matches = db.users.some(function(user){
         return user.username===username&&user.password===password
     })
 

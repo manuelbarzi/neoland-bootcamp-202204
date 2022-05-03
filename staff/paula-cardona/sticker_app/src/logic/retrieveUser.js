@@ -1,5 +1,5 @@
 function retrieveUser(username, callback) {  // recuperar
-    const user = users.find(user => user.username === username)
+    const user = db.users.find(user => user.username === username)
     // find devuelve el valor del primero que cumple la funcion
 
     if (!user) {
@@ -9,6 +9,7 @@ function retrieveUser(username, callback) {  // recuperar
 
     const copy = User.copyFrom(user)  //la función constructora tiene un propiedad que es una función, es decir User como constructor tiene que copiar una función que es user* nos vamos a user.js a escribirla
 
+    delete copy.password
    
     callback(null, copy)
 }

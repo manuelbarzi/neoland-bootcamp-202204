@@ -1,6 +1,7 @@
 function Login() {
-    Component.call(this, `<div class="Login">
-    <form class="Login__form">
+    Component.call(this, `<div>
+    <h1 class= h1> STICKER CREATOR </h1>
+    <form class="Container">
         <input type="text" name="username" placeholder="username">
         <input type="password" name="password" placeholder="password">
         <button>Login</button>

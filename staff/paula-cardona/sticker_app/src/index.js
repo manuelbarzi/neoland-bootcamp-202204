@@ -3,15 +3,17 @@
 const root = document.querySelector('#root')
 
 const app = new App
-const helloWorld = new HelloWorld
 const register = new Register
 const login = new Login
-const home = new Home
+let home 
 
 if (!sessionStorage.username)
-    app.add(helloWorld, login)        //camino natural, primero ir al login
-else
-    app.add(helloWorld, home)
+    app.add(login)        //camino natural, primero ir al login
+else{
+    home= new Home
+
+    app.add(home)
+}
 
 root.appendChild(app.container)
 
@@ -44,18 +46,14 @@ login.onSubmit(function (username, password) {
         
         sessionStorage.username = username
 
-        retrieveUser(username, function(error, user) { //retrive coger
-            if (error) {
-                alert(error.message)
 
-                return
-            }
+        home = new Home
 
-            home.setName(user.name) //set es colocar.coloca el username a home
-    
-            login.removeFrom(app)
-            home.addTo(app)
-        })
+        
+
+        login.removeFrom(app)
+        home.addTo(app)
+        
     })
 
 })

@@ -1,4 +1,9 @@
-function splice(array, index, deleteCount, ...newElements) {
+function splice(array, index, deleteCount = array.length-index, ...newElements) {  //deleteCount= array.length-indice  seria cuando el array viejo queda sin nada por los eliminados
+    if(index<0){     //los indices negativos con las herramientas que tenemos podemos apsarlos a positivos sumandoles el array.length, es decir, -2 + array length es 2.
+        //index? index + array length
+        indice += array.length  //de esta forma se convierte en positivo
+    }
+    
     const deletedElements = []
 
     if (deleteCount === 1) {

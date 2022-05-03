@@ -18,7 +18,7 @@ describe('splice', () => {
         const months = ['Jan', 'Feb', 'March', 'April', 'June']
 
         const deletedElements = splice(months, 4, 1, 'May')
-
+        
         const expectedMonths = ['Jan', 'Feb', 'March', 'April', 'May']
 
         const expectedDeletedElements = ['June']

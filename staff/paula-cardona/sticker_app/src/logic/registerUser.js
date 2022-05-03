@@ -1,5 +1,5 @@
 function registerUser(name, username, password, callback){
-    const exists=users.some(user=>user.username===username)
+    const exists=db.users.some(user=>user.username===username)
 
     if(exists){
         callback(new Error('username already exists'))//fallo esta en que este
@@ -13,7 +13,7 @@ function registerUser(name, username, password, callback){
         password, //password.password
     }
 
-    users.push(user)
+    db.users.push(user)
 
     callback(null)
 }
