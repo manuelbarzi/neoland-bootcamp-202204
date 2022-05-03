@@ -1,49 +1,74 @@
-  function Sticker(){
+function Sticker() {
     Component.call(this, `<div class="Sticker">
-        <button>X</button>
+        <button>x</button>
         <form class="Sticker__form">
             <textarea name="text"></textarea>
             <button>Save</button>
         </form>
-        </div>`)
-        
-        // Thu 28 Apr 1309
-        const form = this.container.querySelector('form')
+    </div>`)
 
-        form.addEventListener('submit', event => {
-            //para que no se dispare el formulario solo
-            event.preventDefault()
+    this.id = null
 
-            //ahora recogerá del formulario el text
-            const text = form.text.value
+    const form = this.container.querySelector('form')
 
-            //y ahora necesitamos el usuario. Para ello usamoes el sessionStorage. Nos vamos al login que manejamos en index 13:11
-            // a buscar donde este authenticateUser
-            // Thu 28 april 13:12, ya se ha cargado el usuario en index.js con sessionStorage y podemos hacer la linea siguiente:
+    form.addEventListener('submit', event => {
+        event.preventDefault()
 
-            createNote(sessionStorage.username, text, error => {
-                //  un error message no es muy elegante pero por ahora nos vale
+        const text = form.text.value
+
+        if (!this.id)
+            createNote(sessionStorage.username, text, (error, noteId) => {
                 if (error) {
                     alert(error.message)
 
                     return
-
                 }
-                
-                alert('Sticker saved')
+
+                this.id = noteId
+
+                alert('Sticker saved!')
             })
+        else
+            updateNote(sessionStorage.username, this.id, text, error => {
+                if (error) {
+                    alert(error.message)
 
-        })
-    } 
+                    return
+                }
 
-    chainPrototypes(Component, Sticker)
+                alert('Sticker updated!')
+            })
+    })
 
-    //hacemos el closer del onClose  
-    Sticker.prototype.onClose = function(callback){
-        const close = this.container.querySelector('button')
+    const close = this.container.querySelector('button')
 
-        close.addEventListener('click', function(){
-            callback() 
-               // el callback que me dicen que tengo que llamar cuando hago close
-        })
-    }
+    close.addEventListener('click', () => {
+        if (this.id) {
+            deleteNote(sessionStorage.username, this.id, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+            })
+        }
+    })
+}
+
+chainPrototypes(Component, Sticker)
+
+Sticker.prototype.onClose = function(callback) {
+    const close = this.container.querySelector('button')
+
+    close.addEventListener('click', function() {
+        callback()
+    })
+}
+
+Sticker.prototype.setText = function(text) {
+    this.container.querySelector('textarea').innerText = text
+}
+
+Sticker.prototype.setId = function(id) {
+    this.id = id
+}

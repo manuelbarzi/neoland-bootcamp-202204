@@ -11,8 +11,8 @@ function createNote(username, text, callback) {
     const note = new Note(username, text)
 
     db.notes.push(note)
-    
-    callback(null, note.id)
+
+    callback(null)
 }
 
 // he llegado mas o menos hasta las 13:06 de la sesión del jueves 29

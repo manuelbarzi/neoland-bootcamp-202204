@@ -64,34 +64,21 @@ login.onSubmit(function (username, password) {
 				home.addTo(app)
 			})
 			*/
-
-			// Mon 2 May 1129
-			// elimina estas lineas (las de abajo) por ser reduntantes. Estaban también el Home
-			/*
 			retrieveUser(username, function (error, user) {
 				if (error) {
 					alert(error.message)
 	 
 					return
 				}
-			*/
-				home = new Home //se crea la home (de este usuario)
 	
-				// Mon 2 May 1129
-				// elimina estas lineas (las de abajo) por ser reduntantes
-				/*
+				home = new Home
+	
 				home.setName(user.name)
-				*/
-				
+	
 				login.removeFrom(app)
 				home.addTo(app)
-
-
-			// Mon 2 May 1129
-			// elimina estas lineas (las de abajo) por ser reduntantes. Estaban también el Home	
-			/*
 			})
-			*/
+
  
 	})
 

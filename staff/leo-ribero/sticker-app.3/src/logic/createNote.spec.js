@@ -7,7 +7,7 @@ describe('createNote', () => {
 
         
 
-        createNote('john', 'Goodbye cruel world!', function(error, noteId) {
+        createNote('john', 'Goodbye cruel world!', function(error) {
             expect(error).toBeNull()
 
             const note = db.notes[0]

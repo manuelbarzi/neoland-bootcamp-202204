@@ -23,25 +23,17 @@ function Home() {
 
 		// addSticker.addEventListener('click', function(){
 		addStickerButton.addEventListener('click', () => {
-
-		//Mon 2 May v
-		const list = this.container.querySelector('.Home__list')
-
-
 			const sticker = new Sticker
 			// hemos instanciado un objeto, sticker es un componente
 			
 			sticker.onClose(() => {
-
-				//Mon 2 May v
-				//this.remove(sticker)
-				list.removeChild(sticker.container)
+				this.remove(sticker)
 			})
 			// cuando te cierras, eliminamos el sticker de la home (this) con
 			// el método remove. Luego tenemos que hacer el closer
 		
-			//Mon 2 May v
-			//const list = this.container.querySelector('.Home__list')
+
+			const list = this.container.querySelector('.Home__list')
 
 			list.append(sticker.container)
 
@@ -79,16 +71,8 @@ function Home() {
 					const item = document.createElement('li')
 
 					const sticker = new Sticker
-			
-			// Mon 2 May v
-			// sticker.container.querySelector('textarea').innerText = note.text
-					
-				sticker.setText(note.text)
-
-				sticker.setId(note.id)
-
-				sticker.onClose(() => list.removeChild(item))
-				//Mon 2 May ^
+				
+			sticker.container.querySelector('textarea').innerText = note.text
 
 				item.appendChild(sticker.container)
 
