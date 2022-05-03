@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>App - demo</title>
+</head>
+<body>
+
+    <!-- LOGIN -->
+    
+    <section class="container-login page-login off">
+
+        <div class="container-login__error alert"></div>
+
+        <form class="container-login__form form-login">
+            <fieldset> Introduce tus datos
+                <i class="fa-solid fa-lock"></i>
+                <input class="username" name="username" type="text" placeholder="Username" required>
+                <input class="password" name="password" type="password" placeholder="Password" required>
+            </fieldset>
+
+            <div class="container-login__btns">
+                <button type="submit" class="button" type="button">Login</button>
+                <button class="container-login__btn login-btn-register" type="button">Register</button>
+            </div>
+        </form>
+    </section>
+
+<!-- REGISTER -->
+
+    <section class="container-register page-register off">
+
+        <div class="container-register__error alert"></div>
+
+        <form class="container-register__form">
+            <fieldset> Introduce tus datos 
+                <i class="fa-solid fa-lock"></i>
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="password" name="confirmPassword" placeholder="Confirm Password" required>
+            </fieldset>
+            <div class="container-login__btns">
+                <button class="container-register__btn register-btn-login" type="button">Login</button>
+                <button type="submit">Register</button>
+            </div>
+        </form>
+    </section>
+
+    <!-- LANDING -->
+
+    <section class="landing off">
+        <h1>bienvenidos</h1>
+        <div class="landing-img">
+            <img src="./img/pexels-cottonbro-3585095.jpg" alt="">
+        </div>
+
+        <div class="landing-btns">
+            <button class="landing-btn__login" type="button">Login</button>
+            <button class="landing-btn__register" type="submit">Register</button>
+        </div>
+    </section>
+
+    <!-- HOME PAGE -->
+
+    <main class="home off">
+        <h1>hola home</h1>
+
+        <div class="gallery">
+            <div class="gallery__item">1</div>
+            <div class="gallery__item">2</div>
+            <div class="gallery__item">3</div>
+            <div class="gallery__item">4</div>
+            <div class="gallery__item">5</div>
+            <div class="gallery__item">6</div>
+            <div class="gallery__item">7</div>
+            <div class="gallery__item">8</div>
+            <div class="gallery__item">9</div>
+        </div>
+    </main>
+
+
+    <script src="./main.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+html, body {
+    margin: 0;
+    height: 100%;
+}
+body {
+    box-sizing: border-box;
+}
+i {
+    font-size: 60px;
+    color: #2b95d6;
+    margin-bottom: 20px;
+}
+input {
+    background: #f2f2f2;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 15px;
+    width: 100%;
+    font-family: 'Comfortaa', cursive;
+}
+input:focus, input:hover {
+    background: #dbdbdb;
+    border: 0;
+}
+button {
+    font-family: 'Comfortaa', cursive;
+    font-size: large;
+    cursor: pointer;
+    height: 100%;
+    width: 100%;
+    margin: 5px;
+    color: #ffffff;
+    border-radius: 5px;
+    background: #3eaaed;
+}
+button:hover{
+    background: #2b95d6;
+}
+img{
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 10px 12px 18px -2px rgba(0,0,0,0.51);
+}
+
+button:nth-child(2n) {
+    color: rgb(1, 1, 1);
+    background-color: #E7E7FF;
+}
+button:nth-child(2n):hover {
+    background-color: #d5d5e9;
+}
+
+button:nth-child(2n):hover {
+    background-color: #d5d5e9;
+}
+fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px; 
+    line-height: 48px; 
+    font-weight: 600;
+    width: 300px;
+}
+.container-login, .container-register, .landing {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: #ffffff;
+    width: 300px; 
+}
+.container-login__error, .container-register__error{
+    text-align: center;
+    color: #cf2727; 
+    font-family: 'Comfortaa', cursive;
+    font-size: 20px;
+    font-weight: 600; 
+    line-height: 48px; 
+    margin: 0;
+}
+.container-login__form, .container-register__form {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-login__btns, .container-login__btns, .landing-btns{
+    display: flex;
+    width: 300px;
+    height: 50px;
+}
+.off{
+    display: none;
+} 
