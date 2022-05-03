@@ -11,7 +11,7 @@ function Login() {
 
 chainPrototypes(Component, Login)
 
-Login.prototype.onSubmit = function(callbalck) {
+Login.prototype.onUserLoggedIn = function(callbalck) {
     const form = this.container.querySelector('form')
     form.addEventListener('submit', function(e) {
         e.preventDefault()
@@ -19,7 +19,16 @@ Login.prototype.onSubmit = function(callbalck) {
         const username = form.username.value
         const password = form.password.value
         
-        callbalck(username, password)
+        // callbalck(username, password)
+
+        authenticateUser(username, password, function(error) {
+            if (error) {
+                alert(error.message)
+                return
+            }
+            sessionStorage.username = username
+            callbalck()
+        })
     })
 }
 

@@ -12,7 +12,7 @@ function Register() {
 
 chainPrototypes(Component, Register)
 
-Register.prototype.onSubmit = function(callbalck) {
+Register.prototype.onUserRegister = function(callbalck) {
     const form = this.container.querySelector('form')
     form.addEventListener('submit', (e) => {
         e.preventDefault()
@@ -21,7 +21,15 @@ Register.prototype.onSubmit = function(callbalck) {
         const username = form.username.value
         const password = form.password.value
         
-        callbalck(name, username, password)
+        // callbalck(name, username, password)
+
+        registerUser(name, username, password, function(error) {
+            if(error) {
+                alert(error.message)
+                return
+            }
+            callbalck()
+        }) 
 
         
     })

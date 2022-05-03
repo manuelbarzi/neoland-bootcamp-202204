@@ -17,36 +17,15 @@ if(!sessionStorage.username) {
 }
 root.appendChild(app.container)
 
-register.onSubmit( (name, username, password) => {
-    registerUser(name, username, password, function(error) {
-        if(error) {
-            alert(error.message)
-            return
-        }
-        register.removeFrom(app)
-        login.addTo(app)
-    }) 
+register.onUserRegister( () => {
+    register.removeFrom(app)
+    login.addTo(app)
 })
 
-login.onSubmit(function(username, password) {
-    authenticateUser(username, password, function(error) {
-        if (error) {
-            alert(error.message)
-            return
-        }
-        sessionStorage.username = username
-        retrieveUser(username, function(error, user) {
-            if (error) {
-                alert(error.message)
-                return
-            }
-            const home = new Home
-
-            home.setName(user.name)
-            login.removeFrom(app)
-            home.addTo(app)
-        })
-    })
+login.onUserLoggedIn(function() {
+    home = new Home
+    login.removeFrom(app)
+    home.addTo(app)
 })
 
 
