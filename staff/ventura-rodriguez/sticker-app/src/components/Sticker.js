@@ -7,6 +7,8 @@ function Sticker() {
         </form>
     </div>`)
 
+    this.id = null
+
     const form = this.container.querySelector('form')
 
     form.addEventListener('submit', event => {
@@ -14,15 +16,42 @@ function Sticker() {
 
         const text = form.text.value
 
-        createNote(sessionStorage.username, text, error => {
-            if (error) {
-                alert(error.message)
+        if (!this.id)
+            createNote(sessionStorage.username, text, (error, noteId) => {
+                if (error) {
+                    alert(error.message)
 
-                return
-            }
+                    return
+                }
 
-            alert('Sticker saved!')
-        })
+                this.id = noteId
+
+                alert('Sticker saved!')
+            })
+        else
+            updateNote(sessionStorage.username, this.id, text, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                alert('Sticker updated!')
+            })
+    })
+
+    const close = this.container.querySelector('button')
+
+    close.addEventListener('click', () => {
+        if (this.id) {
+            deleteNote(sessionStorage.username, this.id, error => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+            })
+        }
     })
 }
 
@@ -34,4 +63,12 @@ Sticker.prototype.onClose = function(callback) {
     close.addEventListener('click', function() {
         callback()
     })
+}
+
+Sticker.prototype.setText = function(text) {
+    this.container.querySelector('textarea').innerText = text
+}
+
+Sticker.prototype.setId = function(id) {
+    this.id = id
 }
