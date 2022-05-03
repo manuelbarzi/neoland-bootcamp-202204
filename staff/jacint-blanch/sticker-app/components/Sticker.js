@@ -14,7 +14,8 @@ function Sticker() {
 
         const text = form.text.value
 
-        createNote(sessionStorage.username, text, error => {
+            if (!this.id)
+                createNote(sessionStorage.username, text, error => {
             if (error) {
                 alert(error.message)
 
@@ -23,6 +24,16 @@ function Sticker() {
 
             alert('Sticker saved!')
         })
+            else
+                updateNote(sessionStorage.username, this.id, text, error => {
+                    if(error){
+                        alert(error.message)
+
+                        return
+                    }
+
+                    alert('Sticker updated!')
+                })
     })
 }
 
@@ -34,4 +45,12 @@ Sticker.prototype.onClose = function(callback) {
     close.addEventListener('click', function() {
         callback()
     })
+}
+
+Sticker.prototype.setText = function(text) {
+    this.container.querySelector('textarea').innerText = text
+}
+
+Sticker.prototype.setId = function(id) {
+    this.id = id
 }
