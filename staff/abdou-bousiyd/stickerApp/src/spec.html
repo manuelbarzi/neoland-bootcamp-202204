@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <title>Jasmine Spec Runner v4.1.0</title>
 
-  <link rel="shortcut icon" type="image/png" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine_favicon.png">
+  <link rel="shortcut icon" type="image/png"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine_favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine.css">
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine.js"></script>
@@ -15,18 +17,34 @@
 </head>
 
 <body>
-    <script src="./data/models/Users.js"></script>
-    <script src="./data/models/Newspaper.js"></script>
-    <script src="./data/users.js"></script>
-    <script src="./data/newspapers.js"></script>
+  <script src="utils.js"></script>
 
-    <script src="./logic/RegisterUser.js"></script>
-    <script src="./logic/registerUser.spec.js"></script>
+  <script src="data/db.js"></script>
+  <script src="data/models/User.js"></script>
+  <script src="data/models/Note.js"></script>
+  <script src="data/users.js"></script>
+  <script src="data/notes.js"></script>
 
-    <script src="./logic/authenticateUser.js"></script>
-    <script src="./logic/authenticateUser.spec.js"></script>
+  <!-- <script src="logic/registerUser.js"></script>
+  <script src="logic/registerUser.spec.js"></script> -->
 
-    <script src="./logic/retrieveUser.js"></script>
-    <script src="./logic/registerUser.spec.js"></script>
+  <!-- <script src="logic/authenticateUser.js"></script>
+  <script src="logic/authenticateUser.spec.js"></script> -->
+ 
+  <script src="logic/retrieveUser.js"></script>
+  <script src="logic/retrieveUser.spec.js"></script>
+
+  <script src="logic/createNote.js"></script>
+  <script src="logic/createNote.spec.js"></script>
+
+  <script src="logic/retrieveNotes.js"></script>
+  <script src="logic/retrieveNotes.spec.js"></script>
+
+  <script src="logic/updateNote.js"></script>
+  <script src="logic/updateNote.spec.js"></script>
+
+  <script src="logic/deleteNote.js"></script>
+  <script src="logic/deleteNote.spec.js"></script>
 </body>
+
 </html>

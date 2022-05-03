@@ -1,5 +1,7 @@
+
 function Note(username, text) {
+    this.id = createId()
     this.username = username
     this.text = text
-    this.data = new Date
+    this.date = new Date
 }

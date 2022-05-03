@@ -25,13 +25,13 @@ function Home() {
     const addStickerButton = this.container.querySelector('.Home__addSticker')
 
     addStickerButton.addEventListener('click', () => {
+        const list = this.container.querySelector('.Home__list')
         const sticker = new Sticker
 
         sticker.onClose(() => {
-            this.remove(sticker)
+            list.removeChild(sticker.container)
         })
 
-        const list = this.container.querySelector('.Home__list')
 
         list.append(sticker.container)
     })
@@ -61,8 +61,11 @@ function Home() {
                 const item = document.createElement('li')
                 
                 const sticker = new Sticker
+
+                sticker.setText(note.text)
+                sticker.setId(note.id)
     
-                sticker.container.querySelector('textarea').innerText = note.text
+                sticker.onClose(() => list.removeChild(item))
                 item.appendChild(sticker.container)
                 return item
             })
