@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var list = `TODO buy milk (30m)
+    TODO visit grandma (1d)
+    DONE go to gym (3h)
+    DOING learn js (6h)
+    DONE meditate (1h)
+    TODO meet friends (3h)`;
+
+    function extractDoneHours(list) {
+        var isDone = false
+        var opened = false
+        var total = 0
+        var time = ''
+
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] === 'D' && list[i+1] === 'O' && list[i+2] === 'N' && list[i+3] === 'E') {
+                isDone = true
+            }
+
+            if (isDone) {
+                if (list[i] === '(') {
+                    opened = true
+                }
+
+                if (opened) {
+                    if (Number.isInteger(parseInt(list[i]))) {
+                        time += list[i]
+                    } else {
+                        if (list[i] === 'm') {
+                            total += parseInt(time) / 60
+                        }
+                        if (list[i] === 'd') {
+                            total += (parseInt(time) * 24)
+                        }
+                        if (list[i] === 'h') {
+                            total += parseInt(time)
+                        }
+                    }
+                }
+
+                if (list[i] === ')') {
+                    opened = false
+                    time = ''
+                    isDone = false
+                }
+            }
+
+        }
+
+        console.log(99)
+      }
+
+      extractDoneHours(list);
+      // 4
+
+    function extractTodoHours(list) {
+        var isTodo = false
+        var opened = false
+        var total = 0
+        var time = ''
+
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] === 'T' && list[i+1] === 'O' && list[i+2] === 'D' && list[i+3] === 'O') {
+                isTodo = true
+            }
+
+            if (isTodo) {
+                if (list[i] === '(') {
+                    opened = true
+                }
+
+                if (opened) {
+                    if (Number.isInteger(parseInt(list[i]))) {
+                        time += list[i]
+                    } else {
+                        if (list[i] === 'm') {
+                            total += parseInt(time) / 60
+                        }
+                        if (list[i] === 'd') {
+                            total += (parseInt(time) * 24)
+                        }
+                        if (list[i] === 'h') {
+                            total += parseInt(time)
+                        }
+                    }
+                }
+
+                if (list[i] === ')') {
+                    opened = false
+                    time = ''
+                    isTodo = false
+                }
+            }
+
+        }
+
+        console.log(total)
+      }
+
+      extractTodoHours(list);
+      // 26.5
+
+    function extractTotalHours(list) {
+
+        var opened = false
+        var time = ''
+        var total = 0
+
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] === '(') {
+                opened = true
+            }
+
+            if (opened) {
+                if (Number.isInteger(parseInt(list[i]))) {
+                    time += list[i]
+                } else {
+                    if (list[i] === 'm') {
+                        total += parseInt(time) / 60
+                    }
+                    if (list[i] === 'd') {
+                        total += (parseInt(time) * 24)
+                    }
+                    if (list[i] === 'h') {
+                        total += parseInt(time)
+                    }
+                }
+            }
+
+            if (list[i] === ')') {
+                opened = false
+                time = ''
+            }
+        }
+
+        console.log(total)
+      }
+
+      extractTotalHours(list);
+      // 37.5
+
+      function printList(list) {
+        console.log("REPORT:");
+        console.log(list);
+      }
+
+      printList(list);
+
+      function extractStats(list) {
+        // TODO
+        var count = { todo: 0, doing: 0, done: 0 }
+
+        for (var i = 0; i < list.length; i++) {
+            if (list[i] === 'T' && list[i+1] === 'O' && list[i+2] === 'D' && list[i+3] === 'O') {
+                count.todo++
+            }
+        }
+
+        console.log(count)
+
+      }
+
+      extractStats(list);
+      // { todo: 3, doing: 1, done: 2 }
+
+
+
+    //   function extractTodoHours(list) {
+    //     // TODO
+    //   }
+
+    //   extractTodoHours();
+    //   // 26.5
+
+    //   function extractDoneHours(list) {
+    //     // TODO
+    //   }
+
+    //   extractDoneHours();
+    //   // 4
+    </script>
+  </body>
+</html>
