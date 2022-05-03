@@ -3,8 +3,6 @@ function chainPrototypes(parent, child) {
 	child.prototype.constructor = child
 }
 
-function createID(){
+function createId() {
 	return (Math.random() + Date.now()).toFixed(10)
 }
-
-//https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Number/toFixed
