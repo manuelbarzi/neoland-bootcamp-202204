@@ -3,7 +3,6 @@ function Home() {
         <header class="Home__header">
             <h2>Hello, Home!</h2>
             <button class="Home__logout">Logout</button>
-            <button class="Home__edit">Edit</button>
         </header>
 
         <ul class="Home__list Container"></ul>
@@ -26,15 +25,15 @@ function Home() {
 
     //add.addEventListener('click', function() {
     addStickerButton.addEventListener('click', () => {
+        const list = this.container.querySelector('.Home__list')
+
         const sticker = new Sticker
 
         sticker.onClose(() => {
-            this.remove(sticker)
+            list.removeChild(sticker.container)
         })
-
-        const list = this.container.querySelector('.Home__list')
-
-        list.append(sticker.container)
+        
+        list.appendChild(sticker.container)
     })
 
     if (sessionStorage.username) {
@@ -61,7 +60,10 @@ function Home() {
                 const item = document.createElement('li')
 
                 const sticker = new Sticker
-                sticker.container.querySelector('textarea').innerText = note.text
+                sticker.setText(note.text)
+                sticker.setId(note.id)
+
+                sticker.onClose(() => list.removeChild(item))
                 
                 item.appendChild(sticker.container)
 

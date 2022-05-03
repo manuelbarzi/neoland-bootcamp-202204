@@ -65,7 +65,7 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 
 .Sticker {
@@ -75,6 +75,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+box-shadow: 0px 10px 13px -7px #000000;
 }
 
 .Sticker__form {

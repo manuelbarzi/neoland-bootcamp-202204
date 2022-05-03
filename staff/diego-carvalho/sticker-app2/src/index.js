@@ -44,20 +44,11 @@ login.onSubmit(function (username, password) {
 
         sessionStorage.username = username
 
-        retrieveUser(username, function (error, user) {
-            if (error) {
-                alert(error.message)
+        home = new Home
 
-                return
-            }
+        login.removeFrom(app)
+        home.addTo(app)
 
-            home = new Home
-
-            home.setName(user.name)
-
-            login.removeFrom(app)
-            home.addTo(app)
-        })
     })
 
 })

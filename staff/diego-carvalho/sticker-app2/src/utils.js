@@ -7,3 +7,7 @@ function chainPrototypes(parent, child) {//function
     child.prototype = Object.create(parent.prototype)//hijo.prototipo es igual padre prototipo
     child.prototype.constructor = child//ahora estoy hijando que el hijo ahora será el constructor con las caracteristicas del padre.
 }
+
+function createId() {//función criadora de ID(códigos  unicos) 
+    return(Math.random() + Date.now()).toFixed(10)
+}
