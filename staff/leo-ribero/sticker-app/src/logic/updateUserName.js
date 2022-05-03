@@ -1,4 +1,4 @@
-function retrieveUser(username, callback) {
+function updateUserName(username, name, newName, callback) {
     const user = db.users.find(user => user.username === username)
 
     if (!user) {
@@ -7,9 +7,6 @@ function retrieveUser(username, callback) {
         return
     }
 
-    const copy = User.copyFrom(user)
+    if()
 
-    delete copy.password
-
-    callback(null, copy)
 }

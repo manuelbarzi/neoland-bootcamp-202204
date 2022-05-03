@@ -1,15 +1,15 @@
 function createNote(username, text, callback) {
-	const userExists = db.users.some(user => user.username === username)
+    const userExists = db.users.some(user => user.username === username)
 
-	if (!userExists) {
-		callback(new Error(`username "${username}" does not exist`))
+    if (!userExists) {
+        callback(new Error(`username "${username}" does not exist`))
 
-		return
-	}
+        return
+    }
 
-	const note = new Note(username, text)
+    const note = new Note(username, text)
 
-	db.notes.push(note)
+    db.notes.push(note)
 
-	callback(null, note.id)
+    callback(null, note.id)
 }
