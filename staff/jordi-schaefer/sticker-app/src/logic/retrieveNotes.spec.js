@@ -1,17 +1,17 @@
 describe('retrieveUser', () => {
 
     it('should succeed on existing user and note', () => {
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
         
-        users.push(new User('wendy name', 'wendy', '123123'))
+        db.users.push(new User('wendy name', 'wendy', '123123'))
 
-        notes.push(new Note('wendy','Happy Flower!'))
-        notes.push(new Note('wendy','Happy Flower! (1)'))
-        notes.push(new Note('wendy','Happy Flower! (2)'))
-        notes.push(new Note('peter','test not to read'))
-        notes.push(new Note('peter','test not to read'))
-        notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('wendy','Happy Flower!'))
+        db.notes.push(new Note('wendy','Happy Flower! (1)'))
+        db.notes.push(new Note('wendy','Happy Flower! (2)'))
+        db.notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('peter','test not to read'))
 
 
         retrieveNotes('wendy', (error, note) => {
@@ -30,23 +30,23 @@ describe('retrieveUser', () => {
             expect(note3.text).toBe('Happy Flower! (2)')
         })
         
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
     })
 
     
     it('should succeed with user but no notes', () => {
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
          
-        users.push(new User('wendy name', 'wendy', '123123'))
+        db.users.push(new User('wendy name', 'wendy', '123123'))
 
-        notes.push(new Note('pirulo','Happy Flower!'))
-        notes.push(new Note('pirulo','Happy Flower! (1)'))
-        notes.push(new Note('pirulo','Happy Flower! (2)'))
-        notes.push(new Note('peter','test not to read'))
-        notes.push(new Note('peter','test not to read'))
-        notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('pirulo','Happy Flower!'))
+        db.notes.push(new Note('pirulo','Happy Flower! (1)'))
+        db.notes.push(new Note('pirulo','Happy Flower! (2)'))
+        db.notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('peter','test not to read'))
 
         retrieveNotes('wendy', (error, note) => {
             
@@ -56,23 +56,23 @@ describe('retrieveUser', () => {
             
         })
         
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
     })
 
 
     it('should not succeed with no user found', () => {
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
          
-        users.push(new User('wendy name', 'wendy', '123123'))
+        db.users.push(new User('wendy name', 'wendy', '123123'))
 
-        notes.push(new Note('wendy','Happy Flower!'))
-        notes.push(new Note('wendy','Happy Flower! (1)'))
-        notes.push(new Note('wendy','Happy Flower! (2)'))
-        notes.push(new Note('peter','test not to read'))
-        notes.push(new Note('peter','test not to read'))
-        notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('wendy','Happy Flower!'))
+        db.notes.push(new Note('wendy','Happy Flower! (1)'))
+        db.notes.push(new Note('wendy','Happy Flower! (2)'))
+        db.notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('peter','test not to read'))
+        db.notes.push(new Note('peter','test not to read'))
 
         retrieveNotes('pirulo', (error, note) => {
             
@@ -82,8 +82,8 @@ describe('retrieveUser', () => {
             
         })
         
-        users.length = 0
-        notes.length = 0
+        db.users.length = 0
+        db.notes.length = 0
     })
 
 })

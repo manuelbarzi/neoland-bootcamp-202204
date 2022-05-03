@@ -22,53 +22,17 @@ else {
 root.appendChild(app.container)
 
 
-
-
-register.onSubmit(function(name, username, password) {
-
-    // llamo a la funcion register, registra el usuario o en caso contrario envia error
-    registerUser(name, username, password, function (error) {
-        if (error) {
-            alert(error.message)  // si hay error me salgo
-            return 
-        }
-
-        // si no hay error continuo con cambio de pantallas
-        register.removeFrom(app)
-        login.addTo(app)
-    })
+register.onUserRegister( () => {
+    register.removeFrom(app)
+    login.addTo(app)
 })
 
 
-
-
-login.onSubmit(function(username, password) {
-
-    // autentifico el usuario, y si no cuadra envio error
-    authenticateUser(username, password, function (error) {
-        if (error) {
-            alert(error.message)   // si hay error me salgo
-            return
-        }
-
-        sessionStorage.username = username
-        
-        // si no hay error --------------------------------------------------------------- ??
-        retrieveUser(username, function(error, user) {
-            if (error) {
-                alert(error.message)  // si hay error me salgo
-                return
-            }
-
-            // continuo con la entrada a home
-            home = new Home
-            home.setName(user.name)
-            login.removeFrom(app)
-            home.addTo(app)
-        })
-    })
+login.onUserLoggedIn( () => {
+    home = new Home
+    login.removeFrom(app)
+    home.addTo(app)
 })
-
 
 
 register.onLoginClick(function () {

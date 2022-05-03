@@ -12,7 +12,9 @@ function Register() {
 
 chainPrototypes(Component, Register)
 
-Register.prototype.onSubmit = function(callback) {
+
+
+Register.prototype.onUserRegister = function(callback) {
     const form = this.container.querySelector('form')
 
     form.addEventListener('submit', function(event) {
@@ -22,11 +24,21 @@ Register.prototype.onSubmit = function(callback) {
         const username = form.username.value
         const password = form.password.value
 
-        callback(name, username, password)
+
+        registerUser(name, username, password, function (error) {
+            if (error) {
+                alert(error.message)  // si hay error me salgo
+                return 
+            }
+    
+            // si no hay error continuo con cambio de pantallas
+            callback()
+        })
     })
 }
 
-// TODO implement onLoginClick method (SEE Login.prototype.onRegisterClick for inspiration)
+
+
 
 Register.prototype.onLoginClick = function(callback) {
     const anchor = this.container.querySelector('a')

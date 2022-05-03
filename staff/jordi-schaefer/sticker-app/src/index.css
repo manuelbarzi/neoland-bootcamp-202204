@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 * {
-  font-family: "Courier New", Courier, monospace;
+  font-family: Poppins;
   font-size: 17px;
 }
 
@@ -29,7 +29,8 @@ a {
 
 .App {
   height: 100%;
-  background-color: rgb(189, 189, 134);
+  width: 100%;
+  background-color: rgb(102, 185, 142);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,13 +50,13 @@ h3 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: rgb(189, 189, 134);
+  background-color: rgb(102, 185, 142);
 }
 
 .Home__header {
   position: fixed;
   top: 0;
-  background-color: ghostwhite;
+  background-color: rgb(64, 129, 95);
   width: 100%;
   display: flex;
 }
@@ -67,18 +68,19 @@ h3 {
 .Home__footer {
   position: fixed;
   bottom: 0;
-  background-color: ghostwhite;
+  background-color: rgb(64, 129, 95);
   width: 100%;
+  height: 2.5rem;
 }
 
-.paquete__listas {
+.notelist {
   padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 22rem;
-  margin-bottom: 4rem;
+  margin-top: 0rem;
+  margin-bottom: 1rem;
   gap: 1rem;
 }
 
@@ -104,7 +106,7 @@ h3 {
 }
 
 .Sticker {
-  background-color: yellow;
+  background-color: rgb(236, 236, 84);
   padding: 1rem;
   display: flex;
   flex-direction: column;

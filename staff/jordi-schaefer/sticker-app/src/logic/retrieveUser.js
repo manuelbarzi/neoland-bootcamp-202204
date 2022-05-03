@@ -3,7 +3,6 @@ function retrieveUser(username, callback) {
 
     if (!user) {
         callback(new Error(`user with username ${username} not found`))
-
         return
     }
 
