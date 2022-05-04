@@ -3,10 +3,11 @@ function Home() {
         <header class="Home__header">
             <h2>no user loged => </h2>
             <button class="my">My Notes</button>
+            <button class="Home__profile">Profile</button>
             <button class="edit">Edit my Notes</button>
             <button class="Home__logout">Logout</button>
         </header>
-
+        <main class="Home__body"></main>
         <ul class="Home__list Container"></ul>
 
         <footer class="Home__footer Container">
@@ -21,8 +22,28 @@ function Home() {
     
     //     deleteList.innerHTML = ''
     // })
+    const addStickerButton = this.container.querySelector('.Home__addSticker')
+    const stickerList = new List
+    let profile
 
+    this.addToBody(stickerList)
+
+
+    const profileButton = this.container.querySelector('.my')
+
+    profileButton.addEventListener('click', () => {
+        if (!profile || !this.hasBody(profile)) {
+            this.removeFromBody(stickerList)
+
+            this.container.querySelector('.Home__footer').removeChild(addStickerButton)
     
+            profile = new Profile
+    
+            this.addToBody(profile)
+        }
+    })
+    
+
 
     const logoutButton = this.container.querySelector('.Home__logout')
 
@@ -33,23 +54,52 @@ function Home() {
         app.add(login)
     })
 
-    const addStickerButton = this.container.querySelector('.Home__addSticker')
     
     addStickerButton.addEventListener('click', () => {      // en caso de click crea un nuevo sticker
-        
         const sticker = new Sticker
 
-        sticker.onClose(() => {  // ejecuto la funcion onclose de sticker que esta pendiente del boton close, y hace lo siguiente
-            this.remove(sticker)
+        sticker.onClose(() => {
+            list.removeChild(sticker.container)
         })
 
-        sticker.onSubmit(() => {
-            this.remove(sticker)
-        })
-
-        this.add(sticker)
-
+        List.addSticker(sticker)
     })
+
+    if (sessionStorage.username)
+        retrieveUser(sessionStorage.username, (error, user) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            this.setName(user.name)
+        })
+        // const sticker = new Sticker
+
+        // sticker.onClose(() => {  // ejecuto la funcion onclose de sticker que esta pendiente del boton close, y hace lo siguiente
+        //     this.remove(sticker)
+        // })
+
+        // sticker.onSubmit(() => {
+        //     this.remove(sticker)
+        // })
+
+        // this.add(sticker)
+
+        // list.append(sticker.container)
+        // const list = this.container.querySelector('.Home__list')
+        
+        // const sticker = new Sticker
+
+        // sticker.onClose(() => {
+        //     list.removeChild(sticker.container)
+        // })
+
+        // list.append(sticker.container)
+
+    
+    // ESTO ES PARA ELIMINAR EL FOOTER DE MY NOTES
     
     let list
 
@@ -130,6 +180,9 @@ function Home() {
     // -borra la lista de notas
     // -crea un OBJETO lista con notas no editables
 
+
+    
+    // ---VOLVER A PONER PORSIACASO---
     const my = this.container.querySelector('.my')
     my.addEventListener('click', () => {
 
@@ -167,4 +220,16 @@ Home.prototype.setName = function (name) {
     const title = this.container.querySelector('h2')
 
     title.innerText = `Hello!,  ${name} 📝`
+}
+
+Home.prototype.addToBody = function (component) {
+    this.container.querySelector('.Home__body').appendChild(component.container)
+}
+
+Home.prototype.removeFromBody = function (component) {
+    this.container.querySelector('.Home__body').removeChild(component.container)
+}
+
+Home.prototype.hasBody = function(component) {
+    return this.container.querySelector('.Home__body').hasChild(component.container)
 }

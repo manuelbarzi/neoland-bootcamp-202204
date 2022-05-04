@@ -1,39 +1,35 @@
-describe('RegistreUser', function() {
-    it('should match with the new username', () => {
-        users.length = 0
+describe('registerUser', () => {
+    it('should succeed on new user (not already existing)', () => {
+        db.users.length = 0
 
-        registerUser('Elon Musk', 'Tesla', '1970', function(error){
+        registerUser('Tor Tuga', 'tortuga', 'miguel123', function(error) {
             expect(error).toBeNull()
 
-            expect(users).toHaveSize(1)
+            expect(db.users).toHaveSize(1)
 
-            const user = users[0]
+            const user = db.users[0]
 
             expect(user).toBeDefined()
-            expect(user.name).toBe('Elon Musk')
-            expect(user.username).toBe('Tesla')
-            expect(user.password).toBe('1970')
-            
+            expect(user).toBeInstanceOf(User)
+            expect(user.name).toBe('Tor Tuga')
+            expect(user.username).toBe('tortuga')
+            expect(user.password).toBe('miguel123')
         })
-        users.length = 0
+
+        db.users.length = 0
     })
 
     it('should fail on trying to register an already existing user (same username)', () => {
-        users.length = 0
+        db.users.length = 0
 
-        users.push({
-            name: 'Bill Gates',
-            username: 'bill',
-            password: '666'
-        })
+        db.users.push(new User('Cacá Tua', 'cacatua', 'miguel123'))
 
-        registerUser('Bill Gates', 'bill', '666', function(error) {
+        registerUser('Cacá Tua', 'cacatua', 'miguel123', function(error) {
             expect(error).toBeDefined()
 
             expect(error.message).toBe('username already exists')
         })
 
-        users.length = 0
+        db.users.length = 0
     })
-
 })
