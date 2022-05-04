@@ -25,3 +25,7 @@ Component.prototype.remove = function(...children) {
     for (const child of children)
     this.container.removeChild(child.container)
 }
+
+Component.prototype.has = function(child) {
+    return this.container.hasChild(child.container)
+}

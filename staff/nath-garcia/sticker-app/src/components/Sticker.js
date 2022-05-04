@@ -1,9 +1,10 @@
 function Sticker() {
     Component.call(this, `<div class="Sticker">
-        <button>x</button>
+        <button class="Button">x</button>
         <form class="Sticker__form">
-            <textarea name="text"></textarea>
-            <button type="submit" class="save-button">Save</button>
+            <textarea class="Sticker__text" name="text"></textarea>
+            <p class="Sticker__id"></p>
+            <button class="Button">Save</button>
         </form>
     </div>`)
 
@@ -16,7 +17,6 @@ function Sticker() {
 
         const text = form.text.value
 
-
         if (!this.id)
             createNote(sessionStorage.username, text, (error, noteId) => {
                 if (error) {
@@ -25,7 +25,9 @@ function Sticker() {
                     return
                 }
 
-                this.id = noteId
+                //this.id = noteId
+                this.setId(noteId)
+
                 alert('Sticker saved!')
             })
         else
@@ -71,4 +73,6 @@ Sticker.prototype.setText = function(text) {
 
 Sticker.prototype.setId = function(id) {
     this.id = id
+
+    this.container.querySelector('.Sticker__id').innerText = `ID #${id}`
 }
