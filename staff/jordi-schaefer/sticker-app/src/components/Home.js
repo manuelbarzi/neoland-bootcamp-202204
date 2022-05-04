@@ -1,9 +1,12 @@
-function Home() {
-    Component.call(this, `<div class="Home container">
+class Home extends Component {
+    constructor () {
+        super ( `<div class="Home container">
         <header class="Home__header">
-            <button class="Home__profile">Profile</button>
-            <button class="my">📒</button>
-            <button class="edit">✍</button>
+            <div>
+                <button class="Home__profile">Profile</button>
+                <button class="my">📒</button>
+                <button class="edit">✍</button>
+            </div>
             <button class="Home__logout">Logout</button>
         </header>
 
@@ -13,12 +16,11 @@ function Home() {
             <button class="Home__addSticker Transparent">➕</button>
         </footer>
     </div>`)
-
+    
 
     let profile = new Profile()
     let notelist
     let stickerlist = new StickerList()
-    let sticker 
     const addStickerButton = this.container.querySelector('.Home__addSticker')
 
 
@@ -120,36 +122,36 @@ function Home() {
 
     addStickerButton.addEventListener('click', () => {      // en caso de click crea un nuevo sticker
         
-        sticker = new Sticker
+        const sticker = new Sticker
+        // imporante que sea const, ya que sino se pierde entre los stickers y no sabe cual esta referenciando
 
         sticker.onClose(() => {  // ejecuto la funcion onclose de sticker que esta pendiente del boton close, y hace lo siguiente
-            stickerlist.remove(sticker)
+            stickerlist.removeSticker(sticker)
         })
         
         stickerlist.addSticker(sticker)
     }) 
-}
+    }
 
 
 
-chainPrototypes(Component, Home)
+
+    setName(name) {
+        const title = this.container.querySelector('.Home__profile')
+        title.innerText = `${name} 💻`
+    }
 
 
+    addToBody(component) {
+        this.container.querySelector('.Home__body').appendChild(component.container)
+    }
 
-Home.prototype.setName = function (name) {
-    const title = this.container.querySelector('.Home__profile')
-    title.innerText = `${name} 💻`
-}
+    removeFromBody(component) {
+        this.container.querySelector('.Home__body').removeChild(component.container)
+    }
 
+    hasBody(component) {
+        return this.container.querySelector('.Home__body').hasChild(component.container)
+    }
 
-Home.prototype.addToBody = function (component) {
-    this.container.querySelector('.Home__body').appendChild(component.container)
-}
-
-Home.prototype.removeFromBody = function (component) {
-    this.container.querySelector('.Home__body').removeChild(component.container)
-}
-
-Home.prototype.hasBody = function(component) {
-    return this.container.querySelector('.Home__body').hasChild(component.container)
 }

@@ -1,17 +1,13 @@
-function Profile() {
-    Component.call(this, `<div class="Profile">
-        <div class="Profile__buttons">
-            <button class="Profile__changeName">Change Name</button>
-            <button class="Profile__changePassword">Change Password</button>
-        </div>
-        <div class="Profile__functions">
-        </div>
-    </div>`)
+class Profile extends Component {
+    constructor() {
+        super (`<div class="Profile">
+            <button class="Button Profile__changeName">Change Name</button>
+            <button class="Button Profile__changePassword">Change Password</button>
+        </div>`)
 
     let changeName, changePassword
 
     const changeNameButton = this.container.querySelector('.Profile__changeName')
-    const functions = this.container.querySelector('.Profile__functions')
 
     changeNameButton.addEventListener('click', () => {
         if (!changeName || !this.has(changeName)) {
@@ -37,6 +33,5 @@ function Profile() {
             //functions.appendChild(changePassword.container)
         }
     })
+    }
 }
-
-chainPrototypes(Component, Profile)

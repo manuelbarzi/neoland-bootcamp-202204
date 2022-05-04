@@ -1,44 +1,47 @@
-function Login() {
-    Component.call(this, `<div>
+class Login extends Component {
+    constructor () {
+        super( `<div>
         <form class="Container">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button>Login</button>
+            <input class="form" type="text" name="username" placeholder="username">
+            <input class="form" type="password" name="password" placeholder="password">
+            <button class="Button">Login</button>
             <a href="#">Register</a>
         </form>
     </div>`)
-}
+    }
 
-chainPrototypes(Component, Login)
 
-Login.prototype.onUserLoggedIn = function(callback) {
-    const form = this.container.querySelector('form')
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault()
+    onUserLoggedIn(callback) {
+        const form = this.container.querySelector('form')
 
-        const username = form.username.value
-        const password = form.password.value
+        form.addEventListener('submit', function(event) {
+            event.preventDefault()
 
-        // autentifico el usuario, y si no cuadra envio error
-        authenticateUser(username, password, function (error) {
-            if (error) {
-                alert(error.message)   // si hay error me salgo
-                return
-            }
-    
-            sessionStorage.username = username
+            const username = form.username.value
+            const password = form.password.value
+
+            // autentifico el usuario, y si no cuadra envio error
+            authenticateUser(username, password, function (error) {
+                if (error) {
+                    alert(error.message)   // si hay error me salgo
+                    return
+                }
+        
+                sessionStorage.username = username
+                callback()
+            })
+        })
+    }
+
+    onRegisterClick(callback) {
+        const anchor = this.container.querySelector('a')
+
+        anchor.addEventListener('click', function(event) {
+            event.preventDefault()
+
             callback()
         })
-    })
-}
+    }
 
-Login.prototype.onRegisterClick = function(callback) {
-    const anchor = this.container.querySelector('a')
-
-    anchor.addEventListener('click', function(event) {
-        event.preventDefault()
-
-        callback()
-    })
 }

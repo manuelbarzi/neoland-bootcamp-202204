@@ -1,14 +1,15 @@
-function ChangePassword() {
-    Component.call(this, `<div class="ChangePassword">
+class ChangePassword extends Component {
+    constructor() {
+        super ( `<div class="ChangePassword">
         <form class="Container">
-            <input type="password" name="password" placeholder="current password">
+            <input class="form" type="password" name="password" placeholder=" Current password">
+            <input class="form" type="password" name="newPassword" placeholder=" New password">
+            <input class="form" type="password" name="newPasswordRepeat" placeholder=" Repeat new password">
 
-            <input type="password" name="newPassword" placeholder="new password">
-            <input type="password" name="newPasswordRepeat" placeholder="repeat new password">
-
-            <button>Save</button>
+            <button class="Button">Save</button>
         </form>
     </div>`)
+    
 
     this.container.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
@@ -28,6 +29,5 @@ function ChangePassword() {
         })
 
     })
+    }
 }
-
-chainPrototypes(Component, ChangePassword)

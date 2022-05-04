@@ -1,11 +1,12 @@
-function Sticker() {
-    Component.call(this, `<div class="Sticker">
-        <button class="Transparent">❌</button>
-        <form class="Sticker__form">
-            <textarea name="text"></textarea>
-            <button type="submit" class="save-button">Save</button>
-        </form>
-    </div>`)
+class Sticker extends Component {
+    constructor() {
+        super (`<div class="Sticker">
+            <button class="Transparent">❌</button>
+            <form class="Sticker__form">
+                <textarea name="text"></textarea>
+                <button type="submit" class="save-button">Save</button>
+            </form>
+        </div>`)
 
     this.id=null
 
@@ -59,17 +60,11 @@ function Sticker() {
             })
         }
     })
-
-}
-
-
-
-chainPrototypes(Component, Sticker)
+    }
 
 
 
-
-Sticker.prototype.onClose = function(callback) {
+onClose(callback) {
     const close = this.container.querySelector('button')
 
     close.addEventListener('click', function() {
@@ -79,12 +74,14 @@ Sticker.prototype.onClose = function(callback) {
 
 
 
-Sticker.prototype.setText = function(text) {
+setText(text) {
     this.container.querySelector('textarea').innerText = text
 }
 
 
 
-Sticker.prototype.setId = function(id) {
+setId (id) {
     this.id = id
+}
+
 }

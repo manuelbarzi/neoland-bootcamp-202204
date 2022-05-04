@@ -8,6 +8,5 @@ function updateUserName (username, newName, callback)  {
     }
 
     user.name = newName
-
     callback(null)
 }

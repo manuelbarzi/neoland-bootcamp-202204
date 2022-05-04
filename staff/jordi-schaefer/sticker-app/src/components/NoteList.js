@@ -1,5 +1,6 @@
-function NoteList() {
-    Component.call(this, `<ul class="notelist"></ul>`)
+class NoteList extends Component {
+    constructor()  {
+        super ( `<ul class="notelist"></ul>`)
 
     retrieveNotes(sessionStorage.username, (error, data) => {
         if (error) {
@@ -12,6 +13,5 @@ function NoteList() {
             this.add(noteli) 
         })
     })
+}
 } 
-
-chainPrototypes(Component, NoteList)
