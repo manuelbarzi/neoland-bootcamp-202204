@@ -1,4 +1,4 @@
-console.log('%cSmart Components v1.3', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
+console.log('%cSmart Components v1.3.1', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
 
 class Component {
     constructor(template) {
