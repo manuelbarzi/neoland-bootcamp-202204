@@ -16,6 +16,11 @@ const users = [
         username: 'wendy',
         password: '123123123'
     }
+    {
+        name: 'Wendy Bread',
+        username: 'wendy',
+        password: '123123123'
+    }
 ]
 
 const newspapers = [

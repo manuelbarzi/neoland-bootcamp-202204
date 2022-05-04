@@ -4,7 +4,7 @@
 // Desplazar hacia atras los elementos a eliminar y modificar el largo de la array
 // Donde esta el error de sintaxi ¿?
 
-function splice(array, inicio = 0, del, item) {
+function splice(array, inicio = 0, del, ...item) {
 
 
     for (let i = array.length - 1; i >= inicio; i--) {

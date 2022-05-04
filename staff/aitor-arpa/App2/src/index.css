@@ -1,0 +1,83 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+input, button {
+  margin: 0.5rem;
+  font-size: inherit;
+  _font-size: 0.75rem;
+}
+
+a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+.App {
+  height: 100%;
+  background: linear-gradient(to right, #005AA7, #b0cde2, #b0cde2, #005AA7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home__header {
+  position: fixed;
+  top: 0;
+  background: linear-gradient(to right, #FEE2C5, #ccc7c1, #ccc7c1, #FEE2C5);
+  width: 100%;
+}
+
+.Home__footer {
+  position: fixed;
+  bottom: 0;
+  background-color: ghostwhite;
+  width: 100%;
+}
+
+.Home__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Sticker {
+  background: linear-gradient(to right, #7b99b3, #3a87be, #b0cde2, #4d91cd);
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2rem;
+  box-shadow: 10px 5px 5px #FEE2C5;
+}
+
+.Sticker__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/*# sourceMappingURL=index.css.map */
