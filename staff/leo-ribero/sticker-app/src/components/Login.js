@@ -16,8 +16,16 @@ class Login extends Component {
         form.addEventListener('submit', function (event) {
             event.preventDefault()
 
-            const username = form.username.value
-            const password = form.password.value
+            //const username = form.username.value
+            // const username = event.target.username.value
+            //const password = form.password.value
+            // const password = event.target.password.value
+
+            // de-estrusturing 4 may 1715
+            // integridad de datos 
+            // const {target: {username : {}, password: {}}} = event
+
+            const {target: {username : {value: username}, password: {value: password}}} = event
 
             //callback(username, password)
 
@@ -29,6 +37,8 @@ class Login extends Component {
                 }
 
                 sessionStorage.username = username
+                
+                event.target.reset()
 
                 callback()
             })
