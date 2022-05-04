@@ -8,6 +8,7 @@ html,
 body,
 #root {
   height: 100%;
+
 }
 
 body {
@@ -20,11 +21,19 @@ h3 {
   font-size: inherit;
 }
 
-input,
+input {
+  margin: 0.5rem;
+  font-size: inherit;
+  _font-size: 0.75rem;
+  box-shadow: 0px 3px 13px -5px #000000;
+  
+}
+
 button {
   margin: 0.5rem;
   font-size: inherit;
   _font-size: 0.75rem;
+  
 }
 
 a {
@@ -33,31 +42,35 @@ a {
 }
 
 .App {
+  background-image: url('index.jpg');
   height: 100%;
-  background-color: lightblue;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .Home__header {
+  box-shadow: 0px 10px 13px -7px #000000;
+  background-color: rgba(220, 218, 218, 0.883);
   position: fixed;
   top: 0;
-  background-color: ghostwhite;
+  
   width: 100%;
+  height: 80px;
+}
+
+.Home__home, .Home__profile, .Home__logout{
+  margin-top: 30px;
 }
 
 .Home__footer {
   position: fixed;
   bottom: 0;
-  background-color: ghostwhite;
   width: 100%;
-}
-
-.Home__list {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 3rem;
+  height: 60px;
+  background-color: rgba(220, 218, 218, 0.883);
+  box-shadow: 0px -8px 13px -7px #000;
+  
 }
 
 .Container {
@@ -75,15 +88,17 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-box-shadow: 0px 10px 13px -7px #000000;
+  box-shadow: 0px 10px 13px -7px #000000;
+  border-radius: 2px;
 }
 
-.Sticker__form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+.StickerList__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
+
 }
+
 
 
 /*# sourceMappingURL=index.css.map */

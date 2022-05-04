@@ -3,7 +3,7 @@ function Sticker() {
         <button>x</button>
         <form class="Sticker__form">
             <textarea name="text"></textarea>
-            <button class="Sticker__edit">Edit</button>
+            <p class="Sticker__id"></p>
             <button>Save</button>
         </form>
     </div>`)
@@ -25,10 +25,10 @@ function Sticker() {
                     return
                 }
 
-                this.id = noteId
+                //this.id = noteId
+                this.setId(noteId)
 
                 alert('Sticker saved!')
-
             })
         else
             updateNote(sessionStorage.username, this.id, text, error => {
@@ -53,25 +53,26 @@ function Sticker() {
                     return
                 }
             })
-
-        }
+        }  
     })
 }
 
 chainPrototypes(Component, Sticker)
 
-Sticker.prototype.onClose = function (callback) {
+Sticker.prototype.onClose = function(callback) {
     const close = this.container.querySelector('button')
 
-    close.addEventListener('click', function () {
+    close.addEventListener('click', function() {
         callback()
     })
 }
 
-Sticker.prototype.setText = function (text) {
+Sticker.prototype.setText = function(text) {
     this.container.querySelector('textarea').innerText = text
 }
 
-Sticker.prototype.setId = function (id) {
+Sticker.prototype.setId = function(id) {
     this.id = id
+
+    this.container.querySelector('.Sticker__id').innerText = `ID #${id}`
 }

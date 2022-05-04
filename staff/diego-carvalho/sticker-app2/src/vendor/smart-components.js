@@ -1,4 +1,4 @@
-console.log('%cSmart Components v1.2', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
+console.log('%cSmart Components v1.3', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
 
 function Component(template) {
     const temp = document.createElement('div')
@@ -24,4 +24,7 @@ Component.prototype.add = function(...children) {
 Component.prototype.remove = function(...children) {
     for (const child of children)
         this.container.removeChild(child.container)
+}
+Component.prototype.has = function(child) {
+    return this.container.hasChild(child.container)
 }

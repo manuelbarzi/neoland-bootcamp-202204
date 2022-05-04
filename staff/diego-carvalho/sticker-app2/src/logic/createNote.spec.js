@@ -29,7 +29,7 @@ describe('createNote', () => {
         db.notes.length = 0
 
         createNote('john', 'Adiós Mundo Cruel...', function(error) {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
             expect(error).toBeInstanceOf(Error)
             expect(error.message).toBe('username "john" does not exist')
         })
