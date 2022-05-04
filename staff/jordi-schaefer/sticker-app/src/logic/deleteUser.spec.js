@@ -6,7 +6,7 @@ describe('deleteUser', () => {
         db.users.push(new User('Le Chunga', 'lechunga', '123123123'))
         db.users.push(new User('Papa Gayo', 'papagayo', '123123123'))
 
-        deleteUser('chocolater', error => {
+        deleteUser('chocolater', '123123123', error => {
             expect(error).toBeNull()
 
             const user = db.users.find(user => user.username === 'chocolater')
@@ -25,10 +25,10 @@ describe('deleteUser', () => {
         db.users.push(new User('Le Chunga', 'lechunga', '123123123'))
         db.users.push(new User('Papa Gayo', 'papagayo', '123123123'))
 
-        deleteUser('otro usuario', error => {
+        deleteUser('wrong username', '123123123', error => {
             expect(error).not.toBeNull()
             expect(error).toBeInstanceOf(Error)
-            expect(error.message).toBe(`user with username "${'otro usuario'}" does not exist`)
+            expect(error.message).toBe(`user with username "${'wrong username'}" does not exist`)
 
             expect(db.users).toHaveSize(3)
         })
@@ -36,22 +36,22 @@ describe('deleteUser', () => {
         db.users.length = 0
     })
 
-/*     it('fails with wrong password', () => {
+    it('fails with wrong password', () => {
         db.users.length = 0
 
         db.users.push(new User('Choco Later', 'chocolater', '123123123'))
         db.users.push(new User('Le Chunga', 'lechunga', '123123123'))
         db.users.push(new User('Papa Gayo', 'papagayo', '123123123'))
 
-        deleteUser('chocolater'+'-wrong', error => {
+        deleteUser('chocolater', '123', error => {
             expect(error).not.toBeNull()
             expect(error).toBeInstanceOf(Error)
-            expect(error.message).toBe(`user with username "${'chocolater' + '-wrong'}" does not exists`)
+            expect(error.message).toBe(`wrong password`)
 
             expect(db.users).toHaveSize(3)
         })
 
         db.users.length = 0
-    }) */
+    })
 
 })
