@@ -1,0 +1,21 @@
+// Tue 3 May 1025 similar to this
+function updateUserName(username, name, newName, callback) {
+    const user = db.users.find(user => user.username === username)
+
+    if (!user) {
+        callback(new Error(`user with username "${username}" does not exist`))
+
+        return
+    }
+
+    if (name === newName) {
+        callback(new Error('current name and new name are the same'))
+
+        return
+    }
+
+    user.name = newName
+
+    callback(null)
+
+}

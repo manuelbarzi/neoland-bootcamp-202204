@@ -1,7 +1,6 @@
 function ChangeName() {
     Component.call(this, `<div class="ChangeName">
         <form class="Container">
-            <input type="text" name="name" placeholder="name">
             <input type="text" name="newName" placeholder="New name">
             <button>Save</button>
         </form>
