@@ -53,7 +53,7 @@ describe('retrieveNotes', () => {
         db.notes.push(new Note('pirulo', 'Hello, Note! (6)'))
 
         retrieveNotes('elefante', (error, notes) => {
-          expect(error).toBeDefined()
+          expect(error).not.toBeNull()
           expect(error).toBeInstanceOf(Error)
           expect(error.message).toBe('username "elefante" does not exist')
 

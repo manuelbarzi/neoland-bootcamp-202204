@@ -1,29 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
 * {
   font-family: Poppins;
 }
 
 html, body, #root {
   height: 100%;
+  min-height: 100vh;
 }
 
 body {
   margin: 0;
-}
-
-h1, h2, h3 {
-  font-size: inherit;
-}
-
-input, button {
-  margin: 0.5rem;
-  font-size: inherit;
-  _font-size: 0.75rem;
-}
-
-a {
-  color: ghostwhite;
-  text-decoration: none;
+  padding: 0;
 }
 
 .App {
@@ -34,24 +30,64 @@ a {
   justify-content: center;
 }
 
+.Signin {
+  min-height: 100vh;
+}
+.Signin .Login,
+.Signin .Register {
+  transform: translate(0%, 50%);
+}
+.Signin .Login input, .Signin .Login button,
+.Signin .Register input,
+.Signin .Register button {
+  margin: 0;
+  padding: 10px;
+}
+.Signin .Login button,
+.Signin .Register button {
+  background-color: #fff;
+  color: dodgerblue;
+  width: 100%;
+}
+.Signin .Login {
+  margin-top: 50%;
+}
+.Signin .Register {
+  margin-top: 38%;
+}
+
+.Home {
+  width: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
+  background-color: dodgerblue;
+}
 .Home__header {
   position: fixed;
   top: 0;
   background-color: ghostwhite;
   width: 100%;
+  min-height: 46px;
 }
-
+.Home__profile {
+  margin-right: 0;
+}
+.Home__body {
+  overflow-y: auto;
+  flex-grow: 1;
+  width: 100%;
+  margin-top: 15px;
+  margin-bottom: 5px;
+}
+.Home__body .Profile--form {
+  flex-basis: 100%;
+}
 .Home__footer {
   position: fixed;
   bottom: 0;
   background-color: ghostwhite;
   width: 100%;
-}
-
-.Home__list {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 3rem;
 }
 
 .Container {
@@ -61,6 +97,13 @@ a {
   align-items: center;
   gap: 0.5rem;
 }
+.Container--row {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.Container--spread-sides {
+  justify-content: space-between;
+}
 
 .Sticker {
   background-color: #ffc;
@@ -69,13 +112,85 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 40vw;
+  height: 40vw;
+  background: #ffa;
+  margin: 30px auto;
+  padding: 20px;
+  box-shadow: inset 0 -40px 40px rgba(0, 0, 0, 0.2), inset 0 25px 10px rgba(0, 0, 0, 0.2), 0 5px 6px 5px rgba(0, 0, 0, 0.2);
 }
-
+.Sticker__id {
+  font-size: 0.6rem;
+  color: #555;
+}
 .Sticker__form {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  width: 90%;
+}
+.Sticker__text {
+  border: 0 none;
+  background-color: transparent;
+  width: 100%;
+  resize: none;
+  font-family: "Permanent Marker", cursive;
+  line-height: 1.7em;
+  font-size: 24px;
+  color: #130d6b;
+}
+
+.StickerList__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
+}
+
+.Button {
+  margin: 0.5rem;
+  font-size: inherit;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+.Button--light {
+  border-color: white;
+  color: white;
+}
+.Button--no-border {
+  border: none;
+}
+.Button--close {
+  margin-left: auto;
+  margin-right: 0;
+  color: red;
+}
+.Button--small {
+  font-size: 10px;
+}
+
+.Input {
+  margin: 0.5rem;
+  font-size: inherit;
+  text-indent: 0.5rem;
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: text;
+  color: black;
+}
+.Input--light {
+  border-color: white;
+  color: white;
+}
+.Input--light:focus {
+  outline: auto;
+}
+.Input--light::placeholder {
+  color: #EEE;
 }
 
 /*# sourceMappingURL=index.css.map */

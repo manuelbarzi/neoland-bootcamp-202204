@@ -17,17 +17,9 @@ else {
 
 root.appendChild(app.container)
 
-register.onSubmit(function (name, username, password) {
-    registerUser(name, username, password, function (error) {
-        if (error) {
-            alert(error.message)
-
-            return
-        }
-
-        register.removeFrom(app)
-        login.addTo(app)
-    })
+register.onUserRegistered(() => {
+    register.removeFrom(app)
+    login.addTo(app)
 })
 
 register.onLoginClick(function () {
@@ -35,32 +27,11 @@ register.onLoginClick(function () {
     login.addTo(app)
 })
 
-login.onSubmit(function (username, password) {
-    authenticateUser(username, password, function (error) {
-        if (error) {
-            alert(error.message)
-
-            return
-        }
-
-        sessionStorage.username = username
-
-        retrieveUser(username, function (error, user) {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            home = new Home
-
-            home.setName(user.name)
-
-            login.removeFrom(app)
-            home.addTo(app)
-        })
-    })
-
+login.onUserLoggedIn(() => {
+    home = new Home
+    
+    login.removeFrom(app)
+    home.addTo(app)
 })
 
 login.onRegisterClick(function () {

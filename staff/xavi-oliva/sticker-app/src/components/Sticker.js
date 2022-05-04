@@ -1,37 +1,78 @@
-function Sticker() {
-    Component.call(this, `<div class="Sticker">
-        <button>x</button>
-        <form class="Sticker__form">
-            <textarea name="text"></textarea>
-            <button>Save</button>
-        </form>
-    </div>`)
-
-    const form = this.container.querySelector('form')
-
-    form.addEventListener('submit', event => {
-        event.preventDefault()
-
-        const text = form.text.value
-
-        createNote(sessionStorage.username, text, error => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            alert('Sticker saved!')
+class Sticker extends Component {
+    constructor() {
+        super(`<div class="Sticker">
+            <button class="Button Button--no-border Button--close">x</button>
+            <p class="Sticker__id"></p>
+            <form class="Sticker__form">
+                <textarea class="Sticker__text" name="text"></textarea>
+                <button class="Button">Save</button>
+            </form>
+        </div>`)
+    
+        this.id = null
+    
+        const form = this.container.querySelector('form')
+    
+        form.addEventListener('submit', event => {
+            event.preventDefault()
+    
+            const text = form.text.value
+    
+            if (!this.id)
+                createNote(sessionStorage.username, text, (error, noteId) => {
+                    if (error) {
+                        alert(error.message)
+    
+                        return
+                    }
+    
+                    //this.id = noteId
+                    this.setId(noteId)
+    
+                    alert('Sticker saved!')
+                })
+            else
+                updateNote(sessionStorage.username, this.id, text, error => {
+                    if (error) {
+                        alert(error.message)
+    
+                        return
+                    }
+    
+                    alert('Sticker updated!')
+                })
         })
-    })
-}
+    
+        const close = this.container.querySelector('button')
+    
+        close.addEventListener('click', () => {
+            if (this.id) {
+                deleteNote(sessionStorage.username, this.id, error => {
+                    if (error) {
+                        alert(error.message)
+    
+                        return
+                    }
+                })
+            }
+        })
+    }
 
-chainPrototypes(Component, Sticker)
-
-Sticker.prototype.onClose = function(callback) {
-    const close = this.container.querySelector('button')
-
-    close.addEventListener('click', function() {
-        callback()
-    })
+    onClose(callback) {
+        const close = this.container.querySelector('button')
+    
+        close.addEventListener('click', function() {
+            callback()
+        })
+    }
+    
+    setText(text) {
+        this.container.querySelector('textarea').innerText = text
+    }
+    
+    setId(id) {
+        this.id = id
+    
+        this.container.querySelector('.Sticker__id').innerText = `ID #${id}`
+    }
 }

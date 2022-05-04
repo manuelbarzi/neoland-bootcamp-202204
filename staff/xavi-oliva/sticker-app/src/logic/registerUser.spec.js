@@ -25,7 +25,7 @@ describe('registerUser', () => {
         db.users.push(new User('Cacá Tua', 'cacatua', '123123123'))
 
         registerUser('Cacá Tua', 'cacatua', '123123123', function(error) {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
 
             expect(error.message).toBe('username already exists')
         })

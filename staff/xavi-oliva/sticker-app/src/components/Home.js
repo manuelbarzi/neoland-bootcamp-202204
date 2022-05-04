@@ -1,83 +1,102 @@
-function Home() {
-    Component.call(this, `<div class="Home Container">
-        <header class="Home__header">
-            <h2>Hello, Home!</h2>
-            <button class="Home__logout">Logout</button>
+class Home extends Component {
+    constructor() {
+        super(`<div class="Home Container">
+            <header class="Home__header Container Container--row Container--spread-sides">
+            <button class="Button Button--no-border Home__home">📋</button>
+            <div>
+                <button class="Button Button--no-border Home__profile">Profile</button>
+                <button class="Button Button--no-border Home__logout">logout</button>
+            </div>
         </header>
-    
-        <ul class="Home__list Container"></ul>
-    
-        <footer class="Home__footer Container">
-            <button class="Home__addSticker">+</button>
-        </footer>
-    </div>`)
+        
+            <main class="Home__body Container"></main>
+        
+            <footer class="Home__footer Container">
+                <button class="Button Home__addSticker">+</button>
+            </footer>
+        </div>`)
 
-    const logoutButton = this.container.querySelector('.Home__logout')
+        const addStickerButton = this.container.querySelector('.Home__addSticker')
+        const stickerList = new StickerList
+        let profile
 
-    logoutButton.addEventListener('click', () => {
-        delete sessionStorage.username
+        this.addToBody(stickerList)
 
-        app.remove(home)
-        app.add(login)
-    })
+        const homeButton = this.container.querySelector('.Home__home')
 
-    const addStickerButton = this.container.querySelector('.Home__addSticker')
+        homeButton.addEventListener('click', () => {
+            if (!this.hasBody(stickerList)) {
+                this.removeFromBody(profile)
 
+                this.container.querySelector('.Home__footer').appendChild(addStickerButton)
 
-    /** la FUNCIÓN DE FLECHA tiene auto-binding
-     * en función normal  }.bind(this)) */
-    addStickerButton.addEventListener('click', () => {
-        const sticker = new Sticker
-
-        sticker.onClose(() => {
-            this.removeFrom(sticker)
+                this.addToBody(stickerList)
+            }
         })
 
-        const list = this.container.querySelector('.Home__list')
+        const profileButton = this.container.querySelector('.Home__profile')
 
-        list.append(sticker.container)
-    })
+        profileButton.addEventListener('click', () => {
+            if (!profile || !this.hasBody(profile)) {
+                this.removeFromBody(stickerList)
 
-    if (sessionStorage.username) {
-        retrieveUser(sessionStorage.username, (error, user) => {
-            if (error) {
-                alert(error.message)
+                this.container.querySelector('.Home__footer').removeChild(addStickerButton)
 
-                return
+                profile = new Profile
+
+                this.addToBody(profile)
             }
-
-            this.setName(user.name)
         })
 
-        retrieveNotes(sessionStorage.username, (error, notes) => {
-            if (error) {
-                alert(error.message)
+        const logoutButton = this.container.querySelector('.Home__logout')
 
-                return
-            }
+        logoutButton.addEventListener('click', () => {
+            delete sessionStorage.username
 
-            const list = this.container.querySelector('.Home__list')
+            app.remove(home)
+            app.add(login)
+        })
 
-            const items = notes.map(note => {
-                const item = document.createElement('li')
+        /* la FUNCIÓN DE FLECHA tiene auto-binding
+         * en función normal  }.bind(this)) */
+        addStickerButton.addEventListener('click', () => {
+            const sticker = new Sticker
 
-                const sticker = new Sticker
-                sticker.container.querySelector('textarea').innerText = note.text
-
-                item.appendChild(sticker.container)
-
-                return item
+            sticker.onClose(() => {
+                stickerList.removeSticker(sticker)
             })
 
-            list.append(...items) // !!!! spread operator
+            stickerList.addSticker(sticker)
         })
+
+        if (sessionStorage.username) {
+            retrieveUser(sessionStorage.username, (error, user) => {
+                if (error) {
+                    alert(error.message)
+
+                    return
+                }
+
+                this.setName(user.name)
+            })
+        }
     }
-}
 
-chainPrototypes(Component, Home)
+    setName(name) {
+        const profileButton = this.container.querySelector('.Home__profile')
 
-Home.prototype.setName = function (name) {
-    const title = this.container.querySelector('h2')
+        profileButton.innerText = name
+    }
 
-    title.innerText = `Hello, ${name}!`
+    addToBody(component) {
+        this.container.querySelector('.Home__body').appendChild(component.container)
+    }
+
+    removeFromBody(component) {
+        this.container.querySelector('.Home__body').removeChild(component.container)
+    }
+
+    hasBody(component) {
+        return this.container.querySelector('.Home__body').hasChild(component.container)
+    }
 }

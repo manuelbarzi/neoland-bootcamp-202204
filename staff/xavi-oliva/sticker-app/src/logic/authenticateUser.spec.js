@@ -25,7 +25,7 @@ describe('authenticateUser', () => {
         })
 
         authenticateUser('johndoe', 'wrong-123123123', error => {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
             expect(error.message).toBe('wrong credentials')
         })
 
@@ -42,7 +42,7 @@ describe('authenticateUser', () => {
         })
 
         authenticateUser('wrong-johndoe', '123123123', error => {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
             expect(error.message).toBe('wrong credentials')
         })
 
@@ -53,7 +53,7 @@ describe('authenticateUser', () => {
         db.users.length = 0
 
         authenticateUser('johndoe', '123123123', error => {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
             expect(error.message).toBe('wrong credentials')
         })
 
