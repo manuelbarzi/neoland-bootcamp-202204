@@ -1,7 +1,7 @@
-function StickerItem(sticker) {
-    Component.call(this, '<li></li>')
+class StickerItem extends Component {
+    constructor(sticker) {
+        super('<li></li>')
 
-    this.add(sticker)
+        this.add(sticker)
+    }
 }
-
-chainPrototypes(Component, StickerItem)

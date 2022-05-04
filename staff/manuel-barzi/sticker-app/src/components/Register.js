@@ -2,10 +2,10 @@ class Register extends Component {
     constructor() {
         super(`<div>
             <form class="Container">
-                <input type="text" name="name" placeholder="name">
-                <input type="text" name="username" placeholder="username">
-                <input type="password" name="password" placeholder="password">
-                <button>Register</button>
+                <input class="Input Input--light" type="text" name="name" placeholder="name">
+                <input class="Input Input--light" type="text" name="username" placeholder="username">
+                <input class="Input Input--light" type="password" name="password" placeholder="password">
+                <button class="Button Button--light">Register</button>
                 <a href="#">Login</a>
             </form>
         </div>`)
