@@ -2,9 +2,9 @@ class DeleteUser extends Component {
     constructor() {
         super (`<div class="DeleteUser">
         <form class="Container">
-            <input class="form" type="password" name="password" placeholder=" Confirm your password">
+            <input class="form" type="password" name="elemento" placeholder=" Confirm your password">
 
-            <button class="Button">Confirm</button>
+            <button class="Button">Delete</button>
         </form>
     </div>`)
     
@@ -13,15 +13,17 @@ class DeleteUser extends Component {
     this.container.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
 
-        const password = event.target.name.value
+        const confirmation = event.target.elemento.value
 
-        deleteUser(sessionStorage.username, password, (error) => {
+        deleteUser(sessionStorage.username, confirmation, (error) => {
             if (error) {
                 alert(error.message)
                 return
             }
 
             alert('User deleted')
+            delete sessionStorage.username
+            location.reload()
         })
 
     })
@@ -30,3 +32,7 @@ class DeleteUser extends Component {
 
 // despues de borrar el usuario, en la callback de delete user, borraremos el sessionStorage
 // delete sessionStorage.username
+
+
+// en la callback, en vez de manejar vistas, forzaremos un refresco de pagina
+// location.reload()

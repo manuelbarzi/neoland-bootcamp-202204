@@ -4,11 +4,11 @@ class Profile extends Component {
             <button class="Button Profile__changeName">Change Name</button>
             <button class="Button Profile__changePassword">Change Password</button>
             <div>
-            <button class="Button Profile_delete">Delete user</button>
+            <button class="Button Profile__deleteUser">Delete user</button>
             </div>
         </div>`)
 
-    let changeName, changePassword
+    let changeName, changePassword, deleteUser
 
     const changeNameButton = this.container.querySelector('.Profile__changeName')
 
@@ -18,6 +18,9 @@ class Profile extends Component {
 
             if (changePassword && this.has(changePassword))
                 this.remove(changePassword)
+
+            else if (deleteUser && this.has(deleteUser))
+                this.remove(deleteUser)
 
             this.add(changeName)
         }
@@ -31,13 +34,31 @@ class Profile extends Component {
 
             if (changeName && this.has(changeName))
                 this.remove(changeName)
+
+            else if (deleteUser && this.has(deleteUser))
+                this.remove(deleteUser)
                 
             this.add(changePassword)
             //functions.appendChild(changePassword.container)
         }
     })
+
+
+    const deleteUserButton = this.container.querySelector('.Profile__deleteUser')
+
+    deleteUserButton.addEventListener('click', () => {
+        if (!deleteUser || !this.has(deleteUser)) {
+            deleteUser = new DeleteUser()
+
+            if (changeName && this.has(changeName))
+                this.remove(changeName)
+
+            else if (changePassword && this.has(changePassword))
+                this.remove(changePassword)
+                
+            this.add(deleteUser)
+        }
+    })
     }
 }
 
-// en la callback, en vez de manejar vistas, forzaremos un refresco de pagina
-// location.reload()

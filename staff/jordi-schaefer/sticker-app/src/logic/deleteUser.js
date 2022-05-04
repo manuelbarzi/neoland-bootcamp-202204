@@ -1,4 +1,10 @@
-function deleteUser (username, callback)  {
+function deleteUser (username, password, callback)  {
+    
+    const user = db.users.find(user => user.username === username)
+    if (user.password !== password) {
+        callback(new Error('wrong password'))
+        return
+    }
 
     const index = db.users.findIndex(user => user.username === username)
     if (index < 0) {
