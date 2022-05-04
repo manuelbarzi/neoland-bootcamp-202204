@@ -44,7 +44,7 @@ describe('updateNote', () => {
         db.notes.push(note = new Note('papagayo', 'Hello, Note! (5)'))
 
         updateNote('papagayo', note.id + '-wrong', 'Hello, Note! (6)', error => {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
 
             expect(error.message).toBe(`note with id "${note.id + '-wrong'}" does not exist`)
         })
@@ -70,7 +70,7 @@ describe('updateNote', () => {
         db.notes.push(note = new Note('papagayo', 'Hello, Note! (5)'))
 
         updateNote('papagayo' + '-wrong', note.id, 'Hello, Note! (6)', error => {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
 
             expect(error.message).toBe(`username "${'papagayo' + '-wrong'}" does not exist`)
         })
@@ -96,7 +96,7 @@ describe('updateNote', () => {
         db.notes.push(note = new Note('papagayo', 'Hello, Note! (5)'))
 
         updateNote('lechunga', note.id, 'Hello, Note! (6)', error => {
-            expect(error).toBeDefined()
+            expect(error).not.toBeNull()
 
             expect(error.message).toBe(`user "lechunga" does not own note with id "${note.id}"`)
         })

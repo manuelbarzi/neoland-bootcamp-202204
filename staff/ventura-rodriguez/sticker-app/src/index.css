@@ -48,12 +48,6 @@ a {
   width: 100%;
 }
 
-.Home__list {
-  list-style-type: none;
-  padding: 0;
-  margin-bottom: 3rem;
-}
-
 .Container {
   display: flex;
   flex-direction: column;
@@ -76,6 +70,12 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.StickerList__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
 }
 
 /*# sourceMappingURL=index.css.map */

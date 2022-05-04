@@ -1,6 +1,7 @@
 function Sticker() {
     Component.call(this, `<div class="Sticker">
         <button>x</button>
+        <p class="Sticker__id"></p>
         <form class="Sticker__form">
             <textarea name="text"></textarea>
             <button>Save</button>
@@ -24,7 +25,8 @@ function Sticker() {
                     return
                 }
 
-                this.id = noteId
+                //this.id = noteId
+                this.setId(noteId)
 
                 alert('Sticker saved!')
             })
@@ -71,4 +73,6 @@ Sticker.prototype.setText = function(text) {
 
 Sticker.prototype.setId = function(id) {
     this.id = id
+
+    this.container.querySelector('.Sticker__id').innerText = `ID #${id}`
 }

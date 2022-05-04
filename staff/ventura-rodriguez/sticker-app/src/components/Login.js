@@ -11,23 +11,35 @@ function Login() {
 
 chainPrototypes(Component, Login)
 
-Login.prototype.onSubmit = function(callback) {
+Login.prototype.onUserLoggedIn = function (callback) {
     const form = this.container.querySelector('form')
 
-    form.addEventListener('submit', function(event) {
+    form.addEventListener('submit', function (event) {
         event.preventDefault()
 
         const username = form.username.value
         const password = form.password.value
 
-        callback(username, password)
+        //callback(username, password)
+
+        authenticateUser(username, password, function (error) {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            sessionStorage.username = username
+
+            callback()
+        })
     })
 }
 
-Login.prototype.onRegisterClick = function(callback) {
+Login.prototype.onRegisterClick = function (callback) {
     const anchor = this.container.querySelector('a')
 
-    anchor.addEventListener('click', function(event) {
+    anchor.addEventListener('click', function (event) {
         event.preventDefault()
 
         callback()
