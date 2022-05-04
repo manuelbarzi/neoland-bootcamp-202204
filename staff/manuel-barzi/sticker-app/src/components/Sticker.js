@@ -1,9 +1,9 @@
 function Sticker() {
     Component.call(this, `<div class="Sticker">
         <button>x</button>
-        <p class="Sticker__id"></p>
         <form class="Sticker__form">
-            <textarea name="text"></textarea>
+            <textarea class="Sticker__text" name="text"></textarea>
+            <p class="Sticker__id"></p>
             <button>Save</button>
         </form>
     </div>`)

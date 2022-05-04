@@ -1,9 +1,9 @@
 function Login() {
     Component.call(this, `<div>
         <form class="Container">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button>Login</button>
+            <input class="Input Input--light" type="text" name="username" placeholder="username">
+            <input class="Input Input--light" type="password" name="password" placeholder="password">
+            <button class="Button Button--light">Login</button>
             <a href="#">Register</a>
         </form>
     </div>`)

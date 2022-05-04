@@ -32,3 +32,17 @@ StickerList.prototype.addSticker = function(sticker) {
 
     this.add(item)
 }
+
+StickerList.prototype.removeSticker = function(sticker) {
+    const items = this.container.children
+
+    for (let i = 0; i < items.length; i++) {
+        const item = items[i]
+
+        if (item.hasChild(sticker.container)) {
+            this.container.removeChild(item)
+
+            return
+        }
+    }
+}

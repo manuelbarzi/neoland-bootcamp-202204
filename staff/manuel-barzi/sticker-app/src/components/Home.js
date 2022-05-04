@@ -1,9 +1,11 @@
 function Home() {
     Component.call(this, `<div class="Home Container">
-        <header class="Home__header">
+        <header class="Home__header Container Container--row Container--spread-sides">
             <button class="Home__home">📋</button>
-            <button class="Home__profile">Profile</button>
-            <button class="Home__logout">Logout</button>
+            <div>
+                <button class="Home__profile">Profile</button>
+                <button class="Home__logout">Logout</button>
+            </div>
         </header>
 
         <main class="Home__body"></main>
@@ -38,9 +40,10 @@ function Home() {
             this.removeFromBody(stickerList)
 
             this.container.querySelector('.Home__footer').removeChild(addStickerButton)
-    
-            profile = new Profile
-    
+
+            if (!profile)
+                profile = new Profile
+
             this.addToBody(profile)
         }
     })
@@ -58,7 +61,7 @@ function Home() {
         const sticker = new Sticker
 
         sticker.onClose(() => {
-            list.removeChild(sticker.container)
+            stickerList.removeSticker(sticker)
         })
 
         stickerList.addSticker(sticker)
@@ -92,6 +95,6 @@ Home.prototype.removeFromBody = function (component) {
     this.container.querySelector('.Home__body').removeChild(component.container)
 }
 
-Home.prototype.hasBody = function(component) {
+Home.prototype.hasBody = function (component) {
     return this.container.querySelector('.Home__body').hasChild(component.container)
 }
