@@ -12,9 +12,16 @@ body {
   margin: 0;
 }
 
-h1, h2, h3 {
-  font-size: 35px;
+h1 {
+  font-size: 40px;
   font-family: "Fredoka One", cursive;
+  display: flex;
+  color: ghostwhite;
+}
+
+h2, h3 {
+  font-size: 24px;
+  font-family: "Poppins";
   display: flex;
   color: ghostwhite;
 }
@@ -22,7 +29,6 @@ h1, h2, h3 {
 input, button {
   margin: 0.5rem;
   font-size: inherit;
-  _font-size: 0.75rem;
 }
 
 a {
@@ -32,9 +38,9 @@ a {
 
 .App {
   height: 100%;
-  background: #efefbb;
-  background: -webkit-linear-gradient(to right, #efefbb, #d4d3dd);
-  background: linear-gradient(to right, #efefbb, #d4d3dd);
+  background-image: url("https://images.pexels.com/photos/8749131/pexels-photo-8749131.jpeg?cs=srgb&dl=pexels-tamanna-rumee-8749131.jpg&fm=jpg");
+  background-size: cover;
+  background-attachment: fixed;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,9 +49,7 @@ a {
 .Home__header {
   position: fixed;
   top: 0;
-  background: #efefbb;
-  background: -webkit-linear-gradient(to right, #efefbb, #d4d3dd);
-  background: linear-gradient(to right, #efefbb, #d4d3dd);
+  background-color: #adebbe;
   width: 100%;
 }
 
@@ -71,7 +75,7 @@ a {
 }
 
 .Sticker {
-  background-color: #fff87f;
+  background-color: #ffff81;
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -84,6 +88,12 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.StickerList__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
 }
 
 /*# sourceMappingURL=index.css.map */
