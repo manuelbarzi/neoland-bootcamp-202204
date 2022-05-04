@@ -23,7 +23,12 @@ describe('updateUserName', () => {
         updateUserName('chocolater' + '-wrong', 'Choco crispi', error => {
             expect(error).not.toBeNull()
             expect(error).toBeInstanceOf(Error)
-            expect(error.message).toBe('user with username "chocolater-wrong" does not exist')
+            expect(error.message).toBe('user with username "chocolater-wrong" does not exists')
+
+            expect(db.users).toHaveSize(1)
+            const user = db.users.find(user => user.username === 'chocolater')
+
+            expect(user.name).toBe('Choco Later')
         })
 
         db.users.length = 0

@@ -47,7 +47,7 @@ describe('updateNote', () => {
         updateNote('papagayo', note.id + '-wrong', 'Hello, Note! (6)', error => {
             expect(error).toBeDefined()
 
-            expect(error.message).toBe(`note with id "${note.id + '-wrong'}" does not exist`)
+            expect(error.message).toBe(`note with id "${note.id + '-wrong'}" does not exists`)
         })
 
         db.users.length = 0
@@ -73,7 +73,7 @@ describe('updateNote', () => {
         updateNote('papagayo' + '-wrong', note.id, 'Hello, Note! (6)', error => {
             expect(error).toBeDefined()
 
-            expect(error.message).toBe(`username "${'papagayo' + '-wrong'}" does not exist`)
+            expect(error.message).toBe(`username "${'papagayo' + '-wrong'}" does not exists`)
         })
 
         db.users.length = 0

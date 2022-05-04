@@ -2,7 +2,7 @@ function updateUserPassword(username, password, newPassword, newPasswordRepeat, 
     const user = db.users.find(user => user.username === username)
 
     if (!user) {
-        callback(new Error(`user with username "${username}" does not exist`))
+        callback(new Error(`user with username "${username}" does not exists`))
 
         return
     }

@@ -3,14 +3,14 @@ function updateNote(username, noteId, text, callback) {
     // comprueba si el usuario existe
     const userExists = db.users.some(user => user.username === username)
     if (!userExists) {
-        callback(new Error(`username "${username}" does not exist`))
+        callback(new Error(`username "${username}" does not exists`))
         return
     }
 
     // comprueba si el ID de la nota existe
     const note = db.notes.find(note => note.id === noteId)
     if (!note) {
-        callback(new Error(`note with id "${noteId}" does not exist`))
+        callback(new Error(`note with id "${noteId}" does not exists`))
         return
     }
 

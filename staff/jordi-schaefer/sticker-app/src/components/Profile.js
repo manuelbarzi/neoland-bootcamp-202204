@@ -3,6 +3,9 @@ class Profile extends Component {
         super (`<div class="Profile">
             <button class="Button Profile__changeName">Change Name</button>
             <button class="Button Profile__changePassword">Change Password</button>
+            <div>
+            <button class="Button Profile_delete">Delete user</button>
+            </div>
         </div>`)
 
     let changeName, changePassword
@@ -35,3 +38,6 @@ class Profile extends Component {
     })
     }
 }
+
+// en la callback, en vez de manejar vistas, forzaremos un refresco de pagina
+// location.reload()

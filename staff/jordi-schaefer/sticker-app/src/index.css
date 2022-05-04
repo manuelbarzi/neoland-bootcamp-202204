@@ -159,8 +159,8 @@ h3 {
   background-color: rgba(204, 224, 206, 0.7411764706);
 }
 
-.Profile__changeName {
-  margin: 2rem;
+.Profile {
+  margin-bottom: 2rem;
 }
 
 /* sass --watch index.sass index.css */
