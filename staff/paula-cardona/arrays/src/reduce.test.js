@@ -1,0 +1,1 @@
+//reducir un array a una cosa

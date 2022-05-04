@@ -1,0 +1,94 @@
+  html, body{
+      margin: 0;
+      height: 100%;
+  }
+
+  body{
+    box-sizing: border-box;
+}
+  
+.page {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: end;
+      gap: 1rem;
+      margin-top: -30%;
+   }    
+
+  
+    img {
+       border-radius: 50px;
+       background-color: rgb(0, 204, 255);
+       height: 80px;
+       width: 80px;
+   }         
+
+   .title {
+       font-family: 'Montserrat', sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 60%;
+
+   }
+
+.button {
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(6, 189, 251, 0.898);
+    font-size: larger;
+    color: white;
+    width: 40%;
+    height: 60px;
+    font-weight: bolder;
+}
+.button:hover {
+    background-color: rgb(42, 165, 67);
+}
+input {
+    font-family: 'Montserrat', sans-serif;
+    background-color: rgba(192, 198, 199, 0.776);
+    font-size: larger;
+    width: 80%;
+    height: 60px;
+    font-weight: bolder;
+    text-align: left;
+}
+::placeholder, .name{ 
+    color: rgb(255, 255, 255);
+    opacity: 1; 
+    font-size: medium;
+    padding: 16px;
+  }
+
+.iniciar, .entrar{  font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 50%;
+    color: rgb(0, 0, 0); 
+}
+
+
+
+a:link, a:visited, a:active, .p {
+    text-decoration:none;
+    
+
+}
+
+.question { font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+
+}
+
+.blue{
+    color: rgb(42, 165, 58);
+}
+
+.off {
+    display: none !important;
+  }
+  .login-to-register, .register-to-login {
+      cursor: pointer;
+  }
+
