@@ -12,7 +12,7 @@ class Home extends Component {
             <main class="Home__body Container"></main>
         
             <footer class="Home__footer Container">
-                <button class="Button Home__addSticker">+</button>
+                <button class="Button Home__addSticker">➕</button>
             </footer>
         </div>`)
 

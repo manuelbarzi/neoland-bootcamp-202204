@@ -89,6 +89,9 @@ body {
   background-color: ghostwhite;
   width: 100%;
 }
+.Home__footer button {
+  border: 2px solid grey;
+}
 
 .Container {
   display: flex;
