@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!--creo el elemento principal que sera la raíz para poderle añadir elementos html-->
+    <div id="root"></div> 
+
+    <!--añado la libreria de React-->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!--añado la libreria de Babel para convertir jsx en js de react-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+    <!--añado los componentes por orden de menos importante a más-->
+    <script src="components/Result.jsx" type="text/babel"></script>
+    <script src="components/App.jsx" type="text/babel"></script>
+    <script src="index.jsx" type="text/babel"></script>
+</body>
+
+</html>
