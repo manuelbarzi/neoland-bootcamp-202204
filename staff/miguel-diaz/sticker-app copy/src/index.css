@@ -255,6 +255,22 @@ a {
   color: black;
 }
 
+.Button {
+  justify-content: center;
+  margin: 0 auto;
+  outline: none;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 14px 24px;
+  border: none;
+  transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
+  background: #FFEF82;
+  color: black;
+}
+
 .namebutton {
   padding: 12px 20px;
   font-size: 1rem;
@@ -333,6 +349,19 @@ a {
   transition: box-shadow 0.2s ease 0s, -ms-transform 0.1s ease 0s, -webkit-transform 0.1s ease 0s, transform 0.1s ease 0s;
   background: #FFEF82;
   color: black;
+}
+
+.Form {
+  padding: 12px 20px;
+  font-size: 1rem;
+  border-width: calc(var(--border-width) * 1px);
+  border-style: solid;
+  border-color: var(--accent);
+  border-radius: calc(var(--border-radius) * 1px);
+  text-align: center;
+  outline: transparent;
+  width: 25%;
+  transition: border-color calc(var(--transition, 0.2) * 1s) ease;
 }
 
 /* sass --watch index.sass index.css *\ */
