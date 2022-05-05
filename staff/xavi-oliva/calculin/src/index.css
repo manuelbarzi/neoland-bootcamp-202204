@@ -1,0 +1,32 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.App--row {
+  flex-direction: row;
+  margin: 0.75rem 0;
+}
+.App--row button {
+  margin: 0 0.25rem;
+}
+.App input[type=number] {
+  width: 60px;
+  padding: 1.5rem;
+  text-align: right;
+  font-size: 1.2rem;
+}
+
+.App__title {
+  color: dodgerblue;
+}
+
+.Result {
+  border: 5px solid red;
+  background-color: yellow;
+  padding: 1.5rem;
+  font-size: 1.5rem;
+}
+
+/*# sourceMappingURL=index.css.map */
