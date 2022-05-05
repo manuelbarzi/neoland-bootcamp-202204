@@ -1,0 +1,22 @@
+@use '../config'
+@use '../utils'
+
+.button
+    background-color: lightgray
+    // border-radius: .5rem
+    // border-width: 1px
+    // border-style: solid
+    // border-color: config.$fore-color
+    // border: 1px solid config.$fore-color
+    @include utils.round-border(1px, solid, config.$fore-color, .5rem)
+    padding: .75rem
+    cursor: pointer
+    text-decoration: none
+    font-size: 1rem
+    color: config.$fore-color
+
+    &:visited
+        color: config.$fore-color
+
+    &_light
+        background-color: white

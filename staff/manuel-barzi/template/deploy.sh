@@ -1,0 +1,1 @@
+surge build template-202204-manuel.surge.sh

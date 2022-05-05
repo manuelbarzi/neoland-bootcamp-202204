@@ -1,0 +1,19 @@
+@use '../config'
+
+.container
+    display: flex
+    gap: .5rem
+    background-color: config.$color
+
+    &_column
+        flex-direction: column
+
+    &_spread
+        justify-content: space-between
+
+    &_height_100
+        height: 100%
+
+    &_center
+        justify-content: center
+        align-items: center
