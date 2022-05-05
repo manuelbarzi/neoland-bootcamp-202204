@@ -15,12 +15,12 @@ class Login extends Component {
 
         form.addEventListener('submit', function (event) {
             event.preventDefault()
-
-            const username = form.username.value
-            const password = form.password.value
+            
+            const{target: {username: {value: username}, password: {value: password}}} = event
+            //const username = form.username.value
+            //const password = form.password.value
 
             //callback(username, password)
-
             authenticateUser(username, password, function (error) {
                 if (error) {
                     alert(error.message)
@@ -29,6 +29,8 @@ class Login extends Component {
                 }
 
                 sessionStorage.username = username
+
+                event.target.reset()
 
                 callback()
             })
