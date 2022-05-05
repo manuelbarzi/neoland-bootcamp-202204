@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" type="image/png"
+        href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine_favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine-html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/boot0.js"></script>
+    <!-- optional: include a file here that configures the Jasmine env -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/boot1.js"></script>
+    <title>Spec</title>
+
+</head>
+
+<body>
+
+    <script src="data/models/User.js"></script>
+    <script src="data/models/Newspaper.js"></script>
+    <script src="data/users.js"></script>
+    <script src="data/newspapers.js"></script>
+
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/registerUser.spec.js"></script>
+
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/authenticateUser.spec.js"></script>
+
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/retrieveUser.spec.js"></script>
+
+</body>
+
+</html>

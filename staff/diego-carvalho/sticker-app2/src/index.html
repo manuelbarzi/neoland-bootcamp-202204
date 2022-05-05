@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <div id="root"></div>
+
+    <script src="vendor/smart-polyfills.js"></script>
+    <script src="vendor/smart-components.js"></script>
+    <script src="utils.js"></script>
+
+    <!-- data -->
+    <script src="data/db.js"></script>
+    <script src="data/models/User.js"></script>
+    <script src="data/models/Note.js"></script>
+    <script src="data/users.js"></script>
+    <script src="data/notes.js"></script>
+
+    <!-- business (logic) -->
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/createNote.js"></script>
+    <script src="logic/retrieveNotes.js"></script>
+    <script src="logic/updateNote.js"></script>
+    <script src="logic/deleteNote.js"></script>
+    <script src="logic/updateUserPassword.js"></script>
+    <script src="logic/updateUserName.js"></script>
+ 
+
+    <!-- presentation -->
+    <script src="components/Register.js"></script>
+    <script src="components/Login.js"></script>
+    <script src="components/Sticker.js"></script>
+    <script src="components/StickerList.js"></script>
+    <script src="components/StickerItem.js"></script>
+    <script src="components/Profile.js"></script>
+    <script src="components/ChangeName.js"></script>
+    <script src="components/ChangePassword.js"></script>
+    <script src="components/Home.js"></script>
+    <script src="components/App.js"></script>
+  
+
+    <script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!--links of CSS -->
+    <link rel="stylesheet" href="components/HelloWorld.css">
+    <link rel="stylesheet" href="components/Register.css">
+    <link rel="stylesheet" href="components/Login.css">
+    <link rel="stylesheet" href="components/Search.css">
+    <link rel="stylesheet" href="components/Results.css">
+    <link rel="stylesheet" href="components/Home.css">
+    <link rel="stylesheet" href="components/App.css">
+
+</head>
+
+<body>
+    <!--container HTML to save all JS files in.-->
+    <div id="root"></div>
+
+    <!--The library-->
+    <script src="vendor/smart-components.js"></script>
+    
+    <!--tool that automate the process of inheritance between parent and child-->
+    <script src="utils.js"></script>
+
+    <!--Data-->
+    <!--file where the info of the users and link of the web pages will be saved-->
+    <script src="data/models/User.js"></script>
+    <script src="data/models/Newspaper.js"></script>
+    <script src="data/users.js"></script>
+    <script src="data/newspaper.js"></script>
+
+    <!--Business (logic)-->
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/seachNewspapers.js"></script>
+   
+
+    <!--Presentation-->
+    <script src="components/HelloWorld.js"></script>
+    <script src="components/Register.js"></script>
+    <script src="components/Login.js"></script>
+    <script src="components/Search.js"></script>
+    <script src="components/Results.js"></script>
+    <script src="components/Home.js"></script>
+    <script src="components/App.js"></script>
+
+    <!--the file where are all interaction of the page-->
+    <script src="index.js"></script>
+
+</body>
+</html>

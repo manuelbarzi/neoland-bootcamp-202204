@@ -1,0 +1,222 @@
+body, html {
+    background-color: grey;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+.page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.hello_sila {
+    width: 120px;
+    height: 160px;
+    padding-top: 150px;
+    text-align: center;
+    font-family: 'Cabin';
+    color:white;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    font-size: 40px;
+}
+.buttons_group {
+    display: flex;
+    flex-direction: column;
+ 
+  
+}
+
+.input_up,
+.input_in {
+    width: 282px;
+    padding: 14px 0;
+    border-radius: 50px;
+    background: rgba(196, 196, 196, 0.12);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    cursor: pointer;   
+    font-family: 'Cabin';
+    font-size: 18px;
+    text-align: center;
+    text-decoration: none;
+    margin: 10px;
+    border: 1px solid white;
+    color: white;
+}
+
+.forgot { 
+   
+    font-family: 'Cabin';
+    font-size: 12px;
+    color: rgb(255, 255, 255);
+    text-align: center;
+    text-decoration: none;
+    margin: 10px;
+    padding-bottom: 70px;
+}
+
+.input_signup {
+
+    padding-top: 120px;
+    font-family: 'Cabin';
+    color: white;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    font-size: 40px;   
+}
+
+.container_inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+}
+
+
+.inputs_registers {
+    text-align: center;
+    width: 282px;
+    height: 52px;
+    background: rgba(196, 196, 196, 0.12);
+    border: 1px solid #F0E3E3;
+    box-sizing: border-box;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 25px;
+    letter-spacing: 0.15em;
+    margin: 10px;
+}
+
+
+input::placeholder {
+    color: white;
+    font-family: 'Cabin';
+}
+
+.register_button {
+    
+    width: 160px;
+    height: 30px;
+    margin: 1px;
+    border-radius: 25px;
+    border: solid;
+    color:black;
+    background: rgba(196, 196, 196, 0.12);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.signin {
+    padding-top: 120px;
+    font-family: 'Cabin';
+    color: white;
+    letter-spacing: 0.15em;
+    font-weight: 400;
+    font-size: 40px;
+}
+
+.inputs_login {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 400px;
+}
+
+.input_log {
+    width: 282px;
+    height: 52px;
+    margin: 12px;
+    border: solid 1px white;
+    border-radius: 50px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    letter-spacing: 0.15em;
+    background-color: gray;
+    text-align: center;
+}
+
+.login_button {
+   
+    width: 160px;
+    height: 30px;
+    margin: 1px;
+    border-radius: 25px;
+    border: solid;
+    color:black;
+    background: rgba(196, 196, 196, 0.12);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+   
+}
+
+.container {
+    display: flex;
+    gap: 0.5rem;
+    background-color: white;
+  }
+
+  .container_column {
+    flex-direction: column;
+  }
+
+  .container_height_100 {
+    height: 100%;
+  }
+
+  .container_center {
+    justify-content: center;
+    align-items: center;
+  }
+
+  .gallery {
+    border: 1px solid black;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  @media (min-width: 668px) {
+    .gallery {
+      display: grid;
+      grid-template-areas: "a a b" " c c b" "d d e" "f f e" "g h h" "g i i";
+    }
+  }
+  .gallery__item {
+    border: 1px solid black;
+    min-height: 8vh;
+    background: transparent;
+  }
+  @media (min-width: 668px) {
+    .gallery__item:nth-child(1) {
+      grid-area: a;
+    }
+    .gallery__item:nth-child(2) {
+      grid-area: b;
+    }
+    .gallery__item:nth-child(3) {
+      grid-area: c;
+    }
+    .gallery__item:nth-child(4) {
+      grid-area: d;
+    }
+    .gallery__item:nth-child(5) {
+      grid-area: e;
+    }
+    .gallery__item:nth-child(6) {
+      grid-area: f;
+    }
+    .gallery__item:nth-child(7) {
+      grid-area: g;
+    }
+    .gallery__item:nth-child(8) {
+      grid-area: h;
+    }
+    .gallery__item:nth-child(9) {
+      grid-area: i;
+    }
+  }
+  
+  
+.off {
+    display: none !important;
+}
