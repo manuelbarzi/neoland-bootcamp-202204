@@ -1,39 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
-
 * {
   font-family: Poppins;
 }
 
-html,
-body,
-#root {
+html, body, #root {
   height: 100%;
-
 }
 
 body {
   margin: 0;
 }
 
-h1,
-h2,
-h3 {
+h1, h2, h3 {
   font-size: inherit;
 }
 
-input {
+input, button {
   margin: 0.5rem;
   font-size: inherit;
   _font-size: 0.75rem;
-  box-shadow: 0px 3px 13px -5px #000000;
-  
-}
-
-button {
-  margin: 0.5rem;
-  font-size: inherit;
-  _font-size: 0.75rem;
-  
 }
 
 a {
@@ -41,64 +26,62 @@ a {
   text-decoration: none;
 }
 
-.App {
-  background-image: url('index.jpg');
+App {
   height: 100%;
+  background: lightblue;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .Home__header {
-  box-shadow: 0px 10px 13px -7px #000000;
-  background-color: rgba(220, 218, 218, 0.883);
   position: fixed;
   top: 0;
-  
+  background-color: ghostwhite;
   width: 100%;
-  height: 80px;
-}
-
-.Home__home, .Home__profile, .Home__logout{
-  margin-top: 30px;
 }
 
 .Home__footer {
   position: fixed;
   bottom: 0;
+  background-color: ghostwhite;
   width: 100%;
-  height: 60px;
-  background-color: rgba(220, 218, 218, 0.883);
-  box-shadow: 0px -8px 13px -7px #000;
-  
+}
+
+.Home__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
 }
 
 .Container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1.5rem;
+  gap: 0.5rem;
 }
 
 .Sticker {
-  background-color: rgb(249, 249, 6);
+  background-color: yellow;
   padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  box-shadow: 0px 10px 13px -7px #000000;
-  border-radius: 2px;
+}
+
+.Sticker__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .StickerList__list {
   list-style-type: none;
   padding: 0;
   margin-bottom: 3rem;
-
 }
-
-
 
 /*# sourceMappingURL=index.css.map */
