@@ -23,7 +23,7 @@ class DeleteUser extends Component {
 
             alert('User deleted')
             delete sessionStorage.username
-            location.reload()
+            location.reload() //refresca la página donde estan
         })
 
     })

@@ -9,7 +9,7 @@ class Component { //creo un elemento div
         this.container = temp.firstChild //todo el paquete se lo pongo a una propiedad llamada paquete
     }
 
-    //desde el compo tonto
+   //desde el compo tonto
     addTo(parent) {      //this, desde el objeto donde se llama
         parent.container.appendChild(this.container)
     }
