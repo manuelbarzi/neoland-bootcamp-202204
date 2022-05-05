@@ -1,5 +1,6 @@
-function Login() {
-    Component.call(this, `<div class="LoginAndRegister">
+class Login extends Component {
+    constructor() {
+        super(`<div class="LoginAndRegister">
         <form class="form">
             <input class="input" type="text" name="username" placeholder="username">
             <input class="input" type="password" name="password" placeholder="password">
@@ -7,30 +8,29 @@ function Login() {
             <a href="#" class="button button__light">Register</a>
         </form>
     </div>`)
-}
+    }
 
-chainPrototypes(Component, Login)
+    onSubmit(callback) {
+        const form = this.container.querySelector('form')
 
-Login.prototype.onSubmit = function(callback) {
-    const form = this.container.querySelector('form')
+        form.addEventListener('submit', function (event) {
+            event.preventDefault()
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault()
+            const username = form.username.value
+            const password = form.password.value
 
-        const username = form.username.value
-        const password = form.password.value
+            event.target.reset()
+            callback(username, password)
+        })
+    }
 
-        event.target.reset()
-        callback(username, password)
-    })
-}
+    onRegisterClick(callback) {
+        const anchor = this.container.querySelector('a')
 
-Login.prototype.onRegisterClick = function(callback) {
-    const anchor = this.container.querySelector('a')
+        anchor.addEventListener('click', function (event) {
+            event.preventDefault()
 
-    anchor.addEventListener('click', function(event) {
-        event.preventDefault()
-
-        callback()
-    })
+            callback()
+        })
+    }
 }

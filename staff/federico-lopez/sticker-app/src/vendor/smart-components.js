@@ -1,32 +1,38 @@
 console.log('%cSmart Components v1.2', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
 
-function Component(template = '') {
-    const temp = document.createElement('div')
+class Component {
+    constructor(template = '') {
+        const temp = document.createElement('div')
 
-    temp.innerHTML = template
+        temp.innerHTML = template
 
-    this.container = temp.firstChild
-}
+        this.container = temp.firstChild
+    }
 
-Component.prototype.addTo = function(parent) {
-    parent.container.appendChild(this.container)
-}
+    addTo(parent) {
+        parent.container.appendChild(this.container)
+    }
 
-Component.prototype.removeFrom = function(parent) {
-    parent.container.removeChild(this.container)
-}
+    removeFrom(parent) {
+        parent.container.removeChild(this.container)
+    }
 
-Component.prototype.add = function(...children) {
-    for (const child of children)
-        this.container.appendChild(child.container)
-}
+    add(...children) {
+        for (const child of children)
+            this.container.appendChild(child.container)
+    }
 
-Component.prototype.remove = function(...children) {
-    for (const child of children)
-        this.container.removeChild(child.container)
-}
+    remove(...children) {
+        for (const child of children)
+            this.container.removeChild(child.container)
+    }
 
-Component.prototype.addFirst = function(...children) {
-    for (const child of children)
-        this.container.prepend(child.container)
+    addFirst(...children) {
+        for (const child of children)
+            this.container.prepend(child.container)
+    }
+
+    has(child) {
+        return this.container.hasChild(child.container)
+    }
 }

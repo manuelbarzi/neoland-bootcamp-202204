@@ -1,5 +1,5 @@
-function App() {
-    Component.call(this, `<main class="App"></main>`)
+class App extends Component {
+    constructor() {
+        super(`<main class="App"></main>`)
+    }
 }
-
-chainPrototypes(Component, App)

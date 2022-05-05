@@ -1,8 +1,9 @@
 describe('createNote', () => {
     it('should succeed for existing user', () => {
         db.users.length = 0
-        db.users.push(new User('John Doe', 'john', '123123123'))
         db.notes.length = 0
+
+        db.users.push(new User('John Doe', 'john', '123123123'))
 
         createNote('john', 'Adiós Mundo Cruel...', function(error) {
             expect(error).toBeNull()

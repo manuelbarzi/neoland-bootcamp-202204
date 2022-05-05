@@ -11,5 +11,5 @@ function createNote(username, text, callback) {
 
     db.notes.push(note)
 
-    callback(null)
+    callback(null, note)
 }

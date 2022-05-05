@@ -1,36 +1,105 @@
-function Sticker(previousText = '') {
-    Component.call(this, `<li class="Sticker">
-        <a class="xButton">x</a>
-        <form class="Sticker__form">
-            <textarea class="textarea" name="text"></textarea>
-            <button class="saveButton">Save</button>
-        </form>
-    </li>`)
+class Sticker extends Component {
+    constructor(text = '', parent) {
+        super(`<li class="Sticker"></li>`)
 
-    const textarea = this.container.querySelector('textarea')
+        this.id = null
 
-    textarea.innerText = previousText
+        const editableSticker = new EditableSticker(text)
+        const viewSticker = new ViewSticker(text)
 
-}
+        this.editable = editableSticker
+        this.view = viewSticker
 
-chainPrototypes(Component, Sticker)
+        let p = this.view.container.querySelector('p')
+        let textarea = this.editable.container.querySelector('textarea')
 
-Sticker.prototype.onSubmit = function (callback) {
-    const form = this.container.querySelector('form')
+        const editButton = this.view.container.querySelector('.editButton')
 
-    form.addEventListener('submit', event => {
-        event.preventDefault()
+        editButton.addEventListener('click', () => {
+            this.toEditMode()
+        })
 
-        const text = form.text.value
+        const xButton = this.editable.container.querySelector('.xButton')
 
-        callback(text)
-    })
-}
+        // xButton.addEventListener('click', () => {
+        //     parent.remove(this)
+        // })
 
-Sticker.prototype.onClose = function (callback) {
-    const close = this.container.querySelector('.xButton')
+        const form = this.editable.container.querySelector('.Sticker__form')
 
-    close.addEventListener('click', function () {
-        callback()
-    })
+        form.addEventListener('submit', () => {
+            if (!this.id) {
+                createNote(sessionStorage.username, textarea.value, (error, note) => {
+                    if (error)
+                        alert(error.message)
+                    else
+                        this.setId(note.id)
+
+                })
+            } else {
+                updateNote(sessionStorage.username, this.id, textarea.value, error => {
+                    if (error)
+                        alert(error.message)
+                })
+            }
+
+            p.innerHTML = textarea.value
+            this.toViewMode()
+        })
+    }
+
+    toEditMode() {
+        if (this.has(this.view))
+            this.remove(this.view)
+
+        this.add(this.editable)
+    }
+
+    toViewMode(text) {
+        if (this.has(this.editable))
+            this.remove(this.editable)
+
+        this.add(this.view)
+    }
+
+    onSubmit(callback) {
+        const form = this.container.querySelector('form')
+
+        form.addEventListener('submit', event => {
+            event.preventDefault()
+
+            const text = form.text.value
+
+            callback(text)
+        })
+    }
+
+    onClose(callback) {
+        const close = this.editable.container.querySelector('.xButton')
+
+        close.addEventListener('click', () => {
+            const idExists = !!this.id
+            if (idExists)
+                this.toViewMode()
+
+            callback(idExists)
+        })
+    }
+
+    onRemove(callback) {
+        const remove = this.view.container.querySelector(".removeButton")
+
+        remove.addEventListener('click', () => {
+            deleteNote(sessionStorage.username, this.id, error => {
+                if (error) {
+                    alert(message.error)
+                }
+            })
+            callback()
+        })
+    }
+
+    setId(id) {
+        this.id = id
+    }
 }

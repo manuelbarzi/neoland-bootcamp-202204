@@ -1,5 +1,6 @@
-function Register() {
-    Component.call(this, `<div class="LoginAndRegister">
+class Register extends Component {
+    constructor() {
+        super(`<div class="LoginAndRegister">
         <form class="form">
             <input class="input" type="text" name="name" placeholder="name">
             <input class="input" type="text" name="username" placeholder="username">
@@ -8,32 +9,29 @@ function Register() {
             <a class="button button__light" href="#">Login</a>
         </form>
     </div>`)
-}
+    }
 
-chainPrototypes(Component, Register)
+    onSubmit(callback) {
+        const form = this.container.querySelector('form')
 
-Register.prototype.onSubmit = function(callback) {
-    const form = this.container.querySelector('form')
+        form.addEventListener('submit', function (event) {
+            event.preventDefault()
 
-    form.addEventListener('submit', function(event) {
-        event.preventDefault()
+            const name = form.name.value
+            const username = form.username.value
+            const password = form.password.value
 
-        const name = form.name.value
-        const username = form.username.value
-        const password = form.password.value
+            callback(name, username, password)
+        })
+    }
 
-        callback(name, username, password)
-    })
-}
+    onLoginClick(callback) {
+        const anchor = this.container.querySelector('a')
 
-// TODO implement onLoginClick method (SEE Login.prototype.onRegisterClick for inspiration)
+        anchor.addEventListener('click', function (event) {
+            event.preventDefault()
 
-Register.prototype.onLoginClick = function(callback) {
-    const anchor = this.container.querySelector('a')
-
-    anchor.addEventListener('click', function(event) {
-        event.preventDefault()
-
-        callback()
-    })
+            callback()
+        })
+    }
 }

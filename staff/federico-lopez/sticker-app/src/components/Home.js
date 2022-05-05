@@ -1,58 +1,81 @@
-function Home() {
-    Component.call(this, `<div class="Home">
+class Home extends Component {
+    constructor() {
+        super(`<div class="Home">
         <header class="header">
-            <h2 class="salute">Hello, Home!</h2>
+            <a class="viewStickersButton">Stickers</a>
+            <a class="profileButton"></a>
             <button class="logout">Log Out</button>
         </header>
         <footer class="footer">
             <button class="addNote">+</button>
         </footer>
     </div>`)
-    
-    if (sessionStorage.username)
-    retrieveUser(sessionStorage.username, (error, user) => {
-        if (error) {
-            alert(error.message)
-            
-            return
-        }
-        
-        this.setName(user.name)
-    })
 
-    if (!this.container.querySelector('.List')) {
-        let list = new List(sessionStorage.username, this)
+        if (sessionStorage.username)
+            retrieveUser(sessionStorage.username, (error, user) => {
+                if (error) {
+                    alert(error.message)
 
-        if (!list.container.querySelector('li'))
-            return
+                    return
+                }
 
+                this.setName(user.name)
+            })
+
+        const list = new List(sessionStorage.username, this)
         this.add(list)
+
+        const add = this.container.querySelector('.addNote')
+
+        let profile
+
+        const profileButton = this.container.querySelector('.profileButton')
+
+        profileButton.addEventListener('click', () => {    
+            if(!profile || !this.has(profile)){
+                profile = new Profile
+                
+                this.add(profile)
+                if(this.has(list)) {
+                    this.remove(list)
+                    this.container.querySelector('.footer').removeChild(add)
+            }
+        }
+        })
+
+        const listButton = this.container.querySelector('.viewStickersButton')
+
+        listButton.addEventListener('click', () => {
+            if(!this.has(list)) {
+                if(this.has(profile))
+                    this.remove(profile)
+                
+                this.add(list)
+                this.container.querySelector('footer').appendChild(add)
+            }
+        })
     }
-}
 
-chainPrototypes(Component, Home)
+    setName(name) {
+        const profileButton = this.container.querySelector('.profileButton')
 
-Home.prototype.setName = function (name) {
-    const title = this.container.querySelector('h2')
+        profileButton.innerText = name
+    }
 
-    title.innerText = `Hello, ${name}!`
-}
+    onClickLogout(callback) {
+        const logoutButton = this.container.querySelector('.logout')
 
-Home.prototype.onClickLogout = function (callback) {
-    const logoutButton = this.container.querySelector('.logout')
+        logoutButton.addEventListener('click', () => {
+            delete sessionStorage.username
+            callback()
+        })
+    }
 
-    logoutButton.addEventListener('click', () => {
-        delete sessionStorage.username
-        callback()
-    })
-}
+    onClickAdd(callback) {
+        const add = this.container.querySelector('.addNote')
 
-Home.prototype.onClickAdd = function (callback) {
-    const add = this.container.querySelector('.addNote')
-
-    add.addEventListener('click', () => {
-        // if (this.container.querySelector('.Sticker'))
-        //     return
-        callback()
-    })
+        add.addEventListener('click', () => {
+            callback()
+        })
+    }
 }
