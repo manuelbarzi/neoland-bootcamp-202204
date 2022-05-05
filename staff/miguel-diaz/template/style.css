@@ -1,0 +1,359 @@
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  position: relative;
+  width: 375px;
+  height: 812px;
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  background-color: #ffbcd1;
+  box-sizing: border-box;
+}
+
+.off {
+  display: none !important;
+}
+
+.button-1 {
+  position: absolute;
+  width: 200px;
+  height: 61px;
+  left: 87px;
+  top: 469px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  border-width: 0;
+}
+
+.button-2 {
+  position: absolute;
+  width: 200px;
+  height: 61px;
+  left: 87px;
+  top: 566px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  border-width: 0;
+}
+
+.button-2:hover {
+  cursor: pointer;
+  color: white;
+  background: #46244C;
+}
+
+.button-1:hover {
+  cursor: pointer;
+  color: white;
+  background: #46244C;
+}
+
+.login-title {
+  position: absolute;
+  width: 101px;
+  height: 54px;
+  left: 30px;
+  top: 129px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 54px;
+  color: white;
+}
+
+.flecha-login {
+  position: absolute;
+  width: 48px;
+  height: 0px;
+  left: 32px;
+  top: 86px;
+  font-size: 28px;
+}
+
+.flecha-login:hover{
+  cursor: pointer;
+}
+
+.bienvenido {
+  position: absolute;
+  width: 211px;
+  height: 54px;
+  left: 82px;
+  top: 297px;
+  
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 54px;
+  color: #FFFFFF;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: white;
+  background: rebeccapurple;
+}
+
+
+.back {
+  color: #46244C;
+}
+
+.landing {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 95%;
+  margin: 0 auto;
+}
+
+
+.icon {
+  font-size: 30px;
+  display: flex;
+}
+
+.input-user {
+  position: absolute;
+  width: 320px;
+  height: 61px;
+  left: 27px;
+  top: 375px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  text-align: center;
+  border-width: 0;
+}
+
+.input-pass {
+  position: absolute;
+  width: 320px;
+  height: 61px;
+  left: 27px;
+  left: 27px;
+  top: 454px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  text-align: center;
+  border-width: 0;
+}
+
+.button-login {
+  position: absolute;
+  width: 200px;
+  height: 61px;
+  left: 87px;
+  top: 550px; 
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  border-width: 0;
+}
+
+.button-registro {
+  position: absolute;
+  width: 144px;
+  height: 48px;
+  left: 116px;
+  top: 629px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  border-width: 0;
+}
+
+.flecha-register {
+  position: absolute;
+  width: 48px;
+  height: 0px;
+  left: 32px;
+  top: 86px;
+  font-size: 28px;
+}
+
+.flecha-register:hover{
+  cursor: pointer;
+}
+
+.input-u {
+  position: absolute;
+  width: 320px;
+  height: 61px;
+  left: 27px;
+  top: 283px;
+
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+.input-e {
+  position: absolute;
+  width: 320px;
+  height: 61px;
+  left: 27px;
+  top: 375px;
+
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+.input-p {
+  position: absolute;
+  width: 320px;
+  height: 61px;
+  left: 27px;
+  top: 467px;
+
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+.input-rp {
+  position: absolute;
+  width: 320px;
+  height: 61px;
+  left: 27px;
+  top: 559px;
+
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+}
+
+.button-register {
+  position: absolute;
+  width: 220px;
+  height: 61px;
+  left: 77px;
+  top: 668px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  border-width: 0;
+}
+
+input {
+  text-align: center;
+  border-width: 0;
+}
+
+
+input:last-child {
+  margin-bottom: 0;
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  margin: 0 auto;
+  max-width: fit-content;
+  padding: 0 0.75rem;
+}
+
+.register {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin: 0 auto;
+    max-width: fit-content;
+    padding: 0 0.75rem;
+}
+
+.registro-title {
+  position: absolute;
+  width: 101px;
+  height: 54px;
+  left: 30px;
+  top: 129px;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-size: 36px;
+  line-height: 54px;
+  color: white;
+}
+
+.gallery {
+
+  border: 1px solid black;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 668px;
+}
+
+@media (min-width: 668px) {
+  .gallery {
+
+    display: grid;
+    border-width: 0;
+    grid-template-areas: "a1 a2 a2" "a1 a3 a3" "a4 a4 a6" "a5 a5 a6" "a7 a8 a9";  
+  }
+}
+
+.gallery__item {
+  border: 1px solid rebeccapurple;
+  min-height: 14vh;
+  background: purple;
+}
+
+@media (min-width: 668px) {
+
+  .gallery__item:nth-child(1) {
+      grid-area: a1;
+  }
+
+  .gallery__item:nth-child(2) {
+    grid-area: a2;
+  }
+
+  .gallery__item:nth-child(3) {
+    grid-area: a3;
+  }
+
+  .gallery__item:nth-child(4) {
+    grid-area: a4;
+  }
+
+  .gallery__item:nth-child(5) {
+    grid-area: a5;
+  }
+
+  .gallery__item:nth-child(6) {
+    grid-area: a6;
+  }
+
+  .gallery__item:nth-child(7) {
+    grid-area: a7;
+  }
+
+  .gallery__item:nth-child(8) {
+    grid-area: a8;
+  }
+
+  .gallery__item:nth-child(9) {
+    grid-area: a9;
+  }
+}
+
+
+
+/*# sourceMappingURL=style.css.map */
