@@ -5,5 +5,5 @@ function Fakay() {
         this[i] = elem
     }
 
-    this.length = arguments.length
+    this.length = arguments.length //si no le paso argumentos a la función el length es 0
 }

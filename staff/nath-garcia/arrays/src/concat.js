@@ -4,7 +4,7 @@
   - concatenar cada argumento (array) en result
   - retornar result
   */
-function concat() {
+/*function concat() {
     const result = []
 
     for (let i = 0; i < arguments.length; i++) {
@@ -20,4 +20,14 @@ if (argument instanceof Array)
         result[result.length] = argument
     }
     return result
+}*/
+function concat (){
+    let newArray = []
+    for (let i = 0; i < arguments.length; i++) {
+        for (let element of arguments[i]){
+            newArray.push(element)
+        }
+    }
+    return newArray
 }
+

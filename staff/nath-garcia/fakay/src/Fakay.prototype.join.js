@@ -1,12 +1,13 @@
-function join(array, separator = ',') {
+Fakay.prototype.join = function(separator = ',') {
+
     let string = ''
 
-    for (let i = 0; i < array.lenght; i++) {
-        const currentElement = array[i]
+    for (let i = 0; i < this.length; i++) {
+        const currentElement = this[i]
 
         string += currentElement
 
-        if (i < array.length - 1)
+        if (i < this.length - 1)
             string += separator
     }
     return string
