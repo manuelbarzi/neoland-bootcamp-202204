@@ -1,7 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+}
+
 .App {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 1rem;
   margin-bottom: 3rem;
   background-color: #e5e5e5;
   height: 100%;
@@ -20,8 +35,7 @@
   border: 3px solid #794cea;
   background-color: #e5e5e5;
   border-radius: 0.5rem;
-  margin: 0.5rem;
-  font-size: 30px;
+  font-size: 1.7rem;
   width: 30%;
   text-align: center;
 }
@@ -32,7 +46,7 @@
 
 .btn1 {
   background-color: #794cea;
-  color: #262626;
+  color: #9f9f9f;
   border-style: none;
   border-radius: 0.5rem;
   font-size: 1rem;
@@ -57,20 +71,11 @@
 .Result {
   font-size: 2rem;
   background-color: #69a87e;
-  padding: 1rem;
-  width: 25%;
+  padding: 1rem 2rem;
   text-align: center;
   color: white;
   border-radius: 1rem;
-}
-
-html, body, #root {
-  height: 100%;
-  width: 100%;
-}
-
-body {
-  margin: 0;
+  margin-top: 1.2rem;
 }
 
 /*# sourceMappingURL=index.css.map */

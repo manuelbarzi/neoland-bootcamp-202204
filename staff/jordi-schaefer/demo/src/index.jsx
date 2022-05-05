@@ -3,5 +3,5 @@ const root = document.querySelector('#root')
 
 // añadimos clase App a root
 // ReactDOM.render(<App/>, root)
-ReactDOM.render(<App titulo="Calculadora"/>, root)
+ReactDOM.render(<App titulo="Calculator"/>, root)
 // le pasamos la variable salute a la App

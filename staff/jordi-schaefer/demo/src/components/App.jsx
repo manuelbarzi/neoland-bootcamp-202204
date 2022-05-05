@@ -38,8 +38,8 @@ class App extends Component {
         const { a, b } = this.state        
         this.setState({ result: a/b }) 
     }
-    handleRes = () => {      
-        this.setState({ result: null }) 
+    handleRes = () => {     
+        this.setState({ result: null })  
     }
 
 
@@ -67,7 +67,6 @@ class App extends Component {
             </div>
 
 
-            <h2 className="igual">=</h2>
 
             {/* si el estado de result es diferente a null y el otro es "algo/true" ejecuta la segunda condicion */}
             {/* ejecutamos la class result, enviadole la propiedad value, que es el estado result de la app, a traves de props */}
