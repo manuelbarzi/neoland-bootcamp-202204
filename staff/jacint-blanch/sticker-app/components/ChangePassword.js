@@ -1,5 +1,7 @@
-function ChangePassword() {
-    Component.call(this, `<div class="ChangePassword">
+class ChangePassword extends Component {
+    constructor() {
+
+    super(`<div class="ChangePassword">
         <form class="Container">
             <input type="password" name="password" placeholder="current password">
 
@@ -29,5 +31,4 @@ function ChangePassword() {
 
     })
 }
-
-chainPrototypes(Component, ChangePassword)
+}

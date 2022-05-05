@@ -1,10 +1,11 @@
-function ChangeName() {
-    Component.call(this, `<div class="ChangeName">
-    <form class="Container">
-        <input type="text" name="name" placeholder="name">
-        <button>Save</button>
-    </form>
-</div>`)
+class ChangeName extends Component {
+    constructor() {
+        super(`<div class="ChangeName">
+        <form class="Container">
+            <input type="text" name="name" placeholder="name">
+            <button>Save</button>
+        </form>
+    </div>`)
 
 
 this.container.querySelector('form').addEventListener('submit', event => {
@@ -25,4 +26,4 @@ this.container.querySelector('form').addEventListener('submit', event => {
 })
 }
 
-chainPrototypes(Component, ChangeName)
+}

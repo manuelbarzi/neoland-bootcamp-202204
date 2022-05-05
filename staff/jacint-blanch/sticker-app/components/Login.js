@@ -1,47 +1,49 @@
-function Login() {
-    Component.call(this, `<div>
-        <form class="Container">
-            <input type="text" name="username" placeholder="username">
-            <input type="password" name="password" placeholder="password">
-            <button>Login</button>
-            <a href="#">Register</a>
-        </form>
-    </div>`)
-}
+class Login extends Component {
+    constructor() {
+        super(`<div>
+            <form class="Container">
+                <input class="Input Input--light" type="text" name="username" placeholder="username">
+                <input class="Input Input--light" type="password" name="password" placeholder="password">
+                <button class="Button Button--light">Login</button>
+                <a href="#">Register</a>
+            </form>
+        </div>`)
+    }
 
-chainPrototypes(Component, Login)
+    onUserLoggedIn(callback) {
+        const form = this.container.querySelector('form')
 
-Login.prototype.onUserLoggedIn = function (callback) {
-    const form = this.container.querySelector('form')
+        form.addEventListener('submit', function (event) {
+            event.preventDefault()
 
-    form.addEventListener('submit', function (event) {
-        event.preventDefault()
+            const username = form.username.value
+            const password = form.password.value
 
-        const username = form.username.value
-        const password = form.password.value
+            //callback(username, password)
 
-        //callback(username, password)
+            authenticateUser(username, password, function (error) {
+                if (error) {
+                    alert(error.message)
 
-        authenticateUser(username, password, function (error) {
-            if (error) {
-                alert(error.message)
+                    return
+                }
 
-                return
-            }
+                sessionStorage.username = username
+                
+                event.target.reset()
+                callback()
+              
+            })
+        })
+    }
 
-            sessionStorage.username = username
+    onRegisterClick(callback) {
+        const anchor = this.container.querySelector('a')
+
+        anchor.addEventListener('click', function (event) {
+            event.preventDefault()
 
             callback()
         })
-    })
-}
-
-Login.prototype.onRegisterClick = function (callback) {
-    const anchor = this.container.querySelector('a')
-
-    anchor.addEventListener('click', function (event) {
-        event.preventDefault()
-
-        callback()
-    })
+    }
 }

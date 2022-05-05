@@ -7,5 +7,13 @@ function updateUserName(username, newUsername, callback){
         return
     }
 
+    if (user.name === newUsername) {
+        callback(new Error('new username its the same as previous one'))
+
+        return
+    }
+
     user.username = newUsername
+
+    callback(null)
 }
