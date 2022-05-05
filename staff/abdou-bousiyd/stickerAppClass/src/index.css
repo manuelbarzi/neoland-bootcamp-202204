@@ -1,0 +1,293 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  height: 100%;
+  background-color: dodgerblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home {
+  height: 100%;
+  width: 100%;
+}
+
+.Home__header {
+  position: fixed;
+  top: 0;
+  background-color: ghostwhite;
+  width: 100%;
+  z-index: 10;
+}
+
+.Home__body {
+  overflow: auto;
+  width: 100%;
+  padding-top: 20px;
+}
+
+.Home__footer {
+  position: fixed;
+  bottom: 0;
+  background-color: ghostwhite;
+  width: 100%;
+}
+
+.Home__header__btns {
+  width: 230px;
+  display: flex;
+}
+
+.Home__header__nameUser {
+  display: flex;
+  width: 100px;
+}
+
+.profile__user, img {
+  width: 35px;
+  height: 34px;
+  border-radius: 50%;
+  margin: 2px;
+}
+
+._Button {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  background-color: ghostwhite;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Container--row {
+  flex-direction: row;
+}
+
+.Container--spread-sides {
+  justify-content: space-between;
+}
+
+.Sticker {
+  position: relative;
+  background-color: yellow;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  height: 40vw;
+  background: #ffa;
+  margin: 30px auto;
+  padding: 20px;
+  box-shadow: inset 0 -40px 40px rgba(0, 0, 0, 0.2), inset 0 25px 10px rgba(0, 0, 0, 0.2), 0 5px 6px 5px rgba(0, 0, 0, 0.2);
+}
+
+.Sticker__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+
+.sticker__close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+  border: 0;
+}
+.sticker__close i {
+  margin: 5px;
+  font-size: 25px;
+  color: crimson;
+}
+
+.Sticker__id {
+  font-size: 10px;
+}
+
+.Sticker__text {
+  background: transparent;
+  border: none;
+  resize: none;
+  width: 100%;
+  font-family: "Permanent Marker", cursive;
+  line-height: 1.7em;
+  font-size: 24px;
+  color: #130d6b;
+}
+
+.StickerList__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
+}
+
+.Button {
+  margin: 0.5rem;
+  font-size: inherit;
+}
+
+.Button {
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.Button--light {
+  border-color: white;
+  color: white;
+}
+
+.Button--no-border {
+  border: none;
+}
+
+.Input {
+  margin: 0.5rem;
+  font-size: inherit;
+  text-indent: 0.5rem;
+}
+
+.Input {
+  border: 1px solid black;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.Input--light {
+  border-color: white;
+  color: white;
+}
+
+.Input--light::placeholder {
+  color: #EEE;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  padding: 15px;
+}
+
+fieldset {
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}
+
+.form__login, .form__register {
+  display: flex;
+  justify-content: center;
+  background-color: #fff;
+  border-radius: 5px;
+  width: 300px;
+}
+
+.form__login {
+  height: 400px;
+}
+
+.form__register {
+  height: 500px;
+}
+
+.form__login__title, .form__register__title {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.form__login__input, .form__register__input {
+  border: 1px solid #666464;
+  padding: 5px;
+  width: 90%;
+  height: 30px;
+  border-radius: 5px;
+  background-color: transparent;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.form__login__btn, .form__register__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  color: #eee;
+  width: 200px;
+  height: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 18px;
+  background-color: #38a169;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+}
+
+#password, #username, #name {
+  align-self: flex-start;
+  text-indent: 10px;
+}
+
+.Profile {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  height: 200px;
+}
+
+.Profile__changeName, .Profile__changePassword {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  border-radius: 5px;
+  color: #eee;
+  width: 200px;
+  height: 50px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 15px;
+  background-color: #38a169;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  margin: 5px;
+}
+
+/*# sourceMappingURL=index.css.map */
