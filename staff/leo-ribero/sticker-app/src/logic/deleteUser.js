@@ -1,10 +1,9 @@
-function deleteUser (username, password, callback) {
+function deleteUserFun (username, password, callback) {
     const index = db.users.findIndex(user => user.username === username)
     if (index < 0) {
         callback(new Error(`user with username "${'wrong username'}" does not exist`))
         return
     }
-
 
     const user = db.users.find(user => user.username === username)
     if (user.password !== password) {
@@ -13,5 +12,6 @@ function deleteUser (username, password, callback) {
         return
     }
     db.users.splice(index, 1)
+
     callback(null)
 }

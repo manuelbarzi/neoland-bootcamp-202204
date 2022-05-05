@@ -6,7 +6,7 @@ class Profile extends Component {
             <button class="Button Profile__deleteUser">Delete user</button>
         </div>`)
 
-        let changeName, changePassword
+        let changeName, changePassword, deleteUser
 
         const changeNameButton = this.container.querySelector('.Profile__changeName')
 
