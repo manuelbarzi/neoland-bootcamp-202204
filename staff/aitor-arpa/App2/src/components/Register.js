@@ -1,4 +1,4 @@
-class Register extends Comment {
+class Register extends Component {
     constructor() {
         super(`<div>
         <form class="Container">

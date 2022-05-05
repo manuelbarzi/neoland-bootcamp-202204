@@ -1,5 +1,5 @@
 class StickerItem extends Component {
-    constructor (){
+    constructor (sticker){
     super('<li></li>')
 
     this.add(sticker)

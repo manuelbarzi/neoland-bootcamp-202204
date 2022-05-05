@@ -17,6 +17,7 @@ describe('updateUserName', () => {
 
             expect(db.users[0].name).toBe('chocolater')
             expect(error.message).toBe(`Your "chocolater" is the same "chocolater"`)
+            expect(error).toBeIsantaOf(error)
                                 
            
             db.users.length = 0
@@ -25,15 +26,22 @@ describe('updateUserName', () => {
 
 
 
-    /* it('Espero que el nuevo nombre no este en la base de datos', () => {
+    it('Espero que el nombre sea diferente al nombre new y lo cambia', () => {
+        db.users.length = 0
 
         db.users.push(new User('chocolater', 'chocolater', '123123123'))
 
-        UserNoFound = db.user.find('chocolater')
 
-        updateUserName()
 
-    }) */
+        updateUserName('chocolater', 'chocolatero',(error) =>  { 
+
+            expect(db.users[0].name).toBe('chocolater')
+            expect(error.message).toBe(`Your "chocolater" is the same "chocolater"`)
+                                
+           
+            db.users.length = 0
+        })
+    })
 
     
 })

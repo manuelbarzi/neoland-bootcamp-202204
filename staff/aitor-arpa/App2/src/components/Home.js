@@ -31,17 +31,18 @@ class Home extends Component {
             }
         })
 
-        const profileButton = this.container.querySelector('.Home__profile')
+const profileButton = this.container.querySelector('.Home__profile')
 
-        profileButton.addEventListener('click', () => {
-            if (!profile || !this.hasBody(profile)) {
-                this.removeFromBody(stickerList)
+profileButton.addEventListener('click', () => {
+    if (!profile || !this.hasBody(profile)) {
+        this.removeFromBody(stickerList)
 
-                this.container.querySelector('.Home__footer').removeChild(addStickerButton)
+        this.container.querySelector('.Home__footer').removeChild(addStickerButton)
 
-                profile = new Profile
+    if (!profile)    
+        profile = new Profile
 
-                this.addToBody(profile)
+    this.addToBody(profile)
             }
         })
 
@@ -85,22 +86,23 @@ class Home extends Component {
         chainPrototypes(Component, Home)
     }
 
-    
 
-setName(name) {
-    const profileButton = this.container.querySelector('.Home__profile')
 
-    profileButton.innerText = name
+    setName(name) {
+        const profileButton = this.container.querySelector('.Home__profile')
+
+        profileButton.innerText = name
+    }
+
+    addToBody(component) {
+        this.container.querySelector('.Home__body').appendChild(component.container)
+    }
+
+    removeFromBody(component) {
+        this.container.querySelector('.Home__body').removeChild(component.container)
+    }
+
+    hasBody(component) {
+        return this.container.querySelector('.Home__body').hasChild(component.container)
+    }
 }
-
-addToBody(component) {
-    this.container.querySelector('.Home__body').appendChild(component.container)
-}
-
-removeFromBody(component) {
-    this.container.querySelector('.Home__body').removeChild(component.container)
-}
-
-hasBody(component) {
-    return this.container.querySelector('.Home__body').hasChild(component.container)
-}}

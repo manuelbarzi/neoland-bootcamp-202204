@@ -3,6 +3,7 @@ class Profile extends Component{
     super( `<div class="Profile">
         <button class="Profile__changeName">Change Name</button>
         <button class="Profile__changePassword">Change Password</button>
+        <button class="Profile__deleteUser">Delete User</button>
     </div>`)
 
     let changeName, changePassword
@@ -32,4 +33,6 @@ class Profile extends Component{
             this.add(changePassword)
         }
     })
+
+    
 }}

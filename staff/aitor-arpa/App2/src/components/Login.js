@@ -1,4 +1,4 @@
-class Login extends Comment {
+class Login extends Component {
     constructor(){
         super(`<div>
         <form class="Container">
@@ -17,8 +17,9 @@ onUserLoggedIn(callback) {
     form.addEventListener('submit', function (event) {
         event.preventDefault()
 
-        const username = form.username.value
-        const password = form.password.value
+       /*  const username = event.target.username.value
+        const password = event.target.password.value */
+        const {target: {username: {value: username}, password: {value:password}}} = event
 
         // callback(username, password)
         authenticateUser(username, password, function (error) {
@@ -29,6 +30,7 @@ onUserLoggedIn(callback) {
             }
 
             sessionStorage.username = username
+            event.target.reset()
 
             callback()
         })
