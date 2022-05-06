@@ -1,0 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/*# sourceMappingURL=index.css.map */

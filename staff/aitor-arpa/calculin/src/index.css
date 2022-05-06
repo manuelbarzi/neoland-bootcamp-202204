@@ -1,3 +1,43 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
+.App__title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.calcone {
+  display: grid;
+  grid-template-columns: repeat(2, 2rem);
+  justify-content: center;
+}
+
+.selecNum {
+  width: 60px;
+}
+
+.Calc_Btn {
+  display: grid;
+  grid-template-columns: repeat(4, 4rem);
+  padding: 4rem;
+  justify-content: center;
+}
+
+.span-two {
+  grid-column: span 2;
+}
+
+.output {
+  grid-column: 1/-1;
+}
+
+.Result {
+  border: 1px solid #0f0e0e;
+  width: 30px;
+}
 
 /*# sourceMappingURL=index.css.map */
