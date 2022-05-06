@@ -1,0 +1,20 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: #FCF69C;
+}
+
+.App__title {
+  color: #55D8C1;
+  font-size: 3rem;
+}
+
+.Result {
+  border: 5px solid red;
+  background-color: yellow;
+  padding: 1rem;
+}
+
+/*# sourceMappingURL=index.css.map */

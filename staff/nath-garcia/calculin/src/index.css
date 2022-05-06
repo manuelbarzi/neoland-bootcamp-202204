@@ -1,12 +1,49 @@
-.App {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+* {
+  border: none;
+  color: white;
+  text-align: center;
 }
 
-.App__title {
-  color: dodgerblue;
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: repeat(4, 2rem);
+  grid-template-rows: repeat(6, 1.5rem);
+  background-color: #006E7F;
+  gap: 0.1rem;
+  width: 8.4rem;
+  height: 9.6rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+
+.App__display {
+  grid-column: 1/-1;
+  background-color: #444;
+}
+
+.App__zero {
+  grid-column: span 2;
+}
+
+.Button {
+  background-color: dimgray;
+}
+
+.Button:hover {
+  cursor: pointer;
+}
+
+.Button--gray {
+  background-color: #444;
+}
+
+.Button--orange {
+  background-color: #006E7F;
 }
 
 .Result {
