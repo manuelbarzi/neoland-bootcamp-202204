@@ -42,6 +42,7 @@ class App extends Component{ //crea un componente de react. React.Component{. Cr
     render() {//encargado de pintar el html
         return <div className="App">
             <h1 className="App__title"> {this.props.salute}</h1>
+            
             <input type="number" name="a" onChange={this.handleChangeA}/> {/*para cualquier nuevo presion en el teclado la esta espiando en el onChange*/}
             
             <div className="button__App">
@@ -59,7 +60,7 @@ class App extends Component{ //crea un componente de react. React.Component{. Cr
             <h2>=</h2>
 
             {/*si el estado de result es diferente a null y el otro es algo/true, ejecuta la segunda condición*/}
-            {this.state.result !== null && <Result value={this.state.result}/>} {/*ejecutamos la class result (objeto nuevo), enviandole la propiedad value, que es el estado result de la app, a través de props*/}
+            {this.state.result !== null && <Result value={this.state.result}/>} {/*solo pinto result si hay un resultado diferente al result predeterminadp*/}
             {/*if (this.state.result !== null){
                 <Result value={this.state.result*/}
         </div>
