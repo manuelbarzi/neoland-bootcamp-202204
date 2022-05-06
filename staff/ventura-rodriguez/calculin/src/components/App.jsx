@@ -39,7 +39,8 @@ class App extends Component {
             <input type="number" name="b" onChange={this.handleChangeB} />
 
             =
-            {this.state.result !== null && <Result value={this.state.result} />}
+            {/* {this.state.result !== null && <Result value={this.state.result} />} */}
+            <Result value={this.state.result} />
         </div>
     }
 }
