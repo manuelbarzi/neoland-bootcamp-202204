@@ -1,6 +1,8 @@
+const {Component} = React
+
 class Profile extends Component {
-    constructor() {
-        super(`<div class="Profile">
+    render() {
+        return <div class="Profile">
             <button class="Profile__changeName">Change Name</button>
             <button class="Profile__changePassword">Change Password</button>
 
@@ -8,9 +10,12 @@ class Profile extends Component {
             <button class="Profile__deleteUser">Delete User</button>
             </div>
             
-        </div>`)
+        </div>
+    }
 
-    let changeName, changePassword, deleteUser
+}
+
+/*let changeName, changePassword, deleteUser
 
     const changeNameButton = this.container.querySelector('.Profile__changeName')
 
@@ -59,9 +64,7 @@ class Profile extends Component {
             this.add(deleteUser)
 
         }
-    })
-}
-}
+    }) */
 
 
 

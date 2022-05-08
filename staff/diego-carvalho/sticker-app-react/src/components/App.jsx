@@ -7,18 +7,20 @@ class App extends Component{
 
     handleUserLoggedIn = () => this.setState({view: 'home'})
     
-    handleLoginNavigation = () => this.setState({view: 'register'})
+    handleRegisterNavigation = () => this.setState({view: 'register'})
 
-    handleLoginNavigation = () => this.setState({view: 'loigin'})
+    handleLoginNavigation = () => this.setState({view: 'login'})
 
     handleUserLoggedOut = () => this.handleLoginNavigation()
 
+    handleUserProfileIn = () => this.handleProfileNavigation()
+
     render() {
-        return <div className='App'>
-            {this.state.view === 'login' && <Login onUseLoggedI={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigantion} />}
-            {this.state.view === 'register' && <Register onUseRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigantion} />}
-            {this.state.view === 'home' && <Home onUseLoggedOut={this.handleUserLoggedOut} />}
-            
+        return <div className="App">
+            {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}
+            {this.state.view === 'register' && <Register onUserRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation} />}
+            {this.state.view === 'home' && <Home onUserLoggedOut={this.handleUserLoggedOut} />}
+            {this.state.view === 'home' && <Profile onUserProfileIn={this.handleUserProfileIn} />}
         </div>
     }
 }

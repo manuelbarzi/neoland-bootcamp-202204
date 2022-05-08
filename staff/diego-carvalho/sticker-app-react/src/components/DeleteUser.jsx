@@ -1,14 +1,17 @@
+const {Component} = React
+
 class DeleteUser extends Component{
-    constructor() {
-        super(`<div class="DeleteUser">
-        <form classe="Container">
-            <input class="" type="password" name="password" placeholder="password"></input>
+    render() {
+        return <div className="DeleteUser">
+        <form className="Container">
+            <input className="" type="password" name="password" placeholder="password"/>
 
-            <button class"Delete__button">Delete User</button>
+            <button className="Delete__button">Delete User</button>
         </form>
-    </div>`)
-    
-
+    </div>
+}
+}
+/*
     this.container.querySelector('form').addEventListener('submit', event => {
         event.preventDefault()
 
@@ -24,9 +27,6 @@ class DeleteUser extends Component{
             delete sessionStorage.username
             location.reload()
         })       
-    })  
-}
-}
-
+    })   */
 
 

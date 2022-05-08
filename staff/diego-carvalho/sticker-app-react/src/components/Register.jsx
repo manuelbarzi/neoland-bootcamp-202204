@@ -22,10 +22,10 @@ class Register extends Component {
     handleLoginLinkClick = event => {
         event.preventDefault()
 
-        this.props.onLoginClick()
+        this.props.onLoginLinkClicked()
     }
 
-    render(){
+    render() {
         return <div>
             <form className="Container" onSubmit={this.handleFormSubmit}>
                 <input className="Input Input--light" type="text" name="name" placeholder="name" />

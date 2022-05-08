@@ -23,12 +23,12 @@ class Login extends Component {
     handleRegisterLinkClick = event => {
         event.preventDefault()
 
-        this.props.onRegisterLinkClick()
+        this.props.onRegisterLinkClicked()
     }
-    //visual(buttons and inputs on scream)
-    render(){
+
+    render() {
         return <div>
-            <form className="Container">
+            <form className="Container" onSubmit={this.handleFormSubmit}>
                 <input className="Input Input--light" type="text" name="username" placeholder="username"/>
                 <input className="Input Input--light" type="password" name="password" placeholder="password"/>
                 <button className="Button Button--light">Login</button>

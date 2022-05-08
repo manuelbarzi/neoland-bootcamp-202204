@@ -1,8 +1,15 @@
-class StickerList extends Component {
-    constructor() {
-        super(`<ul class="StickerList__list Container"></ul>`)
+const {Component} = React
 
-        if (sessionStorage.username)
+class StickerList extends Component {
+    state = {notes: null}
+
+    render() {
+        return <ul class="StickerList__list Container"></ul>
+    }
+    
+}
+
+/*    if (sessionStorage.username)
             retrieveNotes(sessionStorage.username, (error, notes) => {
                 if (error) {
                     alert(error.message)
@@ -44,5 +51,4 @@ class StickerList extends Component {
                 return
             }
         }
-    }
-}
+    } */

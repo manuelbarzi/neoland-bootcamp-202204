@@ -1,17 +1,22 @@
-class ChangePassword extends Component {
-    constructor() {
-        super(`<div class="ChangePassword">
-            <form class="Container">
-                <input type="password" name="password" placeholder="current password">
+const {Component} = React
 
-                <input type="password" name="newPassword" placeholder="new password">
-                <input type="password" name="newPasswordRepeat" placeholder="repeat new password">
+class ChangePassword extends Component {
+    render() {
+        return <div className="ChangePassword">
+            <form className="Container">
+                <input type="password" name="password" placeholder="current password" />
+
+                <input type="password" name="newPassword" placeholder="new password" />
+                <input type="password" name="newPasswordRepeat" placeholder="repeat new password" />
 
                 <button>Save</button>
             </form>
-        </div>`)
+        </div>
+    }
 
-        this.container.querySelector('form').addEventListener('submit', event => {
+}
+
+/* this.container.querySelector('form').addEventListener('submit', event => {
             event.preventDefault()
 
             const password = event.target.password.value
@@ -29,5 +34,4 @@ class ChangePassword extends Component {
             })
 
         })
-    }
-}
+ */
