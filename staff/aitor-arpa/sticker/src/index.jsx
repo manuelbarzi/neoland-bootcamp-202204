@@ -1,3 +1,3 @@
 const { Component } = React
 
-React.render(<App />, root)
+ReactDOM.render(<App />, root)
