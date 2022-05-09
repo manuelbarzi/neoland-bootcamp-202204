@@ -8,7 +8,6 @@ function Result(props) {
     const [state, setState] = useState(value)
     
     useEffect(() => {
-        debugger
         setState(value)
     }, [value])
 
