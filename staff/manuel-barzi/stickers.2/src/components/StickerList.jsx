@@ -1,6 +1,9 @@
 const { Component } = React
 
 class StickerList extends Component {
+    // constructor() {
+    //     this.state = { notes: null }
+    // }
     state = { notes: null }
 
     componentDidMount() {
@@ -13,17 +16,6 @@ class StickerList extends Component {
 
             this.setState({ notes })
         })
-    }
-
-    componentWillReceiveProps(props) {
-        const { newNotes } = props
-
-        if (this.state.notes) {
-            //const notes = [...this.state.notes, ...newNotes]
-            const notes = this.state.notes.concat(newNotes)
-    
-            this.setState({ notes })
-        }
     }
 
     handleRemoveSticker = stickerId => {

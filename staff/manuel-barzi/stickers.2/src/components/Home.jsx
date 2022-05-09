@@ -1,7 +1,7 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null, newNotes: [] }
+    state = { name: null }
 
     handleLogoutClick = () => {
         delete sessionStorage.username
@@ -22,22 +22,6 @@ class Home extends Component {
         })
     }
 
-    handleAddClick = () => {
-        // const newNotes = []
-
-        // for (const value of this.state.newNotes)
-        //     newNotes.push(value)
-
-        const newNotes = [...this.state.newNotes]
-
-        const note = new Note()
-
-        newNotes.push(note)
-
-        //this.setState({ newNotes: newNotes })
-        this.setState({ newNotes })
-    }
-
     render() {
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
@@ -49,11 +33,11 @@ class Home extends Component {
             </header>
 
             <main className="Home__body Container">
-                <StickerList newNotes={this.state.newNotes} />
+                <StickerList />
             </main>
 
             <footer className="Home__footer Container">
-                <button className="Home__addSticker" onClick={this.handleAddClick}>+</button>
+                <button className="Home__addSticker">+</button>
             </footer>
         </div>
     }
