@@ -1,0 +1,30 @@
+/*
+    [1, 2, 3] => unshift 4,5 => [4, 5, 1, 2, 3]
+    iterate array backward
+        place current elem in next index
+    iterate elemnts forward
+        place each element in array (same index)
+    returns array length
+*/
+
+Fakay.prototype.unshift = function (...elements) {
+    for (let i = this.length - 1; i >= 0; i--)
+        this[i + elements.length] = this[i]
+
+    for (let i = 0; i < elements.length; i++)
+        this[i] = elements[i]
+
+    return this.length
+} 
+
+//REDO
+
+// function unshift(array, ...elements) {
+//     for (let i = array.length - 1; i > -1; i--)
+//         array[i + elements.length] = array[i]
+
+//     for (let i = 0; i < elements.length; i++)
+//         array[i] = elements[i]
+
+//     return array.length
+// }

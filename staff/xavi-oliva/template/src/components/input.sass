@@ -1,0 +1,22 @@
+@use '../config'
+@use '../utils'
+
+.input
+    @include utils.round-border(0, solid, config.$color, .5rem)
+    padding: 1.25rem
+    font-size: 1rem
+    width: 100%
+    background-color: #ffffff28
+    box-sizing: border-box
+    color: config.$color
+    margin: 0
+    margin-bottom: .75rem
+
+    &::placeholder
+        color: white
+
+    &:focus
+        outline: 0 none
+
+    &:last-child
+        margin-bottom: .25rem  

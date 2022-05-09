@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- landing page -->
+    <section class="off landing page" >
+        <div class="container container_height_100 container_center container_column">
+            <article class="title">
+                <h1>Welcome!</h1>
+                <h2>Lets not<br>waste time</h2>
+            </article>
+            <a class="login-button button_light button" href="#">Login</a>
+            <a class="signup-button button" href="#">Sign up</a>
+        </div>
+    </section>
+
+    <!-- login page -->
+    <section class="login page off" >
+        <div class="container container_height_100 container_column container_center">
+            <form class="container container_column">
+        
+                <fieldset>
+                    <input class="input" type="text" name="username" placeholder="Username">
+                    <input class="input" type="password" name="password" placeholder="Password">
+                </fieldset>
+                
+                <button type="submit" class="button">Login</button>
+        
+                <a class="signup-button back" href="#">Don't have an account? SIGN UP</a>
+            </form>
+        </div>
+    </section>
+
+    <!-- signup page -->
+    <section class="signup page off">
+        <div class="container container_height_100 container_column container_center">
+            <form class="container container_column">
+                <fieldset>
+                    <input class="input" type="text" name="username" placeholder="Username" required>
+                    <input class="input" type="email" name="email" placeholder="Email" required>
+                    <input class="input" type="password" name="password" placeholder="Password" required>
+                </fieldset>
+                <button type="submit" class="button">Sign Up</button>
+                <a class="login-button back" href="#">Have already signed up? LOGIN</a>
+            </form>
+        </div>
+    </section>
+
+    <!-- home page -->
+    <section class="home page off" >
+        <div class="container container_height_100 container_column container_center">
+            <h1>Hola Mundo</h1>
+            <div class="gallery">
+                <div class="gallery__item">1</div>
+                <div class="gallery__item">2</div>
+                <div class="gallery__item">3</div>
+                <div class="gallery__item">4</div>
+                <div class="gallery__item">5</div>
+                <div class="gallery__item">6</div>
+                <div class="gallery__item">7</div>
+                <div class="gallery__item">8</div>
+                <div class="gallery__item">9</div>
+            </div>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+</body>
+</html>

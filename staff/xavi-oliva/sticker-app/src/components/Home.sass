@@ -1,0 +1,36 @@
+.Home
+    width: 100%
+    overflow: hidden
+    overflow-y: auto
+    min-height: 100vh
+    background-color: dodgerblue
+
+    &__header
+        position: fixed
+        top: 0
+        background-color: ghostwhite
+        width: 100%
+        min-height: 46px
+
+    &__profile
+        margin-right: 0
+
+    &__body
+        overflow-y: auto
+        flex-grow: 1
+        width: 100%
+        margin-top: 15px
+        margin-bottom: 5px
+
+        .Profile
+            &--form
+                flex-basis: 100%
+
+    &__footer
+        position: fixed
+        bottom: 0
+        background-color: ghostwhite
+        width: 100%
+
+        button
+            border: 2px solid grey
