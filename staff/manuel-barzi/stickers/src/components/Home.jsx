@@ -38,6 +38,12 @@ class Home extends Component {
         this.setState({ newNotes })
     }
 
+    handleStickerSaved = stickerId => {
+        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
+
+        this.setState({ newNotes })
+    }
+
     render() {
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
@@ -49,7 +55,7 @@ class Home extends Component {
             </header>
 
             <main className="Home__body Container">
-                <StickerList newNotes={this.state.newNotes} />
+                <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />
             </main>
 
             <footer className="Home__footer Container">

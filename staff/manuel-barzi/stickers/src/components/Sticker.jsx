@@ -20,15 +20,18 @@ class Sticker extends Component {
         event.preventDefault()
 
         const { target: { text: { value: text } } } = event
+        const { props: { stickerId, onSaved }} = this
 
-        updateNote(sessionStorage.username, this.props.stickerId, text, error => {
+        saveNote(sessionStorage.username, stickerId, text, error => {
             if (error) {
                 alert(error.message)
 
                 return
             }
 
-            alert('Sticker updated!')
+            alert('Sticker saved!')
+
+            onSaved(stickerId)
         })
     }
 
