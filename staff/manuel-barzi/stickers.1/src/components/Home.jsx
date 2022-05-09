@@ -1,7 +1,7 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null }
+    state = { name: null, notes: null }
 
     handleLogoutClick = () => {
         delete sessionStorage.username
@@ -20,6 +20,17 @@ class Home extends Component {
 
             this.setState({ name: user.name })
         })
+
+        // TODO load sticker list and save them in state (then React will call render, so paint them there)
+        retrieveNotes(sessionStorage.username, (error, notes) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            this.setState({ notes })
+        })
     }
 
     render() {
@@ -33,7 +44,11 @@ class Home extends Component {
             </header>
 
             <main className="Home__body Container">
-                <StickerList />
+                {
+                    this.state.notes && <ul>
+                        {this.state.notes.map(note => <li><Sticker text={note.text} /></li>)}
+                    </ul>
+                }
             </main>
 
             <footer className="Home__footer Container">
