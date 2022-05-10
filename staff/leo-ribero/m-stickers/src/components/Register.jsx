@@ -1,14 +1,9 @@
-// ver apuntes notion Friday 6 May
 const { Component } = React
 
 class Register extends Component {
-
     handleFormSubmit = event => {
         event.preventDefault()
 
-        // const name = form.name.value
-        // const username = form.username.value
-        // const password = form.password.value
         const name = event.target.name.value
         const username = event.target.username.value
         const password = event.target.password.value
@@ -20,9 +15,7 @@ class Register extends Component {
                 return
             }
 
-            // callback()
             this.props.onUserRegistered()
-            // este callback avisara que ha cambiado y por tanto cuando puede cambiar de vista
         })
     }
 
@@ -31,8 +24,6 @@ class Register extends Component {
 
         this.props.onLoginLinkClicked()
     }
-
-    
 
     render() {
         return <div>
@@ -44,17 +35,5 @@ class Register extends Component {
                 <a href="#" onClick={this.handleLoginLinkClick}>Login</a>
             </form>
         </div>
-    }
-
-
-
-    onLoginClick(callback) {
-        const anchor = this.container.querySelector('a')
-
-        anchor.addEventListener('click', function (event) {
-            event.preventDefault()
-
-            callback()
-        })
     }
 }

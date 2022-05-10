@@ -1,0 +1,77 @@
+const { Component } = React
+
+class Home extends Component {
+    state = { name: null, newNotes: [] }
+
+    handleLogoutClick = () => {
+        delete sessionStorage.username
+
+        this.props.onUserLoggedOut()
+    }
+
+    // TODO load user when component mounts (RTFM componentDidMount lifecycle methods)
+    componentDidMount() {
+        retrieveUser(sessionStorage.username, (error, user) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            this.setState({ name: user.name })
+        })
+
+        // TODO load sticker list and save them in state (then React will call render, so paint them there)
+        retrieveNotes(sessionStorage.username, (error, notes) => {
+            if (error) {
+                alert(error.message)
+
+                return
+            }
+
+            this.setState({ notes })
+        })
+    }
+
+    handleAddClick = () => {
+        // aqui quiero indicarle al state que cuando haya un cambio de estado sepa que hay una nueva nota
+        
+        const newNotes = [...this.state.newNotes] 
+        
+        //todas las propiedades que tiene un array se las paso al nuevo. También se podría poner como abajo
+        
+        // const newNotes = []
+
+        //     for (const value of this.state.newNotes)
+        //     newNotes.push(value)
+
+        // yahora, cuahdo ya tengo un nuevo array "newNotes"
+
+        const note = new Note()
+
+        newNotes.push(note)
+
+        // this.setState({ newNotes: newNotes }) tambien se puede simplificar
+        this.setState({ newNotes })
+    }
+
+    render() {
+        return <div className="Home Container">
+            <header className="Home__header Container Container--row Container--spread-sides">
+                <button className="Button Button--no-border Home__home">📋</button>
+                <div>
+                    <button className="Button Button--no-border Home__profile">{this.state.name}</button>
+                    <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>Logout</button>
+                </div>
+            </header>
+
+            <main className="Home__body Container">
+                <StickerList newNotes={this.state.newNotes}/>
+            </main>
+
+            <footer className="Home__footer Container">
+                <button className="Home__addSticker" onClick={this.handleAddClick}>+</button>
+            </footer>
+        </div>
+    }
+}
