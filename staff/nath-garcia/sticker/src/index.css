@@ -1,0 +1,159 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+a {
+  color: ghostwhite;
+  text-decoration: none;
+}
+
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  height: 100%;
+  background-color: #FFC898;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Home {
+  height: 100%;
+  width: 100%;
+}
+
+.Home__header {
+  position: fixed;
+  top: 0;
+  background-color: ghostwhite;
+  width: 100%;
+}
+
+.Home__body {
+  overflow: auto;
+  width: 100%;
+  padding-top: 5rem;
+}
+
+.Home__footer {
+  position: fixed;
+  bottom: 0;
+  background-color: ghostwhite;
+  width: 100%;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Container--row {
+  flex-direction: row;
+}
+
+.Container--spread-sides {
+  justify-content: space-between;
+}
+
+.Sticker {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40vw;
+  height: 40vw;
+  background: #CDF2CA;
+  margin: 30px auto;
+  padding: 20px;
+  box-shadow: inset 0 -40px 40px rgba(0, 0, 0, 0.2), inset 0 25px 10px rgba(0, 0, 0, 0.2), 0 5px 6px 5px rgba(0, 0, 0, 0.2);
+}
+
+.Sticker__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+}
+.Sticker__form .Sticker__id {
+  font-size: 10px;
+}
+.Sticker__form .Sticker__text {
+  background: transparent;
+  border: none;
+  resize: none;
+  width: 100%;
+  font-family: "Permanent Marker", cursive;
+  line-height: 1.7em;
+  font-size: 24px;
+  color: #130d6b;
+}
+
+.StickerList__list {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 3rem;
+}
+
+.Button {
+  margin: 0.5rem;
+  font-size: inherit;
+}
+
+.Button {
+  border: 1px solid black;
+  border_radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.Button--light {
+  border-color: white;
+  color: white;
+}
+
+.Button--no-border {
+  border: none;
+}
+
+.Input {
+  margin: 0.5rem;
+  font-size: inherit;
+  text-indent: 0.5rem;
+}
+
+.Input {
+  border: 1px solid black;
+  border-radius: 0.25rem;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+}
+
+.Input--light {
+  border-color: white;
+  color: white;
+}
+
+.Input--light::placeholder {
+  color: #EEE;
+}
+
+/*# sourceMappingURL=index.css.map */
