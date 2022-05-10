@@ -1,4 +1,4 @@
-function updateUserName(username,name, newName, callback) {
+function updateUserName(username, newName, callback) {
     const user = db.users.find(user => user.username === username)
 
     if (!user) {
@@ -7,7 +7,7 @@ function updateUserName(username,name, newName, callback) {
         return
     }
 
-    if (name === newName) {
+    if (username === newName) {
         callback(new Error('current name and new name are the same'))
 
         return

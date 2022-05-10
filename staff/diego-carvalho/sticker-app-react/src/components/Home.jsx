@@ -1,81 +1,80 @@
 const { Component } = React
 
 class Home extends Component {
-    state = {name: null, notes: null}
-
-    handleProfileInClick = () => {
-        this.setState({})
-    
-        this.props.onUserProfileIn()
-    }
+    state = { name: null, newNotes: [], view: 'stickers' }
 
     handleLogoutClick = () => {
         delete sessionStorage.username
 
-        this.props.onUserLoggedOut
+        this.props.onUserLoggedOut()
     }
-   
+
+    handleProfileClick = () => {
+
+        this.setState({view: 'profile'})
+    }
+
+    handleHomeClick = () => {
+
+        this.setState({view: 'stickers'})
+    }
+
     //TODO load user when component mounts (RTFM componentDidMount lifecycle methods)
     componentDidMount() {
         retrieveUser(sessionStorage.username, (error, user) => {
-            if(error){
+            if (error) {
                 alert(error.message)
 
                 return
             }
 
-            this.setState({name: user.name})
-        })
-    
-        //TODO load sticker list and save them in state (then React will call render , so paint them there)
-        retrieveNotes(sessionStorage.username, (error, notes) => {
-            if(error){
-                alert(error.message)
-
-                return
-            }
-            
-            this.setState({ notes })
+            this.setState({ name: user.name })
         })
     }
-    
+
+    handleAddClick = () => {
+        // const newNotes = []
+
+        // for (const value of this.state.newNotes)
+        //     newNotes.push(value)
+
+        const newNotes = [...this.state.newNotes]
+
+        const note = new Note()
+
+        newNotes.push(note)
+        //this.setState({newNotes: newNotes})
+        this.setState({newNotes})
+    }
+
+    handleStickerSaved = stickerId => {
+        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
+
+        
+        this.setState({newNotes})
+    }
+
     render() {
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides" >
-                <button className="Button Button--no-border Home__home">📋</button>
+                <button className="Button Button--no-border Home__home"onClick={this.handleHomeClick}>📋</button>
                 <div>
-                    <button className="Button Button--no-border Home__profile" onClick={this.handleProfileInClick}>{this.state.name}</button>
+                    <button className="Button Button--no-border Home__profile" onClick={this.handleProfileClick}>{this.state.name}</button>
                     <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>Logout</button>
                 </div>
             </header>
 
             <main className="Home__body Container">
-                {
-                    this.state.notes && <ul>
-                        {this.state.notes.map(note => <li><Sticker text={note.text} /></li>)}
-                    </ul>
-                }
+                {this.state.view === 'stickers' && <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />}
+                {this.state.view === 'profile' && <Profile /> }
+               
+
             </main>
 
             <footer className="Home__footer Container">
-                <button className="Home__addSticker"onClick={this.handleAddStickerClick}>+</button>
+                <button className="Home__addSticker" onClick={this.handleAddClick}>+</button>
             </footer>
         </div>
     }
 }
 
-
-/* const profileButton = this.container.querySelector('.Home__profile')
-
-        profileButton.addEventListener('click', () => {
-            if (!profile || !this.hasBody(profile)) {
-                this.removeFromBody(stickerList)
-
-                this.container.querySelector('.Home__footer').removeChild(addStickerButton)
-
-                if (!profile)
-                    profile = new Profile
-
-                this.addToBody(profile)
-            }
-        }) */

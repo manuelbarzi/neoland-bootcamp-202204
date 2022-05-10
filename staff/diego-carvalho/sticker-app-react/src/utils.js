@@ -1,4 +1,3 @@
-
 function createId() {
-    return (Math.random() + Date.now()).toFixed(10)
+    return Math.random().toString(36).substring(2) + Math.random().toString(36).substring(2)
 }

@@ -1,19 +1,41 @@
 const {Component} = React
 
 class Profile extends Component {
-    render() {
-        return <div class="Profile">
-            <button class="Profile__changeName">Change Name</button>
-            <button class="Profile__changePassword">Change Password</button>
+    state ={view: 'profile'}
 
+    handleChangeNameButtonClick = () => {
+
+        this.setState({view:'changeName'})
+    }
+
+    handleChangePasswordButtonClick = () => {
+
+        this.setState({view: 'changePassword'})
+    }
+
+    handleDeleteUserButtonClick = () => {
+
+        this.setState({view: 'deleteUser'})
+    }
+
+    render() {
+        return <div className="Profile">
+        
+            <button className="Profile__changeName" onClick={this.handleChangeNameButtonClick}>Change Name</button>
+            <button className="Profile__changePassword" onClick={this.handleChangePasswordButtonClick}>Change Password</button>
+            
             <div>
-            <button class="Profile__deleteUser">Delete User</button>
+            <button className="Profile__deleteUser" onClick={this.handleDeleteUserButtonClick}>Delete User</button>
             </div>
+
+            {this.state.view === 'changeName' && <ChangeName />} 
+            {this.state.view === 'changePassword' && <ChangePassword />}
+            {this.state.view === 'deleteUser' && <DeleteUser />}  
             
         </div>
     }
-
 }
+
 
 /*let changeName, changePassword, deleteUser
 
