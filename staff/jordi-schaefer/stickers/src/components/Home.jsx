@@ -12,6 +12,7 @@ class Home extends Component {
 
     handleListClick = () => {
         this.setState({ view: 'list' })
+        this.loadNotes()
     }
 
     handleEditClick = () => {
@@ -34,7 +35,11 @@ class Home extends Component {
             this.setState({ name: user.name })
         })
 
-        // TODO load sticker list and save them in state (then React will call render, so paint them there)
+        this.loadNotes()
+    }
+
+
+    loadNotes = () => { 
         retrieveNotes(sessionStorage.username, (error, notes) => {
             if (error) {
                 alert(error.message)
@@ -43,6 +48,7 @@ class Home extends Component {
             this.setState({ notes })
         })
     }
+
 
     handleUserNameChanged = () => {
         retrieveUser(sessionStorage.username, (error, user) => {

@@ -29,7 +29,7 @@ class Register extends Component {
 
     render () {
         return <div className="Container">
-            <form className="Container" onClick={this.handleFormSubmit}>
+            <form className="Container" onSubmit={this.handleFormSubmit}>
                 <input className="form" type="text" name="name" placeholder=" Name"/>
                 <input className="form" type="text" name="username" placeholder=" Username"/>
                 <input className="form" type="password" name="password" placeholder=" Password"/>

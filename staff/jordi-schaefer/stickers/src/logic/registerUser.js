@@ -1,5 +1,5 @@
 function registerUser(name, username, password, callback) {
-    
+
     // compruebo si el usuario existe
     const exists = db.users.some(user => user.username === username)
     if (exists) {
