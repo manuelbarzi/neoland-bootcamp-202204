@@ -1,15 +1,30 @@
-function retrieveUser(username, callback) {  
-    const user = db.users.find(user => user.username === username)
-    // find devuelve el valor del primero que cumple la funcion
-    if (!user) {
-        callback(new Error(`user with username ${username} not found`))
+function retrieveUser(token, callback) {
+    const xhr = new XMLHttpRequest
 
-        return
-    }
+    xhr.addEventListener('load', event => {
+        //const { target: { status } } = event
+        const status = event.target.status
 
-    const copy = User.copyFrom(user)
+        if (status === 200) {
+            const json = event.target.responseText
 
-    delete copy.password
+            const data = JSON.parse(json)
 
-    callback(null, copy)
+            const user = { name: data.name, username: data.username }
+
+            callback(null, user)
+        } else if (status >= 400 && status < 500) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error))
+        } else callback(new Error('server error'))
+    })
+
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
 }

@@ -1,45 +1,62 @@
-describe('authenticateUser', ()=>{ //hecho por Ventu
-
-    it('authenticateUser should succeed on valid credentials', () =>{
-
+describe('authenticateUser', () => {
+    it('should succeed on existing user with correct credentials', () => {
         db.users.length = 0
 
-        const user = {
-            name : 'Pepito Grillo',
-            username: 'pepito',
+        db.users.push({
+            name: 'John Doe',
+            username: 'johndoe',
             password: '123123123'
-        }
-        db.users.push(user)
+        })
 
-        authenticateUser('pepito', '123123123', function(error) {
+        authenticateUser('johndoe', '123123123', error => {
             expect(error).toBeNull()
         })
 
         db.users.length = 0
-
     })
 
-    it('authenticateUser should fail on invalid credentials', ()=> {
-
+    it('should fail on existing user with incorrect password', () => {
         db.users.length = 0
 
-        db.users.push ({
-            name : 'Pepito Grillo',
-            username: 'pepito',
+        db.users.push({
+            name: 'John Doe',
+            username: 'johndoe',
             password: '123123123'
         })
 
-        authenticateUser('manolito', '123123123', error =>{
-
-            expect(error).toBeDefined()
-
+        authenticateUser('johndoe', 'wrong-123123123', error => {
+            expect(error).not.toBeNull()
             expect(error.message).toBe('wrong credentials')
         })
 
         db.users.length = 0
     })
 
+    it('should fail on existing user with incorrect username', () => {
+        db.users.length = 0
+
+        db.users.push({
+            name: 'John Doe',
+            username: 'johndoe',
+            password: '123123123'
+        })
+
+        authenticateUser('wrong-johndoe', '123123123', error => {
+            expect(error).not.toBeNull()
+            expect(error.message).toBe('wrong credentials')
+        })
+
+        db.users.length = 0
+    })
+
+    it('should fail on non-existing user', () => {
+        db.users.length = 0
+
+        authenticateUser('johndoe', '123123123', error => {
+            expect(error).not.toBeNull()
+            expect(error.message).toBe('wrong credentials')
+        })
+
+        db.users.length = 0
+    })
 })
-
-
- 
