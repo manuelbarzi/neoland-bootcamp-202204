@@ -1,7 +1,7 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null, timestamp: null, view: 'list' }
+    state = { name: null, newNotes: [] }
 
     handleLogoutClick = () => {
         delete sessionStorage.username
@@ -9,6 +9,7 @@ class Home extends Component {
         this.props.onUserLoggedOut()
     }
 
+    // TODO load user when component mounts (RTFM componentDidMount lifecycle methods)
     componentDidMount() {
         retrieveUser(sessionStorage.username, (error, user) => {
             if (error) {
@@ -22,34 +23,39 @@ class Home extends Component {
     }
 
     handleAddClick = () => {
-        saveNote(sessionStorage.username, null, null, error => {
-            if (error) {
-                alert(error.message)
+        // const newNotes = []
 
-                return
-            }
+        // for (const value of this.state.newNotes)
+        //     newNotes.push(value)
 
-            this.setState({ timestamp: Date.now() })
-        })
+        const newNotes = [...this.state.newNotes]
+
+        const note = new Note()
+
+        newNotes.push(note)
+
+        //this.setState({ newNotes: newNotes })
+        this.setState({ newNotes })
     }
 
-    handleProfileClick = () => this.setState({ view: 'profile' })
+    handleStickerSaved = stickerId => {
+        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
 
-    handleHomeClick = () => this.setState({ view: 'list' })
+        this.setState({ newNotes })
+    }
 
     render() {
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
+                <button className="Button Button--no-border Home__home">📋</button>
                 <div>
-                    <button className="Button Button--no-border Home__profile" onClick={this.handleProfileClick}>{this.state.name}</button>
+                    <button className="Button Button--no-border Home__profile">{this.state.name}</button>
                     <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>Logout</button>
                 </div>
             </header>
 
             <main className="Home__body Container">
-                {this.state.view === 'list' && <StickerList timestamp={this.state.timestamp} />}
-                {this.state.view === 'profile' && <Profile />}
+                <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />
             </main>
 
             <footer className="Home__footer Container">

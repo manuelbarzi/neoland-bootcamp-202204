@@ -4,10 +4,6 @@ class StickerList extends Component {
     state = { notes: null }
 
     componentDidMount() {
-        this.loadNotes()
-    }
-
-    loadNotes = () =>
         retrieveNotes(sessionStorage.username, (error, notes) => {
             if (error) {
                 alert(error.message)
@@ -17,10 +13,23 @@ class StickerList extends Component {
 
             this.setState({ notes })
         })
+    }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props.timestamp !== newProps.timestamp)
-            this.loadNotes()
+    componentWillReceiveProps(props) {
+        const { newNotes } = props
+
+        if (this.state.notes) {
+            const notes = [...this.state.notes]
+
+            newNotes.forEach(newNote => {
+                const exists = notes.some(note => note.id === newNote.id)
+
+                if (!exists)
+                    notes.push(newNote)
+            })
+    
+            this.setState({ notes })
+        }
     }
 
     handleRemoveSticker = stickerId => {
@@ -39,8 +48,8 @@ class StickerList extends Component {
         return notes && notes.length ?
             <ul className="StickerList__list Container">
                 {notes.map(note => <li key={note.id}>
-                    <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} />
-                </li>)}
+                    <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} onSaved={this.handleStickerSaved} />
+                    </li>)}
             </ul>
             :
             <p>no stickers yet</p>
