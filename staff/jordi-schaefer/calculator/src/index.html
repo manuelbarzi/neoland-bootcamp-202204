@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculin</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- creo un elemento div referenciarlo con archivo js y añadir elementos html -->
+    <div id="root"></div>
+
+    <!-- añado la libreria de react -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- añado la libreria de babel, transforma el jsx en js-react -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+    <!-- añado los componentes de la app -->
+    <script src="components/App.jsx" type="text/babel"></script>
+    <script src="index.jsx" type="text/babel"></script>
+</body>
+
+</html>
