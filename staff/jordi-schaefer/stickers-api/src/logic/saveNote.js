@@ -42,6 +42,4 @@ function saveNote(token, id, text, callback) {
         xhr.send(json) // se los envio al xhr (el constructor que abro al principio)
     })
 
-
-
 }
