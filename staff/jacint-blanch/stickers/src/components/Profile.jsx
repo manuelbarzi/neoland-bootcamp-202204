@@ -1,27 +1,19 @@
 const { Component } = React
 
 class Profile extends Component {
-    handleProfileSubmit = event => {
-        event.preventDefault()
+    state = { view: null }
 
-        let changeName, changePassword
+    handleChangeNameClick = () => this.setState({ view: 'change-name' })
 
-        changeNameButton = () => {
-            if (!changeName || !this.has(changeName)) {
-            changeName = new ChangeName
-
-            if (changePassword && this.has(changePassword))
-                this.remove(changePassword)
-
-            this.props(changeNameButton)
-            }
-        }
-    }
+    handleChangePasswordClick = () => this.setState({ view: 'change-password' })
 
     render() {
-        return <div class="Profile">
-            <button class="Profile__changeName" onClick={this.changeNameButton}>Change Name</button>
-            {/* <button class="Profile__changePassword" onClick={this.changePasswordButton}>Change Password</button> */}
+        return <div className="Profile Container">
+            <button className="Profile__changeName" onClick={this.handleChangeNameClick}>Change Name</button>
+            <button className="Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
+
+            {this.state.view === 'change-name' && <ChangeName />}
+            {this.state.view === 'change-password' && <ChangePassword />}
         </div>
     }
 }

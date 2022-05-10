@@ -11,7 +11,9 @@ function saveNote(username, noteId, text, callback) {
 
     if (!note) {
         note = new Note(username, text) 
-        note.id = noteId
+        
+        //if (noteId) note.id = noteId
+        noteId && (note.id = noteId)
 
         db.notes.push(note)
     } else {
@@ -24,5 +26,5 @@ function saveNote(username, noteId, text, callback) {
         note.text = text
     }
 
-    callback(null)
+    callback(null, note.id)
 }

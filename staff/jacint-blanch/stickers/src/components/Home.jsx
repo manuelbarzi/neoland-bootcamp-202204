@@ -1,7 +1,7 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null, newNotes: [] }
+    state = { name: null, timestamp: null, view: 'list' }
 
     handleLogoutClick = () => {
         delete sessionStorage.username
@@ -23,31 +23,24 @@ class Home extends Component {
     }
 
     handleAddClick = () => {
-        // const newNotes = []
+        saveNote(sessionStorage.username, null, null, error => {
+            if (error) {
+                alert(error.message)
 
-        // for (const value of this.state.newNotes)
-        //     newNotes.push(value)
+                return
+            }
 
-        const newNotes = [...this.state.newNotes]
-
-        const note = new Note()
-
-        newNotes.push(note)
-
-        //this.setState({ newNotes: newNotes })
-        this.setState({ newNotes })
+            this.setState({ timestamp: Date.now() })
+        })
     }
 
-    handleStickerSaved = stickerId => {
-        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
-
-        this.setState({ newNotes })
-    }
+    handleHomeClick = () => this.setState({ view: 'list' })
+    handleProfileClick = () => this.setState({ view: 'profile' })
 
     render() {
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home">📋</button>
+                <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
                 <div>
                     <button className="Button Button--no-border Home__profile" onClick={this.handleProfileClick}>{this.state.name}</button>
                     <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>Logout</button>
@@ -55,7 +48,8 @@ class Home extends Component {
             </header>
 
             <main className="Home__body Container">
-                <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />
+                {this.state.view === 'list' && <StickerList timestamp={this.state.timestamp} />}
+                {this.state.view === 'profile' && <Profile />}
             </main>
 
             <footer className="Home__footer Container">
