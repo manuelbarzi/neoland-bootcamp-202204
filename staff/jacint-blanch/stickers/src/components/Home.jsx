@@ -1,7 +1,7 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null, notes: null }
+    state = { name: null, newNotes: [] }
 
     handleLogoutClick = () => {
         delete sessionStorage.username
@@ -20,17 +20,28 @@ class Home extends Component {
 
             this.setState({ name: user.name })
         })
+    }
 
-        // TODO load sticker list and save them in state (then React will call render, so paint them there)
-        retrieveNotes(sessionStorage.username, (error, notes) => {
-            if (error) {
-                alert(error.message)
+    handleAddClick = () => {
+        // const newNotes = []
 
-                return
-            }
+        // for (const value of this.state.newNotes)
+        //     newNotes.push(value)
 
-            this.setState({ notes })
-        })
+        const newNotes = [...this.state.newNotes]
+
+        const note = new Note()
+
+        newNotes.push(note)
+
+        //this.setState({ newNotes: newNotes })
+        this.setState({ newNotes })
+    }
+
+    handleStickerSaved = stickerId => {
+        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
+
+        this.setState({ newNotes })
     }
 
     render() {
@@ -38,21 +49,17 @@ class Home extends Component {
             <header className="Home__header Container Container--row Container--spread-sides">
                 <button className="Button Button--no-border Home__home">📋</button>
                 <div>
-                    <button className="Button Button--no-border Home__profile">{this.state.name}</button>
+                    <button className="Button Button--no-border Home__profile" onClick={this.handleProfileClick}>{this.state.name}</button>
                     <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>Logout</button>
                 </div>
             </header>
 
             <main className="Home__body Container">
-                {
-                    this.state.notes && <ul>
-                        {this.state.notes.map(note => <li><Sticker text={note.text} /></li>)}
-                    </ul>
-                }
+                <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />
             </main>
 
             <footer className="Home__footer Container">
-                <button className="Home__addSticker">+</button>
+                <button className="Home__addSticker" onClick={this.handleAddClick}>+</button>
             </footer>
         </div>
     }

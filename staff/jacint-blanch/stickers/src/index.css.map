@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,IAAI,CAAJ,QAAI,GACJ,IAAI,CAAJ,gBAAI,GACJ,IAAI,CAAJ,iBAAI,GACJ,IAAI,CAAJ,sBAAI,GACJ,IAAI,CAAJ,oBAAI,GACJ,IAAI,CAAJ,wBAAI,GACJ,IAAI,CAAJ,mBAAI,GACJ,IAAI,CAAJ,kBAAI",
+    "sources": [
+        "index.sass"
+    ],
+    "names": [],
+    "file": "index.css"
+}
