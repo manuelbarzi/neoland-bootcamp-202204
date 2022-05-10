@@ -24,5 +24,5 @@ function saveNote(username, noteId, text, callback) {
         note.text = text
     }
 
-    callback(null)
+    callback(null, note.id)
 }

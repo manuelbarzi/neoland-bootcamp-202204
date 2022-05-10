@@ -8,7 +8,7 @@ class ChangePassword extends Component {
         const newPassword = event.target.newPassword.value
         const newPasswordRepeat = event.target.newPasswordRepeat.value
 
-        updateUserPassword(sessionStorage.username, password, newPassword, newPasswordRepeat, error => {
+        updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
             if (error) {
                 alert(error.message)
                 return

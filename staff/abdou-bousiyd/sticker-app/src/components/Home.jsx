@@ -3,16 +3,17 @@ const { Component } = React
 class Home extends Component {
     
     // state = {view: 'stickers', name: null, newNotes: []}
-    state = { name: null, timestamp: null, view: 'list' }
+    state = { name: null, timestamp: null, username: null, view: 'list' }
 
 
     componentDidMount() {
-        retrieveUser(sessionStorage.username, (error, user) => {
+        console.log(sessionStorage.token, 8888)
+        retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
                 return
             }
-            this.setState({ name: user.name })
+            this.setState({ name: user.name, username: user.username })
         })
     }
 
@@ -23,6 +24,7 @@ class Home extends Component {
         // this.setState({ newNotes })
         saveNote(sessionStorage.username, null, null, error => {
             if (error) {
+                
                 alert(error.message)
 
                 return
@@ -32,13 +34,8 @@ class Home extends Component {
         })
     }
 
-    handleStickerSaved = stickerId => {
-        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
-        this.setState({ newNotes })
-    }
-
     handleLogoutClick = () => {
-        delete sessionStorage.username
+        delete sessionStorage.token
         this.props.onUserLoggedOut()
     }
 
@@ -59,7 +56,7 @@ class Home extends Component {
             <main className="Home__body Container">
                 {/* quitar props a profile */}
                 {/* { this.state.view === 'stickers' && <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />} */}
-                { this.state.view === 'list' && <StickerList timestamp={this.state.timestamp} />}
+                { this.state.view === 'list' && this.state.username && <StickerList username={this.state.username} timestamp={this.state.timestamp} />}
                 { this.state.view === 'profile' && <Profile username={sessionStorage.username} />}
             </main>
 

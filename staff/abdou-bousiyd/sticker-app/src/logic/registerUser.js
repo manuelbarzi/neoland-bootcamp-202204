@@ -1,15 +1,28 @@
 function registerUser(name, username, password, callback) {
-    const exists = db.users.some(user => user.username === username)
+    const xhr = new XMLHttpRequest
+    const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
 
-    if (exists) {
-        callback(new Error('username already exists'))
+    xhr.addEventListener('load', event => {
+        const status = event.target.status
 
-        return
-    }
+        if(status === 201)
+            callback(null)
+        else if (status >= 400 && status < 500) {
+            const json = event.target.responseText
 
-    const user = new User(name, username, password)
+            const data = JSON.parse(json)
 
-    db.users.push(user)
+            callback(new Error(data.error))
+        }  else callback(new Error('server error'))
 
-    callback(null)
+    })
+    xhr.open('POST', url)
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const data = { name, username, password }
+
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
 }

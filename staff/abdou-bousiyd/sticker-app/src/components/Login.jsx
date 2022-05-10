@@ -8,13 +8,15 @@ class Login extends Component {
         const username = e.target.username.value
         const password = e.target.password.value
 
-        authenticateUser(username, password, error => {
+        authenticateUser(username, password, (error, token ) => {
             if (error) {
                 alert(error.message)
 
                 return
             }
-            sessionStorage.username = username
+            // sessionStorage.username = username
+            sessionStorage.token = token
+
 
             this.props.onUserLoggedIn()
         })

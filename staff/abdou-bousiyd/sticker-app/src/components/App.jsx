@@ -3,7 +3,7 @@ const { Component } = React
 class App extends Component {
 
     // state = {view: sessionStorage.username ? 'profile' : 'login'}
-    state = {view: sessionStorage.username ? 'home' : 'login'}
+    state = {view: sessionStorage.token ? 'home' : 'login'}
 
     handleUserLoggedIn = () => this.setState({view: 'home'})
     handleUserLoggedOut = () => this.setState({view: 'login'})

@@ -7,7 +7,7 @@ class ChangeName extends Component {
 
         const name = e.target.name.value
 
-        updateUserName(sessionStorage.username, name, (error) => {
+        updateUserName(sessionStorage.token, name, (error) => {
             if (error) {
                 alert(error.message);
 

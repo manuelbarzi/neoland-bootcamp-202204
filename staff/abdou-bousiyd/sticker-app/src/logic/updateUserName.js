@@ -1,20 +1,36 @@
-function updateUserName(username, name, callback) {
+function updateUserName(token, name, callback) {
 
-    const user = db.users.find(user => user.username === username)
+    const xhr = new XMLHttpRequest()
+    const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
 
-    if (!user) {
-        callback(new Error(`user with username "${username}" does not exist`))
-        return
-    }
+    console.log(`Bearer ${token}`, 773)
+
+    xhr.addEventListener('load', event => {
+        const status = event.target.status
+        if(status === 204) {
+            // const json = event.target.responseText
+            // const data = JSON.parse(json)
+            callback(null)
+        }else if (status >= 400 && status < 500) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error))
+        } else callback(new Error('server error'))
+    })
 
 
-    if (user.name === name) {
-        callback(new Error('current username and new name are the same'))
 
-        return
-    }
+    xhr.open('PATCH', url)
 
-    user.name = name
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
-    callback(null)
+    const data = { name}
+    
+    const json = JSON.stringify(data)
+        
+    xhr.send(json)
+    
 }

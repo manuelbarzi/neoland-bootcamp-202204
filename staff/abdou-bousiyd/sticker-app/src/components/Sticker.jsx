@@ -17,7 +17,7 @@ class Sticker extends Component {
     handleSaveSubmit = event => {
         event.preventDefault()
         const { target: { text: { value: text } } } = event
-        const { props: { stickerId, onSaved }} = this
+        const { props: { stickerId }} = this
 
         saveNote(sessionStorage.username, stickerId, text, error => {
             if (error) {
