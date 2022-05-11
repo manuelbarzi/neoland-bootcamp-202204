@@ -36,7 +36,7 @@ class StickerList extends Component {
         const { state: { notes } } = this
 
         return notes && notes.length ?
-            <ul className="StickerList__list Container">
+            <ul className="StickerList__list _Container">
                 {notes.map(note => <li key={note.id}>
                     <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} />
                     </li>)}
