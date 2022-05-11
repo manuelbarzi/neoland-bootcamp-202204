@@ -6,7 +6,9 @@ class App extends Component {
 
         this.state = { view: sessionStorage.token? 'home' : 'login' }
 
-        logger.info('App - constructor')
+        this.logger = new Logger('App')
+
+        this.logger.info('constructor')
     }
     //state = { view: sessionStorage.token? 'home' : 'login' }
 
@@ -21,7 +23,7 @@ class App extends Component {
     handleUserLoggedOut = () => this.handleLoginNavigation()
 
     render() {
-        logger.info('App - render')
+        this.logger.info('render')
         
         return <div className="App">
             {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}

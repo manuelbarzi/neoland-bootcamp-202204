@@ -3,8 +3,10 @@ const { Component } = React
 class Login extends Component {
     constructor() {
         super()
+        
+        this.logger = new Logger('Login')
 
-        logger.info('Login - constructor')
+        this.logger.info('constructor')
     }
 
     handleFormSubmit = event => {
@@ -33,7 +35,7 @@ class Login extends Component {
     }
 
     render() {
-        logger.info('Login - render')
+        this.logger.info('render')
         
         return <div>
             <form className="Container" onSubmit={this.handleFormSubmit}>

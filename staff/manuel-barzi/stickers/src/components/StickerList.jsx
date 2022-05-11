@@ -1,14 +1,25 @@
 const { Component } = React
 
 class StickerList extends Component {
-    state = { notes: null }
+    constructor() {
+        super()
+
+        this.state = { notes: null }
+
+        this.logger = new Logger('StickerList')
+
+        this.logger.info('constructor')
+    }
+    //state = { notes: null }
 
     componentDidMount() {
+        this.logger.info('componentDidMount')
+
         this.loadNotes()
     }
 
     loadNotes = () =>
-        retrieveNotes(sessionStorage.username, (error, notes) => {
+        retrieveNotes(sessionStorage.token, (error, notes) => {
             if (error) {
                 alert(error.message)
 
@@ -19,6 +30,8 @@ class StickerList extends Component {
         })
 
     componentWillReceiveProps(newProps) {
+        this.logger.info('componentWillReceiveProps')
+
         if (this.props.timestamp !== newProps.timestamp)
             this.loadNotes()
     }
@@ -34,6 +47,8 @@ class StickerList extends Component {
     }
 
     render() {
+        this.logger.info('render')
+
         const { state: { notes } } = this
 
         return notes && notes.length ?

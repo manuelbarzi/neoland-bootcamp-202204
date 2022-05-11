@@ -1,9 +1,13 @@
 function retrieveNotes(token, callback) {
-    logger.info('retrieveNotes')
+    const logger = new Logger('retrieveNotes')
+
+    logger.info('call')
     
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {
+        logger.info('response')
+
         //const { target: { status } } = event
         const status = event.target.status
 
@@ -27,4 +31,6 @@ function retrieveNotes(token, callback) {
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
     xhr.send()
+
+    logger.info('request')
 }

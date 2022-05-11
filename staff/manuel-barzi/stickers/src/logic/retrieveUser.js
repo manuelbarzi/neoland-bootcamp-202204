@@ -1,9 +1,13 @@
 function retrieveUser(token, callback) {
-    logger.info('retrieveUser - call')
+    const logger = new Logger('retrieveUser')
+
+    logger.info('call')
 
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {
+        logger.info('response')
+
         //const { target: { status } } = event
         const status = event.target.status
 
@@ -29,4 +33,6 @@ function retrieveUser(token, callback) {
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
     xhr.send()
+
+    logger.info('request')
 }

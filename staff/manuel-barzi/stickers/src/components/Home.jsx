@@ -3,10 +3,12 @@ const { Component } = React
 class Home extends Component {
     constructor() {
         super()
-
+        
         this.state = { name: null, timestamp: null, view: 'list' }
+        
+        this.logger = new Logger('Home')
 
-        logger.info('Home - constructor')
+        this.logger.info('constructor')
     }
     //state = { name: null, timestamp: null, view: 'list' }
 
@@ -17,7 +19,7 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        logger.info('Home - componentDidMount')
+        this.logger.info('componentDidMount')
         
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
@@ -32,7 +34,7 @@ class Home extends Component {
 
     handleAddClick = () => {
         // TODO convert to api-connected logic
-        saveNote(sessionStorage.username, null, null, error => {
+        saveNote(sessionStorage.token, null, null, error => {
             if (error) {
                 alert(error.message)
 
@@ -48,7 +50,7 @@ class Home extends Component {
     handleHomeClick = () => this.setState({ view: 'list' })
 
     render() {
-        logger.info('Home - render')
+        this.logger.info('render')
 
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
