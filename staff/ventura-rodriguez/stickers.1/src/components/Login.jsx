@@ -7,14 +7,14 @@ class Login extends Component {
         const username = event.target.username.value
         const password = event.target.password.value
 
-        authenticateUser(username, password, (error, token) => {
+        authenticateUser(username, password, error => {
             if (error) {
                 alert(error.message)
 
                 return
             }
 
-            sessionStorage.token = token
+            sessionStorage.username = username
 
             this.props.onUserLoggedIn()
         })

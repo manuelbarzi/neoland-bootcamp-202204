@@ -1,7 +1,7 @@
 const { Component } = React
 
 class App extends Component {
-    state = { view: sessionStorage.token? 'home' : 'login' }
+    state = { view: sessionStorage.username? 'home' : 'login' }
 
     handleUserRegistered = () => this.handleLoginNavigation()
 
