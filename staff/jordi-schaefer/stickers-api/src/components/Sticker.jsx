@@ -27,7 +27,7 @@ class Sticker extends Component {
         
         //const{ target: { text: { value: text }}} = event
         const text = event.target.text.value
-        const { props: { stickerId, onSaved }} = this
+        const { props: { stickerId }} = this
 
 
         saveNote(sessionStorage.token, stickerId, text, error => {
@@ -37,7 +37,6 @@ class Sticker extends Component {
             }
 
             alert('Sticker saved! ')
-            onSaved(stickerId)
         })
     }
 

@@ -7,7 +7,7 @@ class Apicaller {
         const xhr = new XMLHttpRequest
 
 
-        xkr.addEventListener('load', event => {
+        xhr.addEventListener('load', event => {
             const { status, responseText: payload } = event.target
             callback(null, {status, payload})
         })
@@ -25,7 +25,7 @@ class Apicaller {
         if (headers)
             for (const element in headers)
                 xhr.setRequestHeader(element, headers[element])
-
+        
         if (body)
             xhr.send(body)
         else xhr.send()

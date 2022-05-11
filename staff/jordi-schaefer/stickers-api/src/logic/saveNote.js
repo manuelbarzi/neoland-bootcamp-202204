@@ -5,14 +5,14 @@ function saveNote(token, noteId, text, callback) {
 
 
 
-
     xhr.addEventListener('load', event => {
         const status = event.target.status
 
         if (status === 200) {
             const json = event.target.responseText
             const data = JSON.parse(json)
-            const notes = data.notes
+            //const notes = data.notes
+            const { notes = [] } = data
             
             let note
             if (noteId) {

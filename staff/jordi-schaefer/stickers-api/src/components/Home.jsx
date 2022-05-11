@@ -2,7 +2,7 @@ const { Component } = React
 
 class Home extends Component {
 
-    state = { name: null, notes: null, view: 'edit', newNotes: [] }
+    state = { name: null, timestamp: null, view: 'edit' }
 
 
     handleLogoutClick = () => {
@@ -17,7 +17,6 @@ class Home extends Component {
 
     handleEditClick = () => {
         this.setState({ view: 'edit' })
-        this.setState({ newNotes: [] })
     }
 
     handleProfileClick = () => {
@@ -34,20 +33,6 @@ class Home extends Component {
             }
             this.setState({ name: user.name })
         })
-
-        this.loadNotes()
-    }
-
-
-    loadNotes = () => { 
-        retrieveNotes(sessionStorage.token, (error, notes) => {
-            if (error) {
-                alert(error.message)  // aqui sale el error del token!!!!
-                return
-            }
-            
-            this.setState({ notes })
-        })
     }
 
 
@@ -61,26 +46,16 @@ class Home extends Component {
         })
     }
 
-    handleStickerSaved = stickerId => {
-        const newNotes = this.state.newNotes.filter(note => note.id !== stickerId)
-
-        //this.setState({ newNotes: newNotes })
-        this.setState({ newNotes })
-    }
-
 
     handleAddClick = () => {
-        const newNotes = [...this.state.newNotes]
-        const note = new Note()
-        newNotes.push(note)
-        this.setState({ newNotes })
+        saveNote(sessionStorage.token, null, null, error => {
+            if (error) {
+                alert(error.message)
+                return
+            }
 
-        /*  codigo equivalente, de forma safety
-        this.setState((state) => {
-            const { newNotes } = state
-            newNotes.push(new Note)
-            return NewNotes
-        }) */
+            this.setState({ timestamp: Date.now() })
+        })
     }
 
 
@@ -98,7 +73,7 @@ class Home extends Component {
         </header>
 
         <main className="Home__body">
-            {this.state.view === 'edit' && <StickerList  handleStickerSaved={this.handleStickerSaved} newNotes={this.state.newNotes} />}
+            {this.state.view === 'edit' && <StickerList  timestamp={this.state.timestamp} />}
 
             {this.state.notes && this.state.view === 'list' && <ul className="List__stickers">
                 {this.state.notes.map(note => <li className="Li__note" key={note.id}>
