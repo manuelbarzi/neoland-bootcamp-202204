@@ -1,17 +1,4 @@
-function updateUserPassword(username, password, newPassword, newPasswordRepeat, callback) {
-    const user = db.users.find(user => user.username === username)
-
-    if (!user) {
-        callback(new Error(`user with username "${username}" does not exists`))
-
-        return
-    }
-
-    if (user.password !== password) {
-        callback(new Error('wrong password'))
-
-        return
-    }
+function updateUserPassword(token, password, newPassword, newPasswordRepeat, callback) {
 
     if (password === newPassword) {
         callback(new Error('current password and new password are the same'))
@@ -25,7 +12,34 @@ function updateUserPassword(username, password, newPassword, newPasswordRepeat, 
         return
     }
 
-    user.password = newPassword
+    
+    
+    const xhr = new XMLHttpRequest
 
-    callback(null)
+    xhr.addEventListener('load', event => {
+        const status = event.target.status
+        
+        if (status === 204) 
+            callback(null)
+        else if (status >= 400 && status < 500) { 
+            const json = event.target.responseText 
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error)) 
+        } else {
+            callback(new Error('server error'))
+        }
+    })
+
+
+    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    
+    const data = { oldPassword: password, password: newPassword }
+    const json = JSON.stringify(data) 
+
+    xhr.send(json)
+
 }

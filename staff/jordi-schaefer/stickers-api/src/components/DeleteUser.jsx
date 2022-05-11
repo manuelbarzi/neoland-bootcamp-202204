@@ -7,14 +7,14 @@ class DeleteUser extends Component {
 
         const confirmation = event.target.elemento.value
 
-        deleteUser(sessionStorage.username, confirmation, (error) => {
+        deleteUser(sessionStorage.token, confirmation, (error) => {
             if (error) {
                 alert(error.message)
                 return
             }
 
             alert('User deleted')
-            delete sessionStorage.username
+            delete sessionStorage.token
             location.reload()
         })
     }

@@ -85,6 +85,10 @@ h3 {
   gap: 1rem;
 }
 
+.Padding {
+  padding-top: 20rem;
+}
+
 .List__stickers {
   list-style-type: none;
   padding: 0;

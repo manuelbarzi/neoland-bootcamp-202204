@@ -69,6 +69,8 @@ class StickerList extends Component {
              </li>)}
          </ul>
          : 
-         <p> no stickers yet </p>
+         <div className="Container Padding">
+            <p> No notes yet </p>
+         </div>
     }
 }

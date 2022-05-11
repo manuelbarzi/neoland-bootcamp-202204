@@ -1,18 +1,30 @@
-function deleteUser (username, password, callback)  {
+function deleteUser (token, password, callback)  {
     
-    const index = db.users.findIndex(user => user.username === username)
-    if (index < 0) {
-        callback(new Error(`user with username "${username}" does not exist`))
-        return
-    }
-    
-    const user = db.users.find(user => user.username === username)
-    if (user.password !== password) {
-        callback(new Error('wrong password'))
-        return
-    }
+    const xhr = new XMLHttpRequest
+
+    xhr.addEventListener('load', event => {
+        const status = event.target.status
+        
+        if (status === 204) 
+            callback(null)
+        else if (status >= 400 && status < 500) { 
+            const json = event.target.responseText 
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error)) 
+        } else {
+            callback(new Error('server error'))
+        }
+    })
 
 
-    db.users.splice(index, 1)
-    callback(null)
+    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+    xhr.setRequestHeader('Content-Type', 'application/json')
+    
+    const data = { password: password }
+    const json = JSON.stringify(data) 
+
+    xhr.send(json)
 }

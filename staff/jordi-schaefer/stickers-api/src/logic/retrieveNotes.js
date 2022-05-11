@@ -8,7 +8,6 @@ function retrieveNotes(token, callback) {  // recuperar
         if (status === 200) {
             const json = event.target.responseText
             const data = JSON.parse(json)
-            //const notes = { id: data.notes[0].id, text: data.notes[0].text }
             const notes = data.notes
             
             callback(null, notes)
@@ -18,7 +17,7 @@ function retrieveNotes(token, callback) {  // recuperar
             const data = JSON.parse(json)
             callback(new Error(data.error))
         } else
-            callback(new Error('server error'))
+            callback(new Error('server error')) // si el error es un 500 no viene JASON ni nada
     })
 
 
