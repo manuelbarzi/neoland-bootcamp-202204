@@ -1,0 +1,12 @@
+@use 'base' {}* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+/*# sourceMappingURL=resets.css.map */

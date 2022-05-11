@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,kBAAkB,CAAC;EACf,eAAe,EAAE,IAAI;EACrB,OAAO,EAAE,CAAC;EACV,aAAa,EAAE,IAAI;CAAG",
+    "sources": [
+        "StickerList.sass"
+    ],
+    "names": [],
+    "file": "StickerList.css"
+}
