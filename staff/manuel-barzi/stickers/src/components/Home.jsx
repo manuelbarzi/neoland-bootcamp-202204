@@ -1,7 +1,14 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null, timestamp: null, view: 'list' }
+    constructor() {
+        super()
+
+        this.state = { name: null, timestamp: null, view: 'list' }
+
+        logger.info('Home - constructor')
+    }
+    //state = { name: null, timestamp: null, view: 'list' }
 
     handleLogoutClick = () => {
         delete sessionStorage.token
@@ -10,6 +17,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
+        logger.info('Home - componentDidMount')
+        
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
@@ -39,6 +48,8 @@ class Home extends Component {
     handleHomeClick = () => this.setState({ view: 'list' })
 
     render() {
+        logger.info('Home - render')
+
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
                 <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
