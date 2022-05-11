@@ -1,16 +1,12 @@
-const { Component, createRef } = React
+const { Component } = React
 
 class Home extends Component {
-    state = { view: 'stickers', newStickers: false, name: null }
-    ref = createRef()
+    state = { view: 'stickers', newStickersCounter: 0, name: null }
+
     onLogoutButtonClick = () => {
         delete sessionStorage.username
 
         this.props.onLoggedOut()
-    }
-
-    handleNewNoteCreated = () => {
-        this.setState({ newStickers: false })
     }
 
     handleOnProfileButton = () => {
@@ -26,11 +22,7 @@ class Home extends Component {
     handleAddNoteClick = event => {
         event.preventDefault()
 
-        this.ref.current.foo()
-        // Entender bien esta mierda
-        // en vez de hacer set
-        // Ver si se puede limitara a lo que se puede acceder con ref, en hooks se hace con forward ref y uesimperativehandler
-        // this.state.newStickers === true ? this.setState({ newStickers: false }) : this.setState({ newStickers: true })        
+        this.setState({ newStickersCounter: this.state.newStickersCounter + 1 })
     }
 
     componentDidMount() {
@@ -54,7 +46,7 @@ class Home extends Component {
 
             <main>
                 {this.state.view === 'profile' && <Profile username={sessionStorage.username} />}
-                {this.state.view === 'stickers' && <List ref={this.ref} username={sessionStorage.username} newStickers={this.state.newStickers} onNewNoteCreated={this.handleNewNoteCreated} />}
+                {this.state.view === 'stickers' && <List username={sessionStorage.username} newStickers={this.state.newStickersCounter} />}
             </main>
             
             <footer className="footer">

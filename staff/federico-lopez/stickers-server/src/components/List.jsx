@@ -4,7 +4,7 @@ class List extends Component {
     state = { notes: null, newNotes: [] }
 
     componentDidMount = () => {
-        retrieveNotes(this.props.username, (error, notes) => {
+        retrieveNotes(sessionStorage.token, (error, notes) => {
             if (error) {
                 alert(error.message)
                 return
@@ -15,32 +15,29 @@ class List extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.newStickers !== prevProps.newStickers) {
-            // const newNote = new Note
-
-            // const newNotes = [...this.state.newNotes]
-
-            // newNotes.push(newNote)
-
-            
+            this.setState(({ newNotes }) => newNotes.push(new Note))
         }
     }
 
-    foo = () => {
-        this.setState(({ newNotes }) => {
-            newNotes.push(new Note)
-            return {newNotes}
-        })
-    }
+    handleOnRemovedSticker = id => {
+        let notes = [...this.state.notes]
 
-    handleOnRemovedSticker = () => {
+        notes = notes.filter(note => note.id !== id)
 
+        this.setState({ notes })
     }
 
     handleOnClosedSticker = id => {
+        let newNotes = [...this.state.newNotes]
 
+ 
+
+        newNotes = newNotes.filter(note => note.id !== id)
+
+        this.setState({ newNotes })
     }
 
-    handlerOnSavedNote = id => {
+    handlerOnSavedNote = (id, text) => {
         if (this.state.newNotes.length > 0) {
             const isNew = this.state.newNotes.some(note => note.id === id)
 
@@ -49,11 +46,16 @@ class List extends Component {
 
                 const note = newNotes.find(note => note.id === id)
 
+                note.text = text
+                
                 newNotes = newNotes.filter(note => note.id !== id)
 
                 this.setState({ newNotes })
 
-                const notes = [...this.state.notes]
+                let notes = []
+                
+                if (this.state.notes instanceof Array && this.state.notes.length > 0)
+                    notes = [...this.state.notes]
 
                 notes.push(note)
 
@@ -81,23 +83,3 @@ class List extends Component {
         </ul>
     }
 }
-
-
-//         home.onClickAdd(() => {
-//             const sticker = new Sticker
-
-//             sticker.toEditMode()
-
-//             this.add(sticker)
-
-//             sticker.onClose((idExists) => {
-//                 if (!idExists)
-//                     this.remove(sticker)
-//             })
-
-//             sticker.onRemove(() => {
-//                 this.remove(sticker)
-//             })
-//         })
-//     }
-// }

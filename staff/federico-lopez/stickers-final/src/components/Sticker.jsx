@@ -18,22 +18,22 @@ class Sticker extends Component {
             }
         })
 
-        this.props.onRemovedSticker()
+        this.props.onRemovedSticker(this.props.id)
     }
 
     handleOnSubmitForm = event => {
         event.preventDefault()
 
-        saveNote(this.props.username, this.props.id, event.target[0].value, error => {
+        saveNote(this.props.username, this.props.id, event.target.text.value, error => {
             if (error)
                 alert(error.message)
         })
 
-        this.setState({ text: event.target[0].value })
+        this.setState({ text: event.target.text.value })
 
         this.setState({ view: 'view' })
 
-        this.props.onSavedNote(this.props.id)
+        this.props.onSavedNote(this.props.id, event.target.text.value)
     }
 
     handleCloseClick = event => {
@@ -43,7 +43,7 @@ class Sticker extends Component {
 
         if (stickerIsSaved)
             this.setState({ view: 'view' })
-        else
+        else 
             this.props.onClosedSticker(this.props.id)
     }
 

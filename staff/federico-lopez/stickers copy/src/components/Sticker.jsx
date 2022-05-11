@@ -17,34 +17,39 @@ class Sticker extends Component {
                 alert(message.error)
             }
         })
-
         this.props.onRemovedSticker()
+        // callback() TODO -> HOW TO CLOSE THE STICKER WHEN IS DELETED
     }
 
     handleOnSubmitForm = event => {
         event.preventDefault()
 
-        saveNote(this.props.username, this.props.id, event.target[0].value, error => {
-            if (error)
-                alert(error.message)
-        })
-
+        if (!this.props.id) {
+            createNote(this.props.username, event.target[0].value, (error, note) => {
+                if (error)
+                    alert(error.message)
+                else
+                    this.setState({ id: note.id })
+            })
+        } else {
+            updateNote(this.props.username, this.props.id, event.target[0].value, error => {
+                if (error)
+                    alert(error.message)
+            })
+        }
         this.setState({ text: event.target[0].value })
 
         this.setState({ view: 'view' })
-
-        this.props.onSavedNote(this.props.id)
     }
 
     handleCloseClick = event => {
         event.preventDefault()
 
-        const stickerIsSaved = db.notes.find(note => note.id === this.props.id)
-
-        if (stickerIsSaved)
+        const idExists = !!this.props.id
+        if (idExists)
             this.setState({ view: 'view' })
-        else
-            this.props.onClosedSticker(this.props.id)
+
+        this.props.onClosedSticker(idExists)
     }
 
     render() {
@@ -66,7 +71,7 @@ class Sticker extends Component {
                 <div className="Sticker__Edit">
                     <a className="xButton" onClick={this.handleCloseClick}>x</a>
                     <form className="Sticker__form" onSubmit={this.handleOnSubmitForm} >
-                        <textarea className="textarea" name="text" defaultValue={this.state.text} ></textarea>
+                        <textarea className="textarea" name="text">{this.state.text}</textarea>
                         <button className="saveButton">Save</button>
                     </form>
                 </div>

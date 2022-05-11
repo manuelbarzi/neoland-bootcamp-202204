@@ -12,39 +12,42 @@ class Sticker extends Component {
     handleRemoveButton = event => {
         event.preventDefault()
 
-        deleteNote(this.props.username, this.props.id, error => {
+        deleteNote(sessionStorage.token, this.props.id, error => {
             if (error) {
                 alert(message.error)
             }
         })
 
-        this.props.onRemovedSticker()
+        this.props.onRemovedSticker(this.props.id)
     }
 
     handleOnSubmitForm = event => {
         event.preventDefault()
 
-        saveNote(this.props.username, this.props.id, event.target[0].value, error => {
+        saveNote(sessionStorage.token, this.props.id, event.target.text.value, error => {
             if (error)
                 alert(error.message)
         })
 
-        this.setState({ text: event.target[0].value })
+        this.setState({ text: event.target.text.value })
 
         this.setState({ view: 'view' })
 
-        this.props.onSavedNote(this.props.id)
+        this.props.onSavedNote(this.props.id, event.target.text.value)
     }
 
     handleCloseClick = event => {
         event.preventDefault()
 
-        const stickerIsSaved = db.notes.find(note => note.id === this.props.id)
-
-        if (stickerIsSaved)
-            this.setState({ view: 'view' })
-        else
-            this.props.onClosedSticker(this.props.id)
+        noteIsSaved(sessionStorage.token, this.props.id, (error, isSaved) => {
+            if (error)
+                alert(error.message)
+            else
+                if (isSaved)
+                    this.setState({ view: 'view' })
+                else
+                    this.props.onClosedSticker(this.props.id)
+        })
     }
 
     render() {
@@ -71,7 +74,6 @@ class Sticker extends Component {
                     </form>
                 </div>
             }
-
         </div>
     }
 }
