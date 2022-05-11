@@ -1,6 +1,14 @@
 const { Component } = React
 
 class Login extends Component {
+    constructor() {
+        super()
+        
+        this.logger = new Logger('Login')
+
+        this.logger.info('constructor')
+    }
+
     handleFormSubmit = event => {
         event.preventDefault()
 
@@ -27,6 +35,8 @@ class Login extends Component {
     }
 
     render() {
+        this.logger.info('render')
+        
         return <div>
             <form className="Container" onSubmit={this.handleFormSubmit}>
                 <input className="Input Input--light" type="text" name="username" placeholder="username" />

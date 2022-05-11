@@ -1,16 +1,7 @@
 const { Component } = React
 
 class App extends Component {
-    constructor() {
-        super()
-
-        this.state = { view: sessionStorage.token? 'home' : 'login' }
-
-        this.logger = new Logger('App')
-
-        this.logger.info('constructor')
-    }
-    //state = { view: sessionStorage.token? 'home' : 'login' }
+    state = { view: sessionStorage.token? 'home' : 'login' }
 
     handleUserRegistered = () => this.handleLoginNavigation()
 
@@ -23,8 +14,6 @@ class App extends Component {
     handleUserLoggedOut = () => this.handleLoginNavigation()
 
     render() {
-        this.logger.info('render')
-        
         return <div className="App">
             {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}
             {this.state.view === 'register' && <Register onUserRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation} />}

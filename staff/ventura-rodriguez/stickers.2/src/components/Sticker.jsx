@@ -22,7 +22,7 @@ class Sticker extends Component {
         const { target: { text: { value: text } } } = event
         const { props: { stickerId }} = this
 
-        saveNote(sessionStorage.token, stickerId, text, error => {
+        saveNote(sessionStorage.username, stickerId, text, error => {
             if (error) {
                 alert(error.message)
 

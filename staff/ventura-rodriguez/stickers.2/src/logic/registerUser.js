@@ -1,8 +1,4 @@
 function registerUser(name, username, password, callback) {
-    const logger = new Logger('registerUser')
-
-    logger.info('call')
-
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {

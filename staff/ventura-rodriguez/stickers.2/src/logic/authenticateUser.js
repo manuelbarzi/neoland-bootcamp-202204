@@ -1,13 +1,7 @@
-function retrieveUser(token, callback) {
-    const logger = new Logger('retrieveUser')
-
-    logger.info('call')
-
+function authenticateUser(username, password, callback) {
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {
-        logger.info('response')
-
         //const { target: { status } } = event
         const status = event.target.status
 
@@ -16,9 +10,7 @@ function retrieveUser(token, callback) {
 
             const data = JSON.parse(json)
 
-            const user = { name: data.name, username: data.username }
-
-            callback(null, user)
+            callback(null, data.token)
         } else if (status >= 400 && status < 500) {
             const json = event.target.responseText
 
@@ -28,11 +20,13 @@ function retrieveUser(token, callback) {
         } else callback(new Error('server error'))
     })
 
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth')
 
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+    xhr.setRequestHeader('Content-Type', 'application/json')
 
-    xhr.send()
+    const data = { name, username, password }
 
-    logger.info('request')
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
 }
