@@ -5,11 +5,11 @@ class App extends Component {
 
     handleButtonClick = event => {
 
-        const key = event.target.innerText
+        const key = event.target.innerText   //guardaremos el valor del div i su boton en la tecla key
 
-        if (key !== '=')
+        if (key !== '=') //si la tecla key no es igual a = entonces se le suma al estado actual la tecla apretada
             this.setState({ history: this.state.history + key })
-        else
+        else //si la tecla es igual, hará el calculo y cambiara el estado del display que por defecto es 0 
             this.setState({ display: eval(this.state.history) })
     }
 
