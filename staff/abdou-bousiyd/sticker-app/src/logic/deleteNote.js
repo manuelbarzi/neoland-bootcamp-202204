@@ -1,29 +1,68 @@
-function deleteNote(username, noteId, callback) {
-    const userExists = db.users.some(user => user.username === username)
+function deleteNote(token, noteId, callback) {
 
-    if (!userExists) {
-        callback(new Error(`username "${username}" does not exist`))
+    const xhr = new XMLHttpRequest
 
-        return
-    }
+    xhr.addEventListener('load', event => {
 
-    const index = db.notes.findIndex(note => note.id === noteId)
+        const status = event.target.status
 
-    if (index < 0) {
-        callback(new Error(`note with id "${noteId}" does not exist`))
+        
+        if (status === 200) {
+            
+            const json = event.target.responseText
+            const data = JSON.parse(json)
 
-        return
-    }
+            const { notes = [] } = data
+            // const notes = data.notes
+            
+            if (noteId) {
+                
+                const index = notes.findIndex(note => note.id === noteId)
+                notes.splice(index, 1)
 
-    const note = db.notes[index]
+                {
+                    const xhr = new XMLHttpRequest
+    
+                    xhr.addEventListener('load', event => {
+    
+                        const status = event.target.status
+    
+                        if (status === 204) {
+                            callback(null)
+                        } else if (status >= 400 && status < 500) {
+                            const json = event.target.responseText
+    
+                            const data = JSON.parse(json)
+    
+                            callback(new Error(data.error))
+                        } else callback(new Error('server error'))
+                    })
+    
+                    xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    
+                    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+                    xhr.setRequestHeader('Content-Type', 'application/json')
+    
+                    const data = { notes }
+    
+                    const json = JSON.stringify(data)
+    
+                    xhr.send(json)
+    
+                }
+            }
+        } else if (status >= 400 && status < 500) {
+            const json = event.target.responseText
 
-    if (note.username !== username) {
-        callback(new Error(`user "${username}" does not own note with id "${noteId}"`))
+            const data = JSON.parse(json)
 
-        return
-    }
+            callback(new Error(data.error))
+        } else callback(new Error('server error'))
+    })
 
-    db.notes.splice(index, 1)
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
-    callback(null)
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send() 
 }

@@ -7,7 +7,6 @@ class Home extends Component {
 
 
     componentDidMount() {
-        console.log(sessionStorage.token, 8888)
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
@@ -18,18 +17,12 @@ class Home extends Component {
     }
 
     handleAddClick = () => {
-        // const newNotes = [...this.state.newNotes]
-        // const note = new Note()
-        // newNotes.push(note)
-        // this.setState({ newNotes })
-        saveNote(sessionStorage.username, null, null, error => {
+        saveNote(sessionStorage.token, null, null, error => {
+            // console.log(sessionStorage.token, 33)
             if (error) {
-                
                 alert(error.message)
-
                 return
             }
-
             this.setState({ timestamp: Date.now() })
         })
     }

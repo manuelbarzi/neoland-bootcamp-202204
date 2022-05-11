@@ -3,7 +3,6 @@ function updateUserName(token, name, callback) {
     const xhr = new XMLHttpRequest()
     const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
 
-    console.log(`Bearer ${token}`, 773)
 
     xhr.addEventListener('load', event => {
         const status = event.target.status

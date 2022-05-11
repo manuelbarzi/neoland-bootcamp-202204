@@ -9,13 +9,11 @@ class StickerList extends Component {
     }
 
     loadNotes = () => {
-        retrieveNotes(this.props.username, (error, notes) => {
+        retrieveNotes(sessionStorage.token, (error, notes) => {
             if (error) {
-                // alert(error.message)
-
+                alert(error.message)
                 return
             }
-            console.log(notes)
             this.setState({ notes })
         })
     }

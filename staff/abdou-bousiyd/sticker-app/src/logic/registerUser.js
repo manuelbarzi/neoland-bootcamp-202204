@@ -1,4 +1,8 @@
 function registerUser(name, username, password, callback) {
+
+    if(typeof name !== 'string') throw new TypeError(`name ${name} is not a string`)
+
+    
     const xhr = new XMLHttpRequest
     const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
 
