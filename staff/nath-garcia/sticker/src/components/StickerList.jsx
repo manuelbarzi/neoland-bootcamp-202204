@@ -1,10 +1,25 @@
 const { Component } = React
 
 class StickerList extends Component {
-    state = { notes: null }
+    constructor() {
+        super()
+
+        this.state = { notes: null }
+
+        this.logger = new Logger('StickerList')
+
+        this.logger.info('constructor')
+    }
+    //state = { notes: null }
 
     componentDidMount() {
-        retrieveNotes(sessionStorage.username, (error, notes) => {
+        this.logger.info('componentDidMount')
+
+        this.loadNotes()
+    }
+
+    loadNotes = () =>
+        retrieveNotes(sessionStorage.token, (error, notes) => {
             if (error) {
                 alert(error.message)
 
@@ -13,23 +28,12 @@ class StickerList extends Component {
 
             this.setState({ notes })
         })
-    }
 
-    componentWillReceiveProps(props) {
-        const { newNotes } = props
+    componentWillReceiveProps(newProps) {
+        this.logger.info('componentWillReceiveProps')
 
-        if (this.state.notes) {
-            const notes = [...this.state.notes]
-
-            newNotes.forEach(newNote => {
-                const exists = notes.some(note => note.id === newNote.id)
-
-                if (!exists)
-                    notes.push(newNote)
-            })
-    
-            this.setState({ notes })
-        }
+        if (this.props.timestamp !== newProps.timestamp)
+            this.loadNotes()
     }
 
     handleRemoveSticker = stickerId => {
@@ -43,13 +47,15 @@ class StickerList extends Component {
     }
 
     render() {
+        this.logger.info('render')
+
         const { state: { notes } } = this
 
         return notes && notes.length ?
             <ul className="StickerList__list Container">
                 {notes.map(note => <li key={note.id}>
-                    <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} onSaved={this.handleStickerSaved} />
-                    </li>)}
+                    <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} />
+                </li>)}
             </ul>
             :
             <p>no stickers yet</p>

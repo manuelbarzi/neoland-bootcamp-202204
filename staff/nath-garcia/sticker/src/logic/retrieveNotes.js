@@ -1,13 +1,36 @@
-function retrieveNotes(username, callback) {
-    const userExists = db.users.some(user => user.username === username)
+function retrieveNotes(token, callback) {
+    const logger = new Logger('retrieveNotes')
 
-    if(!userExists) {
-        callback(new Error(`username "${username}" does not exist`))
+    logger.info('call')
 
-        return
-    }
+    const xhr = new XMLHttpRequest
 
-    const notes = db.notes.filter(note => note.username === username)
+    xhr.addEventListener('load', event => {
+        logger.info('response')
 
-    callback(null, notes)
+        //const { target: { status } } = event
+        const status = event.target.status
+
+        if (status === 200) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(null, data.notes)
+        } else if (status >= 400 && status < 500) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error))
+        }else callback( new Error('server error'))
+    })
+
+    xhr.open('GET','https://b00tc4mp.herokuapp.com/api/v2/users')
+
+    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+
+    xhr.send()
+
+    logger.info('request')
 }
