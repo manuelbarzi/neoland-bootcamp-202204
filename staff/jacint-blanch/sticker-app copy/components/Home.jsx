@@ -17,6 +17,16 @@ class Home extends React.Component {
 
             this.setState({ name: user.name})
         })
+
+        retrieveNotes(sessionStorage.username, (error, notes) =>{
+            if(error) {
+                alert(error.message)
+
+                return
+            }
+
+            this.setState({ notes })
+        })
     }
     
     render() {

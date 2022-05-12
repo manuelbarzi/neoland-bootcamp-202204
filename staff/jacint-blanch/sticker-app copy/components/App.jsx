@@ -13,7 +13,7 @@ class App extends React.Component {
     render() {
         return <div className="App">
             {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}
-            {this.state.view === 'register' && <Register onUserLoggedOut={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation}/>}
+            {this.state.view === 'register' && <Register onUserRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation}/>}
             {this.state.view === 'home' && <Home onUserLoggedOut={this.handleUserLoggedOut} />}
         </div>
 

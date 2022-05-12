@@ -5,13 +5,13 @@ class Sticker extends Component {
         const { props: { stickerId, onRemove } } = this
 
         if (stickerId)
-            deleteNote(sessionStorage.username, stickerId, error => {
+            deleteNote(sessionStorage.token, stickerId, error => {
                 if (error) {
                     alert(error.message)
 
                     return
                 }
-
+            
                 onRemove(stickerId)
             })
     }
@@ -22,7 +22,7 @@ class Sticker extends Component {
         const { target: { text: { value: text } } } = event
         const { props: { stickerId }} = this
 
-        saveNote(sessionStorage.username, stickerId, text, error => {
+        saveNote(sessionStorage.token, stickerId, text, error => {
             if (error) {
                 alert(error.message)
 

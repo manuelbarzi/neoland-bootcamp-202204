@@ -1,17 +1,23 @@
 const { Component } = React
 
 class Home extends Component {
-    state = { name: null, timestamp: null, view: 'list' }
+    constructor() {
+        super()
+        
+        this.state = { name: null, timestamp: null, view: 'list' }
+        
+    }
+    //state = { name: null, timestamp: null, view: 'list' }
 
     handleLogoutClick = () => {
-        delete sessionStorage.username
+        delete sessionStorage.token
 
         this.props.onUserLoggedOut()
     }
 
-    // TODO load user when component mounts (RTFM componentDidMount lifecycle methods)
     componentDidMount() {
-        retrieveUser(sessionStorage.username, (error, user) => {
+        
+        retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
 
@@ -23,7 +29,8 @@ class Home extends Component {
     }
 
     handleAddClick = () => {
-        saveNote(sessionStorage.username, null, null, error => {
+        // TODO convert to api-connected logic
+        saveNote(sessionStorage.token, null, null, error => {
             if (error) {
                 alert(error.message)
 
@@ -34,10 +41,12 @@ class Home extends Component {
         })
     }
 
-    handleHomeClick = () => this.setState({ view: 'list' })
     handleProfileClick = () => this.setState({ view: 'profile' })
 
+    handleHomeClick = () => this.setState({ view: 'list' })
+
     render() {
+
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
                 <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
@@ -49,7 +58,7 @@ class Home extends Component {
 
             <main className="Home__body Container">
                 {this.state.view === 'list' && <StickerList timestamp={this.state.timestamp} />}
-                {this.state.view === 'profile' && <Profile />}
+                {this.state.view === 'profile' && <Profile username={sessionStorage.username} />}
             </main>
 
             <footer className="Home__footer Container">

@@ -1,14 +1,24 @@
 const { Component } = React
 
 class StickerList extends Component {
-    state = { notes: null }
+    constructor() {
+        super()
+
+        this.state = { notes: null }
+
+
+    }
+    //state = { notes: null }
 
     componentDidMount() {
+
         this.loadNotes()
     }
 
-    loadNotes = () =>
-        retrieveNotes(sessionStorage.username, (error, notes) => {
+    loadNotes = () => {
+
+        retrieveNotes(sessionStorage.token, (error, notes) => {
+            
             if (error) {
                 alert(error.message)
 
@@ -17,8 +27,10 @@ class StickerList extends Component {
 
             this.setState({ notes })
         })
+    }
 
     componentWillReceiveProps(newProps) {
+
         if (this.props.timestamp !== newProps.timestamp)
             this.loadNotes()
     }
@@ -27,6 +39,7 @@ class StickerList extends Component {
         const notes = this.state.notes.filter(note => note.id !== stickerId)
 
         this.setState({ notes })
+        
     }
 
     handleStickerSaved = stickerId => {
@@ -34,6 +47,7 @@ class StickerList extends Component {
     }
 
     render() {
+
         const { state: { notes } } = this
 
         return notes && notes.length ?
