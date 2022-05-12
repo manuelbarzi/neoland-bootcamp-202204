@@ -1,7 +1,39 @@
-console.log('%cApium v1.0', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
+console.log('%cApium v1.1', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
 
+/**
+ * API "Universal Messenger" (APIum)
+ *
+ * Processes HTTP requests/responses (http client)
+ */
 class Apium {
-    call(method, url, options, callback) {
+    /**
+     * Constructs an instance of Apium
+     * 
+     * @param {string} baseUrl The base url to connect to
+     */
+    constructor(baseUrl) {
+        this.baseUrl = baseUrl
+    }
+
+    /**
+     * Performs an HTTP call to a server
+     * 
+     * @param {string} method The HTTP method (GET, POST, PATCH, PUT, DELETE, ...)
+     * @param {string} urlOrPath The address of the server to connect to
+     * @param {Object} options The required HTTP headers or body for the specific call
+     *  
+     * Example:
+     * 
+     * {
+     *       headers: {
+     *           Authorization: ...,
+     *           'Content-Type': ...
+     *       },
+     *       body: ...
+     *   }
+     * @param {function} callback  The callback function that attends the response's result ({ status, payload})
+     */
+    call(method, urlOrPath, options, callback) {
         const xhr = new XMLHttpRequest
 
         xhr.addEventListener('load', event => {
@@ -14,27 +46,42 @@ class Apium {
             callback(new Error('API call fail'))
         })
 
+        const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}/${urlOrPath}`
+
         xhr.open(method, url)
 
-        /* 
-        options:
+        if (options) {
+            const { headers, body } = options
 
-        {
-            headers: {
-                Authorization: ...,
-                'Content-Type': ...
-            },
+            if (headers)
+                for (const key in headers)
+                    xhr.setRequestHeader(key, headers[key])
 
-            body: ...
-        }
-        */
+            xhr.send(body)
+        } else xhr.send()
+    }
 
-        const { headers, body } = options
+    get(urlOrPath, options, callback) {
+        this.call('GET', urlOrPath, options, callback)
+    }
 
-        if (headers)
-            for (const key in headers)
-                xhr.setRequestHeader(key, headers[key])
+    post(urlOrPath, options, callback) {
+        this.call('POST', urlOrPath, options, callback)
+    }
 
-        xhr.send(body)
+    patch(urlOrPath, options, callback) {
+        this.call('PATCH', urlOrPath, options, callback)
+    }
+
+    put(urlOrPath, options, callback) {
+        this.call('PUT', urlOrPath, options, callback)
+    }
+
+    delete(urlOrPath, options, callback) {
+        this.call('DELETE', urlOrPath, options, callback)
+    }
+
+    options(urlOrPath, options, callback) {
+        this.call('OPTIONS', urlOrPath, options, callback)
     }
 }
