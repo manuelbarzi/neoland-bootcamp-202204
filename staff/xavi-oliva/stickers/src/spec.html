@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Jasmine Spec Runner v4.1.0</title>
+
+  <link rel="shortcut icon" type="image/png"
+    href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine_favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine.css">
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/jasmine-html.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/boot0.js"></script>
+  <!-- optional: include a file here that configures the Jasmine env -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jasmine/4.1.0/boot1.js"></script>
+</head>
+
+<body>
+  <script src="utils/createId.js"></script>
+
+  <script src="data/db.js"></script>
+  <script src="data/models/User.js"></script>
+  <script src="data/models/Note.js"></script>
+  <script src="data/users.js"></script>
+  <script src="data/notes.js"></script>
+
+  <script src="logic/registerUser.js"></script>
+  <script src="logic/registerUser.spec.js"></script>
+
+  <script src="logic/authenticateUser.js"></script>
+  <script src="logic/authenticateUser.spec.js"></script>
+
+  <script src="logic/retrieveUser.js"></script>
+  <script src="logic/retrieveUser.spec.js"></script>
+
+  <script src="logic/retrieveNotes.js"></script>
+  <script src="logic/retrieveNotes.spec.js"></script>
+
+  <script src="logic/saveNote.js"></script>
+  <script src="logic/saveNote.spec.js"></script>
+
+  <script src="logic/deleteNote.js"></script>
+  <script src="logic/deleteNote.spec.js"></script>
+
+  <script src="logic/updateUserPassword.js"></script>
+  <script src="logic/updateUserPassword.spec.js"></script>
+</body>
+
+</html>
