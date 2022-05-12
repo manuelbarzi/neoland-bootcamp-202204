@@ -12,17 +12,13 @@ function retrieveNotes(token, callback) {
         if(error) return callback(error)
         if(status === 200) {
             const data = JSON.parse(payload)
-            const {notes} = data
+            const {notes = []} = data
             callback(null, notes)
         }else if (status >= 400 && status < 500) {
-            logger.warn('response - client error status ' + status)
-
             const data = JSON.parse(payload)
 
             callback(new Error(data.error))
         } else {
-            logger.error('response - server error status ' + status)
-
             callback(new Error('server error'))
         }
     })
