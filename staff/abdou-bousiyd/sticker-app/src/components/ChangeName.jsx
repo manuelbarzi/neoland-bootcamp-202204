@@ -18,8 +18,8 @@ class ChangeName extends Component {
     }
 
     render() {
-        return <div className="ChangeName" onSubmit={this.handleFormSubmit}>
-            <form className="Container">
+        return <div className="ChangeName">
+            <form className="Container"  onSubmit={this.handleFormSubmit}>
                 <input type="text" name="name" placeholder="name" />
                 <button>Save</button>
             </form>
