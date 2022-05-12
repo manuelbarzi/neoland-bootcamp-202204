@@ -26,7 +26,7 @@ class Profile extends Component {
             <div className="Profile__buttons">
             <button className="Button Profile__changeName" onClick={this.handleNameClick}>Change Name</button>
             <button className="Button Profile__changePassword" onClick={this.handlePasswordClick}>Change Password</button>
-            <button className="Button Profile__deleteUser" onClick={this.handleDeleteClick}>Delete user</button>
+            <button className="Button Profile__deleteUser" onClick={this.handleDeleteClick}>Delete User</button>
             </div>
             <div className="Profile__views">
                 {this.state.view === 'name' && <ChangeName onUserNameChanged={this.handleUserNameChanged} />}

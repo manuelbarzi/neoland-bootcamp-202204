@@ -1,5 +1,31 @@
 function registerUser(name, username, password, callback) {
 
+    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
+
+    api.post('/v2/users/auth', {
+        headers: { 'Content-Type': 'application/json' }, 
+        body: JSON.stringify( {name, username, password})}, (error, {status, payload}) => {
+
+            if (error) {
+                callback(error)
+                return
+            }
+            if (status === 201) {
+                callback(null) 
+            } 
+            else if (status >= 400 && status < 500) { 
+                const data = JSON.parse(payload)  
+                callback(new Error(data.error)) 
+            } 
+            else
+            callback(new Error('server error'))
+        }
+    )
+}
+
+
+
+/*
     // declaro un constructor de una peticion a servidor
     const xhr = new XMLHttpRequest
 
@@ -13,10 +39,10 @@ function registerUser(name, username, password, callback) {
         else if (status >= 400 && status < 500) { // 400-500 errores de cliente
             const json = event.target.responseText // me guardo el texto de error
             const data = JSON.parse(json) // lo convierto de jason a string
-
             callback(new Error(data.error)) // lo envio como mensaje de error
-        } else
-        callback(new Error('server error')) // sino sera un error de servidor
+        } 
+        else
+            callback(new Error('server error')) // sino sera un error de servidor
     })
 
     // abro la api en modpo POST
@@ -29,5 +55,4 @@ function registerUser(name, username, password, callback) {
     const json = JSON.stringify(data)   // lo convierto a jason
 
     xhr.send(json) // se los envio al xhr (el constructor que abro al principio)
-
-}
+*/

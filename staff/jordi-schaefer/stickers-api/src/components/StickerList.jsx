@@ -10,13 +10,11 @@ class StickerList extends Component {
     }
 
 
-
     loadNotes = () => retrieveNotes(sessionStorage.token, (error, notes) => {
         if (error) {
             alert(error.message)
             return
         }
-
         this.setState({ notes })
     })
 

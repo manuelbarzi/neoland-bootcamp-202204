@@ -1,3 +1,68 @@
+function saveNote(token, noteId, text, callback){
+
+    const api= new Apicaller('https://b00tc4mp.herokuapp.com/api')
+
+    api.get('/v2/users', 
+    {headers: {'Authorization' : `Bearer ${token}`}}, (error, {status, payload}) =>{ //payload=todo lo que hay guardado en la api
+        
+        if (error) {
+            callback (error)
+            return
+        }
+        if (status === 200) {
+            const data = JSON.parse(payload)
+            const { notes = [] } = data // si no hay notas lo creo vacio
+
+            let note
+            if (noteId) {
+                note = notes.find(note => note.id === noteId) // guardo la nota que tiene ese id, si existe
+
+                if (note) // si ha encontrado alguna
+                    note.text = text // le paso el nuevo texto
+                else { // si no hay ninguna nota
+                    note = new Note(noteId, text) // creo una nueva
+                    notes.push(note) // y se la pongo a todas las notas
+                }
+            }
+            else { // si no llega ningun id
+                note = new Note(null, text) // creo una nota nueva con un nuevo id
+                notes.push(note) 
+            }
+
+
+            { 
+                api.patch('/v2/users',
+                {headers : {'Authorization' : `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({notes})}, 
+                (error, {status, payload}) => { 
+                    if (error) {  // si hay un error definido
+                        callback(error) // lo enviamos por callback
+                        return
+                    }
+                    if (status === 204) { // 204 = todo ok pero no devuelve nada
+                        callback(null)
+                    } else if (status >= 400 && status < 500) {
+                        
+                        const data = JSON.parse(payload) //convierte de jason a JS
+
+                        callback(new Error(data.error)) // para pasarle el error
+                    } else callback(new Error('server error'))
+
+                })
+            }
+    
+
+        } else if (status >= 400 && status < 500) {
+            const data = JSON.parse(payload)
+            
+            callback(new Error(data.error))
+        } else callback(new Error('server error'))        
+    })
+}
+
+
+
+/*
+
 function saveNote(token, noteId, text, callback) {
 
     // declaro un constructor de una peticion a servidor
@@ -84,3 +149,5 @@ function saveNote(token, noteId, text, callback) {
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
     xhr.send()
 }
+
+*/

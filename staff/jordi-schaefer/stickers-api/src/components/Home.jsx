@@ -2,7 +2,7 @@ const { Component } = React
 
 class Home extends Component {
 
-    state = { name: null, timestamp: null, view: 'edit' }
+    state = { name: null, notes: null, timestamp: null, view: 'edit' }
 
 
     handleLogoutClick = () => {
@@ -33,7 +33,17 @@ class Home extends Component {
             }
             this.setState({ name: user.name })
         })
+        this.loadNotes()
     }
+
+    loadNotes = () => retrieveNotes(sessionStorage.token, (error, notes) => {
+        if (error) {
+            alert(error.message)
+            return
+        }
+
+        this.setState({ notes })
+    })
 
 
     handleUserNameChanged = () => {

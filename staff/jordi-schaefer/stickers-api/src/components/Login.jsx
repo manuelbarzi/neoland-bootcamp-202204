@@ -1,8 +1,6 @@
-const { Component } = React
+function Login (props) {
 
-class Login extends Component {
-
-    handleFormSubmit = event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const username = event.target.username.value
@@ -16,24 +14,22 @@ class Login extends Component {
     
             sessionStorage.token = token
             // la callback son los props de la app
-            this.props.onUserLoggedIn()
+            props.onUserLoggedIn()
         })
     }
 
-    handleRegisterLinkClick = event => {
+    const handleRegisterLinkClick = event => {
         event.preventDefault()
-        this.props.onRegisterLinkClicked()
+        props.onRegisterLinkClicked()
     }
     
 
-    render () {
-        return <div className="Container">
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                <input className="form" type="text" name="username" placeholder=" Username"/>
-                <input className="form" type="password" name="password" placeholder=" Password"/>
-                <button className="Button">Login</button>
-            </form>
-                <a href="#" onClick={this.handleRegisterLinkClick}>Register</a>
-        </div>
-    }
+    return <div className="Container">
+        <form className="Container" onSubmit={handleFormSubmit}>
+            <input className="form" type="text" name="username" placeholder=" Username"/>
+            <input className="form" type="password" name="password" placeholder=" Password"/>
+            <button className="Button">Login</button>
+        </form>
+            <a href="#" onClick={handleRegisterLinkClick}>Register</a>
+    </div>
 }

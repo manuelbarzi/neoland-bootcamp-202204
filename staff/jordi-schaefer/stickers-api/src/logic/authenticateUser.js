@@ -1,8 +1,8 @@
 function authenticateUser(username, password, callback) {
 
-    const api = new Apicaller
+    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
-    api.call('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth', {
+    api.post('/v2/users/auth', {
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify( {username, password})}, (error, {status, payload}) => {
 
@@ -10,20 +10,16 @@ function authenticateUser(username, password, callback) {
                 callback(error)
                 return
             }
-
             if (status === 200) {// 200 todo ok
                 const data = JSON.parse(payload)  // los paso a objeto
-                
                 callback(null, data.token) // y envio el token por la callback
-    
-            } else if (status >= 400 && status < 500) { // 400-500 errores de cliente
-                const data = JSON.parse(payload) // lo convierto de jason a string
-    
-                callback(new Error(data.error)) // lo envio como mensaje de error
-    
-            } else
+            } 
+            else if (status >= 400 && status < 500) { // 400-500 errores de cliente
+                const data = JSON.parse(payload) // lo convierto de jason a string   
+                callback(new Error(data.error)) // lo envio como mensaje de error   
+            } 
+            else
             callback(new Error('server error')) // sino sera un error de servidor
-
         }
     )
 }

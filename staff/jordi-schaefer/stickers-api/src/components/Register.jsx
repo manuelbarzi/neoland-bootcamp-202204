@@ -1,15 +1,13 @@
-const { Component } = React
+function Register (props){
 
-class Register extends Component {
-
-    handleLoginLinkClick = event => {
+    const handleLoginLinkClick = event => {
         event.preventDefault()
         //event.stopPropagation()
 
-        this.props.onLoginLinkClicked()
+        props.onLoginLinkClicked()
     }
 
-    handleFormSubmit = event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const name = event.target.name.value
@@ -22,20 +20,18 @@ class Register extends Component {
                 return 
             }
     
-            this.props.onUserRegistered()
+            props.onUserRegistered()
         })
     }
 
 
-    render () {
-        return <div className="Container">
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                <input className="form" type="text" name="name" placeholder=" Name"/>
-                <input className="form" type="text" name="username" placeholder=" Username"/>
-                <input className="form" type="password" name="password" placeholder=" Password"/>
-                <button className="Button">Register</button>
-            </form>
-                <a href="#" onClick={this.handleLoginLinkClick}>Login</a>
-        </div>
-    }
+    return <div className="Container">
+        <form className="Container" onSubmit={handleFormSubmit}>
+            <input className="form" type="text" name="name" placeholder=" Name"/>
+            <input className="form" type="text" name="username" placeholder=" Username"/>
+            <input className="form" type="password" name="password" placeholder=" Password"/>
+            <button className="Button">Register</button>
+        </form>
+            <a href="#" onClick={handleLoginLinkClick}>Login</a>
+    </div>
 }

@@ -1,30 +1,57 @@
 function deleteUser (token, password, callback)  {
     
-    const xhr = new XMLHttpRequest
+    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
-    xhr.addEventListener('load', event => {
-        const status = event.target.status
-        
-        if (status === 204) 
-            callback(null)
-        else if (status >= 400 && status < 500) { 
-            const json = event.target.responseText 
-            const data = JSON.parse(json)
+    api.delete('/v2/users', {
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'},
+        body: JSON.stringify({ password})}, (error, {status, payload}) => {
 
-            callback(new Error(data.error)) 
-        } else {
-            callback(new Error('server error'))
+            if (error) {
+                callback(error)
+                return
+            }
+            if (status === 204) 
+                callback(null)
+            else if (status >= 400 && status < 500) { 
+                const data = JSON.parse(payload)
+                callback(new Error(data.error)) 
+            } 
+            else {
+                callback(new Error('server error'))
+            }
         }
-    })
-
-
-    xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-    
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    
-    const data = { password: password }
-    const json = JSON.stringify(data) 
-
-    xhr.send(json)
+    )
 }
+
+
+
+
+
+
+/* const xhr = new XMLHttpRequest
+
+xhr.addEventListener('load', event => {
+    const status = event.target.status
+    
+    if (status === 204) 
+        callback(null)
+    else if (status >= 400 && status < 500) { 
+        const json = event.target.responseText 
+        const data = JSON.parse(json)
+
+        callback(new Error(data.error)) 
+    } else {
+        callback(new Error('server error'))
+    }
+})
+
+
+xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+xhr.setRequestHeader('Content-Type', 'application/json')
+
+const data = { password: password }
+const json = JSON.stringify(data) 
+
+xhr.send(json) */

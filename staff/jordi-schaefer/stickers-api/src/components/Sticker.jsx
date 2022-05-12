@@ -1,10 +1,7 @@
-const { Component } = React
+function Sticker (props) {
 
-class Sticker extends Component {
-
-
-    handleCloseClick = () => {
-        const { props: { stickerId, onRemove }} = this
+    const handleCloseClick = () => {
+        const { stickerId, onRemove } = props
 
 
         if (stickerId)
@@ -21,13 +18,12 @@ class Sticker extends Component {
     }
 
 
-
-    handleSaveClick = (event) => {
+    const handleSaveClick = (event) => {
         event.preventDefault()
         
         //const{ target: { text: { value: text }}} = event
         const text = event.target.text.value
-        const { props: { stickerId }} = this
+        const { stickerId } = props
 
 
         saveNote(sessionStorage.token, stickerId, text, error => {
@@ -35,19 +31,17 @@ class Sticker extends Component {
                 alert(error.message)
                 return
             }
-
+            
             alert('Sticker saved! ')
         })
     }
 
     
-    render() {
-        return <div className="Sticker">
-            <button className="Transparent" onClick={this.handleCloseClick}>❌</button>
-            <form className="Sticker__form" onSubmit={this.handleSaveClick}>
-                <textarea name="text" defaultValue={this.props.text}></textarea>
-                <button type="submit" className="save-button">Save</button>
-            </form>
-        </div>
-    }
+    return <div className="Sticker">
+        <button className="Transparent" onClick={handleCloseClick}>❌</button>
+        <form className="Sticker__form" onSubmit={handleSaveClick}>
+            <textarea name="text" defaultValue={props.text}></textarea>
+            <button type="submit" className="save-button">Save</button>
+        </form>
+    </div>
 }
