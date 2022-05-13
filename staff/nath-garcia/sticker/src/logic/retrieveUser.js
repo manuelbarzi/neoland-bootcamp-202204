@@ -1,4 +1,8 @@
 function retrieveUser(token, callback) {
+    const logger = new Logger('retrieveUser')
+
+    logger.info('call')
+
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {

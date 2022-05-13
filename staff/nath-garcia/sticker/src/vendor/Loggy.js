@@ -1,4 +1,4 @@
-console.log('%cLoggy v1.0', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
+console.log('%c Loggy v1.0', 'font-size: 36px; background: linear-gradient(to right, #30CFD0 0%, #330867 100%); color: white;')
 
 class Logger {
     static DEBUG = 0

@@ -2,7 +2,7 @@ function retrieveNotes(token, callback) {
     const logger = new Logger('retrieveNotes')
 
     logger.info('call')
-
+    
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {
@@ -23,10 +23,10 @@ function retrieveNotes(token, callback) {
             const data = JSON.parse(json)
 
             callback(new Error(data.error))
-        }else callback( new Error('server error'))
+        } else callback(new Error('server error'))
     })
 
-    xhr.open('GET','https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
 
     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
 
