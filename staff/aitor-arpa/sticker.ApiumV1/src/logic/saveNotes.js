@@ -42,12 +42,12 @@ function saveNote(token, noteId, text, callback) {
                     const status = event.target.status
                     
                     if (status === 204) // si es 204 correcto, sin respuesta
-                        callback(null, note.id)
+                        callback(null, note.id) // como no hay error envio el null + la nota id 
                     else if (status >= 400 && status < 500) { // 400-500 errores de cliente
                         const json = event.target.responseText // me guardo el texto de error
                         const data = JSON.parse(json) // lo convierto de jason a string
             
-                        callback(new Error(data.error)) // lo envio como mensaje de error
+                        callback(new Error(data.error)) // y del data recojo el valor del error del data
                     } else {
                         callback(new Error('server error')) // sino sera un error de servidor
                     }

@@ -15,9 +15,9 @@ class Login extends Component {
             }
 
             sessionStorage.token = token
-            debugger
+            
             this.props.onUserLoggedIn()
-            debugger
+            
         })  
     }
 

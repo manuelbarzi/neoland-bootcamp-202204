@@ -8,7 +8,7 @@ class Apium {
             
             const { status, responseText: payload } = event.target
 
-            callback(null, { status, payload })
+            callback(null, { status, payload }) 
         })
 
         xhr.addEventListener('error', () => {
