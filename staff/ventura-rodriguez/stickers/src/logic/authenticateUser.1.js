@@ -3,11 +3,11 @@ function authenticateUser(username, password, callback) {
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium
 
     logger.info('request')
-    
-    api.post('v2/users/auth', {
+
+    api.call('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users/auth', {
         headers: {
             'Content-Type': 'application/json'
         },

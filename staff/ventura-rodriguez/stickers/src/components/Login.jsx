@@ -1,15 +1,9 @@
-const { Component } = React
+function Login(props) {
+    const logger = new Logger('Login')
 
-class Login extends Component {
-    constructor() {
-        super()
-        
-        this.logger = new Logger('Login')
+    logger.info('call')
 
-        this.logger.info('constructor')
-    }
-
-    handleFormSubmit = event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const username = event.target.username.value
@@ -24,26 +18,24 @@ class Login extends Component {
 
             sessionStorage.token = token
 
-            this.props.onUserLoggedIn()
+            props.onUserLoggedIn()
         })
     }
 
-    handleRegisterLinkClick = event => {
+    const handleRegisterLinkClick = event => {
         event.preventDefault()
 
-        this.props.onRegisterLinkClicked()
+        props.onRegisterLinkClicked()
     }
 
-    render() {
-        this.logger.info('render')
-        
-        return <div>
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                <input className="Input Input--light" type="text" name="username" placeholder="username" />
-                <input className="Input Input--light" type="password" name="password" placeholder="password" />
-                <button className="Button Button--light">Login</button>
-                <a href="#" onClick={this.handleRegisterLinkClick}>Register</a>
-            </form>
-        </div>
-    }
+    logger.info('render')
+
+    return <div>
+        <form className="Container" onSubmit={handleFormSubmit}>
+            <input className="Input Input--light" type="text" name="username" placeholder="username" />
+            <input className="Input Input--light" type="password" name="password" placeholder="password" />
+            <button className="Button Button--light">Login</button>
+            <a href="#" onClick={handleRegisterLinkClick}>Register</a>
+        </form>
+    </div>
 }

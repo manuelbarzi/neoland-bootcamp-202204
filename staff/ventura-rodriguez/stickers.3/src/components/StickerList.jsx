@@ -42,6 +42,10 @@ class StickerList extends Component {
         this.setState({ notes })
     }
 
+    handleStickerSaved = stickerId => {
+        this.props.handleStickerSaved(stickerId)
+    }
+
     render() {
         this.logger.info('render')
 
