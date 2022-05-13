@@ -1,28 +1,68 @@
-function deleteNote(username, noteId, callback){
-    const userExists = db.users.some(user=> user.username ===username)
+function deleteNote(token, noteId, callback) {
+    const logger = new Logger('deleteNote')
 
-    if(!userExists){
-        callback(new Error(`username "${username}" does not exist`))
+    logger.info('call')
 
-        return
-    }
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
-    const index= db.notes.findIndex(note => note.id === noteId)
+    logger.info('request')
 
-    if (index < 0){
-        callback(new Error(`note with id "${noteId}" does not exist`))
-        return
-    }
+    api.get('v2/users', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }, (error, response) => {
+        if (error) return callback(error)
 
-    const note = db.notes[index]
+        logger.info('response')
 
-    if (note.username !== username) {
-        callback(new Error(`user "${username}" does not own note with id "${noteId}"`))
+        //const { status, payload } = response
+        const status = response.status
+        const payload = response.payload
 
-        return
-    }
+        if (status >= 400 && status < 500) {
+            const data = JSON.parse(payload)
 
-    db.notes.splice(index, 1)
+            callback(new Error(data.error))
+        } else if (status >= 500)
+            callback(new Error('server error'))
+        else if (status === 200) {
+            const data = JSON.parse(payload)
 
-    callback(null)
+            const { notes = [] } = data
+
+            const index = notes.findIndex(note => note.id === noteId) //guarda en nota, la propiedad id de la nota que sea igual a noteId
+
+            if (index < 0) //ponemos el indice menor a 0 porque findindex si no encuentra la note.id te devuelve por predeterminado -1 y borraria la ultima posición
+                return callback(new Error(`note with id ${noteId} not found`))
+
+            notes.splice(index, 1)
+
+            logger.info('request')
+
+            api.patch('v2/users', {
+                headers: {
+                    'Authorization': `Bearer ${token}`,  // envio token solo si quiero hacer algo relacionado ocn un usuario (osea SIEMPRE menos login)
+                    'Content-Type': 'application/json' // envio content type solo si quiero pasar informacion a la API, para recoger info NO
+                },
+                body: JSON.stringify({ notes })
+            }, (error, response) => {
+                if (error) return callback(error)
+
+                logger.info('response')
+
+                const { status, payload } = response
+
+                if (status >= 400 && status < 500) {
+                    const data = JSON.parse(payload)
+        
+                    callback(new Error(data.error))
+                } else if (status >= 500)
+                    callback(new Error('server error'))
+                else if (status === 204) {
+                    callback(null)
+                }
+            })
+        }
+    })
 }

@@ -14,6 +14,7 @@ class ChangeName extends Component {
                 }
     
                 alert('Name changed')
+                this.props.onNameChange()
                 
             })
 

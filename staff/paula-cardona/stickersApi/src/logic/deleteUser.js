@@ -1,18 +1,25 @@
-function deleteUser (username, password, callback)  {
+function deleteUser (token, password, callback)  {
     
-    const index = db.users.findIndex(user => user.username === username)
-    if (index < 0) {
-        callback(new Error(`user with username "${username}" does not exist`))
-        return
-    }
-    
-    const user = db.users.find(user => user.username === username)
-    if (user.password !== password) {
-        callback(new Error('wrong password'))
-        return
-    }
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
+    api.delete('/v2/users', {
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'},
+        body: JSON.stringify({ password})}, (error, {status, payload}) => {
 
-    db.users.splice(index, 1)
-    callback(null)
+            if (error) {
+                callback(error)
+                return
+            }
+            if (status === 204) 
+                callback(null)
+            else if (status >= 400 && status < 500) { 
+                const data = JSON.parse(payload)
+                callback(new Error(data.error)) 
+            } 
+            else {
+                callback(new Error('server error'))
+            }
+        }
+    )
 }
+

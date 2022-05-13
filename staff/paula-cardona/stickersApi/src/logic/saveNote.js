@@ -16,18 +16,21 @@ function saveNote(token, noteId, text, callback){
     const api= new Apium //creo una constante que sera la nueva Apium
     api.call('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users', 
     {headers: {'Authorization' : `Bearer ${token}`}}, (error, {status, payload}) =>{ //payload=todo lo que hay guardado en la api
-        debugger
+       
         if (error) {
             callback (error)
             return
         }
         if (status === 200) {
             const data = JSON.parse(payload)
-            const notes = data.notes
+            const { notes = []} = data
 
             let note
             if (noteId) {
                 note = notes.find(note => note.id === noteId) // guardo la nota que tiene ese id, si existe
+
+                //const guardoAqui = notes.find(cadaElemento => cadaElemento.id === noteId)
+
 
                 if (note) // si ha encontrado alguna
                     note.text = text // le paso el nuevo texto
@@ -46,7 +49,7 @@ function saveNote(token, noteId, text, callback){
                 const api2 = new Apium
                 api2.call('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users',
                 {headers : {'Authorization' : `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({notes})}, 
-                (error, {status, payload}) => { 
+                (error, {status, payload}) => {  //le enviamos authoriztion porque como queremos cambiar algo, tenemos que pedir permiso
                     if (error) {  // si hay un error definido
                         callback(error) // lo enviamos por callback
                         return
@@ -63,7 +66,7 @@ function saveNote(token, noteId, text, callback){
                 })
             }
             
-            callback(null)
+           
 
         } else if (status >= 400 && status < 500) {
             
@@ -75,107 +78,3 @@ function saveNote(token, noteId, text, callback){
 
     })
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//2 llamadas
-// function saveNote(token, noteId, text, callback) { 
-//     const logger = new Logger('saveNote')
-
-//     logger.info('call')
-
-//     const xhr = new XMLHttpRequest
-
-//     xhr.addEventListener('load', event => {
-//         logger.info('response')
-
-//         //const { target: { status } } = event
-//         const status = event.target.status
-
-//         if (status === 200) {
-//             const json = event.target.responseText
-
-//             const data = JSON.parse(json)
-
-//             const { notes = [] } = data
-
-//             let note
-
-//             if (noteId) {
-//                 note = notes.find(note => note.id === noteId)
-
-//                 if (note)
-//                     note.text = text
-//                 else {
-//                     note = new Note(noteId, text)
-
-//                     notes.push(note)
-//                 }
-//             } else {
-//                 note = new Note(null, text)
-
-//                 notes.push(note)
-//             }
-
-//             {
-//                 const xhr = new XMLHttpRequest
-
-//                 xhr.addEventListener('load', event => {
-//                     logger.info('response')
-
-//                     //const { target: { status } } = event
-//                     const status = event.target.status
-
-//                     if (status === 204) {
-//                         callback(null, note.id)
-//                     } else if (status >= 400 && status < 500) {
-//                         const json = event.target.responseText
-
-//                         const data = JSON.parse(json)
-
-//                         callback(new Error(data.error))
-//                     } else callback(new Error('server error'))
-//                 })
-
-//                 xhr.open('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users') //devuelve una parte
-
-//                 xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-//                 xhr.setRequestHeader('Content-Type', 'application/json')
-
-//                 const data = { notes }  //de lo que me devuelve la api me quedo con notes
-
-//                 const json = JSON.stringify(data)
-
-//                 xhr.send(json)
-
-//                 logger.info('request')
-//             }
-//         } else if (status >= 400 && status < 500) {
-//             const json = event.target.responseText
-
-//             const data = JSON.parse(json)
-
-//             callback(new Error(data.error))
-//         } else callback(new Error('server error'))
-//     })
-
-//     xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-//     xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-//     xhr.send()
-
-//     logger.info('request')
-// }
-

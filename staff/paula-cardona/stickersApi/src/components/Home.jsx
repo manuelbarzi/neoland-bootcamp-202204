@@ -34,6 +34,17 @@ class Home extends Component { //todo lo que vemos en home lo manejamos desde aq
         })
     }
 
+    onNameChange = () => { //cambiar el nombre arriba en el boton
+        retrieveUser(sessionStorage.token, (error, user) => {
+            if (error) {
+                alert(error.message)
+                return
+            }
+            this.setState({ name: user.name })
+        })
+    }
+
+
     handleAddClick = () =>{
         // TODO convert to api-connected logic
         

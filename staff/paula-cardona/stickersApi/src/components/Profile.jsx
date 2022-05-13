@@ -1,7 +1,7 @@
 const { Component } = React
 
 class Profile extends Component {
-    state= { view: 'profile' }
+    state= { view: 'null' }
 
     handleChangeName = () => {
         
@@ -18,10 +18,11 @@ class Profile extends Component {
         this.setState ({ view: 'deletedUser'})
     }
 
-    handleUserDeleted = () => {
-        this.setState ({ view: 'login'})
+    handleNameChanged = () =>{
+        this.props.onNameChange ()
     }
 
+   
    
 
     render() {
@@ -32,16 +33,12 @@ class Profile extends Component {
                 <button className="Button Profile__deleteUser"onClick={this.handleDeleteUser}>Delete user</button>
             </div>
             <div>
-                {this.state.view ==='changeName' && <ChangeName />}
-                {this.state.view ==='changePassword' && <ChangePassword />}
-                {this.state.view ==='login' && <DeletedUser onDeletedUser={this.handleUserDeleted} />}
+                {this.state.view ==='changeName' && <ChangeName onNameChange={this.handleNameChanged}/>}
+                {this.state.view ==='changePassword' && <ChangePassword onPasswordChange = {this.handlePasswordChanged}/>}
+                {this.state.view ==='deletedUser' && <DeletedUser onDeletedUser={this.handleUserDeleted} />}
 
             </div>
         </div>
     }
-
-
-
-    
 }
 

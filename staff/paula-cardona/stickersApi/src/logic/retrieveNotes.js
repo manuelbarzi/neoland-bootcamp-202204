@@ -1,36 +1,34 @@
 function retrieveNotes(token, callback){
-    const logger = new Logger ('retrieveNotes')
 
-    logger.info('call')
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
-    const xhr = new XMLHttpRequest
+    api.get('v2/users', {
+        headers: { 'Authorization': `Bearer ${token}`}
+        },
+        (error, {status, payload}) => {
 
-    xhr.addEventListener('load', event =>{
-        logger.info('response') //console.log('response')
+        if(error) {
+            callback (error)
 
-        //const { target: { status } } = event
-        const status = event.target.status
+            return
+        }
 
         if (status === 200) {
-            const json = event.target.responseText
 
-            const data = JSON.parse(json)
+            const data = JSON.parse(payload)
 
             callback(null, data.notes)
-        } else if (status>= 400 && status <500) {
-            const json = event.target.responseText
 
-            const data = JSON.parse(json)
+        } else if (status>= 400 && status <500) {
+            
+            const data = JSON.parse(payload)
 
             callback(new Error(data.error))
+
+        
+
         } else callback(new Error('server error'))
+
     })
-
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
-
-    logger.info('request')
 }
+
