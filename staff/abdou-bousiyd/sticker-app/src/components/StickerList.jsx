@@ -2,7 +2,7 @@ const { Component } = React
 
 class StickerList extends Component {
 
-    state = {notes: null}
+    state = {notes: null, error: null, alert: null}
 
     componentDidMount() {
         this.loadNotes()
@@ -11,7 +11,10 @@ class StickerList extends Component {
     loadNotes = () => {
         retrieveNotes(sessionStorage.token, (error, notes) => {
             if (error) {
-                alert(error.message)
+                this.setState({ alert : <Alert error message={error.message} />})
+                setTimeout( () => {
+                    this.setState({alert: null})
+                }, 4000 )
                 return
             }
             this.setState({ notes })
@@ -33,16 +36,21 @@ class StickerList extends Component {
     }
 
     render() {
-        const { state: { notes } } = this
+        const { state: { notes, alert } } = this
 
         return notes && notes.length ?
             <ul className="StickerList__list _Container">
+                
                 {notes.map(note => <li key={note.id}>
                     <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} />
                     </li>)}
             </ul>
             :
-            <p>no stickers yet</p>
+            <div>
+                <p>no stickers yet</p>
+                {alert && alert}
+            </div>
+            
     }
     //     if (sessionStorage.username)
     //         retrieveNotes(sessionStorage.username, (error, notes) => {

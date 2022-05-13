@@ -2,6 +2,8 @@ const { Component } = React
 
 class Register extends Component {
 
+    state = {error: null, alert: null}
+
     handleFormSubmit = e => {
         e.preventDefault()
 
@@ -11,8 +13,10 @@ class Register extends Component {
         
         registerUser(name, username, password, error => {
             if (error) {
-                alert(error.message)
-
+                this.setState({ alert : <Alert error message={error.message} />})
+                setTimeout( () => {
+                    this.setState({alert: null})
+                }, 4000 )
                 return
             }
 
@@ -28,8 +32,10 @@ class Register extends Component {
     }
 
     render() {
+        const {state: {alert}} = this
         return<div>
             <form className="Container" onSubmit={this.handleFormSubmit}>
+                {alert && alert}
                 <input className="Input Input--light" type="text" name="name" placeholder="name" />
                 <input className="Input Input--light" type="text" name="username" placeholder="username" />
                 <input className="Input Input--light" type="password" name="password" placeholder="password" />

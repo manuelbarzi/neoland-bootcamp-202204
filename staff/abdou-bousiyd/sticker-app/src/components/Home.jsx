@@ -3,8 +3,7 @@ const { Component } = React
 class Home extends Component {
     
     // state = {view: 'stickers', name: null, newNotes: []}
-    state = { name: null, timestamp: null, username: null, view: 'list' }
-
+    state = { name: null, timestamp: null, username: null, view: 'list', error: null, alert: null }
 
     componentDidMount() {
         this.handleRetriveUser()
@@ -13,7 +12,10 @@ class Home extends Component {
     handleRetriveUser = () => {
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
-                alert(error.message)
+                this.setState({ alert : <Alert error message={error.message} />})
+                setTimeout( () => {
+                    this.setState({alert: null})
+                }, 4000 )
                 return
             }
             this.setState({ name: user.name, username: user.username })
@@ -22,9 +24,11 @@ class Home extends Component {
 
     handleAddClick = () => {
         saveNote(sessionStorage.token, null, null, error => {
-            // console.log(sessionStorage.token, 33)
             if (error) {
-                alert(error.message)
+                this.setState({ alert : <Alert error message={error.message} />})
+                setTimeout( () => {
+                    this.setState({alert: null})
+                }, 4000 )
                 return
             }
             this.setState({ timestamp: Date.now() })
@@ -41,7 +45,10 @@ class Home extends Component {
     handleHomeClick = () => this.setState({ view: 'list' })
 
     render() {
+        const {state: {alert}} = this
+
         return <div className="Home Container">
+            {alert && alert}
             <header className="Home__header Container Container--row Container--spread-sides">
                 <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
                 <div>
@@ -51,8 +58,6 @@ class Home extends Component {
             </header>
 
             <main className="Home__body Container">
-                {/* quitar props a profile */}
-                {/* { this.state.view === 'stickers' && <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />} */}
                 { this.state.view === 'list' && this.state.username && <StickerList username={this.state.username} timestamp={this.state.timestamp} />}
                 { this.state.view === 'profile' && <Profile handleRetriveUser={this.handleRetriveUser} username={sessionStorage.username} />}
             </main>
