@@ -8,19 +8,16 @@ class ChangeName extends Component {
         const name = e.target.name.value
 
         updateUserName(sessionStorage.token, name, (error) => {
-            if (error) {
-                alert(error.message);
+            if (error) return alert(error.message);
 
-                return;
-            }
-            alert("Name saved");
+            this.props.handleRetriveUser()
         });
     }
 
     render() {
         return <div className="ChangeName">
-            <form className="Container"  onSubmit={this.handleFormSubmit}>
-                <input type="text" name="name" placeholder="name" />
+            <form className="Container"  onSubmit='name'>
+                <input type="text" name="name" placeholder={this.name}/>
                 <button>Save</button>
             </form>
         </div>

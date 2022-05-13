@@ -7,6 +7,10 @@ class Home extends Component {
 
 
     componentDidMount() {
+        this.handleRetriveUser()
+    }
+
+    handleRetriveUser = () => {
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
@@ -50,7 +54,7 @@ class Home extends Component {
                 {/* quitar props a profile */}
                 {/* { this.state.view === 'stickers' && <StickerList newNotes={this.state.newNotes} handleStickerSaved={this.handleStickerSaved} />} */}
                 { this.state.view === 'list' && this.state.username && <StickerList username={this.state.username} timestamp={this.state.timestamp} />}
-                { this.state.view === 'profile' && <Profile username={sessionStorage.username} />}
+                { this.state.view === 'profile' && <Profile handleRetriveUser={this.handleRetriveUser} username={sessionStorage.username} />}
             </main>
 
             <footer className="Home__footer Container">

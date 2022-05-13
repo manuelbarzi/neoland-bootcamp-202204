@@ -12,7 +12,7 @@ class Profile extends Component {
             <button className="Profile__changeName" onClick={this.handleChangeNameClick}>Change Name</button>
             <button className="Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
 
-            {this.state.view === 'change-name' && <ChangeName />}
+            {this.state.view === 'change-name' && <ChangeName handleRetriveUser={this.props.handleRetriveUser}/>}
             {this.state.view === 'change-password' && <ChangePassword />}
 
         </div>

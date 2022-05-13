@@ -12,6 +12,7 @@ function retrieveUser(token, callback) {
         if(status === 200) {
             const data = JSON.parse(payload)
             const user = { name: data.name, username: data.username }
+            // const user = new User(data.name, data.username)
             callback(null, user)
         }else if (status >= 400 && status < 500) {
             const data = JSON.parse(payload)

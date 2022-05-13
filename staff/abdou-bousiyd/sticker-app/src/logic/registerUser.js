@@ -9,15 +9,16 @@ function registerUser(name, username, password, callback) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ name, username, password })
-    }, (error, {status}) => {
+    }, (error, response) => {
         if(error) {
             callback(error)
             return
         }
+        const { status, payload } = response
         if(status === 201) {
             callback(null)
         }else if (status >= 400 && status < 500) {       
-                const data = JSON.parse(json)
+                const data = JSON.parse(payload)
     
                 callback(new Error(data.error))
             }  else callback(new Error('server error'))

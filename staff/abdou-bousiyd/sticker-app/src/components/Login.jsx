@@ -2,6 +2,8 @@ const { Component } = React
 
 class Login extends Component {
 
+    state = {error: null, alert: null}
+
     handleFormSubmit = e => {
         e.preventDefault()
 
@@ -10,8 +12,10 @@ class Login extends Component {
 
         authenticateUser(username, password, (error, token ) => {
             if (error) {
-                alert(error.message)
-
+                this.setState({ alert : <Alert error message={error.message} />})
+                setTimeout( () => {
+                    this.setState({alert: null})
+                }, 4000 )
                 return
             }
             // sessionStorage.username = username
@@ -29,8 +33,12 @@ class Login extends Component {
     }
 
     render() {
+
+        const {state: {alert}} = this
+
         return <div>
             <form className="Container" onSubmit={this.handleFormSubmit}>
+                {alert && alert}
                 <input className="Input Input--light" type="text" name="username" placeholder="username" />
                 <input className="Input Input--light" type="password" name="password" placeholder="password" />
                 <button className="Button Button--light">Login</button >
