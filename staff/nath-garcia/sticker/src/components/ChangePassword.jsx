@@ -1,5 +1,3 @@
-const { Component } = React
-
 class ChangePassword extends Component {
     handleSubmit = event => {
         event.preventDefault()

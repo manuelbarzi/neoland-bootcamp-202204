@@ -1,31 +1,42 @@
 function updateUserPassword(username, password, newPassword, newPasswordRepeat, callback) {
-    const user = db.users.find(user => user.username === username)
+    const logger = new Logger('UpdatePassword') 
+    
+    logger.info('call')
 
-    if (!user) {
-        callback(new Error(`user with username "${username}" does not exist`))
+    validateJwt(token)
+    validatePassword(password)
+    validatePassword(newPassword, 'new password')
+    validatePassword(newPasswordRepeat, 'new password repeat')
 
-        return
-    }
 
-    if (user.password !== password) {
-        callback(new Error('wrong password'))
+    if (newPassword !== newPasswordRepeat)
+        throw new Error('new password and new password repeat are not the same')
 
-        return
-    }
+            logger.info('request')
 
-    if (password === newPassword) {
-        callback(new Error('current password and new password are the same'))
+            const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
-        return
-    }
+            api.patch('v2/users', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                },
+                boby: JSON.stringify({ oldPassword: password, password: new Password })
+            }, (error, response) => {
+                if (error) return callback(error)
 
-    if (newPassword !== newPasswordRepeat) {
-        callback(new Error('new password and new password repeat are not the same'))
+                logger.info('response')
+                
+                const { status, payload } = response
+            
+                if ( status >= 400 && status < 500) {
+                    const data = JSON.parse(payload)
 
-        return
-    }
+                    callback(new Error(data.error))
+                } else if (status >= 500)
 
-    user.password = newPassword
-
-    callback(null)
+                    callback(new Error('server arror'))
+                    else if (status === 204)
+                    callback(null)
+            })
 }

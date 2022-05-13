@@ -4,13 +4,13 @@ class Home extends Component {
     state = { name: null, timestamp: null, view: 'list' }
 
     handleLogoutClick = () => {
-        delete sessionStorage.username
+        delete sessionStorage.token
 
         this.props.onUserLoggedOut()
     }
 
     componentDidMount() {
-        retrieveUser(sessionStorage.username, (error, user) => {
+        retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
 
@@ -22,7 +22,7 @@ class Home extends Component {
     }
 
     handleAddClick = () => {
-        saveNote(sessionStorage.username, null, null, error => {
+        saveNote(sessionStorage.token, null, null, error => {
             if (error) {
                 alert(error.message)
 

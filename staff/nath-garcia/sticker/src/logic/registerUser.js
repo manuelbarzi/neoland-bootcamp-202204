@@ -1,7 +1,48 @@
 function registerUser(name, username, password, callback) {
-    const xhr = new XMLHttpRequest
+    const logger = new Logger('registerUser')
 
-    xhr.addEventListener('load', event => {
+    logger.info('call')
+
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+
+    logger.info('request')
+
+    api.post('v2/users/auth', {
+        headers: {
+            'content-Type': 'application/json'
+        },
+        body: JSON.stringify({ username, password })
+    }, (error, { status, payload }) => {
+        logger.info('response')
+
+        if (error) {
+            callback(error)
+
+            return
+        }
+
+        if (status === 200) {
+            const data = JSON.parse(payload)
+
+            callback(null, data.token)
+        } else if (status >= 400 && status < 500) {
+            logger.warn('response - client error status ' + status)
+
+            const data = JSON.parse(payload)
+
+            callback(new Error(data.error))
+        } else {
+            logger.error('response - server error status ' + status)
+
+            callback(new Error(data('server error'))
+            }
+        })
+    }
+
+   
+   
+   
+   /*         xhr.addEventListener('load', event => {
         //const { target: { status } } = event
         const status = event.target.status
 
@@ -15,14 +56,4 @@ function registerUser(name, username, password, callback) {
             callback(new Error(data.error))
         } else callback(new Error('server error'))
     })
-
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Content-Type', 'application/json')
-
-    const data = { name, username, password }
-
-    const json = JSON.stringify(data)
-
-    xhr.send(json)
-}
+}*/

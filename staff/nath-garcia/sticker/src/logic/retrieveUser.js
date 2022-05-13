@@ -3,32 +3,33 @@ function retrieveUser(token, callback) {
 
     logger.info('call')
 
-    const xhr = new XMLHttpRequest
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
-    xhr.addEventListener('load', event => {
-        //const { target: { status } } = event
-        const status = event.target.status
+    logger.info('request')
 
-        if (status === 200) {
-            const json = event.target.responseText
+    api.get('v2/users', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }, (error, response) => {
+        if (error) return callback(error)
 
-            const data = JSON.parse(json)
+        logger.info('response')
 
-            const user = { name: data.name, username: data.username }
+        const { status, payload } = response
 
-            callback(null, user)
-        } else if (status >= 400 && status < 500) {
-            const json = event.target.responseText
+        if(status >= 400 && status > 500) {
+            const data = JSON.parse(payload)
 
-            const data = JSON.parse(json)
+            callback(new Error(data, error))
+        } else if (status >= 500)
+            callback(new error('server error'))
+            else if(status >= 200) {
+                const data = JSON.parse(payload)
 
-            callback(new Error(data.error))
-        } else callback(new Error('server error'))
+                const user = new User(data.name, data.username)
+
+                callback(null, user)
+            }
     })
-
-    xhr.open('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
 }

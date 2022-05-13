@@ -1,29 +1,66 @@
-function deleteNote(username, noteId, callback){
-    const userExists = db.users.some(user=>user.username === username)
+function deleteNote(token, noteId, callback){
+    const logger = new Logger('deleteNote')
 
-    if(!userExists){
-        callback(new Error(`username "${username}" does not exist`))
+    logger.info('call')
 
-        return
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+
+    logger.info('request')
+
+    api.get('v2/users', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }, (error, response) => {
+        if (error) return callback(error)
+
+        logger.info('respose')
+
+        const { status, payload } = response
+
+        if (status >= 400 && status < 500) {
+            const data = JSON.parse(payload)
+
+            callback(new Error(data.error))
+        } else if (status >= 500)
+            callback(new Error('server error'))
+        else if (status === 200) {
+            const data = JSON.parse(payload)
+
+            const { notes = [] } = data
+
+            const index = notes.findIndex(note => note.id === noteId)
+
+            if (index < 0)
+                return callback(new Error(`note with id ${noteId} not found`))
+
+                notes.splice(index, 1)
+
+                logger.info('request')
+    
+                api.patch('v2/users', {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ notes })
+                }, (error, response) => {
+                    if (error) return callback(error)
+    
+                    logger.info('response')
+    
+                    const { status, payload } = response
+    
+                    if (status >= 400 && status < 500) {
+                        const data = JSON.parse(payload)
+            
+                        callback(new Error(data.error))
+                    } else if (status >= 500)
+                        callback(new Error('server error'))
+                    else if (status === 204) {
+                        callback(null)
+                    }
+                })
+            }
+        })
     }
-
-    const index = db.notes.findIndex(note=> note.id === noteId)
-
-    if (index < 0) {
-        callback(new Error(`note with id "${noteId}" does not exist`))
-
-        return
-    }
-
-    const note = db.notes[index]
-
-    if (note.username !== username) {
-        callback(new Error(`user "${username}" does not own note with id "${noteId}"`))
-
-        return
-}
-
-db.notes.splice(index, 1)
-
-callback(null)
-}
