@@ -3,12 +3,12 @@ function saveNote(token, noteId, text, callback) {
 
     logger.info('call')
 
-    const api = new Apium
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')
 
 
-    api.call('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users', {
+    api.post('v2/users', {
 
         headers: {
             'Authorization': `Bearer ${token}`
