@@ -1,5 +1,7 @@
 function retrieveUser(token, callback) {
     
+    validateJwt(token)
+
     const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
     api.get('/v2/users', {

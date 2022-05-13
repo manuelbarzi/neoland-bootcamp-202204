@@ -1,5 +1,8 @@
 function authenticateUser(username, password, callback) {
 
+    validateString(username, 'Username')
+    //validatePassword(password, 'Password')
+
     const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
     api.post('/v2/users/auth', {
@@ -25,7 +28,7 @@ function authenticateUser(username, password, callback) {
 }
 
 
-
+//si encuentras esto la contraseña es homer simpson 
 
 /*
     const xhr = new XMLHttpRequest

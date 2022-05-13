@@ -149,6 +149,10 @@ a {
   border: none;
   background-color: rgba(135, 161, 188, 0.9);
   font-size: 1.2rem;
+  transition: 0.5s;
+}
+.Home__button:hover {
+  background-color: rgba(135, 188, 158, 0.9);
 }
 
 .Transparent {
@@ -158,6 +162,13 @@ a {
 
 .Profile {
   margin-bottom: 2rem;
+}
+
+.Special__button {
+  transition: 0.5s;
+}
+.Special__button:hover {
+  box-shadow: 0 0 30px #445b47;
 }
 
 .Profile {

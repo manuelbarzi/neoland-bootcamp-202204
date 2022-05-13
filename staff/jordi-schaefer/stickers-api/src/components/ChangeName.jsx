@@ -1,31 +1,30 @@
-const { Component } = React
+function ChangeName (props) {
 
-class ChangeName extends Component {
-
-    handleSaveClick = event => {
+    const handleSaveClick = event => {
         event.preventDefault()
 
         const newName = event.target.name.value
 
-        updateUserName(sessionStorage.token, newName, (error) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
+        try {
+            updateUserName(sessionStorage.token, newName, (error) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
 
-            alert('Name changed')
-            this.props.onUserNameChanged()
-        })
-
+                alert('Name changed')
+                props.onUserNameChanged()
+            })
+        } catch(error) {
+            alert(error.message)
+        }
     }
 
 
-    render() {
-        return <div className="ChangeName">
-        <form className="Container" onSubmit={this.handleSaveClick}>
+    return <div className="ChangeName">
+        <form className="Container" onSubmit={handleSaveClick}>
             <input className="form" type="text" name="name" placeholder=" New name"/>
             <button className="Button">Save</button>
         </form>
     </div>
-    }
 }

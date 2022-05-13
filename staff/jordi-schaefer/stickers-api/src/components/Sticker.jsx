@@ -4,17 +4,21 @@ function Sticker (props) {
         const { stickerId, onRemove } = props
 
 
-        if (stickerId)
-            deleteNote(sessionStorage.token, stickerId, error => {
-                if (error) {
-                    if(error.message === `note with id "${stickerId}" does not exist`)
-                        onRemove(stickerId)
-                    else alert(error.message)
-                    return
-                }
-                onRemove(stickerId)
-            })
-        
+        if (stickerId) {
+            try {
+                deleteNote(sessionStorage.token, stickerId, error => {
+                    if (error) {
+                        if(error.message === `note with id "${stickerId}" does not exist`)
+                            onRemove(stickerId)
+                        else alert(error.message)
+                        return
+                    }
+                    onRemove(stickerId)
+                })
+            } catch(error) {
+                alert(error.message)
+            }
+        }
     }
 
 
@@ -25,15 +29,17 @@ function Sticker (props) {
         const text = event.target.text.value
         const { stickerId } = props
 
-
-        saveNote(sessionStorage.token, stickerId, text, error => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-            
-            alert('Sticker saved! ')
-        })
+        try {
+            saveNote(sessionStorage.token, stickerId, text, error => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                alert('Sticker saved! ')
+            })
+        } catch(error) {
+            alert(error.message)
+        }
     }
 
     

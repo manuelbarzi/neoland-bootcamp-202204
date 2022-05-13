@@ -1,5 +1,8 @@
 function updateUserName (token, newName, callback)  {
 
+    validateJwt(token)
+    validateString(newName, 'Name')
+
     const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
     api.patch('/v2/users', {

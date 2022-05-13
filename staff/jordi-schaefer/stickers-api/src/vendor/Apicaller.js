@@ -47,7 +47,7 @@ class Apicaller {
             callback(new Error('API call fail'))
         })
 
-        const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}/${urlOrPath}`
+        const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}${urlOrPath}`
 
         xhr.open(method, url)
 

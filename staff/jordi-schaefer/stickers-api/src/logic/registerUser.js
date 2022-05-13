@@ -1,5 +1,9 @@
 function registerUser(name, username, password, callback) {
 
+    validateString(name, 'Name')
+    validateString(username, 'Username')
+    //validatePassword(password, 'Password')
+
     const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
     api.post('/v2/users/auth', {

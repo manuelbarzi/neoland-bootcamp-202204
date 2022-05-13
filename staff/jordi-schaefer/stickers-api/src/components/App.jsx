@@ -1,21 +1,21 @@
-const { Component } = React
+const { useState } = React
 
-class App extends Component {
-    state = { view: sessionStorage.token? 'home' : 'login' }
+function App () {
+    // explicacion a las 11:50am viernes 13/05
+    const [view, setView] = useState(sessionStorage.token? 'home' : 'login')
 
-    handleUserRegistered = () => this.setState({ view: 'login' })
-    handleUserLoggedIn = () => this.setState({ view: 'home' })
+    const handleUserRegistered = () => setView('login')
+    const handleUserLoggedIn = () => setView('home')
 
-    handleRegisterNavigation = () => this.setState({ view: 'register' })
-    handleLoginNavigation = () => this.setState({ view: 'login' })
+    const handleRegisterNavigation = () => setView('register')
+    const handleLoginNavigation = () => setView('login')
 
-    handleUserLoggedOut = () => this.setState({ view: 'login' })
+    const handleUserLoggedOut = () => setView('login')
 
-    render() {
-        return <div className="App">
-            {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}
-            {this.state.view === 'register' && <Register onUserRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation} />}
-            {this.state.view === 'home' && <Home onUserLoggedOut={this.handleUserLoggedOut} />}
-        </div>
-    }
+
+    return <div className="App">
+        {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
+        {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
+        {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} />}
+    </div>
 }

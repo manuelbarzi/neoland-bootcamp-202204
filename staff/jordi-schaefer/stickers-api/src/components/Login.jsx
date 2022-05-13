@@ -6,16 +6,20 @@ function Login (props) {
         const username = event.target.username.value
         const password = event.target.password.value
 
-        authenticateUser(username, password, (error, token) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-    
-            sessionStorage.token = token
-            // la callback son los props de la app
-            props.onUserLoggedIn()
-        })
+        try {
+            authenticateUser(username, password, (error, token) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+        
+                sessionStorage.token = token
+                // la callback son los props de la app
+                props.onUserLoggedIn()
+            })
+        } catch(error) {
+            alert(error.message)
+        }
     }
 
     const handleRegisterLinkClick = event => {

@@ -1,5 +1,8 @@
 function deleteUser (token, password, callback)  {
     
+    validateJwt(token)
+    //validatePassword(password, 'Password')
+
     const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
     api.delete('/v2/users', {

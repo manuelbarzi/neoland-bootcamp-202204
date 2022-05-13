@@ -14,14 +14,18 @@ function Register (props){
         const username = event.target.username.value
         const password = event.target.password.value
 
-        registerUser(name, username, password, error => {
-            if (error) {
-                alert(error.message) 
-                return 
-            }
-    
-            props.onUserRegistered()
-        })
+        try {
+            registerUser(name, username, password, error => {
+                if (error) {
+                    alert(error.message) 
+                    return 
+                }
+        
+                props.onUserRegistered()
+            })
+        } catch(error) {
+            alert(error.message)
+        }
     }
 
 

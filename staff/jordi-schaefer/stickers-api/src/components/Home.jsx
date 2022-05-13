@@ -1,102 +1,121 @@
-const { Component } = React
+const { useState, useEffect } = React
 
-class Home extends Component {
+function Home(props) {
 
-    state = { name: null, notes: null, timestamp: null, view: 'edit' }
+    const [name, setName] = useState(null)
+    const [notes, setNotes] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
+    const [view, setView] = useState(null)
 
 
-    handleLogoutClick = () => {
+    const handleLogoutClick = () => {
         delete sessionStorage.token
-        this.props.onUserLoggedOut()
+        props.onUserLoggedOut()
     }
 
-    handleListClick = () => {
-        this.setState({ view: 'list' })
-        this.loadNotes()
+    const handleListClick = () => {
+        setView('list')
+        loadNotes()
     }
 
-    handleEditClick = () => {
-        this.setState({ view: 'edit' })
+    const handleEditClick = () => {
+        setView('edit')
     }
 
-    handleProfileClick = () => {
-        this.setState({ view: 'profile' })
+    const handleProfileClick = () => {
+        setView('profile')
     }
 
 
     // primero renderiza y luego lanza el DidMount
-    componentDidMount() {
-        retrieveUser(sessionStorage.token, (error, user) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-            this.setState({ name: user.name })
-        })
-        this.loadNotes()
-    }
-
-    loadNotes = () => retrieveNotes(sessionStorage.token, (error, notes) => {
-        if (error) {
+    useEffect(() => {
+        try {
+            retrieveUser(sessionStorage.token, (error, user) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                setName(user.name)
+                setView('edit')
+            })
+        } catch(error) {
             alert(error.message)
-            return
         }
-
-        this.setState({ notes })
-    })
-
-
-    handleUserNameChanged = () => {
-        retrieveUser(sessionStorage.token, (error, user) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-            this.setState({ name: user.name })
-        })
-    }
+        loadNotes()
+    }, [])
 
 
-    handleAddClick = () => {
-        saveNote(sessionStorage.token, null, null, error => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-
-            this.setState({ timestamp: Date.now() })
-        })
+    const loadNotes = () => {
+        try {
+            retrieveNotes(sessionStorage.token, (error, notes) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                setNotes(notes)
+            })
+        } catch(error) {
+            alert(error.message)
+        }
     }
 
 
 
+    const handleUserNameChanged = () => {
+        try {
+            retrieveUser(sessionStorage.token, (error, user) => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                setName(user.name)
+            })
+        } catch(error) {
+            alert(error.message)
+        }
+    }
 
-    render () {
-        return <div className="Home container">
+
+    const handleAddClick = () => {
+        try {
+            saveNote(sessionStorage.token, null, null, error => {
+                if (error) {
+                    alert(error.message)
+                    return
+                }
+                setTimestamp(Date.now())
+            })
+        } catch(error) {
+            alert(error.message)
+        }
+    }
+
+
+
+    return <div className="Home container">
         <header className="Home__header">
             <div>
-                <button className="Home__button" onClick={this.handleProfileClick}>{this.state.name}</button>
-                <button className="Home__button" onClick={this.handleListClick}>📒</button>
-                <button className="Home__button" onClick={this.handleEditClick}>✍</button>
+                <button className="Home__button" onClick={handleProfileClick}>{name}</button>
+                <button className="Home__button" onClick={handleListClick}>📒</button>
+                <button className="Home__button" onClick={handleEditClick}>✍</button>
             </div>
-            <button className="Home__button" onClick={this.handleLogoutClick}>Logout</button>
+            <button className="Home__button" onClick={handleLogoutClick}>Logout</button>
         </header>
 
         <main className="Home__body">
-            {this.state.view === 'edit' && <StickerList  timestamp={this.state.timestamp} />}
+            {view === 'edit' && <StickerList  timestamp={timestamp} />}
 
-            {this.state.notes && this.state.view === 'list' && <ul className="List__stickers">
-                {this.state.notes.map(note => <li className="Li__note" key={note.id}>
+            {notes && view === 'list' && <ul className="List__stickers">
+                {notes.map(note => <li className="Li__note" key={note.id}>
                         <h2>{note.text}</h2>
                     </li>)}
             </ul>}
 
-            {this.state.view === 'profile' && <Profile onUserNameChanged={this.handleUserNameChanged}/>}
+            {view === 'profile' && <Profile onUserNameChanged={handleUserNameChanged}/>}
         </main>
         
         <footer className="Home__footer Container">
-            {this.state.view === 'edit' && <button className="Home__button Transparent" onClick={this.handleAddClick}>➕</button>}
+            {view === 'edit' && <button className="Home__button Transparent" onClick={handleAddClick}>➕</button>}
         </footer>
     </div>
-    }
 }
