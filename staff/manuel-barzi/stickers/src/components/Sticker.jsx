@@ -1,7 +1,11 @@
+const { useContext } = React
+
 function Sticker(props) {
     const logger = new Logger('Sticker')
 
     logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
 
     const handleRemoveClick = () => {
         const { stickerId, onRemove } = props
@@ -9,7 +13,7 @@ function Sticker(props) {
         if (stickerId)
             deleteNote(sessionStorage.token, stickerId, error => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ level: 'error', message: error.message })
 
                     return
                 }
@@ -26,12 +30,12 @@ function Sticker(props) {
 
         saveNote(sessionStorage.token, stickerId, text, error => {
             if (error) {
-                alert(error.message)
+                handleFeedback({ level: 'error', message: error.message })
 
                 return
             }
 
-            alert('Sticker saved!')
+            handleFeedback({ level: 'success', message: 'Sticker saved' })
         })
     }
 

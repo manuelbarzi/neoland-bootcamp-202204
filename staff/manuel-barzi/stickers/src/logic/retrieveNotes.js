@@ -3,6 +3,8 @@ function retrieveNotes(token, callback) {
 
     logger.info('call')
 
+    // TODO validate input args
+
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')
