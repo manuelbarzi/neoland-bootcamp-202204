@@ -1,4 +1,8 @@
+const { useContext } = React
+
 function ChangePassword () {
+
+    const { handleFeedback } = useContext(Context)
 
     const handleSaveClick = event => {
         event.preventDefault()
@@ -10,13 +14,13 @@ function ChangePassword () {
         try {
             updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
-                alert('Password saved')
+                handleFeedback({ type: 'success', message: 'Password saved'})
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

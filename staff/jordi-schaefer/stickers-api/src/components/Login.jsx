@@ -1,4 +1,8 @@
+const { useContext } = React
+
 function Login (props) {
+
+    const { handleFeedback } = useContext(Context)
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -9,7 +13,7 @@ function Login (props) {
         try {
             authenticateUser(username, password, (error, token) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
         
@@ -18,7 +22,7 @@ function Login (props) {
                 props.onUserLoggedIn()
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

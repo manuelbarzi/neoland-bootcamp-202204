@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useContext } = React
 
 function Home(props) {
 
@@ -6,6 +6,7 @@ function Home(props) {
     const [notes, setNotes] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
     const [view, setView] = useState(null)
+    const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
 
 
     const handleLogoutClick = () => {
@@ -32,14 +33,14 @@ function Home(props) {
         try {
             retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
                 setName(user.name)
                 setView('edit')
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
         loadNotes()
     }, [])
@@ -49,13 +50,13 @@ function Home(props) {
         try {
             retrieveNotes(sessionStorage.token, (error, notes) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
                 setNotes(notes)
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 
@@ -65,13 +66,13 @@ function Home(props) {
         try {
             retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
                 setName(user.name)
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 
@@ -80,13 +81,13 @@ function Home(props) {
         try {
             saveNote(sessionStorage.token, null, null, error => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
                 setTimestamp(Date.now())
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

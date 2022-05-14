@@ -1,8 +1,11 @@
+const { useContext } = React
+
 function Sticker (props) {
+
+    const { handleFeedback } = useContext(Context)
 
     const handleCloseClick = () => {
         const { stickerId, onRemove } = props
-
 
         if (stickerId) {
             try {
@@ -10,13 +13,14 @@ function Sticker (props) {
                     if (error) {
                         if(error.message === `note with id "${stickerId}" does not exist`)
                             onRemove(stickerId)
-                        else alert(error.message)
+                        else handleFeedback({ type: 'error', message: error.message})
                         return
                     }
                     onRemove(stickerId)
+                    handleFeedback({ type: 'success', message: 'Sticker deleted'})
                 })
             } catch(error) {
-                alert(error.message)
+                handleFeedback({ type: 'error', message: error.message})
             }
         }
     }
@@ -32,13 +36,13 @@ function Sticker (props) {
         try {
             saveNote(sessionStorage.token, stickerId, text, error => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
-                alert('Sticker saved! ')
+                handleFeedback({ type: 'success', message: 'Sticker saved!'})
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

@@ -1,6 +1,9 @@
-const { useState } = React
+const { useState, useEffect, useContext } = React
+// sin useEffect tambien funciona
 
 function StickerList({ timestamp }) {
+
+    const { handleFeedback } = useContext(Context)
 
     const [notes, setNotes] = useState(null)
 
@@ -14,13 +17,13 @@ function StickerList({ timestamp }) {
         try {
             retrieveNotes(sessionStorage.token, (error, notes) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
                 setNotes(notes)
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

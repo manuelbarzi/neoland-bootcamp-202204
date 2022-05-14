@@ -1,4 +1,8 @@
+const { useContext } = React
+
 function DeleteUser () {
+
+    const { handleFeedback } = useContext(Context)
 
     const handleDeleteClick = (event) => {
         event.preventDefault()
@@ -8,16 +12,16 @@ function DeleteUser () {
         try {
             deleteUser(sessionStorage.token, confirmation, (error) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
 
-                alert('User deleted')
+                handleFeedback({ type: 'success', message: 'User deleted'})
                 delete sessionStorage.token
                 location.reload()
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

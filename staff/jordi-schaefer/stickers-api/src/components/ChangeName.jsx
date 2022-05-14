@@ -1,4 +1,8 @@
+const { useContext } = React
+
 function ChangeName (props) {
+
+    const { handleFeedback } = useContext(Context)
 
     const handleSaveClick = event => {
         event.preventDefault()
@@ -8,15 +12,15 @@ function ChangeName (props) {
         try {
             updateUserName(sessionStorage.token, newName, (error) => {
                 if (error) {
-                    alert(error.message)
+                    handleFeedback({ type: 'error', message: error.message})
                     return
                 }
 
-                alert('Name changed')
+                handleFeedback({ type: 'success', message: 'Name changed'})
                 props.onUserNameChanged()
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

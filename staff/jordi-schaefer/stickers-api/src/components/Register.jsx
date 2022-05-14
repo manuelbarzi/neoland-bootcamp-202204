@@ -1,4 +1,8 @@
+const { useContext } = React
+
 function Register (props){
+
+    const { handleFeedback } = useContext(Context)
 
     const handleLoginLinkClick = event => {
         event.preventDefault()
@@ -17,14 +21,13 @@ function Register (props){
         try {
             registerUser(name, username, password, error => {
                 if (error) {
-                    alert(error.message) 
+                    handleFeedback({ type: 'error', message: error.message})
                     return 
                 }
-        
                 props.onUserRegistered()
             })
         } catch(error) {
-            alert(error.message)
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 
