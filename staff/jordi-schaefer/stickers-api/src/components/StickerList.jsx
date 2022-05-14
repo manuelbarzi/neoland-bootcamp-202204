@@ -1,16 +1,19 @@
 const { useState, useEffect, useContext } = React
 // sin useEffect tambien funciona
+// useEffect maneja los ciclos de vida de comando
 
-function StickerList({ timestamp }) {
+function StickerList({ timestamp }) { // timestamp son las props desestructuradas
 
     const { handleFeedback } = useContext(Context)
 
     const [notes, setNotes] = useState(null)
 
+
     // si se monta el componente, ejecuta esto
     useEffect(() => {
         loadNotes()
-    }, [timestamp])
+    }, [timestamp]) // si pongo un array vacio ejecutara esto la primera vez, cuando carga el componente
+    // al ponerle las props, tambien ejecutara cuando cambien las props
 
 
     const loadNotes = () => {

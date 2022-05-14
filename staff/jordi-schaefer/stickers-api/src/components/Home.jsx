@@ -6,6 +6,7 @@ function Home(props) {
     const [notes, setNotes] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
     const [view, setView] = useState(null)
+    const [clip, setClip] = useState(null)
     const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
 
 
@@ -91,6 +92,9 @@ function Home(props) {
         }
     }
 
+    const handleAddClip = () => setClip(true)
+    const handleClipTimeout = () => setClip(null)
+
 
 
     return <div className="Home container">
@@ -118,5 +122,9 @@ function Home(props) {
         <footer className="Home__footer Container">
             {view === 'edit' && <button className="Home__button Transparent" onClick={handleAddClick}>➕</button>}
         </footer>
+
+        { clip && <Clip onClipTimeout={handleClipTimeout} />}
+        { clip && <ClipMessage/>}
+        <span className="Clip__button material-symbols-outlined" onClick={handleAddClip} >attach_file</span>
     </div>
 }
