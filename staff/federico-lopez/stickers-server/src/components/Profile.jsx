@@ -1,43 +1,37 @@
-const { Component } = React
+const { useState } = React
 
-class Profile extends Component {
-    state = { view: null }
+function Profile(props) {
+    const [view, setView] = useState(null)
 
-    handleChangeName = event => {
+    const handleChangeName = event => {
         event.preventDefault()
 
-        this.setState({ view: 'changeName' })
+        setView('changeName')
     }
 
-    handleChangePassword = event => {
+    const handleChangePassword = event => {
         event.preventDefault()
 
-        this.setState({ view: 'changePassword' })
+        setView('changePassword')
     }
 
-    handleDeleteUser = event => {
+    const handleDeleteUser = event => {
         event.preventDefault()
 
-        this.setState({ view: 'deleteUser' })
+        setView('deleteUser')
     }
 
-    handleOnProfileChange = () => {
-        this.setState({ view: null })
+    const handleOnProfileChange = () => {
+        setView(null)
     }
 
-    handleOnDeletedUser = () => {
-        location.reload()
-    }
-
-    render() {
-        return <div className="Profile">
-            <div className="Profile__Buttons"><a className="ChangeNameButton button__profile" onClick={this.handleChangeName} >Change Name</a>
-            <a className="ChangePasswordButton button__profile" onClick={this.handleChangePassword} >Change Password</a>
-            </div>
-            <a className="DeleteUserButton button__profile" onClick={this.handleDeleteUser} >Delete User</a>
-            {this.state.view === 'changeName' && <ChangeName username={this.props.username} onChangedName={this.handleOnProfileChange} onChangedNameHome={this.props.onChangedName} />}
-            {this.state.view === 'changePassword' && <ChangePassword username={this.props.username} onChangedPassword={this.handleOnProfileChange} />}
-            {this.state.view === 'deleteUser' && <DeleteUser username={this.props.username} onDeletedUser={this.handleOnDeletedUser} />}
+    return <div className="Profile">
+        <div className="Profile__Buttons"><a className="ChangeNameButton button__profile" onClick={handleChangeName} >Change Name</a>
+            <a className="ChangePasswordButton button__profile" onClick={handleChangePassword} >Change Password</a>
         </div>
-    }
+        <a className="DeleteUserButton button__profile" onClick={handleDeleteUser} >Delete User</a>
+        {view === 'changeName' && <ChangeName username={props.username} onChangedName={handleOnProfileChange} onChangedNameHome={props.onChangedName} name={props.name} />}
+        {view === 'changePassword' && <ChangePassword username={props.username} onChangedPassword={handleOnProfileChange} />}
+        {view === 'deleteUser' && <DeleteUser username={props.username} onDeletedUser={props.onDeletedUser} />}
+    </div>
 }

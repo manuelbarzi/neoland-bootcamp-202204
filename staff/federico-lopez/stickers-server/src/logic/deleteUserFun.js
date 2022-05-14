@@ -1,16 +1,33 @@
-function deleteUserFun(username, callback) {
-    const userExists = db.users.some(user => user.username === username)
+function deleteUserFun(token, password, passwordRepeat, callback) {
+    validateJWT(token)
+    validatePassword(password)
+    validatePassword(passwordRepeat, 'password repeat')
 
-    if(!userExists) {
-        const error = new Error('the user does not exist')
+    if(password !== passwordRepeat) throw new Error('password and password repeat do not match')
 
-        callback(error)
-        return
-    }
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
+    api.delete(
+        'users',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ password })
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
+                
+            if (status >= 400 && status < 500){
+                const data = JSON.parse(payload)
 
-    const indexOfUser = db.users.findIndex(user => user.username === username)
+                callback(new Error(data.error))          
+                 
+            } else if (status >= 500) 
+                callback(new Error('server error'))
 
-    db.users.splice(indexOfUser, 1)
-
-    callback(null)
+            if (status === 204)
+                callback(null)
+        }
+    )
 }

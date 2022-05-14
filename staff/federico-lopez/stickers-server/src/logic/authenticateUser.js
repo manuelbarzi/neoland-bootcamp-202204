@@ -1,27 +1,30 @@
 function authenticateUser(username, password, callback) {
-    const xhr = new XMLHttpRequest
+    validateString(username, 'username')
+    validatePassword(password, 'password')
+    
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
 
-    xhr.addEventListener('load', event => {
-        const status = event.target.status
-        
-        const json = event.target.responseText
+    api.post(
+        'users/auth',
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
 
-        const data = JSON.parse(json)
-        
-        if (status === 200) {
-            callback(null, data.token)
-        } else if (status >= 400 && status < 500) {
-            callback(new Error(data.error))
-        } else callback(new Error('server error'))
-    })
+            const data = JSON.parse(payload)
 
-    xhr.open('POST', 'http://b00tc4mp.herokuapp.com/api/v2/users/auth')
+            if (status >= 400 && status < 500) 
+                callback(new Error(data.error))
 
-    xhr.setRequestHeader('Content-Type', 'application/json')
+            else if (status >= 500)
+                callback(new Error('server error'))
 
-    const data = { username, password }
-
-    const json = JSON.stringify(data)
-
-    xhr.send(json)
+            else if (status === 200)
+                callback(null, data.token)
+        }
+    )
 }

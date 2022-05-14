@@ -1,57 +1,51 @@
 function deleteNote(token, noteId, callback) {
-    const xhr = new XMLHttpRequest
+    validateJWT(token)
+    validateNoteId(noteId)
+    
+    const api = new Apium
 
-    xhr.addEventListener('load', event => {
-        const status = event.target.status
+    api.call(
+        'GET',
+        'http://b00tc4mp.herokuapp.com/api/v2/users',
+        {
+            headers: { Authorization: `Bearer ${token}` }
+        },
+        (error, { status, payload }) => {    
+            const data = JSON.parse(payload)
+            
+            if (status >= 200 && status < 300) {                
+                const notes = data.notes
 
-        const json = event.target.responseText
+                const indexNote = notes.findIndex(note => note.id === noteId)
 
-        const data = JSON.parse(json)
+                notes.splice(indexNote, 1)
 
-        if (status >= 200 && status < 300) {
-            const otherXhr = new XMLHttpRequest
+                api.call(
+                    'PATCH',
+                    'http://b00tc4mp.herokuapp.com/api/v2/users',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    },
+                    (error, { status, payload }) => {
 
-            otherXhr.addEventListener('load', event => {
-                const status = event.target.status
-
-                if (status >= 200 && status < 300) {
-                    callback(null)
-
-                } else if (status >= 400 && status < 500) {
-                    const json = event.target.responseText
-
-                    const data = JSON.parse(json)
-                    callback(new Error(data.error))
-
-                } else callback(new Error('server error'))
-            })
-
-            otherXhr.open('PATCH', 'http://b00tc4mp.herokuapp.com/api/v2/users')
-
-            otherXhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-            otherXhr.setRequestHeader('Content-Type', 'application/json')
-
-            const notes = data.notes
-
-            const indexNote = notes.findIndex(note => note.id === noteId)
-
-            notes.splice(indexNote, 1)
-
-            data.notes = notes
-
-            const actualJson = JSON.stringify(data)
-
-            otherXhr.send(actualJson)
-
-        } else if (status >= 400 && status < 500) {
-            callback(new Error(data.error))
-        } else callback(new Error('server error'))
-    })
-
-    xhr.open('GET', 'http://b00tc4mp.herokuapp.com/api/v2/users')
-
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
-
-    xhr.send()
+                        if (status >= 200 && status < 300) {
+                            callback(null)
+        
+                        } else if (status >= 400 && status < 500) {
+                            const data = JSON.parse(payload)
+                        
+                            callback(new Error(data.error))
+        
+                        } else callback(new Error('server error'))
+                    }
+                )
+            } else if (status >= 400 && status < 500) {
+                callback(new Error(data.error))
+            } else callback(new Error('server error'))
+        }
+    )
 }

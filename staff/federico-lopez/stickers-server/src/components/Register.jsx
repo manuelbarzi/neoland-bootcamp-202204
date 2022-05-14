@@ -1,39 +1,44 @@
-const { Component } = React
+const { useContext } = React
 
-class Register extends Component {
+function Register(props) {
+    const { handleFeedback } = useContext(Context)
 
-    handleFormSubmit = event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const name = event.target.name.value
         const username = event.target.username.value
         const password = event.target.password.value
+        
+        try {
+            registerUser(name, username, password, error => {
+                if (error) {
+                    handleFeedback(error.message)
 
-        registerUser(name, username, password, error => {
-            if (error) {
-                alert(error.message)
-    
-                return
-            }
-            this.props.onRegistered()
-        })
+                    return
+                }
+                handleFeedback('the registration process succeded', 'succeed')
+                
+                props.onRegistered()
+            })
+        } catch(error) {
+            handleFeedback(error.message)
+        }
     }
 
-    onLoginClick = event => {
+    const onLoginClick = event => {
         event.preventDefault()
 
-        this.props.onLoginNavigation()
+        props.onLoginNavigation()
     }
 
-    render() {
-        return <div className="LoginAndRegister">
-            <form className="form" onSubmit={this.handleFormSubmit}>
-                <input className="input" type="text" name="name" placeholder="name" />
-                <input className="input" type="text" name="username" placeholder="username" />
-                <input className="input" type="password" name="password" placeholder="password" />
-                <button className="button">Register</button>
-                <a className="button button__light" href="#" onClick={this.onLoginClick}>Login</a>
-            </form>
-        </div>
-    }
+    return <div className="LoginAndRegister">
+        <form className="form" onSubmit={handleFormSubmit}>
+            <input className="input" type="text" name="name" placeholder="name" />
+            <input className="input" type="text" name="username" placeholder="username" />
+            <input className="input" type="password" name="password" placeholder="password" />
+            <button className="button">Register</button>
+            <a className="button button__light" href="#" onClick={onLoginClick}>Login</a>
+        </form>
+    </div>
 }

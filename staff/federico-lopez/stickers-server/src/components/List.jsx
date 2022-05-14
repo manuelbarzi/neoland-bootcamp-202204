@@ -1,85 +1,87 @@
-const { Component } = React
+const { useState, useEffect, useContext } = React
 
-class List extends Component {
-    state = { notes: null, newNotes: [] }
+function List({ newStickers, username }) {
+    const { handleFeedback } = useContext(Context)
 
-    componentDidMount = () => {
-        retrieveNotes(sessionStorage.token, (error, notes) => {
+    const [notes, setNotes] = useState(null)
+    const [newNotes, setNewNotes] = useState([])
+
+    useEffect(() => {
+        retrieveNotes(sessionStorage.token, (error, notesRetrieved) => {
             if (error) {
-                alert(error.message)
+                handleFeedback(error.message)
                 return
             }
-            this.setState({ notes })
+            setNotes(notesRetrieved)
         })
-    }
+    }, [])
 
-    componentDidUpdate(prevProps) {
-        if (this.props.newStickers !== prevProps.newStickers) {
-            this.setState(({ newNotes }) => newNotes.push(new Note))
+    useEffect(() => {
+        if (newStickers !== null) {
+            let _newNotes = [...newNotes]
+            _newNotes.push(new Note)
+
+            setNewNotes(_newNotes)
         }
+    }, [newStickers])
+
+    const handleOnRemovedSticker = id => {
+        let _notes = [...notes]
+
+        _notes = _notes.filter(note => note.id !== id)
+
+        setNotes(_notes)
     }
 
-    handleOnRemovedSticker = id => {
-        let notes = [...this.state.notes]
+    const handleOnClosedSticker = id => {
+        let _newNotes = [...newNotes]
 
-        notes = notes.filter(note => note.id !== id)
+        _newNotes = _newNotes.filter(note => note.id !== id)
 
-        this.setState({ notes })
+        setNewNotes(_newNotes)
     }
 
-    handleOnClosedSticker = id => {
-        let newNotes = [...this.state.newNotes]
-
- 
-
-        newNotes = newNotes.filter(note => note.id !== id)
-
-        this.setState({ newNotes })
-    }
-
-    handlerOnSavedNote = (id, text) => {
-        if (this.state.newNotes.length > 0) {
-            const isNew = this.state.newNotes.some(note => note.id === id)
+    const handlerOnSavedNote = (id, text) => {
+        if (newNotes.length > 0) {
+            const isNew = newNotes.some(note => note.id === id)
 
             if (isNew) {
-                let newNotes = [...this.state.newNotes]
+                let _newNotes = [...newNotes]
 
-                const note = newNotes.find(note => note.id === id)
+                const note = _newNotes.find(note => note.id === id)
 
                 note.text = text
-                
-                newNotes = newNotes.filter(note => note.id !== id)
 
-                this.setState({ newNotes })
+                _newNotes = _newNotes.filter(note => note.id !== id)
 
-                let notes = []
-                
-                if (this.state.notes instanceof Array && this.state.notes.length > 0)
-                    notes = [...this.state.notes]
+                setNewNotes(_newNotes)
 
-                notes.push(note)
+                let _notes = []
 
-                this.setState({ notes })
+                if (notes instanceof Array && notes.length > 0)
+                    _notes = [...notes]
+
+                _notes.push(note)
+
+                setNotes(_notes)
             }
         }
     }
 
-    render() {
-        return <ul className='List'>
+    return <ul className='List'>
 
-            {this.state.notes !== null && this.state.notes.map(note => <li key={note.id}>
-                <Sticker
-                    text={note.text}
-                    username={this.props.username}
-                    id={note.id}
-                    view="view"
-                    onRemovedSticker={this.handleOnRemovedSticker}
-                    onClosedSticker={this.handleOnClosedSticker}
-                    onSavedNote={this.handlerOnSavedNote}
-                />
-            </li>)}
+        {notes !== null && notes.map(note => <li key={note.id}>
+            <Sticker
+                text={note.text}
+                username={username}
+                id={note.id}
+                view="view"
+                onRemovedSticker={handleOnRemovedSticker}
+                onClosedSticker={handleOnClosedSticker}
+                onSavedNote={handlerOnSavedNote}
+            />
+        </li>)}
 
-            {this.state.newNotes.length > 0 && this.state.newNotes.map(note => <li key={note.id}> <Sticker text="" username={this.props.username} id={note.id} view="edit" onRemovedSticker={this.handleOnRemovedSticker} onClosedSticker={this.handleOnClosedSticker} onSavedNote={this.handlerOnSavedNote} /> </li>)}
-        </ul>
-    }
+        {newNotes.length > 0 && newNotes.map(note => <li key={note.id}> <Sticker text="" id={note.id} view="edit" onRemovedSticker={handleOnRemovedSticker} onClosedSticker={handleOnClosedSticker} onSavedNote={handlerOnSavedNote} /> </li>)}
+    </ul>
 }

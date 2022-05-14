@@ -1,23 +1,34 @@
-const { Component } = React
+const { useState } = React
 
-class App extends Component {
-    state = { view: sessionStorage.username? 'home' : 'login' }
+function App() {
+    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
+    const [feedback, setFeedback] = useState(null)
 
-    handleLoggedIn = () => this.setState({ view: 'home' })
+    const handleLoggedIn = () => setView('home')
 
-    handleNavToRegister = () => this.setState({ view: 'register' })
+    const handleNavToRegister = () => setView('register')
 
-    handleOnUserRegistered = () => this.setState({ view: 'login' })
+    const handleOnUserRegistered = () => setView('login')
 
-    handleNavToLogin = () => this.setState({ view: 'login' })
+    const handleNavToLogin = () => setView('login')
 
-    handleOnLoggedOut = () => this.setState({ view: 'login' })
+    const handleOnLoggedOut = () => setView('login')
 
-    render() {
-        return <div className="App">
-            {this.state.view === 'login' && <Login onLoggedIn={this.handleLoggedIn} onRegisterNavigation={this.handleNavToRegister} />}
-            {this.state.view === 'register' && <Register onRegistered={this.handleOnUserRegistered} onLoginNavigation={this.handleNavToLogin} />}
-            {this.state.view === 'home' && <Home onLoggedOut={this.handleOnLoggedOut} />}
-        </div>
+    const handleOnDeletedUser = () => setView('login')
+
+    const handleFeedback = (message, level) => {
+        setFeedback({level, message})
+        setTimeout(handleFeedbackTimeOut, 2000)
     }
+
+    const handleFeedbackTimeOut = () => setFeedback(null)
+
+    return <Context.Provider value={{ handleFeedback }}>
+        <div className="App">
+            {view === 'login' && <Login onLoggedIn={handleLoggedIn} onRegisterNavigation={handleNavToRegister} />}
+            {view === 'register' && <Register onRegistered={handleOnUserRegistered} onLoginNavigation={handleNavToLogin} />}
+            {view === 'home' && <Home onLoggedOut={handleOnLoggedOut} onDeletedUser={handleOnDeletedUser} />}
+            {feedback !== null && <Feedback level={feedback.level} message={feedback.message} />}
+        </div>
+    </Context.Provider>
 }

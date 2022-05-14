@@ -1,65 +1,72 @@
 function saveNote(token, noteId, text, callback) {
-    const xhr = new XMLHttpRequest
+    validateJWT(token)
+    validateNoteId(noteId)
+    validateString(text, 'text')
+    
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
 
-    xhr.addEventListener('load', event => {
-        const status = event.target.status
-
-        const json = event.target.responseText
-
-        const data = JSON.parse(json)
-
-        if (status >= 200 && status < 300) {
-            const otherXhr = new XMLHttpRequest
-
-            otherXhr.addEventListener('load', event => {
-                const status = event.target.status
-
-                if (status >= 200 && status < 300) {
-                    callback(null)
-
-                } else if (status >= 400 && status < 500) {
-                    const json = event.target.responseText
-
-                    const data = JSON.parse(json)
-                    callback(new Error(data.error))
-
-                } else callback(new Error('server error'))
-            })
-
-            otherXhr.open('PATCH', 'http://b00tc4mp.herokuapp.com/api/v2/users')
-
-            otherXhr.setRequestHeader('Authorization', `Bearer ${token}`)
-            otherXhr.setRequestHeader('Content-Type', 'application/json')
-
-            const username = data.username
-
-            const { notes = [] } = data
-
-            const indexNote = notes.findIndex(note => note.id === noteId)
-
-            if (indexNote > -1) {
-                notes[indexNote].text = text
-
-            } else {
-                const actualNote = { username, text, date: new Date, id: noteId }
-
-                notes.push(actualNote)
+    api.get(
+        'users',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
 
-            data.notes = notes
+            const data = JSON.parse(payload)
 
-            const actualJson = JSON.stringify(data)
+            if (status >= 400 && status < 500)
+                callback(new Error(data.error))
+            else if (status >= 500)
+                callback(new Error('server error'))
 
-            otherXhr.send(actualJson)
+            else if (status >= 200 && status < 300) {
+                const username = data.username
 
-        } else if (status >= 400 && status < 500) {
-            callback(new Error(data.error))
-        } else callback(new Error('server error'))
-    })
+                const { notes = [] } = data
 
-    xhr.open('GET', 'http://b00tc4mp.herokuapp.com/api/v2/users')
+                const indexNote = notes.findIndex(note => note.id === noteId)
 
-    xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+                if (indexNote > -1) {
+                    notes[indexNote].text = text
 
-    xhr.send()
+                } else {
+                    const actualNote = { username, text, date: new Date, id: noteId }
+
+                    notes.push(actualNote)
+
+                    data.notes = notes
+                }
+
+                api.patch(
+                    'users',
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(data)
+                    },
+                    (error, { status, payload }) => {
+                        if (error) return callback(error)
+
+                        if (status >= 400 && status < 500) {
+
+                            const data = JSON.parse(payload)
+                            
+                            callback(new Error(data.error))
+
+                        } else if (status >= 500)
+                            callback(new Error('server error'))
+
+                        else if (status >= 200 && status < 300)
+                            callback(null)
+
+                    }
+                )
+            }
+        }
+    )
 }

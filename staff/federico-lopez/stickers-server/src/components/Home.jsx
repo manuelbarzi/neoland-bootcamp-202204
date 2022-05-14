@@ -1,73 +1,72 @@
-const { Component } = React
+const { useState, useEffect, useContext } = React
 
-class Home extends Component {
-    state = { view: 'stickers', newStickers: false, name: null }
+function Home(props) {
+    const { handleFeedback } = useContext(Context)
 
-    onLogoutButtonClick = () => {
+    const [view, setView] = useState('stickers')
+    const [newStickers, setNewStickers] = useState(null)
+    const [name, setName] = useState(null)
+
+    const onLogoutButtonClick = () => {
         delete sessionStorage.token
 
-        this.props.onLoggedOut()
+        props.onLoggedOut()
     }
 
-    handleNewNoteCreated = () => {
-        this.setState({ newStickers: false })
+    const handleNewNoteCreated = () => {
+        setNewStickers(false)
     }
 
-    handleOnProfileButton = () => {
-        this.setState({ view: 'profile' })
+    const handleOnProfileButton = () => {
+        setView('profile')
     }
 
-    handleOnStickersButton = event => {
+    const handleOnStickersButton = event => {
         event.preventDefault()
 
-        this.setState({ view: 'stickers' })
+        setView('stickers')
     }
 
-    handleAddNoteClick = event => {
+    const handleAddNoteClick = event => {
         event.preventDefault()
-        
-        this.state.newStickers === true ? this.setState({ newStickers: false }) : this.setState({ newStickers: true })
-        
+
+        newStickers === true || newStickers === null ? setNewStickers(false) : setNewStickers(true)
     }
 
-    componentDidMount() {
-        retrieveUser(sessionStorage.token, (error, name) => {
-            if (error) {
-                alert(error.message)
+    useEffect(() => {
+        try {
+            retrieveUser(sessionStorage.token, (error, user) => {
+                if (error) {
+                    handleFeedback(error.message)
 
-                return
-            }
-            this.setState({ name: name })
-        })
+                    return
+                }
+                setName(user.name)
+            })
+        } catch (error) {
+            handleFeedback(error.message)
+        }
+    }, [])
+
+
+    const handleOnChangedName = (newName) => {
+        setName(newName)
     }
 
-    handleOnChangedName(newName) {
-        retrieveUser(sessionStorage.token, (error, newName) => {
-            if (error) {
-                alert(error.message)
+    return <div className="Home">
+        <header className="header">
+            <a className="viewStickersButton" onClick={handleOnStickersButton} >Stickers</a>
+            <a className="profileButton" onClick={handleOnProfileButton} >{name}</a>
+            <a className="logout" onClick={onLogoutButtonClick}>Log Out</a>
+        </header>
 
-                return
-            }
-            this.setState({ name: newName })
-        })
-    }
+        <main>
+            {view === 'profile' && <Profile onChangedName={handleOnChangedName} onDeletedUser={props.onDeletedUser} name={name}/>}
+            {view === 'stickers' && <List newStickers={newStickers} onNewNoteCreated={handleNewNoteCreated} />}
+        </main>
 
-    render() {
-        return <div className="Home">
-            <header className="header">
-                <a className="viewStickersButton" onClick={this.handleOnStickersButton} >Stickers</a>
-                <a className="profileButton" onClick={this.handleOnProfileButton} >{this.state.name}</a>
-                <a className="logout" onClick={this.onLogoutButtonClick}>Log Out</a>
-            </header>
-
-            <main>
-                {this.state.view === 'profile' && <Profile username={sessionStorage.username} onChangedName={this.handleOnChangedName} />}
-                {this.state.view === 'stickers' && <List username={sessionStorage.username} newStickers={this.state.newStickers} onNewNoteCreated={this.handleNewNoteCreated} />}
-            </main>
-            
-            <footer className="footer">
-                <a className="addNote" onClick={this.handleAddNoteClick} >+</a>
-            </footer>
-        </div>
-    }
+        <footer className="footer">
+            <a className="addNote" onClick={handleAddNoteClick} >+</a>
+        </footer>
+    </div>
 }
