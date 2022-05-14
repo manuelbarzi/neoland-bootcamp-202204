@@ -1,7 +1,7 @@
 const { useContext } = React
 
 function ChangeName() {
-
+    const { handleFeedeback } = useContext(Context)
     handelChangeName = event => {
         event.preventDefault()
 
@@ -9,11 +9,11 @@ function ChangeName() {
 
         updateUserName(sessionStorage.token, newName, error => {
             if (error) {
-                alert(error.message)
+                handleFeedeback(error.message)
 
                 return
             }
-            alert('Name Update')
+            handleFeedeback('Name Update')
 
         })
     }

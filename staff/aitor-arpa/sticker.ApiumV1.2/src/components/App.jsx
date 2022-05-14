@@ -1,35 +1,40 @@
-const { Component } = React
+const { useState } = React
 
-class App extends Component{
-    // Declaro un estado con condicion que si hay sesionStorage abre Home si no Login 
-    state = { view: sessionStorage.token? 'home' : 'login'}
+function App () {
+     
+    const [view, setVuew] = useState( sessionStorage.token? 'home' : 'login')
+    const [feedeback, setFeedeback] = useState ({ level: 'error', message: ''})
     /* <  ---------      Manejador de Vistas  -----------  > */
-    handleUserRegistered= () => this.handleLoginNavigation ()
+    const handleUserRegistered= () => handleLoginNavigation ()
     
-
-    handleUserLoggedIn = () => this.setState({ view: 'home' })
+    const handleUserLoggedIn = () => setState({ view: 'home' })
  
-    handleRegisterNavigation = () => this.setState({ view:'register' })
+    const handleRegisterNavigation = () => setState({ view:'register' })
 
-    handleLoginNavigation = () => this.setState({ view:'login' })
+    const handleLoginNavigation = () => setState({ view:'login' })
     
-    handelUserLoggedOut = () => this.handleLoginNavigation()
+    const handelUserLoggedOut = () => handleLoginNavigation()
 
+    const handleFeedback = feedback => setFeedback (feedback)
 
+    const handleFeedbackTiemout = () => setFeedback(null)
     
 
     
 
 
     /* <  ---------     Pintado con Condiciones para Mostrar Vistas   -----------  > */
-    render() {
-        return  <div className="App">
+  
+        return  <Context.Provider valuer ={{handleFeedback}}>
+        
+        <div className="App">
             
-            {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}
-            {this.state.view === 'register' && <Register onUserRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation} />}
-            {this.state.view === 'home' && <Home  onUserLoggedOut={this.handelUserLoggedOut}  onUserGoProfile={this.handelUserProfile} onUserGoHome={this.handelUserGoHome}/>}
+            {state.view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
+            {state.view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
+            {state.view === 'home' && <Home  onUserLoggedOut={handelUserLoggedOut}  onUserGoProfile={handelUserProfile} onUserGoHome={handelUserGoHome}/>}
          
             </div>
+            </Context.Provider>
     }
-}
+
 
