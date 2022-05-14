@@ -3,9 +3,14 @@ function registerUser(name, username, password, callback) {
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    validateJwt(token)
+    validateString(name, 'name')
+    validateString(username, 'username')
+    validatePassword(password)
 
     logger.info('request')
+
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     api.post('v2/users', {
         headers: {
