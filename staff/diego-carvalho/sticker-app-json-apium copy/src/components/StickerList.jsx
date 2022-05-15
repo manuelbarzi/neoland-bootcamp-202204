@@ -15,16 +15,20 @@ function StickerList({timestamp}){
         loadNotes()
     }, [timestamp])
 
-    const loadNotes = () =>
-        retrieveNotes(sessionStorage.token, (error, notes) => {
-            if (error) {
-                handleFeedback({level: 'error', message: error.message})
-
-                return
-            }
-
-            setNotes( notes )
-        })
+    const loadNotes = () =>{
+        try {
+            retrieveNotes(sessionStorage.token, (error, notes) => {
+                if (error) {
+                    handleFeedback({level: 'error', message: error.message})
+    
+                    return
+                }
+                setNotes( notes )
+            })
+        } catch (error) {
+            handleFeedback({ type: 'error', message: error.message})
+        }
+    }
 
     const handleRemoveSticker = stickerId => {
         const _notes = notes.filter(note => note.id !== stickerId)
@@ -42,6 +46,5 @@ function StickerList({timestamp}){
         </ul>
         :
         <p>no sticker yet</p>
-    
 }
 

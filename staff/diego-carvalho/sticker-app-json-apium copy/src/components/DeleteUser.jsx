@@ -23,26 +23,21 @@ function DeleteUser() {
 
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
+            delete sessionStorage.token
+            location.reload()
         }
     }
     
-   /* handleDeleteUserButtonClick = () => {
-        delete sessionStorage.token
-        location.reload()
-
-    }*/
-
     logger.info('render')
 
     return <div className="DeleteUser">
         <form className="Container" onSubmit={handleFormSubmit}>
             <input className="" type="password" name="password" placeholder="password" />
 
-            <button className="Delete__button" onClick={handleDeleteUserButtonClick}>Delete User</button>
+            <button className="Delete__button">Delete User</button>
         </form>
     </div>
 }
-
 
 //INFO
 

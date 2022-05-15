@@ -20,6 +20,7 @@ function ChangeName() {
                     return
                 }
                 handleFeedback({ level: 'success', message: 'name has been changed'})
+            
             })
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
@@ -31,10 +32,9 @@ function ChangeName() {
     return <div className="ChangeName">
         <form className="Container" onSubmit={handleFormSubmit}>
             <input type="text" name="name" placeholder="name" />
-            <button>Save</button>
+            <button className="Button">Save</button>
         </form>
     </div>
-
 }
 
 

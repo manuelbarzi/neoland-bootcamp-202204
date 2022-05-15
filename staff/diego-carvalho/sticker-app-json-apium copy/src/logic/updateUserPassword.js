@@ -15,7 +15,6 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
-
     api.patch('v2/users', {
         headers: {
             Authorization: `Bearer ${token}`,

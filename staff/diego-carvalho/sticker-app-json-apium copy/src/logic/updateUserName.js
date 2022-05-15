@@ -32,6 +32,5 @@ function updateUserName(token,newName, callback) {
         else if (status === 204)
             callback(null)
     })
-
 }
 

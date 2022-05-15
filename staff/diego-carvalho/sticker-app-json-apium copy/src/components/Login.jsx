@@ -20,12 +20,10 @@ function Login(props) {
 
                     return
                 }
-
                 sessionStorage.token = token
 
                 props.onUserLoggedIn()
             })
-
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }

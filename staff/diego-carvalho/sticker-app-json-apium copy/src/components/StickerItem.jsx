@@ -1,16 +1,12 @@
-const {Component} = React
+const {useContext} = React
 
-class StickerItem extends Component {
-    constructor(){
-        super()
-        this.logger = new Logger('StickerItem')
+function StickerItem() {
+    const logger = new Logger('StickerItem')
 
-        this.logger.info('constructor')
-    }
-    render() {
-        this.logger.info('render')
-        return<li></li>
+    logger.info('call')
 
-    }
+    logger.info('render')
+   
+    return<li></li>
 
 }

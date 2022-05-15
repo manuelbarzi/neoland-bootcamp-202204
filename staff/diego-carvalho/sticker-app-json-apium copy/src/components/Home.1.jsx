@@ -9,7 +9,6 @@ class Home extends Component {
         this.logger = new Logger('Home')
 
         this.logger.info('constructor')
-
     }
 
     handleLogoutClick = () => {
@@ -27,7 +26,6 @@ class Home extends Component {
 
                 return
             }
-
             this.setState({ name: user.name, username: user.username })
         })
     }

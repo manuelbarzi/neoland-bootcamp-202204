@@ -21,10 +21,8 @@ function Register(props) {
     
                     return
                 }
-    
                 props.onUserRegistered()
             })
-
         } catch(error){
             handleFeedback({ level: 'error', message: error.message })
         }
@@ -47,5 +45,4 @@ function Register(props) {
             <a href="#" onClick={handleLoginLinkClick}>Login</a>
         </form>
     </div>
-
 }
