@@ -9,7 +9,8 @@ class Logger {
 
 
     #name
-    static #level = Logger.DEBUG
+    //static #level = Logger.DEBUG
+    static #level = 5
 
     constructor(name) {
         this.#name = name
@@ -27,26 +28,26 @@ class Logger {
 
     debug(message) {
         if (Logger.#level === Logger.DEBUG)
-            console.log(`%cDEBUG%c ${new Date().toISOString()} %c${this.#name} %c${message}`, 'color: green; font-weight: bold;', 'color: gray;', 'color: black;')
+            console.log(`%cDEBUG%c ${new Date().toISOString()} %c${this.#name} ${message}`, 'color: green; font-weight: bold;', 'color: gray;', 'color: black;')
     }
 
     info(message) {
         if (Logger.#level <= Logger.INFO)
-            console.log(`%cINFO%c ${new Date().toISOString()} %c${this.#name} %c${message}`, 'color: blue; font-weight: bold;', 'color: gray;', 'color: black;')
+            console.log(`%cINFO%c ${new Date().toISOString()} %c${this.#name} ${message}`, 'color: blue; font-weight: bold;', 'color: gray;', 'color: black;')
     }
 
     warn(message) {
         if (Logger.#level <= Logger.WARN)
-            console.log(`%cWARN%c ${new Date().toISOString()} %c${this.#name} %c${message}`, 'color: gold; font-weight: bold;', 'color: gray;', 'color: black;')
+            console.log(`%cWARN%c ${new Date().toISOString()} %c${this.#name} ${message}`, 'color: gold; font-weight: bold;', 'color: gray;', 'color: black;')
     }
 
     error(message) {
         if (Logger.#level <= Logger.ERROR)
-            console.log(`%cERROR%c ${new Date().toISOString()} %c${this.#name} %c${message}`, 'color: tomato; font-weight: bold;', 'color: gray;', 'color: black;')
+            console.log(`%cERROR%c ${new Date().toISOString()} %c${this.#name} ${message}`, 'color: tomato; font-weight: bold;', 'color: gray;', 'color: black;')
     }
 
     fatal(message) {
         if (Logger.#level <= Logger.FATAL)
-            console.log(`%cFATAL%c ${new Date().toISOString()} %c${this.#name} %c${message}`, 'color: white; background-color: tomato; font-weight: bold;', 'color: gray;', 'color: black;')
+            console.log(`%cFATAL%c ${new Date().toISOString()} %c${this.#name} ${message}`, 'color: white; background-color: tomato; font-weight: bold;', 'color: gray;', 'color: black;')
     }
 }

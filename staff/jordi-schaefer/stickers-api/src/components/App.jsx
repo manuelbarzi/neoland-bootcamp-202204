@@ -1,9 +1,13 @@
 const { useState } = React
 
 function App () {
+
+    const logger = new Logger('App')
+    logger.info('call')
+
     // explicacion a las 11:50am viernes 13/05
     const [view, setView] = useState(sessionStorage.token? 'home' : 'login')
-    const [feedback, setFeedback] = useState({type: 'error', message: 'feedback'}) // el feedback es un objeto que tiene propiedades de tipo y mensajes
+    const [feedback, setFeedback] = useState(null) // el feedback es un objeto que tiene propiedades de tipo y mensajes
 
     const handleUserRegistered = () => setView('login')
     const handleUserLoggedIn = () => setView('home')
@@ -18,6 +22,9 @@ function App () {
     const handleFeedback = feedback => setFeedback(feedback) // recibo el objeto feedback y lo guardo en el estado, al cambiar estado repintara
 
     const handleFeedbackTimeout = () => setFeedback(null)
+
+
+    logger.info('render')
 
     // Encierra todo esto en un context provider, el App va a proveer del contexto a los hijos, y cualquiera podra usarlo
     // le paso value al contexto

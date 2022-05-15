@@ -2,6 +2,9 @@ const { useState, useEffect, useContext } = React
 
 function Home(props) {
 
+    const logger = new Logger('Home')
+    logger.info('call')
+
     const [name, setName] = useState(null)
     const [notes, setNotes] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
@@ -31,8 +34,11 @@ function Home(props) {
 
     // primero renderiza y luego lanza el DidMount
     useEffect(() => {
+        logger.info('useEffect')
+
         try {
             retrieveUser(sessionStorage.token, (error, user) => {
+                logger.info('callback try-catch')
                 if (error) {
                     handleFeedback({ type: 'error', message: error.message})
                     return
@@ -43,6 +49,7 @@ function Home(props) {
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
+        logger.info('try-catch finished')
         loadNotes()
     }, [])
 
@@ -96,6 +103,7 @@ function Home(props) {
     const handleClipTimeout = () => setClip(null)
 
 
+    logger.info('render')
 
     return <div className="Home container">
         <header className="Home__header">
@@ -125,6 +133,6 @@ function Home(props) {
 
         { clip && <Clip onClipTimeout={handleClipTimeout} />}
         { clip && <ClipMessage/>}
-        <span className="Clip__button material-symbols-outlined" onClick={handleAddClip} >attach_file</span>
+        <span className="Clip__button material-symbols-outlined" onClick={handleAddClip} >info</span>
     </div>
 }
