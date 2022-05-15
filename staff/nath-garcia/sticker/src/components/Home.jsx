@@ -1,60 +1,77 @@
-const { Component } = React
+const { useState, useEffect, useContext } = React
 
-class Home extends Component {
-    state = { name: null, timestamp: null, view: 'list' }
+function Home(props) {
+    const logger = new Logger('Home')
 
-    handleLogoutClick = () => {
+    logger.info('call')
+
+    const [name, setName] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
+    const [view, setView] = useState(null)
+    const { handleFeedback } = useContext(Context)
+
+    const handleLogoutClick = () => {
+        handleLogout()
+    }
+
+    const handleLogout = () => {
         delete sessionStorage.token
 
-        this.props.onUserLoggedOut()
+        props.onUserLoggedOut()
     }
 
-    componentDidMount() {
+    useEffect(() => {
+        logger.info('componentDidMount')
+
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
-                alert(error.message)
+                handleFeedback({ level: 'error', message: error.message })
+
+                handleLogout()
 
                 return
             }
 
-            this.setState({ name: user.name })
+            //setState({ name: user.name, view: 'list' })
+            setName(user.name)
+            setView('list')
         })
-    }
+    }, [])
 
-    handleAddClick = () => {
+    const handleAddClick = () => {
         saveNote(sessionStorage.token, null, null, error => {
             if (error) {
-                alert(error.message)
+                handleFeedback({ level: 'error', message: error.message })
 
                 return
             }
 
-            this.setState({ timestamp: Date.now() })
+            setTimestamp(Date.now())
         })
     }
 
-    handleProfileClick = () => this.setState({ view: 'profile' })
+    const handleProfileClick = () => setView('profile')
 
-    handleHomeClick = () => this.setState({ view: 'list' })
+    const handleHomeClick = () => setView('list')
 
-    render() {
+    logger.info('render')
+
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
+                <button className="Button Button--no-border Home__home" onClick={handleHomeClick}>📋</button>
                 <div>
-                    <button className="Button Button--no-border Home__profile" onClick={this.handleProfileClick}>{this.state.name}</button>
-                    <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>Logout</button>
+                    <button className="Button Button--no-border Home__profile" onClick={handleProfileClick}>{name}</button>
+                    <button className="Button Button--no-border Home__logout" onClick={handleLogoutClick}>Logout</button>
                 </div>
             </header>
 
             <main className="Home__body Container">
-                {this.state.view === 'list' && <StickerList timestamp={this.state.timestamp} />}
-                {this.state.view === 'profile' && <Profile />}
+                {view === 'list' && <StickerList timestamp={timestamp} />}
+                {view === 'profile' && <Profile />}
             </main>
 
             <footer className="Home__footer Container">
-                <button className="Home__addSticker" onClick={this.handleAddClick}>+</button>
+                <button className="Home__addSticker" onClick={handleAddClick}>+</button>
             </footer>
         </div>
     }
-}

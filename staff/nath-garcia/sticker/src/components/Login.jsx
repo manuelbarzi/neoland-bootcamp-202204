@@ -1,7 +1,13 @@
-const { Component } = React
+const { useContext } = React
 
-class Login extends Component {
-    handleFormSubmit = event => {
+function Login(props) {
+    const logger = new Logger('Login')
+
+    logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
+
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const username = event.target.username.value
@@ -9,31 +15,31 @@ class Login extends Component {
 
         authenticateUser(username, password, (error, token) => {
             if (error) {
-                alert(error.message)
+                handleFeedback({ level: 'error', message: error.message })
 
                 return
             }
 
             sessionStorage.token = token
 
-            this.props.onUserLoggedIn()
+            props.onUserLoggedIn()
         })
     }
 
-    handleRegisterLinkClick = event => {
+    const handleRegisterLinkClick = event => {
         event.preventDefault()
 
-        this.props.onRegisterLinkClicked()
+        props.onRegisterLinkClicked()
     }
 
-    render() {
+    logger.info('render')
+
         return <div>
-            <form className="Container" onSubmit={this.handleFormSubmit}>
+            <form className="Container" onSubmit={handleFormSubmit}>
                 <input className="Input Input--light" type="text" name="username" placeholder="username" />
                 <input className="Input Input--light" type="password" name="password" placeholder="password" />
                 <button className="Button Button--light">Login</button>
-                <a href="#" onClick={this.handleRegisterLinkClick}>Register</a>
+                <a href="#" onClick={handleRegisterLinkClick}>Register</a>
             </form>
         </div>
-    }
-}
+    } 
