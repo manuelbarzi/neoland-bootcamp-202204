@@ -1,8 +1,8 @@
 .Home
     width: 100%
+    height: 100%
     overflow: hidden
     overflow-y: auto
-    min-height: 100vh
     background-color: dodgerblue
 
     &__header
@@ -17,14 +17,17 @@
 
     &__body
         overflow-y: auto
-        flex-grow: 1
         width: 100%
-        margin-top: 15px
-        margin-bottom: 5px
+        height: 100%
+        margin: 56px 0
 
         .Profile
-            &--form
-                flex-basis: 100%
+            gap: .5rem
+            margin-top: 1.2rem
+
+            &--form > form
+                gap: .5rem
+                margin-top: 0.5rem
 
     &__footer
         position: fixed

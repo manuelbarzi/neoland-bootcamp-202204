@@ -3,6 +3,8 @@ function retrieveUser(token, callback) {
 
     logger.info('call')
 
+    validateJwt(token)
+
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')

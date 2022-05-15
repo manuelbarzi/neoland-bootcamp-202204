@@ -1,76 +1,87 @@
-const { Component } = React
+const { useState, useEffect, useContext } = React
 
-class Home extends Component {
-    constructor() {
-        super()
-        
-        this.state = { name: null, timestamp: null, view: 'stickerList' }
+function Home(props) {
+    const logger = new Logger('Home')
 
-        this.logger = new Logger('Home')
+    logger.info('call')
 
-        this.logger.info('constructor')
+    const [name, setName] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
+    const [view, setView] = useState(null)
+    const { handleFeedback } = useContext(Context)
+
+    const handleLogoutClick = () => {
+        handleLogout()
     }
-
-    // state = { name: null, timestamp: null, view: 'stickerList' }
-
-    handleLogoutClick = () => {
+    
+    const handleLogout = () => {
         delete sessionStorage.token
 
-        this.props.onUserLoggedOut()
+        props.onUserLoggedOut()
     }
 
     // Cargar al user cuando se monta el component (RTFM componentDidMount lifecycle methods)
-    componentDidMount() {
-        this.logger.info('componentDidMount')
+    useEffect(() => {
+        logger.info('componentDidMount')
 
-        retrieveUser(sessionStorage.token, (error, user) => {
-            if (error) {
-                alert(error.message)
+        try {
+            retrieveUser(sessionStorage.token, (error, user) => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+                    
+                    handleLogout()
+                    
+                    return
+                }
+                
+                // setState({ name: user.name, view: 'list' })
+                setName(user.name)
+                setView('stickerlist')
+            })
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })            
+        }
+    }, [])
 
-                return
-            }
-            
-            // this.setName(user.name)
-            this.setState({ name: user.name })
-        })
-    }
+    const handleAddClick = () => {
+        try {
+            saveNote(sessionStorage.token, null, null, error => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
     
-    handleAddClick = () => {
-        saveNote(sessionStorage.token, null, null, error => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            this.setState({ timestamp: Date.now() })
-        })
-    }
+                    return
+                }
     
-    handleProfileClick = () => this.setState({ view: 'profile' })
-
-    handleHomeClick = () => this.setState({ view: 'stickerList' })
-
-    render() {
-        this.logger.info('render')
-
-        return <div className="Home Container">
-            <header className="Home__header Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home" onClick={this.handleHomeClick}>📋</button>
-                <div>
-                    <button className="Button Button--no-border Home__profile" onClick={this.handleProfileClick}>{this.state.name}</button>
-                    <button className="Button Button--no-border Home__logout" onClick={this.handleLogoutClick}>logout</button>
-                </div>
-            </header>
-
-            <main className="Home__body Container">
-                {this.state.view === 'stickerList' && <StickerList timestamp={this.state.timestamp} />}
-                {this.state.view === 'profile' && <Profile />}
-            </main>
-
-            <footer className="Home__footer Container">
-                <button className="Button Home__addSticker" onClick={this.handleAddClick}>➕</button>
-            </footer>
-        </div>
+                setTimestamp(Date.now())
+            })
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
+
+    const handleProfileClick = () => setView('profile')
+
+    const handleHomeClick = () => setView('stickerList')
+
+    logger.info('render')
+
+    return <div className="Home Container">
+        <header className="Home__header Container Container--row Container--spread-sides">
+            <button className="Button Button--no-border Home__home" onClick={handleHomeClick}>📋</button>
+            <div>
+                <button className="Button Button--no-border Home__profile" onClick={handleProfileClick}>{name}</button>
+                <button className="Button Button--no-border Home__logout" onClick={handleLogoutClick}>logout</button>
+            </div>
+        </header>
+
+        <main className="Home__body">
+            {view === 'stickerList' && <StickerList timestamp={timestamp} />}
+            {view === 'profile' && <Profile />}
+        </main>
+
+        <footer className="Home__footer Container">
+            <button className="Button Home__addSticker" onClick={handleAddClick}>➕</button>
+        </footer>
+    </div>
+
 }

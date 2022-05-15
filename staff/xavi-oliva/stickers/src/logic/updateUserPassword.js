@@ -1,23 +1,19 @@
 function updateUserPassword(token, password, newPassword, newPasswordRepeat, callback) {
-    if (password === newPassword) {
-        callback(new Error('current password and new password are the same'))
-
-        return
-    }
-
-    if (newPassword !== newPasswordRepeat) {
-        callback(new Error('new password and new password repeat are not the same'))
-
-        return
-    }
-
     const logger = new Logger('updateUserPassword')
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    validateJwt(token)
+    validatePassword(password)
+    validatePassword(newPassword, 'new password')
+    validatePassword(newPasswordRepeat, 'new password repeat')
+
+    if (newPassword !== newPasswordRepeat)
+        return callback(new Error('new password and new password repeat are not the same'))
 
     logger.info('request')
+
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     api.patch('v2/users', {
         headers: {
@@ -38,7 +34,7 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
             callback(new Error(data.error))
         } else if (status >= 500)
             callback(new Error('server error'))
-        if (status === 204)
+        else if (status === 204)
             callback(null)
     })
 }

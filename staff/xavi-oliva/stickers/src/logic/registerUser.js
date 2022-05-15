@@ -3,6 +3,10 @@ function registerUser(name, username, password, callback) {
 
     logger.info('call')
 
+    validateString(name, 'name')
+    validateString(username, 'username')
+    validatePassword(password)
+
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')

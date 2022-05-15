@@ -1,25 +1,33 @@
+const { useContext } = React
+
 function DeleteUser(props) {
     const logger = new Logger('DeleteUser')
 
     logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
 
     const handleFormSubmit = event => {
         event.preventDefault()
 
         const confirmation = event.target.element.value
 
-        deleteUser(sessionStorage.token, confirmation, (error) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
-
-            alert('User deleted')
-
-            delete sessionStorage.token
-
-            location.reload()
-        })
+        try {
+            deleteUser(sessionStorage.token, confirmation, (error) => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+                    return
+                }
+    
+                handleFeedback({ level: 'success', message: 'User deleted' })
+    
+                delete sessionStorage.token
+    
+                location.reload()
+            })
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
 
     logger.info('render')

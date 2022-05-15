@@ -1,6 +1,8 @@
 function retrieveNotes(token, callback) {
     const logger = new Logger('retrieveNotes')
 
+    validateJwt(token)
+
     logger.info('call')
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')

@@ -1,7 +1,11 @@
-function ChangePassword(prop) {
+const { useContext } = React
+
+function ChangePassword() {
     const logger = new Logger('ChangePassword')
 
     logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -10,17 +14,19 @@ function ChangePassword(prop) {
         const newPassword = event.target.newPassword.value
         const newPasswordRepeat = event.target.newPasswordRepeat.value
 
-        updateUserPassword(props.username, password, newPassword, newPasswordRepeat, error => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            alert('Password saved')
-
-            onUserPasswordChanged()
-        })
+        try {
+            updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+    
+                    return
+                }
+    
+                handleFeedback({ level: 'success', message: 'Password saved' })
+            })            
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
 
     logger.info('render')

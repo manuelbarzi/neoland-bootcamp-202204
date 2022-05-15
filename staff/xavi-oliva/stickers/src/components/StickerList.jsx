@@ -1,63 +1,65 @@
-const { Component } = React
+const { useState, useEffect, useContext } = React
 
-class StickerList extends Component {
-    constructor() {
-        super()
+function StickerList({ timestamp }) {
+    const logger = new Logger('StickerList')
 
-        this.state = { notes: null }
+    logger.info('call')
 
-        this.logger = new Logger('StickerList')
+    // const noteState = useState(null)
+    // const notes = notesState[0]
+    // const setNotes = notesState[1]
+    const [notes, setNotes] = useState(null)
+    const { handleFeedback } = useContext(Context)
 
-        this.logger.info('constructor')
+    // componentDidMount() {
+    //     logger.info('componentDidMount')
+
+    //     loadNotes()
+    // }
+
+    // componentWillReceiveProps(newProps) {
+    //     logger.info('componentWillReceiveProps')
+
+    //     if (props.timestamp !== newProps.timestamp)
+    //         loadNotes()
+    // }
+
+    useEffect(() => {
+        logger.info('componentDidMount | componentWillReceiveProps')
+
+        loadNotes()
+    }, [timestamp])
+
+    const loadNotes = () => {
+        try {
+            retrieveNotes(sessionStorage.token, (error, notes) => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+    
+                    return
+                }
+    
+                setNotes(notes)
+            })
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
-    //state = { notes: null }
 
-    componentDidMount() {
-        this.logger.info('componentDidMount')
+    const handleRemoveSticker = stickerId => {
+        const _notes = notes.filter(note => note.id !== stickerId)
 
-        this.loadNotes()
+        setNotes(_notes)
     }
 
-    loadNotes = () =>
-        retrieveNotes(sessionStorage.token, (error, notes) => {
-            if (error) {
-                alert(error.message)
+    logger.info('render')
 
-                return
-            }
-
-            this.setState({ notes })
-        })
-
-    componentWillReceiveProps(newProps) {
-        this.logger.info('componentWillReceiveProps')
-
-        if (this.props.timestamp !== newProps.timestamp)
-            this.loadNotes()
-    }
-
-    handleRemoveSticker = stickerId => {
-        const notes = this.state.notes.filter(note => note.id !== stickerId)
-
-        this.setState({ notes })
-    }
-
-    handleStickerSaved = stickerId => {
-        this.props.handleStickerSaved(stickerId)
-    }
-
-    render() {
-        this.logger.info('render')
-
-        const { state: { notes } } = this
-
-        return notes && notes.length ?
-            <ul className="StickerList__list Container">
-                {notes.map(note => <li key={note.id}>
-                    <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} />
-                </li>)}
-            </ul>
-            :
-            <p className="StickerList--white">No stickers yet</p>
-    }
+    return notes && notes.length ?
+        <ul className="StickerList__list Container">
+            {notes.map(note => <li key={note.id}>
+                <Sticker stickerId={note.id} text={note.text} onRemove={handleRemoveSticker} />
+            </li>)}
+        </ul>
+        :
+        <p className="StickerList--white Container">No stickers yet</p>
 }

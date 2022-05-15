@@ -1,6 +1,9 @@
 function updateUserName(token, newName, callback) {
     const logger = new Logger('updateUserName')
 
+    validateJwt(token)
+    validateString(newName, 'newName')
+
     logger.info('call')
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')

@@ -1,7 +1,11 @@
+const { useContext } = React
+
 function Register(props) {
     const logger = new Logger('Register')
 
     logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -10,15 +14,19 @@ function Register(props) {
         const username = event.target.username.value
         const password = event.target.password.value
 
-        registerUser(name, username, password, error => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            props.onUserRegistered()
-        })
+        try {
+            registerUser(name, username, password, error => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+    
+                    return
+                }
+    
+                props.onUserRegistered()
+            })
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
 
     const handleLoginLinkClick = event => {

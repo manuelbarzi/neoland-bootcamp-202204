@@ -58,9 +58,9 @@ body {
 
 .Home {
   width: 100%;
+  height: 100%;
   overflow: hidden;
   overflow-y: auto;
-  min-height: 100vh;
   background-color: dodgerblue;
 }
 .Home__header {
@@ -75,13 +75,17 @@ body {
 }
 .Home__body {
   overflow-y: auto;
-  flex-grow: 1;
   width: 100%;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  height: 100%;
+  margin: 56px 0;
 }
-.Home__body .Profile--form {
-  flex-basis: 100%;
+.Home__body .Profile {
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+.Home__body .Profile--form > form {
+  gap: 0.5rem;
+  margin-top: 0.5rem;
 }
 .Home__footer {
   position: fixed;
@@ -98,7 +102,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 0.5rem;
+  gap: 1.5rem;
 }
 .Container--row {
   flex-direction: row;
@@ -120,7 +124,6 @@ body {
   height: 40vw;
   min-height: 210px;
   background: #ffa;
-  margin: 30px auto;
   padding: 20px;
   box-shadow: inset 0 -40px 40px rgba(0, 0, 0, 0.2), inset 0 25px 10px rgba(0, 0, 0, 0.2), 0 5px 6px 5px rgba(0, 0, 0, 0.2);
 }
@@ -142,14 +145,13 @@ body {
   resize: none;
   font-family: "Permanent Marker", cursive;
   line-height: 1.7em;
-  font-size: 24px;
+  font-size: 16px;
   color: #130d6b;
 }
 
 .StickerList__list {
   list-style-type: none;
   padding: 0;
-  margin-bottom: 3rem;
 }
 .StickerList--white {
   color: white;
@@ -178,6 +180,7 @@ body {
 }
 .Button--small {
   font-size: 10px;
+  margin: 0;
 }
 
 .Input {
@@ -200,6 +203,29 @@ body {
 }
 .Input--light::placeholder {
   color: #EEE;
+}
+
+.Feedback {
+  background-color: silver;
+  padding: 1rem;
+  position: absolute;
+  opacity: 0.9;
+  border-radius: 8px;
+}
+
+.Feedback--success {
+  background-color: green;
+  color: white;
+}
+
+.Feedback--warn {
+  background-color: gold;
+  color: black;
+}
+
+.Feedback--error {
+  background-color: tomato;
+  color: white;
 }
 
 /*# sourceMappingURL=index.css.map */
