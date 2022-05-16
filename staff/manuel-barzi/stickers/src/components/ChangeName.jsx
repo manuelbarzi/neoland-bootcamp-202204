@@ -1,4 +1,4 @@
-const { Component } = React
+import { Component } from 'react'
 
 class ChangeName extends Component {
     render() {
@@ -10,3 +10,5 @@ class ChangeName extends Component {
         </div>
     }
 }
+
+export default ChangeName

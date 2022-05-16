@@ -1,3 +1,5 @@
+import Logger from '../vendor/Loggy'
+
 function registerUser(name, username, password, callback) {
     const logger = new Logger('registerUser')
 
@@ -32,3 +34,5 @@ function registerUser(name, username, password, callback) {
 
     xhr.send(json)
 }
+
+export default registerUser

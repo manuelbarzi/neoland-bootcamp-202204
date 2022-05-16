@@ -46,3 +46,5 @@ class Logger {
             console.log(`%cFATAL%c ${new Date().toISOString()} %c${message}`, 'color: white; background-color: tomato; font-weight: bold;', 'color: gray;', 'color: black; font-weight: bold;', 'color: black;')
     }
 }
+
+export default Logger

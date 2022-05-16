@@ -1,4 +1,6 @@
-const { Component } = React
+import { Component } from 'react'
+import ChangeName from './ChangeName'
+import ChangePassword from './ChangePassword'
 
 class Profile extends Component {
     state = { view: null }
@@ -17,3 +19,5 @@ class Profile extends Component {
         </div>
     }
 }
+
+export default Profile

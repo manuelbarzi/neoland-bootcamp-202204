@@ -1,4 +1,7 @@
-const { useContext } = React
+import { useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import authenticateUser from '../logic/authenticateUser'
 
 function Login(props) {
     const logger = new Logger('Login')
@@ -43,3 +46,5 @@ function Login(props) {
         </form>
     </div>
 }
+
+export default Login

@@ -9,3 +9,5 @@ function createCustomError(name) {
 
     return customError
 }
+
+export default createCustomError

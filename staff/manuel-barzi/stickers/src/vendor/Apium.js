@@ -85,3 +85,5 @@ class Apium {
         this.call('OPTIONS', urlOrPath, options, callback)
     }
 }
+
+export default Apium

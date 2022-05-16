@@ -1,3 +1,7 @@
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import User from '../models/User'
+
 function retrieveUser(token, callback) {
     const logger = new Logger('retrieveUser')
 
@@ -35,3 +39,5 @@ function retrieveUser(token, callback) {
         }
     })
 }
+
+export default retrieveUser

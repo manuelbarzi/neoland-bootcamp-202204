@@ -1,4 +1,7 @@
-const { useContext } = React
+import { useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import updateUserPassword from '../logic/updateUserPassword'
 
 function ChangePassword() {
     const logger = new Logger('ChangePassword')
@@ -42,3 +45,5 @@ function ChangePassword() {
         </form>
     </div>
 }
+
+export default ChangePassword

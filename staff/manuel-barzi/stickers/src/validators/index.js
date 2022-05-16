@@ -1,3 +1,5 @@
+import { FormatError } from '../errors'
+
 function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
 }
@@ -38,4 +40,13 @@ function validateUsername(username) {
 
     if (username.length < 4)
         throw new FormatError('username length is lower than 4')
+}
+
+export {
+    validateString,
+    validateStringNotEmptyOrBlank,
+    validateStringNotEmptyNoSpaces,
+    validateJwt,
+    validatePassword,
+    validateUsername
 }

@@ -5,3 +5,5 @@ function Feedback({ level, message, onTimeout }) {
         <p>{message}</p>
     </div>
 }
+
+export default Feedback

@@ -1,4 +1,8 @@
-const { useContext } = React
+import { useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import deleteNote from '../logic/deleteNote'
+import saveNote from '../logic/saveNote'
 
 function Sticker(props) {
     const logger = new Logger('Sticker')
@@ -52,3 +56,5 @@ function Sticker(props) {
         </form>
     </div>
 }
+
+export default Sticker

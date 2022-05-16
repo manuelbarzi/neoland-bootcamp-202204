@@ -1,4 +1,10 @@
-const { useState } = React
+import { useState } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import Login from './Login'
+import Register from './Register'
+import Home from './Home'
+import Feedback from './Feedback'
 
 function App() {
     const logger = new Logger('App')
@@ -34,3 +40,5 @@ function App() {
         </div>
     </Context.Provider>
 }
+
+export default App
