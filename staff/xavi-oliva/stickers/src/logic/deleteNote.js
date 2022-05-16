@@ -1,3 +1,7 @@
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import { validateJwt } from '../validators'
+
 function deleteNote(token, noteId, callback) {
     const logger = new Logger('deleteNote')
 
@@ -66,3 +70,5 @@ function deleteNote(token, noteId, callback) {
         }
     })
 }
+
+export default deleteNote

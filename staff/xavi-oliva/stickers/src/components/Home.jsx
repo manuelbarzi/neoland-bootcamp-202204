@@ -1,4 +1,11 @@
-const { useState, useEffect, useContext } = React
+import React from 'react'
+import { useState, useEffect, useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import retrieveUser from '../logic/retrieveUser'
+import saveNote from '../logic/saveNote'
+import StickerList from './StickerList'
+import Profile from './Profile'
 
 function Home(props) {
     const logger = new Logger('Home')
@@ -85,3 +92,5 @@ function Home(props) {
     </div>
 
 }
+
+export default Home

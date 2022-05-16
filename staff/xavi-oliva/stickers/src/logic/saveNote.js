@@ -1,3 +1,8 @@
+import Logger from "../vendor/Loggy"
+import Apium from '../vendor/Apium'
+import Note from '../models/Note'
+import { validateJwt } from '../validators'
+
 function saveNote(token, noteId, text, callback) {
     const logger = new Logger('saveNote')
 
@@ -82,3 +87,5 @@ function saveNote(token, noteId, text, callback) {
         }
     })
 }
+
+export default saveNote

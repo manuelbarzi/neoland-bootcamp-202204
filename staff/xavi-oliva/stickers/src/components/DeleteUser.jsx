@@ -1,4 +1,5 @@
-const { useContext } = React
+import { useContext } from 'react'
+import Logger from '../vendor/Loggy'
 
 function DeleteUser(props) {
     const logger = new Logger('DeleteUser')
@@ -39,3 +40,5 @@ function DeleteUser(props) {
         </form>
     </div>
 }
+
+export default DeleteUser

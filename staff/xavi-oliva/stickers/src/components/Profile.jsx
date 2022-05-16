@@ -1,4 +1,10 @@
-const { useState } = React
+import React from 'react'
+import { useState } from 'react'
+import Logger from '../vendor/Loggy'
+import ChangeName from './changeName'
+import ChangePassword from './changePassword'
+import DeleteUser from './DeleteUser'
+
 
 function Profile(props) {
     const logger = new Logger('Profile')
@@ -40,3 +46,5 @@ function Profile(props) {
         {view === 'deleteUser' && <DeleteUser onUserDeleted={handleUserDeleted} />}
     </div>
 }
+
+export default Profile

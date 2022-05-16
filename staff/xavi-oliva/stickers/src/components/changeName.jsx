@@ -1,4 +1,8 @@
-const { useContext } = React
+import { useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from '../components/Context'
+import updateUserName from '../logic/updateUserName'
+
 
 function ChangeName(props) {
     const logger = new Logger('ChangeName')
@@ -23,7 +27,7 @@ function ChangeName(props) {
     
             handleFeedback({ level: 'error', message: 'Name saved'})
             
-            onUserNameChanged()            
+            props.onUserNameChanged()            
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
@@ -39,3 +43,5 @@ function ChangeName(props) {
     </div>
 
 }
+
+export default ChangeName

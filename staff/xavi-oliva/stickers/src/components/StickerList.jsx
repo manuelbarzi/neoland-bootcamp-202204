@@ -1,4 +1,11 @@
-const { useState, useEffect, useContext } = React
+import React from 'react'
+import { useState, useEffect, useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import retrieveNotes from '../logic/retrieveNotes'
+import Sticker from './Sticker'
+
+
 
 function StickerList({ timestamp }) {
     const logger = new Logger('StickerList')
@@ -63,3 +70,5 @@ function StickerList({ timestamp }) {
         :
         <p className="StickerList--white Container">No stickers yet</p>
 }
+
+export default StickerList

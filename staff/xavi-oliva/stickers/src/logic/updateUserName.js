@@ -1,3 +1,7 @@
+import Logger from "../vendor/Loggy"
+import { validateJwt, validateString } from '../validators'
+import Apium from '../vendor/Apium'
+
 function updateUserName(token, newName, callback) {
     const logger = new Logger('updateUserName')
 
@@ -33,3 +37,5 @@ function updateUserName(token, newName, callback) {
             callback(null)
     })
 }
+
+export default updateUserName

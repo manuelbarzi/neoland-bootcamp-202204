@@ -1,10 +1,13 @@
+import Logger from "../vendor/Loggy"
+import { validateUsername, validatePassword } from '../validators'
+import Apium from '../vendor/Apium'
+
 function registerUser(name, username, password, callback) {
     const logger = new Logger('registerUser')
 
     logger.info('call')
 
-    validateString(name, 'name')
-    validateString(username, 'username')
+    validateUsername(username)
     validatePassword(password)
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
@@ -33,3 +36,5 @@ function registerUser(name, username, password, callback) {
             callback(null)
     })
 }
+
+export default registerUser

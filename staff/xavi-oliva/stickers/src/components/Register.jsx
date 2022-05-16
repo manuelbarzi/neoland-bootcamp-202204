@@ -1,4 +1,7 @@
-const { useContext } = React
+import { useContext } from 'react'
+import Logger from '../vendor/Loggy'
+import Context from './Context'
+import registerUser from '../logic/registerUser'
 
 function Register(props) {
     const logger = new Logger('Register')
@@ -49,3 +52,5 @@ function Register(props) {
     </div>
 
 }
+
+export default Register
