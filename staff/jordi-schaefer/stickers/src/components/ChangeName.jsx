@@ -1,31 +1,38 @@
-const { Component } = React
+import { useContext } from 'react'
+import Context from './Context'
+import updateUserName from '../logic/updateUserName'
 
-class ChangeName extends Component {
+function ChangeName (props) {
 
-    handleSaveClick = event => {
+    const { handleFeedback } = useContext(Context)
+
+    const handleSaveClick = event => {
         event.preventDefault()
 
         const newName = event.target.name.value
 
-        updateUserName(sessionStorage.username, newName, (error) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
+        try {
+            updateUserName(sessionStorage.token, newName, (error) => {
+                if (error) {
+                    handleFeedback({ type: 'error', message: error.message})
+                    return
+                }
 
-            alert('Name changed')
-            this.props.onUserNameChanged()
-        })
-
+                handleFeedback({ type: 'success', message: 'Name changed'})
+                props.onUserNameChanged()
+            })
+        } catch(error) {
+            handleFeedback({ type: 'error', message: error.message})
+        }
     }
 
 
-    render() {
-        return <div className="ChangeName">
-        <form className="Container" onSubmit={this.handleSaveClick}>
+    return <div className="ChangeName">
+        <form className="Container" onSubmit={handleSaveClick}>
             <input className="form" type="text" name="name" placeholder=" New name"/>
             <button className="Button">Save</button>
         </form>
     </div>
-    }
 }
+
+export default ChangeName

@@ -1,21 +1,33 @@
-function retrieveNotes(username, callback) {  // recuperar
-    
-    const user = db.users.find(user => user.username === username)
-    // find devuelve el valor del primero que cumple la funcion
-    // si no encuentra nada devuelve undefined
-    if (!user) {
-        callback(new Error(`user with username ${username} not found`), null)
-        return
-    }
+import { validateJwt} from '../validators'
+import Apicaller from '../vendor/Apicaller'
 
-    const note = db.notes.filter(note => note.username === username)
-    //crea un nuevo array con todos los elementos que cumplan la condicion deseada
-    // si n hay notas o uruario el array estara vacio
-/*     
-    if (note.length===0) {
-        callback(new Error(`no notes with username ${username}`))
-        return
-    }
-*/
-    callback(null, note)
+function retrieveNotes(token, callback) {  // recuperar
+    
+    validateJwt(token)
+
+    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
+
+    api.get('/v2/users', {
+        headers: { 'Authorization': `Bearer ${token}`}}, (error, {status, payload}) => {
+
+            if (error) {
+                callback(error)
+                return
+            }
+            if (status === 200) {
+                const data = JSON.parse(payload)
+                const notes = data.notes
+                callback(null, notes)
+            } 
+            else if (status >= 400 && status < 500) { 
+                const data = JSON.parse(payload)
+                callback(new Error(data.error)) 
+            } 
+            else {
+                callback(new Error('server error'))
+            }
+        }
+    )
 }
+
+export default retrieveNotes

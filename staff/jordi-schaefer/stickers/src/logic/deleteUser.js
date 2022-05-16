@@ -1,18 +1,64 @@
-function deleteUser (username, password, callback)  {
-    
-    const index = db.users.findIndex(user => user.username === username)
-    if (index < 0) {
-        callback(new Error(`user with username "${username}" does not exist`))
-        return
-    }
-    
-    const user = db.users.find(user => user.username === username)
-    if (user.password !== password) {
-        callback(new Error('wrong password'))
-        return
-    }
+import { validateJwt} from '../validators'
+import Apicaller from '../vendor/Apicaller'
 
+function deleteUser (token, password, callback)  {
+    
+    validateJwt(token)
+    //validatePassword(password, 'Password')
 
-    db.users.splice(index, 1)
-    callback(null)
+    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
+
+    api.delete('/v2/users', {
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'},
+        body: JSON.stringify({ password})}, (error, {status, payload}) => {
+
+            if (error) {
+                callback(error)
+                return
+            }
+            if (status === 204) 
+                callback(null)
+            else if (status >= 400 && status < 500) { 
+                const data = JSON.parse(payload)
+                callback(new Error(data.error)) 
+            } 
+            else {
+                callback(new Error('server error'))
+            }
+        }
+    )
 }
+
+export default deleteUser
+
+
+
+
+
+/* const xhr = new XMLHttpRequest
+
+xhr.addEventListener('load', event => {
+    const status = event.target.status
+    
+    if (status === 204) 
+        callback(null)
+    else if (status >= 400 && status < 500) { 
+        const json = event.target.responseText 
+        const data = JSON.parse(json)
+
+        callback(new Error(data.error)) 
+    } else {
+        callback(new Error('server error'))
+    }
+})
+
+
+xhr.open('DELETE', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+
+xhr.setRequestHeader('Authorization', `Bearer ${token}`)
+xhr.setRequestHeader('Content-Type', 'application/json')
+
+const data = { password: password }
+const json = JSON.stringify(data) 
+
+xhr.send(json) */

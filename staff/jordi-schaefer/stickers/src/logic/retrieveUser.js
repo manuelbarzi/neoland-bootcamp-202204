@@ -1,14 +1,33 @@
-function retrieveUser(username, callback) {
-    const user = db.users.find(user => user.username === username)
+import { validateJwt} from '../validators'
+import Apicaller from '../vendor/Apicaller'
 
-    if (!user) {
-        callback(new Error(`user with username ${username} not found`))
-        return
-    }
+function retrieveUser(token, callback) {
+    
+    validateJwt(token)
 
-    const copy = User.copyFrom(user)
+    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
-    delete copy.password
+    api.get('/v2/users', {
+        headers: { 'Authorization': `Bearer ${token}`}}, (error, {status, payload}) => {
 
-    callback(null, copy)
+            if (error) {
+                callback(error)
+                return
+            }
+            if (status === 200) {
+                const data = JSON.parse(payload)
+                const user = { name: data.name, username: data.username }
+                callback(null, user)
+            } 
+            else if (status >= 400 && status < 500) { 
+                const data = JSON.parse(payload)
+                callback(new Error(data.error)) 
+            } 
+            else {
+                callback(new Error('server error'))
+            }
+        }
+    )
 }
+
+export default retrieveUser
