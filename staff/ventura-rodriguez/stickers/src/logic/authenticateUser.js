@@ -2,11 +2,13 @@ function authenticateUser(username, password, callback) {
     const logger = new Logger('authenticateUser')
 
     logger.info('call')
+    
+    // TODO validate input args
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')
-    
+
     api.post('v2/users/auth', {
         headers: {
             'Content-Type': 'application/json'

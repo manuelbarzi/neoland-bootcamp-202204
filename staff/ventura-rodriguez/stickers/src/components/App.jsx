@@ -1,34 +1,36 @@
-const { Component } = React
+const { useState } = React
 
-class App extends Component {
-    constructor() {
-        super()
+function App() {
+    const logger = new Logger('App')
 
-        this.state = { view: sessionStorage.token? 'home' : 'login' }
+    logger.info('call')
 
-        this.logger = new Logger('App')
+    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
+    const [feedback, setFeedback] = useState({ level: 'error', message: 'hello world'})
 
-        this.logger.info('constructor')
-    }
-    //state = { view: sessionStorage.token? 'home' : 'login' }
+    const handleUserRegistered = () => handleLoginNavigation()
 
-    handleUserRegistered = () => this.handleLoginNavigation()
+    const handleUserLoggedIn = () => setView('home')
 
-    handleUserLoggedIn = () => this.setState({ view: 'home' })
+    const handleRegisterNavigation = () => setView('register')
 
-    handleRegisterNavigation = () => this.setState({ view: 'register' })
+    const handleLoginNavigation = () => setView('login')
 
-    handleLoginNavigation = () => this.setState({ view: 'login' })
+    const handleUserLoggedOut = () => handleLoginNavigation()
 
-    handleUserLoggedOut = () => this.handleLoginNavigation()
+    //const handleFeedback = message => confirm(message)
+    const handleFeedback = feedback => setFeedback(feedback)
 
-    render() {
-        this.logger.info('render')
-        
-        return <div className="App">
-            {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterLinkClicked={this.handleRegisterNavigation} />}
-            {this.state.view === 'register' && <Register onUserRegistered={this.handleUserRegistered} onLoginLinkClicked={this.handleLoginNavigation} />}
-            {this.state.view === 'home' && <Home onUserLoggedOut={this.handleUserLoggedOut} />}
+    const handleFeedbackTimeout = () => setFeedback(null)
+
+    logger.info('render')
+
+    return <Context.Provider value={{ handleFeedback }}>
+        <div className="App Container">
+            {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
+            {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
+            {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} />}
+            { feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
         </div>
-    }
+    </Context.Provider>
 }

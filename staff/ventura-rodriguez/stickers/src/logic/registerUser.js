@@ -3,6 +3,8 @@ function registerUser(name, username, password, callback) {
 
     logger.info('call')
 
+    // TODO validate input args
+
     const xhr = new XMLHttpRequest
 
     xhr.addEventListener('load', event => {
