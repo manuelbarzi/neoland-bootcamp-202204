@@ -1,3 +1,5 @@
+import './Feedback.sass'
+
 function Feedback({ level, message, onTimeout }) {
     setTimeout(onTimeout, 1000)
 

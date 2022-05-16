@@ -5,6 +5,7 @@ import retrieveUser from '../logic/retrieveUser'
 import saveNote from '../logic/saveNote'
 import StickerList from './StickerList'
 import Profile from './Profile'
+import './Home.sass'
 
 function Home(props) {
     const logger = new Logger('Home')

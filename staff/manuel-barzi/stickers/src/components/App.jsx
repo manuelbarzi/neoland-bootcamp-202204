@@ -5,6 +5,7 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Feedback from './Feedback'
+import './App.sass'
 
 function App() {
     const logger = new Logger('App')

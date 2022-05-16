@@ -3,6 +3,7 @@ import Logger from '../vendor/Loggy'
 import Context from './Context'
 import retrieveNotes from '../logic/retrieveNotes'
 import Sticker from './Sticker'
+import './StickerList.sass'
 
 function StickerList({ timestamp }) {
     const logger = new Logger('StickerList')
