@@ -6,7 +6,7 @@ function App() {
     logger.info('call')
 
     const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
-    const [feedback, setFeedback] = useState({ level: 'error', message: 'hello world'})
+    const [feedback, setFeedback] = useState(null)
 
     const handleUserRegistered = () => handleLoginNavigation()
 
