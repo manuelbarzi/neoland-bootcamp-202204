@@ -1,15 +1,34 @@
-function registerUser(name, username, password, callback) {
-    const exists = db.users.some(user => user.username === username)
+import { validateString, validatePassword } from '../validators'
+import Apium from '../vendor/Apium'
 
-    if (exists) {
-        callback(new Error('username already exists'))
+export function registerUser(name, username, password, callback) {
+    validateString(name, 'name')
+    validateString(username, 'username')
+    validatePassword(password)
 
-        return
-    }
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api/v2')
+    api.post(
+        'users',
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, username, password })
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
 
-    const user = new User(name, username, password)
+            if (status === 201) {
+                callback(null)
+            } else if (status >= 400 && status < 500) {
+                const data = JSON.parse(payload)
 
-    db.users.push(user)
+                const error = new Error(data.error)
 
-    callback(null)
+                callback(error)
+            } else {
+                callback(new Error('server error'))
+            }
+        }
+    )
 }

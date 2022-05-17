@@ -17,7 +17,7 @@ function DeleteUser(props) {
                     handleFeedback(error.message)
             })
 
-            handleFeedback('your user was deleted', 'info')
+            handleFeedback('successfully unregistered', 'info')
 
             delete sessionStorage.token
 

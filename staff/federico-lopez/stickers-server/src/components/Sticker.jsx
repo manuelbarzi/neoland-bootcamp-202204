@@ -4,6 +4,7 @@ function Sticker(props) {
     const { handleFeedback } = useContext(Context)
     const [view, setView] = useState(props.view)
     const [text, setText] = useState(props.text)
+    const [viewButtons, setViewButtons] = useState(true)
 
     const handleEditButton = event => {
         event.preventDefault()
@@ -20,6 +21,7 @@ function Sticker(props) {
                     handleFeedback(message.error)
                 }
             })
+            handleFeedback('the note was deleted', 'info')
 
             props.onRemovedSticker(props.id)
 
@@ -68,14 +70,18 @@ function Sticker(props) {
         }
     }
 
+    const handleOnMouseOver = () => setViewButtons(true)
+
+    const handleOnMouseLeave = () => setViewButtons(null)
+
     return <div className="Sticker" key={props.id} >
 
         {
             view === 'view' &&
-            <div className="Sticker__View">
+            <div className="Sticker__View" onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave} >
                 <div className="noteButtons">
-                    <a className="editButton" onClick={handleEditButton}>Edit</a>
-                    <a className="removeButton" onClick={handleRemoveButton}>Remove</a>
+                    {viewButtons && <a className="editButton" onClick={handleEditButton}>Edit</a>}
+                    {viewButtons && <a className="removeButton" onClick={handleRemoveButton}>Remove</a>}
                 </div>
                 <p className="noteText">{text}</p>
             </div>

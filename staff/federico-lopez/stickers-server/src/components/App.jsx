@@ -18,7 +18,6 @@ function App() {
 
     const handleFeedback = (message, level) => {
         setFeedback({level, message})
-        setTimeout(handleFeedbackTimeOut, 2000)
     }
 
     const handleFeedbackTimeOut = () => setFeedback(null)
@@ -28,7 +27,7 @@ function App() {
             {view === 'login' && <Login onLoggedIn={handleLoggedIn} onRegisterNavigation={handleNavToRegister} />}
             {view === 'register' && <Register onRegistered={handleOnUserRegistered} onLoginNavigation={handleNavToLogin} />}
             {view === 'home' && <Home onLoggedOut={handleOnLoggedOut} onDeletedUser={handleOnDeletedUser} />}
-            {feedback !== null && <Feedback level={feedback.level} message={feedback.message} />}
+            {feedback !== null && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeOut} />}
         </div>
     </Context.Provider>
 }

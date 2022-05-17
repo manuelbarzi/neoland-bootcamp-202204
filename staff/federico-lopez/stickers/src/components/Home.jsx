@@ -1,134 +1,79 @@
-const { Component, createRef } = React
+import { useState, useEffect, useContext } from 'react'
+import { retrieveUser } from '../logic/'
+import Profile from './Profile'
+import List from './List'
+import Context from './Context'
+import './Home.sass'
 
-class Home extends Component {
-    state = { view: 'stickers', newStickers: false, name: null }
-    ref = createRef()
-    onLogoutButtonClick = () => {
-        delete sessionStorage.username
+function Home(props) {
+    const { handleFeedback } = useContext(Context)
 
-        this.props.onLoggedOut()
+    const [view, setView] = useState('stickers')
+    const [newStickers, setNewStickers] = useState(null)
+    const [name, setName] = useState(null)
+
+    const onLogoutButtonClick = () => {
+        delete sessionStorage.token
+
+        props.onLoggedOut()
     }
 
-    handleNewNoteCreated = () => {
-        this.setState({ newStickers: false })
+    const handleNewNoteCreated = () => {
+        setNewStickers(false)
     }
 
-    handleOnProfileButton = () => {
-        this.setState({ view: 'profile' })
+    const handleOnProfileButton = () => {
+        setView('profile')
     }
 
-    handleOnStickersButton = event => {
+    const handleOnStickersButton = event => {
         event.preventDefault()
 
-        this.setState({ view: 'stickers' })
+        setView('stickers')
     }
 
-    handleAddNoteClick = event => {
+    const handleAddNoteClick = event => {
         event.preventDefault()
 
-        this.ref.current.foo()
-        // Entender bien esta mierda
-        // en vez de hacer set
-        // Ver si se puede limitara a lo que se puede acceder con ref, en hooks se hace con forward ref y uesimperativehandler
-        // this.state.newStickers === true ? this.setState({ newStickers: false }) : this.setState({ newStickers: true })        
+        newStickers === true || newStickers === null ? setNewStickers(false) : setNewStickers(true)
     }
 
-    componentDidMount() {
-        retrieveUser(sessionStorage.username, (error, user) => {
-            if (error) {
-                alert(error.message)
+    useEffect(() => {
+        try {
+            retrieveUser(sessionStorage.token, (error, user) => {
+                if (error) {
+                    handleFeedback(error.message)
 
-                return
-            }
-            this.setState({ name: user.name })
-        })
+                    return
+                }
+                setName(user.name)
+            })
+        } catch (error) {
+            handleFeedback(error.message)
+        }
+    }, [])
+
+
+    const handleOnChangedName = (newName) => {
+        setName(newName)
     }
 
-    render() {
-        return <div className="Home">
-            <header className="header">
-                <a className="viewStickersButton" onClick={this.handleOnStickersButton} >Stickers</a>
-                <a className="profileButton" onClick={this.handleOnProfileButton} >{this.state.name}</a>
-                <a className="logout" onClick={this.onLogoutButtonClick}>Log Out</a>
-            </header>
+    return <div className="Home">
+        <header className="header">
+            <a className="viewStickersButton" onClick={handleOnStickersButton} >Stickers</a>
+            <a className="profileButton" onClick={handleOnProfileButton} >{name}</a>
+            <a className="logout" onClick={onLogoutButtonClick}>Log Out</a>
+        </header>
 
-            <main>
-                {this.state.view === 'profile' && <Profile username={sessionStorage.username} />}
-                {this.state.view === 'stickers' && <List ref={this.ref} username={sessionStorage.username} newStickers={this.state.newStickers} onNewNoteCreated={this.handleNewNoteCreated} />}
-            </main>
-            
-            <footer className="footer">
-                <a className="addNote" onClick={this.handleAddNoteClick} >+</a>
-            </footer>
-        </div>
-    }
+        <main>
+            {view === 'profile' && <Profile onChangedName={handleOnChangedName} onDeletedUser={props.onDeletedUser} name={name} />}
+            {view === 'stickers' && <List newStickers={newStickers} onNewNoteCreated={handleNewNoteCreated} />}
+        </main>
+
+        <footer className="footer">
+            <a className="addNote" onClick={handleAddNoteClick} >+</a>
+        </footer>
+    </div>
 }
 
-//     if(sessionStorage.username)
-//     retrieveUser(sessionStorage.username, (error, user) => {
-//         if (error) {
-//             alert(error.message)
-
-//             return
-//         }
-
-//         this.setName(user.name)
-//     })
-
-// const list = new List(sessionStorage.username, this)
-// this.add(list)
-
-// const add = this.container.querySelector('.addNote')
-
-// let profile
-
-// const profileButton = this.container.querySelector('.profileButton')
-
-// profileButton.addEventListener('click', () => {
-//     if (!profile || !this.has(profile)) {
-//         profile = new Profile
-
-//         this.add(profile)
-//         if (this.has(list)) {
-//             this.remove(list)
-//             this.container.querySelector('.footer').removeChild(add)
-//         }
-//     }
-// })
-
-// const listButton = this.container.querySelector('.viewStickersButton')
-
-// listButton.addEventListener('click', () => {
-//     if (!this.has(list)) {
-//         if (this.has(profile))
-//             this.remove(profile)
-
-//         this.add(list)
-//         this.container.querySelector('footer').appendChild(add)
-//     }
-// })
-//     }
-
-// setName(name) {
-//     const profileButton = this.container.querySelector('.profileButton')
-
-//     profileButton.innerText = name
-// }
-
-// onClickLogout(callback) {
-//     const logoutButton = this.container.querySelector('.logout')
-
-//     logoutButton.addEventListener('click', () => {
-//         delete sessionStorage.username
-//         callback()
-//     })
-// }
-
-// onClickAdd(callback) {
-//     const add = this.container.querySelector('.addNote')
-
-//     add.addEventListener('click', () => {
-//         callback()
-//     })
-// }
-// }
+export default Home

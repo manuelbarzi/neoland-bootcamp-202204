@@ -1,13 +1,33 @@
-function authenticateUser(username, password, callback) {
-    const matches = db.users.some(function (user) {
-        return user.username === username && user.password === password
-    })
+import { validateString, validatePassword } from '../validators'
+import Apium from '../vendor/Apium'
 
-    if (!matches) {
-        callback(new Error('wrong credentials'))
+export function authenticateUser(username, password, callback) {
+    validateString(username, 'username')
+    validatePassword(password, 'password')
+    
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
 
-        return
-    }
+    api.post(
+        'users/auth',
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
 
-    callback(null)
+            const data = JSON.parse(payload)
+
+            if (status >= 400 && status < 500) 
+                callback(new Error(data.error))
+
+            else if (status >= 500)
+                callback(new Error('server error'))
+
+            else if (status === 200)
+                callback(null, data.token)
+        }
+    )
 }

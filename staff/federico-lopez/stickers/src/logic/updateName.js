@@ -1,20 +1,37 @@
-function updateName(username, newName, callback) {
-    const user = db.users.find(user => user.username === username)
+import { validateJWT, validateString } from '../validators'
+import Apium from '../vendor/Apium'
+
+export function updateName(token, oldName, newName, callback) {
+    validateJWT(token)
+    validateString(oldName, 'old name')
+    validateString(newName, 'new name')
+
+    if(oldName === newName) throw new Error('old name and new name are the same')
     
-    if(!user) {
-        const error = new Error('user does not exist')
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
+   
+    api.patch(
+        'users',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name: newName })
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
 
-        callback(error)
-        return
-    }
+            if (status >= 400 && status < 500) {
+                const data = JSON.parse(payload)
 
-    if(user.name === newName) {
-        const error = new Error('new name and previous name are equals')
-        
-        callback(error)
-        return
-    }
-    user.name = newName
+                callback(new Error(data.error))
+                
+            } else if (status >= 500) {
+                callback(new Error('server error'))
 
-    callback(null)
+            } else if (status >= 200 && status < 300)
+                callback(null)
+        }
+    )
 }

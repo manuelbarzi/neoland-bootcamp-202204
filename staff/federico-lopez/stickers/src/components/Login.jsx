@@ -1,8 +1,12 @@
-const { Component } = React
+import { useContext } from 'react'
+import { authenticateUser } from '../logic/'
+import Context from './Context'
+import './LoginAndRegister.sass'
 
-class Login extends Component {
+function Login(props) {
+    const { handleFeedback } = useContext(Context)
 
-    onFormSubmit = event => {
+    const onFormSubmit = event => {
         event.preventDefault()
 
         const username = event.target.username.value
@@ -10,32 +14,38 @@ class Login extends Component {
 
         event.target.reset()
 
-        authenticateUser(username, password, (error) => {
-            if (error) {
-                alert(error.message)
+        try {
+            authenticateUser(username, password, (error, token) => {
+                if (error) {
+                    handleFeedback(error.message)
 
-                return
-            }
-            sessionStorage.username = username
+                    return
+                }
+                sessionStorage.token = token
 
-            this.props.onLoggedIn()
-        })
+                handleFeedback('successfully logged in', 'succeed')
+
+                props.onLoggedIn()
+            })
+        } catch (error) {
+            handleFeedback(error.message)
+        }
     }
 
-    onRegisterClick = event => {
+    const onRegisterClick = event => {
         event.preventDefault()
 
-        this.props.onRegisterNavigation()
+        props.onRegisterNavigation()
     }
 
-    render() {
-        return <div className="LoginAndRegister">
-            <form className="form" onSubmit={this.onFormSubmit}>
-                <input className="input" type="text" name="username" placeholder="username" />
-                <input className="input" type="password" name="password" placeholder="password" />
-                <button className="button">Log in</button>
-                <a href="#" className="button button__light" onClick={this.onRegisterClick}>Register</a>
-            </form>
-        </div>
-    }
+    return <div className="LoginAndRegister">
+        <form className="form" onSubmit={onFormSubmit}>
+            <input className="input" type="text" name="username" placeholder="username" />
+            <input className="input" type="password" name="password" placeholder="password" />
+            <button className="button">Log in</button>
+            <a href="#" className="button button__light" onClick={onRegisterClick}>Register</a>
+        </form>
+    </div>
 }
+
+export default Login

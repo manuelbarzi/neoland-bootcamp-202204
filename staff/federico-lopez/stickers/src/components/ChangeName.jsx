@@ -1,27 +1,39 @@
-const { Component } = React
+import { useContext } from 'react'
+import { updateName } from '../logic/'
+import Context from './Context'
+import './ChangeName.sass'
 
-class ChangeName extends Component {
+function ChangeName(props) {
+    const { handleFeedback } = useContext(Context)
 
-    handleFormSubmit = event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
-    
+
         const newName = event.target.newName.value
-            
-        updateName(this.props.username, newName, (error) => {
-            if (error) 
-                alert(error.message)
-            })        
-        
-        this.props.onChangedName()
+    
+        try {
+            updateName(sessionStorage.token, props.name, newName, (error) => {
+                if (error)
+                    handleFeedback(error.message)
+
+                handleFeedback('your name was successfully changed', 'succeed')
+
+                props.onChangedName()
+
+                props.onChangedNameHome(newName)
+            })
+        } catch (error) {
+            handleFeedback(error.message)
+        }
     }
 
-    render() {
-        return <div className="ChangeName">
-        <form className="Profile__form" onSubmit={this.handleFormSubmit}>
+    return <div className="ChangeName">
+        <form className="Profile__form" onSubmit={handleFormSubmit}>
             <h2>Change Name</h2>
             <input type="text" name="newName" id="newName" placeholder="newName" />
             <button type="submit" className="SubmitButton button button__light">Save</button>
         </form>
     </div>
-    }
 }
+
+export default ChangeName

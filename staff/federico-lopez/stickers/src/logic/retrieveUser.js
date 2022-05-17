@@ -1,15 +1,28 @@
-function retrieveUser(username, callback) {
-    const user = db.users.find(user => user.username === username)
+import { validateJWT } from '../validators'
+import Apium from '../vendor/Apium'
+import User from '../data/User'
 
-    if (!user) {
-        callback(new Error(`user with username ${username} not found`))
+export function retrieveUser(token, callback) {
+    validateJWT(token)
 
-        return
-    }
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
 
-    const copy = User.copyFrom(user)
-
-    delete copy.password
-
-    callback(null, copy)
+    api.get(
+        'users',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        },
+        (error, { status, payload }) => {
+            const data = JSON.parse(payload)
+            
+            if (status >= 400 && status < 500) 
+                callback(new Error(data.error))
+            else if (status >= 500)
+                callback(new Error('server error'))
+            else if (status === 200)
+                callback(null, new User(data.name, data.username))
+        }
+    )
 }

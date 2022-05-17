@@ -1,77 +1,108 @@
-const { Component } = React
+import { useState, useContext } from 'react'
+import { deleteNote } from '../logic/'
+import { saveNote } from '../logic/'
+import { noteIsSaved } from '../logic/'
+import Context from './Context'
+import './Sticker.sass'
 
-class Sticker extends Component {
-    state = { view: this.props.view, text: this.props.text }
+function Sticker(props) {
+    const { handleFeedback } = useContext(Context)
+    const [view, setView] = useState(props.view)
+    const [text, setText] = useState(props.text)
+    const [viewButtons, setViewButtons] = useState(true)
 
-    handleEditButton = event => {
+    const handleEditButton = event => {
         event.preventDefault()
 
-        this.setState({ view: 'edit' })
+        setView('edit')
     }
 
-    handleRemoveButton = event => {
+    const handleRemoveButton = event => {
         event.preventDefault()
 
-        deleteNote(this.props.username, this.props.id, error => {
-            if (error) {
-                alert(message.error)
-            }
-        })
+        try {
+            deleteNote(sessionStorage.token, props.id, error => {
+                if (error) {
+                    handleFeedback(error.message)
+                }
+            })
+            handleFeedback('the note was deleted', 'info')
 
-        this.props.onRemovedSticker()
+            props.onRemovedSticker(props.id)
+
+        } catch (error) {
+            handleFeedback(error.message)
+        }
     }
 
-    handleOnSubmitForm = event => {
+    const handleOnSubmitForm = event => {
         event.preventDefault()
 
-        saveNote(this.props.username, this.props.id, event.target[0].value, error => {
-            if (error)
-                alert(error.message)
-        })
+        try {
+            saveNote(sessionStorage.token, props.id, event.target.text.value, error => {
+                if (error)
+                    handleFeedback(error.message)
+            })
 
-        this.setState({ text: event.target[0].value })
+            handleFeedback('the note was saved', 'succeed')
 
-        this.setState({ view: 'view' })
+            setText(event.target.text.value)
 
-        this.props.onSavedNote(this.props.id)
+            setView('view')
+
+            props.onSavedNote(props.id, event.target.text.value)
+
+        } catch (error) {
+            handleFeedback(error.message)
+        }
     }
 
-    handleCloseClick = event => {
+    const handleCloseClick = event => {
         event.preventDefault()
 
-        const stickerIsSaved = db.notes.find(note => note.id === this.props.id)
-
-        if (stickerIsSaved)
-            this.setState({ view: 'view' })
-        else
-            this.props.onClosedSticker(this.props.id)
+        try {
+            noteIsSaved(sessionStorage.token, props.id, (error, isSaved) => {
+                if (error)
+                    handleFeedback(error.message)
+                else
+                    if (isSaved)
+                        setView('view')
+                    else
+                        props.onClosedSticker(props.id)
+            })
+        } catch (error) {
+            handleFeedback(error.message)
+        }
     }
 
-    render() {
-        return <div className="Sticker" key={this.props.id} >
+    const handleOnMouseOver = () => setViewButtons(true)
 
-            {
-                this.state.view === 'view' &&
-                <div className="Sticker__View">
-                    <div className="noteButtons">
-                        <a className="editButton" onClick={this.handleEditButton}>Edit</a>
-                        <a className="removeButton" onClick={this.handleRemoveButton}>Remove</a>
-                    </div>
-                    <p className="noteText">{this.state.text}</p>
+    const handleOnMouseLeave = () => setViewButtons(null)
+
+    return <div className="Sticker" key={props.id} >
+
+        {
+            view === 'view' &&
+            <div className="Sticker__View" onMouseOver={handleOnMouseOver} onMouseLeave={handleOnMouseLeave} >
+                <div className="noteButtons">
+                    {viewButtons && <a className="editButton" onClick={handleEditButton}>Edit</a>}
+                    {viewButtons && <a className="removeButton" onClick={handleRemoveButton}>Remove</a>}
                 </div>
-            }
+                <p className="noteText">{text}</p>
+            </div>
+        }
 
-            {
-                this.state.view === 'edit' &&
-                <div className="Sticker__Edit">
-                    <a className="xButton" onClick={this.handleCloseClick}>x</a>
-                    <form className="Sticker__form" onSubmit={this.handleOnSubmitForm} >
-                        <textarea className="textarea" name="text" defaultValue={this.state.text} ></textarea>
-                        <button className="saveButton">Save</button>
-                    </form>
-                </div>
-            }
-
-        </div>
-    }
+        {
+            view === 'edit' &&
+            <div className="Sticker__Edit">
+                <a className="xButton" onClick={handleCloseClick}>x</a>
+                <form className="Sticker__form" onSubmit={handleOnSubmitForm} >
+                    <textarea className="textarea" name="text" defaultValue={text} ></textarea>
+                    <button className="saveButton">Save</button>
+                </form>
+            </div>
+        }
+    </div>
 }
+
+export default Sticker

@@ -1,31 +1,39 @@
-function updatePassword(username, password, newPassword, newPasswordRepeat, callback) {
-    const user = db.users.find(user => user.username === username)
+import { validateJWT, validatePassword } from '../validators'
+import Apium from '../vendor/Apium'
 
-    if (!user) {
-        callback(new Error(`user with username "${username}" does not exist`))
+export function updatePassword(token, oldPassword, password, repeatPassword, callback) {
+    validateJWT(token)
+    validatePassword(oldPassword, 'previous password')
+    validatePassword(password, 'new password')
+    validatePassword(repeatPassword, 'new password repeat')
 
-        return
-    }
+    if (password !== repeatPassword) throw new Error('new password and new password repeat do not match')
+    if (oldPassword === password) throw new Error('previous and new password are the same')
 
-    if (user.password !== password) {
-        callback(new Error('wrong password'))
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
 
-        return
-    }
+    api.patch(
+        'users',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ oldPassword, password })
+        },
+        (error, { status, payload }) => {
+            if (error) return callback(error)
+            
+            if (status >= 400 && status < 500) {
+                const data = JSON.parse(payload)
 
-    if (password === newPassword) {
-        callback(new Error('current password and new password are the same'))
-
-        return
-    }
-
-    if (newPassword !== newPasswordRepeat) {
-        callback(new Error('new password and new password repeat are not the same'))
-
-        return
-    }
-
-    user.password = newPassword
-
-    callback(null)
+                callback(new Error(data.error))
+                
+            } else if (status > 500) 
+                callback(new Error('server error'))
+            
+            if (status >= 200 && status < 300)
+                callback(null)
+        }
+    )
 }

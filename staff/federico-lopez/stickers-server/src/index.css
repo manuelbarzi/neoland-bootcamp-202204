@@ -314,7 +314,7 @@ input {
   justify-content: center;
 }
 
-p {
+.Feedback__p {
   text-align: center;
   margin: 0;
 }
