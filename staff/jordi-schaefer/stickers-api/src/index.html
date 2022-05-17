@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stickers</title>
+
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- creo una raiz para poder referenciar mis elentos con el documento html -->
+    <div id="root"></div>
+
+    <!-- añado la libreria de react -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    
+    <!-- añado la libreria de babel, transforma el jsx en js-react -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,500,0,0" />
+
+
+
+    <!-- utils -->
+    <script src="utils/createCustomError.js"></script>
+    <script src="utils/createId.js"></script>
+
+
+    <script src="validators/index.js"></script>
+    <script src="errors/index.js"></script>
+
+    <!-- vendor -->
+    <script src="vendor/Logger.js"></script>
+    <script src="vendor/Apicaller.js"></script>
+
+    <!-- data -->
+    <script src="data/models/Note.js"></script>
+
+
+    <!-- logic -->
+    <script src="logic/registerUser.js"></script>
+    <script src="logic/authenticateUser.js"></script>
+    <script src="logic/retrieveUser.js"></script>
+    <script src="logic/retrieveNotes.js"></script>
+    <script src="logic/saveNote.js"></script>
+    <script src="logic/deleteNote.js"></script>
+    <script src="logic/updateUserPassword.js"></script>
+    <script src="logic/updateUserName.js"></script>
+    <script src="logic/deleteUser.js"></script>
+
+    <!-- pages / components -->
+    <script src="components/Clip.jsx" type="text/babel"></script>
+    <script src="components/Feedback.jsx" type="text/babel"></script>
+    <script src="components/Context.jsx" type="text/babel"></script>
+    <script src="components/Register.jsx" type="text/babel"></script>
+    <script src="components/Login.jsx" type="text/babel"></script>
+    <script src="components/Sticker.jsx" type="text/babel"></script>
+    <script src="components/StickerList.jsx" type="text/babel"></script>
+    <script src="components/ChangeName.jsx" type="text/babel"></script>
+    <script src="components/ChangePassword.jsx" type="text/babel"></script>
+    <script src="components/DeleteUser.jsx" type="text/babel"></script>   
+    <script src="components/Profile.jsx" type="text/babel"></script>
+    <script src="components/Home.jsx" type="text/babel"></script> 
+    <script src="components/App.jsx" type="text/babel"></script>
+
+    <!-- index -->
+    <script src="index.jsx" type="text/babel"></script>
+    
+</body>
+
+</html>

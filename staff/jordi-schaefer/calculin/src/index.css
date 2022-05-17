@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+* {
+  font-family: Poppins;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  background-color: #e5e5e5;
+  height: 100%;
+  border: 3px solid #585858;
+  border-radius: 1rem;
+}
+
+.App__title {
+  color: #794cea;
+  font-size: 2rem;
+  margin-top: 5rem;
+  margin-bottom: 2rem;
+}
+
+.App__input {
+  border: 3px solid #794cea;
+  background-color: #e5e5e5;
+  border-radius: 0.5rem;
+  font-size: 1.7rem;
+  width: 30%;
+  text-align: center;
+}
+
+.igual {
+  font-size: 30px;
+}
+
+.btn1 {
+  background-color: #794cea;
+  color: #9f9f9f;
+  border-style: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  margin: 0.5rem;
+  height: 3rem;
+  width: 3rem;
+  text-align: center;
+  text-decoration: none;
+}
+
+.button__Clear {
+  background-color: #4ceab8;
+  color: #000000;
+  height: 2.5rem;
+  width: 5rem;
+  border-style: none;
+  border-radius: 0.5rem;
+  font-size: 1.2rem;
+  margin: 0.5rem;
+}
+
+.Result {
+  font-size: 2rem;
+  background-color: #69a87e;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: white;
+  border-radius: 1rem;
+  margin-top: 1.2rem;
+}
+
+/*# sourceMappingURL=index.css.map */
