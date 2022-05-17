@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import Logger from '../vendor/Loggy'
 import Context from './Context'

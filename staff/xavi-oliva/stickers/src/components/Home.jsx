@@ -1,4 +1,3 @@
-import React from 'react'
 import { useState, useEffect, useContext } from 'react'
 import Logger from '../vendor/Loggy'
 import Context from './Context'
@@ -14,7 +13,7 @@ function Home(props) {
 
     const [name, setName] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
-    const [view, setView] = useState(null)
+    const [view, setView] = useState('stickerList')
     const { handleFeedback } = useContext(Context)
 
     const handleLogoutClick = () => {
