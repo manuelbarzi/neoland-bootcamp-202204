@@ -1,8 +1,9 @@
+function Register(props){
+    const logger = new Logger('Register')
 
-const { Component } = React
+    logger.info('call')
 
-class Register extends Component {
-    handleFormSubmit = event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const name = event.target.name.value
@@ -16,25 +17,25 @@ class Register extends Component {
                 return
             }
 
-            this.props.onUserRegistered()
+            props.onUserRegistered()
         })
     }
 
-    handleLoginLinkClick = event => {
+    const handleLoginLinkClick = event => {
         event.preventDefault()
 
-        this.props.onLoginLinkClicked()
+        props.onLoginLinkClicked()
     }
 
-    render() {
-        return <div>
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                <input className="Input Input--light" type="text" name="name" placeholder="name" />
-                <input className="Input Input--light" type="text" name="username" placeholder="username" />
-                <input className="Input Input--light" type="password" name="password" placeholder="password" />
-                <button className="Button Button--light">Register</button>
-                <a href="#" onClick={this.handleLoginLinkClick}>Login</a>
-            </form>
-        </div>
-    }
+    logger.info('render')
+
+    return <div>
+        <form className="Container" onSubmit={handleFormSubmit}>
+            <input className="Input Input--light" type="text" name="name" placeholder="name" />
+            <input className="Input Input--light" type="text" name="username" placeholder="username" />
+            <input className="Input Input--light" type="password" name="password" placeholder="password" />
+            <button className="Button Button--light">Register</button>
+            <a href="#" onClick={handleLoginLinkClick}>Login</a>
+        </form>
+    </div>
 }

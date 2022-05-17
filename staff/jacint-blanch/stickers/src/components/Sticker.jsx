@@ -1,8 +1,10 @@
-const { Component } = React
+function Sticker(props){
+    const logger = new Logger('Sticker')
 
-class Sticker extends Component {
-    handleRemoveClick = () => {
-        const { props: { stickerId, onRemove } } = this
+    logger.info('call')
+
+    const handleRemoveClick = () => {
+        const { stickerId, onRemove }  = props
 
         if (stickerId)
             deleteNote(sessionStorage.token, stickerId, error => {
@@ -16,11 +18,11 @@ class Sticker extends Component {
             })
     }
 
-    handleSaveSubmit = event => {
+    const handleSaveSubmit = event => {
         event.preventDefault()
 
         const { target: { text: { value: text } } } = event
-        const { props: { stickerId }} = this
+        const { stickerId } = props
 
         saveNote(sessionStorage.token, stickerId, text, error => {
             if (error) {
@@ -28,21 +30,21 @@ class Sticker extends Component {
 
                 return
             }
-
+            
             alert('Sticker saved!')
         })
     }
 
-    render() {
-        return <div className="Sticker">
-            <button className="Button" onClick={this.handleRemoveClick}>x</button>
+    logger.info('render')
 
-            <form className="Sticker__form" onSubmit={this.handleSaveSubmit}>
-                <textarea className="Sticker__text" name="text" defaultValue={this.props.text}></textarea>
-                <p className="Sticker__id">{this.props.stickerId}</p>
+        return <div className="Sticker">
+            <button className="Button" onClick={handleRemoveClick}>x</button>
+
+            <form className="Sticker__form" onSubmit={handleSaveSubmit}>
+                <textarea className="Sticker__text" name="text" defaultValue={props.text}></textarea>
+                <p className="Sticker__id">{props.stickerId}</p>
 
                 <button className="Button">Save</button>
             </form>
         </div>
-    }
 }

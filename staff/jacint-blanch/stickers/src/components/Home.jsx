@@ -5,26 +5,33 @@ class Home extends Component {
         super()
         
         this.state = { name: null, timestamp: null, view: 'list' }
+
+        this.logger = new Logger('Home')
+
+        this.logger.info('constructor')
         
     }
     //state = { name: null, timestamp: null, view: 'list' }
 
     handleLogoutClick = () => {
-        delete sessionStorage.token
+       delete sessionStorage.token
 
-        this.props.onUserLoggedOut()
+       this.props.onUserLoggedOut()
     }
 
     componentDidMount() {
+        this.logger.info('componentDidMount')
         
         retrieveUser(sessionStorage.token, (error, user) => {
             if (error) {
                 alert(error.message)
 
+                this.handleLogout()
+
                 return
             }
 
-            this.setState({ name: user.name })
+            this.setState({ name: user.name, view: 'list' })
         })
     }
 
@@ -46,6 +53,7 @@ class Home extends Component {
     handleHomeClick = () => this.setState({ view: 'list' })
 
     render() {
+        this.logger.info('render')
 
         return <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
@@ -58,7 +66,7 @@ class Home extends Component {
 
             <main className="Home__body Container">
                 {this.state.view === 'list' && <StickerList timestamp={this.state.timestamp} />}
-                {this.state.view === 'profile' && <Profile username={sessionStorage.username} />}
+                {this.state.view === 'profile' && <Profile/>}
             </main>
 
             <footer className="Home__footer Container">
