@@ -1,22 +1,21 @@
-const { Component } = React
+const { useState } = React
 
-class Profile extends Component {
-    state = {view: null}
+function Profile(props) {
+    // state = {view: null}
+    const [view, setView] = useState(null)
 
-    handleChangeNameClick = () => this.setState({ view: 'change-name' })
+    const handleChangeNameClick = () => setView('change-name')
 
-    handleChangePasswordClick = () => this.setState({ view: 'change-password' })
+    const handleChangePasswordClick = () => setView('change-password')
 
-    render() {
-        return <div className="Profile">
-            <button className="Profile__changeName" onClick={this.handleChangeNameClick}>Change Name</button>
-            <button className="Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
+    return <div className="Profile">
+        <button className="Profile__changeName" onClick={handleChangeNameClick}>Change Name</button>
+        <button className="Profile__changePassword" onClick={handleChangePasswordClick}>Change Password</button>
 
-            {this.state.view === 'change-name' && <ChangeName handleRetriveUser={this.props.handleRetriveUser}/>}
-            {this.state.view === 'change-password' && <ChangePassword />}
+        {view === 'change-name' && <ChangeName handleRetriveUser={props.handleRetriveUser}/>}
+        {view === 'change-password' && <ChangePassword />}
 
-        </div>
-    }
+    </div>
 }
 
 

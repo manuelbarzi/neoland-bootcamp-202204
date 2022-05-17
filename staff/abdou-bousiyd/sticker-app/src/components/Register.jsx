@@ -1,10 +1,11 @@
-const { Component } = React
+const { useState } = React
 
-class Register extends Component {
+function Register(props) {
 
-    state = {error: null, alert: null}
+    const [alert, setAlert] = useState(null)
 
-    handleFormSubmit = e => {
+
+    const handleFormSubmit = e => {
         e.preventDefault()
 
         const name = e.target.name.value
@@ -13,37 +14,34 @@ class Register extends Component {
         
         registerUser(name, username, password, error => {
             if (error) {
-                this.setState({ alert : <Alert error message={error.message} />})
+                setAlert(<Alert error message={error.message} />)
                 setTimeout( () => {
-                    this.setState({alert: null})
+                    setAlert(null)
                 }, 4000 )
                 return
             }
 
-            this.props.onUserLoggedOut()
+            props.onUserLoggedOut()
         })
     }
 
-    handleLoginLinkClick = e => {
+    const handleLoginLinkClick = e => {
         e.preventDefault()
 
-        this.props.onUserLoggedOut()
+        props.onUserLoggedOut()
 
     }
 
-    render() {
-        const {state: {alert}} = this
-        return<div>
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                {alert && alert}
-                <input className="Input Input--light" type="text" name="name" placeholder="name" />
-                <input className="Input Input--light" type="text" name="username" placeholder="username" />
-                <input className="Input Input--light" type="password" name="password" placeholder="password" />
-                <button className="Button Button--light">Register</button>
-                <a href="#" onClick={this.handleLoginLinkClick}>Login</a>
-            </form>
-        </div>
-    }
+    return <div>
+        <form className="Container" onSubmit={handleFormSubmit}>
+            {alert && alert}
+            <input className="Input Input--light" type="text" name="name" placeholder="name" />
+            <input className="Input Input--light" type="text" name="username" placeholder="username" />
+            <input className="Input Input--light" type="password" name="password" placeholder="password" />
+            <button className="Button Button--light">Register</button>
+            <a href="#" onClick={handleLoginLinkClick}>Login</a>
+        </form>
+    </div>
 
     // onUserRegistered(callback) {
     //     const form = this.container.querySelector('form')

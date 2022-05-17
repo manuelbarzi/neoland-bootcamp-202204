@@ -1,10 +1,10 @@
-const { Component } = React
+const { useState } = React
 
-class Login extends Component {
+function Login(props) {
+    // state = {error: null, alert: null}
+    const [alert, setAlert] = useState(null)
 
-    state = {error: null, alert: null}
-
-    handleFormSubmit = e => {
+    const handleFormSubmit = e => {
         e.preventDefault()
 
         const username = e.target.username.value
@@ -12,38 +12,33 @@ class Login extends Component {
 
         authenticateUser(username, password, (error, token ) => {
             if (error) {
-                this.setState({ alert : <Alert error message={error.message} />})
+                setAlert(<Alert error message={error.message} />)
                 setTimeout( () => {
-                    this.setState({alert: null})
+                    setAlert(null)
                 }, 4000 )
                 return
             }
-            // sessionStorage.username = username
             sessionStorage.token = token
 
 
-            this.props.onUserLoggedIn()
+            props.onUserLoggedIn()
         })
 
     }
 
-    handleRegisterLinkClick = e => {
+    const handleRegisterLinkClick = e => {
         e.preventDefault()
-        this.props.onRegisterNavigation()
+        props.onRegisterNavigation()
     }
 
-    render() {
 
-        const {state: {alert}} = this
-
-        return <div>
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                {alert && alert}
-                <input className="Input Input--light" type="text" name="username" placeholder="username" />
-                <input className="Input Input--light" type="password" name="password" placeholder="password" />
-                <button className="Button Button--light">Login</button >
-                <a href="#" onClick={this.handleRegisterLinkClick}>Register</a>
-            </form>
-        </div>
-    }
+    return <div>
+        <form className="Container" onSubmit={handleFormSubmit}>
+            {alert && alert}
+            <input className="Input Input--light" type="text" name="username" placeholder="username" />
+            <input className="Input Input--light" type="password" name="password" placeholder="password" />
+            <button className="Button Button--light">Login</button >
+            <a href="#" onClick={handleRegisterLinkClick}>Register</a>
+        </form>
+    </div>
 }

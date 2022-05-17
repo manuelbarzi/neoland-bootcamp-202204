@@ -1,26 +1,21 @@
-const { Component } = React 
+// const { Component } = React 
+const { useState } = React
 
-class App extends Component {
+function App() {
 
-    // state = {view: sessionStorage.username ? 'profile' : 'login'}
-    state = {view: sessionStorage.token ? 'home' : 'login'}
+    // state = {view: sessionStorage.token ? 'home' : 'login'}
+    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
 
-    handleUserLoggedIn = () => this.setState({view: 'home'})
-    handleUserLoggedOut = () => this.setState({view: 'login'})
-    handleRegisterNavigation = () => this.setState({view: 'register'})
-    handleProfileNavigation = () => this.setState({view: 'profile'})
+    const handleUserLoggedIn = () => setView('home')
+    const handleUserLoggedOut = () => setView('login')
+    const handleRegisterNavigation = () => setView('register')
+    const handleProfileNavigation = () => setView('profile')
     // handleChangeName = () => this.setState({view: 'changeName'})
 
 
-    render() {
-        return <div className="App">
-            {this.state.view === 'login' && <Login onUserLoggedIn={this.handleUserLoggedIn} onRegisterNavigation={this.handleRegisterNavigation} />}
-            {this.state.view === 'home' && <Home onUserLoggedOut={this.handleUserLoggedOut} onProfileNavigation={this.handleProfileNavigation}/>}
-            {this.state.view === 'register' && <Register onUserLoggedOut={this.handleUserLoggedOut} />}
-            {/* {this.state.view === 'profile' && <Profile onChangeName={this.handleChangeName} />} */}
-            {/* {this.state.view === 'changeName' && <ChangeName />} */}
-
-        </div>
-    }
-    
+    return <div className="App">
+        {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterNavigation={handleRegisterNavigation} />}
+        {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} onProfileNavigation={handleProfileNavigation}/>}
+        {view === 'register' && <Register onUserLoggedOut={handleUserLoggedOut} />}
+    </div>
 }

@@ -1,57 +1,48 @@
-const { Component } = React 
+const { Component, useState, useEffect } = React 
 
-class StickerList extends Component {
+function StickerList(props) {
 
-    state = {notes: null, error: null, alert: null}
+    const [alert, setAlert] = useState(null)
+    const [notes, setNotes] = useState(null)
 
-    componentDidMount() {
-        this.loadNotes()
-    }
 
-    loadNotes = () => {
-        retrieveNotes(sessionStorage.token, (error, notes) => {
+    useEffect(() => {
+        loadNotes()
+    }, []);
+
+    const loadNotes = () => {
+        retrieveNotes(sessionStorage.token, (error, _notes) => {
             if (error) {
-                this.setState({ alert : <Alert error message={error.message} />})
+                setAlert(<Alert error message={error.message} />)
                 setTimeout( () => {
-                    this.setState({alert: null})
+                    setAlert(null)
                 }, 4000 )
                 return
             }
-            this.setState({ notes })
+            setNotes( _notes )
         })
     }
 
-    componentWillReceiveProps(newProps) {
-        if (this.props.timestamp !== newProps.timestamp)
-            this.loadNotes()
+    const handleRemoveSticker = stickerId => {
+        const _notes = notes.filter(note => note.id !== stickerId)
+        setNotes(_notes)
     }
 
-    handleRemoveSticker = stickerId => {
-        const notes = this.state.notes.filter(note => note.id !== stickerId)
-        this.setState({ notes })
-    }
-
-    handleStickerSaved = stickerId => {
-        this.props.handleStickerSaved(stickerId)
-    }
-
-    render() {
-        const { state: { notes, alert } } = this
-
-        return notes && notes.length ?
-            <ul className="StickerList__list _Container">
-                
-                {notes.map(note => <li key={note.id}>
-                    <Sticker stickerId={note.id} text={note.text} onRemove={this.handleRemoveSticker} />
-                    </li>)}
-            </ul>
-            :
-            <div>
-                <p>no stickers yet</p>
-                {alert && alert}
-            </div>
+    return notes && notes.length ?
+        <ul className="StickerList__list _Container">
             
-    }
+            {notes.map(note => <li key={note.id}>
+                <Sticker stickerId={note.id} text={note.text} onRemove={handleRemoveSticker} />
+                </li>)}
+        </ul>
+        :
+        <div>
+            <p>no stickers yet</p>
+            {alert && alert}
+        </div>
+}
+    
+            
     //     if (sessionStorage.username)
     //         retrieveNotes(sessionStorage.username, (error, notes) => {
     //             if (error) {
@@ -95,4 +86,3 @@ class StickerList extends Component {
     //         }
     //     }
     // }
-}

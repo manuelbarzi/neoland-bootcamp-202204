@@ -1,4 +1,13 @@
 function updateUserPassword(token, oldPassword, password, newPasswordRepeat, callback) {
+// console.log(token, oldPassword, password, newPasswordRepeat, 588558585885)
+        // validateJwt(token)
+        // validatePassword(password)
+        // validatePassword(newPassword, 'new password')
+        // validatePassword(newPasswordRepeat, 'new password repeat')
+
+        // if (newPassword !== newPasswordRepeat)
+        //     throw new Error('new password and new password repeat are not the same')
+
     const api = new Apium
     const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
 

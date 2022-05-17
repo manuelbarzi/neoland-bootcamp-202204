@@ -1,41 +1,37 @@
-const {Component} = React
+const { useState } = React
 
-class ChangeName extends Component {
+function ChangeName(props) {
+    // state = {error: null, alert: null}
+    const [alert, setAlert] = useState(null)
 
-    state = {error: null, alert: null}
-
-    handleFormSubmit = e => {
+    const handleFormSubmit = e => {
         e.preventDefault()
 
         const name = e.target.name.value
 
         updateUserName(sessionStorage.token, name, (error) => {
             if (error) {
-                this.setState({ alert : <Alert error message={error.message} />})
+                setAlert(<Alert error message={error.message} />)
                 setTimeout( () => {
-                    this.setState({alert: null})
+                    setAlert(null)
                 }, 4000 )
                 return
             }
-            this.setState({ alert : <Alert message="Name updated" />})
+            setAlert( <Alert message="Name updated" />)
             setTimeout( () => {
-                this.setState({alert: null})
+                setAlert(null)
             }, 4000 )
-            this.props.handleRetriveUser()
+            props.handleRetriveUser()
         });
     }
 
-    render() {
 
-        const {state: {alert}} = this
-
-        return <div className="ChangeName">
-            {alert && alert}
-            <form className="Container"  onSubmit={this.handleFormSubmit}>
-                <input type="text" name="name" placeholder='name'/>
-                <button>Save</button>
-            </form>
-        </div>
-    }
+    return <div className="ChangeName">
+        {alert && alert}
+        <form className="Container"  onSubmit={handleFormSubmit}>
+            <input type="text" name="name" placeholder='name'/>
+            <button>Save</button>
+        </form>
+    </div>
 }
 
