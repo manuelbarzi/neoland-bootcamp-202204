@@ -1,35 +1,25 @@
+import { validateJwt } from "../../../../../stickers/src/validators"
 function retrieveUser(token, callback) {
-    const logger = new Logger('retrieveUser')
+    validateJwt(token)
+    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
 
-    logger.info('call')
-
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
-
-    logger.info('request')
-
-    api.get('v2/users', {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }, (error, response) => {
-        if (error) return callback(error)
-
-        logger.info('response')
-
-        const { status, payload } = response
-
-        if (status >= 400 && status < 500) {
+    api.get(
+        'users',
+        {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        },
+        (error, { status, payload }) => {
             const data = JSON.parse(payload)
 
-            callback(new Error(data.error))
-        } else if (status >= 500)
-            callback(new Error('server error'))
-        else if (status === 200) {
-            const data = JSON.parse(payload)
-
-            const user = new User(data.name, data.username)
-
-            callback(null, user)
+            if (status >= 400 && status < 500)
+                callback(new Error(data.error))
+            else if (status >= 500)
+                callback(new Error('server error'))
+            else if (status === 200)
+                callback(null, new User(data.name, data.username))
         }
-    })
+    )
 }
+export default retrieveUser

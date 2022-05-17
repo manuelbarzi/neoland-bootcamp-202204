@@ -1,4 +1,4 @@
-const { useState, useEffect, useContext } = React
+const { useState, useEffect, useContext} = React
 
 function Home(props) {
     const [name, setName] = useState(null)

@@ -1,7 +1,6 @@
-const { useContext } = React
 
 function Sticker(props) {
-    const { handleFeedeback } = useContext(Context)
+    
     const handleRemoveClick = () => {
 
         const { stickerId, onRemove } = props
@@ -9,7 +8,7 @@ function Sticker(props) {
     if (stickerId)
         deleteNote(sessionStorage.token, stickerId, error => {
             if (error) {
-                handleFeedeback(error.message)
+                alert(error.message)
 
                 return
             }
@@ -21,15 +20,15 @@ const handleSaveSubmit = event => {
     event.preventDefault()
 
     const { target: { text: { value: text } } } = event
-    const { props: { stickerId } } = this
+    const  { stickerId } = props
 
     saveNote(sessionStorage.token, stickerId, text, error => {
         if (error) {
-            handleFeedeback(error.message)
+            aletr(error.message)
 
             return
         }
-        handleFeedeback('Sticker saved!')
+        alert('Sticker saved!')
 
     })
 }

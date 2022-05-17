@@ -1,9 +1,6 @@
-/* Creo funcion donde le pasare por parametros el nombre y el nuevo nombre recogidos por los input 
-del formulario de UpdateUserName ( faltara 1 input en su componente).
-Condiciones --> -Que el nombre sea diferente al Nuevo nombre 
-                -Que el Nuevo nombre sea diferente a los introducidos en la base de datos (OPCIONAL) 
-si todo se cumple igualo el nombre al nuevo nomber devuelvo null conforme todo va bien */
 function updateUserName(token, name, callback) {
+    validateJwt(token) 
+     
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
     
@@ -15,9 +12,8 @@ function updateUserName(token, name, callback) {
         body: JSON.stringify({ name }) // es lo que envio al servidor 
     }, (error, { status, payload }) => {
        if(status === 204) {
-        const data = JSON.parse(payload)  // payload es la respuesta de servidor 
-
-        callback(null, data.name)
+        
+        callback(null, name)
 
     } else if (status >= 400 && status < 500) {
         const data = JSON.parse(payload)

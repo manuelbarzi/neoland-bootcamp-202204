@@ -1,9 +1,9 @@
-const { useState, useContext } = React
+const { useState  } = React
 
 function App() {
 
     const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
-    const [feedeback, setFeedeback] = useState({ level: 'error', message: '' })
+    const [feedback, setFeedback] = useState(null)
     /* <  ---------      Manejador de Vistas  -----------  > */
     const handleUserRegistered = () => handleLoginNavigation()
 
@@ -15,11 +15,10 @@ function App() {
 
     const handelUserLoggedOut = () => handleLoginNavigation()
 
-    const handleFeedback = feedback => setFeedback(feedback)
+    const handeleFeedback = feedback => setFeedeback(feedback)
 
-    const handleFeedbackTiemout = () => setFeedback(null)
-
-    const handeleFeedback = message => alert(message)
+    const handleFeedbackTimeout = () => setFeedback(null)
+    
 
 
 
@@ -31,7 +30,7 @@ function App() {
         {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
         {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
         {view === 'home' && <Home onUserLoggedOut={handelUserLoggedOut}  />}
-
+        { feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
     </div>
 
     </Context.Provider> 

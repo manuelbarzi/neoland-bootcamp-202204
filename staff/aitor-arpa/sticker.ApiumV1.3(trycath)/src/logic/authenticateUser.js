@@ -1,4 +1,6 @@
 function authenticateUser(username, password, callback) {
+
+    
     const logger = new Logger('authenticateUser')
 
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')

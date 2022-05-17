@@ -1,31 +1,32 @@
-const { Componet } = React
- 
-class Profile extends Component {
-    state = {view:'sticker'}
-    handelChangeName = () => {
-        this.setState({view:'ChangeName'})
-    }
-    handelChangePassword = () => {
-        this.setState({view:'ChangePass'})
-    }
-    handelDeleteUser = () => {
-        this.setState({view:'Delete'})
-    }
+const { useState } = React
+
+function Profile() {
+    const [view, setView] = useState('profile')
     
-render() {
-            
-    return <div className="Profile">
-        <button className="Profile__changeName" onClick={this.handelChangeName}>Change Name</button>
-        
-        <button className="Profile__changePassword" onClick={this.handelChangePassword}>Change Password</button>
-        <button className="Profile__deleteUser" onClick={this.handelDeleteUser}>Delete User</button>
-        {this.state.view === 'ChangeName' && <ChangeName />}
-        {this.state.view === 'ChangePass' && <ChangePassword />}
-        {this.state.view === 'Delete' && <Delete />}
-    </div>
+
+    const handelChangeName = () => {
+        setView('ChangeName')
     }
+    const handelChangePassword = () => {
+        setView('ChangePass')
+    }
+    const handelDeleteUser = () => {
+        setView('Delete')
+    }
+
+
+    return <div className="Profile">
+        <button className="Profile__changeName" onClick={handelChangeName}>Change Name</button>
+
+        <button className="Profile__changePassword" onClick={handelChangePassword}>Change Password</button>
+        <button className="Profile__deleteUser" onClick={handelDeleteUser}>Delete User</button>
+        {view === 'ChangeName' && <ChangeName />}
+        {view === 'ChangePass' && <ChangePassword />}
+        {view === 'Delete' && <Delete />}
+    </div>
 }
 
-    
-   
+
+
+
 

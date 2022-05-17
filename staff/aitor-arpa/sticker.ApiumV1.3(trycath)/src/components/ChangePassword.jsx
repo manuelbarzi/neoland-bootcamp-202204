@@ -1,9 +1,11 @@
 const  { useContext } = React
 // TODO implementar logica y combertir a Funcion 
 function ChangePassword () {
-    const { handleFeedeback } = useContext(Context)
+const { handeleFeedback } = useContext(Context)
+
   const handleSubmit = event => {
-      event.prevntDefault()
+    event.preventDefault()
+      
 
       const password = event.target.password.value
       const newPassword = event.target.newPassword.value
@@ -12,19 +14,18 @@ function ChangePassword () {
       try {
           updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error =>{
               if (error) {
-                  handleFeedeback(error.message)
-
+                handleFeedback({ level: 'error', message: error.message })
                   return
               }
-              handleFeedeback('Password saved')
+              handleFeedback({ level: 'success', message: 'Password saved' })
           })
       } catch (error){
-          handleFeedeback(error.message)
+        handleFeedback({ level: 'error', message: error.message })
       }
     }
       
-        return <div className="ChangePassword"  >
-        <form className="Container" onSubmit={handleSubmit}>
+        return <div className="ChangePassword" >
+        <form className="Container" onSubmit={handleSubmit} >
             <input type="newPasswordRepeat" name="password" placeholder="current password" />
             <input type="password" name="newPassword" placeholder="new password" />
              <input type="password" name="newPasswordRepeat" placeholder="repeat new password"/>

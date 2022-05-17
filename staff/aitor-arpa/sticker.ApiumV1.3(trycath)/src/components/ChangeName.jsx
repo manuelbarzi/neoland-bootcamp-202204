@@ -1,19 +1,19 @@
-const { useContext } = React
+const { Component } = React
 
 function ChangeName() {
-    const { handleFeedeback } = useContext(Context)
-    handelChangeName = event => {
+  
+    const handelChangeName = event => {
         event.preventDefault()
 
         const newName = event.target.newName.value
 
         updateUserName(sessionStorage.token, newName, error => {
             if (error) {
-                handleFeedeback(error.message)
+                alert(error.message)
 
                 return
             }
-            handleFeedeback('Name Update')
+            alert('Name Update')
 
         })
     }

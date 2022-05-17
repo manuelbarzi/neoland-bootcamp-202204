@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 
 function StickerList({ timestamp }) {
     const [notes, setNotes] = useState(null)
-    const { handleFeedeback } = useContext(Context)
+
 
     useEffect(() => {
         loadNotes()
@@ -23,14 +23,12 @@ function StickerList({ timestamp }) {
 
 
     const handleRemoveSticker = stickerId => {
-        const notes = state.notes.filter(note => note.id !== stickerId)
+        const _notes = notes.filter(note => note.id !== stickerId)
 
-        setNotes( notes )
+        setNotes( _notes )
     }
 
-    const handleStickerSaved = stickerId => {
-        props.handleStickerSaved(stickerId)
-    }
+    
 
     return notes && notes.length ?
 

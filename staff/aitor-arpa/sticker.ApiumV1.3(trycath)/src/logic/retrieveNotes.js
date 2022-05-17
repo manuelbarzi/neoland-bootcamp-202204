@@ -1,4 +1,5 @@
 function retrieveNotes(token, callback) {
+    
     const logger = new Logger('retrieveNotes')
 
     logger.info('call')
