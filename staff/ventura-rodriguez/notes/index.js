@@ -1,11 +1,5 @@
-// CRUD
-// const obj = require("./utils")
-// const { randomId } = obj
-
-
 const fs = require('fs')
-
-const { randomId } = require('utils') // Importa todo lo que haya en el index de la carpeta utils
+const { randomId } = require('utils')
 
 
 function createNote(note) {
@@ -23,7 +17,7 @@ function createNote(note) {
 }
 
 function retrieveNote() {
-    debugger
+
     fs.readFile('./db/note.json', function(error, data) {
         if (error) console.error(error)
 
