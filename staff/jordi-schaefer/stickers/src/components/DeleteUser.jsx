@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import Context from './Context'
 import deleteUser from '../logic/deleteUser'
 
-function DeleteUser () {
+function DeleteUser(props) {
 
     const [view, setView] = useState('delete')
     const [password, setPassword] = useState(null)
@@ -27,7 +27,7 @@ function DeleteUser () {
 
                 handleFeedback({ type: 'success', message: 'User deleted'})
                 delete sessionStorage.token
-                //location.reload()
+                props.onDeletedUser()
             })
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})

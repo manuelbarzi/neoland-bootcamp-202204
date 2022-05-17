@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import Context from './Context'
 import authenticateUser from '../logic/authenticateUser'
-import '../styles/Home.sass'
 
 function Login (props) {
 

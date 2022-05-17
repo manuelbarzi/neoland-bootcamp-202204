@@ -1,3 +1,5 @@
+import '../styles/Feedback.sass'
+
 function Feedback({ type, message, callback }) { // recivo el tipo de mensaje y el mensaje, y callback para avisar que ha terminado el timing
     
     setTimeout(callback, 3500)  // 

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import ChangeName from './ChangeName'
 import ChangePassword from './ChangePassword'
 import DeleteUser from './DeleteUser'
+import '../styles/Profile.sass'
 
 function Profile(props) {
 
@@ -34,7 +35,7 @@ function Profile(props) {
         <div className="Profile__views">
             {view === 'name' && <ChangeName onUserNameChanged={handleUserNameChanged} />}
             {view === 'password' && <ChangePassword/>}
-            {view === 'delete' && <DeleteUser/>}
+            {view === 'delete' && <DeleteUser onDeletedUser={props.onDeletedUser}/>}
         </div>
     </div>
 }

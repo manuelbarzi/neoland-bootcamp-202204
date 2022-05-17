@@ -5,6 +5,7 @@ import Feedback from './Feedback'
 import Login from './Login'
 import Register from './Register'
 import Home from './Home'
+import '../styles/App.sass'
 
 
 function App () {
@@ -30,6 +31,7 @@ function App () {
 
     const handleFeedbackTimeout = () => setFeedback(null)
 
+    const handleOnDeletedUser = () => setView('login')
 
     logger.info('render')
 
@@ -42,7 +44,7 @@ function App () {
             {feedback && <Feedback type={feedback.type} message={feedback.message} callback={handleFeedbackTimeout}/> } 
             {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
             {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
-            {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} />}
+            {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} onDeletedUser={handleOnDeletedUser}/>}
         </div>
     </Context.Provider>
 }

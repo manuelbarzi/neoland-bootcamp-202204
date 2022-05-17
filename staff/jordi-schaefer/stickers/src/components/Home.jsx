@@ -7,6 +7,9 @@ import saveNote from '../logic/saveNote'
 import StickerList from './StickerList'
 import Profile from './Profile'
 import { Clip, ClipMessage } from './Clip'
+import '../styles/Home.sass'
+import '../styles/Sticker.sass'
+
 
 function Home(props) {
 
@@ -132,7 +135,7 @@ function Home(props) {
                     </li>)}
             </ul>}
 
-            {view === 'profile' && <Profile onUserNameChanged={handleUserNameChanged}/>}
+            {view === 'profile' && <Profile onUserNameChanged={handleUserNameChanged}  onDeletedUser={props.onDeletedUser}/>}
         </main>
         
         <footer className="Home__footer Container">

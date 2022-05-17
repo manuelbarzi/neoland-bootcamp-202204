@@ -1,4 +1,5 @@
 import clippy from '../styles/clippy.png'
+import '../styles/Clip.sass'
 
 function Clip({onClipTimeout }) { // recivo el tipo de mensaje y el mensaje, y callback para avisar que ha terminado el timing
     

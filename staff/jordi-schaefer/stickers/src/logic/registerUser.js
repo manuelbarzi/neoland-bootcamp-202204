@@ -9,7 +9,7 @@ function registerUser(name, username, password, callback) {
 
     const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
 
-    api.post('/v2/users/auth', {
+    api.post('/v2/users', {
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify( {name, username, password})}, (error, {status, payload}) => {
 
