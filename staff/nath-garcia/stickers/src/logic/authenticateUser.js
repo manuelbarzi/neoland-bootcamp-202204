@@ -1,5 +1,6 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
+
 function authenticateUser(username, password, callback) {
     const logger = new Logger('authenticateUser')
 
