@@ -29,7 +29,7 @@ const interval = setInterval(() => {
         else console.log(`\n ${car3}  wins!`)
     }
 
-},100)
+},100)  
 
 
 /* const car1=`oªo`
