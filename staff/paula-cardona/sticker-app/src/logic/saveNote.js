@@ -64,7 +64,7 @@ function saveNote(token, noteId, text, callback){
                 api2.call('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users',
                 {headers : {'Authorization' : `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({notes})}, 
                 (error, {status, payload}) => {  //le enviamos authoriztion porque como queremos cambiar algo, tenemos que pedir permiso
-                    if (error) {  // si hay un error definido
+                    if (error) {  // si hay un error de connexion de red
                         callback(error) // lo enviamos por callback
                         return
                     } logger.info('response')

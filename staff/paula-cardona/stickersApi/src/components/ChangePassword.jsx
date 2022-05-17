@@ -1,8 +1,13 @@
-const { Component } = React
+const { useContext } = React
 
-class ChangePassword extends Component{
+function ChangePassword (){
+    const logger = new Logger('ChangePassword')
+    
+    logger.info('call')
 
-    handleFormSubmit = event => {
+    const { handleFeedback } = useContext(Context)
+     
+    const handleFormSubmit = event => {
         // esto es una responsabilidad (recoger valores)
         event.preventDefault ()
 
@@ -16,32 +21,32 @@ class ChangePassword extends Component{
                     if (error) {
                         // esto manjea el error asíncrono,
                         // como no tenemos otro recurso para manejarlo, lo manejamos por la callback
-                        alert(error.message)
-
+                        handleFeedback({ level: 'error', message: error.message })
                         return
                     }
 
                     alert('Password saved')
                 })
             } catch(error){
-                alert(error.message)
+                handleFeedback({ level: 'error', message: error.message })
             }
 
     }
 
 
-    render (){
-        return <div className="ChangePassword">
-            <form className="Container" onSubmit={this.handleFormSubmit}>
-                <input className="Input" type="password" name="password" placeholder="current password"/>
+    logger.info('render')
 
-                <input className="Input" type="password" name="newPassword" placeholder="new password"/>
-                <input className="Input" type="password" name="newPasswordRepeat" placeholder="repeat new password"/>
+    return <div className="ChangePassword Container">
+        <form className="Container" onSubmit={handleFormSubmit}>
+            <input className="Input" type="password" name="password" placeholder="current password"/>
 
-                <button>Save</button>
-            </form>
-        </div>
+            <input className="Input" type="password" name="newPassword" placeholder="new password"/>
+            <input className="Input" type="password" name="newPasswordRepeat" placeholder="repeat new password"/>
+
+            <button>Save</button>
+        </form>
+    </div>
     
-    }
+    
 }
 

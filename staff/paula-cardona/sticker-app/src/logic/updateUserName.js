@@ -7,7 +7,6 @@ function updateUserName(token, name, newName, callback) {
 
     validateJwt(token)
 
-
     const logger = new Logger('updateUserName')
 
     

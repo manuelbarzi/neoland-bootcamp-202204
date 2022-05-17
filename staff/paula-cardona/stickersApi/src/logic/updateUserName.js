@@ -1,5 +1,14 @@
 
 function updateUserName(token, name, newName, callback) {
+
+    // validateJwt(token)
+    // validateString(name, 'name')
+    // validateString(newName, 'newName')
+
+
+    const logger = new Logger('updateUserName')
+
+    
     
     if (name === newName) {
         callback(new Error('current name and new name are the same'))
@@ -7,8 +16,10 @@ function updateUserName(token, name, newName, callback) {
     }
 
 
+    logger.info('call')
     const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
 
+    logger.info('request')
     api.post('/v2/users', {
         headers : { 
             Authorization: `Bearer ${token}`,
@@ -20,7 +31,8 @@ function updateUserName(token, name, newName, callback) {
                 callback(error)
                 return
             }
-            
+            logger.info('response')
+
             if (status >=400 && status < 500) { 
 
                 const data = JSON.parse(payload) //la respuesta de data de json lo convierto en objeto

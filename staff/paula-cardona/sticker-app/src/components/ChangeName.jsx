@@ -38,11 +38,10 @@ function ChangeName (){
     logger.info('render')
     return <div className="ChangeName Container">
         <form className="Container" onSubmit = {handleFormSubmit}>
-            <input type="text" name="name" placeholder="name"/>
             <input type="text" name="newName" placeholder="enter the new name"/>
             <button>Save</button>
         </form>
     </div>
     
-}
+}  
 export default ChangeName

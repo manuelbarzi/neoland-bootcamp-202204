@@ -1,44 +1,52 @@
-const { Component } = React
+const { useState } = React
 
-class Profile extends Component {
-    state= { view: 'null' }
+function Profile(props) {
+    const logger = new Logger('Profile')
 
-    handleChangeName = () => {
-        
-        this.setState ({ view: 'changeName' })
+    logger.info('call')
+
+
+    const [view, setView] = useState('profile')
+
+    const handleChangeName = () => setView ('changeName')
+    
+
+    const handleChangePassword = () => setView('changePassword')
+    
+
+    const handleDeleteUser = () => setView('deletedUser')
+    
+
+    const handleNameChanged = () =>{
+        props.onNameChange ()
     }
 
-    handleChangePassword = () =>{
-
-        this.setState ({ view:'changePassword'})
+    const handlePasswordChanged = () =>{
+        props.onNameChange ()
     }
 
-    handleDeleteUser = () => {
-        
-        this.setState ({ view: 'deletedUser'})
+    const handleUserDeleted = () =>{
+        props.onNameChange ()
     }
 
-    handleNameChanged = () =>{
-        this.props.onNameChange ()
-    }
 
    
-   
+    
+    logger.info('render')
 
-    render() {
-        return <div className="Profile">
-            <div>
-                <button className="Button Profile__changeName" onClick={this.handleChangeName}>Change Name</button>
-                <button className="Button Profile__changePassword" onClick={this.handleChangePassword}>Change Password</button>
-                <button className="Button Profile__deleteUser"onClick={this.handleDeleteUser}>Delete user</button>
-            </div>
-            <div>
-                {this.state.view ==='changeName' && <ChangeName onNameChange={this.handleNameChanged}/>}
-                {this.state.view ==='changePassword' && <ChangePassword onPasswordChange = {this.handlePasswordChanged}/>}
-                {this.state.view ==='deletedUser' && <DeletedUser onDeletedUser={this.handleUserDeleted} />}
-
-            </div>
+    return <div className="Profile Container">
+        <div>
+            <button className="Button Profile__changeName" onClick={handleChangeName}>Change Name</button>
+            <button className="Button Profile__changePassword" onClick={handleChangePassword}>Change Password</button>
+            <button className="Button Profile__deleteUser"onClick={handleDeleteUser}>Delete user</button>
         </div>
-    }
+        <div>
+            {view ==='changeName' && <ChangeName onNameChange={handleNameChanged}/>}
+            {view ==='changePassword' && <ChangePassword onPasswordChange = {handlePasswordChanged}/>}
+            {view ==='deletedUser' && <DeletedUser onDeletedUser={handleUserDeleted} />}
+
+        </div>
+    </div>
 }
+
 

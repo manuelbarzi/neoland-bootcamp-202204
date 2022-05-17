@@ -1,50 +1,64 @@
-const { Component } = React
+const { useContext } = React
 
-class Sticker extends Component {
-    handleRemoveClick = () => {
-        const { props: { stickerId, onRemove } } = this  //guardamos las propiedades de stickerId i de eliminar.
+function Sticker(props) {
+    const logger = new Logger('Sticker')
 
-        if (stickerId)//si el sticker tiene id
-            deleteNote(sessionStorage.token, stickerId, error => { //eliminaremos la nota pasandole el username guardado en la sesion i el sticker id i el error
-                if (error) { //si da error
-                    alert(error.message)
+    logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
+
+    const handleRemoveClick = () => {
+        const { stickerId, onRemove } = props  //guardamos las propiedades de stickerId i de eliminar.
+
+        if (stickerId) {//si el sticker tiene id
+            try{
+                deleteNote(sessionStorage.token, stickerId, error => { //eliminaremos la nota pasandole el username guardado en la sesion i el sticker id i el error
+                    if (error) { //si da error
+                        handleFeedback({ level: 'error', message: error.message })
+
+                        return
+                    }
+
+                    onRemove(stickerId) //sino elimina el sticker con ese id
+                })
+            }catch(error) {
+                handleFeedback({ level: 'error', message: error.message })
+            }
+        }
+    }
+
+    const handleSaveSubmit = event => {
+        event.preventDefault()
+
+        const { target: { text: { value: text} } } = event  //del form
+        const { stickerId } = props
+
+        try{
+            saveNote(sessionStorage.token, stickerId, text, error => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
 
                     return
                 }
-
-                onRemove(stickerId) //sino elimina el sticker con ese id
+                handleFeedback({ level: 'success', message: 'Sticker saved!'})
             })
-    }
-    handleSaveSubmit = event => {
-        event.preventDefault()
-
-        const { target: { text: { value: text} } } = event  
-        const { props: { stickerId }} = this
-
-        saveNote(sessionStorage.token, stickerId, text, error => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            alert('Sticker saved!')
-
-        })
+        }catch(error){
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
 
-    render() {
-        return <div className="Sticker">
-            <button className="Button" onClick={this.handleRemoveClick}>x</button>
+    logger.info('render')
+    return <div className="Sticker Container">
+        <button className="Button" onClick={handleRemoveClick}>x</button>
 
-            <form className="Sticker__form" onSubmit={this.handleSaveSubmit}>
-                <textarea className="Sticker__text" name="text" defaultValue={this.props.text}></textarea>
-                <p className="Sticker__id">{this.props.stickerId}</p> {/*le digo que el id del sticker será una propiedad del sticker que se llamara stickerId*/}
+        <form className="Sticker__form" onSubmit={handleSaveSubmit}>
+            <textarea className="Sticker__text" name="text" defaultValue={props.text}></textarea>
+            <p className="Sticker__id">{props.stickerId}</p> {/*le digo que el id del sticker será una propiedad del sticker que se llamara stickerId*/}
 
-                <button className="Button">Save</button>
-            </form>
-        </div>
-    }      
+            <button className="Button">Save</button>
+        </form>
+    </div>
+}      
 
-}
+
 

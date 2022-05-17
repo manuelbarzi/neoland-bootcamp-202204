@@ -39,7 +39,7 @@ function Profile(props) {
         <div>
             <button className="Button Profile__changeName" onClick={handleChangeName}>Change Name</button>
             <button className="Button Profile__changePassword" onClick={handleChangePassword}>Change Password</button>
-            <button className="Button Profile__deleteUser"onClick={handleDeleteUser}>Delete user</button>
+            <button className="Button Profile__deleteUser"onClick={handleDeleteUser}>Delete User</button>
         </div>
         <div>
             {view ==='changeName' && <ChangeName onNameChange={handleNameChanged}/>}

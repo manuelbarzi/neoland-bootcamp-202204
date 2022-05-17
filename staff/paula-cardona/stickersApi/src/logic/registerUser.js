@@ -1,7 +1,15 @@
 function registerUser (name, username, password, callback){ 
 
-    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
+    validateString(name, 'name')
+    validateString(username, 'username')
+    validatePassword(password, 'password')
 
+    const logger = new Logger('register user')
+    logger.info('call')
+
+    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
+    
+    logger.info('request')
     api.post('/v2/users', {
         headers : {
             'Content-Type': 'application/json'
@@ -16,7 +24,9 @@ function registerUser (name, username, password, callback){
             return
         }
 
-        if (status ===201) //si el status es 201 no hanrá error, esta bien porque habrá creado el registerUser
+        logger.info('response')
+
+        if (status ===201) //si el status es 201 no habrá error, esta bien porque habrá creado el registerUser
             callback(null)
         else if (status >=400 && status < 500) { 
 

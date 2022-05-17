@@ -7,6 +7,8 @@
 // o sea en la response no se manejan así)
 
 function updateUserPassword(token, password, newPassword, newPasswordRepeat, callback) {
+    const logger = new Logger('updateUserPassword')
+
     // Esto es una responsabilidad ( valida los parámetros de entrada [robusta])
     validateJwt(token)
     validatePassword(password, 'password')
@@ -20,13 +22,14 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
     }
 
     if (newPassword !== newPasswordRepeat) {
-        callback(new Error('new password and new password repeat are not the same'))
-
-        return
+        throw new Error('new password and new password repeat are not the same')
     }
+
+    logger.info('call')
     // esto es una responsabilidad ( llama a la api y maneja erroes asíncronos)
     const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
 
+    logger.info('request')
     api.patch('v2/users', {
         headers : { 
             Authorization: `Bearer ${token}`,
@@ -39,6 +42,7 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
                 callback(error)
                 return
             }
+            logger.info('response')
             
             if (status >=400 && status < 500) { 
 

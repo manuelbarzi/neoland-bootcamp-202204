@@ -1,4 +1,7 @@
 function retrieveUser(token, callback) {
+
+    validateJwt(token)
+
     const logger = new Logger('retrieveUser')
 
     logger.info('call')

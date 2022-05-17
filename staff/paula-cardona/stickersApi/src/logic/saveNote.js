@@ -13,14 +13,22 @@
 
 
 function saveNote(token, noteId, text, callback){
+
+    validateJwt(token) // envia throw error
+
+    const logger = new Logger('save notes')
+    logger.info('call')
     const api= new Apium //creo una constante que sera la nueva Apium
+
+    logger.info('request')
     api.call('GET', 'https://b00tc4mp.herokuapp.com/api/v2/users', 
     {headers: {'Authorization' : `Bearer ${token}`}}, (error, {status, payload}) =>{ //payload=todo lo que hay guardado en la api
        
         if (error) {
             callback (error)
             return
-        }
+        } logger.info('response')
+    
         if (status === 200) {
             const data = JSON.parse(payload)
             const { notes = []} = data
@@ -47,13 +55,15 @@ function saveNote(token, noteId, text, callback){
 
             { 
                 const api2 = new Apium
+                logger.info('request')
                 api2.call('PATCH', 'https://b00tc4mp.herokuapp.com/api/v2/users',
                 {headers : {'Authorization' : `Bearer ${token}`, 'Content-Type': 'application/json'}, body: JSON.stringify({notes})}, 
                 (error, {status, payload}) => {  //le enviamos authoriztion porque como queremos cambiar algo, tenemos que pedir permiso
                     if (error) {  // si hay un error definido
                         callback(error) // lo enviamos por callback
                         return
-                    }
+                    } logger.info('response')
+
                     if (status === 204) { //todo ok pero no devuelve nada
                         callback(null, note.id)
                     } else if (status >= 400 && status < 500) {

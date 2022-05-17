@@ -1,8 +1,15 @@
-function authenticateUser(username, password, callback) {
+function authenticateUser(username, password, callback) { //authenticate el username no podemos traerlo porque no conocemos la manera de como encontrar un username por lo tanto no lo podemos validar, pero si pensar que sea en forma de string, a demás el username en el login es username no token
+    validateString(username, 'username')
+    validatePassword(password, 'password')
+    
+    
+    const logger = new Logger('authenticate user')
+    
+    logger.info('call')
 
-    
-    
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+
+    logger.info('response')
 
     api.post('v2/users/auth', {
         headers: {
@@ -16,6 +23,7 @@ function authenticateUser(username, password, callback) {
             callback(error)
             return
         }
+        logger.info('request')
 
         if (status === 200) {
             

@@ -1,31 +1,38 @@
-const { Component } = React
+function DeleteUser () {
+    const logger = new Logger('deleteUser')
 
-class DeleteUser extends Component {
+    logger.info('call')
+
+    const { handleFeedback } = useContext(Context)
+
+    const handleDeleteUser = (event) => {
+        event.preventDefault()
 
 
-    handleDeleteUser = event => {
+
         const confirmation = event.target.elemento.value
 
-        deleteUser(sessionStorage.username, confirmation, (error) => {
-            if (error) {
-                alert(error.message)
-                return
-            }
+        try {
+            deleteUser(sessionStorage.token, confirmation, (error) => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+                    return
+                }
 
-            alert('User deleted')
-            delete sessionStorage.username
-            location.reload() //refresca la página donde estan
-        })
-
+                alert('User deleted')
+                delete sessionStorage.token
+                location.reload()
+            })
+        } catch(error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
-    
 
-    render() {
-        return <div class="DeleteUser">
-        <form class="Container" onSubmit={this.handleDeleteUser}>
-            <input class="form" type="password" name="elemento" placeholder=" Confirm your password"/>
-
-            <button class="Button">Delete</button>
+    logger.info('render')
+    return <div className="DeleteUser Container">
+        <form className="Container" onSubmit={handleDeleteUser} >
+            <input className="form" type="password" name="elemento" placeholder=" Confirm your password"/>
+            <button className="Button">Delete</button>
         </form>
     </div>
-}   }
+}

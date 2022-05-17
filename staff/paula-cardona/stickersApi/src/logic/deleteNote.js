@@ -1,10 +1,14 @@
 function deleteNote(token, noteId, callback) {
+    
+    
+    validateJwt(token) //dentro del token ya esta la funcion que te lo pasa a string pasará como throw
+    
     const logger = new Logger('deleteNote')
 
     logger.info('call')
-
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
+    
     logger.info('request')
 
     api.get('v2/users', {
@@ -15,7 +19,6 @@ function deleteNote(token, noteId, callback) {
         if (error) return callback(error)
 
         logger.info('response')
-
         //const { status, payload } = response
         const status = response.status
         const payload = response.payload

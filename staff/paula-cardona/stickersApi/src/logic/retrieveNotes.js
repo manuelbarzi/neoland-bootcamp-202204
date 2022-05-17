@@ -1,6 +1,13 @@
 function retrieveNotes(token, callback){
 
+    validateJwt(token)
+
+    const logger = new Logger('retrieve notes')
+    logger.info('call')
+
     const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+
+    logger.info('request')
 
     api.get('v2/users', {
         headers: { 'Authorization': `Bearer ${token}`}
@@ -12,6 +19,7 @@ function retrieveNotes(token, callback){
 
             return
         }
+        logger.info('response')
 
         if (status === 200) {
 
