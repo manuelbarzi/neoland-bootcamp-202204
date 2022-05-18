@@ -1,0 +1,18 @@
+.App {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.App__title {
+  color: dodgerblue;
+}
+
+.Result {
+  border: 5px solid red;
+  background-color: yellow;
+  padding: 2rem;
+}
+
+/*# sourceMappingURL=index.css.map */
