@@ -1,7 +1,14 @@
 import deleteUser from "../logic/deleteUser"
+import {useContext} from "react" 
+import Context from "./Context"
 
-function DeleteUser() {
 
+
+
+function DeleteUser(props) {
+    const { handleFeedback } = useContext(Context)
+  
+   
     const handleDeleteClick = (event) => {
         event.preventDefault()
 
@@ -9,12 +16,14 @@ function DeleteUser() {
 
         deleteUser(sessionStorage.token, confirmation, (error) => {
             if (error) {
-                alert(error.message)
+                handleFeedback({ level: 'error', message: error.message })
                 return
             }
 
-            alert('User deleted')
+            handleFeedback({ level: 'success', message: "User Deleted" })
             delete sessionStorage.token
+            
+            
             
             
         })
@@ -23,7 +32,7 @@ function DeleteUser() {
     return <div className="DeleteUser">
         <form className="Container" onSubmit={handleDeleteClick}>
             <input className="form" type="password" name="elemento" placeholder=" Confirm your password" />
-            <button className="Button">Delete</button>
+            <button className="Button" >Delete</button>
         </form>
     </div>
 }

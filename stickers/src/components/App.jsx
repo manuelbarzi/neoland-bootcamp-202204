@@ -21,9 +21,12 @@ function App() {
 
     const handelUserLoggedOut = () => handleLoginNavigation()
 
+    
+
     const handleFeedback = feedback => setFeedback(feedback)
 
     const handleFeedbackTimeout = () => setFeedback(null)
+
 
 
 
@@ -31,14 +34,14 @@ function App() {
 
     return <Context.Provider value={{ handleFeedback }}>
 
-    <div className="App">
-        {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
-        {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
-        {view === 'home' && <Home onUserLoggedOut={handelUserLoggedOut}  />}
-        { feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
-    </div>
+        <div className="App">
+            {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
+            {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
+            {view === 'home' && <Home onUserLoggedOut={handelUserLoggedOut} onDelete={handelUserLoggedOut}/>}
+            {feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
+        </div>
 
-    </Context.Provider> 
+    </Context.Provider>
 
 }
 

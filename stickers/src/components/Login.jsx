@@ -1,10 +1,10 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import Context from "./Context"
 import authenticateUser from "../logic/authenticateUser"
 
 function Login(props) {
 
-    const { handleFeedeback } = useContext(Context)
+    const { handleFeedback } = useContext(Context)
     
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -14,7 +14,7 @@ function Login(props) {
 
         authenticateUser(username, password, (error, token) => {
             if (error) {
-                handleFeedeback({ level: 'error', message: error.message })
+                handleFeedback({ level: 'error', message: error.message })
 
                 return
             }

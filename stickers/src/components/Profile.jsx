@@ -3,10 +3,10 @@ import ChangeName from "./ChangeName"
 import ChangePassword from "./ChangePassword"
 import DeleteUser from "./DeleteUser"
 
-function Profile() {
+function Profile(props) {
     const [view, setView] = useState('profile')
     
-
+  
     const handelChangeName = () => {
         setView('ChangeName')
     }
@@ -25,7 +25,7 @@ function Profile() {
         <button className="Profile__deleteUser" onClick={handelDeleteUser}>Delete User</button>
         {view === 'ChangeName' && <ChangeName />}
         {view === 'ChangePass' && <ChangePassword />}
-        {view === 'Delete' && <DeleteUser />}
+        {view === 'Delete' && <DeleteUser  />}
     </div>
 }
 
