@@ -11,7 +11,6 @@ function createUser(name, username, password, callback) {
     validateFunction(callback, 'callback')
 
     readdir('./db/users', (error, files) => {
-        debugger
         if (error) return callback(error)
 
         let count = 0, _error

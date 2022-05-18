@@ -1,6 +1,7 @@
-const { access, constants, readdir, readFile, unlink } = require('fs')
+const { access, constants, readdir, readFile, unlink, fstat, writeFile } = require('fs')
 const createUser = require('./createUser')
 const { expect } = require('chai')
+const { ConflictError } = require('../errors')
 
 describe('createUser', () => {
     it('succeeds on new user and correct user data', done => {
@@ -13,9 +14,9 @@ describe('createUser', () => {
             if (files.length) {
 
                 files.forEach(file => {
-                    
+
                     unlink(`./db/users/${file}`, error => {
-                        
+
                         if (!_error) {
                             if (error) return done(_error = error)
 
@@ -23,7 +24,7 @@ describe('createUser', () => {
 
                             if (count == files.length) {
                                 createUser('John Doe', 'johndoe', '123123123', (error, userId) => {
-                                    
+
                                     expect(error).to.be.null
 
                                     expect(userId).to.be.a('string')
@@ -53,7 +54,7 @@ describe('createUser', () => {
                 })
             } else {
                 createUser('John Doe', 'johndoe', '123123123', (error, userId) => {
-                    
+
                     expect(error).to.be.null
 
                     expect(userId).to.be.a('string')
@@ -81,11 +82,53 @@ describe('createUser', () => {
         })
     }),
 
-    it('fails when the user already exists', () => {
-        readdir(`db/users`, (error, files) => {
-            
+        it('fails when the user already exists', () => {
+            readdir(`./db/users`, (error, files) => {
+                if (error) return done(error)
+
+                if (files.length) {
+
+                    let count = 0, _error
+
+                    files.forEach(file => {
+                        unlink(`./db/users/${file}`, error => {
+                            if (!_error) {
+                                if (error) return done(_error = error)
+
+                                count++
+                                if (count === files.length) {
+                                    const json = JSON.stringify({ name: "John Doe", username: "johndoe", password: "123123123" })
+
+                                    writeFile('./db/users/123456789.json', json, error => {
+                                        if (error) return done(error)
+
+                                        createUser('John D', 'johndoe', '123123153', (error, id) => {
+                                            debugger
+                                            expect(error).to.not.be.null
+                                            expect(error.message).to.equal('username johndoe already exists')
+                                            expect(error).to.be.an.instanceOf(ConflictError)
+
+                                            expect(id).to.be.undefined
+                                        })
+                                    })
+                                }
+                            }
+                        })
+                    })
+                } else {
+                    writeFile('./db/users/123456789.json', json, error => {
+                        if (error) return done(error)
+
+                        createUser('John D', 'johndoe', '123123153', (error, id) => {
+                            debugger
+                            expect(error).to.not.be.null
+                            expect(error.message).to.equal('username johndoe already exists')
+                            expect(error).to.be.an.instanceOf(ConflictError)
+
+                            expect(id).to.be.undefined
+                        })
+                    })
+                }
+            })
         })
-
-
-    })
 })
