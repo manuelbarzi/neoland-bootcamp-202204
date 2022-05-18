@@ -58,7 +58,6 @@ const interval = setInterval(() => {
         if (reached.length === 1)
             console.log(`${reached[0].icon} wins`)
         else {
-            debugger
             console.log(`${reached.map(vehicle => vehicle.icon).join(' ')} tie`)
         }
     }
