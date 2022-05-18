@@ -82,7 +82,8 @@ describe('createUser', () => {
         })
     }),
 
-        it('fails when the user already exists', () => {
+        it('fails when the user already exists', done => {
+            debugger
             readdir(`./db/users`, (error, files) => {
                 if (error) return done(error)
 
@@ -103,13 +104,12 @@ describe('createUser', () => {
                                         if (error) return done(error)
 
                                         createUser('John D', 'johndoe', '123123153', (error, id) => {
-                                            debugger
                                             expect(error).to.not.be.null
                                             expect(error.message).to.equal('username johndoe already exists')
                                             expect(error).to.be.an.instanceOf(ConflictError)
-
+    
                                             expect(id).to.be.undefined
-                                        })
+                                    })
                                     })
                                 }
                             }
@@ -120,12 +120,13 @@ describe('createUser', () => {
                         if (error) return done(error)
 
                         createUser('John D', 'johndoe', '123123153', (error, id) => {
-                            debugger
                             expect(error).to.not.be.null
                             expect(error.message).to.equal('username johndoe already exists')
                             expect(error).to.be.an.instanceOf(ConflictError)
 
                             expect(id).to.be.undefined
+
+                            done()
                         })
                     })
                 }
