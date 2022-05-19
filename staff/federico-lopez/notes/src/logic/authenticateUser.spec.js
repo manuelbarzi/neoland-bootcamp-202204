@@ -12,9 +12,8 @@ describe('authenticateUser', () => {
 
             writeFile('./db/users/123456789', json, error => {
                 if (error) return done(error)
-
                 authenticateUser('johndoe', '123123123', (error, token) => {
-                    debugger
+        
                     expect(error).to.be.null
                     expect(token).not.to.be.undefined
                     expect(token).to.be.a('string')
@@ -24,6 +23,20 @@ describe('authenticateUser', () => {
             })
         })
     })
-}), it('fails when the user does not exists', () => {
+}), it('fails when the user does not exists', done => {
+    clearDbUsers(error => {
+        if (error) return done(error)
+        debugger
+        authenticateUser('johndoe', '123123123', (error, token) => {
+            debugger
+            expect(error).not.to.be.null
+            expect(error.message).to.equal('wrong credentials')
+            expect(error).to.be.an.instanceOf(AuthError)
 
+            expect(token).to.be.undefined
+            
+
+            done()
+        })
+    })
 })

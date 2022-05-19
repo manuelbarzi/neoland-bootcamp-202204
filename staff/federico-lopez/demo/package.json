@@ -4,14 +4,14 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-      "demo": "node demo.js",
-      "demo:inspect": "node --inspect-brk demo.js",
-      "prepare": "npm install"
+        "demo": "node demo.js",
+        "demo:inspect": "node --inspect-brk demo.js",
+        "prepare": "npm install"
     },
     "author": "xFNighTMaRe",
     "license": "ISC",
     "dependencies": {
-      "uuid": "^8.3.2",
-      "utils": "file:./utils"
+        "utils": "file:./utils",
+        "uuid": "^8.3.2"
     }
-  }
+}
