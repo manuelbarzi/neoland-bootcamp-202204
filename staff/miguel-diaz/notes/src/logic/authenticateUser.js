@@ -15,7 +15,7 @@ function authenticateUser(username, password, callback) {
 
         files.forEach(file => {
             readFile(`../../db/users${file}`, (error, data) => {
-                debugger
+                
                 if (!_error && !token) {
                     if (error) return callback(_error = error)
 
