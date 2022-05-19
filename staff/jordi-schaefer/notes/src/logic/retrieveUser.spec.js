@@ -1,12 +1,12 @@
 const { readdir, unlink, writeFile } = require('fs')
-const authenticateUser = require('./authenticateUser')
+const retrieveUser = require('./retrieveUser')
 const { expect } = require('chai')
 const { User } = require('../models')
 const { createId } = require('../utils')
 const { AuthError } = require('../errors')
 
 
-describe('authenticateUser', () => {
+describe('retrieveUser', () => {
 
 
     it ('succeeds on existing user', done => {
@@ -45,17 +45,15 @@ describe('authenticateUser', () => {
 
             writeFile(`./db/users/${userId}.json`, json, error => { // escribo el nuevo archivo de mi usuario
                 if (error) return done(error)   // paro con el done i hay error escribiendo
-
-                const username = 'pepi_22'
-                const password = '123456789'
-                authenticateUser(username, password, (error, _userId)=> { // uso la funcion para buscar el usuario que acabo de añadir
+                
+                retrieveUser(userId, (error, user)=> { // uso la funcion para buscar el usuario que acabo de añadir
                     expect(error).to.be.null // no espero encontrar errotes
-                    expect(_userId).to.be.a('string')
+                    expect(user).not.to.be.undefined
+                    expect(user).to.be.an.instanceOf(Object)
 
-                    expect(_userId).to.equal(userId)
-                    //expect(user.name).to.equal('pepito')  // y miro queel usuario tenga los datos del usuario que habia pedido
-                    //expect(user.username).to.equal('pepi_22')
-                    //expect(user.password).to.equal('123456789')
+                    expect(user.name).to.equal('pepito')  // y miro queel usuario tenga los datos del usuario que habia pedido
+                    expect(user.username).to.equal('pepi_22')
+                    expect(user.password).to.be.undefined
 
                     done()
                 })
@@ -83,7 +81,7 @@ describe('authenticateUser', () => {
                             count ++
 
                             if (count == files.length) { // cuando he terminado de eliminar todos
-                            churro() // ejecuto todo el churro
+                                churro() // ejecuto todo el churro
                             }
                         }
                     })
@@ -103,13 +101,11 @@ describe('authenticateUser', () => {
             writeFile(`./db/users/${userId}.json`, json, error => { // escribo el nuevo archivo de mi usuario
                 if (error) return done(error)   // paro con el done i hay error escribiendo
 
-                const username = 'JuanElGrande'
-                const password = '222333444'
-                authenticateUser(username, password, (error, _userId)=> { // uso la funcion para buscar el usuario que acabo de añadir
+                retrieveUser('id_inventing', (error, user)=> { // uso la funcion para buscar el usuario que acabo de añadir
                     expect(error).to.not.be.null
-                    expect(error.message).to.equal('wrong credentials') 
-                    expect(error).to.be.an.instanceOf(AuthError) 
-                    expect(_userId).to.be.undefined
+                    expect(error.message).to.equal('User does not exist') 
+                    expect(error).to.be.an.instanceOf(Error) 
+                    expect(user).to.be.undefined
 
                     done()
                 })

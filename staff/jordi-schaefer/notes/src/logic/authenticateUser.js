@@ -14,29 +14,35 @@ function authenticateUser(username, password, callback) {
     readdir(`./db/users`, (error, files) => { // leo todos los archivos
         if (error) return callback(error)
     
-        let count = 0, _error
+        let count = 0, _error, id
 
-        files.forEach(file => { //para cada uno de los archivos
-            readFile(`./db/users/${file}`, 'utf8', (error, json) => { // lo leo
+        if(files.length) {
+            files.forEach(file => { //para cada uno de los archivos
+                readFile(`./db/users/${file}`, 'utf8', (error, json) => { // lo leo
 
-                if(!_error){
+                    if(!_error && !id){  // si no se ha decalrado el error ni el Id, sigue buscando
 
-                    if(error) return callback(_error = error)
+                        if(error) return callback(_error = error)
 
-                    count ++
+                        count ++
 
-                    const user = JSON.parse(json)
-                    
-                    // miro que ese archivo tenga el usuario y contraseña que estoy buscando
-                    if(user.username === username && user.password === password)
-                        return callback(null, user) // si lo tiene le paso callback null y todo el paquete del usuario
-                    
-                    if(count === files.length) { // si he llegado a leerlos todos, es que no lo he encontrado
-                        return callback(new AuthError('wrong credentials')) // paso el error de aviso de que el pavo no esta por aqui :), en algo se ha equivocado
+                        const user = JSON.parse(json)
+                        
+                        // miro que ese archivo tenga el usuario y contraseña que estoy buscando
+                        if(user.username === username && user.password === password) {
+                            id = file.substring(0, file.indexOf('.'))
+                            return callback(null, id) // si lo tiene le paso callback null y el id del usuario
+                        }
+                        if(count === files.length) { // si he llegado a leerlos todos, es que no lo he encontrado
+                            return callback(new AuthError('wrong credentials')) // paso el error de aviso de que el pavo no esta por aqui :), en algo se ha equivocado
+                        }
                     }
-                }
+                })
             })
-        })
+        }
+        else {
+            return callback(new AuthError('wrong credentials'))
+        }
     })
 }
 
