@@ -1,29 +1,70 @@
-const { expect } = require('chai')
-const { writeFile } = require('fs')
+const { access, constants, readdir, readFile, unlink, writeFile } = require('fs')
 const authenticateUser = require('./authenticateUser')
-const { clearDbUsers } = require('../utils')
+const { expect } = require('chai')
+const { User } = require('../models')
+const { createId } = require('../utils')
 
 describe('authenticateUser', () => {
-    it('succeed when user and password are corrects', done => {
-        clearDbUsers(error => {
+    it('succeeds on new user and correct user data', done => {
+        readdir(`./db/users`, (error, files) => {
             if (error) return done(error)
 
-            const json = JSON.stringify({ name: 'Miguel Angel', username: 'miguel', password: 'miguel123' })
+            let count = 0, _error
 
-            writeFile('./db/users/123456789', json, error => {
-                if (error) return done(error)
+            if (files.length)
+                files.forEach(file => {
+                    unlink(`./db/users/${file}`, error => {
+                        if (!_error) {
+                            if (error) return done(_error = error)
 
-                authenticateUser('miguel', 'miguel123', (error, token) => {
-                    debugger
-                    expect(error).to.be.null
-                    expect(token).not.to.be.undefined
-                    expect(token).to.be.a('string')
+                            count++
 
-                    done()
+                            if (count == files.length) {
+                                const user = new User('Maria Doe', 'mariadoe', '123123123')
+
+                                const json = JSON.stringify(user)
+
+                                const _userId = createId()
+
+                                writeFile(`./db/users/${_userId}.json`, json, error => {
+                                    if (error) return done(error)
+
+                                    authenticateUser('mariadoe', '123123123', (error, userId) => {
+                                        expect(error).to.be.null
+
+                                        expect(userId).to.be.a('string')
+                                        expect(userId).to.equal(_userId)
+
+                                        done()
+                                    })
+                                })
+                            }
+                        }
+                    })
                 })
-            })
+            else {
+                const user = new User('Maria Doe', 'mariadoe', '123123123')
+
+                const json = JSON.stringify(user)
+
+                const _userId = createId()
+
+                writeFile(`./db/users/${_userId}.json`, json, error => {
+                    if (error) return done(error)
+
+                    authenticateUser('mariadoe', '123123123', (error, userId) => {
+                        expect(error).to.be.null
+
+                        expect(userId).to.be.a('string')
+                        expect(userId).to.equal(_userId)
+
+                        done()
+                    })
+                })
+            }
+
         })
     })
-}), it('fails when user does not exists', () => {
 
+    // TODO unhappy test cases
 })

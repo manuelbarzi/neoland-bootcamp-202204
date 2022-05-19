@@ -1,41 +1,45 @@
 const { validateUsername, validatePassword, validateFunction } = require('../validators')
-const { readdir, readFile } = require('fs')
+const { readdir, readFile, writeFile } = require('fs')
 const { AuthError } = require('../errors')
+const { User } = require('../models')
+
 
 function authenticateUser(username, password, callback) {
     validateUsername(username)
     validatePassword(password)
-    validateFunction(callback)
+    validateFunction(callback, 'callback')
 
-    readdir('../../db/users', (error, files) => {
+    readdir('./db/users', (error, files) => {
         if (error) return callback(error)
-        if (files.length === 0) return callback(error)
 
-        let counter = 0, _error, token
+        let count = 0, _error, userId
 
-        files.forEach(file => {
-            readFile(`../../db/users${file}`, (error, data) => {
-                
-                if (!_error && !token) {
-                    if (error) return callback(_error = error)
+        if (files.length)
+            files.forEach(file => {
+                readFile(`./db/users/${file}`, 'utf8', (error, json) => {
+                    if (!_error && !userId) {
+                        if (error) return callback(_error = error)
+                        
+                        count++
 
-                    const body = JSON.parse(data)
+                        const user = JSON.parse(json)
 
-                    if (body.username === username && body.password === password) {
-                        token = '11s11s11s11s11s11s'
-                        callback(null, token)
+                        if (user.username === username && user.password === password) {
+                            userId = file.substring(0, file.indexOf('.')) // ex: 1234qfasdfhas2fas.json
 
-                        counter = files.length -1
+                            callback(null, userId)
+
+                            return
+                        }
+                            
+                        if (count === files.length) {
+                            callback(new AuthError('wrong credentials'))
+                        }
                     }
-
-                    counter++
-
-                    if (counter === files.length && !token)
-                        callback(new AuthError('wrong credentials'))
-                }
+                })
             })
-        })
+        else callback(new AuthError('wrong credentials'))
     })
 }
 
-module.exports = authenticateUser
+module.exports = authenticateUser 
