@@ -1,17 +1,17 @@
 {
   "name": "notes",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "demo": "node demo.js",
-    "demo:inspect": "node --inspect-brk demo.js",
-    "prepare": "npm install"
+    "test": "npx mocha src/logic/*.spec.js",
+    "test-inspect": "npx mocha --inspect-brk src/logic/*.spec.js"
   },
-  "author": "xFNighTMaRe",
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "dependencies": {
-    "uuid": "^8.3.2",
-    "utils": "file:./utils"
+  "devDependencies": {
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0"
   }
 }
