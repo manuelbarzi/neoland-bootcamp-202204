@@ -1,17 +1,17 @@
-const { validateFunction } = require('../validators')
-const { readdir, readFile } = require('fs')
-const { AuthError } = require('../errors')
+const { validateFunction, validateStringNotEmptyNoSpaces } = require('../validators')
+const { readFile } = require('fs')
+const { NotFoundError } = require('../errors')
 
 
 // si me pasan un usuario y su contraseña
 // quiero devolver toda la info que tenga de el ( si existe)
 function retrieveUser(userId, callback) {
-    // validate ID
+    validateStringNotEmptyNoSpaces(userId)
     validateFunction(callback, 'callback')
 
     //access verifica si existe el archivo o no
     readFile(`./db/users/${userId}.json`, 'utf8', (error, json) => { // lo leo
-        if(error) return callback(new Error('User does not exist'))
+        if(error) return callback(new NotFoundError(`User with id ${userId} not found`))
 
         const user = JSON.parse(json)
         delete user.password

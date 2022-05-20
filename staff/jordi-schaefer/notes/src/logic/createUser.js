@@ -10,9 +10,9 @@ const { createId } = require('../utils')
 
 
 function createUser(name, username, password, callback) {
-    validateStringNotEmptyOrBlank(name, 'name')
-    validateUsername(username)
-    validatePassword(password)
+    //validateStringNotEmptyOrBlank(name, 'name')
+    //validateUsername(username)
+    //validatePassword(password)
     validateFunction(callback, 'callback')
 
     // miro el directorio y me traigo todos los archivos json

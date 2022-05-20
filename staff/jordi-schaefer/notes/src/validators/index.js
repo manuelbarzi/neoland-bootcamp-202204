@@ -16,7 +16,7 @@ function validateStringNotEmptyNoSpaces(string, explain = 'string') {
     validateString(string, explain)
 
     if (!string.length) throw new FormatError(`${explain} is empty`)
-
+    
     if (string.includes(' ')) throw new FormatError(`${explain} has spaces`)
 }
 
@@ -47,6 +47,10 @@ function validateFunction(func, explain = 'function') {
         throw new TypeError(`${explain} is not a function`)
 }
 
+function validateDate(date, explain = 'date') {
+    if (!(date instanceof Date)) throw new TypeError(`${explain} is not Date`)
+}
+
 module.exports = {
     validateString,
     validateStringNotEmptyOrBlank,
@@ -54,5 +58,6 @@ module.exports = {
     validateJwt,
     validatePassword,
     validateUsername,
-    validateFunction
+    validateFunction,
+    validateDate
 }

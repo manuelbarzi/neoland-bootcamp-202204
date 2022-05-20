@@ -6,8 +6,8 @@ const { AuthError } = require('../errors')
 // si me pasan un usuario y su contraseña
 // quiero devolver toda la info que tenga de el ( si existe)
 function authenticateUser(username, password, callback) {
-    validateUsername(username)  // verifico que lo que me pasan esta ok
-    validatePassword(password)
+    //validateUsername(username)  // verifico que lo que me pasan esta ok
+    //validatePassword(password)
     validateFunction(callback, 'callback')
 
 

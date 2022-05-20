@@ -1,9 +1,9 @@
-const { readdir, unlink, writeFile } = require('fs')
-const authenticateUser = require('./authenticateUser')
+const { readFile, readdir, unlink, writeFile } = require('fs')
+const deleteUser = require('./deleteUser')
 const { expect } = require('chai')
 const { User } = require('../models')
 const { createId } = require('../utils')
-const { AuthError } = require('../errors')
+const { NotFoundError } = require('../errors')
 
 
 describe('deleteUser', () => {
@@ -52,24 +52,6 @@ describe('deleteUser', () => {
 
                     readdir(`./db/users`, (error, files) => { // leo todos los archivos que tengo
                         if(error) return done(error)
-                        
-                        /*
-                        let count = 0, _error
-            
-                        if(files.length) {
-                            files.forEach(file => {
-                                unlink(`./db/users/${file}`, error => {  // voy eliminando los archivos de usuarios para limpiar
-                                    if(!_error) {
-                                        if (error) return done(_error = error) 
-                                        count ++
-            
-                                        if (count == files.length) { // cuando he terminado de eliminar todos
-                                        
-                                        }
-                                    }
-                                })
-                            })
-                        } */
 
                         expect(files.length).to.equal(0)
                         done()
@@ -122,8 +104,8 @@ describe('deleteUser', () => {
                 const newId = createId()
                 deleteUser(newId, (error)=> { 
                     expect(error).to.not.be.null
-                    expect(error.message).to.equal('user not found') 
-                    //expect(error).to.be.an.instanceOf(AuthError) 
+                    expect(error.message).to.equal(`User with id ${newId} not found`)
+                    expect(error).to.be.an.instanceOf(NotFoundError) 
 
                     readdir(`./db/users`, (error, files) => { // leo todos los archivos que tengo
                         if(error) return done(error)
@@ -133,10 +115,10 @@ describe('deleteUser', () => {
             
                         // se que solo habra un usuario, miro que no lo ha modificado
                         // accedo y lo leo
-                        access(`./db/users/${files[0]}`, constants.F_OK, error => {  
-                            expect(error).to.be.null
+ //                       access(`./db/users/${files[0]}`, constants.F_OK, error => {  
+ //                           expect(error).to.be.null
                             
-                            readFile(files[0], 'utf8', (error, json) => {
+                            readFile(`./db/users/${files[0]}`, 'utf8', (error, json) => {
 
                                 expect(error).to.be.null     
                                 expect(json).to.be.a('string')
@@ -145,9 +127,9 @@ describe('deleteUser', () => {
                                 expect(user.name).to.equal('pepito') 
                                 expect(user.username).to.equal('pepi_22')
                                 expect(user.password).to.equal('123456789')          
+                                done()
                             })                 
-                        })
-                        done()
+ //                       })
                     })
                 })
             })         

@@ -3,7 +3,7 @@ const retrieveUser = require('./retrieveUser')
 const { expect } = require('chai')
 const { User } = require('../models')
 const { createId } = require('../utils')
-const { AuthError } = require('../errors')
+const { NotFoundError } = require('../errors')
 
 
 describe('retrieveUser', () => {
@@ -48,9 +48,10 @@ describe('retrieveUser', () => {
                 
                 retrieveUser(userId, (error, user)=> { // uso la funcion para buscar el usuario que acabo de añadir
                     expect(error).to.be.null // no espero encontrar errotes
+
+                    expect(user).to.exist
                     expect(user).not.to.be.undefined
                     expect(user).to.be.an.instanceOf(Object)
-
                     expect(user.name).to.equal('pepito')  // y miro queel usuario tenga los datos del usuario que habia pedido
                     expect(user.username).to.equal('pepi_22')
                     expect(user.password).to.be.undefined
@@ -101,10 +102,11 @@ describe('retrieveUser', () => {
             writeFile(`./db/users/${userId}.json`, json, error => { // escribo el nuevo archivo de mi usuario
                 if (error) return done(error)   // paro con el done i hay error escribiendo
 
-                retrieveUser('id_inventing', (error, user)=> { // uso la funcion para buscar el usuario que acabo de añadir
+                const id_invent = 'id_inventing'
+                retrieveUser(id_invent, (error, user)=> { // uso la funcion para buscar el usuario que acabo de añadir
                     expect(error).to.not.be.null
-                    expect(error.message).to.equal('User does not exist') 
-                    expect(error).to.be.an.instanceOf(Error) 
+                    expect(error.message).to.equal(`User with id ${id_invent} not found`) 
+                    expect(error).to.be.an.instanceOf(NotFoundError) 
                     expect(user).to.be.undefined
 
                     done()

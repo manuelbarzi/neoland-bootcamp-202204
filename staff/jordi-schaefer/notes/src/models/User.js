@@ -8,9 +8,9 @@ const { validateStringNotEmptyOrBlank, validateUsername, validatePassword } = re
  * @param {string} password The user password
  */
  function User(name, username, password) {
-    validateStringNotEmptyOrBlank(name, 'name')
-    validateUsername(username)
-    validatePassword(password)
+    //validateStringNotEmptyOrBlank(name, 'name')
+    //validateUsername(username)
+    //validatePassword(password)
 
     this.name = name
     this.username = username
