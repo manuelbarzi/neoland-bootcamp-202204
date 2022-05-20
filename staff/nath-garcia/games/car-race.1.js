@@ -4,9 +4,7 @@ first car that reaches 100 steps (count) wins
 take into account two or all cars can reach at the same time (tie)
 show results below
 */
-
-//versión de Manu 
-
+//versión heha por Ventu refactorizada a partir de la que hicimos con Pao
 const thief = '🚘'
 const police = '🚔'
 const taxi = '🚖'
