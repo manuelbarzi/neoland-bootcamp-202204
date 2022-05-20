@@ -11,6 +11,7 @@ function createUser(name, username, password, callback) {
     validateFunction(callback, 'callback')
 
     readdir('./db/users', (error, files) => {
+
         if (error) return callback(error)
 
         let count = 0, _error
@@ -19,6 +20,7 @@ function createUser(name, username, password, callback) {
             files.forEach(file => {
                 readFile(`./db/users/${file}`, 'utf8', (error, json) => {
                     if (!_error) {
+                        
                         if (error) return callback(_error = error)
                         
                         count++
