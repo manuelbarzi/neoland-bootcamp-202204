@@ -1,19 +1,16 @@
-const { validateFunction, validateJwt } = require('../validators')
+
 const { unlink } = require('fs')
-
-function deleteUser(userID, password, callback){
-        
-    validateFunction(callback, 'callback')
+const { NotFoundError } = require('../errors')
 
 
-    unlink(`./db/users/${userID}.json`, callback =>  { 
 
-        if (error) return callback(new Error('User not exist'))
-
+function deleteUser(userID, callback){
       
-       
-        return callback('User Deleted')
+     unlink(`./db/users/${userID}.json`, error =>  { 
 
+        if (error) return callback(new NotFoundError('User not exist'))
+             
+        return callback('User Delete')
 
     })
 }

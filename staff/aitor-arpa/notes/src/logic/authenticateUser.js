@@ -1,9 +1,8 @@
 /* << -------- Archivos que requiere la logica para qeu todo funcione -------  >>> */
 
 const { validateUsername, validatePassword, validateFunction } = require('../validators')
-const { readdir, readFile, writeFile } = require('fs')
+const { readdir, readFile } = require('fs')
 const { AuthError } = require('../errors')
-const { User } = require('../models')
 
 
 function authenticateUser(username, password, callback) {
