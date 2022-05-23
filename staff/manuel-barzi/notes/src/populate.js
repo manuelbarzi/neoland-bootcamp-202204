@@ -1,44 +1,27 @@
-const { writeFile } = require('fs')
-const { User, Note } = require('./models')
-const { createId, deleteFiles } = require('./utils')
+const { MongoClient } = require('mongodb')
 
-deleteFiles('./db/users', error => {
-    if (error) return done(error)
+MongoClient.connect('mongodb://localhost:27017', (error, connection) => {
+    if (error) return console.error(error)
 
-    deleteFiles('./db/notes', error => {
-        if (error) return done(error)
+    const db = connection.db('notes-db')
 
-        const user = new User('Maria Doe', 'mariadoe', '123123123')
+    const users = db.collection('users')
+    const notes = db.collection('notes')
 
-        const json = JSON.stringify(user)
+    users.deleteMany({}, (error, result) => {
+        if (error) return console.error(error)
 
-        const userId = createId()
+        users.insertOne({ name: 'Peter Pan', username: 'peter', password: '123123123' }, (error, result) => {
+            if (error) return console.error(error)
+    
+            console.log(result)
 
-        writeFile(`./db/users/${userId}.json`, json, error => {
-            if (error) return done(error)
+            const { insertedId } = result
 
-            const texts = ['note 1', 'note 2', 'note 3']
+            notes.insertOne({ user: insertedId, text: 'hola mundo', date: new Date }, (error, result) => {
+                if (error) return console.error(error)
 
-            let count = 0, _error
-
-            texts.forEach(text => {
-                const noteId = createId()
-
-                const note = new Note(noteId, userId, text)
-
-                const json = JSON.stringify(note)
-
-                writeFile(`./db/notes/${noteId}.json`, json, error => {
-                    if (!_error) {
-                        if (error) return done(_error = error)
-
-                        count++
-
-                        if (count === texts.length) {
-                            console.log('populated')
-                        }
-                    }
-                })
+                console.log(result)
             })
         })
     })
