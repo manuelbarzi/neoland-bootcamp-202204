@@ -1,0 +1,12 @@
+{
+  "scripts": {
+    "test": "node src/test.js",
+    "test:inspect": "node --inspect-brk src/test.js",
+    "filldb": "node src/populate.js", 
+    "filldb:inspect": "node --inspect-brk src/populate.js" 
+  },
+  "dependencies": {
+    "mongodb": "^4.6.0",
+    "node": "^17.7.2"
+  }
+}
