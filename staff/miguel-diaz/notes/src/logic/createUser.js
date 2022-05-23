@@ -10,15 +10,14 @@ function createUser(name, username, password, callback) {
     validatePassword(password)
     validateFunction(callback, 'callback')
 
-    readdir('../../db/users', (error, files) => {
-        
+    readdir('./db/users', (error, files) => {
         if (error) return callback(error)
 
         let count = 0, _error
 
         if (files.length)
             files.forEach(file => {
-                readFile(`../../db/users${file}`, 'utf8', (error, json) => {
+                readFile(`./db/users/${file}`, 'utf8', (error, json) => {
                     if (!_error) {
                         if (error) return callback(_error = error)
                         
@@ -29,12 +28,6 @@ function createUser(name, username, password, callback) {
                         if (user.username === username)
                             return callback(_error = new ConflictError(`username ${username} already exists`))
 
-
-
-
-
-
-                            
                         if (count === files.length) {
                             const user = new User(name, username, password)
 
@@ -42,7 +35,7 @@ function createUser(name, username, password, callback) {
 
                             const userId = createId()
 
-                            writeFile(`../../db/users${userId}.json`, json, error => {
+                            writeFile(`./db/users/${userId}.json`, json, error => {
                                 if (error) return callback(error)
 
                                 callback(null, userId)
@@ -58,7 +51,7 @@ function createUser(name, username, password, callback) {
 
             const userId = createId()
 
-            writeFile(`../../db/users${userId}.json`, json, error => {
+            writeFile(`./db/users/${userId}.json`, json, error => {
                 if (error) return callback(error)
 
                 callback(null, userId)
@@ -68,4 +61,3 @@ function createUser(name, username, password, callback) {
 }
 
 module.exports = createUser
-

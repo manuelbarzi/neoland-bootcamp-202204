@@ -1,27 +1,27 @@
 const { readdir, unlink } = require('fs')
 
-function clearDbUsers(callback) {
-    readdir(`../../db/users`, (error, files) => {
+function deleteFiles(folder, callback) {
+    readdir(folder, (error, files) => {
         if (error) return callback(error)
 
         let count = 0, _error
 
-        if (files.length) {
-
+        if (files.length)
             files.forEach(file => {
-                unlink(`./db/users/${file}`, error => {
+                unlink(`${folder}/${file}`, error => {
                     if (!_error) {
                         if (error) return callback(_error = error)
 
                         count++
 
-                        if (count == files.length)
+                        if (count === files.length)
                             callback(null)
                     }
                 })
             })
-        }
+        else
+            callback(null)
     })
 }
 
-module.exports = clearDbUsers
+module.exports = deleteFiles
