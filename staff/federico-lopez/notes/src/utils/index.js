@@ -1,9 +1,11 @@
 const createCustomError = require('./createCustomError')
 const createId = require('./createId')
-const clearDbUsers = require('./clearDbUsers')
+const deleteFiles = require('./deleteFiles')
+const parseCookies = require('./parseCookies')
 
 module.exports = {
     createCustomError,
     createId,
-    clearDbUsers
+    deleteFiles,
+    parseCookies
 }

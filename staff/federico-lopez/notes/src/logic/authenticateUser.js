@@ -9,28 +9,26 @@ function authenticateUser(username, password, callback) {
 
     readdir('./db/users', (error, files) => {
         if (error) return callback(error)
-        if (files.length === 0) return callback(error)
+        if (files.length === 0) return callback(new AuthError('wrong credentials'))
 
-        let counter = 0, _error, token
+        let counter = 0, _error, userId
 
         files.forEach(file => {
             readFile(`./db/users/${file}`, (error, data) => {
                 debugger
-                if (!_error && !token) {
+                if (!_error && !userId) {
                     if (error) return callback(_error = error)
 
                     const body = JSON.parse(data)
 
                     if (body.username === username && body.password === password) {
-                        token = '516879846516wefw'
-                        callback(null, token)
-
-                        counter = files.length -1
+                        userId = file.substring(0, file.lastIndexOf('.'))
+                        return callback(null, userId)  
                     }
 
                     counter++
 
-                    if (counter === files.length && !token)
+                    if (counter === files.length && !userId)
                         callback(new AuthError('wrong credentials'))
                 }
             })
