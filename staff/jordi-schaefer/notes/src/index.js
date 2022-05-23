@@ -3,11 +3,16 @@ const bodyParser = require('body-parser')
 const { createUser,
         authenticateUser,
         retrieveUser,
-        retrieveNotes
+        retrieveNotes,
+        createNote,
+        deleteNote
 } = require('./logic')
 const { parseCookies } = require('./utils')
 
+// ejecutamos la funcion y guardamos el resultado en server
+// retorna un conjunto de ejecuciones (get, post.. )
 const server = express()
+
 
 server.use(express.static('public'))
 
@@ -15,6 +20,7 @@ server.use(express.static('public'))
 const formBodyParser = bodyParser.urlencoded({ extended: true })
 
 
+debugger
 
 server.get('/register', (req, res) => {
 
@@ -38,19 +44,14 @@ server.get('/register', (req, res) => {
                 </form>
                 <a href="http://localhost:8080/login">login</a>
                 
-                <div></div>
             </body>
         </html>`)
     
     } catch(error) {
         res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-
-
-
-
-    
+    }   
 })
+
 
 
 //cuando hago peticion primero pasa por el boyparser y lo pone en un objeto llamado body para que podamos acceder a todos los datos
@@ -66,10 +67,10 @@ server.post('/register', formBodyParser, (req, res) => {
             //            <h1> with id: ${userId} </h1>`)
             res.redirect(`/login`)
         })
+
     } catch(error){
         res.status(400).send(`<h1>${error.message}</h1>`)
     }
-
 })
 
 
@@ -102,8 +103,8 @@ server.get('/login', (req, res) => {
     } catch(error) {
         res.status(400).send(`<h1>${error.message}</h1>`)
     }
-
 })
+
 
 server.post('/login', formBodyParser, (req, res) => {
     try {
@@ -118,6 +119,7 @@ server.post('/login', formBodyParser, (req, res) => {
             res.cookie('userId', userId)
             res.redirect(`/`)
         })
+
     } catch(error) {
         res.status(400).send(`<h1>${error.message}</h1>`)
     }
@@ -139,7 +141,7 @@ server.get('/', (req, res) => {
             retrieveNotes(userId, (error, notes) => {
                 if (error)
                     return res.status(400).send(`<h1>${error.message}</h1>`)
-
+                debugger
                 res.status(200).send(`<html>
                 <head>
                     <link rel="stylesheet" href="index.css">
@@ -165,6 +167,7 @@ server.get('/', (req, res) => {
                 </html>`)
             })
         })
+
     } catch (error) {
         res.status(400).send(`<h1>${error.message}</h1>`)
     }
@@ -179,7 +182,7 @@ server.post('/logout', (req, res) => {
 
 
 
-server.post('/save-note', formBodyParser, (req, res) => {
+server.post('/create-note', formBodyParser, (req, res) => {
     try {
         const { userId } = parseCookies(req.header('cookie'))
 
@@ -187,12 +190,20 @@ server.post('/save-note', formBodyParser, (req, res) => {
             return res.redirect('/login')
 
         const { text } = req.body
+        
+        createNote(userId, text, (error) => { 
+            if (error)
+                return res.status(400).send(`<h1>callback ${error.message}</h1>`)
 
-        // ... createNote(userId, text, error => { ... res.redirect('/') })
+            res.redirect('/') 
+        })
+
     } catch (error) {
-        // ...
+        res.status(400).send(`<h1> no callback ${error.message}</h1>`)
     }
 })
+
+
 
 server.post('/delete-note/:noteId', (req, res) => {
     try {
@@ -203,16 +214,25 @@ server.post('/delete-note/:noteId', (req, res) => {
 
         const { noteId } = req.params
 
-        // ... deleteNote(userId, noteId, error => ... res.redirect('/') )
+        deleteNote(userId, noteId, error => {
+            if (error)
+                return res.status(400).send(`<h1>${error.message}</h1>`)
 
-        res.send(`TODO delete note with id ${noteId}`)
+            res.redirect('/')
+        })
+
     } catch (error) {
-        // ...
+        res.status(400).send(`<h1>${error.message}</h1>`)
     }
 })
 
 
-server.listen(8080, () => console.log('server started')) // cuando ya este ejecutndo el servicio nos permite tener una callback para hacer algo
+// cuando ya este ejecutando el servicio nos permite tener una callback para hacer algo
+server.listen(8080, () => console.log('server started')) 
+
+
+
+
 
 // node src/index.js    (estando en la carpeta notes)
 // npm start

@@ -3,7 +3,7 @@ const { access, readdir, readFile } = require('fs')
 const { NotFoundError } = require('../errors')
 
 function retrieveNotes(userId, callback) {
-    //validateStringNotEmptyNoSpaces(userId)
+    validateStringNotEmptyNoSpaces(userId)
     validateFunction(callback, 'callback')
 
     access(`./db/users/${userId}.json`, error => {
@@ -27,10 +27,10 @@ function retrieveNotes(userId, callback) {
                             count++
 
                             const note = JSON.parse(json)
-
+                            
                             note.date = new Date(note.date)
 
-                            if (note.user === userId)
+                            if (note.userId === userId)
                                 notes.push(note)
 
                             if (count === files.length)
@@ -39,7 +39,6 @@ function retrieveNotes(userId, callback) {
                     })
                 })
             }
-
         })
     })
 }

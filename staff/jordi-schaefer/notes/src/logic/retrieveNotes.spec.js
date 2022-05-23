@@ -6,7 +6,7 @@ const { createId, deleteFiles } = require('../utils')
 const { NotFoundError } = require('../errors')
 
 describe('retrieveNotes', () => {
-    it('succeeds on existing user and has notes', done => {
+    it('succeeds on existing user and notes', done => {
         deleteFiles('./db/users', error => {
             if (error) return done(error)
 
@@ -31,7 +31,7 @@ describe('retrieveNotes', () => {
                         
                         const note = new Note(noteId, userId, text)
 
-                        const json = JSON.stringify(note)
+                        const json = JSON.stringify(note, null, 4)
 
                         writeFile(`./db/notes/${noteId}.json`, json, error => {
                             if (!_error) {
@@ -48,7 +48,7 @@ describe('retrieveNotes', () => {
 
                                         notes.forEach(note => {
                                             expect(note.id).to.be.a('string')
-                                            expect(note.user).to.equal(userId)
+                                            expect(note.userId).to.equal(userId)
                                             expect(texts.includes(note.text)).to.be.true
                                             expect(note.date).to.be.instanceOf(Date)
                                         })

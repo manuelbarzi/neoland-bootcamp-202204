@@ -34,7 +34,7 @@ describe('createNote', () => {
                         expect(error).to.be.null
 
                         readFile(`./db/notes/${noteId}.json`, 'utf8', (error, json) => { // lo leo
-                            if(error) return callback(new Error(`User with id ${userId} not found`))
+                            if(error) return done(new Error(`User with id ${userId} not found`))
                     
                             const note = JSON.parse(json)
                             expect(note).to.exist
