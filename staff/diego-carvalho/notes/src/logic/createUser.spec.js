@@ -1,10 +1,11 @@
-const { access, constants, readdir, unlink } = require('fs')
+const { access, readFile, constants, readdir, unlink } = require('fs')
 const createUser = require('./createUser')
 const { expect } = require('chai')
 
 describe('createUser', () => {
+    debugger
     it('succeeds on new user and correct user data', done => {//done es el primer (y unico por ahora) parámetro de la callback de it para determinar cuando hemos terminado. Es el último callback que usamos en la cadena de callbacks
-        debugger
+    
         readdir(`./db/users`, (error, files) => {//uso un readdir para leer de los archivos que hay en la capeta db.
             if (error) return done(error)//si el readdir tiene algún error, el proceso para por aquí. ()
 
@@ -49,7 +50,8 @@ describe('createUser', () => {
                         }
                     })
                 })
-            } else
+            } else {
+                debugger
                 createUser('John Doe', 'johndoe', '123123123', (error, userId) => {
                     expect(error).to.be.null
 
@@ -74,6 +76,7 @@ describe('createUser', () => {
                         })
                     })
                 })
+            }
 
         })
     })

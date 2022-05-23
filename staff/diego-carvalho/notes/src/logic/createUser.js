@@ -20,7 +20,7 @@ function createUser(name, username, password, callback) {
     validateFunction(callback, 'callback')
 
     //uso un readdir para leer de los archivos que hay en la capeta db.
-    readdir('./db.users', (error, files) => {
+    readdir('./db/users', (error, files) => {
         if (error) return callback(error)
         //como no sabemos cuanto tardrá el proceso de lectura de reddir, criamos un contador que nos conta cuanta vezes ha terminado leer fichero. 
         let count = 0, _error
