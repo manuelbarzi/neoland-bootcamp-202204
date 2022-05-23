@@ -5,12 +5,12 @@ class Note {
     constructor(id, user, text, date = new Date) {
         if (id != null) validateStringNotEmptyNoSpaces(id, 'note id')
         validateStringNotEmptyNoSpaces(user, 'user id')
-        validateString(text, 'text')
+        if (text != null) validateString(text, 'text')
         validateDate(date)
 
         this.id = id || createId()
         this.user = user
-        this.text = text
+        this.text = text || ''
         this.date = date
     }
 

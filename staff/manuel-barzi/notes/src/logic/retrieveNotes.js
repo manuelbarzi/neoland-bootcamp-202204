@@ -1,6 +1,7 @@
 const { validateStringNotEmptyNoSpaces, validateFunction } = require('../validators')
 const { access, readdir, readFile } = require('fs')
 const { NotFoundError } = require('../errors')
+const { Note } = require('../models')
 
 function retrieveNotes(userId, callback) {
     validateStringNotEmptyNoSpaces(userId)
@@ -26,15 +27,18 @@ function retrieveNotes(userId, callback) {
 
                             count++
 
-                            const note = JSON.parse(json)
-
-                            note.date = new Date(note.date)
+                            const note = Note.fromJson(json)
 
                             if (note.user === userId)
                                 notes.push(note)
 
-                            if (count === files.length)
+                            if (count === files.length) {
+                                notes.sort((note1, note2) => {
+                                    return note1.date - note2.date
+                                })
+
                                 callback(null, notes)
+                            }
                         }
                     })
                 })

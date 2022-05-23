@@ -128,7 +128,36 @@ describe('saveNote', () => {
         })
     })
 
-    // TODO it('fails when user exists, but note not')
+    it('fails when user exists, but note not', done => {
+        deleteFiles(`./db/users`, error => {
+            if (error) return done(error)
+
+            deleteFiles('./db/notes', error => {
+                if (error) return done(error)
+
+                const user = new User('Maria Doe', 'mariadoe', '123123123')
+
+                const json = JSON.stringify(user)
+
+                const userId = createId()
+
+                writeFile(`./db/users/${userId}.json`, json, error => {
+                    if (error) return done(error)
+
+                    const _noteId = createId()
+
+                    saveNote(userId, _noteId, 'hola mundo', (error, noteId) => {
+                        expect(error).to.be.instanceOf(NotFoundError)
+                        expect(error.message).to.equal(`note with id ${_noteId} not found`)
+
+                        expect(noteId).to.be.undefined
+
+                        done()
+                    })
+                })
+            })
+        })
+    })
 
     // TODO unhappy test cases
 })

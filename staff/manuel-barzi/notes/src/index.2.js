@@ -4,8 +4,7 @@ const {
     createUser,
     authenticateUser,
     retrieveUser,
-    retrieveNotes,
-    saveNote
+    retrieveNotes
 } = require('./logic')
 const { parseCookies } = require('./utils')
 
@@ -115,20 +114,18 @@ server.get('/', (req, res) => {
                     <form method="POST" action="/logout">
                         <button>Logout</button>
                     </form>
+                    <form method="POST" action="/create-note">
+                        <textarea name="text"></textarea>
+                        <button>Save</button>
+                    </form>
                     <ul>
                         ${notes.map(note => `<li>
-                            <form method="POST" action="/save-note/${note.id}">
-                                <textarea name="text">${note.text}</textarea>
-                                <button>Save</button>
-                            </form>
+                            ${note.text}
                             <form method="POST" action="/delete-note/${note.id}">
                                 <button>x</button>
                             </form>
                         </li>`).join('')}
                     </ul>
-                    <form method="POST" action="/save-note">
-                        <button>+</button>
-                    </form>
                 </body>
                 </html>`)
             })
@@ -138,6 +135,11 @@ server.get('/', (req, res) => {
     }
 })
 
+server.post('/logout', (req, res) => {
+    res.clearCookie('userId')
+    res.redirect('/login')
+})
+
 server.post('/save-note', formBodyParser, (req, res) => {
     try {
         const { userId } = parseCookies(req.header('cookie'))
@@ -145,40 +147,12 @@ server.post('/save-note', formBodyParser, (req, res) => {
         if (!userId)
             return res.redirect('/login')
 
-        saveNote(userId, null, null, (error, noteId) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
+        const { text } = req.body
 
-            res.redirect('/')
-        })
+        // ... createNote(userId, text, error => { ... res.redirect('/') })
     } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
+        // ...
     }
-})
-
-server.post('/save-note/:noteId', formBodyParser, (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
-
-        if (!userId)
-            return res.redirect('/login')
-
-        const { params: { noteId }, body: { text } } = req
-
-        saveNote(userId, noteId, text, (error, noteId) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
-
-            res.redirect('/')
-        })
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
-
-server.post('/logout', (req, res) => {
-    res.clearCookie('userId')
-    res.redirect('/login')
 })
 
 server.post('/delete-note/:noteId', (req, res) => {
