@@ -51,8 +51,8 @@ MongoClient.connect('mongodb://127.0.0.1:27017', (error, connection) => {  // es
                         console.log(result)
 
                         users.insertMany([{ name: 'pepito', username: 'pepi', password: '12121212' },
-                        { name: 'juan', username: 'juanito', password: 45454545 },
-                        { name: 'wendy', username: 'wendy_22', password: 4444 }],(error, result) => {
+                        { name: 'juan', username: 'juanito', password: '454545' },
+                        { name: 'wendy', username: 'wendy_22', password: '4' }],(error, result) => {
                             if (error) return console.error(error)
                     
                             console.log("\u001b[1;42m Three more users created " + "\u001b[0m")
@@ -71,21 +71,20 @@ MongoClient.connect('mongodb://127.0.0.1:27017', (error, connection) => {  // es
                                 console.log("\u001b[1;42m Username peter deleted " + "\u001b[0m")
                                 console.log(result)
                             })
-                            /* 
-                            users.deleteMany({ password: { $in: 4 }}, (error, result) => {
+                            
+                            users.deleteMany({ password: /.*4.*/ }, (error, result) => { // elimina los que contienen un 4
                                 if (error) return console.error(error)
 
                                 console.log("\u001b[1;42m Delete users with 4 in the password " + "\u001b[0m")
                                 console.log(result)
                             })
 
-                            users.deleteOne({ username: 'peter' }, (error, result) => {
+                            users.deleteMany({ password: { $in: ['12121212'] }}, (error, result) => { // elimina los que tienen esa contraseña especifica
                                 if (error) return console.error(error)
 
-                                console.log("\u001b[1;42m Username peter deleted " + "\u001b[0m")
+                                console.log("\u001b[1;42m Delete username with specific password '12121212' " + "\u001b[0m")
                                 console.log(result)
-                            })  
-                            */                          
+                            })                                                      
                         })
                     })
                 })
@@ -94,11 +93,4 @@ MongoClient.connect('mongodb://127.0.0.1:27017', (error, connection) => {  // es
     })
 })
 
-
-// crear, leer, editar, borrar
-
-
-/* [{ name: 'Peter Pan', username: 'peter', password: '123123123' }, 
-        { name: 'pepito', username: 'pepi', password: '12121212' },
-        { name: 'juan', username: 'juanito', password: '45454545' },
-        { name: 'wendy', username: 'wendy_22', password: '44444' }] */
+// { password: { $in: [/.*4.*/, /.*5.*/] }}    Elimina todos los que contiene un 4 o 5
