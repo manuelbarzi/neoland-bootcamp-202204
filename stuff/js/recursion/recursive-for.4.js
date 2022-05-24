@@ -1,0 +1,18 @@
+
+function forEach(array, callback) {
+    let index = 0;
+
+    (function loop() {
+        if (index < array.length) {
+            callback(array[index++])
+    
+            loop()
+        }
+    })() // Immediately Invoked Function Expression (IIFE)
+}
+
+// demo
+
+const nums = [1, 2, 3, 4, 5]
+
+forEach(nums, num => console.log(num))
