@@ -1,28 +1,16 @@
-const { MongoClient } = require('mongodb')
+const { connect, disconnect } = require('mongoose')
+const { User, Note } = require('./models')
 
-MongoClient.connect('mongodb://localhost:27017', (error, connection) => {
+connect('mongodb://localhost:27017/notes-db', error => {
     if (error) return console.error(error)
 
-    const db = connection.db('notes-db')
+    const user = new User({ name: 'Pepito Grillo', username: 'pepigri', password: '123123123' })
 
-    const users = db.collection('users')
-    const notes = db.collection('notes')
+    user.save() // returns a Promise
+        .then(user => {
+            const note = new Note({ user: user.id, text: 'hola mundo' })
 
-    users.deleteMany({}, (error, result) => {
-        if (error) return console.error(error)
-
-        users.insertOne({ name: 'Peter Pan', username: 'peter', password: '123123123' }, (error, result) => {
-            if (error) return console.error(error)
-    
-            console.log(result)
-
-            const { insertedId } = result
-
-            notes.insertOne({ user: insertedId, text: 'hola mundo', date: new Date }, (error, result) => {
-                if (error) return console.error(error)
-
-                console.log(result)
-            })
+            return note.save() // Promise
         })
-    })
+        .then(note => disconnect())
 })
