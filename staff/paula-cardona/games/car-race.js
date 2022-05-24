@@ -11,7 +11,7 @@ const cars = [
     { // car 1 
         name: 'thief',
         icon: '🚘',
-        count: 0,
+        count: 0, //cuantos pasos a dado en total
         position: 0
     },
     { // car 2 
