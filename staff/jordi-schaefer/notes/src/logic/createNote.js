@@ -7,7 +7,7 @@ const { NotFoundError } = require('../errors')
 
 function createNote(userId, text, callback) {
     validateStringNotEmptyNoSpaces(userId, 'userId')
-    validateString(text, 'text')
+    if(text != null) validateString(text, 'text')  // si no escribo nada me puede llegar un null, solo valido estring si no es null
     validateFunction(callback, 'callback')
 
     // leer todas las notas que tengo en la carpeta

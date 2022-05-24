@@ -34,8 +34,10 @@ describe('createNote', () => {
                         expect(error).to.be.null
 
                         readFile(`./db/notes/${noteId}.json`, 'utf8', (error, json) => { // lo leo
-                            if(error) return done(new Error(`User with id ${userId} not found`))
-                    
+                            //if(error) return done(new Error(`User with id ${userId} not found`))
+                            expect(error).to.be.null
+
+                            expect(json).to.be.a('string')
                             const note = JSON.parse(json)
                             expect(note).to.exist
                             expect(note).not.to.be.undefined
@@ -43,8 +45,6 @@ describe('createNote', () => {
                             expect(note.id).to.equal(noteId) 
                             expect(note.userId).to.equal(userId) 
                             expect(note.text).to.equal(text)  
-                            note.date = new Date(note.date)
-                            expect(note.date).to.be.instanceOf(Date)
                             
                             done()
                         })

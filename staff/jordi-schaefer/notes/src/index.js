@@ -5,6 +5,7 @@ const { createUser,
         retrieveUser,
         retrieveNotes,
         createNote,
+        saveNote,
         deleteNote
 } = require('./logic')
 const { parseCookies } = require('./utils')
@@ -20,7 +21,7 @@ server.use(express.static('public'))
 const formBodyParser = bodyParser.urlencoded({ extended: true })
 
 
-debugger
+
 
 server.get('/register', (req, res) => {
 
@@ -141,7 +142,7 @@ server.get('/', (req, res) => {
             retrieveNotes(userId, (error, notes) => {
                 if (error)
                     return res.status(400).send(`<h1>${error.message}</h1>`)
-                debugger
+                
                 res.status(200).send(`<html>
                 <head>
                     <link rel="stylesheet" href="index.css">
@@ -151,18 +152,23 @@ server.get('/', (req, res) => {
                     <form method="POST" action="/logout">
                         <button>Logout</button>
                     </form>
-                    <form method="POST" action="/create-note">
-                        <textarea name="text"></textarea>
-                        <button>Save</button>
-                    </form>
+                    
                     <ul>
                         ${notes.map(note => `<li>
                             ${note.text}
+                            <form method="POST" action="/save-note/${note.id}">
+                                <textarea name="text">${note.text}</textarea>
+                                <div><button>save</button></div>
+                            </form>
                             <form method="POST" action="/delete-note/${note.id}">
                                 <button>x</button>
                             </form>
                         </li>`).join('')}
                     </ul>
+
+                    <form method="POST" action="/new-note">
+                        <div><button>+</button></div>
+                    </form>
                 </body>
                 </html>`)
             })
@@ -193,13 +199,59 @@ server.post('/create-note', formBodyParser, (req, res) => {
         
         createNote(userId, text, (error) => { 
             if (error)
-                return res.status(400).send(`<h1>callback ${error.message}</h1>`)
+                return res.status(400).send(`<h1>${error.message}</h1>`)
 
             res.redirect('/') 
         })
 
     } catch (error) {
-        res.status(400).send(`<h1> no callback ${error.message}</h1>`)
+        res.status(400).send(`<h1>${error.message}</h1>`)
+    }
+})
+
+
+
+server.post('/save-note/:noteId', formBodyParser, (req, res) => {
+    try {
+        const { userId } = parseCookies(req.header('cookie'))
+
+        if (!userId)
+            return res.redirect('/login')
+
+        const { noteId } = req.params
+
+        const { text } = req.body
+        
+        saveNote(userId, noteId, text, (error) => { 
+            if (error)
+                return res.status(400).send(`<h1>${error.message}</h1>`)
+
+            res.redirect('/') 
+        })
+
+    } catch (error) {
+        res.status(400).send(`<h1>${error.message}</h1>`)
+    }
+})
+
+
+server.post('/new-note', formBodyParser, (req, res) => {
+    try {
+        const { userId } = parseCookies(req.header('cookie'))
+
+        if (!userId)
+            return res.redirect('/login')
+
+        
+        saveNote(userId, null, null, (error) => { 
+            if (error)
+                return res.status(400).send(`<h1>${error.message}</h1>`)
+
+            res.redirect('/') 
+        })
+
+    } catch (error) {
+        res.status(400).send(`<h1>${error.message}</h1>`)
     }
 })
 
