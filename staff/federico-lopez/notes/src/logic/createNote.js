@@ -14,7 +14,7 @@ function createNote(userId, text, callback) {
     access(`./db/users/${userId}.json`, error => {
         if (error) return callback(new NotFoundError('user does not exist'))
 
-        writeFile(`./db/notes/${note.id}`, json, error => {
+        writeFile(`./db/notes/${note.id}.json`, json, error => {
             if (error) return callback(error)
 
             callback(null, note.id)

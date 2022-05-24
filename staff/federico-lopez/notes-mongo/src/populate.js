@@ -14,11 +14,11 @@ MongoClient.connect('mongodb://localhost:27017', (error, connection) => {
         notes.deleteMany({}, error => {
             if (error) return console.error(error)
 
-        users.insertMany([
-            { name: 'Peter Pan', username: 'peter', password: '123123123' },
-            { name: 'Charly Pan', username: 'charly', password: '123123123' },
-            { name: 'Charly Smith', username: 'charlysmith', password: '123123123' }
-        ], (error, result) => {
+            users.insertMany([
+                { name: 'Peter Pan', username: 'peter', password: '123123123' },
+                { name: 'Charly Pan', username: 'charly', password: '123123123' },
+                { name: 'Charly Smith', username: 'charlysmith', password: '123123123' }
+            ], (error, result) => {
                 if (error) return console.error(error)
 
                 console.log(result)
@@ -42,7 +42,7 @@ MongoClient.connect('mongodb://localhost:27017', (error, connection) => {
                                     notes.find({ text: /.*3.*/ }).toArray((error, result) => {
                                         console.log(result)
 
-                                    notes.updateOne({ user: insertedIds[2].toString(), text: /.*2.*/ }, { $set : { text: 'yo era la nota 2, ahora soy la 4' } }, (error, result) => {                                        
+                                        notes.updateOne({ user: insertedIds[2].toString(), text: /.*2.*/ }, { $set : { text: 'yo era la nota 2, ahora soy la 4' } }, (error, result) => {                                        
                                         console.log(result)
 
                                         notes.updateMany({ user: insertedIds[0].toString() }, { $set : { text: 'nosotras somos las notas de Peter Pan' } }, (error, result) => {

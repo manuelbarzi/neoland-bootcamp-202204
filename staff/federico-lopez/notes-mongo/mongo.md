@@ -72,6 +72,10 @@
 
 ##### Find values that are not equals to the query value
 
+`$in`
+
+##### Find anyone of the values that matches to the elements of the array
+
 ## Update Documents
 
 ### updateOne
