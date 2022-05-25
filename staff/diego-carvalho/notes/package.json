@@ -8,7 +8,8 @@
     "start-inspect": "node --inspect-brk src",
     "start-watch": "nodemon src",
     "test": "npx mocha src/logic/*.spec.js",
-    "test-inspect": "npx mocha --inspect-brk src/logic/*.spec.js"
+    "test-inspect": "npx mocha --inspect-brk src/logic/*.spec.js",
+    "populate": "node src/populate.js"
   },
   "keywords": [],
   "author": "",

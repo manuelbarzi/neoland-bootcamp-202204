@@ -4,7 +4,8 @@ const {
     createUser,
     authenticateUser,
     retrieveUser,
-    retrieveNotes
+    retrieveNotes,
+    saveNote
 } = require('./logic')
 const { parseCookies } = require('./utils')
 
@@ -125,18 +126,20 @@ server.get('/', (req, res) => {
                     <form method="POST" action="/logout">
                         <button>Logout</button>
                     </form>
-                    <form method="POST" action="/create-note">
-                        <textarea name="text"></textarea>
-                        <button>Save</button>
-                    </form>
                     <ul>
                         ${notes.map(note => `<li>
-                            ${note.text}
-                            <form method="POST" action="/delete-note/${note.id}">
-                                <button>x</button>
-                            </form>
+                            <form method="POST" action="/save-note/${note.id}">
+                                <textarea name="text">${note.text}</textarea>
+                                <button>Save</button>
+                        </form>
+                        <form method="POST" action="/delete-note/${note.id}">
+                            <button>x</button>
+                         </form>
                         </li>`).join('')}
                     </ul>
+                    <form method="POST" action="/save-note">
+                        <button>+</button>
+                    </form>
                 </body>
                 </html>`)
             })
@@ -145,26 +148,51 @@ server.get('/', (req, res) => {
         res.status(400).send(`<h1>${error.message}</h1>`)//si el status error 400(bad request)
     }
 })
-//aqui hago un post con la ruta del button de logout para eleminar la cookie. 
-server.post('/logout', (req, res) => {
-    res.clearCookie('userId')//hago un clearCookie para eleminar la cookie...
-    res.redirect('/login')// y luego que me rediriga a login.
-})
 
 server.post('/save-note', formBodyParser, (req, res) => {
+    try {
+        const { userId } = parseCookies(req.header('cookie'))
+
+        if(!userId)
+            return res.redirect('/login')
+
+        saveNote(userId, null, null, (error, noteId) => {
+            if(error)
+               return res.status(400).send(`<h1>${error.message}</h1>`)
+
+            res.redirect('/')
+        })
+    } catch (error) {
+        res.status(400).send(`<h1>${error.message}</h1>`)
+    }
+})
+
+server.post('/save-note/:noteId', formBodyParser, (req, res) => {
     try {
         const { userId } = parseCookies(req.header('cookie'))
 
         if (!userId)
             return res.redirect('/login')
 
-        const { text } = req.body
+        const { params: { noteId }, body: { text } } = req
 
-        // ... createNote(userId, text, error => { ... res.redirect('/') })
+        saveNote(userId, noteId, text, (error, noteId) => {
+            if (error)
+                return res.status(400).send(`<h1>${error.message}</h1>`)
+
+            res.redirect('/')
+        })
     } catch (error) {
-        // ...
+        res.status(400).send(`<h1>${error.message}</h1>`)
     }
 })
+
+//aqui hago un post con la ruta del button de logout para eleminar la cookie. 
+server.post('/logout', (req, res) => {
+    res.clearCookie('userId')//hago un clearCookie para eleminar la cookie...
+    res.redirect('/login')// y luego que me rediriga a login.
+})
+
 
 server.post('/delete-note/:noteId', (req, res) => {
     try {
