@@ -1,9 +1,11 @@
 const { User } = require('../models')
 const { ConflictError } = require('../errors')
+const { validateStringNotEmptyOrBlank, validateUsername, validatePassword } = require('../validators')
 
-function createUser(name, username, password) {
-    debugger
-    // TODO validate input args
+function registerUser(name, username, password) {
+    validateStringNotEmptyOrBlank(name, 'name')
+    validateUsername(username)
+    validatePassword(password)
 
     return User.create({ name, username, password })
         .then(() => { })
@@ -15,4 +17,4 @@ function createUser(name, username, password) {
         })
 }
 
-module.exports = createUser
+module.exports = registerUser
