@@ -1,62 +1,67 @@
-const { connect, disconnect } = require('mongoose')
+const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
-const { ConflictError } = require('../errors')
+const { NotFoundError } = require('../errors')
 const updateUser = require('./updateUser')
 const { expect } = require('chai')
 
+describe('updateUser', () => {
+    before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
+    beforeEach(() => User.deleteMany())
 
-describe ('updateUser', () => { //función de que modifica el name
-    debugger
-    before(() => connect ('mongodb://localhost:27017/notes-db-test')) //antes de todo el test createUser connecta mongodb
+    describe('when user already exists', () => {
+        let user
 
-    beforeEach(() => User.deleteMany()) //limpia los datos antes de cada test
+        beforeEach(() => {
+            user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
 
+            return user.save()
+        })
 
-    it('succeeds on name updated', () => {
-        return User.create({ name: 'Wendy Pan', username: 'wendypan', password: '123123123'})
-            .then(result => { // cojo el result del create de arriba, para cogerle la Id
-                
-                return updateUser( result._id , 'paula') //llamo a mi funcion de update
-            }) 
-            .then(resultDeArriba => { // cuando tenga la respuesta de update
-                expect(resultDeArriba).to.be.undefined // mireo que sea undefined
+        it('succeeds on correct user data', () =>
+            updateUser(user.id, 'Pepe Gayo', 26, 'pepe@gayo.com', '+34123123123')
+                .then(result => {
+                    expect(result).to.be.undefined
 
-                return User.findOne({ username: 'wendypan' }) // busco el usuario en la base
-            })
-            .then(user => { // cuando tengo la respues de buscar usuario
-                expect(user.name).to.equal('paula') 
-                expect(user.username).to.equal('wendypan')
-                expect(user.password).to.equal('123123123') 
-            })
+                    return User.findById(user.id)
+                })
+                .then(user => {
+                    expect(user.name).to.equal('Pepe Gayo')
+                    expect(user.age).to.equal(26)
+                    expect(user.email).to.equal('pepe@gayo.com')
+                    expect(user.phone).to.equal('+34123123123')
+                })
+        )
+
+        it('fails on incorrect user id', () => {
+            const wrongId = new ObjectId().toString()
+
+            return updateUser(wrongId, 'Pepe Gayo', 26, 'pepe@gayo.com', '+34123123123')
+                .then(result => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                })
+        })
     })
 
-    it ('fails when user does not exist', () => {
-        return User.create({ name: 'Wendy Pan', username: 'wendypan', password: '123123123'})
-            .then(resultNoVoyaUsar => {
-                
-                return updateUser(`jwkdnfljwsdanfId`, 'paula')
-            })
-            .then(result =>{
-                expect(result).to.be.instanceOf(Error)
-                expect(result.message).to.equal(`id not found`)
-            })
-            .catch(error => {
-                expect(error).to.be.instanceOf(Error)
-                expect(error.message).to.equal(`id not found`)
-            })
+    describe('when user does not exist', () => {
+        it('fails on unexisting user id', () => {
+            const unexistingUserId = new ObjectId().toString()
 
+            return updateUser(unexistingUserId, 'Pepe Gayo', 26, 'pepe@gayo.com', '+34123123123')
+                .then(result => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                })
+        })
     })
 
-/*
-crear un usuario nuevo
-intentar el update de una id que no existe, 'jjfiurfnc85tur8ejfr' ,'paula'
-miramos ue el result, sea un error (pork no ha funcionado)
-*/
-
-
-
-        
     afterEach(() => User.deleteMany())
 
     after(() => disconnect())
