@@ -4,11 +4,11 @@ const { Note } = require('../models')
 
 
 function updateNote(id, userId, text, callback) {
-    validateStringNotEmptyNoSpaces(id, 'id')
+   /*  validateStringNotEmptyNoSpaces(id, 'id')
     validateStringNotEmptyNoSpaces(userId, 'userId')
     validateString(text, 'text')
     validateFunction(callback, 'callback')
-
+ */
     // leer todas las notas que tengo en la carpeta
     // mirar una por una
     // si tiene el mismo id de nombre
@@ -23,7 +23,7 @@ function updateNote(id, userId, text, callback) {
         let count = 0, _error  // error enpieza con undefined
         if (files.length) { // si hay archivos
             files.forEach(file => { // para cada uno de los archivos
-                readFile(`./db/users/${file}`, 'utf8', (error, json) => {  // ejecuto lecturas asicronas, cada uno lee a su bola y cuando a terminado se pone en cola
+                readFile(`./db/users/${file}`, 'utf8', (error) => {  // ejecuto lecturas asicronas, cada uno lee a su bola y cuando a terminado se pone en cola
                     // tal cual llegan voy mirando que tengo en la cola
                     if (!_error) { // mientras no esta definido error voy haciendo cosas
 
