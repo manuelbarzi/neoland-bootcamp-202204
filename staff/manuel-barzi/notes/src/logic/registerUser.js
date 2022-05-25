@@ -1,7 +1,7 @@
 const { User } = require('../models')
 const { ConflictError } = require('../errors')
 
-function createUser(name, username, password) {
+function registerUser(name, username, password) {
     // TODO validate input args
 
     return User.create({ name, username, password })
@@ -14,4 +14,4 @@ function createUser(name, username, password) {
         })
 }
 
-module.exports = createUser
+module.exports = registerUser
