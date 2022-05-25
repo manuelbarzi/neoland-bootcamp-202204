@@ -1,16 +1,18 @@
-const { User } = require("../models");
-const { validateObjectId, validateObject } = require("../validators");
+const { User } = require('../models')
+const { NotFoundError } = require('../errors')
+const { validateObjectId, validateStringNotEmptyOrBlank, validateString } = require('../validators')
 
+function updateUser(userId, name, age, email, phone) {
+    validateObjectId(userId)
+    if (name) validateStringNotEmptyOrBlank(name, 'name')
+    if (age) validateNumber(age, 'age')
+    if (email) validateString(email, 'email')
+    if (phone) validateString(phone, 'phone')
 
-function updateUser(userId, updates) {
-    //TODO validators
-    // validateObjectId(userId, 'userId')
-    validateObject(updates, 'updates')
-    
-    return User.updateOne({ id: userId }, { $set : updates})
-        .then(result => {debugger; console.log(result)})
-        .catch(error => {
-            if (error) throw error
+    return User.updateOne({ _id: userId }, { $set: { name, age, email, phone } })
+        .then(result => {
+            if (result.matchedCount === 0)
+                throw new NotFoundError(`user with id ${userId} does not exist`)
         })
 }
 

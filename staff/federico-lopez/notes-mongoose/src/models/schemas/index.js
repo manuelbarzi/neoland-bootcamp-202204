@@ -1,8 +1,7 @@
 const note = require('./note')
-// const {user} = require('./user')
+const user = require('./user')
 
 module.exports = {
     note,
-    // user,
-   ...require('./user')
+    user
 }

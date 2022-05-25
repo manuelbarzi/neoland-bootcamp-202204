@@ -1,14 +1,14 @@
 const { User } = require('../models')
 const { ConflictError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validatePassword } = require('../validators')
+const { validateStringNotEmptyOrBlank, validateUsername, validatePassword } = require('../validators')
 
-function createUser(name, username, password) {
+function registerUser(name, username, password) {
     validateStringNotEmptyOrBlank(name, 'name')
-    validateStringNotEmptyNoSpaces(username, 'username')
+    validateUsername(username)
     validatePassword(password)
 
     return User.create({ name, username, password })
-        .then(() => {})
+        .then(() => { })
         .catch(error => {
             if (error.code = 11000)
                 throw new ConflictError(`user with username ${username} already exists`)
@@ -17,4 +17,4 @@ function createUser(name, username, password) {
         })
 }
 
-module.exports = createUser
+module.exports = registerUser

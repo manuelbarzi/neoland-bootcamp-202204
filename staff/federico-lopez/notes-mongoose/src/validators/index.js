@@ -53,11 +53,15 @@ function validateDate(date, explain = 'date') {
 }
 
 function validateObjectId(id, explain = 'id') {
-    if(!isValidObjectId(id)) throw new TypeError(`${explain} is not an Object Id`)
+    if(!isValidObjectId(id)) throw new TypeError(`${explain} wrong`)
 }
 
 function validateObject(object, explain = 'object') {
     if(!object instanceof Object) throw new TypeError(`${explain} is not an Object`)
+}
+
+function validateNumber(number, explain = 'number') {
+    if(!number instanceof Number) throw new TypeError(`${explain} is not a number`)
 }
 
 module.exports = {
@@ -70,5 +74,6 @@ module.exports = {
     validateFunction,
     validateDate,
     validateObjectId,
-    validateObject
+    validateObject,
+    validateNumber
 }
