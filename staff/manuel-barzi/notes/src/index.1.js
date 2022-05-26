@@ -1,9 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, createNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
-const { generateToken, verifyToken } = require('./helpers')
 
 connect('mongodb://localhost:27017/notes-db')
     .then(() => {
@@ -42,11 +41,7 @@ connect('mongodb://localhost:27017/notes-db')
                 const { body: { username, password } } = req
 
                 authenticateUser(username, password)
-                    .then(userId => {
-                        const token = generateToken(userId)
-
-                        res.status(200).json({ token })
-                    })
+                    .then(userId => res.status(200).json({ token: userId }))
                     .catch(error => {
                         let status = 500
 
@@ -67,7 +62,9 @@ connect('mongodb://localhost:27017/notes-db')
 
         api.get('/api/users', (req, res) => {
             try {
-                const userId = verifyToken(req)
+                const { headers: { authorization } } = req
+
+                const [, userId] = authorization.split(' ')
 
                 retrieveUser(userId)
                     .then(user => res.status(200).json(user))
@@ -91,7 +88,9 @@ connect('mongodb://localhost:27017/notes-db')
 
         api.patch('/api/users', jsonBodyParser, (req, res) => {
             try {
-                const userId = verifyToken(req)
+                const { headers: { authorization } } = req
+
+                const [, userId] = authorization.split(' ')
 
                 const { body: { name, age, email, phone } } = req
 
@@ -109,32 +108,6 @@ connect('mongodb://localhost:27017/notes-db')
                 let status = 500
 
                 if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
-                    status = 400
-
-                res.status(status).json({ error: error.message })
-            }
-        })
-
-        api.post('/api/notes', jsonBodyParser, (req, res) => {
-            try {
-                const userId = verifyToken(req)
-
-                const { body: { text } } = req
-
-                createNote(userId, text)
-                    .then(noteId => res.status(201).json({ noteId }))
-                    .catch(error => {
-                        let status = 500
-
-                        if (error instanceof NotFoundError)
-                            status = 404
-
-                        res.status(status).json({ error: error.message })
-                    })
-            } catch (error) {
-                let status = 500
-
-                if (error instanceof TypeError || error instanceof FormatError)
                     status = 400
 
                 res.status(status).json({ error: error.message })
