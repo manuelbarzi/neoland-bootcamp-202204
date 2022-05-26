@@ -1,14 +1,13 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-
-const { User } = require('../models')
+const { User, Note } = require('../models')
 const { NotFoundError } = require('../errors')
-const updateUser = require('./updateUser')
+const createNote = require('./createNote')
 const { expect } = require('chai')
 
-describe('updateUser', () => {
+describe('createNote', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
-    beforeEach(() => User.deleteMany())
+    beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
     describe('when user already exists', () => {
         let user
@@ -20,25 +19,26 @@ describe('updateUser', () => {
         })
 
         it('succeeds on correct user data', () =>
-            updateUser(user.id, 'Pepe Gayo', 26, 'pepe@gayo.com', '+34123123123')
-                .then(result => {
-                    expect(result).to.be.undefined
+        
+            createNote(user.id, 'Hola Mundo')
+                .then(noteId => {
+                    expect(noteId).to.be.a('string')
 
-                    return User.findById(user.id)
+                    return Note.findById(noteId)
                 })
-                .then(user => {
-                    expect(user.name).to.equal('Pepe Gayo')
-                    expect(user.age).to.equal(26)
-                    expect(user.email).to.equal('pepe@gayo.com')
-                    expect(user.phone).to.equal('+34123123123')
+                .then(note => {
+                    // expect(note.user.toString()).to.equal(user._id.toString())
+                    expect(note.user.toString()).to.equal(user.id)
+                    expect(note.text).to.equal('Hola Mundo')
+                    expect(note.date).to.be.instanceOf(Date)
                 })
         )
 
         it('fails on incorrect user id', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateUser(wrongId, 'Pepe Gayo', 26, 'pepe@gayo.com', '+34123123123')
-                .then(result => {
+            return createNote(wrongId, 'Hello World')
+                .then(() => {
                     throw new Error('should not reach this point')
                 })
                 .catch(error => {
@@ -52,8 +52,8 @@ describe('updateUser', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return updateUser(unexistingUserId, 'Pepe Gayo', 26, 'pepe@gayo.com', '+34123123123')
-                .then(result => {
+            return createNote(unexistingUserId, 'Hello World')
+                .then(() => {
                     throw new Error('should not reach this point')
                 })
                 .catch(error => {

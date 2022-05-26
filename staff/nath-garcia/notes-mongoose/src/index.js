@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser } = require('./logic')
-const { ConflictError, FormatError, AuthError } = require('./errors')
+const { registerUser, authenticateUser, retrieveUser } = require('./logic')
+const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 
 connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
@@ -11,7 +11,7 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
     const api = express()
 
     const jsonBodyParser = bodyParser.json() //Objeto que analiza y comprueba el body d elas solicitudesb entrantes y crea el cuerpo de la request
-
+//registerUser
     api.post('/api/users', jsonBodyParser, (req, res) => {
         try{ //sincrono
             const { body: { name, username, password } } = req
@@ -35,7 +35,7 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
             res.status(status).json({ error: error.message })
         }
     })
-
+//authenticateUser
     api.post('/api/users/auth', jsonBodyParser, (req, res) => {
         try {
             const { body: { username, password } } = req
@@ -56,6 +56,60 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
             if (error instanceof TypeError || error instanceof FormatError)
             status = 400
             
+            res.status(status).json({ error: error.message })
+        }
+    })
+
+    api.get('/api/users', (req, res) => {
+        try {
+            const { headers: { authorization } } = req.body
+
+            const [, userId] = authorization.split(' ')
+
+            retrieveUser(userId)
+            .then(user => res.status(200).json(user))
+            .catch(error => {
+                let status = 500
+
+                if (error instanceof NotFoundError)
+                status = 404
+
+                res.status(status).json({ error: error.message })
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof FormatError)
+            status = 400
+            
+            res.status(status).json({ error: error.message })
+        }
+    })
+    //updateUser
+    api.patch('/api/users', jsonBodyParser, (req, res) => {
+        try {
+            const { headers: { authorization } } = req
+
+            const [, userId] = authorization.split(' ')
+
+            const { body: { name, age, email, phone } } = req
+
+            updateUser(userId, name, age, email, phone)
+            .then(() => res.status(204).send())
+            .catch(error => {
+                let status = 500
+
+                if (error instanceof NotFoundError)
+                status = 404
+
+                res.status(status).json({ error: error.message }) 
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
+            status = 400
+
             res.status(status).json({ error: error.message })
         }
     })
