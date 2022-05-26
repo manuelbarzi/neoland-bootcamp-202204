@@ -1,12 +1,12 @@
 const { User } = require('../models')
 const { NotFoundError } = require('../errors')
-const { validateObjectId, validateStringNotEmptyOrBlank, validateString } = require('../validators')
+const { validateObjectId, validateStringNotEmptyOrBlank, validateStringNotEmptyNoSpaces, validateString } = require('../validators')
 
 function updateUser(userId, name, age, email, phone) {
     validateObjectId(userId)
     if (name) validateStringNotEmptyOrBlank(name, 'name')
     if (age) validateNumber(age, 'age')
-    if (email) validateString(email, 'email')
+    if (email) validateStringNotEmptyNoSpaces(email, 'email')
     if (phone) validateString(phone, 'phone')
 
     return User.updateOne({ _id: userId }, { $set: { name, age, email, phone } })

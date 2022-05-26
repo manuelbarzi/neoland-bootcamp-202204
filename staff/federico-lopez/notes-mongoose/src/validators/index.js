@@ -61,7 +61,7 @@ function validateObject(object, explain = 'object') {
 }
 
 function validateNumber(number, explain = 'number') {
-    if(!number instanceof Number) throw new TypeError(`${explain} is not a number`)
+    if(typeof number !== 'number') throw new TypeError(`${explain} is not a number`)
 }
 
 module.exports = {
