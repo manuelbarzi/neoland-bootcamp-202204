@@ -1,13 +1,20 @@
-const createUser = require('./createUser')
+const registerUser = require('./registerUser')
 const authenticateUser = require('./authenticateUser')
 const retrieveUser = require('./retrieveUser')
-const retrieveNotes = require('./retrieveNotes')
-const saveNote = require('./saveNote')
+const updateUser = require('./updateUser')
+const unregisterUser = require('./unregisterUser')
+const createNote = require('./createNote')
+const retrieveNote = require('./retrieveNote')
+const updateNote = require('./updateNote')
 
 module.exports = {
-    createUser,
+    registerUser,
     authenticateUser,
     retrieveUser,
-    retrieveNotes,
-    saveNote
+    updateUser,
+    unregisterUser,
+    createNote,
+    retrieveNote,
+    updateNote,
+
 }

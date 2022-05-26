@@ -1,8 +1,19 @@
+
 const { FormatError } = require('../errors')
+
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
+// const {isValidObjectId} = require('mongoose')
+
 
 function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
 }
+
+// function validateObjectId(id, explain = 'id') {
+//     if(!isValidObjectId(id)) throw new TypeError(`wrong ${explain}`)
+// }
+
 
 function validateStringNotEmptyOrBlank(string, explain = 'string') {
     validateString(string, explain)
@@ -29,7 +40,7 @@ function validateJwt(token) {
 }
 
 function validatePassword(password, explain = 'password') {
-    validateString(password, explain)
+    validateStringNotEmptyNoSpaces(password, explain)
 
     if (password.length < 8)
         throw new FormatError(`${explain} length is lower than 8`)
@@ -47,8 +58,25 @@ function validateFunction(func, explain = 'function') {
         throw new TypeError(`${explain} is not a function`)
 }
 
+function validatePositiveInteger(number, explain = 'number') {
+    validateNumber(number, explain)
+
+    if (!Number.isInteger(number)) throw new FormatError(`${explain} is not an integer`)
+
+    if (number < 0 || number > 150) throw new RangeError(`${explain} is lower than 0 or greater than 150`)
+}
+
 function validateDate(date, explain = 'date') {
     if (!(date instanceof Date)) throw new TypeError(`${explain} is not Date`)
+}
+
+function validateEmail(email, explain = 'email') {
+    if (!EMAIL_REGEX.test(email))
+        throw new FormatError(`${explain} is not an email`)
+}
+
+function validateNumber(number, explain = 'number') {
+    if (typeof number !== 'number') throw new TypeError(`${explain} is not a number`)
 }
 
 module.exports = {
@@ -59,5 +87,9 @@ module.exports = {
     validatePassword,
     validateUsername,
     validateFunction,
-    validateDate
+    validateDate,
+    validateNumber,
+    validatePositiveInteger,
+    validateEmail
+    
 }

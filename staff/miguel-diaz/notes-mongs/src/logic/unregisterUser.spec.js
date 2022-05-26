@@ -1,10 +1,11 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
-const { AuthError } = require('../errors')
-const retrieveUser = require('./retrieveUser')
+const { NotFoundError} = require('../errors')
+const unregisterUser = require('./unregisterUser')
 const { expect } = require('chai')
+const retrieveUser = require('./retrieveUser')
 
-describe('retrieveUser', () => {
+describe('unregisterUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
     beforeEach(() => User.deleteMany())
@@ -29,25 +30,25 @@ describe('retrieveUser', () => {
                 })
         )
 
-        it('fails on incorrect id', () => {
-            const wrongId = new ObjectId().toString()
+        it('should delete the new user', () =>
+            unregisterUser(user.id)
+                .then(result => {
+                    expect(result).to.be.undefined
 
-            retrieveUser(wrongId)
-                .then(() => {
-                    throw new Error('should not reach this point')
+                    return User.findOne({id:result})
                 })
-                .catch(error => {
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                .then(find => {
+                    expect(find).to.be.null
                 })
-        })
+            
+        )       
     })
 
-    describe('when user does not exist', () => {
-        it('fails on user id from non-existing user', () => {
+    describe('when user id does not exist and try to delete', () => {
+        it('cant delete an inexsting user', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            retrieveUser(unexistingUserId)
+            unregisterUser(unexistingUserId)
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

@@ -1,201 +1,201 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const {
-    createUser,
-    authenticateUser,
-    retrieveUser,
-    retrieveNotes,
-    saveNote
-} = require('./logic')
-const { parseCookies } = require('./utils')
+const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNote, updateNote } = require('./logic')
+const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
+const { connect, disconnect } = require('mongoose')
+const { generateToken, verifyToken } = require('./helpers')
 
-const server = express()
+connect('mongodb://localhost:27017/notes-db')
+    .then(() => {
+        console.log('DB connected')
 
-server.use(express.static('public'))
+        const api = express()
 
-const formBodyParser = bodyParser.urlencoded({ extended: true })
+        const jsonBodyParser = bodyParser.json()
 
-server.get('/register', (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
+        api.post('/api/users', jsonBodyParser, (req, res) => {
+            try {
+                const { body: { name, username, password } } = req
 
-        if (userId)
-            return res.redirect('/')
+                registerUser(name, username, password)
+                    .then(() => res.status(201).send())
+                    .catch(error => {
+                        let status = 500
 
-        res.status(200).send(`<html>
-            <head><head>
-            <body>
-                <form method="POST" action="/register">
-                    <input type="text" name="name" placeholder="name">
-                    <input type="text" name="username" placeholder="username">
-                    <input type="password" name="password" placeholder="password"/>
-                    <button>Register</button>
-                </form>
-            </body>
-            </html>`)
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
+                        if (error instanceof ConflictError)
+                            status = 409
 
-server.post('/register', formBodyParser, (req, res) => {
-    try {
-        const { name, username, password } = req.body
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
 
-        createUser(name, username, password, (error, userId) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
 
-            res.status(201).send(`<h1>User registered ${userId}</h1>`)
+                res.status(status).json({ error: error.message })
+            }
         })
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
 
-server.get('/login', (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
+        api.post('/api/users/auth', jsonBodyParser, (req, res) => {
+            try {
+                const { body: { username, password } } = req
 
-        if (userId)
-            return res.redirect('/')
+                authenticateUser(username, password)
+                    .then(userId => {
+                        const token = generateToken(userId)
 
-        res.status(200).send(`<html>
-            <head><head>
-            <body>
-                <form method="POST" action="/login">
-                    <input type="text" name="username" placeholder="username">
-                    <input type="password" name="password" placeholder="password"/>
-                    <button>Login</button>
-                </form>
-            </body>
-            </html>`)
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
+                        res.status(200).json({ token })
+                    })
+                    .catch(error => {
+                        let status = 500
 
-server.post('/login', formBodyParser, (req, res) => {
-    try {
-        const { username, password } = req.body
+                        if (error instanceof AuthError)
+                            status = 401
 
-        authenticateUser(username, password, (error, userId) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
 
-            res.cookie('userId', userId)
-            res.redirect(`/`)
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
         })
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
 
-server.get('/', (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
+        api.get('/api/users', (req, res) => {
+            try {
+                const userId = verifyToken(req)
 
-        if (!userId)
-            return res.redirect('/login')
+                retrieveUser(userId)
+                    .then(user => res.status(200).json(user))
+                    .catch(error => {
+                        let status = 500
 
-        retrieveUser(userId, (error, user) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
+                        if (error instanceof NotFoundError)
+                            status = 404
 
-            retrieveNotes(userId, (error, notes) => {
-                if (error)
-                    return res.status(400).send(`<h1>${error.message}</h1>`)
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
 
-                res.status(200).send(`<html>
-                <head>
-                    <link rel="stylesheet" href="index.css">
-                <head>
-                <body>
-                    <h1>Hello, ${user.name}!</h1>
-                    <form method="POST" action="/logout">
-                        <button>Logout</button>
-                    </form>
-                    <ul>
-                        ${notes.map(note => `<li>
-                            <form method="POST" action="/save-note/${note.id}">
-                                <textarea name="text">${note.text}</textarea>
-                                <button>Save</button>
-                            </form>
-                            <form method="POST" action="/delete-note/${note.id}">
-                                <button>x</button>
-                            </form>
-                        </li>`).join('')}
-                    </ul>
-                    <form method="POST" action="/save-note">
-                        <button>+</button>
-                    </form>
-                </body>
-                </html>`)
-            })
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
         })
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
 
-server.post('/save-note', formBodyParser, (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
+        api.patch('/api/users', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
 
-        if (!userId)
-            return res.redirect('/login')
+                const { body: { name, age, email, phone } } = req
 
-        saveNote(userId, null, null, (error, noteId) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
+                updateUser(userId, name, age, email, phone)
+                    .then(() => res.status(204).send())
+                    .catch(error => {
+                        let status = 500
 
-            res.redirect('/')
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
         })
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
 
-server.post('/save-note/:noteId', formBodyParser, (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
 
-        if (!userId)
-            return res.redirect('/login')
+        // <<<<<<     N      O       T       E        S   >>>>>>>>>>>>>>>
 
-        const { params: { noteId }, body: { text } } = req
+        api.post('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
 
-        saveNote(userId, noteId, text, (error, noteId) => {
-            if (error)
-                return res.status(400).send(`<h1>${error.message}</h1>`)
+                const { body: { text } } = req
 
-            res.redirect('/')
+                createNote(userId, text)
+                    .then(noteId => res.status(201).json({ noteId }))
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
         })
-    } catch (error) {
-        res.status(400).send(`<h1>${error.message}</h1>`)
-    }
-})
 
-server.post('/logout', (req, res) => {
-    res.clearCookie('userId')
-    res.redirect('/login')
-})
 
-server.post('/delete-note/:noteId', (req, res) => {
-    try {
-        const { userId } = parseCookies(req.header('cookie'))
+        api.get('/api/notes', (req, res) => {
+            try {
+                const userId = verifyToken(req)
 
-        if (!userId)
-            return res.redirect('/login')
+                retrieveNote(userId)
+                    .then(noteId => res.status(200).json(noteId))
+                    .catch(error => {
+                        let status = 500
 
-        const { noteId } = req.params
+                        if (error instanceof NotFoundError)
+                            status = 404
 
-        // ... deleteNote(userId, noteId, error => ... res.redirect('/') )
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
 
-        res.send(`TODO delete note with id ${noteId}`)
-    } catch (error) {
-        // ...
-    }
-})
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
 
-server.listen(8080, () => console.log('server started'))
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+        api.patch('/api/notes', (req, res) => {
+            try {
+                const userId = verifyToken(req)
+                const noteId = verifyToken(req)
+
+                const { body: { text } } = req
+
+                updateNote(userId, noteId, text)
+                    .then(() => res.status(204).send(text))
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        api.listen(8080, () => console.log('API running'))
+    })
