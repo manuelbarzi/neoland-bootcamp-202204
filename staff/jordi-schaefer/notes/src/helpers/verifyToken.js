@@ -13,8 +13,10 @@ function verifyToken(req) {
     //const token = authorization.split(' ')[1]
     const [noInteresa, token] = authorization.split(' ') // [ Bearer, 344834829434]
 
-    const payload = verify(token, 'secretito que codifica')
-    const { sub: userId} = payload
+    //const payload = verify(token, 'secretito que codifica')
+    //const { sub: userId} = payload
+    const { sub: userId } = verify(token, 'secretito que codifica')
+
     return userId
 }
 

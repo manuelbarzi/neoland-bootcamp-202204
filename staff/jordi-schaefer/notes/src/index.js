@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { createUser, authenticateUser, retrieveUser, updateUser, deleteUser, createNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, deleteUser, createNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect } = require('mongoose')
-const generateToken = require('./helpers/generateToken')
+const { generateToken, verifyToken } = require('./helpers')
+const { validateString } = require('./validators')
 
 
 connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
@@ -25,7 +26,7 @@ connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
                 
                 const { body: { name, username, password } } = req // extraigo las propiedades del body que me ha ggenerado jsonBodyParser
             
-                createUser(name, username, password) // llamo a mi funcion
+                registerUser(name, username, password) // llamo a mi funcion
                     .then(() => res.status(201).send()) // cuando ha acabado, envio al res un status 201
                     .catch(error => { // si el registro lanza un error ASINCRONO que llega más tarde
                         let status = 500
@@ -58,7 +59,7 @@ connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
                     .then(userId => {
                         const token = generateToken(userId)
 
-                        res.status(200).json( token )  // devuelvo estatus ok y el token
+                        res.status(200).json({ token })  // devuelvo estatus ok y el token
                     })  
                     .catch(error => {
                         let status = 500
@@ -209,3 +210,5 @@ connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
 
 
 // mongoose sin pons id sin _ te devuelve en string
+
+

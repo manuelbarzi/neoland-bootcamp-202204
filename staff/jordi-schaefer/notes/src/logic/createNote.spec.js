@@ -5,7 +5,7 @@ const createNote = require('./createNote')
 const { expect } = require('chai')
 
 describe('createNote', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
