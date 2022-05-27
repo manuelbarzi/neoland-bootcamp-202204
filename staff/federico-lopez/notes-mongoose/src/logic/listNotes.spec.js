@@ -29,11 +29,8 @@ describe('listNotes', () => {
             })
             return Promise.all(usersPromises)
                 .then(users => {
-                    usersArray = []
-
-                    users.forEach(user => usersArray.push(user))
-                })
-                .then(() => {
+                    usersArray = users
+                    
                     const notesPromises = textArray.map(text => {
                         return Note.create({ user: usersArray[0].id, text: text })
                     })

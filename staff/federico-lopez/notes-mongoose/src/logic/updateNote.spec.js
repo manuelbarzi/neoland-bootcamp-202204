@@ -31,7 +31,6 @@ describe('updateNote', () => {
                     return Note.findById(note.id)
                 })
                 .then(note => {
-                    debugger
                     expect(note.user.toString()).to.equal(user.id)
                     expect(note.text).to.equal('byebye')
                     expect(note.date).to.be.instanceOf(Date)
@@ -59,6 +58,21 @@ describe('updateNote', () => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`note with id ${unexistingNoteId} does not exist`)
                 })
+        })
+
+        it('succeeds on existing note, existing user, without text changes', () => {
+            updateNote(note.id, user.id, 'hola mundo')
+            .then(result => {
+                expect(result).to.be.undefined
+
+                return Note.findById(note.id)
+            })
+            .then(note => {
+                debugger
+                expect(note.user.toString()).to.equal(user.id)
+                expect(note.text).to.equal('hola mundo')
+                expect(note.date).to.be.instanceOf(Date)
+            })
         })
     })
     afterEach(() => User.deleteMany())

@@ -1,10 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, listNotes, createNote, updateNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, listNotes, createNote, updateNote, deleteUser, deleteNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
-const deleteUser = require('./logic/deleteUser')
 
 connect('mongodb://localhost:27017/notes-db')
     .then(() => {
@@ -167,19 +166,19 @@ connect('mongodb://localhost:27017/notes-db')
 
         api.get('/api/notes', (req, res) => {
             try {
-            const userId = verifyToken(req)
+                const userId = verifyToken(req)
 
-            listNotes(userId)
-                .then(notes => {
-                    res.status(200).json(notes)
-                })
-                .catch(error => {
-                    let status = 500
+                listNotes(userId)
+                    .then(notes => {
+                        res.status(200).json(notes)
+                    })
+                    .catch(error => {
+                        let status = 500
 
-                    if (error instanceof NotFoundError) status = 404
+                        if (error instanceof NotFoundError) status = 404
 
-                    res.status(status).json({ error: error.message })
-                })
+                        res.status(status).json({ error: error.message })
+                    })
             } catch (error) {
                 let status = 500
 
@@ -210,6 +209,32 @@ connect('mongodb://localhost:27017/notes-db')
 
                 if (error instanceof TypeError || error instanceof FormatError)
                     status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        api.delete('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                const { body: { id: noteId } } = req
+
+                return deleteNote(noteId, userId)
+                    .then(() => {
+                        res.status(204).send()
+                    })
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError || error instanceof ConflictError) status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError) status = 400
 
                 res.status(status).json({ error: error.message })
             }
