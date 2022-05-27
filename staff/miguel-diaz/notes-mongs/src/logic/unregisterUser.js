@@ -1,18 +1,20 @@
-const { User } = require('../models')
-const { ConflictError } = require('../errors')
-const { toObjectId } = require('../validators')
+const { AuthError } = require("../errors");
+const { User } = require("../models");
+const { validateStringNotEmptyNoSpaces, validatePassword } = require("../validators");
 
-function unregisterUser(userId) {
-    toObjectId(userId)
-    // TODO validate input args
-    return User.deleteOne({_id: userId}).lean()
-        .then(() => { })
-        .catch(error => {
-            if (error.code = 11000)
-                throw new ConflictError(`user with id ${userId} was deleted`)
+function unregisterUser(userId, password) {
+    validateStringNotEmptyNoSpaces(userId, 'user id')
+    validatePassword(password)
+
+    return User.findById(userId)
+        .then(result => {
+            if (result === null) throw new AuthError('incorrect Id')
             
-            throw error
+            if (result.password !== password) throw new AuthError('wrong credentials')
+
+            return User.deleteOne({ _id: userId })
         })
+        .then(() => {})
 }
 
 module.exports = unregisterUser

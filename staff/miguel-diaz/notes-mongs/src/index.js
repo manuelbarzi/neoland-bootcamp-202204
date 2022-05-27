@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNote, updateNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNote, updateNote, listNotes, unregisterUser } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
+const deleteNote = require('./logic/deleteNote')
 
 connect('mongodb://localhost:27017/notes-db')
     .then(() => {
@@ -116,6 +117,31 @@ connect('mongodb://localhost:27017/notes-db')
         })
 
 
+        api.delete('/api/users', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+                const { body: { password } } = req
+
+                unregisterUser(userId, password)
+                    .then(() => res.status(204).send())
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof AuthError) status = 401
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError) status = 400
+
+                res.status(status).send({ error: error.message })
+            }
+        })
+
+
+
         // <<<<<<     N      O       T       E        S   >>>>>>>>>>>>>>>
 
         api.post('/api/notes', jsonBodyParser, (req, res) => {
@@ -169,16 +195,14 @@ connect('mongodb://localhost:27017/notes-db')
             }
         })
 
-
-        api.patch('/api/notes', (req, res) => {
+        api.patch('/api/notes', jsonBodyParser, (req, res) => {
             try {
                 const userId = verifyToken(req)
-                const noteId = verifyToken(req)
 
-                const { body: { text } } = req
+                const { body: { noteId, text } } = req
 
                 updateNote(userId, noteId, text)
-                    .then(() => res.status(204).send(text))
+                    .then(text => res.status(204).send(text))
                     .catch(error => {
                         let status = 500
 
@@ -196,6 +220,56 @@ connect('mongodb://localhost:27017/notes-db')
                 res.status(status).json({ error: error.message })
             }
         })
+
+
+        api.get('/api/notes', (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                listNotes(userId)
+                    .then(noteId => res.status(200).json(noteId))
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+        api.delete('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+                const { body: { noteId } } = req
+
+                deleteNote(userId, noteId)
+                    .then(noteId => res.status(204).send(noteId))
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof AuthError) status = 401
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError) status = 400
+
+                res.status(status).send({ error: error.message })
+            }
+        })
+        
 
         api.listen(8080, () => console.log('API running'))
     })

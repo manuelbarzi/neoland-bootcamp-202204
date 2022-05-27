@@ -9,45 +9,91 @@ describe('listNotes', () => {
 
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
-    describe('Happy Path', () => {
-        let userId
+    describe('when user already exists', () => {
+        let user
 
         beforeEach(() => {
-            return User.create({
-                name: 'lucatiel',
-                username: 'lucataiel',
-                password: '123123123'
+            user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
+
+            return user.save()
+
+            // return User.create({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
+        })
+        // .then(_user => user = _user)
+
+        describe('when user already has notes', () => {
+            let note1, note2, note3, allNotes
+
+            beforeEach(() => {
+                note1 = new Note({ user: user.id, text: 'note 1' })
+                note2 = new Note({ user: user.id, text: 'note 2' })
+                note3 = new Note({ user: user.id, text: 'note 3' })
+
+                return Promise.all([note1.save(), note2.save(), note3.save()])
+                    .then(notes => allNotes = notes)
             })
-            .then(user => {
-                userId = user.id
-                const textNotes = [
-                    'text1',
-                    'text2',
-                    'text3',
-                    'text4',
-                    'text5',
-                ]
-                const notesPromises = textNotes.map(text => Note.create({
-                    user: userId,
-                    text: 'este es mi texto'
-                }))
-                Promise.all(notesPromises)
-            })
+
+            it('succeeds on correct user data', () =>
+                listNotes(user.id)
+                    .then(notes => {
+                        expect(notes).to.be.instanceOf(Array)
+
+                        expect(notes).to.have.lengthOf(3)
+
+                        notes.forEach(note => {
+                            const found = allNotes.some(_note => {
+                                return _note.id === note.id && _note.text === note.text
+                            })
+
+                            expect(found).to.be.true
+                        })
+                    })
+            )
         })
 
-        it('my test', () =>{
-            return listNotes(userId)
-            .then(notes => {
-                expect(notes).to.be.intanceof(Array)
-                expect(notes.lenght).to.be.equal(5)
-                // TODO mirar si los textos corresppnden con las notas introducidas con un for
-            })
+        describe('when user has no notes', () => {
+            it('succeeds on correct user data', () =>
+                listNotes(user.id)
+                    .then(notes => {
+                        expect(notes).to.be.instanceOf(Array)
+
+                        expect(notes).to.have.lengthOf(0)
+                    })
+            )
+        })
+
+        it('fails on incorrect user id', () => {
+            const wrongId = new ObjectId().toString()
+
+            return listNotes(wrongId)
+                .then(() => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                })
         })
     })
 
-    // afterEach(() => User.deleteMany())
+    describe('when user does not exist', () => {
+        it('fails on unexisting user id', () => {
+            const unexistingUserId = new ObjectId().toString()
 
-    // after(() => disconnect())
+            return listNotes(unexistingUserId)
+                .then(() => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                })
+        })
+    })
+
+    afterEach(() => User.deleteMany())
+
+    after(() => disconnect())
 })
 
 
