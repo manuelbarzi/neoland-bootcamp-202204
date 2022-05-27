@@ -19,31 +19,22 @@ describe('listNotes', () => {
         ]
 
         beforeEach(() => {
-            let counter = usersArray.length
-                    for (let i = 0; i < counter; i++) {
-                        usersArray.pop()
-                    }
-
-            usersArray.push(
+            usersArray = [
                 { name: 'abdo', username: 'soyuser', password: '321321321' },
                 { name: 'abdo12321', username: 'NUEVO', password: '321321321' }
-            )
+            ]
 
-            let usersPromises = usersArray.map(user => {
+            const usersPromises = usersArray.map(user => {
                 return User.create(user)
             })
             return Promise.all(usersPromises)
                 .then(users => {
-
-                    let counter = usersArray.length
-                    for (let i = 0; i < counter; i++) {
-                        usersArray.pop()
-                    }
+                    usersArray = []
 
                     users.forEach(user => usersArray.push(user))
                 })
                 .then(() => {
-                    let notesPromises = textArray.map(text => {
+                    const notesPromises = textArray.map(text => {
                         return Note.create({ user: usersArray[0].id, text: text })
                     })
                     return Promise.all(notesPromises)
@@ -59,11 +50,13 @@ describe('listNotes', () => {
                     expect(result).to.be.instanceOf(Array)
                     expect(result.length).to.equal(3)
 
-                    for (let i = 0; i < result.length; i++) {
-                        expect(result[i].text).to.equal(arrayOfNotes[i].text)
-                        expect(result[i].id).to.equal(arrayOfNotes[i].id.toString())
-                        expect(result[i].user).to.equal(arrayOfNotes[i].user.toString())
-                    }
+                    result.forEach(note => {
+                        const found = arrayOfNotes.some(_note => {
+                            return _note.text === note.text && note.id === _note.id
+                        })
+
+                        expect(found).to.be.true
+                    })
                 })
         )
 
@@ -72,7 +65,6 @@ describe('listNotes', () => {
 
             return listNotes(wrongUserId)
                 .then(() => {
-                    debugger
                     throw new Error('it should not reach this point')
                 })
                 .catch(error => {

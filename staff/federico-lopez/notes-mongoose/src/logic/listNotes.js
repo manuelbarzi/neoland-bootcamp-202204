@@ -10,18 +10,18 @@ function listNotes(userId) {
             if (result === null) throw new NotFoundError(`user with id ${userId} dos not exist`)
         })
         .then(() => {
-            return Note.find({ user: userId })
+            return Note.find({ user: userId }).lean()
         })
-        .then(array => {
-            return array.map(note => {
-                note = note._doc
+        .then(notes => {
+            notes.forEach(note => {
                 note.id = note._id.toString()
-                note.user = note.user.toString()
 
                 delete note._id
+                delete note.user
                 delete note.__v
                 return note
             })
+            return notes
         })
 }
 

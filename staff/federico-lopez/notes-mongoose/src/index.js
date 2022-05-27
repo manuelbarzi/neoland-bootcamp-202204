@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, listNotes, createNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, listNotes, createNote, updateNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
@@ -180,6 +180,31 @@ connect('mongodb://localhost:27017/notes-db')
 
                     res.status(status).json({ error: error.message })
                 })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        api.patch('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                const { body: { id: noteId, text } } = req
+                debugger
+                updateNote(noteId, userId, text)
+                    .then(() => res.status(204).send())
+                    .catch(error => {
+                        let status = 500
+
+                        if (status instanceof NotFoundError) status = 404
+
+                        res.json({ error: error.message })
+                    })
             } catch (error) {
                 let status = 500
 
