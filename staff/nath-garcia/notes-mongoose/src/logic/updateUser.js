@@ -4,7 +4,7 @@ const { validateStringNotEmptyOrBlank, validateStringNotEmptyNoSpaces, validateE
 
 function updateUser(userId, name, age, email, phone) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
-    validateStringNotEmptyOrBlank(name, 'name')
+    if (name != null) validateStringNotEmptyOrBlank(name, 'name')
     if (age != null) validatePositiveInteger(age, 'age')
     if (email != null)  validateEmail(email, 'email')
     if (phone != null)  validateString(phone, 'phone')

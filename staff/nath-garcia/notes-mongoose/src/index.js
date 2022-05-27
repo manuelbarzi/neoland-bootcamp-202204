@@ -1,8 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNotes, updateNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
+const { generateToken, verifyToken } = require('./helpers')
 
 connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
 .then(() => { //cuando tenga la confirmación de estar conectado a Mongo
@@ -41,7 +42,11 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
             const { body: { username, password } } = req
 
             authenticateUser(username, password)
-            .then(userId => res.status(200).json({ token: userId }))
+            .then(userId => {
+                const token = generateToken(userId)
+
+                res.status(200).json({ token })
+            })
             .catch(error => {
                 let status = 500
 
@@ -59,13 +64,10 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
             res.status(status).json({ error: error.message })
         }
     })
-
+//retrieveUser
     api.get('/api/users', (req, res) => {
         try {
-            const { headers: { authorization } } = req.body
-
-            const [, userId] = authorization.split(' ')
-
+            const userId = verifyToken(req)
             retrieveUser(userId)
             .then(user => res.status(200).json(user))
             .catch(error => {
@@ -87,10 +89,15 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
     })
     //updateUser
     api.patch('/api/users', jsonBodyParser, (req, res) => {
+        debugger
         try {
-            const { headers: { authorization } } = req
+            // const { headers: { authorization } } = req
 
-            const [, userId] = authorization.split(' ')
+            // const [, token] = authorization.split(' ')
+            // const { sub: userId } = verify(token, 'a pepito le gusta el nudismo')
+
+
+            const userId = verifyToken(req)
 
             const { body: { name, age, email, phone } } = req
 
@@ -110,6 +117,56 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
             if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
             status = 400
 
+            res.status(status).json({ error: error.message })
+        }
+    })
+
+    //createNotes
+    debugger
+    api.post('/api/notes', jsonBodyParser, (req, res) => {
+        try{ //sincrono
+            const userId = verifyToken(req)
+            createNote(userId, text )
+            .then(notes => res.status(200).json({notes}))
+                
+            .catch(error => { //asincrono
+                let status = 500
+
+                if (error instanceof ConflictError) status = 409
+
+                res.status(status).json({ error: error.message })
+                // res.status(status).send(JSON.stringify({ error: error.message }))
+            })
+        } catch (error) { //sincrono
+            let status = 500
+
+            if(error instanceof TypeError || error instanceof FormatError)
+            status = 400
+
+            res.status(status).json({ error: error.message })
+        }
+    })
+
+    //retrieveNotes
+    api.get('/api/notes', (req, res) => {
+        try {
+            const userId = verifyToken(req)
+            retrieveNotes(userId)
+            .then(notes => res.status(200).json({notes}))
+            .catch(error => {
+                let status = 500
+
+                if (error instanceof NotFoundError)
+                status = 404
+
+                res.status(status).json({ error: error.message })
+            })
+        } catch (error) {
+            let status = 500
+
+            if (error instanceof TypeError || error instanceof FormatError)
+            status = 400
+            
             res.status(status).json({ error: error.message })
         }
     })

@@ -11,7 +11,7 @@ describe('authenticateUser', () => {
 
     describe('when user already exists', () => {
         let user
-
+debugger
         beforeEach(() => {
             user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
 
