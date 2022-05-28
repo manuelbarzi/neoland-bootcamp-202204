@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node src",
-    "start-inspect": "node --inspect-brk src",
+    "start-inspect": "node --inspect-brk src",    
     "test": "npx mocha src/**/*.spec.js",
     "test-inspect": "npx mocha --inspect-brk src/**/*.spec.js",
+    "start-watch" : "nodemon src",
     "populate": "node src/populate1.js"
   },
   "keywords": [],
@@ -16,10 +17,12 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "express": "^4.18.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.4"
   },
   "devDependencies": {
     "chai": "^4.3.6",
-    "mocha": "^10.0.0"
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.16"
   }
 }

@@ -1,13 +1,15 @@
 const { User } = require('../models')
 const { NotFoundError } = require('../errors')
+const { validateStringNotEmptyNoSpaces } = require('../validators')
 
 function retrieveUser(id){
-
-    return User.findById(id).lean()  //ponemos return porque hay que ponerle para que las promises se ejecuten cuando terminen
+    validateStringNotEmptyNoSpaces(id, 'user id')
+                                
+    return User.findById(id).lean()  //Con lean() hacemos que solo nos traiga el documento del user
         .then((user)=> {
 
             if (!user){
-                throw new NotFoundError(`user with id ${userId} does not exist`)
+                throw new NotFoundError(`user with id ${id} does not exist`)
             }
 
             delete user.password   //password no existe en la pantalla, hay que poner user.password para llegar a ella

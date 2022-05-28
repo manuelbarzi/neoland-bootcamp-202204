@@ -13,6 +13,7 @@ function registerUser(name, username, password) { //creamos la función createUs
         // si quitas el then o lo dejas con solo parentesis vacios .then()
         // te devuelve automaticamente la respuesta
 
+        //es la unica función que tiene CATCH ya que mongoose pare registerUser caza el error
         .catch(error => {  // si create nos devuelve un error SINCRONO 
             if (error.code = 11000) // (de duplicate o de syntax error)
                 throw new ConflictError(`user with username ${username} already exists`) // lanzamos error de que ya existe

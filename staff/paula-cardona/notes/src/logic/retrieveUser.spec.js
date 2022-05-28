@@ -20,16 +20,16 @@ describe('retrieveUser', () => {
 
         //it es una funcion del mocha y le paso 2 parametros, texto y callback
         
-        it ('success on correct user id', () => //la función flecha lleva el return implicito
-            retrieveUser(user.id)
+        it ('success on correct user id', () => {//la función flecha lleva el return implicito
+            return retrieveUser(user.id)
                 .then((user)=> { 
-                    expect(user.constructor).to.equal(Object)
+                    expect(user.constructor).to.equal(Object) //modelo
                     expect(user.name).to.be.equal('Papa Gayo')
                     expect(user.username).to.be.equal('papagayo')
-                    expect(user.password).to.be.undefined
-                    expect(user.id).to.be.undefined
+                    expect(user.password).to.be.undefined //undefined porque no quiero que me la devuelva
+                    expect(user.id).to.be.undefined //undefined porque no quiero que me devuelva el user.id porque ya me lo se ya que es el que uso como parametro
                 })
-        )
+        })
         
         it ('fails when userid does not exist', () => {
             const wrongId = new ObjectId().toString() //crea un id de tipo mongoose
@@ -50,7 +50,7 @@ describe('retrieveUser', () => {
         it('fails on user id from non-existing user', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            retrieveUser(unexistingUserId)
+            return retrieveUser(unexistingUserId)
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

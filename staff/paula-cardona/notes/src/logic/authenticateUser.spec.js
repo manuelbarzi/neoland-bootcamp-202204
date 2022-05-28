@@ -10,12 +10,12 @@ describe('authenticateUser', () => {
     beforeEach(() => User.deleteMany())
 
     describe('when user already exists', () => {
-        let user
+        let user //para poder usarlo fuera
 
         beforeEach(() => {
             user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
 
-            return user.save()
+            return user.save() 
         })
 
         it('succeeds on correct credentials', () =>
@@ -51,7 +51,7 @@ describe('authenticateUser', () => {
 
     describe('when user does not exist', () => {
         it('fails on credentials from non-existing user', () =>
-            authenticateUser('papagayo', '123123123')
+            authenticateUser('papagayo', '123123123') //no coge el user creado porque esta en un nuevo describe
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -66,3 +66,7 @@ describe('authenticateUser', () => {
 
     after(() => disconnect())
 })
+
+
+
+

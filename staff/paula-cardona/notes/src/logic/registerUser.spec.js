@@ -18,8 +18,10 @@ describe ('registerUser', () => { //función de createUser
                 expect(result).to.be.undefined //espero que el resultado de createUser sea undefined, porque no le envio nada
                 //le devuelve undefined porque en la función de create user no nos devuelve nada el primer .then
                 return User.findOne({ username: 'peterpan' }) // con return espero que me devuelva el usuario encontrado en la base de datos de usuarios con el username: peter pan
+                //  SIEMPRE TENGO QUE HACER COMPROBACIONES CON EL DB PARA SABER SI LAS COSAS SE HAN HECHO BIEN
             })
-            .then(user => { //asincronia, cuando user.findOne me haga return, empiezo este .then con el usuario que me haya devuelto
+            //esto no me lo trae la funcion registerUser, lo traigo yo en spec para comprobar
+            .then(user => { //asincronia, cuando user.findOne me haga return, empiezo este .then con el usuario que me haya devuelto la función findOne
                 expect(user.name).to.equal('Peter Pan') 
                 expect(user.username).to.equal('peterpan')
                 expect(user.password).to.equal('123123123')
@@ -27,7 +29,7 @@ describe ('registerUser', () => { //función de createUser
     })
 
     it('fails when user already exists', () => { 
-        return User.create({ name: 'Wendy Pan', username: 'wendypan', password: '123123123'}) // creo un usuario
+        return User.create({ name: 'Wendy Pan', username: 'wendypan', password: '123123123'}) // creo un usuario para poder hacer otro que ya exista
             .then(() => registerUser('Wendy Pan', 'wendypan', '123123123')) // cuando ya se ha creado, intento crear otro con mi funcion
             .catch(error => { //caza el error
                 expect(error).to.be.instanceOf(ConflictError) //espero que sea instancia de ConflictError

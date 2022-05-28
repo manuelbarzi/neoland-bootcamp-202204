@@ -2,6 +2,7 @@ const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
 const { expect } = require("chai")
 const deleteUser = require('./deleteUser')
+const { NotFoundError } = require('../errors')
 
 describe('deleteUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
@@ -14,34 +15,56 @@ describe('deleteUser', () => {
         beforeEach(() =>  { //más de una linea ponemos {}
             user = new User({ name: 'Papa Gayo', username: 'papagayo', password:'123123123'})
             
-            return user.save() //guardar el usuario y el return es para que entre en los it
+            return user.save() //guardar el usuario en base de datos y el return es para que entre en los it
         })
 
         it('success in delete user with correct Id', ()=>{
-            deleteUser(user.id) //solo usamos la función
+            return deleteUser(user.id, user.password) //solo usamos la función
                 .then((result)=>{
                     expect(result).to.be.undefined
 
-                    return User.findById(user.id)  //ponemos return para que continue con la siguiente ya que espero un result(aunqe sea vacio)
                 })
-                .then((result)=> //null= que esa vacio     si pusieramos undefined seria decir que quiza el user esta incompleto pero existe por ejemplo.
-                    expect(result).to.be.null
-                )
+                .catch ((error) =>{
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.be.equal(`wrong credentials`)
+                })
         })
+        it ('fais when user exist but password is incorrect' ,() => {
+            return deleteUser(user.id, '456456456')
+                .then (() =>{ 
+                    throw new Error('should not reach this point') //al ser un error
+                })
+                .catch ((error) =>{
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.be.equal(`wrong credentials`)
+                })
 
+        })
+    })
+
+    describe ('when user does not exist', ()=> {
+        let user
+
+        beforeEach(() =>  { //más de una linea ponemos {}
+            user = new User({ name: 'Papa Gayo', username: 'papagayo', password:'123123123'})
+            
+            return user.save() //guardar el usuario en base de datos y el return es para que entre en los it
+        })
+    
         it('fails when userid does not exist', ()=>{
             wrongId = new ObjectId().toString()
-            deleteUser(wrongId) //solo usamos la función
+            return deleteUser(wrongId, user.password ) //solo usamos la función
                 .then(() =>{
-                    throw new Error('should not reach this point')
+                    throw new Error('should not reach this point') //al ser un error
 
                 })
                 .catch((error) => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.be.equal(`user with id ${wrongId} does not exist`)
+                    expect(error.message).to.be.equal(`wrong credentials`)
                 })
                 
         })
+        
 
     })
 
@@ -49,3 +72,8 @@ describe('deleteUser', () => {
 
     after(() => disconnect())
 })
+
+/*
+-necesito una noteId 
+
+*/
