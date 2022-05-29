@@ -1,5 +1,7 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
+const secret = require('./secret')
+
 
 const note = new Schema({
     user: {
@@ -18,7 +20,11 @@ const note = new Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+
+    secret: [secret]
+    // notes tiene un propiedad secretos donde se añadiran varios secretos, sin limite, haciendo uso de la funcion push
+
 })
 
 module.exports = note

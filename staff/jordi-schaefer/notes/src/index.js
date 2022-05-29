@@ -1,10 +1,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, deleteUser, createNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, deleteUser, createNote, deleteNote, updateNote, listNotes, saveSecret, deleteSecret } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
-const { validateString } = require('./validators')
 
 
 connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
@@ -146,7 +145,9 @@ connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
                 
                 const userId = verifyToken(req)
 
-                deleteUser(userId)
+                const { body: { password } } = req
+
+                deleteUser(userId, password)
                     .then(() => res.status(200).send())  // devuelvo estatus ok y el token
                     .catch(error => {
                         let status = 500
@@ -198,6 +199,158 @@ connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
                 res.status(status).json({ error: error.message })
             }
         })
+
+
+        // Delete
+        api.delete('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+                
+                const userId = verifyToken(req)
+
+                const { body: { noteId } } = req
+
+                deleteNote(userId, noteId)
+                    .then(() => res.status(200).send())  // devuelvo estatus ok y el token
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+
+
+        // listNotes
+        api.get('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+                
+                const userId = verifyToken(req)
+
+                listNotes(userId)
+                    .then(notes => res.status(200).json({notes}))  // devuelvo estatus ok y el token
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+
+        // Update Notes
+        api.patch('/api/notes', jsonBodyParser, (req, res) => {
+            try {
+
+                const userId = verifyToken(req)
+
+                const { body: { noteId, text } } = req
+                
+                updateNote(userId, noteId, text)
+                    .then(() => res.status(204).send())  // devuelvo estatus modificado ok
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+
+
+
+
+
+        // Save secret
+        api.patch('/api/secrets', jsonBodyParser, (req, res) => {
+            try {
+
+                const userId = verifyToken(req)
+
+                const { body: { noteId, text, hate } } = req
+                
+                saveSecret(userId, noteId, text, hate)
+                    .then(() => res.status(204).send())  // devuelvo result para ver quehay
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+        // Delete Secret
+        api.delete('/api/secrets', jsonBodyParser, (req, res) => {
+            try {
+                
+                const userId = verifyToken(req)
+
+                const { body: { note, secret } } = req
+
+                deleteSecret(userId, note, secret)
+                    .then(() => res.status(200).send())  // devuelvo estatus ok y el token
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
 
 
 

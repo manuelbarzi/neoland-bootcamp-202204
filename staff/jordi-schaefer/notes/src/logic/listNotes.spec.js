@@ -14,6 +14,8 @@ describe('listNotes', () => {
         let userId //lo declaro fuera para poderlo usar en los test
         
         beforeEach (()=> {
+
+            // este sistema te crea el id de mongose antesde enviarle el usuario, asi ya tengo toda la info aqui
             // user = new User({name:'Jordi', username: 'Jorgesito', password: '123123123'})
             // return user.save()
             return User.create({name:'Jordi', username: 'Jorgesito', password: '123123123'}) //metodos staticos
@@ -24,43 +26,62 @@ describe('listNotes', () => {
             })
         })
 
+        describe('when user already has notes',() => {
 
-        it ('success with notes and correct credentials', () => {
-            const texts = [
-                'que paula me de los buenos dias',
-                'comprar lejia',
-                'sacar al perro',
-                'hacer la cena',
-                'ir a una playa nudista'
-            ]
-            const notesPromises = texts.map(text => Note.create({ user: userId,  text: text})) //map devuelve array de promesas
-            // las promesas son "palabra promesa" cositas pendientes de respuesta
-            return Promise.all(notesPromises) // aqui le digo que me espere todas las respuestas
-            // y devolvere las respuestas de haber creado notas
+            let allCreatedNotes
 
-            // solo tiene sentido usar el promise porque estamos langando MAS DE UNA PETICION
-            // y queremos asegurar que acaban todas
-            // si hicieramos solo una peticion, nos bastaria con usar el .then()
-                .then(()=> {
-                    return listNotes(userId) // llamo a nuestra funcion
-                }) 
-                .then((arrayNotas) => { // cuando tenga la respuesta de buscar las notas, me llega en un array
-                    expect(arrayNotas).to.be.instanceOf(Array)
-                    expect(arrayNotas.length).to.be.equal(5)
-
-                    let n=0
-                    arrayNotas.forEach(nota => {
-                        expect(nota.constructor).to.equal(Object)
-                        expect(nota.text).to.be.equal(texts[n++])
+            beforeEach(() => {
+                const texts = [
+                    'que paula me de los buenos dias',
+                    'comprar lejia',
+                    'sacar al perro',
+                    'hacer la cena',
+                    'ir a una playa nudista'
+                ]
+                const notesPromises = texts.map(text => Note.create({ user: userId,  text: text})) //map devuelve array de promesas
+                // las promesas son "palabra promesa" cositas pendientes de respuesta
+                return Promise.all(notesPromises) // aqui le digo que me espere todas las respuestas
+                    .then((result) => {
+                        allCreatedNotes = result
                     })
-                })
+                // y devolvere las respuestas de haber creado notas
+    
+                // solo tiene sentido usar el promise porque estamos langando MAS DE UNA PETICION
+                // y queremos asegurar que acaban todas
+                // si hicieramos solo una peticion, nos bastaria con usar el .then()
+    
+    
+                // promise all es un metodo statico de la clase promise k crea una promera a partir de un array de promesas
+                // se espera que terminan todas para continuar
+            })
+
+            it ('success on correct credentials', () => {
+                return listNotes(userId) // llamo a nuestra funcion 
+                    .then((arrayNotas) => { // cuando tenga la respuesta de buscar las notas, me llega en un array
+                        expect(arrayNotas).to.be.instanceOf(Array)
+                        expect(arrayNotas.length).to.be.equal(5)
+
+                        arrayNotas.forEach(note => { // para cada nota que nos llega
+                            const coincide = allCreatedNotes.some(_note => { // miramos en todas las notas, si alguno cumple la condicion, sabremos si la nota esta
+                                return _note.id === note.id && _note.text === note.text
+                            }) 
+                            // si alguna nota del arrayNotes, NO coincide con NINGUNA del createdNotes, nos enviara false
+                            // si solo una ya coincide, tendremos true
+
+                            // primera nota,, alguna corresponde con esa? se supone que si
+                            // segunda nota, alguna corresponde con esa?? etc..
+                            
+                            expect(coincide).to.be.true
+                        })
+                    })
+            })
+
         })
 
 
         it ('success without notes but correct credentials', () => {
             return listNotes(userId)
                 .then((arrayNotas) => { 
-                    debugger
                     expect(arrayNotas).to.be.instanceOf(Array)
                     expect(arrayNotas.length).to.be.equal(0)
                 })
@@ -86,7 +107,7 @@ describe('listNotes', () => {
 
     })
 
-
+    after(() => disconnect())
 })
 /*
             const wrongId = new ObjectId().toString()

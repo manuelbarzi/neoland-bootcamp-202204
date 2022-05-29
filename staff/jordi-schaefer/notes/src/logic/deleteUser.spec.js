@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
-const { NotFoundError } = require('../errors')
+const { NotFoundError, AuthError } = require('../errors')
 const deleteUser = require('./deleteUser')
 const { expect } = require('chai')
 
@@ -21,7 +21,7 @@ describe('deleteUser', () => {
 
 
         it('success in delete user with correct Id', () =>
-            deleteUser(user.id) //solo usamos la función
+            deleteUser(user.id, user.password) //solo usamos la función
                 .then((result)=>{
                     expect(result).to.be.undefined
 
@@ -33,9 +33,9 @@ describe('deleteUser', () => {
         )
         
 
-        it('fails when userid does not exist', ()=>{
+        it('fails when user does not exist', ()=>{
             wrongId = new ObjectId().toString()
-            return deleteUser(wrongId) //solo usamos la función
+            return deleteUser(wrongId, user.password) //solo usamos la función
                 .then(() =>{
                     throw new Error('should not reach this point')
 
@@ -43,6 +43,19 @@ describe('deleteUser', () => {
                 .catch((error) => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.be.equal(`user with id ${wrongId} does not exist`)
+                })
+                
+        })
+
+        it('fails when password is not correct', ()=>{
+            return deleteUser(user.id, '4234234') //solo usamos la función
+                .then(() =>{
+                    throw new Error('should not reach this point')
+
+                })
+                .catch((error) => {
+                    expect(error).to.be.instanceOf(AuthError)
+                    expect(error.message).to.be.equal(`Password is not correct`)
                 })
                 
         })

@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Note } = require("../models")
-const { NotFoundError } = require('../errors')
+const { NotFoundError, ConflictError } = require('../errors')
 const deleteNote = require('./deleteNote')
 const { expect } = require('chai')
 
@@ -56,7 +56,7 @@ describe('deleteNote', () => {
     })
 
 
-    describe('When user does not exist', () => { 
+    describe('When user does belong to the note', () => { 
 
         it ('fails with wrong user Id', () => {
             const wrongId = new ObjectId().toString()
@@ -73,12 +73,12 @@ describe('deleteNote', () => {
                     throw new Error('should not reach this point')
                 })
                 .catch(error => {
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                    expect(error).to.be.instanceOf(ConflictError)
+                    expect(error.message).to.equal(`note with id ${noteId} does not belong to user with id ${wrongId}`)
                 })
         })
 
     })
 
-
+    after(() => disconnect())
 })
