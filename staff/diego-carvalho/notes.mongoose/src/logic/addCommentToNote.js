@@ -1,27 +1,35 @@
-const { Note, User } = require("../models");
+const { Note, User, Comment } = require("../models");
 const { validateString, validateStringNotEmptyNoSpaces } = require("../validators");
+const { NotFoundError } = require('../errors');
+const { note } = require("../models/schemas");
 
 function addCommentToNote(userId, noteId, comment) {
     validateStringNotEmptyNoSpaces(noteId, 'note id')
     validateStringNotEmptyNoSpaces(userId, 'user id')
     if (comment !== null) validateString(comment, ' comment')
-
-    return User.findById(userId).lean()
+    debugger
+    return User.findById(userId)
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Note.find({ note: noteId }).lean()
+            return Note.findById(noteId)
         })
         .then(note => {
-            if (!note) throw new NotFoundError(`note with id ${noteId} does not exist`)
+            if (!note)
+                throw new NotFoundError(`note with id ${noteId} does not exist`)
 
+            const userComment = new Comment({ user: userId, text: comment })
+            note.comments.push(userComment)
 
-            return Note.comments.push(comment)
+            return note.save()
+                .then(() => {
+                    return comment.id
+                })
         })
-        .then(() => {
 
-        })
+
+
 
 }
 
