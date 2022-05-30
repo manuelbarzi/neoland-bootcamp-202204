@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, createNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNotes, updateNote, deleteNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
@@ -84,6 +84,8 @@ connect('mongodb://localhost:27017/notes-db')
 
                 if (error instanceof TypeError || error instanceof FormatError)
                     status = 400
+                else if (error instanceof AuthError)
+                    status = 401
 
                 res.status(status).json({ error: error.message })
             }
@@ -110,6 +112,8 @@ connect('mongodb://localhost:27017/notes-db')
 
                 if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
                     status = 400
+                else if (error instanceof AuthError)
+                    status = 401
 
                 res.status(status).json({ error: error.message })
             }
@@ -136,6 +140,94 @@ connect('mongodb://localhost:27017/notes-db')
 
                 if (error instanceof TypeError || error instanceof FormatError)
                     status = 400
+                else if (error instanceof AuthError)
+                    status = 401
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        api.get('/api/notes', (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                retrieveNotes(userId)
+                    .then(notes => res.status(200).json(notes))
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+                else if (error instanceof AuthError)
+                    status = 401
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        api.patch('/api/notes/:noteId', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                const { params: { noteId }, body: { text } } = req
+
+                updateNote(userId, noteId, text)
+                    .then(() => res.status(204).send())
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof AuthError)
+                            status = 401
+                        else if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+                else if (error instanceof AuthError)
+                    status = 401
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        api.delete('/api/notes/:noteId', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                const { params: { noteId } } = req
+
+                deleteNote(userId, noteId)
+                    .then(() => res.status(204).send())
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof AuthError)
+                            status = 401
+                        else if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+                else if (error instanceof AuthError)
+                    status = 401
 
                 res.status(status).json({ error: error.message })
             }

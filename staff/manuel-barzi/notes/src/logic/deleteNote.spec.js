@@ -1,10 +1,10 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Note } = require('../models')
 const { NotFoundError } = require('../errors')
-const updateNote = require('./updateNote')
+const deleteNote = require('./deleteNote')
 const { expect } = require('chai')
 
-describe('updateNote', () => {
+describe('deleteNote', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
@@ -31,13 +31,13 @@ describe('updateNote', () => {
             })
 
             it('succeeds on correct user data', () =>
-                updateNote(user.id, note2.id, 'new note 2')
+                deleteNote(user.id, note2.id)
                     .then(result => {
                         expect(result).to.be.undefined
 
                         return Note.findById(note2.id)
                     })
-                    .then(note2 => expect(note2.text).to.equal('new note 2'))
+                    .then(note2 => expect(note2).to.be.null)
             )
         })
 
@@ -45,7 +45,7 @@ describe('updateNote', () => {
             it('succeeds on correct user data', () => {
                 const unexistingNoteId = new ObjectId().toString()
 
-                return updateNote(user.id, unexistingNoteId, 'new note 2')
+                return deleteNote(user.id, unexistingNoteId)
                     .then(() => {
                         throw new Error('should not reach point')
                     })
@@ -60,7 +60,7 @@ describe('updateNote', () => {
             const wrongUserId = new ObjectId().toString()
             const unexistingNoteId = new ObjectId().toString()
 
-            updateNote(wrongUserId, unexistingNoteId, 'new note 2')
+            deleteNote(wrongUserId, unexistingNoteId)
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -76,7 +76,7 @@ describe('updateNote', () => {
             const unexistingUserId = new ObjectId().toString()
             const unexistingNoteId = new ObjectId().toString()
 
-            updateNote(unexistingUserId, unexistingNoteId, 'new note 2')
+            deleteNote(unexistingUserId, unexistingNoteId)
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

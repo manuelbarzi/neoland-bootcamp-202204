@@ -1,4 +1,5 @@
 const { verify } = require('jsonwebtoken')
+const { AuthError } = require('../errors')
 
 /**
 * Parses JWT from Express Request, verifies it (against the secret) and returns the payload.
@@ -9,6 +10,9 @@ const { verify } = require('jsonwebtoken')
 */
 function verifyToken(req) {
     const { headers: { authorization } } = req
+
+    if (!authorization)
+        throw new AuthError('no authorization header received (with token)')
 
     const [, token] = authorization.split(' ')
 
