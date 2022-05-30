@@ -6,7 +6,7 @@ const { expect } = require('chai')
 
 describe('authenticateUser', () => {
 
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/test'))
 
     beforeEach(() => User.deleteMany())
     debugger
@@ -14,22 +14,22 @@ describe('authenticateUser', () => {
     describe('Delete for user alredy exist', () => {
         let user
 
-        beforeEach(() => {
+        beforeEach(() => { // creo nuevo usuario 
             user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
 
-            return user.save()
+            return user.save() // lo guardo 
         })
         it('succes on correct credentials', () =>
 
-            unregisterUser(user.id)
+            unregisterUser(user.id) // uso mi funcion pasando el id ya que es un campo unico 
 
-                .then(result => {
+                .then(result => { // si todo a ido bien me duevelve undefine
                     expect(result).to.be.undefined
 
 
-                    return User.findOne({ id: result })
+                    return User.findOne({ id: result }) // lo busco en la base de datos 
                 })
-                .then(find => {
+                .then(find => { // esperare que el no lo encuentre asi que sera un campo nul 
                     expect(find).to.be.null
 
                 })

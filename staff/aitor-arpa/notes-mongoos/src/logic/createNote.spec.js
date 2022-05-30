@@ -42,7 +42,7 @@ describe('createNote', () => {
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                    expect(error.message).to.equal(`User not Found`)
                 })
         })
     })
@@ -57,7 +57,7 @@ describe('createNote', () => {
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                    expect(error.message).to.equal(`User not Found`)
                 })
         })
     })

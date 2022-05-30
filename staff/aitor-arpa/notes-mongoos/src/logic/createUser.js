@@ -2,7 +2,7 @@ const { User } = require('../models')
 const { ConflictError } = require('../errors')
 
 function createUser(name, username, password) {
-    // TODO validate input args
+    
     debugger
     return User.create({ name, username, password })
         .then(() =>{})

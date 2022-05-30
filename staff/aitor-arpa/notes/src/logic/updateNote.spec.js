@@ -5,79 +5,31 @@ const { NotFoundError } = require('../errors')
 const { User, Note } = require('../models')
 const { createId } = require('../utils')
 const { deleteFiles } = require('../utils')
+describe('updateNote', () => {
+    before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
 
-describe('saveNote', () => {
-    it('succeeds for existing user and new note', done => {
-        deleteFiles(`./db/users`, error => {
-            if (error) return done(error)
+    beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
+    afterEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
-            deleteFiles('./db/notes', error => {
+    describe('Update Notes', () => {
+        it('succeeds for existing user and new note', done => {
+            deleteFiles(`./db/users`, error => {
                 if (error) return done(error)
 
-                const user = new User('Maria Doe', 'mariadoe', '123123123')
-
-                const json = JSON.stringify(user)
-
-                const userId = createId()
-
-                writeFile(`./db/users/${userId}.json`, json, error => {
+                deleteFiles('./db/notes', error => {
                     if (error) return done(error)
 
-                    debugger
-                    updateNote(userId, null, 'hola mundo', (error, noteId) => {
-                        expect(error).to.be.null
+                    const user = new User('Maria Doe', 'mariadoe', '123123123')
 
-                        expect(noteId).to.be.a('string')
+                    const json = JSON.stringify(user)
 
-                        const file = `./db/notes/${noteId}.json`
+                    const userId = createId()
 
-                        readFile(file, 'utf8', (error, json) => {
-                            expect(error).to.be.null
-
-                            expect(json).to.be.a('string')
-
-                            const note = JSON.parse(json)
-                            expect(note.user).to.equal(userId)
-                            expect(note.id).to.equal(noteId)
-                            expect(note.text).to.equal('hola mundo')
-
-                            const date = new Date(note.date)
-                            expect(date.toString()).not.to.equal('Invalid Date')
-
-                            done()
-                        })
-                    })
-                })
-            })
-        })
-    })
-
-    it('succeeds for existing user and note', done => {
-        deleteFiles(`./db/users`, error => {
-            if (error) return done(error)
-
-            deleteFiles('./db/notes', error => {
-                if (error) return done(error)
-
-                const user = new User('Maria Doe', 'mariadoe', '123123123')
-
-                const json = JSON.stringify(user)
-
-                const userId = createId()
-
-                writeFile(`./db/users/${userId}.json`, json, error => {
-                    if (error) return done(error)
-
-                    const _noteId = createId()
-
-                    const note = new Note(_noteId, userId, 'hello world')
-
-                    const json = JSON.stringify(note)
-
-                    writeFile(`./db/notes/${_noteId}.json`, json, error => {
+                    writeFile(`./db/users/${userId}.json`, json, error => {
                         if (error) return done(error)
 
-                        updateNote(userId, _noteId, 'hola mundo', (error, noteId) => {
+                        debugger
+                        updateNote(userId, null, 'hola mundo', (error, noteId) => {
                             expect(error).to.be.null
 
                             expect(noteId).to.be.a('string')
@@ -91,8 +43,7 @@ describe('saveNote', () => {
 
                                 const note = JSON.parse(json)
                                 expect(note.user).to.equal(userId)
-                                expect(note.id).to.equal(_noteId)
-                                expect(noteId).to.equal(_noteId)
+                                expect(note.id).to.equal(noteId)
                                 expect(note.text).to.equal('hola mundo')
 
                                 const date = new Date(note.date)
@@ -105,30 +56,85 @@ describe('saveNote', () => {
                 })
             })
         })
-    })
 
-    it('fails when user does not exist', done => {
-        deleteFiles(`./db/users`, error => {
-            if (error) return done(error)
-
-            deleteFiles('./db/notes', error => {
+        it('succeeds for existing user and note', done => {
+            deleteFiles(`./db/users`, error => {
                 if (error) return done(error)
 
-                const userId = 'unknown'
+                deleteFiles('./db/notes', error => {
+                    if (error) return done(error)
 
-                updateNote(userId, null, 'hola mundo', (error, noteId) => {
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${userId} not found`)
+                    const user = new User('Maria Doe', 'mariadoe', '123123123')
 
-                    expect(noteId).to.be.undefined
+                    const json = JSON.stringify(user)
 
-                    done()
+                    const userId = createId()
+
+                    writeFile(`./db/users/${userId}.json`, json, error => {
+                        if (error) return done(error)
+
+                        const _noteId = createId()
+
+                        const note = new Note(_noteId, userId, 'hello world')
+
+                        const json = JSON.stringify(note)
+
+                        writeFile(`./db/notes/${_noteId}.json`, json, error => {
+                            if (error) return done(error)
+
+                            updateNote(userId, _noteId, 'hola mundo', (error, noteId) => {
+                                expect(error).to.be.null
+
+                                expect(noteId).to.be.a('string')
+
+                                const file = `./db/notes/${noteId}.json`
+
+                                readFile(file, 'utf8', (error, json) => {
+                                    expect(error).to.be.null
+
+                                    expect(json).to.be.a('string')
+
+                                    const note = JSON.parse(json)
+                                    expect(note.user).to.equal(userId)
+                                    expect(note.id).to.equal(_noteId)
+                                    expect(noteId).to.equal(_noteId)
+                                    expect(note.text).to.equal('hola mundo')
+
+                                    const date = new Date(note.date)
+                                    expect(date.toString()).not.to.equal('Invalid Date')
+
+                                    done()
+                                })
+                            })
+                        })
+                    })
                 })
             })
         })
+
+        it('fails when user does not exist', done => {
+            deleteFiles(`./db/users`, error => {
+                if (error) return done(error)
+
+                deleteFiles('./db/notes', error => {
+                    if (error) return done(error)
+
+                    const userId = 'unknown'
+
+                    updateNote(userId, null, 'hola mundo', (error, noteId) => {
+                        expect(error).to.be.instanceOf(NotFoundError)
+                        expect(error.message).to.equal(`user with id ${userId} not found`)
+
+                        expect(noteId).to.be.undefined
+
+                        done()
+                    })
+                })
+            })
+        })
+
+        // TODO it('fails when user exists, but note not')
+
+        // TODO unhappy test cases
     })
-
-    // TODO it('fails when user exists, but note not')
-
-    // TODO unhappy test cases
 })
