@@ -168,7 +168,7 @@ connect('mongodb://127.0.0.1:27017/notes-db')
         api.get('/api/notes', (req, res) => {
             try {
             const userId = verifyToken(req)
-        //mirar aquí
+        
             retrieveNote(userId)
                 .then(notes => {
                     res.status(200).json(notes)
@@ -236,10 +236,7 @@ connect('mongodb://127.0.0.1:27017/notes-db')
 
                 res.status(status).send({ error: error.message })
             }
-
         })
-
-    
 
         api.listen(8080, () => console.log('API running'))
     })
