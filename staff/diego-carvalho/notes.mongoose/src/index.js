@@ -239,14 +239,7 @@ connect('mongodb://127.0.0.1:27017/notes-db')
 
         })
 
-        
-
-
-
-
-
-
-
+    
 
         api.listen(8080, () => console.log('API running'))
     })
