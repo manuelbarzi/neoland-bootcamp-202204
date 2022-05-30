@@ -13,9 +13,10 @@ function saveSecret(userId, note, text, hate) {
         })
         .then((secret) => {
 
-            return Note.updateOne({ _id: note }, { $push: { secret } })
+            return Note.updateOne({ _id: note }, { $push: { secret: secret } })
+            .then((secret) =>{ secret.id })
         })
-        .then(() =>{  })
+        .then((secretId) =>{ secretId })
 
 }
 

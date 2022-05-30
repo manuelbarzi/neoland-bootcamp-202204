@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Note } = require("../models")
-const { NotFoundError, ConflictError } = require('../errors')
+const { NotFoundError, AuthError } = require('../errors')
 const updateNote = require('./updateNote')
 const { expect } = require('chai')
 
@@ -82,8 +82,8 @@ describe('updateNote', () => {
                     throw new Error('should not reach this point')
                 })
                 .catch(error => {
-                    expect(error).to.be.instanceOf(ConflictError)
-                    expect(error.message).to.equal(`note with id ${noteId} does not belong to user with id ${wrongId}`)
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
                 })
         })
 

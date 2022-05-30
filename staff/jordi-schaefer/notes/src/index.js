@@ -362,6 +362,6 @@ connect('mongodb://127.0.0.1:27017/notes-db') // conecto con la base dde datos
 // npm run start-watch
 
 
-// mongoose sin pons id sin _ te devuelve en string
+// mongoose si pones id sin _ te devuelve en string
 
 

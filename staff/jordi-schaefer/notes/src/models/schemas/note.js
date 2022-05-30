@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
-const secret = require('./secret')
+const comment = require('./comment')
 
 
 const note = new Schema({
@@ -9,6 +9,9 @@ const note = new Schema({
         required: true,
         ref: 'User'
     },
+
+    // notes.find().populate('user')     -- en la porpiedad user te traera tambien el usuario!!!
+    // notes.find().populate('user', 'username')     -- en la porpiedad user te traera tambine solo su username, ademas del id
 
     text: {
         type: String,
@@ -22,7 +25,13 @@ const note = new Schema({
         default: Date.now
     },
 
-    secret: [secret]
+    audience: {
+        type: String,
+        enum: ['private', 'public'], // las opciones que tiene esta propiedad
+        default: 'public'
+    },
+
+    comments: [comment]
     // notes tiene un propiedad secretos donde se añadiran varios secretos, sin limite, haciendo uso de la funcion push
 
 })

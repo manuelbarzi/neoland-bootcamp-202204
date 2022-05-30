@@ -1,9 +1,9 @@
 const user = require('./user')
 const note = require('./note')
-const secret = require('./secret')
+const comment = require('./comment')
 
 module.exports = {
     user,
     note,
-    secret
+    comment
 }
