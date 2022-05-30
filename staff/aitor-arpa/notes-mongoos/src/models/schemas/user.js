@@ -1,3 +1,4 @@
+const { ObjectId } = require('bson')
 const { Schema } = require('mongoose')
 
 const user = new Schema({
@@ -26,6 +27,7 @@ const user = new Schema({
     phone: {
         type: String
     }
+ 
 })
 
 module.exports = user
