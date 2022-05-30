@@ -11,5 +11,7 @@ module.exports = {
     retrieveUser,
     updateUser,
     createNote,
-    retrieveNotes
+    retrieveNotes,
+    addCommentFromNote,
+    deleteCommentFromNote
 }

@@ -126,6 +126,9 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
     api.post('/api/notes', jsonBodyParser, (req, res) => {
         try{ //sincrono
             const userId = verifyToken(req)
+
+            const { body: { text } } = req
+
             createNote(userId, text )
             .then(notes => res.status(200).json({notes}))
                 
