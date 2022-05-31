@@ -8,6 +8,7 @@ describe('createNote', () => {
     before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
+    afterEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
     describe('when user already exists', () => {
         let user
@@ -62,7 +63,6 @@ describe('createNote', () => {
         })
     })
 
-    afterEach(() => User.deleteMany())
 
     after(() => disconnect())
 })

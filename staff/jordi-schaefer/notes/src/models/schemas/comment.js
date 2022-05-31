@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
+const reaction = require('./reaction')
 
 
 const comment = new Schema({
@@ -7,15 +8,16 @@ const comment = new Schema({
         type: ObjectId,
         ref: 'User'
     },
-    text: String,
+    text: {
+        type: String,
+        required: true,
+        default: ''
+    },
     date: {
         type: Date,
         default: Date.now
     },
-    likes: [{
-        type: ObjectId,
-        ref: 'User'
-    }]
+    reactions: [reaction]
 })
 
 module.exports = comment

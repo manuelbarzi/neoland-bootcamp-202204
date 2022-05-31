@@ -1,6 +1,7 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
 const comment = require('./comment')
+const reaction = require('./reaction')
 
 
 const note = new Schema({
@@ -26,12 +27,14 @@ const note = new Schema({
     },
 
     audience: {
-        type: String,
-        enum: ['private', 'public'], // las opciones que tiene esta propiedad
-        default: 'public'
+        type: Number,
+        enum: [0 /*'private'*/, 1 /*'public'*/, 2 /* friends */], // las opciones que tiene esta propiedad
+        default: 0
     },
 
-    comments: [comment]
+    comments: [comment],
+
+    reactions: [reaction]
     // notes tiene un propiedad secretos donde se añadiran varios secretos, sin limite, haciendo uso de la funcion push
 
 })

@@ -21,6 +21,24 @@ describe('deleteCommentFromNote', () => {
         })
         afterEach(() => User.deleteMany())
 
+        
+        describe('When note does not exist', () => {
+
+            it('fails without note', () => {
+                const wrongId = new ObjectId().toString()
+                
+                return deleteCommentFromNote(user2.id, wrongId, wrongId)
+                    .then(() => {
+                        throw new Error('should not reach this point')
+                    })
+                    .catch(error => {
+                        expect(error).to.be.instanceOf(NotFoundError)
+                        expect(error.message).to.equal(`note with id ${wrongId} does not exist`)
+                    })
+            })
+
+        })
+
         describe('When note already exists', () => {
             let note
 
@@ -76,73 +94,9 @@ describe('deleteCommentFromNote', () => {
             
         })
 
-        describe('When note does not exist', () => {
-
-            it('fails without note', () => {
-                const wrongId = new ObjectId().toString()
-                debugger
-                return deleteCommentFromNote(user2.id, wrongId, wrongId)
-                    .then(() => {
-                        throw new Error('should not reach this point')
-                    })
-                    .catch(error => {
-                        expect(error).to.be.instanceOf(NotFoundError)
-                        expect(error.message).to.equal(`note with id ${wrongId} does not exist`)
-                    })
-            })
-
-        })
-
         
         // get notes/public
     })
-    //afterEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
     
     after(() => disconnect())
-
-        
-        /*
-        it('succeeds on correct user data', () =>
-            createNote(user.id, 'Hola Mundo')
-                .then(noteId => {
-                    expect(noteId).to.be.a('string')
-
-                    return Note.findById(noteId)
-                })
-                .then(note => {
-                    // expect(note.user.toString()).to.equal(user._id.toString())
-                    expect(note.user.toString()).to.equal(user.id)
-                    expect(note.text).to.equal('Hola Mundo')
-                    expect(note.date).to.be.instanceOf(Date)
-                })
-        )
-
-        it('fails on incorrect user id', () => {
-            const wrongId = new ObjectId().toString()
-
-            return createNote(wrongId, 'Hello World')
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
-                .catch(error => {
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
-                })
-        })
-    })
-
-    describe('when user does not exist', () => {
-        it('fails on unexisting user id', () => {
-            const unexistingUserId = new ObjectId().toString()
-
-            return createNote(unexistingUserId, 'Hello World')
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
-                .catch(error => {
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
-                })
-        })
-        */
 })

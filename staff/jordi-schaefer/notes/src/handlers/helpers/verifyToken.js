@@ -15,7 +15,7 @@ function verifyToken(req) {
 
     //const payload = verify(token, 'secretito que codifica')
     //const { sub: userId} = payload
-    const { sub: userId } = verify(token, 'secretito que codifica')
+    const { sub: userId } = verify(token, process.env.JWT_SECRET)
 
     return userId
 }

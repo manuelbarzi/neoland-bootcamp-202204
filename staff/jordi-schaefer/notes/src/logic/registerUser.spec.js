@@ -40,7 +40,7 @@ describe('registerUser', () => {
         try {
             registerUser('Wendy Pan', 3, '123123123')
         } catch (error) {
-            debugger
+            
             // testeamos los errores síncronos           
         }
     })
