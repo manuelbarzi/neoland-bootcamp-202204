@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose')
+const { Schema, Types: { ObjectId } } = require('mongoose')
 
 const user = new Schema({
     name: {
@@ -27,7 +27,12 @@ const user = new Schema({
 
     phone: {
         type: String
-    }
+    },
+
+    friends: [{
+        type: ObjectId,
+        ref: 'User'
+    }]
 })
 
 module.exports = user
