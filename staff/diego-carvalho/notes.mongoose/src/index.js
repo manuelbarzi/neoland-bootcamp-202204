@@ -1,9 +1,10 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, deleteUser,createNote,retrieveNote, updateNote, deleteNote} = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, deleteUser, createNote, retrieveNote, updateNote, deleteNote, addCommentToNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
+const { text } = require('express')
 
 
 connect('mongodb://127.0.0.1:27017/notes-db')
@@ -164,22 +165,22 @@ connect('mongodb://127.0.0.1:27017/notes-db')
                 res.status(status).json({ error: error.message })
             }
         })
-        
+
         api.get('/api/notes', (req, res) => {
             try {
-            const userId = verifyToken(req)
-        
-            retrieveNote(userId)
-                .then(notes => {
-                    res.status(200).json(notes)
-                })
-                .catch(error => {
-                    let status = 500
+                const userId = verifyToken(req)
 
-                    if (error instanceof NotFoundError) status = 404
+                retrieveNote(userId)
+                    .then(notes => {
+                        res.status(200).json(notes)
+                    })
+                    .catch(error => {
+                        let status = 500
 
-                    res.status(status).json({ error: error.message })
-                })
+                        if (error instanceof NotFoundError) status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
             } catch (error) {
                 let status = 500
 
@@ -193,8 +194,8 @@ connect('mongodb://127.0.0.1:27017/notes-db')
         api.patch('/api/notes', jsonBodyParser, (req, res) => {
             try {
                 const userId = verifyToken(req)
-     
-                const { body: {noteId, text} } = req
+
+                const { body: { noteId, text } } = req
 
                 updateNote(userId, noteId, text)
                     .then(text => res.status(204).send(text))
@@ -238,8 +239,40 @@ connect('mongodb://127.0.0.1:27017/notes-db')
             }
         })
 
+        api.patch('/api/notes/:noteId', jsonBodyParser, (req, res) => {
+            try {
+
+                const userId = verifyToken(req)
+
+                const { params: { noteId }, body: { text } } = req
+
+                addCommentToNote(userId, noteId, text)
+                    .then(() => res.status(204).send())
+                    .catch(error => {
+                        let status = 500
+
+                        if (error instanceof NotFoundError)
+                            status = 404
+
+                        res.status(status).json({ error: error.message })
+                    })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError)
+                    status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+
+
         api.listen(8080, () => console.log('API running'))
     })
+
+
+
 
 // No sabemos de mongo
 // sabemos de logic y de cliente (insmonmia)

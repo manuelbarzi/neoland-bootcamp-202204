@@ -21,31 +21,32 @@ describe('addCommentToNote', () => {
 
         })
         describe('when note exists', () => {
-            let diegoNote, paulaNote
+            let paulaNote
+
             beforeEach(() => {
-                diegoNote = new Note({ user: diegoUser.id, text: 'hola mundo', audience: 'public' })
-                paulaNote = new Note({ user: paulaUser.id, text: 'hello world', audience: 'private' })
+                paulaNote = new Note({ user: paulaUser.id, text: 'hello world' })
 
-                return Promise.all([diegoUser.save(), paulaUser.save()])
+                return paulaNote.save()
             })
-
-            it('succeeds on correct user data with a note', () =>
-                addCommentToNote(diegoUser.id, paulaNote.id, 'SantaK!')
+            
+            it('succeeds on correct data ', () => {
+                return addCommentToNote(diegoUser.id, paulaNote.id, 'SantaK!')
                     .then(commentId => {
                         expect(commentId).to.be.a('string')
-
+                        debugger
                         return Note.findById(paulaNote.id)
-                        // Note.findOne({ comments: [ _id: commentId]})
-                    })
-                    .then(note => {
-                        const comment = note.comments.find(comment => comment._id.toString() === commentId)
+                            // Note.findOne({ comments: [ _id: commentId]})
+                            .then(note => {
+                                const comment = note.comments.find(comment => comment._id.toString() === commentId)
 
-                        expect(comment.text).to.be.equal('SantaK!')
-                        expect(comment.user.toString()).to.be.equal(diegoUser.id)
-                        expect(comment.date).to.be.instanceOf(Date)
+                                expect(comment.text).to.be.equal('SantaK!')
+                                expect(comment.user.toString()).to.be.equal(diegoUser.id)
+                                expect(comment.date).to.be.instanceOf(Date)
 
+                            })
                     })
-            )
+
+            })
         })
 
     })
