@@ -1,6 +1,5 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
-const comment = require('./comment')
 
 const reaction = new Schema({
     user: {
@@ -9,24 +8,17 @@ const reaction = new Schema({
         ref: 'User'
     },
 
-    text: {
-        type: String,
-        required: true,
-        default: ''
+    type: {
+        type: Number,
+        enum: [0 /* like */, 1 /* love */, 2 /* haha */, 3 /* sad */, 4 /* angry */, 5 /* wow */],
+        default: 0
     },
 
     date: {
         type: Date,
         required: true,
         default: Date.now
-    },
-
-    audience: {
-        type: String,
-        enum: ['private', 'public', 'friends'],
-        default: 'private'
-    },
-    comments: [comment]
+    }
 })
 
 module.exports = reaction

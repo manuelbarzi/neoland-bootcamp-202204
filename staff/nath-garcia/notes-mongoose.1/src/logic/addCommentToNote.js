@@ -1,4 +1,4 @@
-const { User, Note } = require('../models')
+const { User, Note, Comment } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
 
