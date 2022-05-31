@@ -2,23 +2,21 @@ const { ConflictError, NotFoundError } = require("../errors");
 const { Note } = require("../models");
 const { validateObjectId, validateString } = require("../validators");
 
-function updateNote(noteId, userId, text, audience) {
+function updateNote(noteId, userId, text) {
     validateObjectId(noteId)
     validateObjectId(userId)
-    if (text) validateString(text)
-    if (audience != null && audience !== 'public' && audience !== 'private') throw new FormatError(`audience is different to 'private' and 'public`)
-    
+    validateString(text)
+
     return Note.findById(noteId)
         .then(note => {
             if(!note) throw new NotFoundError(`note with id ${noteId} does not exist`)
 
-            if((note.text === text && note.audience === audience) || (note.text == null && note.audience == null)) return
+            if(note.text === text) return
 
             if(note.user.toString() !== userId) throw new ConflictError(`note with id ${noteId} does not belong to user with id ${userId}`)
 
-            if (text) note.text = text
-            if (audience) note.audience = audience
-            
+            note.text = text
+            debugger
             return note.save()
         })
         .then(() => {})

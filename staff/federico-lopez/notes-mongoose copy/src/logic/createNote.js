@@ -1,18 +1,16 @@
 const { User, Note } = require('../models')
-const { NotFoundError, FormatError } = require('../errors')
+const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
 
-function createNote(userId, text, audience) {
+function createNote(userId, text) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
-    if (text != null) validateString(text, 'text')
-    if (audience != null && audience !== 'public' && audience !== 'private') throw new FormatError(`audience is different to 'private' and 'public`)
-    debugger
+    if (text != null)  validateString(text, 'text')
 
     return User.findById(userId)
         .then(user => {
             if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Note.create({ user: userId, text, audience })
+            return Note.create({ user: userId, text })
         })
         .then(note => note.id)
 }

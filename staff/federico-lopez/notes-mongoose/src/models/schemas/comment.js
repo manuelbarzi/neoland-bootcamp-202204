@@ -3,7 +3,8 @@ const { Schema, Types: { ObjectId } } = require('mongoose')
 const comment = new Schema({
     user: {
         type: ObjectId,
-        required: true
+        required: true,
+        ref: 'User'
     },
     text: {
         type: String,
