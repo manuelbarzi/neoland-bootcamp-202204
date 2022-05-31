@@ -1,5 +1,5 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User, Note, Comment } = require('../models')
+const { User, Note } = require('../models')
 const addCommentToNote = require('./addCommentToNote')
 const { expect } = require('chai')
 const { comment } = require('../models/schemas')
@@ -10,7 +10,7 @@ describe('addCommentToNote', () => {
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
     describe('when user already exist', () => {
-        let user
+        let user1, user2
 
         beforeEach(() => {
             user1 = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
@@ -49,4 +49,7 @@ describe('addCommentToNote', () => {
             })
         })
     })
+    afterEach(() => User.deleteMany())
+
+    after(() => disconnect())
 })

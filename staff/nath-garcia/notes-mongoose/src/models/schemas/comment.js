@@ -1,20 +1,28 @@
-const { Schema, Types: { ObjectId } } = require('mongoose')
-
+const { Schema } = require('mongoose')
+const {Types: { ObjectId } } = Schema
+const reaction = require('/reaction')
 
 const comment = new Schema({
     user: {
-        type: ObjectId, 
+        type: ObjectId,
+        required: true,
         ref: 'User'
-    }, 
-    text: String,
+    },
+
+    text: {
+        type: String,
+        required: true,
+        default: ''
+    },
+
     date: {
         type: Date,
-        ref: Date.now
+        required: true,
+        default: Date.now
     },
-    likes: [{
-        type: ObjectId,
-        ref: 'User'
-    }]
 
-})  
+    reactions: [reaction]
+
+})
+
 module.exports = comment
