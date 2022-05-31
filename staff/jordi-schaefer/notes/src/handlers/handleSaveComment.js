@@ -8,7 +8,7 @@ module.exports = (req, res) => {
         const { params: {noteId}, body: { text } } = req
         
         addCommentToNote(userId, noteId, text)
-            .then(() => res.status(204).send())  // devuelvo result para ver quehay
+        .then(commentId => res.status(201).json({ commentId }))  
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

@@ -16,6 +16,10 @@ function toggleReactionOnComment(userId, noteId, commentId, type) {
         .then(note => {
             if (!note) throw new NotFoundError(`note with id ${noteId} does not exist`)
 
+
+            debugger
+
+
             const comment = note.comments.find(comment => comment._id.toString() === commentId)
             
             if (comment == null) throw new NotFoundError(`comment with id ${commentId} does not exist`)
@@ -29,8 +33,9 @@ function toggleReactionOnComment(userId, noteId, commentId, type) {
             else
                 comment.reactions.splice(index, 1)
                 
-            return Note.updateOne({ _id: noteId}, {$set: {comments: { _id: commentId}, comment}})
-            //return note.save()
+            return note.save()
+            //return Note.findOneAndUpdate({ _id: noteId},{ $set: {'comments.&._id': commentId}},{ new: comment })
+            //return Note.findOneAndUpdate({ _id: noteId},{ $set: {'comments.&._id': commentId}},{ new: comment })
         })
         .then(() => {  })
 }

@@ -10,7 +10,6 @@ const comment = new Schema({
     },
     text: {
         type: String,
-        required: true,
         default: ''
     },
     date: {

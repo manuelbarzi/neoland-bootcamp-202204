@@ -19,6 +19,7 @@ function deleteCommentFromNote(userId, noteId, commentId) {
             const comment= note.comments.find(comment => comment._id.toString() === commentId)
             
             if (comment == null) throw new NotFoundError(`comment with id ${commentId} does not exist`)
+            else if (!comment.user) throw new NotFoundError(`comment does not have user`)
             else if (comment.user.toString() !== userId) throw new AuthError(`comment does not belong to user with id ${userId}`)  
             
             index = note.comments.findIndex(comment => comment._id.toString() === commentId)

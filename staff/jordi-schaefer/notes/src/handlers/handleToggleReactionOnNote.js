@@ -1,4 +1,4 @@
-const { handleToggleReactionOnNote } = require('../logic')
+const { toggleReactionOnNote } = require('../logic')
 const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
@@ -7,7 +7,7 @@ module.exports = (req, res) => {
 
         const { params: {noteId}, body: { type } } = req
         
-        handleToggleReactionOnNote(userId, noteId, type)
+        toggleReactionOnNote(userId, noteId, type)
             .then(() => res.status(204).send())  // devuelvo result para ver quehay
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {

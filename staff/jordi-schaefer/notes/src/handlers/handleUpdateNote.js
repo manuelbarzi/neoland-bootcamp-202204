@@ -5,7 +5,7 @@ module.exports = (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        const { body: { noteId, text } } = req
+        const { params: {noteId}, body: { text } } = req
         
         updateNote(userId, noteId, text)
             .then(() => res.status(204).send())  // devuelvo estatus modificado ok

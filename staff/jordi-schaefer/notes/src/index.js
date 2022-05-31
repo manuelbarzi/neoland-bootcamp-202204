@@ -50,18 +50,18 @@ const { handleRegisterUser,
     // retrievePublicNotes
     routes.get('/notes', handleRetrievePublicNotes)
     // Update Notes
-    routes.patch('/notes', jsonBodyParser, handleUpdateNote)
+    routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)
     
     
     // ---------------   COMMENTS  --------------------
     // Save comment
-    routes.patch('/notes/:noteId', jsonBodyParser, handleSaveComment)
+    routes.patch('/comments/:noteId', jsonBodyParser, handleSaveComment)
     // Delete comment
-    routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteComment)
+    routes.delete('/comments/:noteId/:commentId', jsonBodyParser, handleDeleteComment)
     // reaction Note
-    routes.patch('/notes/:noteId', jsonBodyParser, handleToggleReactionOnNote)
+    routes.patch('/reactions/:noteId', jsonBodyParser, handleToggleReactionOnNote)
     // reaction Comment
-    routes.patch('/notes/:noteId', jsonBodyParser, handleToggleReactionOnComment)
+    routes.patch('/reactions/:noteId/:commentId', jsonBodyParser, handleToggleReactionOnComment)
 
 
     api.use('/api', routes)
