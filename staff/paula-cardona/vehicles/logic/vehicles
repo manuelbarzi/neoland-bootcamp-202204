@@ -1,0 +1,52 @@
+/*TODO create a function to search vehicles endpoint: https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?q=gold*/
+
+searchVehicles('batman', (error, vehicles) => {
+    if (error) return alert(error.message)
+
+    console.log(vehicles)
+})
+marca_de_verificación_blanca
+ojos
+manos_levantadas
+
+
+/*TODO evolve search vehicles to provide full information by using the other endpoint too: https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles/FYG83*/
+
+function searchVehicles(query, callback) {
+    
+    const xhr = new XMLHttpRequest
+
+    // TODO attend response
+    xhr.addEventListener('load', event => {
+        const { status } = event.target
+
+        if (status >= 400 && status < 500) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error))
+        } else if (status >= 500)
+            callback(new Error('server error'))
+        else if (status === 200) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(null, data)
+        }
+    })
+
+    xhr.addEventListener('error', event => callback(new Error('network error')))
+
+    // TODO execute request
+    xhr.open('GET', `https://b00tc4mp.herokuapp.com/api/hotwheels/vehicles?q=${query}`)
+
+    xhr.send()
+}
+
+searchVehicles('hulk', (error, vehicles) => {
+    if (error) return console.error(error.message)
+
+    console.log(vehicles)
+})
