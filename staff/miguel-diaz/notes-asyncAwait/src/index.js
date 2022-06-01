@@ -39,16 +39,16 @@ const { handleRegisterUser,
     routes.post('/notes', jsonBodyParser, handleCreateNote)
     routes.delete('/notes', jsonBodyParser, handleDeleteNote)
     routes.get('/notes', handleListNotes)
-    routes.get('/notes', handleRetrievePublicNotes)
+    routes.get('/notes/public', handleRetrievePublicNotes)
     routes.patch('/notes', jsonBodyParser, handleUpdateNote)
     
     
     // <<<<  C   O   M   M   E   N   T   S   >>>>
 
-    routes.patch('/notes/:noteId', jsonBodyParser, handleAddComment)
-    routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteComment)
-    routes.patch('/notes/:noteId', jsonBodyParser, handleToggleReactionOnNote)
-    routes.patch('/notes/:noteId', jsonBodyParser, handleToggleReactionOnComment)
+    routes.post('/notes/:noteId/comments', jsonBodyParser, handleAddComment)
+    routes.delete('/notes/:noteId/comments/:commentId', jsonBodyParser, handleDeleteComment)
+    routes.patch('/notes/:noteId/reactions/:reactionCode', jsonBodyParser, handleToggleReactionOnNote)
+    routes.patch('/notes/:noteId/comments/:commentId/reactions/:reactionCode', jsonBodyParser, handleToggleReactionOnComment)
 
 
 
@@ -59,7 +59,12 @@ const { handleRegisterUser,
     process.on('SIGINT', async () => {
         await disconnect()
 
-        console.log('\n>>>>> SE DESCONECTÓ LA BAINA!!! <<<<<<')
+        console.log('\n>>>>> JORDI TE QUIERO!!! <<<<<<')
+        console.log('\n>>>>>    JOPUTA   !!! <<<<<<')
+        console.log('\n>>>>> NO TE VAYAS !!! <<<<<<')
+        console.log('\n>>>>>    CABRONNN  !!! <<<<<<')
+        console.log('\n>>>>>     VUELVE   !!! <<<<<<')
+        console.log('\n>>>>>    TETESIKO   !!! <<<<<<')
 
         process.exit(0)
     })

@@ -8,7 +8,7 @@ describe('toggleReactionOnNote', () => {
     before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
-    afterEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
+    // afterEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
 
     describe('when user already exists', () => {
         let michelo, dieghino
@@ -19,7 +19,7 @@ describe('toggleReactionOnNote', () => {
 
             Promise.all(michelo.save(), dieghino.save())
         })
-        afterEach(() => User.deleteMany())
+        // afterEach(() => User.deleteMany())
 
         describe('When note already exists', () => {
             let note
@@ -28,7 +28,7 @@ describe('toggleReactionOnNote', () => {
                 note = new Note({ user: michelo.id, text: 'QUIERO IRME A BRASIL OSTIASS!' })
                 return note.save()
             })
-            afterEach(() => Note.deleteMany())
+            // afterEach(() => Note.deleteMany())
 
 
             it('succeeds on corret data', () => {
