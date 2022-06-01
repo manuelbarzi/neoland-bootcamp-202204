@@ -1,8 +1,8 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User, Note } = require('../models')
-const addCommentToNote = require('./addCommentToNote')
+const { User, Note, Comment } = require('../models')
+const deleteCommentFromNote = require('./deleteCommentFromNote')
 const { expect } = require('chai')
-const { comment } = require('../models/schemas')
+const { comment, note } = require('../models/schemas')
 
 describe('deleteCommentFromNote', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
@@ -32,26 +32,30 @@ describe('deleteCommentFromNote', () => {
                     .then(notes => allNotes = notes)
             })
 
-                describe('when note already has comment', () => {
-                    let comment 
+            describe('when note already has comment', () => {
+                let comment 
 
-                befoteEach(() => {
-                    comment = new Comment({ user: user2.id, })
-                })
+            beforeEach(() => {
+                comment = new Comment({ user: user2.id, note1, text: 'new comment' })
+
+                note1.comments.push(comment)
+
+                return note1.save()
+            })
             
+
             it('succeeds on correct user data', () => {
-                addCommentToNote(user1.id, note1.id, 'my commentary')
-                    .then(commentId => {
-                        expect(commentId).to.be.a('string')
+                deleteCommentFromNote(user2.id, note1.id, comment.id)
+                    .then(result => {
+                        expect(result).to.be.undefined
 
                        return Note.findById(note1.id)
                     })
                     .then(note1 => {
-                       const comment =  note1.comments.find(comment => comment._id.toString() === commentId)
+                       const commentExist =  note1.comments.some(comment => comment._id.toString() === commentId)
 
-                        expect(comment.user.toString()).to.equal(user1.id)
-                        expect(comment.text).to.equal('')
-                        expect(comment.date).to.be.instanceOf(Date)
+                       expect(commentExist).to.be.false
+
                     })
                 })
             })
@@ -61,4 +65,3 @@ describe('deleteCommentFromNote', () => {
 
     after(() => disconnect())
 })
-

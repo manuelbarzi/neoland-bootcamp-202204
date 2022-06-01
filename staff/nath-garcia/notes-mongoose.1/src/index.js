@@ -1,6 +1,6 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNotes, updateNote, addCommentToNote } = require('./logic')
+const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNotes, updateNote, addCommentToNote, unregisterUser } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
 const { generateToken, verifyToken } = require('./helpers')
@@ -121,6 +121,30 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
             }
         })
 
+        //unregisterUser
+        api.delete('/api/users', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+                const { body: { password } } = req
+
+                unregisterUser(userId, password)
+                .then(() => res.status(204).send())
+                .catch(error => {
+                    let status = 500
+
+                    if (error instanceof AuthError) status = 401
+
+                    res.status(status).json({ error: error.message })
+                })
+            } catch (error) {
+                let status = 500
+
+                if (error instanceof TypeError || error instanceof FormatError) status = 400
+
+                res.status(status).send({ error: error.message })
+            }
+        })
+
         //createNotes
         debugger
         api.post('/api/notes', jsonBodyParser, (req, res) => {
@@ -169,6 +193,37 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
 
                 if (error instanceof TypeError || error instanceof FormatError)
                     status = 400
+
+                res.status(status).json({ error: error.message })
+            }
+        })
+
+        //updateNote
+        api.patch('/api/notes/:noteId', jsonBodyParser, (req, res) => {
+            try {
+                const userId = verifyToken(req)
+
+                const { params: { noteId }, body: { text } } = req
+
+                update(userId, noteId, text)
+                .then(() => res.status(204).send())
+                .catch(error => {
+                    let status = 500
+
+                    if (error instanceof AuthError)
+                    status = 401
+                    else if (error instanceof NotFoundError)
+                    status = 404
+
+                    res.status(status).json({ error: error.message })
+                })
+            } catch (error) {
+                let status = 500
+
+                if(error instanceof TypeError || error instanceof FormatError)
+                status = 400
+                else if (error instanceof AuthError)
+                status = 401
 
                 res.status(status).json({ error: error.message })
             }

@@ -1,5 +1,4 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-
 const { User } = require('../models')
 const { NotFoundError } = require('../errors')
 const updateUser = require('./updateUser')

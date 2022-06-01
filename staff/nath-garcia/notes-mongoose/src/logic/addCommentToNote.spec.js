@@ -49,7 +49,7 @@ describe('addCommentToNote', () => {
             })
         })
     })
-    afterEach(() => User.deleteMany())
+     afterEach(() => User.deleteMany())
 
     after(() => disconnect())
 })
