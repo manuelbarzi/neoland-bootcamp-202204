@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const { registerUser, authenticateUser, retrieveUser, updateUser, createNote, retrieveNotes, updateNote, addCommentToNote } = require('./logic')
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
 const { connect, disconnect } = require('mongoose')
-const { generateToken, verifyToken } = require('./helpers')
+const { generateToken, verifyToken } = require('./handlers/helpers')
 
 connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
 .then(() => { //cuando tenga la confirmación de estar conectado a Mongo
