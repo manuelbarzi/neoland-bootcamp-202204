@@ -39,12 +39,12 @@ describe('retrievePublicNotes', () => {
                 })
                 .then(notes => {arrayOfNotes = notes})
                 .then(() => {
-                    arrayOfNotes[0].audience = 'public'
+                    arrayOfNotes[0].audience = Note.PUBLIC
                     
                     return arrayOfNotes[0].save()
                 })
                 .then(() => {
-                    arrayOfNotes[1].audience = 'public'
+                    arrayOfNotes[1].audience = Note.PUBLIC
                     return arrayOfNotes[1].save()
                 })
         })
@@ -65,8 +65,8 @@ describe('retrievePublicNotes', () => {
                 })
         )
         it('succeeds on not public notes', () => {
-            arrayOfNotes[0].audience = 'private'
-            arrayOfNotes[1].audience = 'private'
+            arrayOfNotes[0].audience = Note.PRIVATE
+            arrayOfNotes[1].audience = Note.PRIVATE
 
             return Promise.all([arrayOfNotes[0].save(), arrayOfNotes[1].save()])
                 .then(() => retrievePublicNotes(usersArray[0].id))

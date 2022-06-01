@@ -21,7 +21,7 @@ describe('deleteCommentFromNote', () => {
                 })
                 .then(_user => {
                     user2 = _user
-                    return Note.create({ user: user1.id, text: 'yo soy la nota', audience: 'public' })
+                    return Note.create({ user: user1.id, text: 'yo soy la nota', audience: Note.PUBLIC })
                 })
                 .then(_note => note = _note)
         })

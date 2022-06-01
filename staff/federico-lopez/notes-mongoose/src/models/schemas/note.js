@@ -1,6 +1,7 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
 const comment = require('./comment')
+const reaction = require('./reaction')
 
 const note = new Schema({
     user: {
@@ -22,12 +23,14 @@ const note = new Schema({
     },
 
     audience: {
-        type: String,
+        type: Number,
         require: true,
-        enum: ['public', 'private', 'friends'],
-        default: 'private'
+        enum: [0 /* private */, 1 /* public */, 2 /* friends */],
+        default: 0
     },
 
+    reactions: [reaction],
+    
     comments: [comment]
 })
 

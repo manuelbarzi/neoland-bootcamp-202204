@@ -5,7 +5,7 @@ const { validateStringNotEmptyNoSpaces, validateString } = require('../validator
 function createNote(userId, text, audience) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
     if (text != null) validateString(text, 'text')
-    if (audience != null && audience !== 'public' && audience !== 'private') throw new FormatError(`audience is different to 'private' and 'public`)
+    if (audience != null && audience !== Note.PUBLIC && audience !== Note.PRIVATE) throw new FormatError(`audience is different to 'private' and 'public`)
     debugger
 
     return User.findById(userId)

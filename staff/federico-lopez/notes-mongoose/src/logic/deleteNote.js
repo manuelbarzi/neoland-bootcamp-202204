@@ -2,7 +2,7 @@ const { NotFoundError, ConflictError } = require("../errors")
 const { Note } = require("../models")
 const { validateObjectId } = require("../validators")
 
-function deleteNote(noteId, userId) {
+function deleteNote(userId, noteId) {
     validateObjectId(noteId)
     validateObjectId(userId)
     debugger

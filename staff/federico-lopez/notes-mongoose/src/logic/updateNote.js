@@ -6,7 +6,7 @@ function updateNote(noteId, userId, text, audience) {
     validateObjectId(noteId)
     validateObjectId(userId)
     if (text) validateString(text)
-    if (audience != null && audience !== 'public' && audience !== 'private') throw new FormatError(`audience is different to 'private' and 'public`)
+    if (audience != null && audience !== Note.PUBLIC && audience !== Note.PRIVATE) throw new FormatError(`audience is different to 'private' and 'public`)
     
     return Note.findById(noteId)
         .then(note => {

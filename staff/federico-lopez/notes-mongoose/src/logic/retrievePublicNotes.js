@@ -10,7 +10,7 @@ function retrievePublicNotes(userId) {
             if (result === null) throw new NotFoundError(`user with id ${userId} dos not exist`)
         })
         .then(() => {
-            return Note.find({ user: userId, audience: 'public'}).lean()
+            return Note.find({ user: userId, audience: Note.PUBLIC}).lean()
         })
         .then(notes => {
             notes.forEach(note => {

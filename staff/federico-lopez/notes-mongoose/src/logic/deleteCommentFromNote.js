@@ -3,7 +3,6 @@ const { NotFoundError, AuthError } = require('../errors')
 const { validateObjectId, validateStringNotEmptyOrBlank } = require('../validators')
 
 function deleteComentFromNote(userId, noteId, commentId) {
-    debugger
     validateObjectId(noteId)
     validateObjectId(userId)
     validateObjectId(commentId)

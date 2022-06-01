@@ -1,10 +1,10 @@
 const { connect, disconnect, Types: { ObjectId }, isValidObjectId } = require('mongoose')
-const { User, Note } = require('../models')
-const { NotFoundError, AuthError, FormatError } = require('../errors')
-const addCommentToNote = require('./addCommentToNote')
+const { User, Note, Reaction } = require('../models')
+const { NotFoundError, AuthError } = require('../errors')
+const toggleReactionToNote = require('./toggleReactionToNote')
 const { expect } = require('chai')
 
-describe('addCommentToNote', () => {
+describe('toggleReactionToNote', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Note.deleteMany()]))
@@ -22,7 +22,7 @@ describe('addCommentToNote', () => {
                     user2 = _user
                     return Note.create({ user: user1.id, text: 'yo soy la nota' })
                 })
-                .then(_note => { 
+                .then(_note => {
                     note = _note
                 })
         })
@@ -34,22 +34,24 @@ describe('addCommentToNote', () => {
             })
 
             it('succeeds on correct user and note data', () =>
-                addCommentToNote(user2.id, note.id, 'tirando hate')
-                    .then(commentId => {
-                        expect(commentId).to.be.a('string')
-                        expect(isValidObjectId(commentId)).to.be.true
+                toggleReactionToNote(user2.id, note.id, Reaction.LOVE)
+                    .then(reactionId => {
+                        expect(reactionId.toString()).to.be.a('string')
+                        expect(isValidObjectId(reactionId)).to.be.true
 
                         return Note.findById(note.id)
                     })
                     .then(note => {
-                        expect(note.comments).to.have.length(1)
+                        expect(note.reactions).to.have.length(1)
+                        expect(note.reactions[0].type).to.equal(Reaction.LOVE)
+                        expect(note.reactions[0].date).to.be.instanceof(Date)
                     })
             )
 
             it('fails on nonexisting user and correct note data', () => {
                 const wrongId = new ObjectId().toString()
 
-                return addCommentToNote(wrongId, note.id, 'tirando hate 2')
+                return toggleReactionToNote(wrongId, note.id, Reaction.LIKE)
                     .then(() => { throw new Error('it should not reach this point') })
                     .catch(error => {
                         expect(error).to.be.instanceof(NotFoundError)
@@ -57,20 +59,49 @@ describe('addCommentToNote', () => {
                     })
             })
 
-            it('fails existing user and correct note data, but empty or blank text', () => {
-                try {
-                addCommentToNote(user2.id, note.id, ' ')
-                
-                } catch(error) {
-                    expect(error).to.be.instanceof(FormatError)
-                    expect(error.message).to.equal(`text is blank`)
-                }
+            describe('on reaction previous reaction "love"', () => {
+                let reaction
+
+                beforeEach(() => {
+                    reaction = new Reaction({ user: user2.id, type: Reaction.LOVE })
+
+                    note.reactions.push(reaction)
+                    return note.save()
+                })
+
+                it('succeeds on correct user, note data and same reaction. It deletes previous reaction', () =>{
+                    debugger 
+                    toggleReactionToNote(user2.id, note.id, Reaction.LOVE)
+                        .then(result => {
+                            expect(result).to.be.undefined
+
+                            return Note.findById(note.id)
+                        })
+                        .then(note => {
+                            expect(note.reactions).to.have.length(0)
+                        })
+                })
+
+                it('succeeds on correct user, note data and different reaction. It changes the reaction', () =>
+                    toggleReactionToNote(user2.id, note.id, Reaction.LIKE)
+                    .then(reactionId => {
+                        expect(reactionId.toString()).to.be.a('string')
+                        expect(isValidObjectId(reactionId)).to.be.true
+
+                        return Note.findById(note.id)
+                    })
+                    .then(note => {
+                        expect(note.reactions).to.have.length(1)
+                        expect(note.reactions[0].type).to.equal(Reaction.LIKE)
+                        expect(note.reactions[0].date).to.be.instanceof(Date)
+                    })
+                )
             })
         })
 
         describe('on private note', () => {
-            it('fails on existing user and correct note data', () => 
-                addCommentToNote(user2.id, note.id, 'tirando hate 3')
+            it('fails on existing user and correct note data', () =>
+                toggleReactionToNote(user2.id, note.id, Reaction.LIKE)
                     .then(() => { throw new Error('it should not reach this point') })
                     .catch(error => {
                         expect(error).to.be.instanceof(AuthError)
@@ -81,7 +112,7 @@ describe('addCommentToNote', () => {
             it('fails on nonexisting user and correct note data', () => {
                 const wrongId = new ObjectId().toString()
 
-                return addCommentToNote(wrongId, note.id, 'tirando hate 2')
+                return toggleReactionToNote(wrongId, note.id, Reaction.LIKE)
                     .then(() => { throw new Error('it should not reach this point') })
                     .catch(error => {
                         expect(error).to.be.instanceof(NotFoundError)

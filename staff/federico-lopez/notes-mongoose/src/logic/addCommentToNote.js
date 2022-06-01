@@ -15,7 +15,7 @@ function addCommentToNote(userId, noteId, text) {
             return Note.findById(noteId)
         })
         .then(note => {
-            if(note.audience === 'private') throw new AuthError(`note with id ${noteId} is private`)
+            if(note.audience === Note.PRIVATE) throw new AuthError(`note with id ${noteId} is private`)
 
             const comment = new Comment({ user: userId, text })
 

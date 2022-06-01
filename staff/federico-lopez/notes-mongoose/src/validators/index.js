@@ -64,6 +64,11 @@ function validateNumber(number, explain = 'number') {
     if(typeof number !== 'number') throw new TypeError(`${explain} is not a number`)
 }
 
+function validateReactionType(reaction, explain = 'reaction type') {
+    validateNumber(reaction, explain)
+    if (reaction < 0 || reaction > 5) throw new RangeError(`${explain} is less than 0 or more than 5`)
+}
+
 module.exports = {
     validateString,
     validateStringNotEmptyOrBlank,
@@ -75,5 +80,6 @@ module.exports = {
     validateDate,
     validateObjectId,
     validateObject,
-    validateNumber
+    validateNumber,
+    validateReactionType
 }
