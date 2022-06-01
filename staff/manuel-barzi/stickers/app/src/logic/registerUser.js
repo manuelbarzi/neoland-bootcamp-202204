@@ -24,7 +24,7 @@ function registerUser(name, username, password, callback) {
         } else callback(new Error('server error'))
     })
 
-    xhr.open('POST', 'https://b00tc4mp.herokuapp.com/api/v2/users')
+    xhr.open('POST', 'http://localhost:8080/api/users')
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 

@@ -9,11 +9,11 @@ function retrieveNotes(token, callback) {
 
     // TODO validate input args
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.get('v2/users', {
+    api.get('notes', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -33,11 +33,7 @@ function retrieveNotes(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            let { notes = [] } = data 
-
-            notes = notes.map(note => new Note(note.id, note.text, new Date(note.date)))
-
-            callback(null, notes)
+            callback(null, data)
         }
     })
 }

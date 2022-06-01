@@ -12,8 +12,7 @@ const note = new Schema({
 
     text: {
         type: String,
-        required: true,
-        default: ''
+        default: null
     },
 
     date: {

@@ -9,11 +9,11 @@ function retrieveUser(token, callback) {
 
     // TODO validate input args
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.get('v2/users', {
+    api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
