@@ -1,0 +1,17 @@
+{
+  "name": "notes-mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/test.js",
+    "test:inspect": "node --inspect-brk src/test.js",
+    "filldb": "node src/populate.js", 
+    "filldb:inspect": "node --inspect-brk src/populate.js" 
+  },
+  "author": "Diego Carvalho",
+  "license": "ISC",
+  "dependencies": {
+    "mongodb": "^4.6.0"
+  }
+}
