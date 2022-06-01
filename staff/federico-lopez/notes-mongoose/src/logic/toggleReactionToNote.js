@@ -7,6 +7,8 @@ function toggleReactionToNote(userId, noteId, type) {
     validateObjectId(noteId)
     validateReactionType(type)
 
+    let reaction
+
     return User.findById(userId)
         .then(user => {
             if (!user) throw new NotFoundError(`user with id ${userId} not found`)
@@ -21,7 +23,7 @@ function toggleReactionToNote(userId, noteId, type) {
             const previousReactionIndex = note.reactions.findIndex(react => react.user.toString() === userId)
 
             if (previousReactionIndex === -1) {
-                const reaction = new Reaction({ user: userId, type })
+                reaction = new Reaction({ user: userId, type })
 
                 note.reactions.push(reaction)
 
@@ -31,7 +33,7 @@ function toggleReactionToNote(userId, noteId, type) {
                 note.reactions.splice(previousReactionIndex, 1)
 
                 if (hasDifferentType) {
-                    const reaction = new Reaction({ user: userId, type })
+                    reaction = new Reaction({ user: userId, type })
 
                     note.reactions.push(reaction)
                 }
@@ -39,6 +41,7 @@ function toggleReactionToNote(userId, noteId, type) {
 
 
             return note.save()
+                .then(() => reaction ? reaction.id : undefined)
         })
 }
 

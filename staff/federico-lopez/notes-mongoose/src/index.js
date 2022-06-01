@@ -13,7 +13,8 @@ const {
     handleDeleteNote,
     handleAddCommentToNote,
     handleDeleteUser,
-    handleDeleteComment
+    handleDeleteComment,
+    handleToggleReactionToNote
     } = require('./handlers')
 const handleRetrievePublicNotes = require('./handlers/handleRetrievePublicNotes')
 
@@ -45,7 +46,7 @@ connect('mongodb://localhost:27017/notes-db')
         api.delete('/api/notes/:noteId/:commentId', handleDeleteComment)
 
         /* REACTIONS */
-        api.post('api/notes/:noteId', jsonBodyParser, handleToggleReactionToNote)
+        api.post('/api/notes/:noteId/reactions/:type', jsonBodyParser, handleToggleReactionToNote)
 
 
         api.listen(8080, () => console.log('API running'))
