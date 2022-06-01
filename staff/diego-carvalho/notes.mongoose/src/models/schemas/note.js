@@ -23,9 +23,10 @@ const note = new Schema({
     },
 
     audience: {
-        type: Number,
-        enum: [0 /* private */, 1 /* public */, 2 /* friends */],
-        default: 0
+        type: String,
+        require: true,
+        enum: ['public', 'private', 'friends'],
+        default: 'private'
     },
 
     reactions: [reaction],
