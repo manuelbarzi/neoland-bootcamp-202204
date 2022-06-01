@@ -4,12 +4,14 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { handleRegisterUser, handleAuthenticateUser, handleRetrieveUser, handleUpdateUser, handleCreateNote, handleRetrieveNotes, handleUpdateNote, handleDeleteNote } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
+const { cors } = require('./helpers.js')
 
     ; ( async () => {
         await connect('mongodb://localhost:27017/notes-db')
         console.log('DB connected')
 
         const api = express()
+        api.use(cors)
         const jsonBodyParser = bodyParser.json()
         const routes = express.Router()
 

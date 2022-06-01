@@ -5,7 +5,7 @@ export default function registerUser(name, username, password, callback) {
 
     const api = new Apium
 
-    const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
+    const url = 'http://localhost:8080/api/users'
 
     api.call('POST', url, {
         headers: {
