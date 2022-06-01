@@ -1,5 +1,3 @@
-const handleAddCommentToNote = require('./handleAddCommentToNote');
-
 module.exports = {
     handleRegisterUser: require('./handleRegisterUser'),
     handleAuthenticateUser: require('./handleAuthenticateUser'),
@@ -10,7 +8,9 @@ module.exports = {
     handleRetrieveNotes: require('./handleRetrieveNotes'),
     handleUpdateNote: require('./handleUpdateNote'),
     handleDeleteNote: require('./handleDeleteNote'),
+    handleRetrievePublicNotes: require('./ handleRetrievePublicNotes'),
     handleAddCommentToNote: require('./handleAddCommentToNote'),
     handleDeleteCommentFromNote: require('./handleDeleteCommentFromNote')
+    
     
 }

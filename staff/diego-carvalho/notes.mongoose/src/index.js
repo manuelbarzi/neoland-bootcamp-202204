@@ -13,7 +13,9 @@ const {
     handleUpdateNote,
     handleDeleteNote,
     handleAddCommentToNote,
-    handleDeleteCommentFromNote} = require('./handlers')
+    handleDeleteCommentFromNote,
+    handleRetrievePublicNotes } = require('./handlers')
+    
 const { connect, disconnect } = require('mongoose')
 
     ; (async () => {
@@ -37,9 +39,11 @@ const { connect, disconnect } = require('mongoose')
         routes.get('/notes', handleRetrieveNotes)//retrieveNote
         routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)//updateNote
         routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteNote)//deleteNote
+        routes.get('/notes/public', jsonBodyParser, handleRetrievePublicNotes)//retrievePublicNote
+
         routes.post('/notes/:noteId/comments', jsonBodyParser, handleAddCommentToNote)//addCommentToNote
         routes.delete('/notes/:noteId/comments/:commentId', jsonBodyParser, handleDeleteCommentFromNote)//deleteCommentFromNote
-
+    
         api.use('/api', routes)//ruta
 
         api.listen(8080, () => console.log('API running'))//client
