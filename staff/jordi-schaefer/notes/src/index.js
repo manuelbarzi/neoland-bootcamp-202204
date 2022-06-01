@@ -55,13 +55,13 @@ const { handleRegisterUser,
     
     // ---------------   COMMENTS  --------------------
     // Save comment
-    routes.patch('/comments/:noteId', jsonBodyParser, handleSaveComment)
+    routes.patch('/notes/:noteId/comments', jsonBodyParser, handleSaveComment)
     // Delete comment
-    routes.delete('/comments/:noteId/:commentId', jsonBodyParser, handleDeleteComment)
+    routes.delete('/notes/:noteId/comments/:commentId', jsonBodyParser, handleDeleteComment)
     // reaction Note
-    routes.patch('/reactions/:noteId', jsonBodyParser, handleToggleReactionOnNote)
+    routes.patch('/notes/:noteId/reactions/:reactionCode', jsonBodyParser, handleToggleReactionOnNote)
     // reaction Comment
-    routes.patch('/reactions/:noteId/:commentId', jsonBodyParser, handleToggleReactionOnComment)
+    routes.patch('notes/:noteId/comments/:commentId/reactions/:reactionCode', jsonBodyParser, handleToggleReactionOnComment)
 
 
     api.use('/api', routes)
