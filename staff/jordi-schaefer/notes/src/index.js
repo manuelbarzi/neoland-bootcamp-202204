@@ -72,7 +72,7 @@ const { handleRegisterUser,
         await disconnect()
 
         console.log('\nDB disconnected')
-
+        
         process.exit(0)
     })
 })()

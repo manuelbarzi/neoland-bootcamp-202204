@@ -31,3 +31,10 @@
 
 npm i mongodb
 
+
+
+db.notes.updateOne({_id: ObjectId("62964f56f24232243823b7f0")}, { $push: { comments: {_id: ObjectId("6296578868466735987e370d")}}})
+
+
+ db.notes.updateOne({_id: ObjectId("62964f56f24232243823b7f0")}, { $pull: { comments: {_id: ObjectId("6296578868466735987e370d")}}})
+
