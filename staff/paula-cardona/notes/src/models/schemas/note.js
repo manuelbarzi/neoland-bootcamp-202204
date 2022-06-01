@@ -1,5 +1,7 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId }} = Schema
+const reaction = require('./reaction')
+const comment = require('./comment')
 
 const note = new Schema({
     user: {
@@ -13,12 +15,20 @@ const note = new Schema({
         required: true,
         default: ''
     },
-
     date: {
         type: Date,
         required: true,
         default: Date.now
-    }
+    },
+    audience: {
+        type: Number,
+        enum: [0 /* private */, 1 /* public */, 2 /* friends */],
+        default: 1
+    },
+    
+    reactions: [reaction], //las notas tambien tienen reaccion
+
+    comments: [comment] //el constructor comment vendrá dentro de notes
 })
 
 module.exports = note

@@ -2,7 +2,7 @@ const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Note } = require("../models")
 const updateNote = require('./updateNote')
 const { expect } = require('chai')
-const { NotFoundError } = require('../errors')
+const { NotFoundError, ConflictError } = require('../errors')
 
 describe('updateNote', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
@@ -74,6 +74,7 @@ describe('updateNote', () => {
         describe('when user does not exist', () => {
             it('fails on unexisting user id', () => {
                 const unexistingWrongId = new ObjectId().toString()
+
 
                 return Note.create({ user: userId, text: 'jelou' })
                     .then((_note) => { //me devuelve la nota entera

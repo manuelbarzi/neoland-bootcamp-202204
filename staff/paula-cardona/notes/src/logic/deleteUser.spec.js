@@ -2,7 +2,7 @@ const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
 const { expect } = require("chai")
 const deleteUser = require('./deleteUser')
-const { NotFoundError } = require('../errors')
+const { NotFoundError, AuthError } = require('../errors')
 
 describe('deleteUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
@@ -22,20 +22,22 @@ describe('deleteUser', () => {
             return deleteUser(user.id, user.password) //solo usamos la función
                 .then((result)=>{
                     expect(result).to.be.undefined
-
+                    return User.findById(user.id)
+                }) 
+                .then((user) => {
+                    expect(user).to.be.null
                 })
-                .catch ((error) =>{
-                    expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.be.equal(`wrong credentials`)
-                })
+                // buscar el usuario
+                // esperamos que no exista (null)
+                
         })
-        it ('fais when user exist but password is incorrect' ,() => {
+        it ('fais when user exist but password is incorrect', () => {
             return deleteUser(user.id, '456456456')
                 .then (() =>{ 
                     throw new Error('should not reach this point') //al ser un error
                 })
                 .catch ((error) =>{
-                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error).to.be.instanceOf(AuthError)
                     expect(error.message).to.be.equal(`wrong credentials`)
                 })
 
@@ -60,7 +62,7 @@ describe('deleteUser', () => {
                 })
                 .catch((error) => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.be.equal(`wrong credentials`)
+                    expect(error.message).to.be.equal(`user with id ${wrongId} does not exist`)
                 })
                 
         })

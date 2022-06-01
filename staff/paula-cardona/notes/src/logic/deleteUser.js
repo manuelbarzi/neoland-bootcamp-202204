@@ -1,5 +1,5 @@
 const { User } = require("../models");
-const { NotFoundError } = require('../errors')
+const { NotFoundError, AuthError } = require('../errors')
 const { validatePassword } = require("../validators");
 
 
@@ -11,10 +11,10 @@ function deleteUser(id, password) {
         .then((user)=> {
 
             if(!user) {
-                throw new NotFoundError (`wrong credentials`)
+                throw new NotFoundError (`user with id ${id} does not exist`)
             }
             if(user.password!==password)
-                throw new NotFoundError (`wrong credentials`)
+                throw new AuthError (`wrong credentials`)
 
             //deleteOne ({id_:id})
             return User.deleteOne({_id: id}) //te devuelve cosas por eso ponemos un result vacio porque nos importa una mierda
