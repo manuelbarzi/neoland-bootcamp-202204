@@ -174,33 +174,33 @@ connect('mongodb://localhost:27017/notes-db') //conecta con la base de datos
         }
     })
 
+    //addCommentToNote 
+    api.post('/api/notes/:noteId', jsonBodyParser, (req, res) => {
+        try{ //sincrono
+            const userId = verifyToken(req)
+    
+            const { params: { noteId }, body: { text } } = req
+    
+            addCommentToNote(userId, noteId, text )
+            .then(notes => res.status(200).json({notes}))
+                
+            .catch(error => { //asincrono
+                let status = 500
+    
+                if (error instanceof ConflictError) status = 409
+    
+                res.status(status).json({ error: error.message })
+                // res.status(status).send(JSON.stringify({ error: error.message }))
+            })
+        } catch (error) { //sincrono
+            let status = 500
+    
+            if(error instanceof TypeError || error instanceof FormatError)
+            status = 400
+    
+            res.status(status).json({ error: error.message })
+        }
+    })
     api.listen(8080, () => console.log('API running'))
 })
 
-//addCommentToNote 
-api.post('/api/notes/:noteId', jsonBodyParser, (req, res) => {
-    try{ //sincrono
-        const userId = verifyToken(req)
-
-        const { params: { noteId }, body: { text } } = req
-
-        addCommentToNote(userId, noteId, text )
-        .then(notes => res.status(200).json({notes}))
-            
-        .catch(error => { //asincrono
-            let status = 500
-
-            if (error instanceof ConflictError) status = 409
-
-            res.status(status).json({ error: error.message })
-            // res.status(status).send(JSON.stringify({ error: error.message }))
-        })
-    } catch (error) { //sincrono
-        let status = 500
-
-        if(error instanceof TypeError || error instanceof FormatError)
-        status = 400
-
-        res.status(status).json({ error: error.message })
-    }
-})

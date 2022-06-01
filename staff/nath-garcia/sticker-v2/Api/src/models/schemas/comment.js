@@ -1,6 +1,6 @@
 const { Schema } = require('mongoose')
 const {Types: { ObjectId } } = Schema
-const reaction = require('/reaction')
+const reaction = require('./reaction')
 
 const comment = new Schema({
     user: {
