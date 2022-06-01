@@ -1,26 +1,29 @@
 const { User, Note, Comment } = require('../models')
 const { NotFoundError } = require('../errors')
+const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
 
-function addCommentToNote(userid,noteid,text) {
-    
-debugger
-    return User.find({_id: userid})
-        .then((userfind)=> {
-            if(!userfind) throw new NotFoundError('User Not Found') 
-            return Note.findById(noteid) 
+function addCommentToNote(userId, noteId, text) {
+    validateStringNotEmptyNoSpaces(userId, 'user id')
+    validateStringNotEmptyNoSpaces(noteId, 'note id')
+    if (text != null)  validateString(text, 'text')
+
+    return User.findById(userId)
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+
+            return Note.findById(noteId)
         })
-        .then ((notefind)=> {
-            if(!notefind) throw new NotFoundError('Note Not found')
-            debugger
-            return Comment.create({user: userid, text : text})              
-                
+        .then(note => {
+            if (!note) throw new NotFoundError(`note with id ${noteId} does not exist`)
+
+            const comment = new Comment({ user: userId, text: text})
+            note.comments.push(comment)
+
+            return note.save()
+                .then(() => {
+                    return comment.id
+                })
         })
-        .then((addcomment)=>{
-            return Note.updateOne({_id:noteid}, {$push: {comments: addcomment}})
-        })
-    
-      
-   
 }
 
 module.exports = addCommentToNote
