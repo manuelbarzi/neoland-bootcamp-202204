@@ -3,11 +3,10 @@ const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
 function retrieveUser(userId) {
-    debugger
     validateStringNotEmptyNoSpaces(userId, 'user id')
 
     return User.findById(userId).lean()
-        .then(user => {
+        .then(user => { // {_id: ObjectId, name: 'Papa Gayo', username: 'papagayo', password: '123123123', __v: 0}
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 

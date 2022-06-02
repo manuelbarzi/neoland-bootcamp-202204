@@ -2,47 +2,39 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-// const {registerUser} = require('./logic')
-// const {authenticateUser} = require('./logic')
-// const {retrieveUser} = require('./logic')
-// const {updateUser} = require('./logic')
-// const { ConflictError, FormatError, AuthError, NotFoundError } = require('./errors')
-
-
 const {
     handleRegisterUser,
     handleAuthenticateUser,
     handleRetrieveUser,
     handleUpdateUser,
-
     handleCreateNote,
     handleRetrieveNotes,
     handleUpdateNote,
-    handleDeleteNote
-
-
-} = require('./handlers')
+    handleDeleteNote } = require('./handlers')
 
 const { connect, disconnect } = require('mongoose')
+const { cors } = require('./helpers')
 
-; (async() => {
-    await connect('mongodb://localhost:27017/notes-db')
+    ; (async () => {
+        await connect('mongodb://localhost:27017/notes-db')
 
-        console.log('db connected')
+        console.log('DB connected')
 
         const api = express()
+
+        api.use(cors)
 
         const jsonBodyParser = bodyParser.json()
 
         const routes = express.Router()
 
         routes.post('/users', jsonBodyParser, handleRegisterUser)
-        routes.post('/auth', jsonBodyParser, handleAuthenticateUser)
-        routes.get('/users', jsonBodyParser, handleRetrieveUser)
+        routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
+        routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
-        
+
         routes.post('/notes', jsonBodyParser, handleCreateNote)
-        routes.get('/notes', jsonBodyParser, handleRetrieveNotes)
+        routes.get('/notes', handleRetrieveNotes)
         routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)
         routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteNote)
 
