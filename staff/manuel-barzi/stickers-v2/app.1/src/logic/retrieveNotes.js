@@ -1,5 +1,6 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
+import Note from '../models/Note'
 
 function retrieveNotes(token, callback) {
     const logger = new Logger('retrieveNotes')

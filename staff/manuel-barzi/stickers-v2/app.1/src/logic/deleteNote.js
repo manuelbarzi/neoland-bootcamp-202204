@@ -1,8 +1,8 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
 
-function retrieveNotes(token, callback) {
-    const logger = new Logger('retrieveNotes')
+function deleteNote(token, noteId, callback) {
+    const logger = new Logger('deleteNote')
 
     logger.info('call')
 
@@ -12,9 +12,10 @@ function retrieveNotes(token, callback) {
 
     logger.info('request')
 
-    api.get('notes', {
+    api.delete(`notes/${noteId}`, {
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
         }
     }, (error, response) => {
         if (error) return callback(error)
@@ -29,12 +30,10 @@ function retrieveNotes(token, callback) {
             callback(new Error(data.error))
         } else if (status >= 500)
             callback(new Error('server error'))
-        else if (status === 200) {
-            const data = JSON.parse(payload)
-
-            callback(null, data)
+        else if (status === 204) {
+            callback(null)
         }
     })
 }
 
-export default retrieveNotes
+export default deleteNote

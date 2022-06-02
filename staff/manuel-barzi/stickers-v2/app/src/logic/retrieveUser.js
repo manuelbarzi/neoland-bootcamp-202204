@@ -1,6 +1,5 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
-import User from '../models/User'
 
 function retrieveUser(token, callback) {
     const logger = new Logger('retrieveUser')
@@ -33,9 +32,7 @@ function retrieveUser(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            const user = new User(data.name, data.username)
-
-            callback(null, user)
+            callback(null, data)
         }
     })
 }

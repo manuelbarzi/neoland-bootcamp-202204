@@ -1,8 +1,9 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
+import User from '../models/User'
 
-function retrieveNotes(token, callback) {
-    const logger = new Logger('retrieveNotes')
+function retrieveUser(token, callback) {
+    const logger = new Logger('retrieveUser')
 
     logger.info('call')
 
@@ -12,7 +13,7 @@ function retrieveNotes(token, callback) {
 
     logger.info('request')
 
-    api.get('notes', {
+    api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -32,9 +33,11 @@ function retrieveNotes(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            callback(null, data)
+            const user = new User(data.name, data.username)
+
+            callback(null, user)
         }
     })
 }
 
-export default retrieveNotes
+export default retrieveUser
