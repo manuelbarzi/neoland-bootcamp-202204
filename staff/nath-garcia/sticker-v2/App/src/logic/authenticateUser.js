@@ -1,4 +1,5 @@
 import Logger from '../vendor/Loggy'
+import { validateUsername, validatePassword } from '../validators'
 import Apium from '../vendor/Apium'
 
 function authenticateUser(username, password, callback) {
@@ -6,11 +7,14 @@ function authenticateUser(username, password, callback) {
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    validateUsername(username)
+    validatePassword(password)
+
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.post('v2/users/auth', {
+    api.post('users/auth', {
         headers: {
             'Content-Type': 'application/json'
         },
