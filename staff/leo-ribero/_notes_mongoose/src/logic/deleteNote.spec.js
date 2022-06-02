@@ -68,7 +68,7 @@ describe('deleteNote', () => {
                 .then((result) => {
                     noteId = result.id
 
-                    return deleteNote(wrongId, noteId) // llamo a nuestra funcion
+                    return deleteNote(wrongId, noteId)
                 })
                 .then(() => {
                     throw new Error('should not reach this point')

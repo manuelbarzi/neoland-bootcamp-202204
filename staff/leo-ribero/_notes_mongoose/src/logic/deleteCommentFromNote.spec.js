@@ -68,10 +68,10 @@ describe('deleteCommentFromNote', () => {
   
         describe('When note does not exist', () => {
             it('fails with wrong note Id', () => {
-                const wrongNoteId = new ObjectId().toString()//creo un objecto wrongNoteId 
-                const wrongCommentId = new ObjectId().toString()//creo un objecto wrongCommentId 
+                const wrongNoteId = new ObjectId().toString()
+                const wrongCommentId = new ObjectId().toString() 
               
-                return deleteCommentFromNote(diegoUser.id, wrongNoteId, wrongCommentId)//les paso como parametros
+                return deleteCommentFromNote(diegoUser.id, wrongNoteId, wrongCommentId)
                     .then(() => {
                         throw new Error('should not reach this point')
                     })

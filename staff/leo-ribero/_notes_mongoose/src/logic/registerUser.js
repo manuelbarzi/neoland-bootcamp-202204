@@ -19,5 +19,3 @@ function registerUser(name, username, password) {
 
 module.exports = registerUser
 
-// No sabemos de cliente
-// sabemos de mongoose
