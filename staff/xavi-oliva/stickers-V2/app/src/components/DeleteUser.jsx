@@ -1,5 +1,7 @@
 import { useContext } from 'react'
+import Context from '../components/Context'
 import Logger from '../vendor/Loggy'
+import deleteUser from '../logic/deleteUser'
 
 function DeleteUser(props) {
     const logger = new Logger('DeleteUser')
@@ -24,7 +26,8 @@ function DeleteUser(props) {
     
                 delete sessionStorage.token
     
-                location.reload()
+                // location.reload()
+                // props.onDeletedUser()
             })
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })

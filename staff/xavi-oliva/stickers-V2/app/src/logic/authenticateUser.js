@@ -10,7 +10,7 @@ function authenticateUser(username, password, callback) {
     validateUsername(username)
     validatePassword(password)
     
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 

@@ -1,3 +1,7 @@
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import { validateJwt, validatePassword } from '../validators'
+
 function deleteUser(token, password, callback) {
     const logger = new Logger('deleteUser')
 
@@ -34,3 +38,5 @@ function deleteUser(token, password, callback) {
             callback(null)
     })
 }
+
+export default deleteUser

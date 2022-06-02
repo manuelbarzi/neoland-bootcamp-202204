@@ -11,11 +11,12 @@ const {
     handleCreateNote,
     handleRetrieveNotes,
     handleRetrievePublicNotes,
-    handleUpdateNote, 
+    handleUpdateNote,
     handleDeleteNote,
     handleAddCommentToNote,
-    handleDeleteCommentFromNote} = require('./handlers')
+    handleDeleteCommentFromNote } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
+const { cors } = require('./helpers')
 
     ; (async () => {
         await connect('mongodb://localhost:27017/notes-db')
@@ -23,6 +24,8 @@ const { connect, disconnect } = require('mongoose')
         console.log('DB connected')
 
         const api = express()
+
+        api.use(cors)
 
         const jsonBodyParser = bodyParser.json()
 
