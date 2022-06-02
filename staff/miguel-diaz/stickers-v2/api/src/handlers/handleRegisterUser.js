@@ -7,7 +7,7 @@ module.exports = (req, res) => {
     
         registerUser(name, username, password)
             .then(() => res.status(201).send())
-            .catch(error => {handleErrorsAndRespond(error, res)})
+            .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)
     }

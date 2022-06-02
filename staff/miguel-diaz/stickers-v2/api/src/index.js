@@ -1,9 +1,9 @@
 require('dotenv').config()
 
 const express = require('express')
+
 const bodyParser = require('body-parser')
-const { connect, disconnect } = require('mongoose')
-const { handleRegisterUser, 
+const { handleRegisterUser, handleRetrieveNotes,
     handleAuthenticateUser, handleRetrieveUser, 
     handleUpdateUser, handleDeleteUser, 
     handleCreateNote, handleDeleteNote, 
@@ -11,13 +11,17 @@ const { handleRegisterUser,
     handleRetrievePublicNotes, 
     handleAddComment, handleDeleteComment,
     handleToggleReactionOnComment, handleToggleReactionOnNote } = require('./handlers')
+const { connect, disconnect } = require('mongoose')
+const {cors} = require('./helpers')
 
 
 ;   (async () => {
-    await connect('mongodb://127.0.0.1:27017/notes-db') 
+    await connect('mongodb://localhost:27017/notes-db') 
     console.log('DB connected') 
     
     const api = express()
+
+    api.use(cors)
     
     const jsonBodyParser = bodyParser.json()
 
@@ -37,10 +41,11 @@ const { handleRegisterUser,
     // <<<<    N    O    T    E    S    >>>>
 
     routes.post('/notes', jsonBodyParser, handleCreateNote)
-    routes.delete('/notes', jsonBodyParser, handleDeleteNote)
+    routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteNote)
+    routes.get('/notes', handleRetrieveNotes)
     routes.get('/notes', handleListNotes)
     routes.get('/notes/public', handleRetrievePublicNotes)
-    routes.patch('/notes', jsonBodyParser, handleUpdateNote)
+    routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)
     
     
     // <<<<  C   O   M   M   E   N   T   S   >>>>
@@ -60,11 +65,6 @@ const { handleRegisterUser,
         await disconnect()
 
         console.log('\n>>>>> JORDI TE QUIERO!!! <<<<<<')
-        console.log('\n>>>>>    JOPUTA   !!! <<<<<<')
-        console.log('\n>>>>> NO TE VAYAS !!! <<<<<<')
-        console.log('\n>>>>>    CABRONNN  !!! <<<<<<')
-        console.log('\n>>>>>     VUELVE   !!! <<<<<<')
-        console.log('\n>>>>>    TETESIKO   !!! <<<<<<')
 
         process.exit(0)
     })

@@ -1,36 +1,35 @@
-import Logger from '../vendor/loggy'
-import { validateString } from '../validators'
-import Apium from '../vendor/Apium'
+import Logger from '../vendor/Loggy'
 
 function registerUser(name, username, password, callback) {
-
     const logger = new Logger('registerUser')
 
-    validateString(name, 'Name')
-    validateString(username, 'Username')
-    //validatePassword(password, 'Password')
+    logger.info('call')
 
-    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
+    const xhr = new XMLHttpRequest()
 
-    api.post('/v2/users/auth', {
-        headers: { 'Content-Type': 'application/json' }, 
-        body: JSON.stringify( {name, username, password})}, (error, {status, payload}) => {
+    xhr.addEventListener('load', event => {
+        const status = event.target.status
 
-            if (error) {
-                callback(error)
-                return
-            }
-            if (status === 201) {
-                callback(null) 
-            } 
-            else if (status >= 400 && status < 500) { 
-                const data = JSON.parse(payload)  
-                callback(new Error(data.error)) 
-            } 
-            else
-            callback(new Error('server error'))
-        }
-    )
+        if (status === 201)
+            callback(null)
+        else if (status >= 400 && status < 500) {
+            const json = event.target.responseText
+
+            const data = JSON.parse(json)
+
+            callback(new Error(data.error))
+        } else callback(new Error('server error'))
+    })
+
+    xhr.open('POST', 'http://localhost:8080/api/users')
+
+    xhr.setRequestHeader('Content-Type', 'application/json')
+
+    const data = { name, username, password }
+
+    const json = JSON.stringify(data)
+
+    xhr.send(json)
 }
 
 export default registerUser

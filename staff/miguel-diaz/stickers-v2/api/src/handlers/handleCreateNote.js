@@ -1,5 +1,5 @@
 const {createNote} = require('../logic')
-const {handleErrorsAndRespond} = require('./helpers')
+const {verifyToken, handleErrorsAndRespond} = require('./helpers')
 
 module.exports = (req, res) => {
     try {
@@ -11,6 +11,6 @@ module.exports = (req, res) => {
             .then(noteId => res.status(201).json({ noteId }))
             .catch(error => {handleErrorsAndRespond(error, res)})
     } catch (error) {
-        handleErrorsAndRespond
+        handleErrorsAndRespond(error, res)
     }
 }

@@ -1,16 +1,16 @@
-import { validateJwt, validateString } from '../validators'
+import { validateJwt} from '../validators'
 import Apium from '../vendor/Apium'
 
-function updateUserName (token, newName, callback)  {
-
+function deleteUser (token, password, callback)  {
+    
     validateJwt(token)
-    validateString(newName, 'Name')
+    //validatePassword(password, 'Password')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
-    api.patch('/v2/users', {
+    api.delete('users', {
         headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json'},
-        body: JSON.stringify({ name: newName })}, (error, {status, payload}) => {
+        body: JSON.stringify({ password})}, (error, {status, payload}) => {
 
             if (error) {
                 callback(error)
@@ -29,4 +29,4 @@ function updateUserName (token, newName, callback)  {
     )
 }
 
-export default updateUserName
+export default deleteUser

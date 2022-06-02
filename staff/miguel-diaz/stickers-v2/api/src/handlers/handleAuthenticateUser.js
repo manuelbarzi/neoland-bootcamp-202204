@@ -1,5 +1,5 @@
-const {authenticateUser} = require('../logic')
-const{handleErrorsAndRespond} = require('./helpers')
+const { authenticateUser } = require('../logic')
+const { generateToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
     try {
@@ -11,8 +11,8 @@ module.exports = (req, res) => {
 
                 res.status(200).json({ token })
             })
-            .catch(error => {handleErrorsAndRespond(error, res)})
-    } catch (error) {
-        handleErrorsAndRespond
-    }
+            .catch(error => handleErrorsAndRespond(error, res))
+        } catch (error) {
+            handleErrorsAndRespond(error, res)
+        }
 }

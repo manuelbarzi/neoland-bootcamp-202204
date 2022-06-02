@@ -1,3 +1,4 @@
+
 module.exports = {
     handleRegisterUser: require('./handleRegisterUser'),
     handleAuthenticateUser: require('./handleAuthenticateUser'),
@@ -12,5 +13,6 @@ module.exports = {
     handleAddComment: require('./handleAddComment'),
     handleDeleteComment: require('./handleDeleteComment'),
     handleToggleReactionOnNote: require('./handleToggleReactionOnNote'),
-    handleToggleReactionOnComment: require('./handleToggleReactionOnComment')
+    handleToggleReactionOnComment: require('./handleToggleReactionOnComment'),
+    handleRetrieveNotes: require('./handleRetrieveNotes')
 }

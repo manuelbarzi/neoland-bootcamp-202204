@@ -1,14 +1,14 @@
-const {retrieveNote} = require('../logic')
-const {handleErrorsAndRespond} = require('./helpers')
+const {retrieveNotes} = require('../logic')
+const {verifyToken, handleErrorsAndRespond} = require('./helpers')
 
 module.exports = (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        retrieveNote(userId)
+        retrieveNotes(userId)
             .then(noteId => res.status(200).json(noteId))
-            .catch(error => {handleErrorsAndRespond})
+            .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
-        handleErrorsAndRespond
+        handleErrorsAndRespond(error, res)
     }
 }

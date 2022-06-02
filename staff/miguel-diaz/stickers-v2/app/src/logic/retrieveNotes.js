@@ -1,7 +1,5 @@
-import Logger from "../vendor/loggy"
-import Apium from "../vendor/Apium"
-import { validateJwt } from "../validators"
-import Note from "../data/models/Note"
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
 
 function retrieveNotes(token, callback) {
     const logger = new Logger('retrieveNotes')
@@ -9,13 +7,12 @@ function retrieveNotes(token, callback) {
     logger.info('call')
 
     // TODO validate input args
-    validateJwt(token)
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.get('v2/users', {
+    api.get('notes', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -35,14 +32,9 @@ function retrieveNotes(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            let { notes = [] } = data 
-
-            notes = notes.map(note => new Note(note.id, note.text, new Date(note.date)))
-
-            callback(null, notes)
+            callback(null, data)
         }
     })
 }
 
 export default retrieveNotes
-

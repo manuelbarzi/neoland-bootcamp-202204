@@ -1,8 +1,5 @@
-import Note from "../data/models/Note"
-import Logger from "../vendor/loggy"
-import Apium from "../vendor/Apium"
-import User from "../data/models/User"
-import { validateJwt } from "../validators"
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
 
 function retrieveUser(token, callback) {
     const logger = new Logger('retrieveUser')
@@ -11,13 +8,11 @@ function retrieveUser(token, callback) {
 
     // TODO validate input args
 
-    validateJwt(token)
-
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.get('v2/users', {
+    api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -37,9 +32,7 @@ function retrieveUser(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            const user = new User(data.name, data.username)
-
-            callback(null, user)
+            callback(null, data)
         }
     })
 }

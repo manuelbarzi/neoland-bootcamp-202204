@@ -2,7 +2,6 @@ import { Component } from 'react'
 import ChangeName from './ChangeName'
 import ChangePassword from './ChangePassword'
 
-
 class Profile extends Component {
     state = { view: null }
 
@@ -12,8 +11,8 @@ class Profile extends Component {
 
     render() {
         return <div className="Profile Container">
-            <button className="Profile__changeName btn1" onClick={this.handleChangeNameClick}>Change Name</button>
-            <button className="Profile__changePassword btn2" onClick={this.handleChangePasswordClick}>Change Password</button>
+            <button className="Profile__changeName" onClick={this.handleChangeNameClick}>Change Name</button>
+            <button className="Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
 
             {this.state.view === 'change-name' && <ChangeName />}
             {this.state.view === 'change-password' && <ChangePassword />}
@@ -22,7 +21,6 @@ class Profile extends Component {
 }
 
 export default Profile
-
 //         let changeName, changePassword
 
 //         const changeNameButton = this.container.querySelector('.Profile__changeName')

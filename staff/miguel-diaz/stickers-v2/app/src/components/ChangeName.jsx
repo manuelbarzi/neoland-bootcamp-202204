@@ -1,47 +1,38 @@
-import {useContext} from 'react'
-import Logger from '../vendor/loggy'
+import { useContext } from 'react'
 import Context from './Context'
 import updateUserName from '../logic/updateUserName'
 
-function ChangeName (){
+function ChangeName (props) {
 
-    const logger = new Logger('ChangeName')
+    const { handleFeedback } = useContext(Context)
 
-    logger.info('call')
-
-    const {handleFeedback} = useContext(Context)
- 
-
-    const handleNameChangeClick = event => {
+    const handleSaveClick = event => {
         event.preventDefault()
 
-        const name = event.target.name.value
+        const newName = event.target.name.value
+
         try {
-            updateUserName(sessionStorage.token, name, (error) => {
-
+            updateUserName(sessionStorage.token, newName, (error) => {
                 if (error) {
-                    handleFeedback({level: 'error', message: error.message})
-
-                    return 
+                    handleFeedback({ type: 'error', message: error.message})
+                    return
                 }
 
-                handleFeedback({ level: 'success', message: 'Name saved'})
+                handleFeedback({ type: 'success', message: 'Name changed'})
+                props.onUserNameChanged()
             })
         } catch(error) {
-            handleFeedback({level: 'error', message: error.message})
+            handleFeedback({ type: 'error', message: error.message})
         }
-        
     }
 
 
-    logger.info('render')
-
     return <div className="ChangeName">
-            <form className="Container" onSubmit={handleNameChangeClick}>
-                <input class="namebutton" type="text" name="name" placeholder="name"/>
-                <button className="btn">Save</button>
-            </form>
-        </div>
+        <form className="Container" onSubmit={handleSaveClick}>
+            <input className="form" type="text" name="name" placeholder=" New name"/>
+            <button className="Button">Save</button>
+        </form>
+    </div>
 }
 
 export default ChangeName
