@@ -11,17 +11,24 @@ function Login(props) {
 
     const { handleFeedback } = useContext(Context)
 
-    const handleFormSubmit = async event => {
+    const handleFormSubmit = event => {
         event.preventDefault()
 
         const username = event.target.username.value
         const password = event.target.password.value
 
         try {
-            const token = await authenticateUser(username, password)
+            authenticateUser(username, password, (error, token) => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
 
-            sessionStorage.token = token
-            props.onUserLoggedIn()
+                    return
+                }
+
+                sessionStorage.token = token
+
+                props.onUserLoggedIn()
+            })
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
