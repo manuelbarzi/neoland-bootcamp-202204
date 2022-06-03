@@ -13,13 +13,19 @@ const {
     handleDeleteNote } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
+const morgan = require('morgan')
+const logger = require('./logger')
+
+const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
     ; (async () => {
-        await connect('mongodb://localhost:27017/notes-db')
+        await connect(MONGODB_URL)
 
-        console.log('DB connected')
+        logger.info(`DB connected to ${MONGODB_URL}`)
 
         const api = express()
+
+        api.use(morgan('dev'))
 
         api.use(cors)
 
@@ -39,12 +45,12 @@ const { cors } = require('./helpers')
 
         api.use('/api', routes)
 
-        api.listen(8080, () => console.log('API running'))
+        api.listen(port, () => logger.info(`API running on port ${port}`))
 
         process.on('SIGINT', async () => {
             await disconnect()
 
-            console.log('\nDB disconnected')
+            logger.info('\nDB disconnected')
 
             process.exit(0)
         })

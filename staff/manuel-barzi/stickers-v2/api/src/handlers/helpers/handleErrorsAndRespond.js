@@ -1,4 +1,5 @@
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('../../errors')
+const logger = require('../../logger')
 
 module.exports = (error, res) => {
     let status = 500
@@ -13,4 +14,6 @@ module.exports = (error, res) => {
         status = 409
 
     res.status(status).json({ error: error.message })
+
+    logger.error(error.message)
 }

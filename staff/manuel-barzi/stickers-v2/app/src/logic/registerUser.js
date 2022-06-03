@@ -24,7 +24,7 @@ function registerUser(name, username, password, callback) {
         } else callback(new Error('server error'))
     })
 
-    xhr.open('POST', 'http://localhost:8080/api/users')
+    xhr.open('POST', `${process.env.REACT_APP_API_URL}/users`)
 
     xhr.setRequestHeader('Content-Type', 'application/json')
 

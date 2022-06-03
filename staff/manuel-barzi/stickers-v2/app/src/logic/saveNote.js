@@ -10,7 +10,7 @@ function saveNote(token, noteId, text, callback) {
 
     logger.info('request')
 
-    const api = new Apium('http://localhost:8080/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     if (!noteId)
         api.post('notes', {
