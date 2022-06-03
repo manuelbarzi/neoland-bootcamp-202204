@@ -1,27 +1,32 @@
 import Apium from '../vendor/Apium'
 
+function retrieveUser(token, callback) {
 
-export default function retrieveUser(token, callback) {
-    const api = new Apium
-    const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
+    const api = new Apium('http://localhost:8080/api')
 
-    api.call('GET', url, {
+    api.get('users', {
         headers: {
             'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ token })
-    }, (error, {status, payload}) => {
-        if(error) return callback(error)
-        if(status === 200) {
-            const data = JSON.parse(payload)
-            const user = { name: data.name, username: data.username }
-            // const user = new User(data.name, data.username)
-            callback(null, user)
-        }else if (status >= 400 && status < 500) {
+        }
+    }, (error, response) => {
+        if (error) return callback(error)
+
+        const { status, payload } = response
+
+        if (status >= 400 && status < 500) {
             const data = JSON.parse(payload)
             callback(new Error(data.error))
-        } else {
+
+        } else if (status >= 500)
             callback(new Error('server error'))
+
+        else if (status === 200) {
+            console.log(status, 98988)
+            const data = JSON.parse(payload)
+            callback(null, data)
         }
     })
 }
+
+
+export default retrieveUser;

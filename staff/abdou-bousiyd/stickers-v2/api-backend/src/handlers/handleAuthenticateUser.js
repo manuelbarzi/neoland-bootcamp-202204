@@ -1,18 +1,18 @@
 const { authenticateUser } = require('../logic')
-const { handleErrorsAndRespond, generateToken} = require('./helpers')
+const { generateToken, handleErrorsAndRespond } = require('./helpers')
 
-module.exports = (req, res) => { 
+module.exports = (req, res) => {
     try {
         const { body: { username, password } } = req
 
         authenticateUser(username, password)
-            .then(userId =>  {
-                // const token = sign({ sub: userId }, 'a pepito le gusta el nudismo')
+            .then(userId => {
                 const token = generateToken(userId)
+
                 res.status(200).json({ token })
             })
             .catch(error => handleErrorsAndRespond(error, res))
-    } catch (error) {
-        handleErrorsAndRespond(req, res)
-    }
+        } catch (error) {
+            handleErrorsAndRespond(error, res)
+        }
 }

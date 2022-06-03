@@ -12,7 +12,23 @@ function Login(props) {
         const username = e.target.username.value
         const password = e.target.password.value
 
-        authenticateUser(username, password, (error, token ) => {
+        try{
+            authenticateUser(username, password)
+                .then(token => {
+                    sessionStorage.token = token
+                    props.onUserLoggedIn()
+                })
+                .catch((error) => {
+                    if (error) {
+                        setAlert(<Alert error message={error.message} />)
+                        setTimeout( () => {
+                            setAlert(null)
+                        }, 4000 )
+                        return
+                    }
+                })
+
+        }catch(error) {
             if (error) {
                 setAlert(<Alert error message={error.message} />)
                 setTimeout( () => {
@@ -20,9 +36,9 @@ function Login(props) {
                 }, 4000 )
                 return
             }
-            sessionStorage.token = token
-            props.onUserLoggedIn()
-        })
+        }
+
+        
     }
 
     const handleRegisterLinkClick = e => {

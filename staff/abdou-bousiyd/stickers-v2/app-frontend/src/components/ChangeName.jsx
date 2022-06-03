@@ -11,20 +11,27 @@ function ChangeName(props) {
         e.preventDefault()
         const name = e.target.name.value
 
-        updateUserName(sessionStorage.token, name, (error) => {
+        try{
+            updateUserName(sessionStorage.token, name, error => {
+                if (error) {
+                    setAlert(<Alert error message={error.message} />)
+                    setTimeout( () => {
+                        setAlert(null)
+                    }, 4000 )
+                    return
+                } 
+                props.handleRetriveUser()
+            })
+
+        }catch(error){
             if (error) {
                 setAlert(<Alert error message={error.message} />)
                 setTimeout( () => {
                     setAlert(null)
                 }, 4000 )
                 return
-            }
-            setAlert( <Alert message="Name updated" />)
-            setTimeout( () => {
-                setAlert(null)
-            }, 4000 )
-            props.handleRetriveUser()
-        });
+            }   
+        }
     }
 
     return <div className="ChangeName">

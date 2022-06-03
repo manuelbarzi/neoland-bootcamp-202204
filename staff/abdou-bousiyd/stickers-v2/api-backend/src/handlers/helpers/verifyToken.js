@@ -12,3 +12,5 @@ function verifyToken(req) {
 }
 
 module.exports = verifyToken
+
+
