@@ -4,7 +4,7 @@ import Logger from '../vendor/Loggy'
 import Context from './Context'
 import updateUserName from '../logic/updateUserName'
 
-function ChangeName() {
+function ChangeName(props) {
     const logger = new Logger('ChangeName')
 
     logger.info('call')
@@ -24,6 +24,7 @@ function ChangeName() {
                     return
                 }
                 handleFeedback({ level: 'success', message: 'name has been changed'})
+                props.onUserNameChanged()
             
             })
         } catch (error) {

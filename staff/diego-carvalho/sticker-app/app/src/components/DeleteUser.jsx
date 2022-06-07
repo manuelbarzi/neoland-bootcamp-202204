@@ -4,7 +4,7 @@ import Logger from '../vendor/Loggy'
 import Context from './Context'
 import deleteUser from '../logic/deleteUser'
 
-function DeleteUser() {
+function DeleteUser() {//passar props como parametro
     const logger = new Logger('DeleteUser')
 
     logger.info('call')
@@ -23,6 +23,7 @@ function DeleteUser() {
 
                     return
                 }
+                //user props aqui
             })
 
         } catch (error) {
@@ -38,12 +39,13 @@ function DeleteUser() {
         <form className="Container" onSubmit={handleFormSubmit}>
             <input className="" type="password" name="password" placeholder="password" />
 
-            <button className="Delete__button">Delete</button>
+            <button className="Delete__button">Delete User</button>
         </form>
     </div>
 }
 export default DeleteUser
 
+//INFO
 
 /*The try statement lets you test a block of code for errors. The catch statement lets you handle the error. 
 The throw statement lets you create custom errors.

@@ -14,7 +14,7 @@ function deleteUser(token, password, callback) {
 
     const api = new Apium('http://localhost:8080/api')
 
-    api.delete(`users/${token}`, {
+    api.delete(`users`, {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'

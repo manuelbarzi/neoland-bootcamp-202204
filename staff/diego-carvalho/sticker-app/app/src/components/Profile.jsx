@@ -10,7 +10,7 @@ class Profile extends Component {
 
     handleChangePasswordClick = () => this.setState({ view: 'change-password' })
 
-    handleDeleteUserClick = () => this.setState({ view: 'delete-user' })
+    handleDeleteUserClick = () => this.setState({ view: 'delete-user' })//no esta bien
 
 
     render() {
@@ -22,7 +22,7 @@ class Profile extends Component {
 
             {this.state.view === 'change-name' && <ChangeName />}
             {this.state.view === 'change-password' && <ChangePassword />}
-            {this.state.view === 'delete-user' && <DeleteUser />}
+            {this.state.view === 'delete-user' && <DeleteUser />} 
 
         </div>
     }
