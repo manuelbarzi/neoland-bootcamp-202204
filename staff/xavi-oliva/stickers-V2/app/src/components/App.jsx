@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Logger from '../vendor/Loggy'
 import Context from './Context'
 import Login from './Login'
@@ -6,24 +6,41 @@ import Register from './Register'
 import Home from './Home'
 import Feedback from './Feedback'
 import './App.sass'
+import { useNavigate, Routes, Route } from 'react-router-dom'
+import { isJwtValid } from '../validators'
 
 function App() {
     const logger = new Logger('App')
 
     logger.info('call')
 
-    const [view, setView] = useState(sessionStorage.token ? 'home' : 'login')
     const [feedback, setFeedback] = useState(null)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (isJwtValid(sessionStorage.token))
+            navigate('/')
+        else
+            handleUserLogout()
+    }, [])
 
     const handleUserRegistered = () => handleLoginNavigation()
 
-    const handleUserLoggedIn = () => setView('home')
+    const handleUserLoggedIn = () => navigate('/')
 
-    const handleRegisterNavigation = () => setView('register')
+    const handleRegisterNavigation = () => navigate('/register')
 
-    const handleLoginNavigation = () => setView('login')
+    const handleLoginNavigation = () => navigate('/login')
 
-    const handleUserLoggedOut = () => handleLoginNavigation()
+    const handleUserLogout = () => {
+        delete sessionStorage.token
+
+        handleLoginNavigation()
+    }
+
+    const handleUserDeleted = () => {
+        navigate('/login')
+    }
 
     // const handleFeedback = message => confirm(message)
     const handleFeedback = feedback => setFeedback(feedback)
@@ -34,9 +51,11 @@ function App() {
 
     return <Context.Provider value={{ handleFeedback }}>
         <div className="App">
-            {view === 'login' && <Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />}
-            {view === 'register' && <Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />}
-            {view === 'home' && <Home onUserLoggedOut={handleUserLoggedOut} />}
+            <Routes>
+                <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />} />
+                <Route path="/register" element={<Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />} />
+                <Route path="/" element={<Home onUserLogout={handleUserLogout} onUserDeleted={handleUserDeleted} />} />
+            </Routes>
             {feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
         </div>
     </Context.Provider>
