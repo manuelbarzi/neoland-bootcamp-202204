@@ -19,21 +19,21 @@ describe('updateUser', () => {
         })
 
         it('succeeds on correct user data', async () => {
-            const result = await updateUser({ userId: user.id, name: 'Wendy', surname: 'Pan', dateOfBirth: new Date('1988-01-01') })
+            const result = await updateUser({ userId: user.id, firstName: 'Wendy', lastName: 'Pan', dateOfBirth: new Date('1988-01-01') })
 
             expect(result).to.be.undefined
 
             const testUser = await User.findById(user.id)
 
-            expect(testUser.name).to.equal('Wendy')
-            expect(testUser.surname).to.equal('Pan')
+            expect(testUser.firstName).to.equal('Wendy')
+            expect(testUser.lastName).to.equal('Pan')
         })
 
         it('fails on incorrect user id', async () => {
             const wrongUserId = new ObjectId().toString()
             
             try {
-                await updateUser({ userId: wrongUserId, name: 'Wendy', surname: 'Pan', dateOfBirth: new Date('1988-01-01') })
+                await updateUser({ userId: wrongUserId, firstName: 'Wendy', lastName: 'Pan', dateOfBirth: new Date('1988-01-01') })
     
                 throw new Error('should not reach this point')
     
@@ -49,7 +49,7 @@ describe('updateUser', () => {
             const wrongUserId = new ObjectId().toString()
             
             try {
-                await updateUser({ userId: wrongUserId, name: 'Wendy', surname: 'Pan', dateOfBirth: new Date('1988-01-01') })
+                await updateUser({ userId: wrongUserId, firstName: 'Wendy', lastName: 'Pan', dateOfBirth: new Date('1988-01-01') })
 
                 throw new Error('should not reach this point')
 

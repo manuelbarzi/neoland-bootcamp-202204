@@ -1,15 +1,18 @@
 const { Schema } = require('mongoose')
+const countries = require('../../data/countries')
 
 const artist = new Schema({
     name: {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     genres: {
         type: [Number]
     },
     country: {
-        type: [Number]
+        type: String,
+        emun: Object.keys(countries)
     }
 })
 

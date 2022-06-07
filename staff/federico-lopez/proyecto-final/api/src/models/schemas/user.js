@@ -18,10 +18,10 @@ const user = new Schema({
         required: true,
         unique: true
     },
-    name: {
+    firstName: {
         type: String,
     },
-    surname: {
+    lastName: {
         type: String,
     },
     dateOfBirth: {

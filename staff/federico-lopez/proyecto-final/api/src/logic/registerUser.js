@@ -11,7 +11,6 @@ async function registerUser(username, email, password) {
         await User.create({ username, email, password })
 
     } catch(error) {
-        debugger
         if (error.message.includes('duplicate key error')) {
             if(error.message.includes('username')) throw new ConflictError(`user with username ${username} already exists`)
 
