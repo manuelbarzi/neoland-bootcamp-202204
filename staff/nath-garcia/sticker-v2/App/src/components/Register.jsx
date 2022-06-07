@@ -22,16 +22,16 @@ function Register(props) {
             registerUser(name, username, password, error => {
                 if (error) {
                     handleFeedback({ level: 'error', message: error.message })
-
+    
                     return
                 }
-
+    
                 props.onUserRegistered()
             })
         } catch(error) {
             handleFeedback({ level: 'error', message: error.message })
         }
-}
+    }
 
     const handleLoginLinkClick = event => {
         event.preventDefault()
@@ -45,12 +45,11 @@ function Register(props) {
         <form className="Container" onSubmit={handleFormSubmit}>
             <input className="Input Input--light" type="text" name="name" placeholder="name" />
             <input className="Input Input--light" type="text" name="username" placeholder="username" />
-            <input className="Input Input--light" type="password" name="pasword" placeholder="password" />
+            <input className="Input Input--light" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Register</button>
             <a href="#" onClick={handleLoginLinkClick}>Login</a>
         </form>
     </div>
 }
-
 
 export default Register

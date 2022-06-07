@@ -11,7 +11,7 @@ function retrieveUser(userId) {
         throw new NotFoundError(`user with id ${userId} does not exist`)
 
         delete user._id
-        delete user._v
+        delete user.__v
         delete user.password
 
         return user

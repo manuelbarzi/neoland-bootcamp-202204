@@ -1,16 +1,18 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
-import User from '../models/User'
+
 function retrieveUser(token, callback) {
     const logger = new Logger('retrieveUser')
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    // TODO validate input args
+
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     logger.info('request')
 
-    api.get('v2/users', {
+    api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -21,19 +23,18 @@ function retrieveUser(token, callback) {
 
         const { status, payload } = response
 
-        if(status >= 400 && status > 500) {
+        if (status >= 400 && status < 500) {
             const data = JSON.parse(payload)
 
-            callback(new Error(data, error))
+            callback(new Error(data.error))
         } else if (status >= 500)
-            callback(new error('server error'))
-            else if(status >= 200) {
-                const data = JSON.parse(payload)
+            callback(new Error('server error'))
+        else if (status === 200) {
+            const data = JSON.parse(payload)
 
-                const user = new User(data.name, data.username)
-
-                callback(null, user)
-            }
+            const user = { name: data.name, username: data.username } //agragdo por Jordi
+            callback(null, user)
+        }
     })
 }
 

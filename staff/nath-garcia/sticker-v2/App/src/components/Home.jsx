@@ -6,8 +6,10 @@ import saveNote from '../logic/saveNote'
 import StickerList from '../components/StickerList'
 import Profile from '../components/Profile'
 //import '.Home.sass'
+import { useNavigate } from 'react-router-dom'
+import { isJwtValid } from '../validators'
 
-function Home(props) {
+function Home({ onUserLogout }) {
     const logger = new Logger('Home')
 
     logger.info('call')
@@ -16,33 +18,34 @@ function Home(props) {
     const [timestamp, setTimestamp] = useState(null)
     const [view, setView] = useState(null)
     const { handleFeedback } = useContext(Context)
+    const navigate = useNavigate()
 
     const handleLogoutClick = () => {
         handleLogout()
     }
 
     const handleLogout = () => {
-        delete sessionStorage.token
-
-        props.onUserLoggedOut()
+        onUserLogout()
     }
 
     useEffect(() => {
         logger.info('componentDidMount')
 
-        retrieveUser(sessionStorage.token, (error, user) => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
+        if (isJwtValid(sessionStorage.token))
+            retrieveUser(sessionStorage.token, (error, user) => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
 
-                handleLogout()
+                    handleLogout()
 
-                return
-            }
+                    return
+                }
 
-            //setState({ name: user.name, view: 'list' })
-            setName(user.name)
-            setView('list')
-        })
+                //setState({ name: user.name, view: 'list' })
+                setName(user.name)
+                setView('list')
+            })
+        else navigate('/login')
     }, [])
 
     const handleAddClick = () => {
@@ -63,7 +66,8 @@ function Home(props) {
 
     logger.info('render')
 
-        return <div className="Home Container">
+    return isJwtValid(sessionStorage.token) ?
+        <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
                 <button className="Button Button--no-border Home__home" onClick={handleHomeClick}>📋</button>
                 <div>
@@ -80,7 +84,7 @@ function Home(props) {
             <footer className="Home__footer Container">
                 <button className="Home__addSticker" onClick={handleAddClick}>+</button>
             </footer>
-        </div>
-    }
-
+        </div> : <></> //si no devuelvo un compo vacio
+    
+}
     export default Home

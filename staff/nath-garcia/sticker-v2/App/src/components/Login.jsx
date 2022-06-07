@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Logger from '../vendor/Loggy'
-import Context from '../components/Context'
+import Context from './Context'
 import authenticateUser from '../logic/authenticateUser'
 import { isJwtValid } from '../validators'
 
@@ -11,24 +11,17 @@ function Login(props) {
 
     const { handleFeedback } = useContext(Context)
 
-    const handleFormSubmit = event => {
+    const handleFormSubmit = async event => {
         event.preventDefault()
 
         const username = event.target.username.value
         const password = event.target.password.value
 
         try {
-            authenticateUser(username, password, (error, token) => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+            const token = await authenticateUser(username, password)
 
-                    return
-                }
-
-                sessionStorage.token = token
-
-                props.onUserLoggedIn()
-            })
+            sessionStorage.token = token
+            props.onUserLoggedIn()
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
@@ -42,7 +35,7 @@ function Login(props) {
 
     logger.info('render')
 
-    return <div>
+    return isJwtValid(sessionStorage.token) ? <></> : <div>
         <form className="Container" onSubmit={handleFormSubmit}>
             <input className="Input Input--light" type="text" name="username" placeholder="username" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />

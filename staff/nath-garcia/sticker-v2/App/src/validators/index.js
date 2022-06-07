@@ -22,10 +22,10 @@ function validateStringNotEmptyNoSpaces(string, explain = 'string') {
 
 function validateJwt(token) {
     validateString(token, 'token')
-
+    
     const parts = token.split('.')
 
-    if(parts.lenght !==3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
+    if(parts.length !==3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
 
     const [,b64Payload] = parts
 
