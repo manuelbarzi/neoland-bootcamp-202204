@@ -22,18 +22,21 @@ const user = new Schema({
     },
 
     email: {
-        type: String,
-        unique: true
+        type: String
     },
 
     phone: {
         type: String
     },
 
-    friends: [{
+    flashes: [{
         type: ObjectId,
         ref: 'User'
-    }]
+    }],
+
+    phot: {
+        
+    }
 })
 
 module.exports = user
