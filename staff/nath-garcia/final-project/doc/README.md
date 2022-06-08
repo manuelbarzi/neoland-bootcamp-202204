@@ -38,26 +38,26 @@ TODO list data entities
 - id (ObjectId)
 - name (String)
 - surname (String)
-- age (Number)
+- date (Date)
 - email (String)
 - phone (Number)
 - usermame (String)
 - password (String)
 
-#### Income
-- id (ObjectId)
+#### Account
+- id (Objectid)
 - user (ObjectId)
-- title (String)
+- type (String, enum ['bank account', 'credit card', 'debit card', 'paypal', 'cash'])
 - text (String)
-- amount (Number)
-- date (Date)
 
-#### Out
+#### Movement
 - id (ObjectId)
 - user (ObjectId)
-- title (String)
-- text (String)
+- type (String, enum ['income', 'outcome'])
+- category (String, enum ['salary', '...'])
+- concept (String)
 - amount (Number)
 - date (Date)
+- account (ObjectId)
 
 ![](images/data-model.svg)
