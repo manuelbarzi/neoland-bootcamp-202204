@@ -1,12 +1,12 @@
 import Apium from "../vendor/Appium"
-import Logger from "../vendor/Loggy"
+
 function authenticateUser(username, password, callback) {
 
     
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
-    api.post('v2/users/auth', {
+    api.post('users/auth', {
         headers: {
             'Content-Type': 'application/json'
         },

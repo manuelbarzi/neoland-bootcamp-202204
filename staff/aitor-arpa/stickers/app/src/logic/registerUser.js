@@ -8,10 +8,10 @@ function registerUser (name, username, password, callback){
     const logger = new Logger('register user')
     logger.info('call')
 
-    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium ('http://localhost:8080/api')
     
     logger.info('request')
-    api.post('v2/users', {
+    api.post('users', {
         headers : {
             'Content-Type': 'application/json'
         }, 

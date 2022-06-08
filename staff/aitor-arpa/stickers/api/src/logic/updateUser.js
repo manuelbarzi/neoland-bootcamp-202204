@@ -1,6 +1,6 @@
-const { User } = require('../models')
-const { NotFoundError } = require('../errors')
-const {  validateStringNotEmptyOrBlank, validateString,validateNumber } = require('../validators')
+const { User } = require('../../../../final-project/api/models')
+const { NotFoundError } = require('../../../../final-project/api/errors')
+const {  validateStringNotEmptyOrBlank, validateString,validateNumber } = require('../../../../final-project/api/validators')
 
 function updateUser(userId, name, age, email, phone) {
    

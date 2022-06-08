@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User } = require('../models')
-const { NotFoundError } = require('../errors')
+const { User } = require('../../../../final-project/api/models')
+const { NotFoundError } = require('../../../../final-project/api/errors')
 const updateUser = require('./updateUser')
 const { expect } = require('chai')
 

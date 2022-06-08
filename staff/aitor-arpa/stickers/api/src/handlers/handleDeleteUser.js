@@ -1,4 +1,4 @@
-const { deleteUser } = require('../logic')
+const { unregisterUser } = require('../logic')
 const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
@@ -7,7 +7,7 @@ module.exports = (req, res) => {
 
         const { body: { password } } = req
 
-        deleteUser(userId, password)
+        unregisterUser(userId, password)
             .then(() => res.status(200).send())  // devuelvo estatus ok y el token
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {

@@ -7,11 +7,11 @@ function retrieveNotes(token, callback) {
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.get('v2/users', {
+    api.get('notes', {
         headers: {
             Authorization: `Bearer ${token}`
         }

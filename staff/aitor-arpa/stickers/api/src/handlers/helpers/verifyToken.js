@@ -12,7 +12,7 @@ function verifyToken(req) {
 
     const [, token] = authorization.split(' ')
 
-    const { sub: userId } = verify(token, 'el secreto')
+    const { sub: userId } = verify(token, process.env.JWT_SECRET)
 
     return userId
 }

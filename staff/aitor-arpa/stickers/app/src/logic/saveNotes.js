@@ -1,90 +1,60 @@
 import Apium from "../vendor/Appium"
-import Logger  from "../vendor/Loggy"
-import Note from "../data/models/Note"
+
 function saveNote(token, noteId, text, callback) {
-    const logger = new Logger('saveNote')
+   
+    
 
-    logger.info('call')
+    
+    const api = new Apium('http://localhost:8080/api')
 
-    // TODO validate input args
+    if (!noteId)
+        api.post('notes', {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text })
+        }, (error, response) => {
+            if (error) return callback(error)
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+           
 
-    logger.info('request')
+            const { status, payload } = response
 
-    api.get('v2/users', {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    }, (error, response) => {
-        // if (error) {
-        //     callback(error)
+            if (status >= 400 && status < 500) {
+                const data = JSON.parse(payload)
 
-        //     return
-        // }
-        if (error) return callback(error)
-
-        logger.info('response')
-
-        const { status, payload } = response
-
-        if (status >= 400 && status < 500) {
-            const data = JSON.parse(payload)
-
-            callback(new Error(data.error))
-        } else if (status >= 500)
-            callback(new Error('server error'))
-        else if (status === 200) {
-            const data = JSON.parse(payload)
-
-            const { notes = [] } = data
-
-            let note
-
-            if (noteId) {
-                note = notes.find(note => note.id === noteId)
-
-                if (note)
-                    note.text = text
-                else {
-                    note = new Note(noteId, text)
-
-                    notes.push(note)
-                }
-            } else {
-                note = new Note(null, text)
-
-                notes.push(note)
+                callback(new Error(data.error))
+            } else if (status >= 500)
+                callback(new Error('server error'))
+            else if (status === 201) {
+                callback(null)
             }
+        })
+    else
+        api.patch(`notes/${noteId}`, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ text })
+        }, (error, response) => {
+            if (error) return callback(error)
 
-            logger.info('request')
+            
 
-            api.patch('v2/users', {
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ notes })
-            }, (error, response) => {
-                if (error) return callback(error)
+            const { status, payload } = response
 
-                logger.info('response')
+            if (status >= 400 && status < 500) {
+                const data = JSON.parse(payload)
 
-                const { status, payload } = response
-
-                if (status >= 400 && status < 500) {
-                    const data = JSON.parse(payload)
-        
-                    callback(new Error(data.error))
-                } else if (status >= 500)
-                    callback(new Error('server error'))
-                else if (status === 204) {
-                    callback(null)
-                }
-            })
-        }
-    })
+                callback(new Error(data.error))
+            } else if (status >= 500)
+                callback(new Error('server error'))
+            else if (status === 204) {
+                callback(null)
+            }
+        })
 }
-
 
 export default saveNote

@@ -8,11 +8,11 @@ function deleteUser(token, password, callback) {
     logger.info('call')
 
   
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
-    api.delete('v2/users', {
+    api.delete('users', {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'

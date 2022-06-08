@@ -5,9 +5,9 @@ function updateUserName(token, name, callback) {
     validateJwt(token) 
      
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium('http://localhost:8080/api')
     
-    api.patch('v2/users', {
+    api.patch('users', {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'
