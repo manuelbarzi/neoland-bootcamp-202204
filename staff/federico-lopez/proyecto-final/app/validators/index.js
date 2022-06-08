@@ -9,7 +9,6 @@ module.exports = {
     validateJWT: require('./validateJWT'),
     isValidJWT: require('./isValidJWT'),
     validateFunction: require('./validateFuncion'),
-    validateObjectId: require('./validateObjectId'),
     validateObject: require('./validateObject'),
     validateNumber: require('./validateNumber'),
     validateCountryCode: require('./validateCountryCode'),

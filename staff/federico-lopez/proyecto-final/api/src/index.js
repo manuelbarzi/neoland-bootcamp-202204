@@ -7,7 +7,12 @@ const {
     handleAuthenticateUser, 
     handleRetrieveUser, 
     handleUpdateUser, 
-    handleUnregisterUser
+    handleUnregisterUser,
+    handleCreateArtist,
+    handleCreateSong,
+    handleRetrieveArtists,
+    handleRetrieveSongs,
+    handleRetrieveArtistsAndSongs
 } = require('./handlers')
 
 const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
@@ -41,7 +46,17 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
-        
+        /* CR ARTISTS */
+        routes.post('/artists', jsonBodyParser, handleCreateArtist)
+        routes.get('/artists', handleRetrieveArtists)
+
+        /* CR SONGS */
+        routes.post('/songs', jsonBodyParser, handleCreateSong)
+        routes.get('/songs', handleRetrieveSongs)
+
+        /* SEARCH */
+        routes.get('/search', handleRetrieveArtistsAndSongs)
+
         //     api.get('/api/users', handleRetrieveUser)
         //     api.patch('/api/users', jsonBodyParser, handleUpdateUser)
         //     api.delete('/api/users', jsonBodyParser, handleDeleteUser)

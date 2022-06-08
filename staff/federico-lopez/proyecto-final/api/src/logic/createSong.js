@@ -1,25 +1,26 @@
-const { Song } = require('../models')
-const { ConflictError } = require('../errors')
-const { validateStringNotEmptyOrBlank } = require('../validators')
+const { Song, Artist, User } = require('../models')
+const { NotFoundError } = require('../errors')
+const { validateStringNotEmptyOrBlank, validateGenres, validateObjectId, validateDate } = require('../validators')
 
-async function createSong(name, genre, country) {
-    validateStringNotEmptyOrBlank(name)
-    //TODO validate genre
-    //TODO validate country
+async function createSong(userId, { artist, name, genres, album, date }) {
+    validateObjectId(userId)
+    validateObjectId(artist)
+    validateStringNotEmptyOrBlank(name, 'song name')
+    validateGenres(genres)
+    if (album) validateStringNotEmptyOrBlank(album, 'album')
+    if (date) validateDate(date)
 
-    // EVERYTHINGTO LOWERCASE????
-    
-    try {
-        const { _id } = await Song.create({ name, genre, country })
+    const user = await User.findById(userId)
 
-        return _id.toString()
+    if(!user) throw NotFoundError(`user with id ${userId} not found`)
+        
+    const artistFounded = await Artist.findOne({ _id: artist })
 
-    } catch(error) {
-        if (error.message.includes('duplicate key error'))
-            throw new ConflictError(`Song ${name} already exists`)    
-            
-        throw error
-    }
+    if (!artistFounded) throw new NotFoundError(`artist with id ${artist} not found`)
+
+    const { _id } = await Song.create({ artist, name, genres, album, date })
+
+    return { id: _id.toString() }
 }
 
 module.exports = createSong

@@ -4,5 +4,10 @@ module.exports = {
     retrieveUser: require('./retrieveUser'),
     updateUser: require('./updateUser'),
     unregisterUser: require('./unregisterUser'),
-    createArtist: require('./createArtist')
+    createArtist: require('./createArtist'),
+    retrieveArtists: require('./retrieveArtists'),
+    createSong: require('./createSong'),
+    retrieveSongs: require('./retrieveSongs'),
+    retrieveSongsOfArtist: require('./retrieveSongsOfArtist'),
+    retrieveArtistsAndSongs: require('./retrieveArtistsAndSongs')
 }
