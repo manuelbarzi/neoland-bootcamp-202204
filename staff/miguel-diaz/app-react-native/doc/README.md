@@ -16,7 +16,7 @@ LA AVENTURA HA COMENZADO.
 ## Functional Description
 
 
-- Sube tus mejores fotos
+- Sube tus mejores foto<s
 - Describe en pocas palabras como eres
 - Conectate al lugar donde estes con el QR
 - Escoge tu interes
@@ -32,12 +32,34 @@ LA AVENTURA HA COMENZADO.
 - Expo
 - etc...
 
-### Data Model
+### Data Models
 
-- Administrator User
-- Flas Users
-- Flash
-- Match
-- Chat
+#### Users :
+- id (ObjectId)
+- role (String enum['admin', 'user'])
+- name (String)
+- username (String)
+- password (String)
+- age (Number)
+- interest (String)
+- gender (String)
+- about me (String)
+- work (String)
+- location id (ObjectId)
+- photo (string, base64)
 
-![](../wireframes/modelo%20de%20datos.jpg)
+#### Flash:
+- id (ObjectId)
+- from ([ObjectId (user)])
+- to ([ObjectId (user)])
+
+#### Match :
+- id (ObjectId)
+- users ([ObjectId (user)])
+- message ([Message])
+
+#### Chat :
+- id (ObjectId)
+- text (String)
+- date (Date)
+
