@@ -1,7 +1,8 @@
 const { FormatError } = require('../errors')
+
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-function validateString(string, explain = 'string') { //explain: lo que me has enviado
+function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
 }
 
@@ -30,7 +31,7 @@ function validateJwt(token) {
 }
 
 function validatePassword(password, explain = 'password') {
-    validateString(password, explain)
+    validateStringNotEmptyNoSpaces(password, explain)
 
     if (password.length < 8)
         throw new FormatError(`${explain} length is lower than 8`)

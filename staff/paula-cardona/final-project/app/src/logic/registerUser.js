@@ -2,7 +2,6 @@ import Logger from '../vendor/Loggy'
 import { validateUsername, validatePassword } from '../validators'
 import Apium from '../vendor/Apium'
 
-//soy la app
 function registerUser (name, username, password, callback){ 
     
     validateUsername(username)
@@ -11,15 +10,14 @@ function registerUser (name, username, password, callback){
     const logger = new Logger('register user')
     logger.info('call')
 
-    const api = new Apium (process.env.REACT_APP_API_URL) //dirección api
+    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
     
     logger.info('request')
-
-    api.post('users', {
+    api.post('/v2/users', {
         headers : {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({ name, username, password }) //cambiar los parametros
+        body: JSON.stringify({ name, username, password })
     }, (error, { status, payload}) => {
 
 

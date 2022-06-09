@@ -20,7 +20,7 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
 
     if (password === newPassword) {
         // con custom errors
-        throw new Error('password and new password repeat are not the same')
+        throw new Error('new password and new password repeat are not the same')
         // failCallback()
     }
 
@@ -30,14 +30,14 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
 
     logger.info('call')
     // esto es una responsabilidad ( llama a la api y maneja erroes asíncronos)
-    const api = new Apium (process.env.REACT_APP_API_URL)
+    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')
-    api.patch('/users', {
+    api.patch('v2/users', {
         headers : { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'  }, 
-        body: JSON.stringify({ password: newPassword })}, //la api te pide algo que se llama oldpassword a su propiedad password, y password a su propiedad newpassword
+        body: JSON.stringify({ oldPassword: password, password: newPassword })}, //la api te pide algo que se llama oldpassword a su propiedad password, y password a su propiedad newpassword
         (error, { status, payload}) => {
 
             if (error) {

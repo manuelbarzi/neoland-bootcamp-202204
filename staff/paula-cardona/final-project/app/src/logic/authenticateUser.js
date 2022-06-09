@@ -11,26 +11,23 @@ function authenticateUser(username, password, callback) { //authenticate el user
     
     logger.info('call')
 
-    validateUsername(username)
-    validatePassword(password)
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
-    const api = new Apium(process.env.REACT_APP_API_URL)
+    logger.info('response')
 
-    logger.info('request')
-
-    api.post('users/auth', {
+    api.post('v2/users/auth', {
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({ username, password })
     }, (error, { status, payload }) => {
-        logger.info('response')
+        
 
         if (error) {
             callback(error)
             return
         }
-    
+        logger.info('request')
 
         if (status === 200) {
             
@@ -38,14 +35,14 @@ function authenticateUser(username, password, callback) { //authenticate el user
             callback(null, data.token)
 
         } else if (status >= 400 && status < 500) {
-            logger.warn('response - client error status ' + status)
+           
             const data = JSON.parse(payload)
 
             callback(new Error(data.error))
 
         } else {
             
-            logger.error('response - server error status ' + status)
+
             callback(new Error('server error'))
         }
     })

@@ -3,18 +3,25 @@ import { validateJwt} from '../validators'
 import Apium from '../vendor/Apium'
 
 
-function updateUserName(token, newName, callback) {
-    
+function updateUserName(token, name, newName, callback) {
+
     validateJwt(token)
 
     const logger = new Logger('updateUserName')
 
+    
+    
+    if (name === newName) {
+        callback(new Error('current name and new name are the same'))
+        return
+    }
+
 
     logger.info('call')
-    const api = new Apium (process.env.REACT_APP_API_URL)
-    
+    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
+
     logger.info('request')
-    api.patch('users', {
+    api.post('/v2/users', {
         headers : { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'  }, 

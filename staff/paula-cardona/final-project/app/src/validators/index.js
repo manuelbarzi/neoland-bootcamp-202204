@@ -24,10 +24,10 @@ function validateStringNotEmptyNoSpaces(string, explain = 'string') {
 }
 
 //comprobamos el token
-function validateJwt(token) { // nos llega el token
-    validateString(token, 'token') //validan si el token es un string usando la funcion de arriba.
+function validateJwt(token) {
+    validateString(token, 'token')
 
-    const parts = token.split('.') //corta el token en sus partes
+    const parts = token.split('.')
 
     if (parts.length !== 3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
 
@@ -42,7 +42,6 @@ function validateJwt(token) { // nos llega el token
     const now = Math.round(Date.now() / 1000)
 
     if (now > exp) throw new AuthError('token expired')
-
 }
 
 function isJwtValid(token) {
@@ -54,6 +53,7 @@ function isJwtValid(token) {
         return false
     }
 }
+
 
 // TRUE si todo cumplen
 // FALSE si alguno no cumpe
@@ -75,13 +75,5 @@ function validateUsername(username) {
         throw new FormatError('username length is lower than 4')
 }
 
-export {
-    validateString,
-    validateStringNotEmptyOrBlank,
-    validateStringNotEmptyNoSpaces,
-    validateJwt,
-    isJwtValid,
-    validatePassword,
-    validateUsername
-}
+export { validateJwt, validateUsername, isJwtValid, validatePassword, validateString, validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank}
 

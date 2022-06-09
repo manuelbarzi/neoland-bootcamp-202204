@@ -1,4 +1,4 @@
-const { Schema, Types: { ObjectId } } = require('mongoose')
+const { Schema} = require('mongoose')
 
 const user = new Schema({
     name: {
@@ -6,10 +6,20 @@ const user = new Schema({
         required: true
     },
 
-    username: {
+    surnames: {
         type: String,
         required: true,
         unique: true
+    },
+
+    username: {
+        type: String,
+        required: true
+    },
+
+    email: {
+        type: String,
+        required: true
     },
 
     password: {
@@ -17,21 +27,9 @@ const user = new Schema({
         required: true
     },
 
-    age: {
-        type: Number
-    },
-
-    email: {
-        type: String
-    },
-
-    phone: {
-        type: String
-    },
-
-    friends: [{
-        type: ObjectId,
-        ref: 'User'
+    address: [{
+        type: String,
+        required: true
     }]
 })
 

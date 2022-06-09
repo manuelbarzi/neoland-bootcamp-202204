@@ -46,19 +46,10 @@ function Register (props) {
             <input className="Input Input--light" type="text" name="name" placeholder="name" />
             <input className="Input Input--light" type="text" name="username" placeholder="username" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />
-            <input className="Input Input--light" type="text" name="adress" placeholder="adress" />
-            <input className="Input Input--light" type="number" name="card number" placeholder="card number" />
-    
-            
             <button className="Button Button--light">Register</button>
             <a href="#" onClick={handleLoginLinkClick}>Login</a>
         </form>
-
-        
-    
     </div>
-
-
 }
 
 export default Register

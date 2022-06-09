@@ -2,7 +2,6 @@ import Logger from '../vendor/Loggy'
 import { validateJwt } from '../validators'
 import Apium from '../vendor/Apium'
 
-
 function retrieveUser(token, callback) {
 
     validateJwt(token)
@@ -11,11 +10,11 @@ function retrieveUser(token, callback) {
 
     logger.info('call')
 
-    const api = new Apium(process.env.REACT_APP_API_URL)
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
 
     logger.info('request')
 
-    api.get('users', {
+    api.get('v2/users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -34,6 +33,7 @@ function retrieveUser(token, callback) {
             callback(new Error('server error'))
         else if (status === 200) {
             const data = JSON.parse(payload)
+
 
             callback(null, data)
         }
