@@ -24,7 +24,7 @@ const {
 
         //USERS
         routes.post('/users', jsonBodyParser, handleRegisterUser)
-        // routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
+        routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
         // routes.get('/users', handleRetrieveUser)
         // routes.patch('/users', jsonBodyParser, handleUpdateUser)
         // routes.delete('/users', jsonBodyParser, handleDeleteUser)

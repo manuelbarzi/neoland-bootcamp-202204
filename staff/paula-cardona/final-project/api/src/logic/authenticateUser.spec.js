@@ -5,7 +5,7 @@ const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 
 describe('authenticateUser', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/project-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -13,7 +13,7 @@ describe('authenticateUser', () => {
         let user //para poder usarlo fuera
 
         beforeEach(() => {
-            user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
+            user = new User({ name: 'Papa', surname:'Gayo', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address:'Calle Madrid' })
 
             return user.save() 
         })
