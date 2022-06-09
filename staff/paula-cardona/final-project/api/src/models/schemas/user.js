@@ -6,7 +6,7 @@ const user = new Schema({
         required: true
     },
 
-    surnames: {
+    surname: {
         type: String,
         required: true,
         unique: true

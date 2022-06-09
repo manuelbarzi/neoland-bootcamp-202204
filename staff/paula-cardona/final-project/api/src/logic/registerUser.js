@@ -1,13 +1,16 @@
 const { User } = require('../models')
 const { ConflictError } = require('../errors')
-const {validateStringNotEmptyOrBlank, validatePassword, validateUsername} = require('../validators')
+const {validateStringNotEmptyOrBlank, validatePassword, validateUsername, validateEmail} = require('../validators')
 
-function registerUser(name, username, password) { //creamos la función createUser y le pasamos por parametros name, username y password
+function registerUser(name, surname, username, email, password, address) { //creamos la función createUser y le pasamos por parametros name, username y password
     validateStringNotEmptyOrBlank(name, 'name')
+    validateStringNotEmptyOrBlank(surname, 'surname')
     validateUsername(username)
+    validateEmail(email)
     validatePassword(password)
+    validateStringNotEmptyOrBlank (address)
 
-    return User.create({ name, username, password }) // funcion para crear el uuario con los parametros que nos llegan arriba
+    return User.create({ name, surname, username, email, password, address }) // funcion para crear el uuario con los parametros que nos llegan arriba
         .then((/*resultDeCreate*/) => {/* hago algo y devuelvo algo, si me interesa */}) // este then captura la respuesta del user create
         // pero esta vacio porque no nos interesa recivir ni devolver nada
         // si quitas el then o lo dejas con solo parentesis vacios .then()

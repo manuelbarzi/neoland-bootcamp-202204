@@ -6,33 +6,36 @@ const { expect } = require('chai')
 
 
 
-describe ('registerUser', () => { //función de createUser
+describe ('registerUser', () => { 
 
-    before(() => connect ('mongodb://localhost:27017/notes-db-test')) //antes de todo el test createUser connecta mongodb
+    before(() => connect ('mongodb://localhost:27017/notes-db-test')) 
 
-    beforeEach(() => User.deleteMany()) //limpia los datos antes de cada test
+    beforeEach(() => User.deleteMany()) 
 
     it('succeeds on correct credentials', () => {
-        return registerUser('Peter Pan', 'peterpan', '123123123') //con el return lo que hacemos es que como createUser es asincrono el primer .then quedará esperando ese result y luego se ejecutará
-            .then(result => { // este .then se ejecutara cuando termine la función de createUser tanto sea como buena o como error. me puede venir el result,
-                expect(result).to.be.undefined //espero que el resultado de createUser sea undefined, porque no le envio nada
-                //le devuelve undefined porque en la función de create user no nos devuelve nada el primer .then
-                return User.findOne({ username: 'peterpan' }) // con return espero que me devuelva el usuario encontrado en la base de datos de usuarios con el username: peter pan
-                //  SIEMPRE TENGO QUE HACER COMPROBACIONES CON EL DB PARA SABER SI LAS COSAS SE HAN HECHO BIEN
+        return registerUser('Peter', 'Pan', 'peterpan', 'peterpan@gmail.com', '123123123', 'Calle Madrid') 
+            .then(result => { 
+                expect(result).to.be.undefined 
+                
+                return User.findOne({ username: 'peterpan' }) 
+                
             })
-            //esto no me lo trae la funcion registerUser, lo traigo yo en spec para comprobar
-            .then(user => { //asincronia, cuando user.findOne me haga return, empiezo este .then con el usuario que me haya devuelto la función findOne
-                expect(user.name).to.equal('Peter Pan') 
-                expect(user.username).to.equal('peterpan')
+            
+            .then(user => { 
+                expect(user.name).to.equal('Peter') 
+                expect(user.surname).to.equal('Pan')
+                expect(user.username).to.equal('peterpan') 
+                expect(user.email).to.equal('peterpan@gmail.com')
                 expect(user.password).to.equal('123123123')
+                expect(user.address).to.be.instanceOf(Array)
             })
     })
 
     it('fails when user already exists', () => { 
-        return User.create({ name: 'Wendy Pan', username: 'wendypan', password: '123123123'}) // creo un usuario para poder hacer otro que ya exista
-            .then(() => registerUser('Wendy Pan', 'wendypan', '123123123')) // cuando ya se ha creado, intento crear otro con mi funcion
-            .catch(error => { //caza el error
-                expect(error).to.be.instanceOf(ConflictError) //espero que sea instancia de ConflictError
+        return User.create({ name: 'Wendy', surname: 'Pan', username: 'wendypan', email:'wendypan@gmail.com', password: '123123123', address: 'Calle Barcelona' }) 
+            .then(() => registerUser('Wendy', 'Pan', 'wendypan', 'wendypan@gmail.com', '123123123', 'Calle Barcelona')) 
+            .catch(error => { 
+                expect(error).to.be.instanceOf(ConflictError) 
                 expect(error.message).to.equal(`user with username wendypan already exists`)
             })
     })
