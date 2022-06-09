@@ -1,0 +1,14 @@
+/**
+ * Constructs instances of Creator
+ * 
+ * @param {string} name The name of the user
+ * @param {string} username The user username
+ */
+ function Creator(name, username) {
+    if (typeof name !== 'string') throw new TypeError('name is not string')
+    if (typeof username !== 'string') throw new TypeError('username is not string')
+
+    this.name = name
+    this.username = username
+}
+export default Creator
