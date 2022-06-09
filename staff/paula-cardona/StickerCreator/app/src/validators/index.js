@@ -1,7 +1,7 @@
 // aqui guardo mis funciones para validar cosas
 
 // comprobamos si los parametros que le enviamos a la funcion son string
-import { FormatError } from "../error"
+import { FormatError, AuthError } from "../error"
 
 function validateString(string, explain = 'string') { //string sera el elemento que queramos validar i explain es la palabra que define el string que pasamos
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
@@ -24,13 +24,36 @@ function validateStringNotEmptyNoSpaces(string, explain = 'string') {
 }
 
 //comprobamos el token
-function validateJwt(token) { // nos llega el token
-    validateString(token, 'token') //validan si el token es un string usando la funcion de arriba.
+function validateJwt(token) {
+    validateString(token, 'token')
 
-    const parts = token.split('.') //corta el token en sus partes
+    const parts = token.split('.')
 
     if (parts.length !== 3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
+
+    const [,b64Payload] = parts
+
+    const jsonPayload = atob(b64Payload)
+
+    const payload = JSON.parse(jsonPayload) 
+
+    const { exp } = payload
+
+    const now = Math.round(Date.now() / 1000)
+
+    if (now > exp) throw new AuthError('token expired')
 }
+
+function isJwtValid(token) {
+    try {
+        validateJwt(token)
+
+        return true
+    } catch(error) {
+        return false
+    }
+}
+
 
 // TRUE si todo cumplen
 // FALSE si alguno no cumpe
@@ -52,5 +75,18 @@ function validateUsername(username) {
         throw new FormatError('username length is lower than 4')
 }
 
-export { validateJwt, validateUsername, validatePassword, validateString, validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank}
-
+module.exports = {
+    validateString,
+    validateStringNotEmptyOrBlank,
+    validateStringNotEmptyNoSpaces,
+    validateJwt,
+    validatePassword,
+    validateUsername,
+    validateFunction,
+    validateDate,
+    validateNumber,
+    validatePositiveInteger,
+    validateEmail,
+    isJwtValid
+    
+}
