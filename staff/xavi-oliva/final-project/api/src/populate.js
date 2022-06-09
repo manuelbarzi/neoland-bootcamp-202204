@@ -1,54 +1,46 @@
 const { connect, disconnect } = require('mongoose')
-const { User, Apartment, Reaction, Comment } = require('./models')
+const { User, Note, Reaction, Comment } = require('./models')
 
     ; (async () => {
         try {
-            await connect('mongodb://localhost:27017/apartments-db')
+            await connect('mongodb://localhost:27017/notes-db')
 
-            await Promise.all([User.deleteMany()/*, Apartment.deleteMany()*/])
+            await Promise.all([User.deleteMany(), Note.deleteMany()])
 
-            const admin = new User({ name: 'Admin', username: 'admin', password: '123123123' })
-            const admin2 = new User({ name: 'Admin 2', username: 'admin2', password: '123123123' })
+            const pepito = new User({ name: 'Pepito Grillo', username: 'pepigri', password: '123123123' })
+            const wendy = new User({ name: 'Wendy Bread', username: 'wendy', password: '123123123' })
 
-            await Promise.all([admin.save(), admin2.save()])
+            await Promise.all([pepito.save(), wendy.save()])
 
-            const apartment = new Apartment({ 
-                user: admin.id, 
-                title: 'Título del apartamento', 
-                description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-                email: 'admin@flats.com',
-                phone: '+34 654 987 321',
-                type: 0
-            })
+            const note = new Note({ user: pepito.id, text: 'hola mundo' })
 
-            await apartment.save()
+            await note.save()
 
-            // {
-            //     const reaction = new Reaction({ user: wendy.id, type: Reaction.LOVE })
+            {
+                const reaction = new Reaction({ user: wendy.id, type: Reaction.LOVE })
 
-            //     apartment.reactions.push(reaction)
+                note.reactions.push(reaction)
 
-            //     await apartment.save()
-            // }
+                await note.save()
+            }
 
-            // const comment = new Comment({ user: admin.id, text: 'esto es un comentario para una review de un apartamento' })
+            const comment = new Comment({ user: wendy.id, text: 'se escribe "Hola, Mundo!", amigo' })
 
-            // note.comments.push(comment) // ---- WARN when pushing an item into an array mongoose does copy the sub-doc into a new object (it does not link / reference it) [1]
-            
-            // ---- note.comments[0] = comment // WARN same here (as [1])
+            note.comments.push(comment) // WARN when pushing an item into an array mongoose does copy the sub-doc into a new object (it does not link / reference it) [1]
+            // note.comments[0] = comment // WARN same here (as [1])
 
-            // await note.save()
+            await note.save()
 
-            // {
-            //     const reaction = new Reaction({ user: pepito.id, type: Reaction.ANGRY })
+            {
+                const reaction = new Reaction({ user: pepito.id, type: Reaction.ANGRY })
 
-            //     // ---- comment.reactions.push(reaction) // WARN!!! it does not work because of [1] ----
-            //     // ---- note.markModified('comments') // this doesn't have any effect to solve [1] ----
+                // comment.reactions.push(reaction) // WARN!!! it does not work because of [1]
+                // note.markModified('comments') // this doesn't have any effect to solve [1]
 
-            //     note.comments[0].reactions.push(reaction) // ---- THIS works, accessing the comment through the object-graph starting from the root document
+                note.comments[0].reactions.push(reaction) // THIS works, accessing the comment through the object-graph starting from the root document
 
-            //     await note.save()
-            // }
+                await note.save()
+            }
 
             await disconnect()
         } catch (error) {

@@ -31,30 +31,32 @@ The **_User_** has 2 roles or views: **_Host_** and **_Guest_**. From the **Host
 
 ### Data Model
 
-User, Apartment, Reserva.
-
-
+User, Apartment, Reserve.
 
 #### User
-- id(ObjectId)
-- email (unique)
-- name
-- apellidos
-- phone
+- id (ObjectId)
+- email (unique, string)
+- name (string)
+- surname (string)
+- phone (string)
 
 #### Apartment
 - id (ObjectId)
-- user (objectId)
+- user (ObjectId)
 - address (string)
-- images (array strings)
+- images ([strings])
 - title (string)
 - description (string)
--
 
-#### Reserva
-- id (objectId)
-- id piso (objectId)
-- id dueño
-- Date (entrada, salida)
+#### Booking
+- id (ObjectId)
+- apartment (ObjectId)
+- user (ObjectId (from admin))
+- name (String)
+- phone (String)
+- email (String)
+- notes (String)
+- from (Date)
+- to (Date)
 
 ![](images/data-model.svg)

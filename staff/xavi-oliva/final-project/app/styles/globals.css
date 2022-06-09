@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .bg-gradient-primary {
+    background: linear-gradient(
+      0deg,
+      rgba(74, 178, 201, 1) 0%,
+      rgba(194, 228, 236, 1) 54%
+    );
+  }
+
+  .bg-primary {
+    background-color: #4AB2C9;
+  }
+
+  .t-title {
+      @apply text-sm md:text-lg;
+  } 
+}
+
+

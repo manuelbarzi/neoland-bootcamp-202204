@@ -1,11 +1,9 @@
 const user = require('./user')
 const apartment = require('./apartment')
-const reaction = require('./reaction')
-const comment = require('./comment')
+const booking = require('./booking')
 
 module.exports = {
     user,
     apartment,
-    reaction,
-    comment
+    booking
 }
