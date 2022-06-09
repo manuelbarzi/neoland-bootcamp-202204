@@ -7,9 +7,9 @@ function registerUser(name, username, password, callback) {
     validateString(username, 'Username')
     //validatePassword(password, 'Password')
 
-    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apicaller(process.env.REACT_APP_API_URL)
 
-    api.post('/v2/users', {
+    api.post('/users', {
         headers: { 'Content-Type': 'application/json' }, 
         body: JSON.stringify( {name, username, password})}, (error, {status, payload}) => {
 

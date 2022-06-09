@@ -35,31 +35,60 @@ class Apicaller {
      * @param {function} callback  The callback function that attends the response's result ({ status, payload})
      */
     call(method, urlOrPath, options, callback) {
-        const xhr = new XMLHttpRequest()
 
-        xhr.addEventListener('load', event => {
-            const { status, responseText: payload } = event.target
+        if (callback) {
+            const xhr = new XMLHttpRequest()
 
-            callback(null, { status, payload })
+            xhr.addEventListener('load', event => {
+                const { status, responseText: payload } = event.target
+
+                callback(null, { status, payload })
+            })
+
+            xhr.addEventListener('error', () => {
+                callback(new Error('API call fail'))
+            })
+
+            const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}${urlOrPath}`
+
+            xhr.open(method, url)
+
+            if (options) {
+                const { headers, body } = options
+
+                if (headers)
+                    for (const key in headers)
+                        xhr.setRequestHeader(key, headers[key])
+
+                xhr.send(body)
+            } else xhr.send()
+        } else return new Promise((resolve, reject) => {
+            const xhr = new XMLHttpRequest
+
+            xhr.addEventListener('load', event => {
+                const { status, responseText: payload } = event.target
+
+                resolve({ status, payload })
+            })
+
+            xhr.addEventListener('error', () => {
+                reject(new Error('API call fail'))
+            })
+
+            const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}${urlOrPath}`
+
+            xhr.open(method, url)
+
+            if (options) {
+                const { headers, body } = options
+
+                if (headers)
+                    for (const key in headers)
+                        xhr.setRequestHeader(key, headers[key])
+
+                xhr.send(body)
+            } else xhr.send()
         })
-
-        xhr.addEventListener('error', () => {
-            callback(new Error('API call fail'))
-        })
-
-        const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}${urlOrPath}`
-
-        xhr.open(method, url)
-
-        if (options) {
-            const { headers, body } = options
-
-            if (headers)
-                for (const key in headers)
-                    xhr.setRequestHeader(key, headers[key])
-
-            xhr.send(body)
-        } else xhr.send()
     }
 
     get(urlOrPath, options, callback) {

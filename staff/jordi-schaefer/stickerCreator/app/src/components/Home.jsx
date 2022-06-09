@@ -9,6 +9,8 @@ import Profile from './Profile'
 import { Clip, ClipMessage } from './Clip'
 import '../styles/Home.sass'
 import '../styles/Sticker.sass'
+import { useNavigate } from 'react-router-dom'
+import { isJwtValid } from '../validators'
 
 
 function Home(props) {
@@ -22,10 +24,9 @@ function Home(props) {
     const [view, setView] = useState(null)
     const [clip, setClip] = useState(null)
     const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
-
+    const navigate = useNavigate()
 
     const handleLogoutClick = () => {
-        delete sessionStorage.token
         props.onUserLoggedOut()
     }
 
@@ -47,21 +48,18 @@ function Home(props) {
     useEffect(() => {
         logger.info('useEffect')
 
-        try {
+        if (isJwtValid(sessionStorage.token)) {
             retrieveUser(sessionStorage.token, (error, user) => {
-                logger.info('callback try-catch')
                 if (error) {
                     handleFeedback({ type: 'error', message: error.message})
+                    handleLogoutClick()
                     return
                 }
                 setName(user.name)
                 setView('edit')
             })
-        } catch(error) {
-            handleFeedback({ type: 'error', message: error.message})
-        }
-        logger.info('try-catch finished')
-        loadNotes()
+            //loadNotes()
+        } else navigate('/login')
     }, [])
 
 
@@ -116,7 +114,8 @@ function Home(props) {
 
     logger.info('render')
 
-    return <div className="Home container">
+    return isJwtValid(sessionStorage.token) ?
+    <div className="Home container">
         <header className="Home__header">
             <div>
                 <button className="Home__button" onClick={handleProfileClick}>{name}</button>
@@ -145,7 +144,7 @@ function Home(props) {
         { clip && <Clip onClipTimeout={handleClipTimeout} />}
         { clip && <ClipMessage/>}
         <span className="Clip__button material-symbols-outlined" onClick={handleAddClip} >info</span>
-    </div>
+    </div> : <></>
 }
 
 export default Home

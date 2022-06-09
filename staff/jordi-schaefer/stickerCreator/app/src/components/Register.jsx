@@ -41,7 +41,7 @@ function Register (props){
             <input className="form" type="password" name="password" placeholder=" Password"/>
             <button className="Button">Register</button>
         </form>
-            <a href="#" onClick={handleLoginLinkClick}>Login</a>
+        <a href="#" onClick={handleLoginLinkClick}>Login</a>
     </div>
 }
 

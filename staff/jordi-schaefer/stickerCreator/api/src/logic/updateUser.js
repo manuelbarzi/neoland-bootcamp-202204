@@ -1,17 +1,18 @@
 const { User } = require('../models')
 const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validatePositiveInteger ,validateStringNotEmptyOrBlank, validateEmail, validateString } = require('../validators')
+const { validateStringNotEmptyNoSpaces, validatePositiveInteger ,validateStringNotEmptyOrBlank, validateEmail, validateString, validatePassword } = require('../validators')
 
 
-function updateUser(userId, name, age, email, phone) {
+function updateUser(userId, name, password, age, email, phone) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
     if (name != null) validateStringNotEmptyOrBlank(name, 'name')
+    if (password != null) validatePassword(password, 'password')
     if (age != null) validatePositiveInteger(age, 'age')
     if (email != null)  validateEmail(email, 'email')
     if (phone != null)  validateString(phone, 'phone')
 
 
-    return User.updateOne({ _id: userId }, { $set: { name, age, email, phone }})
+    return User.updateOne({ _id: userId }, { $set: { name, password, age, email, phone }})
         .then((result) => { // console.log(); debugger })  // este then captura la respuesta del user Id
         // pero no nos interesa recivir ni devolver nada
         // si quitas el then o lo dejas con solo parentesis vacios

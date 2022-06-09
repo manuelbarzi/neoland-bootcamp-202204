@@ -5,10 +5,10 @@ module.exports = (req, res) => {
     try {  
         const userId = verifyToken(req)
 
-        const { body: { noteId } } = req
+        const { params: { noteId } } = req
 
         deleteNote(userId, noteId)
-            .then(() => res.status(200).send())  // devuelvo estatus ok y el token
+            .then(() => res.status(204).send())  // devuelvo estatus ok y el token
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

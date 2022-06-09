@@ -5,9 +5,9 @@ function retrieveNotes(token, callback) {  // recuperar
     
     validateJwt(token)
 
-    const api = new Apicaller('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apicaller(process.env.REACT_APP_API_URL)
 
-    api.get('/v2/users', {
+    api.get('/notes', {
         headers: { 'Authorization': `Bearer ${token}`}}, (error, {status, payload}) => {
 
             if (error) {
