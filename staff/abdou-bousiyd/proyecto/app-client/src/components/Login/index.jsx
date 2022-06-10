@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate,Link } from "react-router-dom";
 import authenticateUser from '../../logic/authenticateUser'
-import Alert from '../Alert/Alert'
+import Alert from '../Alert'
 
 
 const Login = () => {
@@ -27,7 +27,7 @@ const Login = () => {
             const token = await authenticateUser(username, password)
 
             sessionStorage.token = token
-            navigate('/pen')
+            navigate('/project')
         } catch (error) {
             if (error) {
                 setAlert(<Alert error message={error.message} />)

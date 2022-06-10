@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom";
-import Alert from '../Alert/Alert'
+import Alert from '../Alert'
 import registerUser from '../../logic/registerUser'
 
 const Register = () => {

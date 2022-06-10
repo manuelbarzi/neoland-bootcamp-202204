@@ -1,5 +1,5 @@
-// import './index.sass'
-import './index.css'
+import './index.sass'
+// import './index.css'
 
 function Alert (props){
     const {message, error} = props;

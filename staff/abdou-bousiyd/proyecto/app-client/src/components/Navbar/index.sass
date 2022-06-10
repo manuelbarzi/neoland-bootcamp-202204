@@ -1,0 +1,47 @@
+.header
+    background-color: #06070d
+    display: flex
+    align-items: center
+    width: 100%
+    height: 70px
+
+    &__content
+        overflow: hidden
+        display: flex
+        width: 80%
+        margin-left: auto
+        margin-right: auto
+        justify-content: space-between
+        align-items: center
+
+        &__links
+            width: 10%
+            display: flex
+            justify-content: space-between
+            align-items: center
+            list-style: none
+            @media screen and ( max-width: 768px )
+                width: 130px
+                margin: -30px
+
+
+            &__item i 
+                text-decoration: none
+                color: #dbdbe2
+                    
+        &__btns
+            display: flex
+            justify-content: flex-end
+            width: 200px
+            @media screen and ( max-width: 768px )
+                width: 300px
+                
+            &__btn
+                height: 40px
+                margin: 5px
+                border-radius: 4px
+                background-color: #00e59b
+                border-style: none
+                text-transform: uppercase
+                color: #FFFFFF	
+                line-height: 26px
