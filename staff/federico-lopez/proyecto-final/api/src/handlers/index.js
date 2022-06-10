@@ -8,5 +8,9 @@ module.exports = {
     handleRetrieveArtists: require('./handleRetrieveArtists'),
     handleCreateSong: require('./handleCreateSong'),
     handleRetrieveSongs: require('./handleRetrieveSongs'),
-    handleRetrieveArtistsAndSongs: require('./handleRetrieveArtistsAndSongs')
+    handleRetrieveArtistsAndSongs: require('./handleRetrieveArtistsAndSongs'),
+    handleAddInterpretationToSong: require('./handleAddInterpretationToSong'),
+    handleRetrieveInterpretationsFromSong: require('./handleRetrieveInterpretationsFromSong'),
+    handleRetrieveSongsOfArtist: require('./handleRetrieveSongsOfArtist'),
+    handleAddOrUpdateRankToInterpretation: require('./handleAddOrUpdateRankToInterpretation')
 }

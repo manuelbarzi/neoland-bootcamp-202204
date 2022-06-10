@@ -1,6 +1,6 @@
 module.exports = {
     validateString: require('./validateString'),
-    validateStringNotEmptyOrBlank: require('./validateStringNoteEmptyOrBlank'),
+    validateStringNotEmptyOrBlank: require('./validateStringNotEmptyOrBlank'),
     validateStringNotEmptyNoSpaces: require('./validateStringNotEmptyNoSpaces'),
     validateUsername: require('./validateUsername'),
     validateEmail: require('./validateEmail'),
@@ -15,5 +15,7 @@ module.exports = {
     validateCountryCode: require('./validateCountryCode'),
     validateArray: require('./validateArray'),
     validateGenres: require('./validateGenres'),
-    validateDateOfBirth: require('./validateDateOfBirth')
+    validateDateOfBirth: require('./validateDateOfBirth'),
+    validateInterpretationContent: require('./validateInterpretationContent'),
+    validateRank: require('./validateRank')
 }

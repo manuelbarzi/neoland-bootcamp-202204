@@ -9,5 +9,8 @@ module.exports = {
     createSong: require('./createSong'),
     retrieveSongs: require('./retrieveSongs'),
     retrieveSongsOfArtist: require('./retrieveSongsOfArtist'),
-    retrieveArtistsAndSongs: require('./retrieveArtistsAndSongs')
+    retrieveArtistsAndSongs: require('./retrieveArtistsAndSongs'),
+    addInterpretationToSong: require('./addInterpretationToSong'),
+    retrieveInterpretationsFromSong: require('./retrieveInterpretationsFromSong'),
+    addOrUpdateRankToInterpretation: require('./addOrUpdateRankToInterpretation.js')
 }

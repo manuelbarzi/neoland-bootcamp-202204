@@ -12,7 +12,11 @@ const {
     handleCreateSong,
     handleRetrieveArtists,
     handleRetrieveSongs,
-    handleRetrieveArtistsAndSongs
+    handleRetrieveArtistsAndSongs,
+    handleAddInterpretationToSong,
+    handleRetrieveInterpretationsFromSong,
+    handleRetrieveSongsOfArtist,
+    handleAddOrUpdateRankToInterpretation
 } = require('./handlers')
 
 const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
@@ -53,7 +57,15 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         /* CR SONGS */
         routes.post('/songs', jsonBodyParser, handleCreateSong)
         routes.get('/songs', handleRetrieveSongs)
+        routes.get('/songs/artist/:artistId', handleRetrieveSongsOfArtist)
 
+        /* CR INTERPRETATIONS */
+        routes.post('/songs/:songId', jsonBodyParser, handleAddInterpretationToSong)
+        routes.get('/songs/:songId', handleRetrieveInterpretationsFromSong)
+
+        /* CU RANK */
+        routs.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
+        
         /* SEARCH */
         routes.get('/search', handleRetrieveArtistsAndSongs)
 

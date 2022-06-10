@@ -1,8 +1,8 @@
 const { Song } = require('../models')
-const validateStringNoteEmptyOrBlank = require('../validators/validateStringNoteEmptyOrBlank')
+const validateStringNotEmptyOrBlank = require('../validators/validateStringNotEmptyOrBlank')
 
 async function retrieveSongs(query) {
-    validateStringNoteEmptyOrBlank(query)
+    validateStringNotEmptyOrBlank(query)
 
     const re = new RegExp(query)
 

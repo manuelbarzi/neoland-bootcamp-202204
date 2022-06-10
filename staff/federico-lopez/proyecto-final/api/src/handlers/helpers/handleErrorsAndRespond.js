@@ -1,6 +1,7 @@
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('../../errors')
 
 module.exports = (error, res) => {
+    debugger
     let status = 500
 
     if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)

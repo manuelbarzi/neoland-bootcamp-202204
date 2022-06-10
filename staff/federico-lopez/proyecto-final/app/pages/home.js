@@ -1,4 +1,7 @@
 import { retrieveArtistsAndSongs } from "../logic"
+import Footer from '../components/Footer'
+import Header from '../components/Header'
+import SearchButton from "../components/SearchButton"
 
 export default function Home() {
 
@@ -7,19 +10,20 @@ export default function Home() {
 
         try {
             const query = event.target.search.value
-    
+
             const artistsAndSongsResults = await retrieveArtistsAndSongs(query)
 
             console.log(artistsAndSongsResults)
-        } catch(error) {
+        } catch (error) {
             console.error(error)
         }
     }
 
     return <>
-        <form onSubmit={onFormSubmit}>
-            <input type="search" name="search" id="search"></input>
-            <button type="submit">SEARCH</button>
-        </form>
+        <Header></Header>
+        <main>
+            <SearchButton></SearchButton>
+        </main>
+        <Footer></Footer>
     </>
 }
