@@ -1,5 +1,5 @@
-import Logger from '../vendor/Loggy'
-import Apium from '../vendor/Apium'
+import Logger from 'loggy'
+import Apium from 'apium'
 
 function deleteNote(token, noteId, callback) {
     const logger = new Logger('deleteNote')

@@ -1,4 +1,4 @@
-import Logger from '../vendor/Loggy'
+import Logger from 'loggy'
 
 function registerUser(name, username, password, callback) {
     const logger = new Logger('registerUser')

@@ -1,5 +1,5 @@
-import Logger from '../vendor/Loggy'
-import Apium from '../vendor/Apium'
+import Logger from 'loggy'
+import Apium from 'apium'
 
 function retrieveUser(token, callback) {
     const logger = new Logger('retrieveUser')

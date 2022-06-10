@@ -1,6 +1,6 @@
 const { User, Note } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces } = require('validators')
 
 function retrieveNotes(userId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')

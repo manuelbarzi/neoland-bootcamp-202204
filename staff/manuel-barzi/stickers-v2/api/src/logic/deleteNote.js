@@ -1,6 +1,6 @@
 const { User, Note } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces, validateString } = require('validators')
 
 function deleteNote(userId, noteId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')

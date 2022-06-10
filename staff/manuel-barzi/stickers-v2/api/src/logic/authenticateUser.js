@@ -1,6 +1,6 @@
 const { User } = require('../models')
-const { AuthError } = require('../errors')
-const { validateUsername, validatePassword } = require('../validators')
+const { AuthError } = require('errors')
+const { validateUsername, validatePassword } = require('validators')
 
 function authenticateUser(username, password) {
     validateUsername(username)

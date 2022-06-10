@@ -1,6 +1,7 @@
-import Logger from '../vendor/Loggy'
-import { validateUsername, validatePassword } from '../validators'
-import Apium from '../vendor/Apium'
+import Logger from 'loggy'
+import { validateUsername, validatePassword } from 'validators'
+import Apium from 'apium'
+import { AuthError } from 'errors'
 
 function authenticateUser(username, password) {
     const logger = new Logger('authenticateUser')
@@ -31,6 +32,9 @@ function authenticateUser(username, password) {
                 logger.warn('response - client error status ' + status)
 
                 const data = JSON.parse(payload)
+
+                if (status === 401)
+                    throw new AuthError(data.error)
 
                 throw new Error(data.error)
             } else {

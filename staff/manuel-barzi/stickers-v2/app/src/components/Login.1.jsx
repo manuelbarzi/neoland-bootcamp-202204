@@ -1,8 +1,8 @@
 import { useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import authenticateUser from '../logic/authenticateUser'
-import { isJwtValid } from '../validators'
+import { isJwtValid } from 'validators'
 
 function Login(props) {
     const logger = new Logger('Login')

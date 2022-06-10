@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'loggy'
 import Context from './Context'
 import retrieveUser from '../logic/retrieveUser'
 import saveNote from '../logic/saveNote'
@@ -7,7 +7,7 @@ import StickerList from './StickerList'
 import Profile from './Profile'
 import './Home.sass'
 import { useNavigate } from 'react-router-dom'
-import { isJwtValid } from '../validators'
+import { isJwtValid } from 'validators'
 
 function Home({ onUserLogout }) {
     const logger = new Logger('Home')
