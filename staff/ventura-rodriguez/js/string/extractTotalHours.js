@@ -1,0 +1,3 @@
+function extractTotalHours(list) {
+    // TODO
+}
