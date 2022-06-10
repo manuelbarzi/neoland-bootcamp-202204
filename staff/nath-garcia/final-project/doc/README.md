@@ -38,11 +38,11 @@ TODO list data entities
 - id (ObjectId)
 - name (String)
 - surname (String)
-- date (Date)
+- usermame (String)
 - email (String)
 - phone (Number)
-- usermame (String)
 - password (String)
+- date (Date)
 
 #### Account
 - id (Objectid)
@@ -57,7 +57,7 @@ TODO list data entities
 - category (String, enum ['salary', '...'])
 - concept (String)
 - amount (Number)
-- date (Date)
 - account (ObjectId)
+- date (Date)
 
 ![](images/data-model.svg)
