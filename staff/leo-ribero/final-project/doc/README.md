@@ -40,7 +40,6 @@ Create a new spot requires three actions:
 ### Data Model
 #### User
 - id (ObjectId)
-- username (String)
 - email (string)
 - password (String)
 
@@ -50,7 +49,7 @@ Create a new spot requires three actions:
 - title (String)
 - description (String)
 - address (String)
-- coordinates ([(String)])
+- coordinates ([Number, Number])
 - comments ([Comment])
 - image (String)
 - date (Date)
@@ -63,3 +62,6 @@ Create a new spot requires three actions:
 ![](images/application-data.jpg)
 ![](images/endpoints.jpg)
 ![](images/spa-pages.jpg)
+
+#### Timeline progress
+![](images/progress-timeline.jpg)pwd
