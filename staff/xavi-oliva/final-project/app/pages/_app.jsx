@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Wrapper } from '../components'
 import '../styles/globals.css'
 
 function MyApp({ Component, pageProps }) {
@@ -7,7 +8,9 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Brun's Flats</title>
       </Head>
-      <Component {...pageProps} />
+      <Wrapper>
+        <Component {...pageProps} />
+      </Wrapper>
     </>
   )
 }

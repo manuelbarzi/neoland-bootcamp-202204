@@ -9,9 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "apium": "file:../apium",
+    "errors": "file:../errors",
+    "loggy": "file:../loggy",
     "next": "12.1.6",
     "react": "18.1.0",
-    "react-dom": "18.1.0"
+    "react-dom": "18.1.0",
+    "utils": "file:../utils",
+    "validators": "file:../validators"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

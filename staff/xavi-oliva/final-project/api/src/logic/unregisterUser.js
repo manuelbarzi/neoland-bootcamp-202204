@@ -1,6 +1,6 @@
-const { AuthError } = require("../errors");
+const { AuthError } = require("errors");
 const { User } = require("../models");
-const { validateStringNotEmptyNoSpaces, validatePassword } = require("../validators");
+const { validateStringNotEmptyNoSpaces, validatePassword } = require("validators");
 
 function unregisterUser(userId, password) {
     validateStringNotEmptyNoSpaces(userId, 'user id')

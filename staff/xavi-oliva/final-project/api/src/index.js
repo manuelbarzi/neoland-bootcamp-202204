@@ -7,21 +7,16 @@ const {
     handleAuthenticateUser,
     handleRetrieveUser,
     handleUpdateUser,
-    handleUnregisterUser,
-    handleCreateNote,
-    handleRetrieveNotes,
-    handleRetrievePublicNotes,
-    handleUpdateNote,
-    handleDeleteNote,
-    handleAddCommentToNote,
-    handleDeleteCommentFromNote } = require('./handlers')
+    handleUnregisterUser } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
 
-    ; (async () => {
-        await connect('mongodb://localhost:27017/notes-db')
+const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
-        console.log('DB connected')
+    ; (async () => {
+        await connect(MONGODB_URL)
+
+        console.log(`DB connected on ${MONGODB_URL}`)
 
         const api = express()
 
@@ -42,21 +37,21 @@ const { cors } = require('./helpers')
         /* UNREGISTER USER - delete */
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
-        /* CREATE NOTE - post */
-        routes.post('/notes', jsonBodyParser, handleCreateNote)
-        /* RETRIEVE NOTES - get */
-        routes.get('/notes', handleRetrieveNotes)
-        /* RETRIEVE PUBLIC NOTES - get */
-        routes.get('/notes/public', handleRetrievePublicNotes)
-        /* UPDATE NOTE - patch */
-        routes.patch('/notes:noteId', jsonBodyParser, handleUpdateNote)
-        /* DELETE NOTE - delete */
-        routes.delete('/notes:noteId', jsonBodyParser, handleDeleteNote)
+        // /* CREATE NOTE - post */
+        // routes.post('/notes', jsonBodyParser, handleCreateNote)
+        // /* RETRIEVE NOTES - get */
+        // routes.get('/notes', handleRetrieveNotes)
+        // /* RETRIEVE PUBLIC NOTES - get */
+        // routes.get('/notes/public', handleRetrievePublicNotes)
+        // /* UPDATE NOTE - patch */
+        // routes.patch('/notes:noteId', jsonBodyParser, handleUpdateNote)
+        // /* DELETE NOTE - delete */
+        // routes.delete('/notes:noteId', jsonBodyParser, handleDeleteNote)
 
-        /* ADD COMMENT TO NOTE - post */
-        routes.post('/notes/:noteId', jsonBodyParser, handleAddCommentToNote)
-        /* DELETE COMMENT FROM NOTE - delete */
-        routes.delete('/notes/:noteId/comments/:commentId', jsonBodyParser, handleDeleteCommentFromNote)
+        // /* ADD COMMENT TO NOTE - post */
+        // routes.post('/notes/:noteId', jsonBodyParser, handleAddCommentToNote)
+        // /* DELETE COMMENT FROM NOTE - delete */
+        // routes.delete('/notes/:noteId/comments/:commentId', jsonBodyParser, handleDeleteCommentFromNote)
 
         api.use('/api', routes)
 

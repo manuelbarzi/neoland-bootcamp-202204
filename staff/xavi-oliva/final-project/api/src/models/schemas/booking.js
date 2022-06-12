@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
 
-const comment = new Schema({
+const booking = new Schema({
     user: {
         type: ObjectId,
         required: true,

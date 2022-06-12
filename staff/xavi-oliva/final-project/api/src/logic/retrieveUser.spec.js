@@ -2,7 +2,7 @@ const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
 const retrieveUser = require('./retrieveUser')
 const { expect } = require('chai')
-const { NotFoundError } = require('../errors')
+const { NotFoundError } = require('errors')
 
 describe('retrieveUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
