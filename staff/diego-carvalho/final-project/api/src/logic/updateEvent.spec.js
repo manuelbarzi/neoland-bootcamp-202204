@@ -4,18 +4,18 @@ const updateEvent = require('./updateEvent')
 const { expect } = require('chai')
 const { NotFoundError } = require('../errors')
 const { ObjectId } = require('bson')
-const { event } = require('../models/schemas')
+
 
 describe('updateEvent', () => {
     before(() => connect('mongodb://127.0.0.1:27017/events-db-test'))
 
     beforeEach(() => User.deleteMany())
-
+debugger
     describe('when user exists', () => {
         let userId
 
         beforeEach(() => {
-            return User.create({ name: 'Diego Carvalho', username: 'diegocarva', password: '1234' })
+            return User.create({ name: 'Leo Calvo', email: 'leocalvo@gmail.com', password: '1234' })
                 .then(user => {
                     userId = user.id
                 })
@@ -24,7 +24,7 @@ describe('updateEvent', () => {
         it('succeeds events and correct credentials', () => {
             let eventId
 
-            return Event.create({ user: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres  disfrutar...' })
+            return Event.create({ owner: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres  disfrutar...' })
                 .then((result) => {
                     eventId = result.id
              
@@ -37,6 +37,7 @@ describe('updateEvent', () => {
                 })
                 .then((event) => {
                     expect(event.title).to.be.equal('After Work Mar Bella')
+                    expect(event.description).to.be.equal('Únete a nosotros si quieres  disfrutar...')
                 })
         })
 
@@ -50,6 +51,20 @@ describe('updateEvent', () => {
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`event with id ${wrongId} does not exist`)
+                })
+        })
+
+        it ('fails when owner does not exist', () => {
+            const wrongId = new ObjectId().toString()
+            const eventId = new ObjectId().toString()
+
+            return updateEvent(wrongId, eventId, 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...')
+                .then(() => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`owner id ${wrongId} does not exist`)
                 })
         })
     })

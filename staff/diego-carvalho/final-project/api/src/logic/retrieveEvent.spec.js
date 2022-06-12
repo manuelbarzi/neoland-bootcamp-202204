@@ -9,32 +9,29 @@ describe('retrieveEvent', () => {
 
     beforeEach(() => Promise.all([User.deleteMany(), Event.deleteMany()]))
 
-    describe('when user already exists', () => {
-        let user
+    describe('when owner already exists', () => {
+        let owner
 
         beforeEach(() => {
-            user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
+            owner = new User({ name: 'Papa Gayo', email: 'papagayo@gmail.com', password: '1234' })
 
-            return user.save()
-
-            // return User.create({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
+            return owner.save()
         })
-        // .then(_user => user = _user)
 
-        describe('when user already has events', () => {
+        describe('when owner already has events', () => {
             let event1, event2, event3, allEvents
 
             beforeEach(() => {
-                event1 = new Event({ user: user.id, title: 'event 1', description:'test event 1' })
-                event2 = new Event({ user: user.id, title: 'event 2', description:'test event 2' })
-                event3 = new Event({ user: user.id, title: 'event 3', description:'test event 3' })
+                event1 = new Event({ owner: owner.id, title: 'event 1', description: 'test event 1' })
+                event2 = new Event({ owner: owner.id, title: 'event 2', description: 'test event 2' })
+                event3 = new Event({ owner: owner.id, title: 'event 3', description: 'test event 3' })
 
                 return Promise.all([event1.save(), event2.save(), event3.save()])
                     .then(events => allEvents = events)
             })
 
-            it('succeeds on correct user data', () =>
-                retrieveEvent(user.id)
+            it('succeeds on correct owner data', () =>
+                retrieveEvent(owner.id)
                     .then(events => {
                         expect(events).to.be.instanceOf(Array)
 
@@ -51,9 +48,9 @@ describe('retrieveEvent', () => {
             )
         })
 
-        describe('when user has no events', () => {
+        describe('when owner has no events', () => {
             it('succeeds on correct user data', () =>
-                retrieveEvent(user.id)
+                retrieveEvent(owner.id)
                     .then(events => {
                         expect(events).to.be.instanceOf(Array)
 
@@ -62,7 +59,7 @@ describe('retrieveEvent', () => {
             )
         })
 
-        it('fails on incorrect user id', () => {
+        it('fails on incorrect owner id', () => {
             const wrongId = new ObjectId().toString()
 
             return retrieveEvent(wrongId)
@@ -71,12 +68,12 @@ describe('retrieveEvent', () => {
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                    expect(error.message).to.equal(`owner with id ${wrongId} does not exist`)
                 })
         })
     })
 
-    describe('when user does not exist', () => {
+    describe('when owner does not exist', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
@@ -86,7 +83,7 @@ describe('retrieveEvent', () => {
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                    expect(error.message).to.equal(`owner with id ${unexistingUserId} does not exist`)
                 })
         })
     })

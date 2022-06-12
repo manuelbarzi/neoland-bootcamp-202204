@@ -1,5 +1,7 @@
 import { FormatError } from '../errors'
 // CREATING COSTUM ERROR FUNCTIONS
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
 
 function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new FormatError(`${explain} is not a string`)
@@ -44,13 +46,19 @@ function validateUsername(username) {
         throw new FormatError(`username length is lower than 4`)
 }
 
+function validateEmail(email, explain = 'email') {
+    if (!EMAIL_REGEX.test(email))
+        throw new FormatError(`${explain} is not an email`)
+}
+
 export {
     validateString,
     validateStringNotEmptyOrBlank,
     validateStringNotEmptyNoSpaces,
     validateJwt,
     validatePassword,
-    validateUsername
+    validateUsername, 
+    validateEmail
 }
 
 

@@ -6,7 +6,7 @@ const deleteEvent = require('./deleteEvent')
 
 
 describe('deleteEvent', () => {
-    before(() => connect('mongodb://127.0.0.1:27017/event-db-test'))
+    before(() => connect('mongodb://127.0.0.1:27017/events-db-test'))
 
     beforeEach(() => User.deleteMany())
     beforeEach(() => Event.deleteMany())
@@ -15,7 +15,7 @@ describe('deleteEvent', () => {
         let userId
 
         beforeEach(() => {
-            return User.create({ name: 'Diego Carvalho', username: 'diegocarva', password: '1234' })
+            return User.create({ name: 'Nathy Girl', email: 'nath@gmail.com', password: '1234' })
                 .then((user) => {
                     userId = user.id
 
@@ -25,7 +25,7 @@ describe('deleteEvent', () => {
         it('succeeds events and correct credentials', () => {
             let eventId
 
-            return Event.create({ user: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres  disfrutar...' })
+            return Event.create({ owner: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres  disfrutar...' })
                 .then((result) => {
                     eventId = result.id
 
@@ -57,25 +57,25 @@ describe('deleteEvent', () => {
 
     })
 
-    describe('When user does not exist', () => {
+    describe('When owner does not exist', () => {
 
-        it('fails with wrong user Id', () => {
+        it('fails with wrong owner Id', () => {
             const wrongId = new ObjectId().toString()
             const userId = new ObjectId().toString()
 
             let eventId
-            return Event.create({ user: userId, title: 'Sol, playa y voley', description:'Sol, playa, voley y mucha diversión para empezar bien el día. Ven a disfrutar...' })
+            return Event.create({ owner: userId, title: 'Sol, playa y footVoley', description:'Sol, playa, footVoley y mucha diversión para empezar bien el día. Ven a disfrutar...' })
                 .then((result) => {
                     eventId = result.id
 
-                    return deleteEvent(wrongId, eventId) // llamo a nuestra funcion
+                    return deleteEvent(wrongId, eventId)
                 })
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user id ${wrongId} does not found`)
+                    expect(error.message).to.equal(`owner id ${wrongId} does not found`)
                 })
         })
 

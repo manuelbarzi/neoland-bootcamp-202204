@@ -6,7 +6,7 @@ const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 
 describe('authenticateUser', () => {
-    before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
+    before(() => connect('mongodb://127.0.0.1:27017/users-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -14,13 +14,13 @@ describe('authenticateUser', () => {
         let user
 
         beforeEach(() => {
-            user = new User({ name: "Diego Carvalho", username: "diegocarve", password: '1234' })
+            user = new User({ name: "Diego Carvalho", email: "diegocarve@gmail.com", password: '1234' })
 
             return user.save()
         })
-
+    debugger
         it('succeeds on correct credentials', () =>
-            authenticateUser('diegocarve', '1234')
+            authenticateUser('diegocarve@gmail.com', '1234')
                 .then(userId => {
 
                     expect(userId).to.be.a('string')
@@ -29,7 +29,7 @@ describe('authenticateUser', () => {
 
         )
         it('fails on incorrect password', () => {
-            authenticateUser('diegocarve', '1234-wrong')
+            authenticateUser('diegocarve@gmail.com', '1234-wrong')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -38,8 +38,9 @@ describe('authenticateUser', () => {
                     expect(error.message).to.equal('wrong credentials')
                 })
         })
-        it('fails on incorrect username', () => {
-            authenticateUser('diegocarve-wrong', '1234')
+      
+        it('fails on incorrect email', () => {
+            authenticateUser('diegocarve@gmail.com', '1234')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -51,7 +52,7 @@ describe('authenticateUser', () => {
     })
     describe('when user not does not exist', () => {
         it('fails on credentials from non-existing user', () =>
-            authenticateUser('diegocarve', '1234')
+            authenticateUser('diegocarve@gmail.com', '1234')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

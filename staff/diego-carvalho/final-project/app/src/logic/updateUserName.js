@@ -2,7 +2,7 @@ import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
 import {validateJwt, validateString} from '../validators'
 
-function updateUserName(token,newName, callback) {
+function updateUserName(token, newName, callback) {
     const logger = new Logger('updateUserName')
 
     logger.info('call')

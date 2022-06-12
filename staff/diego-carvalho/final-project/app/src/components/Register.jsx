@@ -14,10 +14,10 @@ function Register(props) {
         event.preventDefault()
 
         const name = event.target.name.value
-        const username = event.target.username.value
+        const email= event.target.email.value
         const password = event.target.password.value
 
-        registerUser(name, username, password, error => {
+        registerUser(name, email, password, error => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 
@@ -39,7 +39,7 @@ function Register(props) {
     return <div>
         <form className="Container" onSubmit={handleFormSubmit}>
             <input className="Input Input--light" type="text" name="name" placeholder="name" />
-            <input className="Input Input--light" type="text" name="username" placeholder="username" />
+            <input className="Input Input--light" type="text" name="email" placeholder="email" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Register</button>
             <a href="#" onClick={handleLoginLinkClick}>Login</a>

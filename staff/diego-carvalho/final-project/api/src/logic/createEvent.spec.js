@@ -9,31 +9,31 @@ describe('createEvent', () => {
 
     beforeEach(() => Promise.all([User.deleteMany(), Event.deleteMany()]))
 
-    describe('when user already exists', () => {
-        let user 
-
+    describe('when owner already exists', () => {
+        let owner
+    
         beforeEach(() => {
-            user = new User({ name: 'Mar lucia', username: 'marlucia', password: '1234' })
+            owner = new User({ name: 'Mar lucia', email: 'marlucia@gmail.com', password: '1234' })
 
-            return user.save()
+            return owner.save()
         })
 
-        it('succeeds on correct user data', () =>
-            createEvent(user.id, 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
+        it('succeeds on correct owner data', () =>
+            createEvent(owner.id, 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
                 .then(eventId => {
                     expect(eventId).to.be.a('string')
 
                     return Event.findById(eventId)
                 })
                 .then(event => {
-                    expect(event.user.toString()).to.equal(user.id)
+                    expect(event.owner.toString()).to.equal(owner.id)
                     expect(event.title).to.equal('Surf Session Barceloneta')
                     expect(event.description).to.equal('Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
                     expect(event.date).to.be.instanceOf(Date)
                 })
         )
 
-        it('fails on incorrect user id', () => {
+        it('fails on incorrect owner id', () => {
             const wrongId = new ObjectId().toString()
 
             return createEvent(wrongId, 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
@@ -42,22 +42,22 @@ describe('createEvent', () => {
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                    expect(error.message).to.equal(`owner with id ${wrongId} does not exist`)
                 })
         })
     })
 
-    describe('when user does not exist', () => {
-        it('fails on unexisting user id', () => {
-            const unexistingUserId = new ObjectId().toString()
+    describe('when owner does not exist', () => {
+        it('fails on unexisting owner id', () => {
+            const unexistingOwnerId = new ObjectId().toString()
 
-            return createEvent(unexistingUserId,'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
+            return createEvent(unexistingOwnerId , 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
-                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                    expect(error.message).to.equal(`owner with id ${unexistingOwnerId} does not exist`)
                 })
         })
     })

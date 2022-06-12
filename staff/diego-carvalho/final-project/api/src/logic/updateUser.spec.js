@@ -6,7 +6,7 @@ const { NotFoundError } = require('../errors')
 const { ObjectId } = require('bson')
 
 describe('updateUser', () => {
-    before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
+    before(() => connect('mongodb://127.0.0.1:27017/users-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -14,13 +14,13 @@ describe('updateUser', () => {
         let user
     
         beforeEach(() => {
-            user = new User({ name: 'Diego Carvalho', username: 'diegocarve', password: '1234' })
+            user = new User({ name: 'Diego Carvalho', email:'diegocarve@gmail.com', password: '1234' })
 
             return user.save()
         })
 
         it('succeeds on correct user data', () =>
-            updateUser(user.id, 'Diego Carvalho', '1234','diego@gmail.com')
+            updateUser(user.id, 'Diego Carvalho','diegocarve@gmail.com','1234')
                 .then(result => {
                     expect(result).to.be.undefined
 
@@ -29,8 +29,8 @@ describe('updateUser', () => {
                 })
                 .then(user => {
                     expect(user.name).to.equal('Diego Carvalho')
+                    expect(user.email).to.equal('diegocarve@gmail.com')
                     expect(user.password).to.equal('1234')
-                    expect(user.email).to.equal('diego@gmail.com')
                  
                 })
         )
@@ -38,7 +38,7 @@ describe('updateUser', () => {
         it('fails on incorrect user id', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateUser(wrongId, 'Diego Carvalho','1234','diego@gmail.com')
+            return updateUser(wrongId, 'Diego Carvalho','diegocarve@gmail.com','1234')
                 .then(result => {
 
                     throw new Error('should not reach this point')
@@ -54,7 +54,7 @@ describe('updateUser', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return updateUser(unexistingUserId, 'Diego Carvalho','1234','diego@gmail.com')
+            return updateUser(unexistingUserId, 'Diego Carvalho','diego@gmail.com','1234')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })

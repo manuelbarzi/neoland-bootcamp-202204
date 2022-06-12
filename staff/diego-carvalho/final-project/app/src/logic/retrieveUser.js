@@ -34,7 +34,7 @@ function retrieveUser(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            const user = new User(data.name, data.username)
+            const user = new User(data.name, data.email)
 
             callback(null, user)
         }

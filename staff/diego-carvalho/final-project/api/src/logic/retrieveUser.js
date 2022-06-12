@@ -7,7 +7,7 @@ function retrieveUser(userId) {
     
 
     return User.findById(userId).lean()
-        .then(user => { // {_id: ObjectId, name: 'Papa Gayo', username: 'papagayo', password: '123123123', __v: 0}
+        .then(user => { 
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 

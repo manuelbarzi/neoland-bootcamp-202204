@@ -7,7 +7,7 @@ const user = new Schema({
         required: true
     },
 
-    username: {
+    email: {
         type: String,
         required: true,
         unique: true
@@ -15,15 +15,19 @@ const user = new Schema({
 
     password: {
         type: String,
-        required: true
+        required: true,
+
     },
 
-    email: {
-        type: String
-    },
-
-    events: [event]
-
+    ownerEvents:[{
+        type: ObjectId,
+        ref: 'User'
+    }],
+    
+    events:[{
+        type: ObjectId,
+        ref: 'Event'
+    }]
 
 })
 

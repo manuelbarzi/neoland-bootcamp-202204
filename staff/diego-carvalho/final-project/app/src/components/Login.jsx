@@ -13,10 +13,10 @@ function Login(props) {
     const handleFormSubmit = event => {
         event.preventDefault()
 
-        const username = event.target.username.value
+        const email = event.target.email.value
         const password = event.target.password.value
 
-        authenticateUser(username, password, (error, token) => {
+        authenticateUser(email, password, (error, token) => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 
@@ -39,7 +39,7 @@ function Login(props) {
 
     return <div>
         <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Input Input--light" type="text" name="username" placeholder="username" />
+            <input className="Input Input--light" type="text" name="email" placeholder="email" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Login</button>
             <a href="#" onClick={handleRegisterLinkClick}>Register</a>

@@ -3,9 +3,9 @@ const { generateToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
     try {
-        const { body: { username, password } } = req
+        const { body: { email, password } } = req
 
-        authenticateUser(username, password)
+        authenticateUser(email, password)
             .then(userId => {
                 const token = generateToken(userId)
 

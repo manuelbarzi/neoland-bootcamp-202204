@@ -6,6 +6,7 @@ import saveEvent from '../logic/saveEvent'
 import EventList from './EventList'
 import Profile from './Profile'
 import './Home.sass'
+import { MdHome, MdAddCircle, MdOutlineCalendarToday, MdLogout,MdSearch } from "react-icons/md"
 
 
 function Home(props) {
@@ -43,9 +44,9 @@ function Home(props) {
 
         })
     }, [])
-
+debugger
     const handleAddClick = () => {
-        saveEvent(sessionStorage.token, null, null, null, error => {
+        saveEvent(sessionStorage.token,null, null, null, error => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 
@@ -63,11 +64,11 @@ function Home(props) {
 
     return <div className="Home Container">
         <header className="Home__header Container Container--row Container--spread-sides">
-            <div className='header__nav'>
-                <button className="material-symbols-outlined" onClick={handleLogoutClick}>search</button>
-                <button className="material-symbols-outlined" onClick={handleLogoutClick}>logout</button>
+            <div className='Header__nav'>
+                <button onClick={handleLogoutClick}>< MdSearch/></button>
+                <button onClick={handleLogoutClick}><MdLogout /></button>
             </div>
-        </header>
+        </header> 
 
         <main className="Home__body Container">
             {view === 'list' && <EventList timestamp={timestamp} />}
@@ -77,19 +78,10 @@ function Home(props) {
         <footer className="Home__footer Container">
             <nav className='nav'>
 
-                <a href="#" className='nav__link' onClick={handleHomeClick}>
-                    <i className="material-icons nav__icon">home</i>
-                </a>
-                <a href="#" className='nav__link' onClick={handleAddClick}>
-                    <i className="material-icons nav__icon">add_circle</i>
-                </a>
-                <a href="#" className='nav__link' onClick={handleLogoutClick}>
-                    <i className="material-icons nav__icon">calendar_month</i>
-                </a>
-                <a href="#" className='nav__link' onClick={handleProfileClick}>
-                    <i className="material-icons nav__icon">person</i>
-                </a>
-
+                <a href="#" onClick={handleHomeClick}><MdHome className="icons" /></a>
+                <a href="#" onClick={handleAddClick}><MdAddCircle className="icons" /></a>
+                <a href="#" onClick={handleLogoutClick}><MdOutlineCalendarToday className="icons" /></a>
+                <a href="#" onClick={handleProfileClick}>{name}</a>
             </nav>
 
         </footer>

@@ -14,16 +14,18 @@ class Profile extends Component {
 
 
     render() {
-        return <div className="Profile Container">
-            <button className="Profile__changeName" onClick={this.handleChangeNameClick}>Change Name</button>
-            <button className="Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
-            <button className="Profile__deleteUser" onClick={this.handleDeleteUserClick}>Delete user</button>
-
-
+        return <div  className="Container">
+            
+            <div className='Contaneir__buttons'>
+            <button className="Input Profile__changeName" onClick={this.handleChangeNameClick}>Change Name</button>
             {this.state.view === 'change-name' && <ChangeName />}
-            {this.state.view === 'change-password' && <ChangePassword />}
-            {this.state.view === 'delete-user' && <DeleteUser />} 
 
+            <button className="Input Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
+            {this.state.view === 'change-password' && <ChangePassword />}
+            
+            <button className="Input Profile__deleteUser" onClick={this.handleDeleteUserClick}>Delete user</button>
+            {this.state.view === 'delete-user' && <DeleteUser />} 
+            </div>
         </div>
     }
 }

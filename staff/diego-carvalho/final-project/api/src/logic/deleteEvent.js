@@ -9,14 +9,14 @@ function deleteEvent(userId, eventId) {
 
     return User.findById(userId)
     .then((user) => {
-        if(!user) throw new NotFoundError(`user id ${userId} does not found`)
+        if(!user) throw new NotFoundError(`owner id ${userId} does not found`)
 
         return Event.findById(eventId)
     })
     .then((event) => {
         if(!event) throw new NotFoundError(`event with id ${eventId} does not exist`)
 
-        return Event.deleteOne({_id: eventId, user: userId})
+        return Event.deleteOne({_id: eventId, owner: userId})
     })
     .then(() => { })
 }

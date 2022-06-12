@@ -1,7 +1,7 @@
 const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
-const { event } = require('../models/schemas')
+
 
 function retrieveEvent(userId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
@@ -9,9 +9,9 @@ function retrieveEvent(userId) {
     return User.findById(userId).lean()
         .then(user => {
             if (!user)
-                throw new NotFoundError(`user with id ${userId} does not exist`)
+                throw new NotFoundError(`owner with id ${userId} does not exist`)
 
-            return Event.find({ user: userId }).lean()
+            return Event.find({ owner: userId }).lean()
         })
         .then(events => {
             events.forEach(event => {

@@ -30,9 +30,9 @@ function Event(props) {
     const handleSaveSubmit = event => {
         event.preventDefault()
 
-        const { target: {title: { value: title} } } = event
-        const { target: { text: { value: description} } } = event
         const { eventId } = props
+        const { target: { title: { value: title } } } = event
+        const { target: { text: { value: description } } } = event
 
         saveEvent(sessionStorage.token, eventId, title, description, error => {
             if (error) {
@@ -41,21 +41,22 @@ function Event(props) {
                 return
             }
 
-            handleFeedback({ level: 'success', message: 'Event saved' })
+            handleFeedback({ level: 'success', message: 'event saved' })
         })
     }
 
     logger.info('render')
 
     return <div className="Event">
-        <button className="Button" onClick={handleRemoveClick}>x</button>
+
 
         <form className="Event__form" onSubmit={handleSaveSubmit}>
-            <h1 className='Event__title' name="title" defaultValue={props.title}></h1>
-            <textarea className="Event__text" name="text" defaultValue={props.description}></textarea>
-            <p className="Event__id">{props.EventId}</p>
 
-            <button className="Button">Save</button>
+            <button className="Button__close" onClick={handleRemoveClick}>x</button>
+            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
+            <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
+
+            <button className="Button__save">Save</button>
         </form>
     </div>
 }

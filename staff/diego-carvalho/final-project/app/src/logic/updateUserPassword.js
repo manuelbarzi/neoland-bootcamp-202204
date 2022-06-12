@@ -8,12 +8,12 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
     logger.info('call')
 
     validateJwt(token)
-    validatePassword(password)
+    validatePassword(password, 'password')
     validatePassword(newPassword, 'new password')
     validatePassword(newPasswordRepeat, 'new password repeat')
 
-    // if (!password)
-    //     throw new Error('wrong password!')
+    if(!password)
+        throw new Error('el password es incorrecto!')
 
     if (password === newPassword)
         throw new Error('password and new password are the same!')
@@ -35,7 +35,6 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat, cal
         if (error) return callback(error)
 
         logger.info('response')
-
         const { status, payload } = response
 
         if (status >= 400 && status < 500) {

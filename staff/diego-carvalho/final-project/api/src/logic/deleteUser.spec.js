@@ -6,7 +6,7 @@ const deleteUser = require('./deleteUser')
 
 
 describe('deleteUser', () => {
-    before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
+    before(() => connect('mongodb://127.0.0.1:27017/users-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -14,7 +14,7 @@ describe('deleteUser', () => {
         let user
 
         beforeEach(() => {
-            user = new User({ name: 'Diego Carvalho', username: 'diegocarve', password: '1234' })
+            user = new User({ name: 'Diego Carvalho', email: 'diegocarve@gmail.com', password: '1234' })
 
             return user.save()
         })
