@@ -5,7 +5,7 @@ const registerUser = require('./registerUser')
 const { expect } = require('chai')
 
 describe('registerUser', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/final-pro-test'))
 
     beforeEach(() => User.deleteMany())
 

@@ -10,7 +10,7 @@ function registerUser(name, surname, username, email, phone, password) {
     validateNumber(phone)
     validatePassword(password)
 
-    return User.create({ name, surname, username, email, phone, password, })
+    return User.create({ name, surname, username, email, phone, password })
         .then(() => { })
         .catch(error => {
             if (error.code = 11000)
