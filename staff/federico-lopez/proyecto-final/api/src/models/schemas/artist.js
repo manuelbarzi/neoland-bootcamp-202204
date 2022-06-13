@@ -1,5 +1,5 @@
 const { Schema } = require('mongoose')
-const countries = require('../../data/countries')
+const countries = require('data')
 
 const artist = new Schema({
     name: {

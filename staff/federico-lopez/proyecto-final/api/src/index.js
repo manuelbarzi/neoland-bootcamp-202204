@@ -15,6 +15,7 @@ const {
     handleRetrieveArtistsAndSongs,
     handleAddInterpretationToSong,
     handleRetrieveInterpretationsFromSong,
+    handleRetrieveInterpretationFromSong,
     handleRetrieveSongsOfArtist,
     handleAddOrUpdateRankToInterpretation
 } = require('./handlers')
@@ -62,9 +63,10 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         /* CR INTERPRETATIONS */
         routes.post('/songs/:songId', jsonBodyParser, handleAddInterpretationToSong)
         routes.get('/songs/:songId', handleRetrieveInterpretationsFromSong)
+        routes.get('/songs/:songId/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
 
         /* CU RANK */
-        routs.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
+        routes.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
         
         /* SEARCH */
         routes.get('/search', handleRetrieveArtistsAndSongs)

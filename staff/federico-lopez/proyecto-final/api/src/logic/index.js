@@ -12,5 +12,6 @@ module.exports = {
     retrieveArtistsAndSongs: require('./retrieveArtistsAndSongs'),
     addInterpretationToSong: require('./addInterpretationToSong'),
     retrieveInterpretationsFromSong: require('./retrieveInterpretationsFromSong'),
+    retrieveInterpretationFromSong: require('./retrieveInterpretationFromSong'),
     addOrUpdateRankToInterpretation: require('./addOrUpdateRankToInterpretation.js')
 }

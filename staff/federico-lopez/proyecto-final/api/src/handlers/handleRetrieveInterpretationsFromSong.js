@@ -10,7 +10,6 @@ module.exports = async (req, res) => {
 
         res.status(200).json(interpretations)
     } catch(error) {
-        debugger
         handleErrorsAndRespond(error, res)
     }
 }

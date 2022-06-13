@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose')
+const { Schema, Types: { ObjectId } } = require('mongoose')
 
 const rank = new Schema({
     user: {
@@ -12,4 +12,4 @@ const rank = new Schema({
     }
 })
 
-module.exports = artist
+module.exports = rank

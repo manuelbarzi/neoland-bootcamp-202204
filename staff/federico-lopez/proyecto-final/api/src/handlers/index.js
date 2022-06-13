@@ -11,6 +11,7 @@ module.exports = {
     handleRetrieveArtistsAndSongs: require('./handleRetrieveArtistsAndSongs'),
     handleAddInterpretationToSong: require('./handleAddInterpretationToSong'),
     handleRetrieveInterpretationsFromSong: require('./handleRetrieveInterpretationsFromSong'),
+    handleRetrieveInterpretationFromSong: require('./handleRetrieveInterpretationFromSong'),
     handleRetrieveSongsOfArtist: require('./handleRetrieveSongsOfArtist'),
     handleAddOrUpdateRankToInterpretation: require('./handleAddOrUpdateRankToInterpretation')
 }

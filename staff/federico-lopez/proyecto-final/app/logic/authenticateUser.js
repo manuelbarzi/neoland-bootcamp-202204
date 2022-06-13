@@ -1,4 +1,4 @@
-import { validatePassword, validateEmail } from '../validators'
+import { validatePassword, validateEmail } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 

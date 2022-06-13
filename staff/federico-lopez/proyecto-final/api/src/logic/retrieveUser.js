@@ -1,5 +1,5 @@
 const { User } = require('../models')
-const { NotFoundError } = require('../errors')
+const { NotFoundError } = require('errors')
 const { validateObjectId } = require('../validators')
 
 async function retrieveUser(userId) {

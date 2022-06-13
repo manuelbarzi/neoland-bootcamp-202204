@@ -2,8 +2,8 @@ import Apium from '../vendor/Apium'
 import { context } from './context'
 
 export async function retrieveSongsOfArtist(artistId) {
-    //TODO validate artistId
-
+    // TODO validate artistId
+    
     const api = new Apium(context.API_URL)
 
     const { status, payload } = await api.get(

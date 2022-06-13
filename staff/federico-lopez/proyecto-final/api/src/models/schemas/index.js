@@ -3,5 +3,6 @@ module.exports = {
     artist: require('./artist'),
     song: require('./song'),
     interpretation: require('./interpretation'),
-    comment: require('./comment')
+    comment: require('./comment'),
+    rank: require('./rank')
 }

@@ -1,12 +1,11 @@
 // import { useContext, useEffect } from 'react'
+import Link from 'next/link'
 import { authenticateUser } from '../logic'
-import { isValidJWT } from '../validators'
+import { isValidJWT } from 'validators'
 // import Context from './Context'
 
 export default function Login(props) {
     // const { handleFeedback } = useContext(Context)
-
-    // const navigate = useNavigate()
 
     // useEffect(() => {
     //     if (isValidJWT(sessionStorage.token)) navigate('./')
@@ -34,12 +33,6 @@ export default function Login(props) {
         }
     }
 
-    const onRegisterNavigationClick = event => {
-        event.preventDefault()
-
-        // props.onRegisterNavigation()
-    }
-
     return /*isValidJWT(sessionStorage.token) ? <></> : */ <div>
         <form onSubmit={onFormSubmit}>
             <h1>Log in</h1>
@@ -49,10 +42,16 @@ export default function Login(props) {
             </fieldset>
             <fieldset>
                 <label htmlFor="password">Password</label>
-                <input  type="password" name="password" id="password" placeholder="*******" required />
+                <input type="password" name="password" id="password" placeholder="*******" required />
             </fieldset>
             <button type="submit">Log in</button>
         </form>
-        <p>Don't have an account yet? <br /> <a href="#" onClick={onRegisterNavigationClick} >Register here</a> </p>
+        <p>Don't have an account yet? <br /> <Link href="/register"><a>Register here</a></Link> </p>
     </div>
+}
+
+export async function getServerSideProps(context) {
+    return {
+        props: {},
+    }
 }

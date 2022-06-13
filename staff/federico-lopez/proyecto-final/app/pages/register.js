@@ -1,6 +1,7 @@
 // import { useContext } from 'react'
+import Link from 'next/link'
 import { registerUser } from 'logic'
-import { isValidJWT } from '../validators'
+import { isValidJWT } from 'validators'
 // import Context from './Context'
 
 export default function Register(props) {
@@ -27,12 +28,6 @@ export default function Register(props) {
         }
     }
 
-    const onLoginNavigationClick = event => {
-        event.preventDefault()
-
-        // props.onLoginNavigation()
-    }
-
     return /*isValidJWT(sessionStorage.token) ? <></> : */ <div className="Register">
         <form className="form" onSubmit={onFormSubmit}>
             <h1>Register</h1>
@@ -54,6 +49,6 @@ export default function Register(props) {
             </fieldset>
             <button className="button" type="submit">Register</button>
         </form>
-        <p>Have an account? <a href="#" onClick={onLoginNavigationClick}>Log in</a> </p>
+        <p>Have an account? <Link href="/login"><a>Log in</a></Link> </p>
     </div>
 }

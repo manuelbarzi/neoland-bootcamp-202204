@@ -1,6 +1,6 @@
 const { User } = require('../models')
-const { ConflictError } = require('../errors')
-const { validateUsername, validateEmail, validatePassword } = require('../validators')
+const { ConflictError } = require('errors')
+const { validateUsername, validateEmail, validatePassword } = require('validators')
 
 async function registerUser(username, email, password) {
     validateUsername(username)

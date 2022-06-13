@@ -1,5 +1,5 @@
-import { AuthError } from '../errors'
-import { validatePassword, validateUsername, validateEmail } from '../validators'
+import { AuthError } from 'errors'
+import { validatePassword, validateUsername, validateEmail } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 

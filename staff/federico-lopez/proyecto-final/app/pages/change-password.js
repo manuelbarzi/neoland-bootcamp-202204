@@ -1,6 +1,6 @@
 // import { useContext, useEffect } from 'react'
 import { updateUserPassword } from '../logic'
-// import { isValidJWT } from '../validators'
+// import { isValidJWT } from 'validators'
 // import Context from './Context'
 
 export default function ChangePassword(props) {

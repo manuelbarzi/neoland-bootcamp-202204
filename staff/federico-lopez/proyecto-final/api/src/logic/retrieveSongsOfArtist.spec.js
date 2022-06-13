@@ -2,7 +2,7 @@ const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { Song, Artist } = require('../models')
 const retrieveSongsOfArtist = require('./retrieveSongsOfArtist')
 const { expect } = require('chai')
-const { NotFoundError } = require('../errors')
+const { NotFoundError } = require('errors')
 
 describe('retrieveSongsOfArtist', () => {
     before(() => connect('mongodb://localhost:27017/pitch-us-test'))

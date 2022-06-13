@@ -1,4 +1,4 @@
-import { validateJWT, validateStringNotEmptyOrBlank } from '../validators'
+import { validateStringNotEmptyOrBlank } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 

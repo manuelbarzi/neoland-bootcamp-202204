@@ -1,6 +1,6 @@
 const { verify } = require('jsonwebtoken')
-const { AuthError } = require('../../errors')
-const { validateJWT } = require('../../validators')
+const { AuthError } = require('errors')
+const { validateJWT } = require('validators')
 
 /**
 * Parses JWT from Express Request, verifies it (against the secret) and returns the payload.

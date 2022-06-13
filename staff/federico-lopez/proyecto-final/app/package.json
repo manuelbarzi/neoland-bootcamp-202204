@@ -9,10 +9,14 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tombatossals/react-chords": "^0.2.10",
+    "data": "file:../data",
+    "errors": "file:../errors",
+    "logic": "file:./logic",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "logic": "file:./logic"
+    "validators": "file:../validators"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

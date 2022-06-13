@@ -1,5 +1,6 @@
 const { Schema, Types: { ObjectId }, trusted } = require('mongoose')
 const comment = require('./comment')
+const rank = require('./rank')
 
 const interpretation = new Schema({
     user: {

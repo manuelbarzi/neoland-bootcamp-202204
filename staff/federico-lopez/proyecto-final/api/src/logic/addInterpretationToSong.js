@@ -1,7 +1,8 @@
 const { User, Artist, Song, Interpretation } = require('../models')
-const { NotFoundError, ConflictError } = require('../errors')
-const { validateObjectId, validateInterpretationContent } = require('../validators')
+const { NotFoundError, ConflictError } = require('errors')
+const { validateInterpretationContent } = require('validators')
 const { Comment } = require('../models')
+const { validateObjectId } = require('../validators')
 
 async function addInterpretationToSong(user, song, content) {
     validateObjectId(user)

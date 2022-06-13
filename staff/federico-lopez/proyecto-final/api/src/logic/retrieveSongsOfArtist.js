@@ -1,4 +1,4 @@
-const { NotFoundError } = require('../errors')
+const { NotFoundError } = require('errors')
 const { Song, Artist } = require('../models')
 const { validateObjectId } = require('../validators')
 

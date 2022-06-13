@@ -1,7 +1,7 @@
 import { retrieveArtistsAndSongs } from "../logic"
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import SearchButton from "../components/SearchButton"
+import SearchBar from "../components/SearchBar"
 
 export default function Home() {
 
@@ -22,7 +22,7 @@ export default function Home() {
     return <>
         <Header></Header>
         <main>
-            <SearchButton></SearchButton>
+            <SearchBar></SearchBar>
         </main>
         <Footer></Footer>
     </>

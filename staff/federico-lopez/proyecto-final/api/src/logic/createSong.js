@@ -1,6 +1,7 @@
 const { Song, Artist, User } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyOrBlank, validateGenres, validateObjectId, validateDate } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyOrBlank, validateGenres, validateDate } = require('validators')
+const { validateObjectId } = require('../validators')
 
 async function createSong(userId, { artist, name, genres, album, date }) {
     validateObjectId(userId)

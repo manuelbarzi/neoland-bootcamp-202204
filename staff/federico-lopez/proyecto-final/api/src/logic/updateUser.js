@@ -1,6 +1,8 @@
 const { User } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateObjectId, validateStringNotEmptyOrBlank, validateDate} = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyOrBlank, validateDate} = require('validators')
+const { validateObjectId } = require('../validators')
+
 
 async function updateUser({ userId, firstName, lastName, dateOfBirth }) {
     validateObjectId(userId)

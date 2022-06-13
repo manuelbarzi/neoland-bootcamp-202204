@@ -1,4 +1,4 @@
-import { validateJWT } from '../validators'
+import { validateJWT } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 

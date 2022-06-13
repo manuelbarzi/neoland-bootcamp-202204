@@ -1,11 +1,12 @@
 const { Artist, User } = require('../models')
-const { ConflictError, NotFoundError } = require('../errors')
+const { ConflictError, NotFoundError } = require('errors')
 const { 
     validateStringNotEmptyOrBlank,
     validateCountryCode,
     validateGenres,
-    validateObjectId
-} = require('../validators')
+} = require('validators')
+const { validateObjectId } = require('../validators')
+
 
 async function createArtist(userId, name, genres, country) {
     validateObjectId(userId)

@@ -1,6 +1,7 @@
-const { AuthError, NotFoundError } = require("../errors");
-const { User } = require("../models");
-const { validateObjectId, validatePassword } = require("../validators");
+const { AuthError, NotFoundError } = require("errors")
+const { User } = require("../models")
+const { validatePassword } = require("validators")
+const { validateObjectId } = require('../validators')
 
 async function unregisterUser(userId, password) {
     validateObjectId(userId)

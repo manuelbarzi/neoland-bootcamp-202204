@@ -1,6 +1,6 @@
 const { connect, disconnect } = require('mongoose')
 const { Artist, User } = require('../models')
-const { ConflictError } = require('../errors')
+const { ConflictError } = require('errors')
 const createArtist = require('./createArtist')
 const { validateObjectId } = require('../validators')
 const { expect } = require('chai')
