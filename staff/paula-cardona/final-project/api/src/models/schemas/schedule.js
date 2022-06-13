@@ -19,3 +19,4 @@ const schedule = new Schema({
 })
 
 module.exports = schedule
+

@@ -16,7 +16,9 @@ const product = new Schema({
         type: String,
         required: true,
     }
+    
 
 })
 
 module.exports = product
+

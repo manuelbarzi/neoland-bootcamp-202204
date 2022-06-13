@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const { connect, disconnect } = require('mongoose')
 const { User } = require('../models')
 const { AuthError } = require('../errors')
@@ -5,7 +7,7 @@ const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 
 describe('authenticateUser', () => {
-    before(() => connect('mongodb://localhost:27017/project-db-test'))
+    before(() => connect(process.env.TEST_MONGODB_URL))
 
     beforeEach(() => User.deleteMany())
 

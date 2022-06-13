@@ -2,7 +2,7 @@ import Logger from '../vendor/Loggy'
 import { validateJwt } from '../validators'
 import Apium from '../vendor/Apium'
 
-function retrieveUser(token, callback) {
+function retrieveUser(token) {
 
     validateJwt(token)
 
@@ -10,34 +10,31 @@ function retrieveUser(token, callback) {
 
     logger.info('call')
 
-    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     logger.info('request')
 
-    api.get('v2/users', {
+    return api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
-    }, (error, response) => {
-        if (error) return callback(error)
-
-        logger.info('response')
-
-        const { status, payload } = response
-
-        if (status >= 400 && status < 500) {
-            const data = JSON.parse(payload)
-
-            callback(new Error(data.error))
-        } else if (status >= 500)
-            callback(new Error('server error'))
-        else if (status === 200) {
-            const data = JSON.parse(payload)
-
-
-            callback(null, data)
-        }
     })
+        .then(({status, payload}) => {
+            if (status ===200) {
+                const data = JSON.parse(payload)
+                return data.token
+            } else if (status >= 400 && status < 500) {
+                logger.warn('response - client error status ' + status)
+
+                const data = JSON.parse(payload)
+
+                throw new Error(data.error)
+            } else {
+                logger.error('response - server error status ' + status)
+
+                throw new Error('server error')
+            }
+        })
 }
 
 export default retrieveUser

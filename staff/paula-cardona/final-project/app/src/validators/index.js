@@ -1,9 +1,8 @@
-// aqui guardo mis funciones para validar cosas
+const { FormatError, AuthError } = require('../error')
 
-// comprobamos si los parametros que le enviamos a la funcion son string
-import { FormatError, AuthError } from "../error"
+const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
-function validateString(string, explain = 'string') { //string sera el elemento que queramos validar i explain es la palabra que define el string que pasamos
+function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
 }
 
@@ -23,7 +22,6 @@ function validateStringNotEmptyNoSpaces(string, explain = 'string') {
     if (string.includes(' ')) throw new FormatError(`${explain} has spaces`)
 }
 
-//comprobamos el token
 function validateJwt(token) {
     validateString(token, 'token')
 
@@ -54,19 +52,12 @@ function isJwtValid(token) {
     }
 }
 
-
-// TRUE si todo cumplen
-// FALSE si alguno no cumpe
-
-// (!FALSE) //si se cumple lo del parentesis
-// envie ERROR
-
 function validatePassword(password, explain = 'password') {
-    validateString(password, explain)
+    validateStringNotEmptyNoSpaces(password, explain)
 
-    if (password.length < 8) //si la longitud de la password es menor a 8 envia error
+    if (password.length < 8)
         throw new FormatError(`${explain} length is lower than 8`)
-}   
+}
 
 function validateUsername(username) {
     validateStringNotEmptyNoSpaces(username, 'username')
@@ -75,5 +66,43 @@ function validateUsername(username) {
         throw new FormatError('username length is lower than 4')
 }
 
-export { validateJwt, validateUsername, isJwtValid, validatePassword, validateString, validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank}
+function validateFunction(func, explain = 'function') {
+    if (typeof func !== 'function')
+        throw new TypeError(`${explain} is not a function`)
+}
 
+function validateDate(date, explain = 'date') {
+    if (!(date instanceof Date)) throw new TypeError(`${explain} is not Date`)
+}
+
+function validateNumber(number, explain = 'number') {
+    if (typeof number !== 'number') throw new TypeError(`${explain} is not a number`)
+}
+
+function validatePositiveInteger(number, explain = 'number') {
+    validateNumber(number, explain)
+
+    if (!Number.isInteger(number)) throw new FormatError(`${explain} is not an integer`)
+
+    if (number < 0 || number > 150) throw new RangeError(`${explain} is lower than 0 or greater than 150`)
+}
+
+function validateEmail(email, explain = 'email') {
+    if (!EMAIL_REGEX.test(email))
+        throw new FormatError(`${explain} is not an email`)
+}
+
+module.exports = {
+    validateString,
+    validateStringNotEmptyOrBlank,
+    validateStringNotEmptyNoSpaces,
+    validateJwt,
+    validatePassword,
+    validateUsername,
+    validateFunction,
+    validateDate,
+    validateNumber,
+    validatePositiveInteger,
+    validateEmail,
+    isJwtValid
+}

@@ -2,7 +2,7 @@ import Logger from '../vendor/Loggy'
 import { validateUsername, validatePassword } from '../validators'
 import Apium from '../vendor/Apium'
 
-function registerUser (name, username, password, callback){ 
+function registerUser (name, surname, username, email, password, address){ 
     
     validateUsername(username)
     validatePassword(password, 'password')
@@ -10,37 +10,33 @@ function registerUser (name, username, password, callback){
     const logger = new Logger('register user')
     logger.info('call')
 
-    const api = new Apium ('https://b00tc4mp.herokuapp.com/api')
+    const api = new Apium (process.env.REACT_APP_API_URL)
     
     logger.info('request')
-    api.post('/v2/users', {
+    return api.post('users', {
         headers : {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({ name, username, password })
-    }, (error, { status, payload}) => {
+        body: JSON.stringify({ name, surname, username, email, password, address })
+    }) 
+        .then (({status, payload}) => {
 
+            if (status===201) {
+                return null
 
-        if (error) {
-            callback(error)
+            } else if (status >= 400 && status < 500) {
+                logger.warn('response - client error status ' + status)
 
-            return
-        }
+                const data = JSON.parse(payload)
 
-        logger.info('response')
+                throw new Error(data.error)
+            } else {
+                logger.error('response - server error status ' + status)
 
-        if (status ===201) //si el status es 201 no habrá error, esta bien porque habrá creado el registerUser
-            callback(null)
-        else if (status >=400 && status < 500) { 
+                throw new Error('server error')
 
-            const data = JSON.parse(payload) //la respuesta de data de json lo convierto en objeto
-
-            callback(new Error(data.error)) //la propiedad de error de ese data
-        
-        }else callback(new Error('server error'))
-
-        
-    })
+            }        
+        })
 }
 
 export default registerUser

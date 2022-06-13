@@ -18,25 +18,29 @@ function App (){
     const navigate = useNavigate()
     const [feedback, setFeedback] = useState (null) 
 
-    useEffect(() => {
-        if (isJwtValid(sessionStorage.token))
-            navigate('/')
-        else
-            navigate('/AboutUs')
-    }, [])
+    // useEffect(() => {
+    //     if (isJwtValid(sessionStorage.token))
+    //         navigate('/')
+    //     else
+    //         handleUserLogout()
+    // }, [])
 
     const handleNextToLogin = () => navigate('/login')
+    const handleUserRegistered = () => navigate ('/login')
+    const handleLoginLinkClicked =() => navigate ('/login')
+    const handleRegisterLinkClicked = () => navigate ('/register')
+    const handleUserLoggedIn = () => navigate('/')
 
-   
-    const handleUserLoggedOut = () => {
+    const handleUserLogout = () => {
         delete sessionStorage.token
-        navigate('/login')
+        handleLoginLinkClicked()
     }
 
-    
-    
     const handleFeedback = feedback => setFeedback (feedback) 
     const handleFeedbackTimeout = () => setFeedback (null) 
+
+
+
 
 
     logger.info('render')
@@ -45,9 +49,9 @@ function App (){
         <div className="App Container">
             <Routes>
                 <Route path="/AboutUs" element={<AboutUs onNextArrow={handleNextToLogin}/>} />  
-                {/* <Route path="/login" element={<Login  />} />
-                <Route path="/register" element={<Register  />} />
-                <Route path="/" element={<Home />} />   */}
+                <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked= {handleRegisterLinkClicked} />} />
+                <Route path="/register" element={<Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginLinkClicked} />} />
+                <Route path="/" element={<Home onUserLogout={handleUserLogout}/>} />   
             </Routes>
             {feedback && <Feedback level={feedback.level} message= {feedback.message} onTimeout = {handleFeedbackTimeout} />} {/*si hay feedback dame feedback y lo pinto y te voy a pasar la propiedad level del feedback que es un objeto y la propiedad message del feedback que tmbien es un objeto. (como objeto y el message (como objeto)*/}
         </div>

@@ -4,7 +4,7 @@ const { User, Note, Reaction, Comment } = require('./models')
 
     ; (async () => {
         try {
-            await connect('mongodb://localhost:27017/notes-db')
+            await connect(process.env.TEST_MONGODB_URL)
 
             await Promise.all([User.deleteMany(), Note.deleteMany()])
 

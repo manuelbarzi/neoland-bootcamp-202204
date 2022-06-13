@@ -14,7 +14,8 @@ const item = new Schema({
         ref: 'Product'
     },
     quantity: {
-        type: Number
+        type: Number,
+        required: true
     }
 }) 
 module.exports = item
