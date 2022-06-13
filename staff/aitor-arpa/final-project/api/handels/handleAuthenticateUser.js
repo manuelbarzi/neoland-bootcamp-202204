@@ -1,4 +1,4 @@
-const { authenticateUser } = require('../logic/authenticateUser')
+const { authenticateUser } = require('../logic')
 const { generateToken, handleErrorsAndRespond} = require ('../handels/helpers')
 
 module.exports = (req, res) => {

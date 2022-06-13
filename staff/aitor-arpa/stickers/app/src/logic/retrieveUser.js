@@ -1,12 +1,10 @@
 import Apium from "../vendor/Appium"
-
 import Logger from "../vendor/Loggy"
 import User from "../data/models/User"
 
 
 function retrieveUser(token, callback) {
 
-   /*  validateJwt(token) */  // TODO por que falla 
     
     const logger = new Logger('retrieveUser')
 

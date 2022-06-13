@@ -4,7 +4,7 @@ const unregisterUser = require('./unregisterUser')
 const { expect } = require('chai')
 
 
-describe('authenticateUser', () => {
+describe('Unregister User', () => {
 
     before(() => connect('mongodb://localhost:27017/test'))
 

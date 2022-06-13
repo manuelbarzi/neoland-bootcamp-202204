@@ -1,11 +1,12 @@
-import { useContext } from 'react'
-import Context from "./Context"
+import { useState } from 'react'
+
 import authenticateUser from "../logic/authenticateUser"
+
 
 function Login(props) {
 
-    const { handleFeedback } = useContext(Context)
     
+    const[view, setView] = useState(null)
     const handleFormSubmit = event => {
         event.preventDefault()
 
@@ -22,6 +23,8 @@ function Login(props) {
             sessionStorage.token = token
 
             props.onUserLoggedIn()
+
+            
 
         })
     }

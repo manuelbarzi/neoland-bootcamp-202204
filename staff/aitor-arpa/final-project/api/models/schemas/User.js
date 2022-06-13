@@ -4,11 +4,6 @@ const { Schema } = require('mongoose')
 
 
 const user = new Schema({
-    id:{
-        type: ObjectId,
-        default: new ObjectId
-    },
-    
     role: {
         type: String,
         enum: ['admin', 'worker'], 
@@ -34,7 +29,8 @@ const user = new Schema({
     },
 
     email: {
-        type: String
+        type: String,
+        unique: true
     },
     Date: {
         type: Date,

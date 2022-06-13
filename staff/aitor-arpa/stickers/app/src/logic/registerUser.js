@@ -1,9 +1,7 @@
+import Apium from '../vendor/Appium'
 import Logger from '../vendor/Loggy'
 
-import Apium from '../vendor/Appium'
-
-function registerUser (name, username, password, callback){ 
-  
+function registerUser (name, username, password, callback){   
 
     const logger = new Logger('register user')
     logger.info('call')

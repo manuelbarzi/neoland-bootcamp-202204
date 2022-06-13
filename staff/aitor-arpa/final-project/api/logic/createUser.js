@@ -4,28 +4,25 @@ const { validateUsername, validatePassword, validateEmail, validateString } = re
 
 
 function createUser(adminId, name, username, password, role, nid, email, date) {
-    debugger
     validateString(name)
     validateUsername(username)
     validatePassword(password)
     validateString(nid)
     validateEmail(email)
     validateString(role)
-    return User.findOne({ id: adminId })
-        .then(userfind => {
+
+    return User.findOne({ _id: adminId }).lean() // solo trae el documento sin modelo
+        .then(userfind => {        
             if (userfind.role != 'admin')
                 throw new AuthError(`${username} conctat for you Manager`)
-            return User.create({ name, username, password, role, nid, email, date })
-
-
-
-
+            return fo = User.create({ name, username, password, role, nid, email, date }) 
         })
+      
         .catch(error => {
-            if (error.code = 11000)
-                throw new ConflictError(`user with username ${username} already exists`)
-            throw error
-        })
+         if (error.code === 11000) 
+            return new ConflictError('Username or email duplicate ')
+         
+       }) 
 
 
 

@@ -3,7 +3,7 @@ const { NotFoundError } = require('../errors')
 
 function retrieveUser(userId) {
    
-    return User.findById(userId)
+    return User.findOne({_id:userId})
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)

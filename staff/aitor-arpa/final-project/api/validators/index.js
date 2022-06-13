@@ -1,9 +1,9 @@
 const { FormatError } = require('../../../stickers/api/src/errors') 
 // declaro constante para no poner el churro entereo en la funcion
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+const { isValidObjectId } = require('mongoose')
 
-
-// Valido que sea sting
+// Valido que sea string
 function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
 }
@@ -78,6 +78,11 @@ function validateEmail(email, explain = 'email') {
         throw new FormatError(`${explain} is not an email`)
 }
 
+// Validacion de Objecid
+function validateObjectId(id, explain = 'id') {
+    if(!isValidObjectId(id)) throw new TypeError(`${explain} wrong`)
+}
+
 module.exports = {
     validateString,
     validateStringNotEmptyOrBlank,
@@ -89,5 +94,6 @@ module.exports = {
     validateDate,
     validateNumber,
     validatePositiveInteger,
-    validateEmail
+    validateEmail,
+    validateObjectId
 }

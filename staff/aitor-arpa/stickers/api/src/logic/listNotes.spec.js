@@ -11,7 +11,7 @@
 // Borranmos todos los documentos de notes (deleteMany)
 // Borranmos todos los documentos de users (deleteMany)
 
-conconst { User, Note } = require ('../models')
+const { User, Note } = require ('../models')
 const { NotFoundError } = require ('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
