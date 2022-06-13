@@ -6,7 +6,8 @@ const {
     handleRegisterUser,
     handleAuthenticateUser,
     handleRetrieveUser,
-    handleUpdateUser
+    handleUpdateUser,
+    handleDeleteUser,
 } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
@@ -34,6 +35,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
         routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
+        routes.delete('/users', jsonBodyParser, handleDeleteUser )
 
         //routes.post('/notes', jsonBodyParser, handleCreateNote)
         //routes.get('/notes', handleRetrieveNotes)
