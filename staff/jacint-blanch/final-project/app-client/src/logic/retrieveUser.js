@@ -14,7 +14,7 @@ function retrieveUser(userId) {
             delete user.__v
             delete user.password
 
-            return user 
+            return user
         })
 }
 

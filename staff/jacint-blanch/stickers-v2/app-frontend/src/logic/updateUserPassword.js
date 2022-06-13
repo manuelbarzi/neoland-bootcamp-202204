@@ -1,29 +1,41 @@
-import Apium from "../vendor/Apium"
+import { validateJwt, validatePassword} from '../validators'
+import Apium from '../vendor/Apium'
 
-export default function updateUserPassword(token, oldPassword, password, newPasswordRepeat, callback) {
+function updateUserPassword(token, password, newPassword, newPasswordRepeat, callback) {
 
-    const api = new Apium
-    const url = 'https://b00tc4mp.herokuapp.com/api/v2/users'
 
-    api.call(
-        'PATCH',
-        url,
-        {
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`  
+    validateJwt(token)
+    validatePassword(password)
+    validatePassword(newPassword, 'new password')
+    validatePassword(newPasswordRepeat, 'new password repeat')
+
+    if (newPassword !== newPasswordRepeat)
+        throw new Error('new password and new password repeat are not the same')
+
+
+    const api = new Apium('https://b00tc4mp.herokuapp.com/api')
+
+    api.patch('v2/users', {
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
         },
-            body: JSON.stringify({ oldPassword, password })
-        }, 
-            (error, {status, payload}) => {
-            if(error) return callback(error)
-            if(status === 204) {
-                callback(null)
-            }else if (status >= 400 && status < 500) {
-                const data = JSON.parse(payload)
-                callback(new Error(data.error))
-            } else callback(new Error('server error'))
+        body: JSON.stringify({ oldPassword: password, password: newPassword })
+    }, (error, response) => {
+        if (error) return callback(error)
+
+
+        const { status, payload } = response
+
+        if (status >= 400 && status < 500) {
+            const data = JSON.parse(payload)
+
+            callback(new Error(data.error))
+        } else if (status >= 500)
+            callback(new Error('server error'))
+        else if (status === 204) 
+            callback(null)
     })
 }
 
-
+export default updateUserPassword

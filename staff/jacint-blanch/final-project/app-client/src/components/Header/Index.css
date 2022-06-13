@@ -1,0 +1,40 @@
+*{
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    min-height: 8vh;
+    background-color:antiquewhite;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.HeatMap_Title{
+    color: blueviolet;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-size: 20px;
+}
+
+.navigation-links{
+    display: flex;
+    background-color: red;
+    justify-content: space-around;
+    width: 30%;
+}
+
+.navigation-links a {
+    color: rgb(226, 226, 226);
+    text-decoration: none;
+    letter-spacing: 3px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.navigation-links li {
+    list-style: none;
+}
