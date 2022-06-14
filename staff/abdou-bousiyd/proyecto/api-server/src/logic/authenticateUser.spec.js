@@ -11,22 +11,23 @@ describe('authenticateUser', () => {
 
     describe('when user already exists', ()=> {
         let user 
+
         beforeEach(() => {
-            user = new User({ name:"Papa Gayo", username:"papagayo", password:"123"})
+            user = new User({ name:"Papa Gayo", username:"papagayo", password:"123123123"})
     
             return user.save()
         })
 
         it('succeeds on correct credentials', () => 
         
-            authenticateUser('papagayo', '123')
+            authenticateUser('papagayo', '123123123')
                 .then(userId => {
                     expect(userId).to.be.a('string')
                     expect(userId).to.equal(user.id)
                 })
         )
 
-        it('fails on incorrect password', () =>
+            it('fails on incorrect password', () =>
                 authenticateUser('papagayo', '123123123-wrong')
                     .then(() => {
                         throw new Error('should not reach this point')
@@ -38,7 +39,7 @@ describe('authenticateUser', () => {
             )
 
             it('fails on incorrect username', () =>
-                authenticateUser('papagayo-wrong', '123')
+                authenticateUser('papagayo-wrong', '123123123')
                     .then(() => {
                         throw new Error('should not reach this point')
                     })
@@ -49,7 +50,7 @@ describe('authenticateUser', () => {
             )
     })
 
-    false && describe('when user does not exist', () => {
+    describe('when user does not exist', () => {
         it('fails on credentials from non-existing user', () =>
             authenticateUser('papagayo', '123123123')
                 .then(() => {

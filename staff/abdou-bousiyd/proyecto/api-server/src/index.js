@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const { handleRegisterUser, handleAuthenticateUser, handleRetrieveUser, handleUpdateUser } = require('./handlers')
+const { handleRegisterUser, handleAuthenticateUser, handleRetrieveUser, handleUpdateUser, handleCreateProject, handleRetrieveProjects, handleUpdateProject, handleDeleteProject } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers.js')
 
@@ -19,6 +19,11 @@ const { cors } = require('./helpers.js')
         routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
         routes.get('/users', jsonBodyParser, handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
+
+        routes.post('/project', jsonBodyParser, handleCreateProject)
+        routes.get('/project', jsonBodyParser, handleRetrieveProjects)
+        routes.patch('/project/:projectId', jsonBodyParser, handleUpdateProject)
+        routes.delete('/project/:projectId', jsonBodyParser, handleDeleteProject)
         
 
 

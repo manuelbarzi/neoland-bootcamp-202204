@@ -1,8 +1,8 @@
 const { model } = require('mongoose')
-const { user, note, reaction, comment } = require('./schemas') 
+const { user, project, reaction, comment } = require('./schemas') 
 
 const User = model('User', user)
-const Note = model('Note', note)
+const Project = model('Project', project)
 const Reaction = model('Reaction', reaction)
 
 Reaction.LIKE = 0
@@ -16,7 +16,7 @@ const Comment = model('Comment', comment)
 
 module.exports = {
     User,
-    Note,
+    Project,
     Reaction,
     Comment
 }

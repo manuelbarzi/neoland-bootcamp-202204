@@ -7,6 +7,11 @@ const { expect } = require('chai')
 describe('registerUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
+    beforeEach(() => {
+        User.deleteMany()
+        // User.create({ name: "Papa Gayo", username: "papagayo", password: "123123123"})
+    })
+
     beforeEach(() => User.deleteMany())
 
     it('succeeds on correct credentials', () => {
@@ -23,7 +28,7 @@ describe('registerUser', () => {
             })
     })
 
-    it('fails when user already exists', () => {
+    it('fails when username already exists', () => {
         return User.create({ name: 'Wendy Pan', username: 'wendypan', password: '123123123'})
             .then(() => registerUser('Wendy Pan', 'wendypan', '123123123'))
             .catch(error => {

@@ -1,11 +1,11 @@
 const user = require('./user')
-const note = require('./note')
+const project = require('./project')
 const reaction = require('./reaction')
 const comment = require('./comment')
 
 module.exports = {
     user,
-    note,
+    project,
     reaction,
     comment
 }

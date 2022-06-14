@@ -1,38 +1,39 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User } = require('../models')
-const retrieveUser = require('./retrieveUser')
+const { User, Project } = require('../models')
+const { NotFoundError } = require('../errors')
+const createProject = require('./createProject')
 const { expect } = require('chai')
 
-describe('retrieve', () => {
+describe('createProject', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
-    beforeEach(() => User.deleteMany())
+    beforeEach(() => Promise.all([User.deleteMany(), Project.deleteMany()]))
 
-    describe('when user already exists', () => {
-
+    describe('when project already exists', () => {
         let user
 
         beforeEach(() => {
             user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
-
             return user.save()
         })
 
-        it('succeeds on correct user id', () =>
-            retrieveUser(user.id)
-                .then(user => {
-                    expect(user.constructor).to.equal(Object)
-                    expect(user.name).to.equal('Papa Gayo')
-                    expect(user.username).to.equal('papagayo')
-                    expect(user.password).to.be.undefined
-                    expect(user.id).to.be.undefined
+        it('succeeds on correct project data', () => 
+            createProject(user.id, 'button html css', '<button> test success </button>')
+                .then(projectId => {
+                    expect(projectId).to.be.a('string')
+                    return Project.findById(projectId)
+                })
+                .then( project => {
+                    expect(project.user.toString()).to.equal(user.id)
+                    expect(project.title).to.equal('button html css')
+                    expect(project.code).to.equal('<button> test success </button>')
+                    expect(project.date).to.be.instanceOf(Date)
                 })
         )
-
-        it('fails on incorrect id', () => {
+        it('fails on incorrect project id', () => {
             const wrongId = new ObjectId().toString()
 
-            retrieveUser(wrongId)
+            return createProject(wrongId, 'button html css', '<button> test success </button>')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -44,10 +45,10 @@ describe('retrieve', () => {
     })
 
     describe('when user does not exist', () => {
-        it('fails on user id from non-existing user', () => {
+        it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            retrieveUser(unexistingUserId)
+            return createProject(unexistingUserId, 'Hello World')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -57,7 +58,7 @@ describe('retrieve', () => {
                 })
         })
     })
-    
+
     afterEach(() => User.deleteMany())
 
     after(() => disconnect())
