@@ -43,8 +43,10 @@ Home.getInitialProps = async ({ req, res }) => {
 
     if(response.status === 200){
         return { token }
-    } else {
-        res.writeHead(307, { Location: "/login" })
+    } else if (response.status === 401) {
+        cookies.set('token')
+
+        res.writeHead(307, { Location: '/login' })
         res.end()
     }
 }

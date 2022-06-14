@@ -25,7 +25,7 @@ export default function Login(props) {
 
             sessionStorage.token = token
 
-            document.cookie = `token=${token}`
+            document.cookie = `token=${token}; max-age=3600;`
             // handleFeedback('successfully logged in', 'succeed')
 
             // props.onLoggedIn()
