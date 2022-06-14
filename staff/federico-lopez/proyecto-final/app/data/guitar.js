@@ -1,4 +1,4 @@
-export default {
+const data = {
     "main": {
         "strings": 6,
         "fretsOnChord": 4,
@@ -65045,4 +65045,8 @@ export default {
             }
         ]
     }
+}
+
+export {
+    data
 }

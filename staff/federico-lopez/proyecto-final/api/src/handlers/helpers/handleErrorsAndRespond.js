@@ -1,12 +1,11 @@
 const { ConflictError, FormatError, AuthError, NotFoundError } = require('errors')
 
 module.exports = (error, res) => {
-    debugger
     let status = 500
 
     if (error instanceof TypeError || error instanceof FormatError || error instanceof RangeError)
         status = 400
-    else if (error instanceof AuthError)
+    else if (error instanceof AuthError || error.message === 'invalid signature')
         status = 401
     else if (error instanceof NotFoundError)
         status = 404

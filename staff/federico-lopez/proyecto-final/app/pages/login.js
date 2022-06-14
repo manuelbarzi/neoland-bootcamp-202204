@@ -22,8 +22,10 @@ export default function Login(props) {
         try {
             const token = await authenticateUser(email, password)
             console.log('successfully authenticate')
+
             sessionStorage.token = token
 
+            document.cookie = `token=${token}`
             // handleFeedback('successfully logged in', 'succeed')
 
             // props.onLoggedIn()

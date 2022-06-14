@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@tombatossals/react-chords": "^0.2.10",
+    "cookies": "^0.8.0",
     "data": "file:../data",
     "errors": "file:../errors",
     "logic": "file:./logic",

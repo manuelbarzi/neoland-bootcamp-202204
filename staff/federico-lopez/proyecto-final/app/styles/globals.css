@@ -15,4 +15,7 @@
     li {
         @apply list-none;
     }
+    svg {
+        @apply w-screen;
+    }
 }

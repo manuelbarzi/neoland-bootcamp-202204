@@ -1,6 +1,7 @@
 module.exports = {
     handleRegisterUser: require('./handleRegisterUser'),
     handleAuthenticateUser: require('./handleAuthenticateUser'),
+    handleValidateToken: require('./handleValidateToken'),
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
     handleUnregisterUser: require('./handleUnregisterUser'),
