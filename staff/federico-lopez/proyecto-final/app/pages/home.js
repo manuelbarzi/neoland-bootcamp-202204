@@ -34,7 +34,6 @@ Home.getInitialProps = async ({ req, res }) => {
     const cookies = new Cookies(req, res)
 
     const token = cookies.get('token')
-
     const response = await fetch('http://localhost:8080/api/users/auth', {
         method: 'GET',
         headers: {
@@ -42,9 +41,11 @@ Home.getInitialProps = async ({ req, res }) => {
         }
     })
 
-    // if (response.status !== 200) {
-    //     res.writeHead(301, { Location: "/login" })
-    //     res.end()
-    // }
+    if(response.status === 200){
+        return { token }
+    } else {
+        res.writeHead(307, { Location: "/login" })
+        res.end()
+    }
 }
 

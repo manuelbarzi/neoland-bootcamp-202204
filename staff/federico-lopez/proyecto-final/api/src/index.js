@@ -48,7 +48,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         /* CRUD USERS */
         routes.post('/users', jsonBodyParser, handleRegisterUser)
         routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
-        routes.get('users/auth', handleValidateToken)
+        routes.get('/users/auth', handleValidateToken)
         routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
