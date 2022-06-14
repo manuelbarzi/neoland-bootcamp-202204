@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import Split from 'react-split-grid'
+import Editor from "@monaco-editor/react";
+import { emmetHTML, emmetCSS } from "emmet-monaco-es";
 import Navbar from '../Navbar';
 import Modal from '../Modal'
 import Settings from '../Settings'
@@ -15,34 +17,53 @@ const Project = () => {
         setActive(!active)
     }
 
+    const [_, setIsEditorReady] = useState(false);
     const [active, setActive] = useState(false)
     const [editorValues, setEditorValues] = useState({
         html: "",
         js: "",
         css: "",
     });
+    const [editorOptions, setEditorOptions] = useState({
+        fontSize: 14,
+        minimap: {
+        enabled: true
+        },
+        lineNumbers: 'on',
+        theme:  'vs-dark',
+    })
+
+    const handleOnOptionsChanged = options => {
+        console.log(options)
+        setEditorOptions(options)
+    }
     
     
-    const handleHtmlChange = ({target: {value: html}}) => {
+    const handleHtmlChange = (html) => {
         setEditorValues({
             ...editorValues,
             html
         });
     };
 
-    console.log(editorValues, 99)
-
-    const handleCsslChange = ({target: {value: css}}) => {
+    const handleCsslChange = (css) => {
         setEditorValues({
           ...editorValues,
           css
         });
     };
-      const handleJslChange = ({target: {value: js}}) => {
+      const handleJslChange = (js) => {
         setEditorValues({
           ...editorValues,
           js
         });
+    };
+
+    const handleEditorDidMount = () => {
+        console.log(window.monaco)
+        emmetHTML(window.monaco);
+        emmetCSS(window.monaco);
+        setIsEditorReady(true);
     };
     
     const renderPreview = `
@@ -67,22 +88,51 @@ const Project = () => {
             <Navbar toggle={toggle} />
 
             <Modal active={active} toggle={toggle}>
-                <Settings />
+                <Settings editorOptions={editorOptions} handleOnOptionsChanged={handleOnOptionsChanged} />
             </Modal>
 
             <Split 
                 render={({ getGridProps, getGutterProps, }) => (
                     <section className='grid' {...getGridProps()}>
                         <div>
-                            <textarea id="html" className='editor html' placeholder='html' onChange={handleHtmlChange} defaultValue={editorValues.html}/>
+                            <Editor 
+                                className='editor html'
+                                defaultLanguage="html"
+                                placeholder='html' 
+                                theme="vs-dark"
+                                height="100%"
+                                onChange={handleHtmlChange} 
+                                defaultValue={editorValues.html}
+                                onMount={handleEditorDidMount}
+                                options={editorOptions}
+                            />
                         </div>
 
                         <div>
-                            <textarea id="css" className='editor css' placeholder='css' onChange={handleCsslChange} defaultValue={editorValues.css}/>
+                            <Editor
+                                className='editor css' 
+                                defaultLanguage="css"
+                                placeholder='css' 
+                                theme="vs-dark"
+                                height="100%"
+                                onChange={handleCsslChange} 
+                                defaultValue={editorValues.css}
+                                editorDidMount={handleEditorDidMount}
+                                onMount={handleEditorDidMount}
+                                options={editorOptions}
+                            />
                         </div>
         
                         <div>
-                            <textarea id="js" className='editor js' placeholder='js' onChange={handleJslChange} defaultValue={editorValues.js}/>
+                            <Editor
+                                className='editor js' 
+                                defaultLanguage="css"
+                                placeholder='js' 
+                                theme="vs-dark"
+                                onChange={handleJslChange} 
+                                defaultValue={editorValues.js}
+                                options={editorOptions}
+                            />
                         </div>
 
                         <div

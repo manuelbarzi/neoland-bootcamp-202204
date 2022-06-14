@@ -25,21 +25,22 @@ The project is a clone of the popular Codepen web. Is an online community for te
 ### Data Model
 
 #### User
-- id: (ObjectId)
-- username: (String)
-- name: (String)
-- email: (String)
-- password: (String)
+- id (ObjectId)
+- username (String)
+- name (String)
+- email (String)
+- password (String)
+- favProjects ([ObjectId (Project)])
 
-#### Pen
-- id: (ObjectId)
-- name: (String)
-- description: (String)
-- user: (ObjectId)
-- snippets: [String]
+#### Project
+- id (ObjectId)
+- user (ObjectId)
+- title (String)
+- description (String)
+- files [File]
 
-#### Favorites
-- pens: [{ type: Schema.Types.ObjectId, ref: 'Pen' }]
-- user: (ObjectId)
-
+#### File
+- id (ObjectId)
+- text (String)
+- type (String, enum ['html', 'css', 'js'])
 
