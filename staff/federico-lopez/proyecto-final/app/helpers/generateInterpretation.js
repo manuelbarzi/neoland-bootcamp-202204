@@ -27,8 +27,8 @@ export function generateInterpretation(interpretation, callback) {
 
         const chord = interpretation.slice(position.firstPosition, position.lastPosition)
 
-        return <><>{textFirstPart.split('').map(character => {
-            if (character === ' ') return <>&nbsp;</>
+        return <><>{textFirstPart.split('').map((character, index) => {
+            if (character === ' ' && textFirstPart[index-1] === ' ') return <>&nbsp;</>
             else if (character === '\n') return <br />
             else return character
         })}</>

@@ -1,41 +1,36 @@
-// import { useContext, useEffect } from 'react'
+// import { useContext } from 'react'
 import Link from 'next/link'
 import { authenticateUser } from '../logic'
-import { isValidJWT } from 'validators'
-// import Context from './Context'
+import { verifyTokenWithAPICall } from './helpers'
+import { useRouter } from 'next/router'
 
 export default function Login(props) {
-    // const { handleFeedback } = useContext(Context)
+    const router = useRouter()
 
-    // useEffect(() => {
-    //     if (isValidJWT(sessionStorage.token)) navigate('./')
-    // }, [])
+    // const { handleFeedback } = useContext(Context)
 
     const onFormSubmit = async event => {
         event.preventDefault()
 
-        const email = event.target.email.value
-        const password = event.target.password.value
-
-        event.target.reset()
-
         try {
-            const token = await authenticateUser(email, password)
-            console.log('successfully authenticate')
+            const email = event.target.email.value
+            const password = event.target.password.value
 
-            sessionStorage.token = token
+            event.target.reset()
+
+            const token = await authenticateUser(email, password)
+            // handleFeedback
 
             document.cookie = `token=${token}; max-age=3600;`
-            // handleFeedback('successfully logged in', 'succeed')
 
-            // props.onLoggedIn()
+            router.push('/home')
         } catch (error) {
             console.error(error)
             // handleFeedback(error.message)
         }
     }
 
-    return /*isValidJWT(sessionStorage.token) ? <></> : */ <div>
+    return <div>
         <form onSubmit={onFormSubmit}>
             <h1>Log in</h1>
             <fieldset>
@@ -52,8 +47,7 @@ export default function Login(props) {
     </div>
 }
 
-export async function getServerSideProps(context) {
-    return {
-        props: {},
-    }
+export async function getServerSideProps({ req, res }) {
+    return verifyTokenWithAPICall(req, res)
 }
+

@@ -10,7 +10,8 @@
     main {
         @apply h-full;
         @apply w-full;
-        @apply py-20;
+        @apply my-20;
+        @apply overflow-y-scroll;
     }
     li {
         @apply list-none;

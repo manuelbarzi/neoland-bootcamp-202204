@@ -1,11 +1,13 @@
 // import { useContext } from 'react'
 import Link from 'next/link'
 import { registerUser } from 'logic'
-import { isValidJWT } from 'validators'
+import { useRouter } from 'next/router'
+import { verifyTokenWithAPICall } from './helpers'
 // import Context from './Context'
 
 export default function Register(props) {
     // const { handleFeedback } = useContext(Context)
+    const router = useRouter()
 
     const onFormSubmit = async event => {
         event.preventDefault()
@@ -18,17 +20,15 @@ export default function Register(props) {
         try {
             await registerUser(username, email, password, repeatPassword)
 
-            console.log('successfully registered')
-                // handleFeedback('the registration process succeded', 'succeed')
+            router.push('/login')
 
-                // props.onRegistered()
         } catch (error) {
             console.error(error)
             // handleFeedback(error.message)
         }
     }
 
-    return /*isValidJWT(sessionStorage.token) ? <></> : */ <div className="Register">
+    return <div className="Register">
         <form className="form" onSubmit={onFormSubmit}>
             <h1>Register</h1>
             <fieldset>
@@ -51,4 +51,8 @@ export default function Register(props) {
         </form>
         <p>Have an account? <Link href="/login"><a>Log in</a></Link> </p>
     </div>
+}
+
+export async function getServerSideProps({ req, res }) {
+    return verifyTokenWithAPICall(req, res)
 }

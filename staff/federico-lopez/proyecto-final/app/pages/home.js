@@ -2,16 +2,16 @@ import { retrieveArtistsAndSongs } from "../logic"
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import SearchBar from "../components/SearchBar"
-import Cookies from 'cookies'
+import { verifyTokenWithAPICall } from './helpers'
 
-export default function Home() {
+export default function Home({ token }) {
 
     const onFormSubmit = async event => {
         event.preventDefault()
 
+        const query = event.target.search.value
+        
         try {
-            const query = event.target.search.value
-
             const artistsAndSongsResults = await retrieveArtistsAndSongs(query)
 
             console.log(artistsAndSongsResults)
@@ -25,29 +25,11 @@ export default function Home() {
         <main>
             <SearchBar></SearchBar>
         </main>
-        <Footer></Footer>
+        <Footer userRegistered={!!token}></Footer>
     </>
 }
 
-Home.getInitialProps = async ({ req, res }) => {
 
-    const cookies = new Cookies(req, res)
-
-    const token = cookies.get('token')
-    const response = await fetch('http://localhost:8080/api/users/auth', {
-        method: 'GET',
-        headers: {
-            'Authorization': `bearer ${token}`
-        }
-    })
-
-    if(response.status === 200){
-        return { token }
-    } else if (response.status === 401) {
-        cookies.set('token')
-
-        res.writeHead(307, { Location: '/login' })
-        res.end()
-    }
+export async function getServerSideProps({ req, res }) {
+    return verifyTokenWithAPICall(req, res)
 }
-

@@ -3,8 +3,6 @@ const { GUITAR } = require('./constants')
 import Chord from '@tombatossals/react-chords/lib/Chord'
 
 export function generateChordImages(chord) {
-    debugger
-
     let positions
 
     if (keys.some(key => key === chord)) {
