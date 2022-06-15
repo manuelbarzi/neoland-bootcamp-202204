@@ -5,9 +5,9 @@ module.exports = (req, res) => {
     try {
         const ownerId = verifyToken(req)
 
-        const { body: { title, description } } = req
+        const { body: { photo, title, description, direction, category} } = req
 
-        createEvent(ownerId, title, description)
+        createEvent(ownerId, photo, title, description, direction, category)
             .then(eventId => res.status(201).json({ eventId }))
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {

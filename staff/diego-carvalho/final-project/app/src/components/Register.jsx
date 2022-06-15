@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Logger from '../vendor/Loggy'
 import Context from './Context'
 import registerUser from '../logic/registerUser'
+import { isJwtValid } from '../validators'
 
 function Register(props) {
     const logger = new Logger('Register')
@@ -17,15 +18,20 @@ function Register(props) {
         const email= event.target.email.value
         const password = event.target.password.value
 
-        registerUser(name, email, password, error => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
-
-                return
-            }
-
-            props.onUserRegistered()
-        })
+        try {
+            registerUser(name, email, password, error => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
+    
+                    return
+                }
+    
+                props.onUserRegistered()
+            })
+            
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
     }
 
     const handleLoginLinkClick = event => {
@@ -36,7 +42,7 @@ function Register(props) {
 
     logger.info('render')
 
-    return <div>
+    return isJwtValid(sessionStorage.token) ? <></> : <div>
         <form className="Container" onSubmit={handleFormSubmit}>
             <input className="Input Input--light" type="text" name="name" placeholder="name" />
             <input className="Input Input--light" type="text" name="email" placeholder="email" />

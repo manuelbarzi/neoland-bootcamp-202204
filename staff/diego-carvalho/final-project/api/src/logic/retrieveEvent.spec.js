@@ -22,9 +22,9 @@ describe('retrieveEvent', () => {
             let event1, event2, event3, allEvents
 
             beforeEach(() => {
-                event1 = new Event({ owner: owner.id, title: 'event 1', description: 'test event 1' })
-                event2 = new Event({ owner: owner.id, title: 'event 2', description: 'test event 2' })
-                event3 = new Event({ owner: owner.id, title: 'event 3', description: 'test event 3' })
+                event1 = new Event({ owner: owner.id, photo:'https://d3ipks40p8ekbx.cloudfront.net/dam/Barcelona_Platja-Barceloneta.jpg.' , title: 'event 1', description: 'test event 1', direction:'https://goo.gl/maps/F1C37Q3zqd9CeVNv6', category:'sport-activities'})
+                event2 = new Event({ owner: owner.id, photo:'https://thumbs.dreamstime.com/b/playa-y-mar-18378306.jpg' ,title: 'event 2', description: 'test event 2', direction:'https://goo.gl/maps/arTzFmK6cUaY5Dbg8', category:'social-activities' })
+                event3 = new Event({ owner: owner.id, photo:'https://c8.alamy.com/zoomses/9/db86c48f0d014fa4a5a9dccf7dde7011/fkwpbe.jpg', title: 'event 3', description: 'test event 3', direction:'https://goo.gl/maps/oWMrhDq7pqcrHmwM6', category:'environment'})
 
                 return Promise.all([event1.save(), event2.save(), event3.save()])
                     .then(events => allEvents = events)
@@ -39,7 +39,7 @@ describe('retrieveEvent', () => {
 
                         events.forEach(event => {
                             const found = allEvents.some(_event => {
-                                return _event.id === event.id && _event.title === event.title && event.description === event.description
+                                return _event.id === event.id && _event.photo === event.photo && _event.title === event.title && event.description === event.description && _event.direction === event.direction && _event.category === event.category
                             })
 
                             expect(found).to.be.true

@@ -2,13 +2,13 @@
  * Constructs instances of User
  * 
  * @param {string} name The name of the user
- * @param {string} username The user username
+ * @param {string} email The user email
  */
- function User(name, username) {
+ function User(name, email) {
     if (typeof name !== 'string') throw new TypeError('name is not string')
-    if (typeof username !== 'string') throw new TypeError('username is not string')
+    if (typeof email !== 'string') throw new TypeError('email is not string')
 
     this.name = name
-    this.username = username
+    this.email = email
 }
 export default User

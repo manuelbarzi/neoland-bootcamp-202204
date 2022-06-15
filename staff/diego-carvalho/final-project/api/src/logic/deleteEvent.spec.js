@@ -25,7 +25,7 @@ describe('deleteEvent', () => {
         it('succeeds events and correct credentials', () => {
             let eventId
 
-            return Event.create({ owner: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres  disfrutar...' })
+            return Event.create({ owner: userId, photo:'https://www.upsurfboard.com/wp-content/uploads/2019/05/Barceloneta-Playa-Surf-1.jpg', title: 'After Work Mar Bella', description:'Únete a nosotros si quieres  disfrutar...', direction:'https://goo.gl/maps/WqUnzYRVKLB2A4jE9', category:'sport-activities' })
                 .then((result) => {
                     eventId = result.id
 
@@ -64,7 +64,7 @@ describe('deleteEvent', () => {
             const userId = new ObjectId().toString()
 
             let eventId
-            return Event.create({ owner: userId, title: 'Sol, playa y footVoley', description:'Sol, playa, footVoley y mucha diversión para empezar bien el día. Ven a disfrutar...' })
+            return Event.create({ owner: userId, photo:'https://www.upsurfboard.com/wp-content/uploads/2019/05/Barceloneta-Playa-Surf-1.jpg',title: 'Sol, playa y footVoley', description:'Sol, playa, footVoley y mucha diversión para empezar bien el día. Ven a disfrutar...', direction:'https://goo.gl/maps/WqUnzYRVKLB2A4jE9', category:'sport-activities' })
                 .then((result) => {
                     eventId = result.id
 

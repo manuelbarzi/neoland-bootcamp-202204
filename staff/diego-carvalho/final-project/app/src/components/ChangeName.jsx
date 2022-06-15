@@ -61,6 +61,8 @@ export default ChangeName
 
 
 
+
+
 /*function ChangeName() {
     Component.call(this, `<div class="ChangeName">
         <form class="Container">

@@ -19,7 +19,7 @@ describe('createEvent', () => {
         })
 
         it('succeeds on correct owner data', () =>
-            createEvent(owner.id, 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
+            createEvent(owner.id, 'https://www.upsurfboard.com/wp-content/uploads/2019/05/Barceloneta-Playa-Surf-1.jpg' ,'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.','https://goo.gl/maps/WqUnzYRVKLB2A4jE9','sport-activities')
                 .then(eventId => {
                     expect(eventId).to.be.a('string')
 
@@ -27,8 +27,11 @@ describe('createEvent', () => {
                 })
                 .then(event => {
                     expect(event.owner.toString()).to.equal(owner.id)
+                    expect(event.photo).to.equal('https://www.upsurfboard.com/wp-content/uploads/2019/05/Barceloneta-Playa-Surf-1.jpg')
                     expect(event.title).to.equal('Surf Session Barceloneta')
                     expect(event.description).to.equal('Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
+                    expect(event.direction).to.equal('https://goo.gl/maps/WqUnzYRVKLB2A4jE9')
+                    expect(event.category).to.equal('sport-activities')
                     expect(event.date).to.be.instanceOf(Date)
                 })
         )
@@ -36,7 +39,7 @@ describe('createEvent', () => {
         it('fails on incorrect owner id', () => {
             const wrongId = new ObjectId().toString()
 
-            return createEvent(wrongId, 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
+            return createEvent(wrongId, 'https://www.upsurfboard.com/wp-content/uploads/2019/05/Barceloneta-Playa-Surf-1.jpg' ,'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.','https://goo.gl/maps/WqUnzYRVKLB2A4jE9','sport-activities' )
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -51,7 +54,7 @@ describe('createEvent', () => {
         it('fails on unexisting owner id', () => {
             const unexistingOwnerId = new ObjectId().toString()
 
-            return createEvent(unexistingOwnerId , 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.')
+            return createEvent(unexistingOwnerId , 'https://www.upsurfboard.com/wp-content/uploads/2019/05/Barceloneta-Playa-Surf-1.jpg' ,'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.','https://goo.gl/maps/WqUnzYRVKLB2A4jE9','sport-activities')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

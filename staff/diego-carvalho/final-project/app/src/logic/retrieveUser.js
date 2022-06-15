@@ -1,6 +1,5 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
-import User from '../models/User'
 import { validateJwt } from '../validators'
 
 function retrieveUser(token, callback) {
@@ -14,7 +13,7 @@ function retrieveUser(token, callback) {
 
     logger.info('request')
 
-    api.get('users', {
+    return api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -34,9 +33,7 @@ function retrieveUser(token, callback) {
         else if (status === 200) {
             const data = JSON.parse(payload)
 
-            const user = new User(data.name, data.email)
-
-            callback(null, user)
+            callback(null, data)
         }
     })
 }

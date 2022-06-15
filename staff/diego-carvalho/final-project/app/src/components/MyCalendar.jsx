@@ -5,7 +5,7 @@ import retrieveEvent from '../logic/retrieveEvent'
 import Event from './Event'
 import './EventList.sass'
 
-function EventList({ timestamp }) {
+function MyCalendar({ timestamp }) {
     const logger = new Logger('EventList')
 
     logger.info('call')
@@ -49,4 +49,4 @@ function EventList({ timestamp }) {
         <p>no event yet</p>
 }
 
-export default EventList
+export default MyCalendar

@@ -19,7 +19,6 @@ class Profile extends Component {
             <button className="Profile__changePassword" onClick={this.handleChangePasswordClick}>Change Password</button>
             <button className="Profile__deleteUser" onClick={this.handleDeleteUserClick}>Delete user</button>
 
-
             {this.state.view === 'change-name' && <ChangeName />}
             {this.state.view === 'change-password' && <ChangePassword />}
             {this.state.view === 'delete-user' && <DeleteUser />} 

@@ -1,17 +1,14 @@
 import Logger from '../vendor/Loggy'
 import Apium from '../vendor/Apium'
-import { validateJwt} from '../validators'
+import { validateJwt } from '../validators'
 
 
-function saveEvent(token, eventId, title, description, callback) {
+function saveEvent(token, eventId, photo, title, description, direction, category, callback) {
     const logger = new Logger('saveEvent')
 
     logger.info('call')
 
     validateJwt(token, 'token')
-    //validateStringNotEmptyNoSpaces(eventId, 'eventId')
-    //validateString(title, 'title')
-    //validateString(description, 'description')
 
     logger.info('request')
 
@@ -23,7 +20,7 @@ function saveEvent(token, eventId, title, description, callback) {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ title, description })
+            body: JSON.stringify({ photo, title, description, direction, category })
         }, (error, response) => {
             if (error) return callback(error)
 
@@ -47,7 +44,7 @@ function saveEvent(token, eventId, title, description, callback) {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ eventId, title, description })
+            body: JSON.stringify({ eventId, photo, title, description, direction })
         }, (error, response) => {
             if (error) return callback(error)
 

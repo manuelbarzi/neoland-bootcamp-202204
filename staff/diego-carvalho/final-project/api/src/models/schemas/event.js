@@ -8,22 +8,20 @@ const event = new Schema({
         ref: 'User'
     },
 
-    // photo:{
-    //     type: String,
-    //     default: 'https://metaverso247.com/wp-content/uploads/2022/05/Metaverso-ETF.jpg'
-    // },
+    photo:{
+        type: String,
+        default: 'https://metaverso247.com/wp-content/uploads/2022/05/Metaverso-ETF.jpg'
+    },
 
     title: {
         type: String,
         default: null,
-        required: true
-       
     },
 
     description: {
         type: String,
         default: null,
-        required: true
+       
     },
 
     date: {
