@@ -7,7 +7,8 @@ const {
     handleAuthenticateUser,
     handleRetrieveUser,
     handleUpdateUser,
-    handleDeleteUser
+    handleDeleteUser,
+    handleAddProductToSchedule
     // handleCreateNote,
     // handleRetrieveNotes,
     // handleUpdateNote,
@@ -43,7 +44,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.delete('/users', jsonBodyParser, handleDeleteUser)
 
-        // routes.post('/notes', jsonBodyParser, handleCreateNote)
+        routes.post('/schedule', jsonBodyParser, handleAddProductToSchedule)
         // routes.get('/notes', handleRetrieveNotes)
         // routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)
         // routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteNote)

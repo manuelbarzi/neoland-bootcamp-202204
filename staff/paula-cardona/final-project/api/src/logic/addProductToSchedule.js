@@ -6,7 +6,7 @@ function addProductToSchedule(userId, day, productId, quantity) {
     
     validateUsername(userId)
     validateStringNotEmptyOrBlank(day, 'day')
-    validateStringNotEmptyNoSpaces(productId, 'note id')
+    validateStringNotEmptyNoSpaces(productId, 'product id')
     validatePositiveInteger(quantity, 'quantity')
     
     
@@ -20,7 +20,7 @@ function addProductToSchedule(userId, day, productId, quantity) {
             if (!schedule) throw new NotFoundError(`schedule from user ${userId} does not exist`)
 
             
-            const item = new Item({ user: userId, product: productId, quantity})
+            const item = new Item({ product: productId, quantity})
             
             if(day==='monday')
                 schedule.monday.push(item)

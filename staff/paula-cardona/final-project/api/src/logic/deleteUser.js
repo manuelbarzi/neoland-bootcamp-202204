@@ -13,7 +13,7 @@ function deleteUser(userId, password) {
             if (user.password !== password)
                 throw new AuthError(`Password is not correct`)
 
-            return User.deleteOne({ _id: userId, passwor: password })
+            return User.deleteOne({ _id: userId, password: password })
         })
         .then(()=> { })
 }
