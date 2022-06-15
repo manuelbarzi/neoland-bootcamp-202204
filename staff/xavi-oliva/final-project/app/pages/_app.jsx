@@ -7,9 +7,9 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Brun's Flats</title>
       </Head>
-      <div className='w-screen bg-gradient-primary'>
+      <main className='w-screen bg-gradient-primary'>
         <Component {...pageProps} />
-      </div>
+      </main>
     </>
   )
 }

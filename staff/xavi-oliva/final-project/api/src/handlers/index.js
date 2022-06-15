@@ -7,5 +7,7 @@ module.exports = {
     handleCreateFlat: require('./handleCreateFlat'),
     handleRetrieveFlats: require('./handleRetrieveFlats'),
     handleUpdateFlat: require('./handleUpdateFlat'),
-    handleDeleteFlat: require('./handleDeleteFlat')
+    handleDeleteFlat: require('./handleDeleteFlat'),
+    handleValidateToken: require('./handleValidateToken'),
+
 }

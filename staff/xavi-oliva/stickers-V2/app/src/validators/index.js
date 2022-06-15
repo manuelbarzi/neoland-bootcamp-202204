@@ -49,6 +49,7 @@ function isJwtValid(token) {
         return false
     }
 }
+
 function validatePassword(password, explain = 'password') {
     validateString(password, explain)
 

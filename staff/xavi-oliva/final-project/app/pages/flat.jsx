@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { Header, Footer, CommonMain, Container, Card, PrimaryButton } from "../components";
 
 
-export default function Apartment() {
+export default function Flat() {
     return <>
         <div className="flex flex-col h-screen">
             <Header />

@@ -1,19 +1,22 @@
-import { Header, CommonMain, HomeList, Thumbnail, Footer } from "../components"
+import { Header, CommonMain, HomeList, Footer } from "../components"
+import { verifyTokenWithAPICall } from './helpers'
 
 
-export default function Home() {
+export default function Home({ token }) {
+
+  
+
   return <>
     <div className="flex flex-col h-screen">
       <Header />
       <CommonMain>
-        <ul className="text-secondary bg-white w-screen">
-          <HomeList>
-            <Thumbnail className='w-6 h-6 mr-2' />
-            <p>Spacious apartment in downtown area</p>
-          </HomeList>
-        </ul>
+        <HomeList></HomeList>
       </CommonMain>
       <Footer />
     </div>
   </>
+}
+
+export async function getServerSideProps({ req, res }) {
+  return verifyTokenWithAPICall(req, res)
 }
