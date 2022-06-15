@@ -1,8 +1,16 @@
-import Apium from 'vendor/Apium'
-import { validateJwt } from 'validators'
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import { validateJwt } from '../validators'
+
 
 function saveEvent(token, eventId, photo, title, description, direction, category, callback) {
+    const logger = new Logger('saveEvent')
+
+    logger.info('call')
+
     validateJwt(token, 'token')
+
+    logger.info('request')
 
     const api = new Apium('http://localhost:8080/api')
 
@@ -15,6 +23,8 @@ function saveEvent(token, eventId, photo, title, description, direction, categor
             body: JSON.stringify({ photo, title, description, direction, category })
         }, (error, response) => {
             if (error) return callback(error)
+
+            logger.info('response')
 
             const { status, payload } = response
 
@@ -37,6 +47,8 @@ function saveEvent(token, eventId, photo, title, description, direction, categor
             body: JSON.stringify({ eventId, photo, title, description, direction })
         }, (error, response) => {
             if (error) return callback(error)
+
+            logger.info('response')
 
             const { status, payload } = response
 

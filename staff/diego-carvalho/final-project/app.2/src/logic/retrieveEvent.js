@@ -1,10 +1,17 @@
-import Apium from 'vendor/Apium'
-import {validateJwt} from 'validators'
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import {validateJwt} from '../validators'
 
 function retrieveEvent(token, callback) {
+    const logger = new Logger('retrieveEvent')
+
+    logger.info('call')
+
     validateJwt(token)
 
     const api = new Apium('http://localhost:8080/api')
+
+    logger.info('request')
 
     api.get('events', {
         headers: {
@@ -12,6 +19,8 @@ function retrieveEvent(token, callback) {
         }
     }, (error, response) => {
         if (error) return callback(error)
+
+        logger.info('response')
 
         const { status, payload } = response
 

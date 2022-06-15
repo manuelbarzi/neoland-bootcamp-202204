@@ -1,17 +1,26 @@
-import Apium from 'vendor/Apium'
-import {validateJwt} from 'validators'
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import { validateJwt } from '../validators'
 
-function retrieveEvent(token, callback) {
+function retrieveUser(token, callback) {
+    const logger = new Logger('retrieveUser')
+
+    logger.info('call')
+
     validateJwt(token)
 
     const api = new Apium('http://localhost:8080/api')
 
-    api.get('events', {
+    logger.info('request')
+
+    return api.get('users', {
         headers: {
             Authorization: `Bearer ${token}`
         }
     }, (error, response) => {
         if (error) return callback(error)
+
+        logger.info('response')
 
         const { status, payload } = response
 
@@ -29,4 +38,4 @@ function retrieveEvent(token, callback) {
     })
 }
 
-export default retrieveEvent
+export default retrieveUser

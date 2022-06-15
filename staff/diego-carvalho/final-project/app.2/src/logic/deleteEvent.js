@@ -1,11 +1,18 @@
-import Apium from 'vendor/Apium'
-import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
+import Logger from '../vendor/Loggy'
+import Apium from '../vendor/Apium'
+import { validateJwt, validateStringNotEmptyNoSpaces } from '../validators'
 
-export function deleteEvent(token, eventId, callback) {
+function deleteEvent(token, eventId, callback) {
+    const logger = new Logger('deleteEvent')
+
+    logger.info('call')
+
     validateJwt(token)
     validateStringNotEmptyNoSpaces(eventId, 'eventId')
 
     const api = new Apium('http://localhost:8080/api')
+
+    logger.info('request')
 
     api.delete(`events/${eventId}`, {
         headers: {
@@ -14,6 +21,8 @@ export function deleteEvent(token, eventId, callback) {
         }
     }, (error, response) => {
         if (error) return callback(error)
+
+        logger.info('response')
 
         const { status, payload } = response
 
@@ -28,3 +37,5 @@ export function deleteEvent(token, eventId, callback) {
         }
     })
 }
+
+export default deleteEvent
