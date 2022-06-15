@@ -1,10 +1,10 @@
 import Image from 'next/image'
-import { Wrapper, Header, Footer, CommonMain, Container, Card, PrimaryButton } from "../components";
+import { Header, Footer, CommonMain, Container, Card, PrimaryButton } from "../components";
 
 
 export default function Apartment() {
     return <>
-        <Wrapper className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen">
             <Header />
             <CommonMain>
                 <Container>
@@ -70,6 +70,6 @@ export default function Apartment() {
                 </Container>
             </CommonMain>
             <Footer />
-        </Wrapper>
+        </div>
     </>
 }

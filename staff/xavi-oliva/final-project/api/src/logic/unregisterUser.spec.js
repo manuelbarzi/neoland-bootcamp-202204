@@ -1,11 +1,11 @@
-const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User } = require('../models')
-const { AuthError } = require('errors')
-const unregisterUser = require('./unregisterUser')
 const { expect } = require('chai')
+const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
+const { AuthError, NotFoundError } = require('errors')
+const { User } = require('../models')
+const unregisterUser = require('./unregisterUser')
 
 describe('unregisterUser', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -13,56 +13,59 @@ describe('unregisterUser', () => {
         let user
 
         beforeEach(() => {
-            user = User({ name: 'perrito malvado', username: 'perri', password: '123456789' })
+            user = new User({ name: 'Papa Gayo', email: 'papa@gayo.com', password: '123123123' })
+
             return user.save()
         })
 
-        it('succeeds on correct password and token', () => {
-            return unregisterUser(user.id, user.password)
-                .then(() => {
-                    return User.findById(user.id)
-                })
-                .then(result => {
-                    expect(result).to.be.null
-                })
+        it('succeeds on correct password and token', async () => {
+            await unregisterUser(user.id, user.password)
+
+            const result = await User.findById(user.id)
+
+            expect(result).to.be.null
         })
 
-        it('fails on incorrect password and correct token', () => {
-            return unregisterUser(user.id, '321654987')
-                .then(() => {
-                    throw new Error('it should not reach this point')
-                })
-                .catch(error => {
-                    expect(error).to.be.instanceOf(AuthError)
-                    expect(error.message).to.equal('wrong credentials')
-                })
+        it('fails on incorrect password and correct token', async () => {
+            try {
+                await unregisterUser(user.id, 'Wr0ngPasssss')
+
+                throw new Error('it should not reach this point')
+            } catch (error) {
+                expect(error).to.be.instanceOf(AuthError)
+                expect(error.message).to.equal('wrong credentials')
+            }
         })
 
-        it('fails on incorrect token and correct password', () => {
-            return unregisterUser(new ObjectId().toString(), user.password)
-                .then(() => {
-                    throw new Error('it should not reach this point')
-                })
-                .catch(error => {
-                    expect(error).to.be.instanceOf(AuthError)
-                    expect(error.message).to.equal('incorrect Id')
-                })
+        it('fails on incorrect token and correct password', async () => {
+            const wrongUserId = new ObjectId().toString()
+
+            try {
+                await unregisterUser(wrongUserId, '123123123')
+
+                throw new Error('it should not reach this point')
+
+            } catch (error) {
+                expect(error).to.be.instanceOf(NotFoundError)
+                expect(error.message).to.equal(`user with id ${wrongUserId} not found`)
+            }
         })
     })
 
     describe('on unexisting user', () => {
-        it ('fails on incorrect token and password', () => {
-            return unregisterUser(new ObjectId().toString(), '15975364')
-                .then(() => {
-                    throw new Error('it should not reach this point')
-                })
-                .catch(error => {
-                    expect(error).to.be.instanceOf(AuthError)
-                    expect(error.message).to.equal('incorrect Id')
-                })
+        it('fails on incorrect token and password', async () => {
+            const wrongUserId = new ObjectId().toString()
+
+            try {
+                await unregisterUser(wrongUserId, 'Passw0rd-wrong')
+                throw new Error('it should not reach this point')
+
+            } catch (error) {
+                expect(error).to.be.instanceOf(NotFoundError)
+                expect(error.message).to.equal(`user with id ${wrongUserId} not found`)
+            }
         })
     })
-
     afterEach(() => User.deleteMany())
 
     after(() => disconnect())

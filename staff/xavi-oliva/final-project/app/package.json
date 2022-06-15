@@ -16,7 +16,8 @@
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "utils": "file:../utils",
-    "validators": "file:../validators"
+    "validators": "file:../validators",
+    "logic": "file:./logic"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",

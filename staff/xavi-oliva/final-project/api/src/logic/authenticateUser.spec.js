@@ -5,7 +5,7 @@ const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 
 describe('authenticateUser', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -13,13 +13,13 @@ describe('authenticateUser', () => {
         let user
 
         beforeEach(() => {
-            user = new User({ name: 'Papa Gayo', username: 'papagayo', password:'123123123' })
+            user = new User({ name: 'Papa Gayo', email: 'papa@gayo.com', password:'123123123' })
 
             return user.save()
         })
 
         it('succeeds on correct credentials', () => 
-            authenticateUser('papagayo', '123123123')
+            authenticateUser('papa@gayo.com', '123123123')
                 .then(userId => {
                     expect(userId).to.be.a('string')
                     expect(userId).to.equal(user.id)
@@ -27,7 +27,7 @@ describe('authenticateUser', () => {
         )
 
         it('fails on incorrect password', () => 
-            authenticateUser('papagayo', '123123123-wrong')
+            authenticateUser('papa@gayo.com', '123123123-wrong')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -37,8 +37,8 @@ describe('authenticateUser', () => {
                 })
         )
         
-        it('fails on incorrect username', () => 
-            authenticateUser('papagayo-worng', '123123123')
+        it('fails on incorrect email', () => 
+            authenticateUser('papa-wrong@gayo.com', '123123123')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -51,7 +51,7 @@ describe('authenticateUser', () => {
 
     describe('when user does not exist', () => {
         it('fails on credentials from non-existing user', () => 
-            authenticateUser('papagayo', '123123123')
+            authenticateUser('another@gayo.com', '123123123')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

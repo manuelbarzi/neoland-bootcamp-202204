@@ -1,20 +1,18 @@
-const { AuthError } = require("errors");
+const { AuthError, NotFoundError } = require("errors");
 const { User } = require("../models");
 const { validateStringNotEmptyNoSpaces, validatePassword } = require("validators");
 
-function unregisterUser(userId, password) {
+async function unregisterUser(userId, password) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
     validatePassword(password)
 
-    return User.findById(userId)
-        .then(result => {
-            if (result === null) throw new AuthError('incorrect Id')
+    const result = await User.findById(userId)
 
-            if (result.password !== password) throw new AuthError('wrong credentials')
+    if (result === null) throw new NotFoundError(`user with id ${userId} not found`)
 
-            return User.deleteOne({ _id: userId })
-        })
-        .then(() => {})
+    if (result.password !== password) throw new AuthError('wrong credentials')
+
+    await User.deleteOne({ _id: userId })
 }
 
 module.exports = unregisterUser

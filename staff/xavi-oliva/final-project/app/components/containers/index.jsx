@@ -1,7 +1,0 @@
-export * from './wrapper'
-export * from './section'
-export * from './common-main'
-export * from './container'
-export * from './home-list'
-export * from './profile-list'
-export * from './card'

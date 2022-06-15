@@ -5,7 +5,7 @@ const { expect } = require('chai')
 const { NotFoundError } = require('errors')
 
 describe('retrieveUser', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -13,7 +13,7 @@ describe('retrieveUser', () => {
         let user
 
         beforeEach(() => {
-            user = new User({ name: 'Papa Gayo', username: 'papagayo', password: '123123123' })
+            user = new User({ name: 'Papa Gayo', email: 'papa@gayo.com', password: '123123123' })
 
             return user.save()
         })
@@ -23,7 +23,7 @@ describe('retrieveUser', () => {
                 .then(user => {
                     expect(user.constructor).to.equal(Object)
                     expect(user.name).to.equal('Papa Gayo')
-                    expect(user.username).to.equal('papagayo')
+                    expect(user.email).to.equal('papa@gayo.com')
                     expect(user.password).to.be.undefined
                     expect(user.id).to.be.undefined
                 })

@@ -7,7 +7,11 @@ const {
     handleAuthenticateUser,
     handleRetrieveUser,
     handleUpdateUser,
-    handleUnregisterUser } = require('./handlers')
+    handleUnregisterUser,
+    handleCreateFlat, 
+    handleRetrieveFlats,
+    handleUpdateFlat,
+    handleDeleteFlat} = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
 
@@ -26,27 +30,16 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         const routes = express.Router()
 
-        /* REGISTER USER - post */
         routes.post('/users', jsonBodyParser, handleRegisterUser)
-        /* AUTHENTICATE USER - post */
         routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
-        /* RETRIEVE USER - get */
         routes.get('/users', handleRetrieveUser)
-        /* UPDATE USER - patch */
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
-        /* UNREGISTER USER - delete */
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
-        // /* CREATE NOTE - post */
-        // routes.post('/notes', jsonBodyParser, handleCreateNote)
-        // /* RETRIEVE NOTES - get */
-        // routes.get('/notes', handleRetrieveNotes)
-        // /* RETRIEVE PUBLIC NOTES - get */
-        // routes.get('/notes/public', handleRetrievePublicNotes)
-        // /* UPDATE NOTE - patch */
-        // routes.patch('/notes:noteId', jsonBodyParser, handleUpdateNote)
-        // /* DELETE NOTE - delete */
-        // routes.delete('/notes:noteId', jsonBodyParser, handleDeleteNote)
+        routes.post('/flats', jsonBodyParser, handleCreateFlat)
+        routes.get('/flats', handleRetrieveFlats)
+        routes.patch('/flats/:flatId', jsonBodyParser, handleUpdateFlat)
+        routes.delete('/flats/:flatId', jsonBodyParser, handleDeleteFlat)
 
         // /* ADD COMMENT TO NOTE - post */
         // routes.post('/notes/:noteId', jsonBodyParser, handleAddCommentToNote)

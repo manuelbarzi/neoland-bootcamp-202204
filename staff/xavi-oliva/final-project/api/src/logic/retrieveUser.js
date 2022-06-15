@@ -6,7 +6,7 @@ function retrieveUser(userId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
 
     return User.findById(userId).lean()
-        .then(user => { // {_id: ObjectId, name: 'Papa Gayo', username: 'papagayo', password: '123123123', __v: 0}
+        .then(user => { // {_id: ObjectId, name: 'Papa Gayo', email: 'papa@gayo.com', password: '123123123', __v: 0}
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 

@@ -1,10 +1,27 @@
+import { authenticateUser } from 'logic'
+import Logger from 'loggy'
 import Image from 'next/image'
 import Link from 'next/link'
 import { PrimaryButton, Input, Section } from '../components'
+import { useRouter } from 'next/router'
 
 
 export default function Login() {
-	return <>
+	const logger = new Logger('Login')
+
+	const router = useRouter()
+
+    logger.info('call')
+
+    // const { handleFeedback } = useContext(Context)
+
+    const submitLogin = async event => {
+        event.preventDefault()
+
+		// router.push('/')
+    }
+
+	return /*isValidJWT(sessionStorage.token) ? <></> : */  <> 
 		<Section>
 			<h1 className='md:basis-1/2 text-5xl md:text-5xl text-center t-logo'>Brun's <span className="text-secondary">Flats</span></h1>
 			<h3 className='md:basis-1/2 text-center text-secondary'>home sweet home</h3>
@@ -13,7 +30,7 @@ export default function Login() {
 				<Image src="/media/myhouse.svg" height={150} width={150} />
 			</figure>
 
-			<form className="px-8">
+			<form className="px-8" onSubmit={submitLogin}>
 				<Input type="text" name="email" placeholder="email"></Input>
 				<Input type="password" name="password" placeholder="password" />
 

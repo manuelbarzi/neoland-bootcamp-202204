@@ -1,7 +1,7 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
 
-const apartment = new Schema({
+const flat = new Schema({
     user: {
         type: ObjectId,
         required: true,
@@ -29,4 +29,4 @@ const apartment = new Schema({
     }
 })
 
-module.exports = apartment
+module.exports = flat

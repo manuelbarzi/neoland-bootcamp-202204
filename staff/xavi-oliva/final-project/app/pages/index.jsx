@@ -1,9 +1,9 @@
-import { Wrapper, Header, Footer, Thumbnail, HomeList, CommonMain } from "../components";
+import { Header, CommonMain, HomeList, Thumbnail, Footer } from "../components"
 
 
 export default function Home() {
   return <>
-    <Wrapper className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen">
       <Header />
       <CommonMain>
         <ul className="text-secondary bg-white w-screen">
@@ -14,6 +14,6 @@ export default function Home() {
         </ul>
       </CommonMain>
       <Footer />
-    </Wrapper>
+    </div>
   </>
 }

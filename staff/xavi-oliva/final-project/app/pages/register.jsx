@@ -1,21 +1,22 @@
 import Link from 'next/link'
-import { registerUser } from '../logic'
+import { registerUser } from 'logic'
 import { PrimaryButton, Input, Section } from '../components'
 
-export default function Register() {
+export default function Register(props) {
   // const { handleFeedback } = useContext(Context)
 
   const handleFormSubmit = event => {
     event.preventDefault()
 
     const name = event.target.name.value
-    const username = event.target.username.value
+    const email = event.target.email.value
     const password = event.target.password.value
 
     try {
-      registerUser(name, username, password, error => {
+      registerUser(name, email, password, error => {
         if (error) {
-          handleFeedback({ level: 'error', message: error.message })
+          console.log('successfully registered')
+          // handleFeedback({ level: 'error', message: error.message })
 
           return
         }
@@ -23,7 +24,8 @@ export default function Register() {
         props.onUserRegistered()
       })
     } catch (error) {
-      handleFeedback({ level: 'error', message: error.message })
+      console.error(error)
+      // handleFeedback({ level: 'error', message: error.message })
     }
   }
 
@@ -34,7 +36,7 @@ export default function Register() {
         <Input type="text" name="email" placeholder="email"></Input>
         <Input type="password" name="password" placeholder="password"></Input>
 
-        <PrimaryButton className='mb-4'>
+        <PrimaryButton type="submit" className='mb-4'>
           Sign Up
         </PrimaryButton>
 

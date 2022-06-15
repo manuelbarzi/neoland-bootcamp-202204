@@ -1,13 +1,13 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User } = require('../models')
+const { User, Flat } = require('../models')
 const { NotFoundError } = require('errors')
-const updateUser = require('./updateUser')
+const createFlat = require('./createFlat')
 const { expect } = require('chai')
 
-describe('updateUser', () => {
+describe('createFlat', () => {
     before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
-    beforeEach(() => User.deleteMany())
+    beforeEach(() => Promise.all([User.deleteMany(), Flat.deleteMany()]))
     
     describe('when user already exists', () => {
         let user
@@ -19,24 +19,25 @@ describe('updateUser', () => {
         })
 
         it('succeeds on correct user data', () =>
-            updateUser(user.id, 'Pepe Gayo', 'Fante', '234234234', '+34123123123')
-                .then(result => {
-                    expect(result).to.be.undefined
+            createFlat(user.id, 'This is a title', 'this is a description', 'this is an address')
+                .then(flatId => {
+                    expect(flatId).to.be.a('string')
 
-                    return User.findById(user.id)
+                    return Flat.findById(flatId)
                 })
-                .then(user => {
-                    expect(user.name).to.equal('Pepe Gayo')
-                    expect(user.surnames).to.equal('Fante')
-                    expect(user.password).to.equal('234234234')
-                    expect(user.phone).to.equal('+34123123123')
+                .then(flat => {
+                    // expect(note.user.toString()).to.equal(user._id.toString())
+                    expect(flat.user.toString()).to.equal(user.id)
+                    expect(flat.title).to.equal('This is a title')
+                    expect(flat.description).to.equal('this is a description')
+                    expect(flat.address).to.equal('this is an address')
                 })
-        )
+        ) 
 
         it('fails on incorrect user id', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateUser(wrongId, 'Pepe Gayo', 'Fante', '234234234', '+34123123123')
+            return createFlat(wrongId, 'This is a title', 'this is a description', 'this is an address')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })
@@ -51,7 +52,7 @@ describe('updateUser', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return updateUser(unexistingUserId, 'Pepe Gayo', 'Fante', '234234234', '+34123123123')
+            return createFlat(unexistingUserId, 'This is a title', 'this is a description', 'this is an address')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })

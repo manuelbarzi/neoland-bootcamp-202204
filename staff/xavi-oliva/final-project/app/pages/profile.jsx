@@ -1,9 +1,9 @@
-import { Wrapper, Header, Footer, CommonMain, ProfileListButton } from "../components";
+import { Header, Footer, CommonMain, ProfileListButton } from "../components";
 
 
 export default function Profile() {
     return <>
-        <Wrapper className="flex flex-col h-screen">
+        <div className="flex flex-col h-screen">
             <Header />
             <CommonMain>
                 <div className="text-secondary bg-white w-screen">
@@ -21,6 +21,6 @@ export default function Profile() {
                 </div>
             </CommonMain>
             <Footer />
-        </Wrapper>
+        </div>
     </>
 }

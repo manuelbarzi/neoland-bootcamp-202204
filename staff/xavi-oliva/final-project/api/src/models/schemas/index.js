@@ -1,9 +1,9 @@
 const user = require('./user')
-const apartment = require('./apartment')
+const flat = require('./flat')
 const booking = require('./booking')
 
 module.exports = {
     user,
-    apartment,
+    flat,
     booking
 }

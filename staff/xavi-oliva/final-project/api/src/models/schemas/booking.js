@@ -8,10 +8,10 @@ const booking = new Schema({
         ref: 'User'
     },
 
-    apartment: {
+    flat: {
         type: ObjectId,
         required: true,
-        ref: 'Apartment'
+        ref: 'Flat'
     },
 
     name: {

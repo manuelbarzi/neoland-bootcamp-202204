@@ -1,4 +1,4 @@
-import Logger from '../vendor/Loggy'
+import Logger from 'loggy'
 import { validateJwt } from '../validators'
 import Apium from '../vendor/Apium'
 
