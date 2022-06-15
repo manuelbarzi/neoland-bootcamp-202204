@@ -1,7 +1,7 @@
 const { User, Schedule } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateUsername, validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank } = require('../validators')
-const { product } = require('../models/schemas')
+
 
 function removeProductFromSchedule(userId, day, productId) {
     validateUsername(userId)

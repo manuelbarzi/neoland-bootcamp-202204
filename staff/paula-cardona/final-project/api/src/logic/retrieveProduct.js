@@ -13,6 +13,12 @@ function retrieveProduct (userId, productId) {
         })
         .then((product) => {
             if(!product) throw new NotFoundError(`product with id ${productId} does not exist`)
+            
+            product.id = product._id.toString()
+
+            delete product._id
+            delete product._v
+            
             return product     
         })
 }

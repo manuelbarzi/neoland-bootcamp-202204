@@ -67,7 +67,7 @@ describe ('retrieveSchedule' , () => {
         describe('when user does not exist', () => {
             it('fails on user id from non-existing user', () => {
                 const unexistingUserId = new ObjectId().toString()
-    
+        
                 return retrieveSchedule(unexistingUserId)
                     .then(() => {
                         throw new Error('should not reach this point')
@@ -78,13 +78,6 @@ describe ('retrieveSchedule' , () => {
                     })
             })
         })
-
-
-
-
-
-
-
     })
 
     after(() => disconnect())

@@ -6,7 +6,6 @@ const { validateStringNotEmptyNoSpaces } = require('../validators')
 function retrieveSchedule(userId) { // recivimos el user id al que les buscaremos sus notas 
     validateStringNotEmptyNoSpaces(userId, 'user id')
 
-    debugger
     return User.findById(userId)
 
         .then(user => {

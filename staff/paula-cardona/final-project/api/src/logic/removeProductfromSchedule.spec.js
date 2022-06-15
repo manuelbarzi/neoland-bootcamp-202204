@@ -71,8 +71,6 @@ describe('removeProductfromSchedule', () => {
 
             it('succeds on removing one product from correct data', () => {
 
-                debugger
-                
                 const schedule = new Schedule({ user: user.id, friday:[item, item2, item3]})
                 
                 return schedule.save()
@@ -96,6 +94,24 @@ describe('removeProductfromSchedule', () => {
                         expect(found).to.be.false
                        
                     })    
+            })
+            it ('fails with wrong user Id', () => {
+            
+                const wrongId = new ObjectId().toString()
+                const schedule = new Schedule({ user: wrongId, monday:[item, item2, item3]})
+    
+                return schedule.save()
+                .then (( ) => {
+                    
+                    return removeProductfromSchedule(wrongId, 'monday', product.id)
+                })
+                .then(() => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                })
             })
         })
 
@@ -124,25 +140,6 @@ describe('removeProductfromSchedule', () => {
         })
         afterEach(() => Item.deleteMany())
          
-    
-        it ('fails with wrong user Id', () => {
-            
-            const wrongId = new ObjectId().toString()
-            const schedule = new Schedule({ user: wrongId, monday:[item, item2, item3]})
-
-            return schedule.save()
-            .then (( ) => {
-                
-                return removeProductfromSchedule(wrongId, 'monday', product.id)
-            })
-            .then(() => {
-                throw new Error('should not reach this point')
-            })
-            .catch(error => {
-                expect(error).to.be.instanceOf(NotFoundError)
-                expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
-            })
-        })
 
     })
         
