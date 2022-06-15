@@ -1,4 +1,4 @@
-const updateUser = require('../logic')
+const { updateUser } = require('../logic')
 const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
