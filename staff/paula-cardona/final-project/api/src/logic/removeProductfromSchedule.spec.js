@@ -31,7 +31,7 @@ describe('removeProductfromSchedule', () => {
         afterEach(() => Promise.all([User.deleteMany(), Product.deleteMany()]))
 
         
-        describe('When schedule and product already exists', () => {
+        describe('When item already exists', () => {
         
             let item, item2, item3
 

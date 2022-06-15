@@ -1,11 +1,12 @@
-require('dotenv').config()
+
+
 
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
-const { User, Schedule, Product, Item } = require('../models')
+const { User, Schedule, Product } = require('../models')
 const { NotFoundError } = require('../errors')
 const addProductToSchedule = require('./addProductToSchedule')
 const { expect } = require('chai')
-const { product } = require('../models/schemas')
+
 
 
 describe('addProductToSchedule', () => {
