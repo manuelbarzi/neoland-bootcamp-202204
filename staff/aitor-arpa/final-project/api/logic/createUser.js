@@ -1,6 +1,6 @@
 const { User } = require('../models')
-const { ConflictError, AuthError } = require('../errors')
-const { validateUsername, validatePassword, validateEmail, validateString } = require('../validators')
+const { ConflictError, AuthError } = require('errors')
+const { validateUsername, validatePassword, validateEmail, validateString } = require('validator')
 
 
 function createUser(adminId, name, username, password, role, nid, email, date) {

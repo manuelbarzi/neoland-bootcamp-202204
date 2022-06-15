@@ -1,17 +1,17 @@
 const { User } = require('../models')
-const { AuthError } = require('../errors')
-const { validateUsername, validatePassword } = require('../validators')
+const { AuthError } = require('errors')
+const { validateUsername, validatePassword } = require('validator')
 
 function authenticateUser(username, password) {
     validateUsername(username)
     validatePassword(password)
 debugger
     return User.findOne({ username, password })
-        .then(userfind => {
-            if (!userfind)
+        .then(user => {
+            if (!user)
                 throw new AuthError('wrong credentials')
 
-            return userfind.id
+            return { userId: user.id, role: user.role }
         })
 }
 

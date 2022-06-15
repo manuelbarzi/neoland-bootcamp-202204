@@ -3,7 +3,7 @@ const { cors } = require('./helpers')
 const express = require('express')
 const bodyParser = require('body-parser')
 const { connect, disconnect } = require('mongoose')
-const { handleRegisterUser,handleAuthenticateUser,handleDeleteUser,handleRetrieveUser} = require('./handels')
+const { handleRegisterUser,handleAuthenticateUser,handleDeleteUser,handleRetrieveUser} = require('./handlers')
 
 
  ;(async () => {
@@ -16,8 +16,8 @@ const { handleRegisterUser,handleAuthenticateUser,handleDeleteUser,handleRetriev
     const routes = express.Router()
     debugger
  
-    routes.post('/login', jsonBodyParser, handleRegisterUser)
-    routes.post('/login/auth', jsonBodyParser, handleAuthenticateUser)
+    routes.post('/users', jsonBodyParser, handleRegisterUser)
+    routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
     routes.delete('/users', jsonBodyParser, handleDeleteUser)
     routes.get('/user', handleRetrieveUser)
    

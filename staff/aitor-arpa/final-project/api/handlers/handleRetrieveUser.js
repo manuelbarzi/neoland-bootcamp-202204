@@ -1,5 +1,5 @@
 const { retrieveUser } = require('../logic')
-const { verifyToken, handleErrorsAndRespond } = require('../handels/helpers')
+const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
     try {

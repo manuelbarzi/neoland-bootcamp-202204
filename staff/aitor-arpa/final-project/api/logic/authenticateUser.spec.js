@@ -1,30 +1,37 @@
-const { connect, disconnect, isValidObjectId} = require('mongoose')
+const { connect, disconnect, isValidObjectId } = require('mongoose')
 const { User } = require('../models')
-const { AuthError } = require('../errors')
+const { AuthError } = require('errors')
 const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 
 describe('authenticateUser', () => {
-    before(() => connect('mongodb://localhost:27017/controlz'))
-
-     
+    before(() => connect('mongodb://localhost:27017/test'))
 
     describe('when user already exists', () => {
-        let user 
-       
-        beforeEach(() => {
-            user = new User ({ name: 'Wendy Pan', username: 'wendypan', password: '123123123', rol: 1, DNI: '123123123s' })
+        let user
 
-            user.save()
-        })
-debugger
-        it('succeeds on correct credentials', () =>
-            authenticateUser('wendypan', '123123123')
-                .then(userId => { 
-                   debugger
-                   expect(isValidObjectId(userId)).to.be.true
+        beforeEach(() => {
+            return User.deleteMany()
+                .then(() => {
+                    user = new User({ name: 'Wendy Pan', username: 'wendypan', password: '123123123', rol: 1, DNI: '123123123s' })
+                    
+                    return user.save()
                 })
-        )
+
+        })
+        
+        it('succeeds on correct credentials', () => {
+            return authenticateUser('wendypan', '123123123')
+                .then(data => {
+                    debugger
+                    expect(data).to.be.an('object')
+
+                    const { userId, role } = data
+
+                    expect(userId).to.equal(user.id)
+                    expect(role).to.equal(user.role)
+                })
+        })
 
         it('fails on incorrect password', () =>
             authenticateUser('wendypan', '123123123-wrong')
@@ -62,7 +69,7 @@ debugger
         )
     })
 
-    /* afterEach(() => User.deleteMany()) */
+    afterEach(() => User.deleteMany())
 
     after(() => disconnect())
 })

@@ -16,9 +16,9 @@ function verifyToken(req) {
 
     const [, token] = authorization.split(' ')
 
-    const { sub: userId } = verify(token, process.env.JWT_SECRET)
+    const { sub: userId , role: role } = verify(token, process.env.JWT_SECRET)
 
-    return userId
+    return {userId, role }
 }
 
 module.exports = verifyToken

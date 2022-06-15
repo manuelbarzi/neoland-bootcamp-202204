@@ -4,9 +4,7 @@ const user = require ('./User')
 const job = require ('./Job')
 
 const report = new Schema({
-    id:{ 
-        type: ObjectId
-    },
+  
     user: {
         type: ObjectId,
         ref: 'user'

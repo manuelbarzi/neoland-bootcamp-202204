@@ -1,5 +1,5 @@
 const { Job } = require("../models");
-const { validateObjectId} = require('../validators')
+const { validateObjectId} = require('validator')
 
 function deleteWork(adminId, id) {
   validateObjectId(adminId)

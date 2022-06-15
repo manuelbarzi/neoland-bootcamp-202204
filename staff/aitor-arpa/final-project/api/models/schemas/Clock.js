@@ -3,10 +3,7 @@ const { Schema } = require('mongoose')
 const{ job } =require('./Job')
 
 const clock = new Schema({
-    id:{
-        type: ObjectId,
-        default: new ObjectId
-    },
+   
     user:{
         type:ObjectId,
         ref: 'user'

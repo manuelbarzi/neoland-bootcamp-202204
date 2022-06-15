@@ -1,6 +1,6 @@
   
 const { createUser } = require('../logic')
-const { handleErrorsAndRespond } = require('../handels/helpers')
+const { handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => { // tengo un express pediente de si recive un POST a users, y me devuelve (req, res)
     try {

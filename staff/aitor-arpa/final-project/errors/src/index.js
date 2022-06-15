@@ -1,4 +1,4 @@
-const createCustomError = require('../../../stickers/api/src/utils/createCustomError')
+const {createCustomError} = require('utils')
 
 const FormatError = createCustomError('FormatError')
 const AuthError = createCustomError('AuthError')
