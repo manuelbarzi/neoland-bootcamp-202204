@@ -1,6 +1,6 @@
 const { User, Note, Comment } = require('../models')
 const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
+const { validateStringNotEmptyNoSpaces, validateString } = require('validator')
 
 function addCommentToNote(userId, noteId, text) {
     validateStringNotEmptyNoSpaces(userId, 'user id')

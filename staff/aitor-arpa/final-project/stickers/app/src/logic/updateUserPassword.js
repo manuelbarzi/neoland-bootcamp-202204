@@ -1,5 +1,5 @@
 import Apium from "../vendor/Appium"
-import { validateJwt, validatePassword } from "../validators"
+import { validateJwt, validatePassword } from "'validator's"
 function updateUserPassword(token, password, newPassword, newPasswordRepeat, callback) {
     // Validacion de datos antes de enviarlo a la API
     validateJwt(token)

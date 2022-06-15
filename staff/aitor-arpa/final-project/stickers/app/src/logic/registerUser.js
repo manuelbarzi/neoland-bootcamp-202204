@@ -1,4 +1,4 @@
-import Apium from '../vendor/Appium'
+import Apium from 'apium'
 import Logger from '../vendor/Loggy'
 
 function registerUser (name, username, password, callback){   

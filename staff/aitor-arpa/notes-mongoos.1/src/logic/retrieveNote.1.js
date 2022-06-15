@@ -1,6 +1,6 @@
 const { Note, User } = require('../models')
 const { NotFoundError, AuthError } = require('../errors')
-const { validateStringNotEmptyNoSpaces } = require('../validators')
+const { validateStringNotEmptyNoSpaces } = require('validator')
 
 // Esete espera el userId y el noteId y solo trae la nota en concreto no array
 function retrieveNote(userId, noteId) {

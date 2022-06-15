@@ -1,7 +1,7 @@
 import Apium from "../vendor/Appium"
 import Logger from "../vendor/Loggy"
-import { validateJwt } from "../validators"
-import { validatePassword } from "../validators"
+import { validateJwt } from "'validator's"
+import { validatePassword } from "'validator's"
 function deleteUser(token, password, callback) {
     const logger = new Logger('deleteUser')
 

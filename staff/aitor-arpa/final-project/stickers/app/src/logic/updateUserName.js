@@ -1,5 +1,5 @@
 import Apium from "../vendor/Appium"
-import {validateJwt} from "../validators"
+import {validateJwt} from "'validator's"
 
 function updateUserName(token, name, callback) {
     validateJwt(token) 
