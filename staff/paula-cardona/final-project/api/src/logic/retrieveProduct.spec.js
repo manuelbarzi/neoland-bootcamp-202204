@@ -3,7 +3,7 @@ require('dotenv').config()
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Product} = require("../models")
 const { NotFoundError } = require('../errors')
-const retrieveProduct = require('./retrieveSchedule')
+const retrieveProduct = require('./retrieveProduct')
 const { expect } = require('chai')
 
 
@@ -30,8 +30,8 @@ describe ('retrieveProduct' , () => {
             beforeEach (() => {
                 
                 product = new Product({ title: 'baguette', description: 'baguette francesa' })
-                product2 = new Product({ title: 'baguette', description: 'baguette francesa' })
-                product3 = new Product({ title: 'baguette', description: 'baguette francesa' })
+                product2 = new Product({ title: 'rustico', description: 'rustico jeje' })
+                product3 = new Product({ title: 'ensaimada', description: 'ensaimada menorca' })
 
                 return Promise.all([product.save(), product2.save(), product3.save()])
             })
@@ -40,18 +40,59 @@ describe ('retrieveProduct' , () => {
                 return retrieveProduct (user.id, product.id)
                                 
                     .then((product) => {
-                        expect(product).to.be.instanceOf(Array)
-                        expect(product.length).to.be.equal(1)
+                        expect(product.title).to.be.equal('baguette')
+                        expect(product.description).to.be.equal('baguette francesa')
                     })
             })
 
-            
 
+            it ('fails when userid does not exist', () => {
+                const wrongId = new ObjectId().toString() //crea un id de tipo mongoose
+    
+                return retrieveProduct(wrongId, product.id)
+                    .then(() =>{
+                        throw new Error('should not reach this point')
+                    })
+                    .catch((error) => {
+                        expect(error).to.be.instanceOf(NotFoundError)
+                        expect(error.message).to.be.equal(`user with id ${wrongId} does not exist`)
+                    })
+            })
+            it ('fails when productId does not exist', () => {
+                const wrongId = new ObjectId().toString() //crea un id de tipo mongoose
+    
+                return retrieveProduct(user.id, wrongId)
+                    .then(() =>{
+                        throw new Error('should not reach this point')
+                    })
+                    .catch((error) => {
+                        expect(error).to.be.instanceOf(NotFoundError)
+                        expect(error.message).to.be.equal(`product with id ${wrongId} does not exist`)
+                    })
+            })
 
         })
-
-
-
+        describe('when user does not exist', () => {
+            let product
+            
+            beforeEach (() => {
+                product = new Product({ title: 'baguette', description: 'baguette francesa' })
+                return product.save()
+            })
+                
+            it('fails on user id from non-existing user', () => {
+                const unexistingUserId = new ObjectId().toString()
+    
+                return retrieveProduct(unexistingUserId, product.id)
+                    .then(() => {
+                        throw new Error('should not reach this point')
+                    })
+                    .catch(error => {
+                        expect(error).to.be.instanceOf(NotFoundError)
+                        expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                    })
+            })
+        })
     })
 
     after(() => disconnect())

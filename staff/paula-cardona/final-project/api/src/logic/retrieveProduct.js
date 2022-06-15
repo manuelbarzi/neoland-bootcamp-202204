@@ -2,7 +2,7 @@ const { User, Product} = require ('../models')
 const { NotFoundError } = require ('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
-function retrieveProduct (productId) {
+function retrieveProduct (userId, productId) {
     validateStringNotEmptyNoSpaces(productId, 'product id')
 
     return User.findById(userId)
@@ -12,6 +12,7 @@ function retrieveProduct (productId) {
             return Product.findById(productId)
         })
         .then((product) => {
+            if(!product) throw new NotFoundError(`product with id ${productId} does not exist`)
             return product     
         })
 }
