@@ -1,4 +1,5 @@
 const addComment = require('./addComment')
+const addPointToActivity = require('./addPointToActivity')
 const authenticateUser = require('./authenticateUser')
 const createActivity = require('./createActivity')
 const deleteActivity = require('./deleteActivity')
@@ -8,11 +9,13 @@ const registerUser = require('./registerUser')
 const retrieveActivities = require('./retrieveActivities')
 const retrieveUser = require('./retrieveUser')
 const retrieveUserActivities = require('./retrieveUserActivities')
+const saveActivity = require('./saveActivity')
 const toggleLikeOnActivity = require('./toggleLikeOnActivity')
 const updateUserData = require('./updateUserData')
 
 module.exports = {
     addComment,
+    addPointToActivity,
     authenticateUser,
     createActivity,
     deleteActivity,
@@ -22,6 +25,7 @@ module.exports = {
     retrieveActivities,
     retrieveUser,
     retrieveUserActivities,
+    saveActivity,
     toggleLikeOnActivity,
     updateUserData
 }

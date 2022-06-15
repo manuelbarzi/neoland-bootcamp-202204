@@ -12,22 +12,35 @@ const activity = new Schema({
     },
     title: {
         type: String,
-        required: true
+        required: true,
+        default: 'Mountain Activity'
     },
     date: {
         type: Date,
         required: true,
         default: Date.now
     },
-
-    checkpoints: [point],
+    sport: {
+        type: String,
+        required: true
+    },
+    text: {
+        type: String,
+    },
+    private: {
+        type: Boolean,
+        default: false
+    },
+    
+    points: [point],
     
     comments: [comment],
     
     likes: [{
         type: ObjectId,
         ref: 'User'
-    }]
+    }],
+
 
 })
 

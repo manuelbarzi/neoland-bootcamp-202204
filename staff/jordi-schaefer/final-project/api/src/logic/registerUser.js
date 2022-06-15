@@ -11,7 +11,7 @@ function registerUser(name, username, password, email) {
     return User.create({ name, username, password, email })
         .then(() => { })
         .catch(error => {
-            debugger
+            
             if (error.code = 11000)
                 throw new ConflictError(`user with username ${username} already exists`)
             

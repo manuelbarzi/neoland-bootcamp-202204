@@ -1,0 +1,119 @@
+@use 'base'
+
+.Container
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.Container__buttons
+    justify-content: center
+    gap: 0rem
+    
+.Container__image
+    width: 100%
+    height: 100%
+    background-image: url('../../public/peak.jpg')
+    background-size: cover  
+    background-position: center 
+
+.Background__box
+    background-color: #00000091
+
+
+
+.Header
+    top: 0
+    background-color: #fff
+    display: flex
+    width: 100%
+    height: 60px
+    border-bottom: 2px solid base.$border-color
+
+
+.Footer
+    bottom: 0
+    display: flex
+    flex-direction: column
+    justify-content: end
+    width: 100%
+    border-top: 2px solid base.$border-color
+    background-color: #fff
+    height: 60px
+
+.Footer__home
+    width: 100%
+    display: flex
+    justify-content: space-around
+    align-items: center
+    padding: 0
+
+.Footer__icon
+    color: base.$almost-black
+    //color: base.$main-color
+    border: none
+    background: none
+    font-size: 33px
+    padding: 0
+/*     &:hover
+        color: base.$main-color */
+
+.Footer__word
+    color: base.$almost-black
+    //color: base.$main-color
+    font-weight: 400
+    font-size: 13px
+
+    
+
+.Footer__activity
+    height: 180px
+    justify-content: space-around
+    align-items: center
+    background-color: #fff
+
+.Center
+    position: absolute
+    left: 50%
+    transform: translate(-50%, -50%)
+    margin-top: 1.4rem
+
+    
+.Home__body
+    padding: 0
+    display: flex
+    justify-content: center
+    align-items: baseline
+    background-color: #ebebeb
+
+
+.Confirm__message
+    margin: 0
+    font-size: 16px
+    font-weight: 400
+    text-align: center
+    max-width: 90%
+
+
+.Overflow
+    overflow: auto
+.mh
+    height: 100%
+.mw
+    width: 100%
+.Flex__end
+    justify-content: end
+.Flex__start
+    justify-content: start
+.pb
+    padding-bottom: 1.5rem
+.m__form
+    margin-top: 2rem
+
+.m_left_word
+    margin-left: 0.15rem
+
+.m_right_word
+    margin-right: 0.15rem
+
+
+

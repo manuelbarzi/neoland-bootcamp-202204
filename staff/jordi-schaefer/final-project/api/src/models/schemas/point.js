@@ -4,7 +4,7 @@ const point = new Schema({
     
     altitude: {
         type: Number,
-        required: true
+        /* required: true     Opcionalmente aceptamos null */
     },
     latitude: {
         type: Number,
@@ -19,10 +19,6 @@ const point = new Schema({
         required: true,
         default: Date.now
     },
-    text: {
-        type: String,
-        required: true
-    }
 
 })
 

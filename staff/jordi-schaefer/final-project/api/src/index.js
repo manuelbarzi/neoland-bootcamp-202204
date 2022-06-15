@@ -9,7 +9,7 @@ const { handleRegisterUser,
     handleUpdateUserData, handleDeleteUser, 
     handleCreateActivity, handleDeleteActivity, 
     handleRetrieveActivities, handleRetrieveUserActivities,
-    handleRetrievePublicNotes, 
+    handleAddPointToActivity, handleSaveActivity,
     handleSaveComment, handleDeleteComment,
     handleToggleReactionOnComment, handleToggleReactionOnNote } = require('./handlers')
 
@@ -54,11 +54,13 @@ const { env: { MONGODB_URL, PORT=8080 }, argv: [ , , port = PORT]} = process
     routes.get('/activities', handleRetrieveActivities)
     // RetrieveUserActivities
     routes.get('/activities/user', handleRetrieveUserActivities)
+    // Save Point
+    routes.patch('/activities/:activityId', jsonBodyParser, handleAddPointToActivity)
+    // Save Activity
+    routes.patch('/activities/:activityId/save', jsonBodyParser, handleSaveActivity)
     
 /*     
     // ---------------   COMMENTS  --------------------
-    // Save comment
-    routes.patch('/notes/:noteId/comments', jsonBodyParser, handleSaveComment)
     // Delete comment
     routes.delete('/notes/:noteId/comments/:commentId', jsonBodyParser, handleDeleteComment)
     // reaction Note
