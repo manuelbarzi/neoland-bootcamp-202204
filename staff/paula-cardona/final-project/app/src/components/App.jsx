@@ -30,6 +30,7 @@ function App (){
     const handleLoginLinkClicked =() => navigate ('/login')
     const handleRegisterLinkClicked = () => navigate ('/register')
     const handleUserLoggedIn = () => navigate('/')
+  
 
     const handleUserLogout = () => {
         delete sessionStorage.token
@@ -51,7 +52,7 @@ function App (){
                 <Route path="/AboutUs" element={<AboutUs onNextArrow={handleNextToLogin}/>} />  
                 <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked= {handleRegisterLinkClicked} />} />
                 <Route path="/register" element={<Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginLinkClicked} />} />
-                <Route path="/" element={<Home onUserLogout={handleUserLogout}/>} />   
+                <Route path="/" element={<Home onUserLogout={handleUserLogout}/>} />     
             </Routes>
             {feedback && <Feedback level={feedback.level} message= {feedback.message} onTimeout = {handleFeedbackTimeout} />} {/*si hay feedback dame feedback y lo pinto y te voy a pasar la propiedad level del feedback que es un objeto y la propiedad message del feedback que tmbien es un objeto. (como objeto y el message (como objeto)*/}
         </div>

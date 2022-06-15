@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react'
 import Logger from '../vendor/Loggy'
 // import Context from './Context'
 // import retrieveUser from '../logic/retrieveUser'
-// import StickerList from './StickerList'
 import Profile from './Profile'
 import Monday from './Monday'
 import Tuesday from './Tuesday'
@@ -23,6 +22,10 @@ function Home(props) {
     logger.info('call')
 
     const [view, setView] = useState('home')
+    // const navigate = useNavigate()
+    // const [name, setName] = useState(null)
+    // const { handleFeedback } = useContext(Context)
+
 
     const handleProfileClick = () => setView('profile')
     const handleMiSemanaClick = () => setView('home')
@@ -49,10 +52,10 @@ function Home(props) {
     const handleClickedNextToSunday = () => setView ('sunday')
     const handleClickedBackToSaturday = () => setView ('saturday')
     const handleClickedNextToMonday = () => setView ('monday')
+
     
 
-
-
+    
 
     logger.info('render')
     
@@ -61,9 +64,11 @@ function Home(props) {
         
             {view=== 'home' && <header className="Week__header Container">
                 <div>
-                    <h1 className="Home__h1">HOLA</h1>
+                    <h1 className="Home__h1">Hola </h1>
                 </div>
             </header>}
+
+            {view === 'profile' && <Profile/>}
 
             <main >
                 {view === 'monday' && <Monday onClickedBackToWeek= {handleClickedBackToWeek} onClickedNextToTuesday={handleClickedNextToTuesday}/>}
@@ -73,7 +78,6 @@ function Home(props) {
                 {view === 'friday' && <Friday onClickedNextToThursday= {handleClickedBackToThursday} onClickedNextToSaturday={handleClickedNextToSaturday}/>}
                 {view === 'saturday' && <Saturday onClickedBackToFriday = {handleClickedBackToFriday} onClickedNextToSunday= {handleClickedNextToSunday}/>}
                 {view === 'sunday' && <Sunday onClickedBackToSaturday = {handleClickedBackToSaturday} onClickedNextToMonday= {handleClickedNextToMonday}/>}
-                {view === 'profile' && <Profile />}
                 {view === 'home' && <div className="Week__buttons">
                     <button className="Button Button Week__Day" onClick= {handleClickMondayDay}>Lunes</button>
                     <button className="Button Button Week__Day" onClick= {handleClickTuesdayDay}> Martes</button>
@@ -84,12 +88,10 @@ function Home(props) {
                     <button className="Button Button Week__Day" onClick= {handleClickSundayDay}>Domingo</button>
                 </div>}
             </main>
-
-
+            
             <footer className="Home__footer Container Container--row Container--spread-sides">
                 <button className="Button Button--no-border Home__home" onClick={handleMiSemanaClick}>Mi semana</button>
                 <button className="Button Button--no-border Home__profile" onClick={handleProfileClick}>Perfil</button>
-                
             </footer> 
         </div> : <></>
         

@@ -1,7 +1,10 @@
-//sobre que árbol genealogico de componentes lo quieres aplicar
+// import React from 'react'
+// import { createContext } = React
 
-import {createContext} from 'react'
+import { createContext } from "react"
 
-const Context= createContext ({}) //react creame un contexto con un objeto para guardar varias cosas dentro del objeto
+// react crea un contexto 
+// lo usaremos para guardar cosas en el objeto
+const Context = createContext()
 
 export default Context

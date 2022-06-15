@@ -13,7 +13,7 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat) {
 
     if (password === newPassword) {
         
-        throw new Error('new password and new password repeat are not the same')
+        throw new Error('current password and new password repeat are not the same')
         
     }
 

@@ -2,18 +2,17 @@ import { useContext } from 'react'
 import Context from './Context'
 import updateUserName from '../logic/updateUserName'
 
-function ChangeName(props) {
+function ChangeEmail(props) {
 
     const { handleFeedback } = useContext(Context)
 
     const handleSaveNameClick = event => {
         event.preventDefault()
 
-        const newName = event.target.name.value
-        const newSurname = event.target.surname.value
+        const newEmail = event.target.email.value
 
         try {
-            updateUserName(sessionStorage.token, newName, newSurname, (error) => {
+            updateUserName(sessionStorage.token, newEmail, (error) => {
                 if (error) {
                     handleFeedback({ type: 'error', message: error.message})
                     return
@@ -26,6 +25,7 @@ function ChangeName(props) {
             handleFeedback({ type: 'error', message: error.message})
         }
     }
+
     const handleClickBackToProfile = event => {
         event.preventDefault()
         props.onClickedBackToProfile()
@@ -36,11 +36,10 @@ function ChangeName(props) {
     return <div className="changeName Container">
         <form className="Container mw" onSubmit={handleSaveNameClick}>
             <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
-            <input className="form" type="text" name="name" placeholder=" Nuevo nombre"/>
-            <input className="form" type="text" name="surname" placeholder=" Nuevo apellido"/>
+            <input className="form" type="text" name="email" placeholder="Nuevo email"/>
             <button className="Button__Save">Save</button>
         </form>
     </div>
 }
 
-export default ChangeName
+export default ChangeEmail

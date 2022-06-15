@@ -1,15 +1,15 @@
 import Logger from '../vendor/Loggy'
-import { validateJwt, validateString} from '../validators'
+import { validateEmail, validateJwt, validateEmail} from '../validators'
 import Apium from '../vendor/Apium'
 
 
-function updateUserName(token, newName, newSurname) {
+function updateUserEmail(token, newEmail) {
 
     validateJwt(token)
-    validateString(newName, 'newName')
-    validateString(newSurname, 'newSurname')
+    validateEmail(newEmail)
+   
 
-    const logger = new Logger('updateUserName')
+    const logger = new Logger('updateUserEmail')
 
     logger.info('call')
     const api = new Apium (process.env.REACT_APP_API_URL)
@@ -19,7 +19,7 @@ function updateUserName(token, newName, newSurname) {
         headers : { 
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'  }, 
-        body: JSON.stringify({ name: newName, surname: newSurname })
+        body: JSON.stringify({ email: newEmail })
     })
         .then (({ status, payload}) => {
             logger.info('response')
@@ -41,4 +41,4 @@ function updateUserName(token, newName, newSurname) {
         })
 }
 
-export default updateUserName
+export default updateUserEmail
