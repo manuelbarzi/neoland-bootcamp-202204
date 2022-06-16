@@ -16,11 +16,14 @@ const handleFormSubmit = event => {
     event.preventDefault()
 
     const name = event.target.name.value
+    const surname = event.target.surname.value
     const username = event.target.username.value
+    const email = event.target.email.value
+    const phone = event.target.phone.value
     const password = event.target.password.value
-
+    
     try {
-        registerUser(name, username, password, error => {
+        registerUser(name, surname, username, email, phone, password, error => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 

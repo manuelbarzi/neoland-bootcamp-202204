@@ -38,7 +38,6 @@ function App() {
         handleLoginNavigation()
     }
 
-    //const handleFeedback = message => confirm(message)
     const handleFeedback = feedback => setFeedback(feedback)
 
     const handleFeedbackTimeout = () => setFeedback(null)

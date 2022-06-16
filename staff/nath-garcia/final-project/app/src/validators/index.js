@@ -57,6 +57,8 @@ function validatePassword(password, explain = 'password') {
         throw new FormatError(`${explain} length is lower than 8`)
 }
 
+
+
 function validateUsername(username) {
     validateStringNotEmptyNoSpaces(username, 'username')
 

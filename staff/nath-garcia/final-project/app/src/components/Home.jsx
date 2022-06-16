@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext} from 'react'
-import Logger from '../vendor/Loggy' 
+import { useState, useEffect, useContext } from 'react'
+import Logger from '../vendor/Loggy'
 import Context from '../components/Context'
 import retrieveUser from '../logic/retrieveUser'
 import Profile from '../components/Profile'
@@ -26,33 +26,32 @@ function Home({ onUserLogout }) {
         onUserLogout()
     }
 
-    useEffect(() => {
-        logger.info('componentDidMount')
-
-        if (isJwtValid(sessionStorage.token))
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
-
-                    handleLogout()
-
-                    return
-                }
-
-                // setState({ name: user.name, view: 'list' })
-                setName(user.name)
-                setView('list')
-            })
-        else navigate('/login')
-    }, [])
+    /*  useEffect(() => {
+          logger.info('componentDidMount')
+  
+          if (isJwtValid(sessionStorage.token))
+              retrieveUser(sessionStorage.token, (error, user) => {
+                  if (error) {
+                      handleFeedback({ level: 'error', message: error.message })
+  
+                      handleLogout()
+  
+                      return
+                  }
+  
+                  setName(user.name)
+                  setView('list')
+              })
+          else navigate('/login')
+      }, [])*/
 
     const handleAddClick = () => {
-        
+
     }
 
     const handleProfileClick = () => setView('profile')
 
-    const handleHomeClick = () => setView('list')
+    const handleHomeClick = () => setView('home')
 
     logger.info('render')
 
@@ -67,6 +66,9 @@ function Home({ onUserLogout }) {
             </header>
 
             <main className="Home__body Container">
+                <div className="Box">
+                    <button className="Plus">+</button>
+                </div>
                 {view === 'profile' && <Profile />}
             </main>
 

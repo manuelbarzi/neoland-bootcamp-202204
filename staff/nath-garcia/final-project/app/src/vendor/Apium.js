@@ -2,7 +2,7 @@ console.log('%cApium v1.2', 'font-size: 36px; background: linear-gradient(to rig
 
 /**
  * API "Universal Messenger" (APIum)
- * 
+ *
  * Processes HTTP requests/responses (http client)
  */
 class Apium {
@@ -21,7 +21,7 @@ class Apium {
      * @param {string} method The HTTP method (GET, POST, PATCH, PUT, DELETE, ...)
      * @param {string} urlOrPath The address of the server to connect to
      * @param {Object} options The required HTTP headers or body for the specific call
-     * 
+     *  
      * Example:
      * 
      * {
@@ -30,10 +30,10 @@ class Apium {
      *           'Content-Type': ...
      *       },
      *       body: ...
-     *  }
+     *   }
      * @param {function} callback  The callback function that attends the response's result ({ status, payload})
      */
-     call(method, urlOrPath, options, callback) {
+    call(method, urlOrPath, options, callback) {
         if (callback) {
             const xhr = new XMLHttpRequest
 

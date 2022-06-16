@@ -1,35 +1,52 @@
 import Logger from '../vendor/Loggy'
+import { validateUsername, validatePassword, validateString } from '../validators'
+import Apium from '../vendor/Apium'
 
-function registerUser(name, surname, username, email, phone, password, callback) {
+function registerUser(name, surname, username, email, phone, password) {
+
+    validateString(name)
+    validateString(surname)
+    validateUsername(username)
+    validateString(email)
+    validatePassword(password, 'password')
+
+
     const logger = new Logger('RegisterUser')
 
     logger.info('call')
 
-    const xhr = new XMLHttpRequest
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
-    xhr.addEventListener('load', event => {
-        const status = event.target.status
+    logger.info('request')
 
-        if (status === 201)
-        callback(null)
-
-        else if (status >= 400 && status < 500) {
-            const json = event.target.responseText
-
-            const data = JSON.parse(json)
-
-            callback(new Error(data.error))
-        } else callback(new Error('server error'))
+    return api.post('users', {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, surname, username, email, phone, password })
     })
 
-    xhr.open('POST', `${process.env.REACT_APP_API_URL}/users`)
+        .then(({ status, payload }) => {
 
-    xhr.setRequestHeader('Content-Type', 'application/json')
+            if (status === 201) {
+                return null
 
-    const data = { name, surname, username, email, phone, password }
-    const json = JSON.stringify(data)
+            } else if (status >= 400 && status < 500) {
+                logger.warn('response - client error status ' + status)
 
-    xhr.send(json)
+                const data = JSON.parse(payload)
+
+                throw new Error(data.error)
+            } else {
+                logger.error('response - server error status ' + status)
+
+                throw new Error('server error')
+            }
+        })
+
 }
+
+
+
 
 export default registerUser

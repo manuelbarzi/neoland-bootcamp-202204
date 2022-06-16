@@ -1,7 +1,7 @@
 const { User } = require('../models')
 const { AuthError } = require('../errors')
 const { validateUsername, validatePassword } = require('../validators')
-
+debugger
 function authenticateUser(username, password) {
     validateUsername(username)
     validatePassword(password)

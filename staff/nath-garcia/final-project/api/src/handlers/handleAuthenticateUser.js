@@ -2,9 +2,9 @@ const  { authenticateUser } = require ('../logic')
 const { generateToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
-    try {
+    try { 
         const { body: { username, password } } = req
-
+        debugger  
         authenticateUser(username, password)
         .then(userId => {
             const token = generateToken(userId)

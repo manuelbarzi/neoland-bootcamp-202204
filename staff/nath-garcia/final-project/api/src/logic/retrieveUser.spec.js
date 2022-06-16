@@ -18,7 +18,8 @@ describe('retrieveUser', () => {
                 surname: 'Pig',
                 username: 'lapeppa',
                 email: 'lapeppa@mail.com',
-                phone: 643643643, password: '01020300'
+                phone: '643643643', 
+                password: '01020300'
             })
 
             return user.save()
@@ -32,7 +33,7 @@ describe('retrieveUser', () => {
                     expect(user.surname).to.equal('Pig')
                     expect(user.username).to.equal('lapeppa')
                     expect(user.email).to.equal('lapeppa@mail.com')
-                    expect(user.phone).to.equal(643643643)
+                    expect(user.phone).to.equal('643643643')
                     expect(user.password).to.be.undefined
                     expect(user.id).to.be.undefined
                 })

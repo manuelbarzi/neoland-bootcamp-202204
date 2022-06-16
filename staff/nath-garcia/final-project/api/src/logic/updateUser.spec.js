@@ -18,7 +18,7 @@ describe('updateUser', () => {
                 surname: 'Pig',
                 username: 'lapeppa',
                 email: 'lapeppa@mail.com',
-                phone: 643643643,
+                phone: '643643643',
                 password: '01020300'
             })
 
@@ -26,7 +26,7 @@ describe('updateUser', () => {
         })
 
         it('succeeds on correct user data', () =>
-            updateUser(user.id, 'Peppa', 'Pig', 'lapeppa', 'lapeppa@mail.com', 643643000, '01020300')
+            updateUser(user.id, 'Peppa', 'Pig', 'lapeppa', 'lapeppa@mail.com', '643643000', '01020300')
                 .then(result => {
                     expect(result).to.be.undefined
 
@@ -37,7 +37,7 @@ describe('updateUser', () => {
                     expect(user.surname).to.equal('Pig')
                     expect(user.username).to.equal('lapeppa')
                     expect(user.email).to.equal('lapeppa@mail.com')
-                    expect(user.phone).to.equal(643643000)
+                    expect(user.phone).to.equal('643643000')
                     expect(user.password).to.equal('01020300')
                 })
         )
@@ -45,7 +45,7 @@ describe('updateUser', () => {
         it('fails on incorrect user id', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateUser(wrongId, 'Peppa', 'Pig', 'lapeppa', 'lapeppa@mail.com', 643643000, '01020300')
+            return updateUser(wrongId, 'Peppa', 'Pig', 'lapeppa', 'lapeppa@mail.com', '643643000', '01020300')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })
@@ -60,7 +60,7 @@ describe('updateUser', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return updateUser(unexistingUserId, 'Peppa', 'Pig', 'lapeppa', 'lapeppa@mail.com', 643643000, '01020300')
+            return updateUser(unexistingUserId, 'Peppa', 'Pig', 'lapeppa', 'lapeppa@mail.com', '643643000', '01020300')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })

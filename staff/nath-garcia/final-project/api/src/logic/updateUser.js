@@ -8,7 +8,7 @@ function updateUser(userId, name, surname, username, email, phone, password) {
     if (surname != null) validateStringNotEmptyNoSpaces(surname, 'surname')
     if (username != null) validateUsername(username)
     if (email != null) validateEmail(email)
-    if (phone != null) validateNumber(phone)
+    if (phone != null) validateStringNotEmptyNoSpaces(phone)
     if (password != null) validatePassword(password)
 
     return User.updateOne({ _id: userId }, { $set: { name, surname, username, email, phone, password } })

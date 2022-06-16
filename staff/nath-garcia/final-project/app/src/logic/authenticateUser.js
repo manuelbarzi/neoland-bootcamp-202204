@@ -3,11 +3,10 @@ import { validateUsername, validatePassword } from '../validators'
 import Apium from '../vendor/Apium'
 
 function authenticateUser(username, password) {
-    debugger
     const logger = new Logger('authenticateUser')
 
     logger.info('call')
-
+    
     validateUsername(username)
     validatePassword(password)
 
@@ -17,7 +16,7 @@ function authenticateUser(username, password) {
 
     return api.post('users/auth', {
         headers: {
-            'content-type': 'aplication/json'
+            'Content-Type': 'application/json'
         }, 
         body: JSON.stringify({ username, password })
     })
