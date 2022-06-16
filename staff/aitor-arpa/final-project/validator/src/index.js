@@ -91,6 +91,10 @@ function validateEmail(email, explain = 'email') {
     if (!EMAIL_REGEX.test(email))
         throw new FormatError(`${explain} is not an email`)
 }
+function validateObjectId(object, explain = 'object') {
+    if(!object instanceof Object) 
+    throw new TypeError(`${explain} is not an Object`)
+}
 
 module.exports = {
     validateString,
@@ -104,5 +108,6 @@ module.exports = {
     validateDate,
     validateNumber,
     validatePositiveInteger,
-    validateEmail
+    validateEmail,
+    validateObjectId    
 }

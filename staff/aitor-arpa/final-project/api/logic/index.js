@@ -3,6 +3,7 @@ const authenticateUser = require('./authenticateUser')
 const retrieveUser = require('./retrieveUser')
 const updateUser = require('./updateUser')
 const unregisterUser = require('./unregisterUser')
+const addJob = require('./addJob')
 
 
 module.exports = {
@@ -11,6 +12,9 @@ module.exports = {
     retrieveUser,
     updateUser,
     unregisterUser,
+    addJob
+    
+    
     
 
 }

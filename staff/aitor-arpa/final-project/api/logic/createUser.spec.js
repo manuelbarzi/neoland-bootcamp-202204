@@ -3,11 +3,11 @@ const { User } = require('../models')
 const { ConflictError, AuthError } = require('errors')
 const createUser = require('./createUser')
 const { expect } = require('chai')
-const { user } = require('../models/schemas')
+
 
 
 describe('createUser', () => {
-    debugger
+    
     let usera
     let userw
 
@@ -16,7 +16,6 @@ describe('createUser', () => {
     beforeEach(() => {
         return User.deleteMany()
             .then(() => {
-
                 usera = new User({ name: 'Miguel', username: 'Mingu', password: '123123123', role: 'admin', DNI: '123123123s' })
                 return usera.save()
 
@@ -47,7 +46,7 @@ describe('createUser', () => {
                 expect(error.message).to.equal(`user duplicate`) // devuevle el mensaje 
             })
     }) */
-    it('fails when user is not admit', () => {
+  /*   it('fails when user is not admit', () => {
         userw = new User({ name: 'PACO', username: 'PACO', password: '123123123', role: 'worker', DNI: '123123123s' })
         return userw.save()
             .then(() => {
@@ -57,7 +56,7 @@ describe('createUser', () => {
                 expect(error).to.be.instanceOf(AuthError)
                 expect(error.message).to.equal(`Javi conctat for you Manager`) // devuevle el mensaje 
             })
-    })
+    }) */
 
     afterEach(() => User.deleteMany())
 

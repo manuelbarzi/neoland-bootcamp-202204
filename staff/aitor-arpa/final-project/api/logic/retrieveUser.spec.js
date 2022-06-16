@@ -12,7 +12,7 @@ describe('Retrive User', () => {
     describe('when user already exists', () => {
         let user
         
-        debugger
+        
         it('succeeds on correct credentials', () => {
 
             user = new User({ name: 'Wendy Pan', username: 'wendypan', password: '123123123', rol: 'worker' })

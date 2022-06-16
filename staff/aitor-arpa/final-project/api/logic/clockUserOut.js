@@ -1,13 +1,30 @@
-const { AuthError, ConflictError } = require('errors')
+const { ConflictError, NotFoundError } = require('errors')
 const { User, Clock } = require('../models')
+const { validateObjectId } = require('validator')
 
-function ClocUserOut(clockid, user, timeout = new Date) {
+function clockUserOut(userId, clockId) {
+    validateObjectId(userId)
+    validateObjectId(clockId)
 
-    return User.findOne({ _id: user })
-        .then(userfind => {
-            if (userfind === null)
-                return new AuthError(`User not exist`)
-            return Clock.updateOne({ _id: clockid }, { $set: { timeout } })
+    return Promise.all([User.findById(userId), Clock.findById(clockId)])// promise all with search clock
+        .then(([user, clock]) => {
+            if (!user)
+                return new NotFoundError(`${userId} not found`)
+            if (!clock)
+                return new NotFoundError(`${clockId} not found`)
+            /*   if (clock.user.toSrting() !== userId)
+                  throw new ConflictError(`${clockId}this does not belong to ${userId}`) */
+            if (!clock.timein)
+                throw new ConflictError(`${clockId} need clocked in`)
+            if (clock.timein && !clock.timeout && clock.user.toString() === userId)
+                return Clock.updateOne({ _id: clockId }, { $set: { timeout: new Date } })
+            if (!clock.timein)
+                throw new ConflictError(`${clockId} need clocked in`)
+            if (clock.timein && clock.timeout)
+                throw new ConflictError(`${clockId} clocked finsh register`)
+            if (clock.timein && !clock.timeout)
+                return Clock.updateOne({ _id: clockId }, { $set: { timeout: new Date } })
+
         })
 
         .then(clock => {
@@ -15,5 +32,6 @@ function ClocUserOut(clockid, user, timeout = new Date) {
                 return new ConflictError('exit cant registrer')
             return clock
         })
+        .catch(() => { })
 }
-module.exports = ClocUserOut
+module.exports = clockUserOut

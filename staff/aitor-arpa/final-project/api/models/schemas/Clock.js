@@ -13,12 +13,11 @@ const clock = new Schema({
         ref: 'job'
     },
     timein:{
-        type: Date
-        
+        type: Date,
+        default: Date.now
     },
     timeout:{
         type: Date
-        
     }
 })
 module.exports = clock

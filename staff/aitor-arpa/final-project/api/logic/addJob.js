@@ -1,7 +1,8 @@
 const { Job , User} = require('../models')
 const { validateString, validateStringNotEmptyOrBlank } = require('validator')
+const { AuthError } = require('errors')
 
-function addWork(adminId,title,description,address,wokers)  {
+function addJob(adminId,title,description,address,wokers)  {
     validateString('title')
     validateString('description')
     validateString('addres')
@@ -9,17 +10,22 @@ function addWork(adminId,title,description,address,wokers)  {
     validateStringNotEmptyOrBlank('description')
     validateStringNotEmptyOrBlank('addres')
 
-    return User.findOne({ id: adminId })
+    return User.findOne({ _id: adminId })
     .then(userfind => {
-        if (userfind.role != 'admin')
-            throw new AuthError(`${adminId} conctat for you Manager`)
+        debugger
+        if (userfind.role === 'worker'|| userfind === undefined)
+            throw new AuthError(`conctat for you Manager`)
         return Job.create({ title, description, address, wokers })
     })
     .then(job => {
         return job
     })
+    .catch(error =>{
+        return error
+    })
+
         
 
 }
 
-module.exports = addWork
+module.exports = addJob

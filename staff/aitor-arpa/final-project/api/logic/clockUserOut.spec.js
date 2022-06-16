@@ -1,10 +1,10 @@
 const { expect } = require('chai')
 const { connect, disconnect } = require('mongoose')
 const { User, Clock, } = require('../models')
-const ClocUserOut = require('./clockUserOut')
-const { AuthError } = require('errors')
+const clocUserOut = require('./clockUserOut')
+const { AuthError, NotFoundError } = require('errors')
 
-describe('ClocUserOut', () => {
+describe('clocUserOut', () => {
 
     before(() => connect('mongodb://localhost:27017/test')) // conexion a la base de datos 
     let userWork
@@ -12,38 +12,41 @@ describe('ClocUserOut', () => {
         return Promise.all([User.deleteMany(), Clock.deleteMany()])
             .then(() => {
                 data = new Date
-                clockout = new Clock({ timein: data })
+                invalid = new Clock({ timein: data })
                 userWork = new User({ name: 'Miguel', username: 'Mingu', password: '123123123', role: 'worker', DNI: '123123123s' })
-                return Promise.all([userWork.save(), clockout.save()])
+                return Promise.all([userWork.save(), invalid.save()])
+
+            })
+            .then(([user, clock]) => {
+                clockgood = new Clock({ user: user, timein: new Date })
+                return Promise.all([clockgood.save(), clock])
 
             })
     })
 
     it('sucees on Worker exist', () => {
-        debugger
-        return ClocUserOut(clockout.id, userWork.id)
+      
+        return clocUserOut(userWork.id, clockgood.id)
 
-            .then(registertimein => {
-                expect(registertimein.matchedCount).to.be.equal(1)
-                expect(registertimein).to.instanceOf(Object)
+            .then(timeout => {
+                expect(timeout.matchedCount).to.be.equal(1)
+                expect(timeout).to.instanceOf(Object)
             })
-
-
-
 
     })
 
     it('error on Worker not  exist', () => {
 
-        return ClocUserOut(clockout.id, '232123123123')
+        return clocUserOut(invalid.id,clockgood.id)
 
-            .then(registertimein => {
-                expect(registertimein.message).to.be.equals(`User not exist`)
-                expect(registertimein).to.instanceOf(AuthError)
+            .then(timeout => {
+                expect(timeout).to.instanceOf(NotFoundError)
+                expect(timeout.message).to.be.equal(`${invalid.id} not found`)
             })
 
 
 
 
     })
+    after(() => disconnect())
 })

@@ -15,12 +15,12 @@ function createUser(adminId, name, username, password, role, nid, email, date) {
         .then(userfind => {        
             if (userfind.role != 'admin')
                 throw new AuthError(`${username} conctat for you Manager`)
-            return fo = User.create({ name, username, password, role, nid, email, date }) 
+            return User.create({ name, username, password, role, nid, email, date }) 
         })
       
         .catch(error => {
          if (error.code === 11000) 
-            return new ConflictError('Username or email duplicate ')
+            throw new ConflictError('Username or email duplicate ')
          
        }) 
 

@@ -1,5 +1,4 @@
-
-const { Schema } = require('mongoose')
+const { Schema, Types: { ObjectId } } = require('mongoose')
 const user = require('./User')
 
 const Job = new Schema({
@@ -20,8 +19,7 @@ duration: {
     
 },
     
-workers: ([user])
-
+workers: [ObjectId]
 })
 
 module.exports = Job
