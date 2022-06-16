@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, Routes, Route } from 'react-router-dom'
-import { isJwtValid } from '../validators'
-import Logger from '../vendor/Logger.js'
+import { isJwtValid } from 'validators'
+//import Logger from 'loggy'
 import Context from './Context'
 import Feedback from './Feedback'
 import Welcome from './Welcome'
@@ -13,8 +13,8 @@ import '../styles/App.sass'
 
 function App () {
 
-    const logger = new Logger('App')
-    logger.info('call')
+    //const logger = new Logger('App')
+    //logger.info('call')
 
     // explicacion a las 11:50am viernes 13/05
     const [feedback, setFeedback] = useState(null) // el feedback es un objeto que tiene propiedades de tipo y mensajes
@@ -47,7 +47,6 @@ function App () {
     const handleFeedbackTimeout = () => setFeedback(null)
     const handleOnDeletedUser = () => navigate('/')
 
-    logger.info('render')
 
     // Encierra todo esto en un context provider, el App va a proveer del contexto a los hijos, y cualquiera podra usarlo
     // le paso value al contexto

@@ -1,5 +1,5 @@
-import { validateStringNotEmptyNoSpaces, validateNumber } from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateStringNotEmptyNoSpaces, validateNumber } from 'validators'
+import Apicaller from 'apicaller'
 
 
 function addPointToActivity(activityId, position){

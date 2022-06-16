@@ -1,5 +1,5 @@
-import { validateString, validateEmail, validatePassword } from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateString, validateEmail, validatePassword } from 'validators'
+import Apicaller from 'apicaller'
 
 function registerUser(name, username, password, email, callback) {
 

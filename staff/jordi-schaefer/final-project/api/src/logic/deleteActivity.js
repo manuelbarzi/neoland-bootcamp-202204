@@ -1,6 +1,6 @@
 const { Activity } = require ('../models')
-const { NotFoundError, ConflictError } = require ('../errors')
-const { validateStringNotEmptyNoSpaces } = require('../validators')
+const { NotFoundError, ConflictError } = require ('errors')
+const { validateStringNotEmptyNoSpaces } = require('validators')
 
 
 function deleteActivity(userId, activityId) {

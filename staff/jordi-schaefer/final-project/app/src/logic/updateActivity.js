@@ -1,5 +1,5 @@
-import { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString } from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString } from 'validators'
+import Apicaller from 'apicaller'
 
 
 function updateActivity(activityId, title, text='', audience){

@@ -1,5 +1,5 @@
 const { User } = require('../models')
-const { NotFoundError, AuthError } = require('../errors')
+const { NotFoundError, AuthError } = require('errors')
 
 function deleteUser(userId, password) {
     // TODO validate input args

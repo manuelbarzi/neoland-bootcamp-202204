@@ -1,8 +1,7 @@
-import { validateJwt} from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateJwt} from 'validators'
+import Apicaller from 'apicaller'
 
 function retrieveActivities(token, callback) {  // recuperar
-    
     validateJwt(token)
 
     const api = new Apicaller(process.env.REACT_APP_API_URL)

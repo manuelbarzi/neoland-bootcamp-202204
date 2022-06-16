@@ -1,8 +1,8 @@
 const { User, Activity, Comment } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validateString } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces, validateString } = require('validators/src')
 
-function addComment(userId, activityId, text) {
+function saveComment(userId, activityId, text) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
     validateStringNotEmptyNoSpaces(activityId, 'activity id')
     if (text != null)  validateString(text, 'text')
@@ -26,4 +26,4 @@ function addComment(userId, activityId, text) {
         })
 }
 
-module.exports = addComment
+module.exports = saveComment

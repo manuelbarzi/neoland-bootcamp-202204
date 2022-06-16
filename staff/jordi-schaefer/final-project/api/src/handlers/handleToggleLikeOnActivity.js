@@ -5,10 +5,10 @@ module.exports = (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        const { params: {noteId} } = req
+        const { params: {activityId} } = req
         
-        toggleLikeOnActivity(userId, noteId)
-            .then(() => res.status(204).send())  // devuelvo result para ver quehay
+        toggleLikeOnActivity(userId, activityId)
+            .then(() => res.status(204).send()) 
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

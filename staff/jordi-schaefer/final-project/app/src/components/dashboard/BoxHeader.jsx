@@ -1,16 +1,22 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Context from '../Context'
 import deleteActivity from '../../logic/deleteActivity'
+import toggleLikeActivity from '../../logic/toggleLikeActivity'
 import MapView from './MapView'
 import '../../styles/BoxHeader.sass'
 
 function BoxHeader (props) {
     
     const { handleFeedback } = useContext(Context)
-    const { activity, setDelete, onRemove } = props
+    const { activity, setDelete, onRemove, setTimestamp } = props
+    const [ likes, setLikes ] = useState(null)
     
     var options = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  };
     const date = new Date(props.activity.date)
+
+    useEffect(() => {
+        setLikes(props.activity.likes.length)
+    }, []) 
 
 
     const handleDeleteClick = async() => {
@@ -26,6 +32,21 @@ function BoxHeader (props) {
                 handleFeedback({ type: 'error', message: error.message})
             }
         }
+    }
+
+    const handleLikeClick = async() => {
+        try {
+            await toggleLikeActivity(sessionStorage.token, activity.id)
+
+            handleFeedback({ type: 'success', message: 'Liked!'})
+            setTimestamp(Date.now())
+        } catch(error) {
+            handleFeedback({ type: 'error', message: error.message})
+        }
+    }
+
+    const handleCommentClick = () => {
+        props.onCommentClicked(activity.id)
     }
 
     
@@ -46,8 +67,13 @@ function BoxHeader (props) {
         </div> }
 
         { !setDelete && <div className='Box__footer mw'>
-            <button className='Button__footer Button__borderR'>like</button>
-            <button className='Button__footer'>comment</button>
+            <div className='Box__buttonFooter Button__borderR'>
+                { likes>0 && <h2 className='Likes__number'>{likes}</h2> }
+                <button className='Button__footer material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
+            </div>
+            <div className='Box__buttonFooter'>
+            <button className='Button__footer material-symbols-outlined' onClick={handleCommentClick}>chat</button>
+            </div>
         </div> }
 
     </div>

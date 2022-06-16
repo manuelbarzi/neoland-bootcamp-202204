@@ -5,17 +5,19 @@ import BoxHeader from './BoxHeader'
 // sin useEffect tambien funciona
 // useEffect maneja los ciclos de vida de comando
 
-function ActivityList() { // timestamp son las props desestructuradas
+function ActivityList(props) { // timestamp son las props desestructuradas
 
     const { handleFeedback } = useContext(Context)
 
     const [activities, setActivities] = useState(null)
+    const [timestamp, setTimestamp] = useState(null)
 
 
     // si se monta el componente, ejecuta esto
     useEffect(() => {
         loadActivities()
-    }, []) // si pongo un array vacio ejecutara esto la primera vez, cuando carga el componente
+        console.log('useEffect')
+    }, [timestamp]) // si pongo un array vacio ejecutara esto la primera vez, cuando carga el componente
     // al ponerle las props, tambien ejecutara cuando cambien las props
 
 
@@ -26,8 +28,7 @@ function ActivityList() { // timestamp son las props desestructuradas
                     handleFeedback({ type: 'error', message: error.message})
                     return
                 }
-                setActivities(activities)
-                
+                setActivities(activities) 
             })
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
@@ -38,7 +39,7 @@ function ActivityList() { // timestamp son las props desestructuradas
     return activities &&
         <ul className = "List__activities mw Overflow" >
             {activities.map(activitie => <li className="Li__activity" key={activitie.id} >  
-                <BoxHeader activity={activitie} />
+                <BoxHeader activity={activitie} setTimestamp={setTimestamp} onCommentClicked={props.onCommentClicked}/>
             </li>)}
         </ul>
 }

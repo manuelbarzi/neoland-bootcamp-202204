@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import ChangeView from './ChangeView';
+import ChangeView from './ChangeView'
 import '../../styles/List.sass'
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';

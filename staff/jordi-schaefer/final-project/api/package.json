@@ -1,5 +1,5 @@
 {
-  "name": "notes",
+  "name": "project",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -21,9 +21,11 @@
   "dependencies": {
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
+    "errors": "file:../errors",
     "express": "^4.18.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.4",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^6.3.0",
+    "validators": "file:../validators"
   }
 }

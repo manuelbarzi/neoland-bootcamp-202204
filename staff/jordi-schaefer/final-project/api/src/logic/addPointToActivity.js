@@ -1,6 +1,6 @@
 const { Activity, Point } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validateNumber } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces, validateNumber } = require('validators')
 
 function addPointToActivity(activityId, lat, lng, alt) {
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')

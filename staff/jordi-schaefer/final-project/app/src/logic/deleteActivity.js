@@ -1,5 +1,5 @@
-import { validateJwt} from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateJwt} from 'validators'
+import Apicaller from 'apicaller'
 
 function deleteActivity(token, activityId) {
 

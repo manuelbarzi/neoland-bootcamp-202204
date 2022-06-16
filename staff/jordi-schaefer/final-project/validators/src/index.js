@@ -1,6 +1,7 @@
-const { FormatError } = require('../errors')
+const { FormatError } = require('errors')
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+
 
 function validateString(string, explain = 'string') {
     if (typeof string !== 'string') throw new TypeError(`${explain} is not a string`)
@@ -28,6 +29,23 @@ function validateJwt(token) {
     const parts = token.split('.')
 
     if (parts.length !== 3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
+
+    const [,b64Payload] = parts
+    const jsonPayload = atob(b64Payload)
+    const payload = JSON.parse(jsonPayload) 
+    const { exp } = payload
+    const now = Math.round(Date.now() / 1000)
+
+    if (now > exp) throw new AuthError('token expired')
+}
+
+function isJwtValid(token) {
+    try {
+        validateJwt(token)
+        return true
+    } catch(error) {
+        return false
+    }
 }
 
 function validatePassword(password, explain = 'password') {
@@ -81,5 +99,6 @@ module.exports = {
     validateDate,
     validateNumber,
     validatePositiveInteger,
-    validateEmail
+    validateEmail,
+    isJwtValid
 }

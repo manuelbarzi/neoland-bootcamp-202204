@@ -1,6 +1,6 @@
 const { User } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces ,validateStringNotEmptyOrBlank, validateEmail, validatePassword } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces ,validateStringNotEmptyOrBlank, validateEmail, validatePassword } = require('validators')
 
 
 function updateUserData(userId, name, password, email) {

@@ -1,5 +1,5 @@
-import { validateEmail, validateJwt } from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateEmail, validateJwt } from 'validators'
+import Apicaller from 'apicaller'
 
 function updateUserEmail (token, email, callback)  {
 

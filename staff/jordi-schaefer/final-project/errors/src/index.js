@@ -1,4 +1,17 @@
-const createCustomError = require('../utils/createCustomError')
+//const createCustomError = require('utils')
+
+function createCustomError(name) {
+    const customError = class extends Error {
+        constructor(message) {
+            super(message)
+        }
+    }
+
+    customError.prototype.name = name
+
+    return customError
+}
+
 
 const FormatError = createCustomError('FormatError')
 const AuthError = createCustomError('AuthError')
@@ -11,3 +24,4 @@ module.exports = {
     ConflictError,
     NotFoundError
 }
+

@@ -1,6 +1,6 @@
 const { Activity } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString } = require('validators')
 
 function saveActivity(activityId, title, text='', audience) {
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')

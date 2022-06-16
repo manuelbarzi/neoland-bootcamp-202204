@@ -1,5 +1,5 @@
 const { User } = require('../models')
-const { AuthError } = require('../errors')
+const { AuthError } = require('errors')
 
 function authenticateUser(username, password) {
     // TODO validate input args

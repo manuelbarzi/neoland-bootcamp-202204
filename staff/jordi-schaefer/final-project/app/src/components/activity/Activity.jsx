@@ -2,7 +2,7 @@ import { useState, useEffect, useContext, componentDidMount, componentWillUnmoun
 import Context from '../Context'
 import '../../styles/List.sass'
 import { useNavigate } from 'react-router-dom'
-import { isJwtValid } from '../../validators'
+import { isJwtValid } from 'validators'
 import ActivityStart from './ActivityStart'
 import ActivityRecord from './ActivityRecord'
 import ActivityFinish from './ActivityFinish'

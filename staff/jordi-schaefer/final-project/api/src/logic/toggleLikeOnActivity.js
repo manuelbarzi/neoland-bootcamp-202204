@@ -1,6 +1,6 @@
 const { User, Activity } = require('../models')
-const { NotFoundError } = require('../errors')
-const { validateStringNotEmptyNoSpaces } = require('../validators')
+const { NotFoundError } = require('errors')
+const { validateStringNotEmptyNoSpaces } = require('validators')
 
 function toggleLikeOnActivity(userId, activityId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
@@ -14,13 +14,13 @@ function toggleLikeOnActivity(userId, activityId) {
         })
         .then(activity => {
             if (!activity) throw new NotFoundError(`Activity with id ${activityId} does not exist`)
-
-            const index = activity.likes.findIndex(like => like === userId)
+            
+            const index = activity.likes.findIndex(like => like._id.toString() === userId)
             if (index < 0) {
-                activity.like.push(userId)
+                activity.likes.push(userId)
             }
             else
-                activity.like.splice(index, 1)
+                activity.likes.splice(index, 1)
 
             return activity.save()
         })

@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { isJwtValid } from '../../validators'
+import { isJwtValid } from 'validators'
 import Context from '../Context'
 import ActivitiesList from './ActivitiesList'
+import Comment from './Comment'
 import Settings from '../settings/Settings'
 import ChangeName from '../settings/ChangeName'
 import ChangePassword from '../settings/ChangePassword'
@@ -16,6 +17,7 @@ function Home(props) {
  
     const [view, setView] = useState(null)
     const [back, setBack] = useState(null)
+    const [activityId, setActivityId] = useState(null)
     const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
     const navigate = useNavigate()
 
@@ -59,7 +61,7 @@ function Home(props) {
     const handleDataChanged = () => handleBackClick()
 
     const handleBackClick = () => {
-        if (view === 'Settings') {
+        if (view === 'Settings' || view === 'Comment') {
             setView('Profile') 
             setBack(null)
         }
@@ -67,13 +69,19 @@ function Home(props) {
             setView('Settings'); setBack('Profile')
         }
     }
+
+    const handleCommentClicked = (activityId) => {
+        setView('Comment')
+        setBack('Back')
+        setActivityId(activityId)
+    }
     
 
 
     return  isJwtValid(sessionStorage.token) ?
     <div className="Container Overflow mw mh">
         <header className="Header">
-            {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User'].includes(view)) 
+            {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comment'].includes(view)) 
                 && <button className="Button__back" onClick={handleBackClick}>{`< `+back}</button>}
             <h1 className="Center">{view}</h1>
             {view === 'Profile' && <button className="Button__set material-symbols-outlined" onClick={handleSettingClick}>Settings</button>}
@@ -81,8 +89,8 @@ function Home(props) {
 
 
         <main className="Home__body mw mh Overflow">
-            {view === 'Home' && <ActivitiesList />}
-            {view === 'Profile' && <ActivitiesList />}
+            {view === 'Home' && <ActivitiesList onCommentClicked={handleCommentClicked}/>}
+            {view === 'Profile' && <ActivitiesList onCommentClicked={handleCommentClicked}/>}
 
             {view === 'Settings' && <Settings onChangeNameClicked={handleChangeNameClick}
                 onChangePasswordClicked={handleChangePasswordClick}
@@ -96,6 +104,8 @@ function Home(props) {
             {view === 'Change Email' && <ChangeEmail onDataChanged={handleDataChanged}/>}
             {view === 'Delete User' && <DeleteUser onDeletedUser={props.onDeletedUser}/>} 
             {view === 'Delete Activity' && <DeleteActivity />}
+
+            {view === 'Comment' && <Comment activityId={activityId}/>}
 
         </main>
 

@@ -1,5 +1,5 @@
-import { validateJwt, validateString, validateNumber } from '../validators'
-import Apicaller from '../vendor/Apicaller'
+import { validateJwt, validateString, validateNumber } from 'validators'
+import Apicaller from 'apicaller'
 
 
 function createActivity(token, sport, position){

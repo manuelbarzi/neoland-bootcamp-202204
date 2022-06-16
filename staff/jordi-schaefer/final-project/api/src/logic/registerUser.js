@@ -1,6 +1,6 @@
 const { User } = require('../models')
-const { ConflictError } = require('../errors')
-const { validateStringNotEmptyOrBlank, validateUsername, validatePassword, validateEmail} = require('../validators')
+const { ConflictError } = require('errors')
+const { validateStringNotEmptyOrBlank, validateUsername, validatePassword, validateEmail} = require('validators')
 
 function registerUser(name, username, password, email) {
     validateStringNotEmptyOrBlank(name, 'name')
