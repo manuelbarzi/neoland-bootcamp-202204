@@ -3,11 +3,11 @@ require('dotenv').config()
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Product} = require("../models")
 const { NotFoundError } = require('../errors')
-const retrieveProduct = require('./retrieveProduct')
+const retrieveProductsOfType = require('./retrieveProductsOfType')
 const { expect } = require('chai')
 
 
-describe ('retrieveProduct' , () => {
+describe ('retrieveProductsOfType' , () => {
     before (() => connect(process.env.TEST_MONGODB_URL))
 
     beforeEach(() => Promise.all([User.deleteMany(), Product.deleteMany()]))
@@ -24,32 +24,47 @@ describe ('retrieveProduct' , () => {
         afterEach(() => Promise.all([User.deleteMany()]))
 
 
-        describe ('when user already has products', () =>{
-            let product, product2, product3
+        describe ('when there are products', () =>{
+            let allCreatedProducts
+            
             
             beforeEach (() => {
                 
-                product = new Product({ title: 'baguette', type:0 })
-                product2 = new Product({ title: 'rustico', type: 1 })
-                product3 = new Product({ title: 'ensaimada', type: 2 })
-
-                return Promise.all([product.save(), product2.save(), product3.save()])
-            })
-                
-            it ('success on retrieve product', () => {
-                return retrieveProduct (user.id, product.id)
-                                
-                    .then((product) => {
-                        expect(product.title).to.be.equal('baguette')
-                        expect(product.type).to.be.equal(0)
+                const products = [
+                    ['baguette', 0 ],
+                    ['bretón', 0],
+                    ['gallega', 0 ],
+                    ['integral', 1 ],
+                    ['molde', 1 ],
+                    ['ensaimada', 2 ]
+                ]
+                const productsPromises = products.map(elemento=> Product.create ({title: elemento[0], type: elemento [1]}) )
+                return Promise.all(productsPromises)
+                    .then((result) =>{
+                        allCreatedProducts=result
                     })
             })
+            afterEach(() => Product.deleteMany())
+                
+            it ('success on retrieve product', () => {
+                return retrieveProductsOfType(user.id, Product.BLANCO)
+
+                    .then((results) => {
+                        expect(results).to.be.instanceOf(Array)
+                        expect(results.length).to.be.equal(3)
+
+                        results.forEach (result=> {
+                            expect(result.type).to.be.equal(0)
+                        })
+                    })
+
+            })
 
 
-            it ('fails when userid does not exist', () => {
+            it ('fails when userId does not exist', () => {
                 const wrongId = new ObjectId().toString() //crea un id de tipo mongoose
     
-                return retrieveProduct(wrongId, product.id)
+                return retrieveProductsOfType(wrongId, Product.BLANCO)
                     .then(() =>{
                         throw new Error('should not reach this point')
                     })
@@ -58,18 +73,7 @@ describe ('retrieveProduct' , () => {
                         expect(error.message).to.be.equal(`user with id ${wrongId} does not exist`)
                     })
             })
-            it ('fails when productId does not exist', () => {
-                const wrongId = new ObjectId().toString() //crea un id de tipo mongoose
-    
-                return retrieveProduct(user.id, wrongId)
-                    .then(() =>{
-                        throw new Error('should not reach this point')
-                    })
-                    .catch((error) => {
-                        expect(error).to.be.instanceOf(NotFoundError)
-                        expect(error.message).to.be.equal(`product with id ${wrongId} does not exist`)
-                    })
-            })
+            
 
         })
         describe('when user does not exist', () => {
@@ -83,7 +87,7 @@ describe ('retrieveProduct' , () => {
             it('fails on user id from non-existing user', () => {
                 const unexistingUserId = new ObjectId().toString()
     
-                return retrieveProduct(unexistingUserId, product.id)
+                return retrieveProductsOfType(unexistingUserId, Product.BLANCO)
                     .then(() => {
                         throw new Error('should not reach this point')
                     })
@@ -98,4 +102,4 @@ describe ('retrieveProduct' , () => {
     after(() => disconnect())
 })
 
-module.exports = retrieveProduct
+module.exports = retrieveProductsOfType

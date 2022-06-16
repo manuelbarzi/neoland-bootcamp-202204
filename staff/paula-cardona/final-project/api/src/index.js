@@ -8,12 +8,11 @@ const {
     handleRetrieveUser,
     handleUpdateUser,
     handleDeleteUser,
-    handleAddProductToSchedule
-    // handleCreateNote,
-    // handleRetrieveNotes,
-    // handleUpdateNote,
-    // handleDeleteNote 
-    } = require('./handlers')
+    handleAddProductToSchedule,
+    handleRetrieveSchedule,
+    handleRetrieveProduct,
+    handleUpdateProductQuantityinSchedule,
+    handleRemoveProductfromSchedule } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
 const morgan = require('morgan')
@@ -45,9 +44,10 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.delete('/users', jsonBodyParser, handleDeleteUser)
 
         routes.post('/schedule', jsonBodyParser, handleAddProductToSchedule)
-        // routes.get('/notes', handleRetrieveNotes)
-        // routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)
-        // routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteNote)
+        routes.get('/schedule', handleRetrieveSchedule)
+        routes.get('/schedule', handleRetrieveProduct)
+        routes.patch('/schedule/:scheduleId', jsonBodyParser, handleUpdateProductQuantityinSchedule)
+        routes.patch('/schedule/:scheduleId', jsonBodyParser, handleRemoveProductfromSchedule)
 
         api.use('/api', routes)
 

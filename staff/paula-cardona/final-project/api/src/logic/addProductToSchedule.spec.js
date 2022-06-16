@@ -1,4 +1,4 @@
-
+require('dotenv').config()
 
 
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
@@ -19,7 +19,7 @@ describe('addProductToSchedule', () => {
         let user
 
         beforeEach(() => {
-            user = new User({ name: 'Papa', surname: 'Gayo', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address: 'Calle Madrid' })
+            user = new User({ name: 'Papa', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address: 'Calle Madrid' })
 
             return user.save()
         })
@@ -32,7 +32,7 @@ describe('addProductToSchedule', () => {
 
             beforeEach(() => {
                 schedule = new Schedule({ user: user.id })
-                product = new Product({ title: 'baguette', description: 'baguette francesa' })
+                product = new Product({ title: 'baguette', type:0 })
 
                 return Promise.all([schedule.save(), product.save()])
             })
@@ -66,7 +66,7 @@ describe('addProductToSchedule', () => {
 
             beforeEach(() => {
                 schedule = new Schedule({ user: user.id })
-                product = new Product({ title: 'baguette', description: 'baguette francesa' })
+                product = new Product({ title: 'baguette', type: 0 })
 
                 return Promise.all([schedule.save(), product.save()])
             })

@@ -4,6 +4,7 @@ module.exports = {
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
     handleDeleteUser: require('./handleDeleteUser'),
-    handleAddProductToSchedule: require('./handleAddProductToSchedule')
-    
+    handleAddProductToSchedule: require('./handleAddProductToSchedule'),
+    handleRemoveProductfromSchedule: require('./handleRemoveProductfromSchedule'),
+    handleRetrieveSchedule: require('./handleRetrieveSchedule')
 }

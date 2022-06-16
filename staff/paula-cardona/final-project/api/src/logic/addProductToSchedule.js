@@ -47,10 +47,3 @@ function addProductToSchedule(userId, day, productId, quantity) {
 
 module.exports = addProductToSchedule
 
-// 1) addProductToSchedule
-//        when user already exists
-//          when schedule and product already exists
-//            succeds on correct data:
-//      AssertionError: expected { Object () } to equal '62a5be0f94f8ab468a8bc74c'
-//       at /Users/paulacardonatrigueros/neoland-bootcamp-202204/staff/paula-cardona/final-project/api/src/logic/addProductToSchedule.spec.js:51:56
-//       at processTicksAndRejections (node:internal/process/task_queues:96:5)

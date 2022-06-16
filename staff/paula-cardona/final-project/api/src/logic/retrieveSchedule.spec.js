@@ -18,8 +18,8 @@ describe ('retrieveSchedule' , () => {
         let product
 
         beforeEach (() => {
-            user = new User({ name: 'Papa', surname: 'Gayo', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address: 'Calle Madrid' })
-            product = new Product({ title: 'baguette', description: 'baguette francesa' })
+            user = new User({ name: 'Papa', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address: 'Calle Madrid' })
+            product = new Product({ title: 'baguette', type: 0})
 
             return Promise.all([user.save(), product.save()])
         })

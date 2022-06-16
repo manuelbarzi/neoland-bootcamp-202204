@@ -21,10 +21,10 @@ describe('removeProductfromSchedule', () => {
 
         beforeEach(() => {
             
-            user = new User({ name: 'Papa', surname: 'Gayo', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address: 'Calle Madrid' })
-            product = new Product({ title: 'baguette', description: 'baguette francesa' })
-            product2 = new Product({ title: 'rustica', description: 'rústica' })
-            product3 = new Product({ title: 'molde', description: 'molde' })
+            user = new User({ name: 'Papa', username: 'papagayo', email: 'papagayo@gmail.com', password: '123123123', address: 'Calle Madrid' })
+            product = new Product({ title: 'baguette', type: 0 })
+            product2 = new Product({ title: 'rustica', type: 3})
+            product3 = new Product({ title: 'molde', type: 1 })
 
             return Promise.all([user.save(), product.save(), product2.save(), product3.save()])
         })

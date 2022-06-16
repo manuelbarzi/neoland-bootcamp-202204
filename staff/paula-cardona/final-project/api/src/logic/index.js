@@ -4,6 +4,10 @@ const retrieveUser = require('./retrieveUser')
 const updateUser = require('./updateUser')
 const deleteUser = require('./deleteUser')
 const addProductToSchedule = require('./addProductToSchedule')
+const removeProductfromSchedule = require('./removeProductfromSchedule')
+const retrieveSchedule = require('./retrieveSchedule')
+const retrieveProduct = require('./retrieveProduct')
+const updateProductQuantityinSchedule = require('./updateProductQuantityinSchedule')
 
 
 module.exports = {
@@ -12,6 +16,10 @@ module.exports = {
     retrieveUser,
     updateUser,
     deleteUser,
-    addProductToSchedule
+    addProductToSchedule,
+    removeProductfromSchedule,
+    retrieveSchedule,
+    updateProductQuantityinSchedule,
+    retrieveProduct
     
 }

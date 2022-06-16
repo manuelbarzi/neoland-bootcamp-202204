@@ -6,12 +6,6 @@ const user = new Schema({
         required: true
     },
 
-    surname: {
-        type: String,
-        required: false,
-    
-    },
-
     username: {
         type: String,
         required: true,
