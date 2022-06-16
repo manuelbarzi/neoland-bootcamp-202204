@@ -10,7 +10,7 @@ const {
     handleDeleteUser,
     handleAddProductToSchedule,
     handleRetrieveSchedule,
-    handleRetrieveProduct,
+    handleRetrieveProductsOfType,
     handleUpdateProductQuantityinSchedule,
     handleRemoveProductfromSchedule } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
@@ -45,8 +45,8 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         routes.post('/schedule', jsonBodyParser, handleAddProductToSchedule)
         routes.get('/schedule', handleRetrieveSchedule)
-        routes.get('/schedule', handleRetrieveProduct)
-        routes.patch('/schedule/:scheduleId', jsonBodyParser, handleUpdateProductQuantityinSchedule)
+        routes.get('/products', jsonBodyParser, handleRetrieveProductsOfType)
+        routes.patch('/schedule', jsonBodyParser, handleUpdateProductQuantityinSchedule)
         routes.patch('/schedule/:scheduleId', jsonBodyParser, handleRemoveProductfromSchedule)
 
         api.use('/api', routes)

@@ -6,5 +6,7 @@ module.exports = {
     handleDeleteUser: require('./handleDeleteUser'),
     handleAddProductToSchedule: require('./handleAddProductToSchedule'),
     handleRemoveProductfromSchedule: require('./handleRemoveProductfromSchedule'),
-    handleRetrieveSchedule: require('./handleRetrieveSchedule')
+    handleRetrieveSchedule: require('./handleRetrieveSchedule'),
+    handleRetrieveProductsOfType: require('./handleRetrieveProductsOfType'),
+    handleUpdateProductQuantityinSchedule: require('./handleUpdateProductQuantityinSchedule')
 }

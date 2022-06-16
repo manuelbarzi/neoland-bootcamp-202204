@@ -15,7 +15,7 @@ describe('updateUser', () => {
         let user
 
         beforeEach(() => {
-            user = new User({ name: 'Wendy', surname: 'Pan', username: 'wendypan', email:'wendypan@gmail.com', password: '123123123', address: 'Calle Barcelona' })
+            user = new User({ name: 'Wendy', username: 'wendypan', email:'wendypan@gmail.com', password: '123123123', address: 'Calle Barcelona' })
 
             return user.save()
         })
@@ -30,7 +30,6 @@ describe('updateUser', () => {
                 .then(user => {
                     
                     expect(user.name).to.equal('Pepe')
-                    expect(user.surname).to.equal('Gayo')
                     expect(user.username).to.equal('wendypan')
                     expect(user.email).to.equal('pepegayo@gmail.com')
                     expect(user.password).to.equal('123123123')

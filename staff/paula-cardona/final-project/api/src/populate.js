@@ -1,47 +1,49 @@
+require('dotenv').config()
 const { connect, disconnect } = require('mongoose')
 const { Product } = require('./models')
 
     ; (async () => {
         try {
-            await connect(process.env.TEST_MONGODB_URL)
+            // await connect(process.env.TEST_MONGODB_URL)
+            await connect(process.env.MONGODB_URL)
 
             await Product.deleteMany()
 
-            const baguette = new Product({ title: 'Baguette', description: 'Baguette', type:0 })
-            const panDeAgua = new Product({ title: 'Pan de agua', description: 'Pan de agua', type: 0 })
-            const panGallego = new Product({ title: 'Pan gallego', description: 'Pan gallego', type: 0 })
-            const redondoQuilo = new Product({ title: 'Redondo de quilo', description: 'Redondo de quilo', type: 0 })
-            const rondoCuarto = new Product({ title: 'Redondo de cuarto', description: 'Redondo de cuarto', type: 0 })
-            const redondoMedio = new Product({ title: 'Redondo de medio', description: 'Redondo de medio', type: 0 })
-            const panViena= new Product({ title: 'Pan de viena', description: 'Pan de viena', type: 0 })
-            const panMolde = new Product({ title: 'Pan de molde', description: 'Pan de molde', type: 0 })
-            const chapata = new Product({ title: 'Chapata', description: 'Chapata', type: 0 })
-            const panecillosPequeños = new Product({ title: 'Panecillos pequeños', description: 'Panecillos pequeños', type: 0 })
-            const panBretón = new Product({ title: 'Pan bretón', description: 'Pan bretón', type: 0 })
-
-            const panIntegral = new Product({ title: 'Pan integral', description: 'Pan integral', type: 1 })
-            const panMedioIntegral = new Product({ title: 'Pan medio integral', description: 'Pan medio integral', type: 1 })
-            const panMoldeIntegral = new Product({ title: 'Pan molde integral', description: 'Pan molde integral', type: 1 })
-
-            const panDeNueces = new Product({ title: 'Pan de nueces', description: 'Pan de nueces', type: 2 })
-            const panEspelta = new Product({ title: 'Pan de espelta', description: 'Pan de espelta', type: 2 })
-            const panCenteno = new Product({ title: 'Pan de centeno', description: 'Pan de centeno', type: 2 })
-            const panSemillasAmapola= new Product({ title: 'Pan semillas de amapola', description: 'Pan semillas de amapola', type: 2 })
-            const panOlivas= new Product({ title: 'Pan de olivas', description: 'Pan de olivas', type: 2 })
-            const panPasas= new Product({ title: 'Pan de pasas', description: 'Pan de pasas', type: 2 })
-
-            const donutXoco= new Product({ title: 'Donut de chocolate', description: 'Donut de chocolate', type: 3 })
-            const donut= new Product({ title: 'Donut', description: 'Donut', type: 3 })
-            const madalena= new Product({ title: 'Magdalena', description: 'Magdalena', type: 3 })
-            const EnsaimadaXoco= new Product({ title: 'Ensaimada de chocolate', description: 'Ensaimada chocolate', type: 3 })
-            const EnsaimadaCrema= new Product({ title: 'Ensaimada de crema', description: 'Ensaimada de crema', type: 3 })
-            const croissant= new Product({ title: 'Croissant', description: 'Croissant', type: 3 })
-            const croissantXoco= new Product({ title: 'Croissant de Chocolate', description: 'Croissant de Chocolate', type: 3 })
-
-            const panSinGluten= new Product({ title: 'Barra de pan sin gluten', description: 'Pan sin gluten', type: 4 })
-            const panSinGlutenMedio= new Product({ title: 'Barra de medio sin gluten', description: 'Pan sin gluten', type: 4 })
-
-            /*FALTA GUARDAAAAAAAR*/
+            await Promise.all([
+                Product.create({ title: 'Baguette', type: Product.BLANCO }),
+                Product.create({ title: 'Pan de agua', type: Product.BLANCO }),
+                Product.create({ title: 'Pan gallego', type: Product.BLANCO }),
+                Product.create({ title: 'Redondo de quilo', type: Product.BLANCO }),
+                Product.create({ title: 'Redondo de cuarto', type: Product.BLANCO }),
+                Product.create({ title: 'Redondo de medio', type: Product.BLANCO }),
+                Product.create({ title: 'Pan de viena', type: Product.BLANCO }),
+                Product.create({ title: 'Pan de molde', type: Product.BLANCO }),
+                Product.create({ title: 'Chapata', type: Product.BLANCO }),
+                Product.create({ title: 'Panecillos pequeños', type: Product.BLANCO}),
+                Product.create({ title: 'Pan bretón', type: Product.BLANCO }),
+    
+                Product.create({ title: 'Pan integral', type: Product.INTEGRAL }),
+                Product.create({ title: 'Pan medio integral', type: Product.INTEGRAL }),
+                Product.create({ title: 'Pan molde integral', type: Product.INTEGRAL }),
+    
+                Product.create({ title: 'Pan de nueces', type: Product.VARIADADES}),
+                Product.create({ title: 'Pan de espelta', type: Product.VARIADADES }),
+                Product.create({ title: 'Pan de centeno', type: Product.VARIADADES }),
+                Product.create({ title: 'Pan semillas de amapola', type: Product.VARIADADES }),
+                Product.create({ title: 'Pan de olivas', type: Product.VARIADADES }),
+                Product.create({ title: 'Pan de pasas', type: Product.VARIADADES }),
+    
+                Product.create({ title: 'Donut de chocolate', type: Product.BOLLERIA }),
+                Product.create({ title: 'Donut', type: Product.BOLLERIA }),
+                Product.create({ title: 'Magdalena', type: Product.BOLLERIA }),
+                Product.create({ title: 'Ensaimada de chocolate', type: Product.BOLLERIA }),
+                Product.create({ title: 'Ensaimada de crema', type: Product.BOLLERIA }),
+                Product.create({ title: 'Croissant', type: Product.BOLLERIA }),
+                Product.create({ title: 'Croissant de Chocolate', type: Product.BOLLERIA }),
+    
+                Product.create({ title: 'Barra de pan sin gluten', type: Product.SIN_GLUTEN }),
+                Product.create({ title: 'Barra de medio sin gluten', type: Product.SIN_GLUTEN })
+            ])
 
             await disconnect()
         } catch (error) {

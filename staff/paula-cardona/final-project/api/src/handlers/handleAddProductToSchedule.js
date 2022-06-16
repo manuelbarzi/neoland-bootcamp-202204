@@ -1,5 +1,6 @@
 const { addProductToSchedule } = require('../logic')
-const { handleErrorsAndRespond } = require('./helpers')
+const { verifyToken, handleErrorsAndRespond } = require('./helpers')
+
 
 module.exports = (req, res) => {
     try {

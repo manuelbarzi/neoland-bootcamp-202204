@@ -9,7 +9,7 @@
     "test": "npx mocha src/**/*.spec.js",
     "test-inspect": "npx mocha --inspect-brk src/**/*.spec.js",
     "start-watch": "nodemon src",
-    "populate": "node src/populate1.js"
+    "populate": "node src/populate.js"
   },
   "keywords": [],
   "author": "",

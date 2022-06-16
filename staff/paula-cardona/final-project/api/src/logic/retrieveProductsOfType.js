@@ -3,14 +3,15 @@ const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
 function retrieveProductsOfType(userId, type) {
-    validateStringNotEmptyNoSpaces(userId, 'product id')
+    validateStringNotEmptyNoSpaces(userId, 'userId')
 
-
+    debugger
     return User.findById(userId)
+
         .then((user) => {
             if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Product.find({ type }).lean()
+            return Product.find({ type })
         })
 
 

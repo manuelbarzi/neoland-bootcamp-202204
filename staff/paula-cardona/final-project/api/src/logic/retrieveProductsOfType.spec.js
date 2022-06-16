@@ -47,14 +47,16 @@ describe ('retrieveProductsOfType' , () => {
             afterEach(() => Product.deleteMany())
                 
             it ('success on retrieve product', () => {
+                debugger
                 return retrieveProductsOfType(user.id, Product.BLANCO)
+            
 
-                    .then((results) => {
-                        expect(results).to.be.instanceOf(Array)
-                        expect(results.length).to.be.equal(3)
+                    .then((arrayProducts) => {
+                        expect(arrayProducts).to.be.instanceOf(Array)
+                        expect(arrayProducts.length).to.be.equal(3)
 
-                        results.forEach (result=> {
-                            expect(result.type).to.be.equal(0)
+                        arrayProducts.forEach (product=> {
+                            expect(product.type).to.be.equal(0)
                         })
                     })
 

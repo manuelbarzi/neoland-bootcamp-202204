@@ -19,7 +19,7 @@ function retrieveSchedule(userId) { // recivimos el user id al que les buscaremo
             schedule.id = schedule._id.toString()
 
             delete schedule._id
-            delete schedule._v
+            delete schedule.__v
                 
                 
 

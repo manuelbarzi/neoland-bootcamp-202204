@@ -13,7 +13,7 @@ const { AuthError } = require('../../errors')
 
 function verifyToken(req) { 
     const { headers: { authorization } } = req //del objeto de request, extraigo la propiedad de headers y su keu authorization
-    debugger
+    
     if (!authorization)
         throw new AuthError('no authorization header received (with token)')
 

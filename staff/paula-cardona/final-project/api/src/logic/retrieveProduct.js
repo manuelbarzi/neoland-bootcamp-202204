@@ -17,7 +17,7 @@ function retrieveProduct (userId, productId) {
             product.id = product._id.toString()
 
             delete product._id
-            delete product._v
+            delete product.__v
             
             return product     
         })

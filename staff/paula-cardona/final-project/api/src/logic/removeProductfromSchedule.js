@@ -1,12 +1,13 @@
 const { User, Schedule } = require('../models')
 const { NotFoundError } = require('../errors')
-const { validateUsername, validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank } = require('../validators')
+const { validateUsername, validateStringNotEmptyNoSpaces } = require('../validators')
 
 
 function removeProductFromSchedule(userId, day, productId) {
+    
     validateUsername(userId)
-    validateStringNotEmptyOrBlank(day, 'day')
-    validateStringNotEmptyNoSpaces(productId, 'product id')
+    validateStringNotEmptyNoSpaces(day, 'day')
+    validateStringNotEmptyNoSpaces(productId, 'productId')
       
     
     return User.findById(userId)
