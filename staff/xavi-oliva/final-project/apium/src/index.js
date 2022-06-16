@@ -69,7 +69,8 @@ class Apium {
                 resolve({ status, payload })
             })
 
-            xhr.addEventListener('error', () => {
+            xhr.addEventListener('error', error => {
+                console.log(error)
                 reject(new Error('API call fail'))
             })
 

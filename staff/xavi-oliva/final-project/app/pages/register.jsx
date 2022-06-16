@@ -1,37 +1,34 @@
 import Link from 'next/link'
 import { registerUser } from 'logic'
-import { PrimaryButton, Input, Section } from '../components'
+import { Section, Form, Input, PrimaryButton } from '../components'
+import { useRouter } from 'next/router'
+import { verifyTokenWithAPICall } from './helpers'
 
 export default function Register(props) {
   // const { handleFeedback } = useContext(Context)
+  const router = useRouter()
 
-  const handleFormSubmit = event => {
-    event.preventDefault()
+  const handleFormSubmit = async event => {
+      event.preventDefault()
 
-    const name = event.target.name.value
-    const email = event.target.email.value
-    const password = event.target.password.value
+      const name = event.target.name.value
+      const email = event.target.email.value
+      const password = event.target.password.value
 
-    try {
-      registerUser(name, email, password, error => {
-        if (error) {
-          console.log('successfully registered')
-          // handleFeedback({ level: 'error', message: error.message })
+      try {
+          await registerUser(name, email, password)
 
-          return
-        }
+          router.push('/login')
 
-        props.onUserRegistered()
-      })
-    } catch (error) {
-      console.error(error)
-      // handleFeedback({ level: 'error', message: error.message })
-    }
+      } catch (error) {
+          console.error(error)
+          // handleFeedback(error.message)
+      }
   }
 
   return <>
     <Section>
-      <form className="px-8" onSubmit={handleFormSubmit}>
+      <Form onSubmit={handleFormSubmit}>
         <Input type="text" name="name" placeholder="name"></Input>
         <Input type="text" name="email" placeholder="email"></Input>
         <Input type="password" name="password" placeholder="password"></Input>
@@ -45,7 +42,11 @@ export default function Register(props) {
             Already have an account? LOGIN
           </a>
         </Link>
-      </form>
+      </Form>
     </Section>
   </>
+}
+
+export async function getServerSideProps({ req, res }) {
+  return verifyTokenWithAPICall(req, res)
 }

@@ -14,7 +14,7 @@ const {
     handleDeleteFlat,
     handleValidateToken} = require('./handlers')
 const { connect, disconnect } = require('mongoose')
-const { cors } = require('./helpers')
+const cors = require('cors')
 
 const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
@@ -25,7 +25,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         const api = express()
 
-        api.use(cors)
+        api.use(cors())
 
         const jsonBodyParser = bodyParser.json()
 
@@ -50,7 +50,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         api.use('/api', routes)
 
-        api.listen(8080, () => console.log('API running'))
+        api.listen(port, () => console.log(`API running on port ${port}`))
 
         process.on('SIGINT', async () => {
             await disconnect()

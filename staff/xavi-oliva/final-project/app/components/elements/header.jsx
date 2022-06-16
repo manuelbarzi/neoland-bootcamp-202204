@@ -1,18 +1,22 @@
 import { useState, useEffect } from 'react'
-import Logger from 'loggy'
+import { useRouter } from 'next/router'
 import { ProfileButton, LogoutButton } from '../buttons'
 
 export const Header = ({ className, ...props }) => {
-    const logger = new Logger('Header')
+    const router = useRouter()
 
-    logger.info('call')
-
-    const handleLogoutClick = () => {
-        handleLogout()
+    const handleHomeCLick = () => {
+        router.push('/')
     }
 
-    const handleLogout = () => {
-        onUserLogout()
+    const handleProfileClick = () => {
+        router.push('/profile')
+    }
+    
+    const handleLogoutClick = () => {
+        document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
+        
+        router.push('/login')
     }
 
     // useEffect(() => {
@@ -41,10 +45,11 @@ export const Header = ({ className, ...props }) => {
                 w-full h-16 bg-white border-b-2 border-primary py-2 px-1`}>
             <nav className="h-full flex justify-between items-center">
                 <div className='pl-3'>
-                    <h1 className='t-logo text-lg'>Brun's <span className='text-secondary'>Flats</span></h1>
+                    <h1 onClick={handleHomeCLick} 
+                        className='t-logo text-lg cursor-pointer'>Brun's <span className='text-secondary'>Flats</span></h1>
                 </div>
                 <div className="flex justify-around gap-3.5 pt-1 pr-2.5">
-                    <ProfileButton />
+                    <ProfileButton onClick={handleProfileClick} />
                     <LogoutButton onClick={handleLogoutClick} />
                 </div>
             </nav>

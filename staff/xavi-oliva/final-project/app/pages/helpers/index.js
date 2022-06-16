@@ -6,20 +6,19 @@ async function verifyTokenWithAPICall(req, res) {
     const cookies = new Cookies(req, res)
 
     const token = cookies.get('token')
-
+    
     try {
-        isValidJWT(token)
-        const response = await fetch('http://localhost:8081/api/users/auth', {
+        isValidJWT(token) // Por validate que lance un error
+        const response = await fetch('http://localhost:8080/api/users/auth', {
             method: 'GET',
             headers: {
                 'Authorization': `bearer ${token}`
             }
         })
-
         if (response.status !== 200) {
             cookies.set('token')
 
-            if (req.url === '/profile' || req.url === '/flats' || req.url === '/') {
+            if (req.url === '/' || req.url === '/flats' || req.url === '/profile') {
                 res.writeHead(307, { Location: '/login' })
                 res.end()
             }
@@ -33,7 +32,7 @@ async function verifyTokenWithAPICall(req, res) {
             res.end()
         }
     } catch (error) {
-        if(req.url === 'profile' || req.url === '/') {
+        if(req.url === '/' || req.url === '/flats' || req.url === '/profile') {
             res.writeHead(307, { Location: '/login' })
             res.end()
         }

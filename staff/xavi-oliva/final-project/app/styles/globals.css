@@ -45,6 +45,9 @@
     );
   }
   .t-logo {
-    @apply font-semibold text-primary;
+    @apply font-semibold text-primary text-center;
+  }
+  .pre-anchor {
+    @apply text-white block text-center;
   }
 }

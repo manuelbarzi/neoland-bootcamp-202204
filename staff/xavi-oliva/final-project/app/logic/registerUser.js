@@ -2,36 +2,35 @@ import { validateStringNotEmptyOrBlank, validateEmail, validatePassword } from '
 import Apium from 'apium'
 import Logger from 'loggy'
 
-export function registerUser(name, email, password, callback) {
+
+
+export async function registerUser(name, email, password) {
     const logger = new Logger('registerUser')
 
     validateStringNotEmptyOrBlank(name, 'name')
     validateEmail(email, 'email')
     validatePassword(password)
 
-    const api = new Apium(process.env.REACT_APP_API_URL)
+    const api = new Apium('http://localhost:8081/api')
 
     logger.info('request')
 
-    api.post('users', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, password })
-    }, (error, response) => {
-        if (error) return callback(error)
+    const { status, payload } = await api.post(
+        'users',
+        {
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ name, email, password })
+        })
 
-        logger.info('response')
+    if (status === 201) return
 
-        const { status, payload } = response
+    else if (status >= 400 && status < 500) {
+        const data = JSON.parse(payload)
 
-        if (status >= 400 && status < 500) {
-            const data = JSON.parse(payload)
+        throw new Error(data.error)
 
-            callback(new Error(data.error))
-        } else if (status >= 500)
-            callback(new Error('server error'))
-        if (status === 201)
-            callback(null)
-    })
+    } else
+        throw new Error('server error')
 }

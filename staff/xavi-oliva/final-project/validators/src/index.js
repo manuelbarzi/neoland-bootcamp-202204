@@ -42,7 +42,7 @@ function validateJwt(token) {
     if (now > exp) throw new AuthError('token expired')
 }
 
-function isJwtValid(token) {
+function isValidJWT(token) {
     try {
         validateJwt(token)
 
@@ -97,7 +97,7 @@ module.exports = {
     validateStringNotEmptyOrBlank,
     validateStringNotEmptyNoSpaces,
     validateJwt,
-    isJwtValid,
+    isValidJWT,
     validatePassword,
     validateUsername,
     validateFunction, 

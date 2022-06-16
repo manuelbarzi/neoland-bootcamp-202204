@@ -5,7 +5,7 @@ import { validateJwt, validatePassword } from 'validators'
 export async function unregisterUser(token, password) {
     const logger = new Logger('unregisterUser')
 
-    validateJWT(token)
+    validateJwt(token)
     validatePassword(password)
 
     const api = new Apium(process.env.REACT_APP_API_URL)

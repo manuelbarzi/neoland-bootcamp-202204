@@ -2,17 +2,17 @@ import Logger from 'loggy'
 import { validateJwt } from 'validators'
 import Apium from 'apium'
 
-export async function retrieveUser(token) {
-    const logger = new Logger('retrieveUser')
+export async function retrieveFlats(token) {
+    const logger = new Logger('retrieveFlats')
     
     validateJwt(token)
 
-    const api = new Apium(process.env.REACT_APP_API_URL)
+    const api = new Apium('http://localhost:8080/api')
 
     logger.info('request')
 
     const { status, payload } = await api.get(
-        'users',
+        'flats',
         {
             headers: {
                 Authorization: `Bearer ${token}`
