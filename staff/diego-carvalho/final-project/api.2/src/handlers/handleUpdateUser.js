@@ -1,13 +1,13 @@
-const { updateEvent } = require('../logic')
+const { updateUser } = require('../logic')
 const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        const { params: { eventId }, body: {photo, title, description, direction} } = req
+        const { body: { name, email, password} } = req
 
-        updateEvent(userId, eventId, photo, title, description, direction)
+        updateUser(userId, name, email, password)
             .then(() => res.status(204).send())
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {

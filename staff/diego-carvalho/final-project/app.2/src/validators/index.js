@@ -57,7 +57,7 @@ function isJwtValid(token) {
 function validatePassword(password, explain = 'password') {
     validateString(password, explain)
 
-    if (password.length < 8)
+    if (password.length < 3)
         throw new FormatError(`${explain} length is lower than 8`)
 }
 

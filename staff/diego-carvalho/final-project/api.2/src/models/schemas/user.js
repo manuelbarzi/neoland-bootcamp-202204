@@ -1,0 +1,34 @@
+const { Schema, Types: { ObjectId } } = require('mongoose')
+const event = require('./event')
+
+const user = new Schema({
+    name: {
+        type: String,
+        required: true
+    },
+
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+
+    password: {
+        type: String,
+        required: true,
+
+    },
+
+    ownerEvents:[{
+        type: ObjectId,
+        ref: 'User'
+    }],
+    
+    events:[{
+        type: ObjectId,
+        ref: 'Event'
+    }]
+
+})
+
+module.exports = user

@@ -31,11 +31,10 @@ function Event(props) {
         event.preventDefault()
 
         const { eventId } = props
-        const { target: { photo: { value: photo } } } = event
         const { target: { title: { value: title } } } = event
         const { target: { text: { value: description } } } = event
 
-        saveEvent(sessionStorage.token, eventId, photo, title, description, error => {
+        saveEvent(sessionStorage.token, eventId, title, description, error => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 
@@ -52,27 +51,11 @@ function Event(props) {
 
         <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-            {/* <figure className=''>
-                <img src="hola" alt="" />
-            </figure> */}
-
-            <input type='text' name="photo" />
-
             <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
             <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
 
-            {/* <a href="https://goo.gl/maps/KATcT35taGGNh6dg7"></a> */}
-
-            <select name='select'>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-                <option value="category3">Category 3</option>
-            </select>
-
-            <div className='Event__button'>
-                <button className="button-event" onClick={handleRemoveClick}>cancelar</button>
-                <button className="button-event">Save</button>
-            </div>
+            <button className="button-event" onClick={handleRemoveClick}>cancelar</button>
+            <button className="button-event">Save</button>
 
         </form>
     </div>
@@ -82,4 +65,12 @@ export default Event
 
 
 
+{/* <select name='select'>
+                <option value="category1">Category 1</option>
+                <option value="category2">Category 2</option>
+                <option value="category3">Category 3</option>
+</select> */}
 
+{/* <figure className=''>
+                <img src="hola" alt="" />
+            </figure> */}
