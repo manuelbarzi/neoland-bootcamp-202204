@@ -7,9 +7,9 @@ module.exports = async (req, res) => {
 
         const { body: { content }, params: { songId } } = req
 
-        await addInterpretationToSong(userId, songId, content)
+        const interpretationId = await addInterpretationToSong(userId, songId, content)
 
-        res.status(201).send()
+        res.status(201).json({ interpretationId })
     } catch (error) {
         handleErrorsAndRespond(error, response)
     }

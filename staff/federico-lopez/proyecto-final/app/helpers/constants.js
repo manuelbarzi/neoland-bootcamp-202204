@@ -1,4 +1,4 @@
-const CHORD_REGEX = /((\\)?\b[A-G](?:(?:add|dim|aug|maj|mM|mMaj|sus|m|b|#|\d)?(?:\/[A-G0-9])?)*(?!\||—|-|\.|:)(?:\b|#)+)/g
+const CHORD_REGEX = /((\\)?\b[A-G](?:(?:add|dim|°|aug|maj|mM|mMaj|sus|m|b|#|\d)?(?:\/[A-G0-9])?)*(?!\||—|-|\.|:)(?:\b|#)+)/g
 
 const GUITAR = {
     strings: 6,

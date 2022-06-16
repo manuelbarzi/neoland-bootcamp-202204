@@ -5,8 +5,9 @@ import Footer from '../../../components/Footer'
 import { retrieveSongsOfArtist } from '../../../logic'
 import { context } from '../../../logic/context'
 import { useEffect, useState } from 'react'
+import Header from '../../../components/Header'
 
-export default function Artist({songs: serverSideSongs}) {
+export default function Artist({ songs: serverSideSongs }) {
     const router = useRouter()
 
     const [songs, setSongs] = useState(serverSideSongs)
@@ -15,19 +16,18 @@ export default function Artist({songs: serverSideSongs}) {
 
     artistName = artistName.split('-').join(' ')
 
-    useEffect(() => {
-        if(!serverSideSongs) {
-            (async () => {
-                const songsRetrieved = await retrieveSongsOfArtist(artistId)
-    
-                setSongs(songsRetrieved)
-            })()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!serverSideSongs) {
+    //         (async () => {
+    //             const songsRetrieved = await retrieveSongsOfArtist(artistId)
+
+    //             setSongs(songsRetrieved)
+    //         })()
+    //     }
+    // }, [])
 
     return <>
-        {/* <header className="w-full h-20 fixed top-0 border-b-2 py-2 px-4">
-        </header> */}
+        <Header></Header>
         <main>
             <p>{artistName}</p>
             {songs.length > 0 && songs.map(song => {
@@ -45,7 +45,7 @@ export default function Artist({songs: serverSideSongs}) {
 export async function getServerSideProps({ params }) {
     const res = await fetch(`${context.API_URL}/songs/artist/${params.artistId}`)
 
-    if(res.ok) {
+    if (res.ok) {
         let songs = await res.json()
         return {
             props: {

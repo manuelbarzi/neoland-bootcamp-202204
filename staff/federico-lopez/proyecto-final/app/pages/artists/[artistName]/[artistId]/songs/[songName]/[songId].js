@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { useState, useEffect } from "react"
 import Footer from '../../../../../../components/Footer'
 import { retrieveInterpretationFromSong, context } from 'logic'
+import Header from '../../../../../../components/Header'
 
 export default function Song({ interpretations: serverSideinterpretations }) {
     const router = useRouter()
@@ -14,19 +15,18 @@ export default function Song({ interpretations: serverSideinterpretations }) {
     artistName = artistName.split('-').join(' ')
     songName = songName.split('-').join(' ')
 
-    useEffect(() => {
-        if (!interpretations) {
-            (async () => {
-                const interpretationsRetrieved = await retrieveInterpretationsFromSong(songId)
+    // useEffect(() => {
+    //     if (!interpretations) {
+    //         (async () => {
+    //             const interpretationsRetrieved = await retrieveInterpretationsFromSong(songId)
 
-                setInterpretations(interpretationsRetrieved)
-            })()
-        }
-    }, [])
+    //             setInterpretations(interpretationsRetrieved)
+    //         })()
+    //     }
+    // }, [])
 
     return <>
-        {/* <header className="w-full h-20 fixed top-0 border-b-2 py-2 px-4">
-    </header> */}
+        <Header></Header>
         <main>
             <p>{songName}</p>
 
@@ -44,7 +44,7 @@ export default function Song({ interpretations: serverSideinterpretations }) {
             })}
 
             {interpretations.length === 0 && <p>There are not available interpretations for this song</p>}
-            
+
         </main>
         <Footer></Footer>
     </>

@@ -3,24 +3,55 @@ const { GUITAR } = require('./constants')
 import Chord from '@tombatossals/react-chords/lib/Chord'
 
 export function generateChordImages(chord) {
-    let positions
+    let chordObjectFounded
+
+    // if(chord.includes('dim')) {
+    //     chord.replace('dim', '°')
+    // }
+
+    if (chord.includes('D#'))
+        chord = chord.replace('D#', 'Eb')
+    else if (chord.includes('G#'))
+        chord = chord.replace('G#', 'Ab')
+    else if (chord.includes('A#'))
+        chord = chord.replace('A#', 'Bb')
+    else if (chord.includes('Db'))
+        chord = chord.replace('Db', 'C#')
+    else if (chord.includes('Gb'))
+        chord = chord.replace('Gb', 'F#')
 
     if (keys.some(key => key === chord)) {
-        const chordObjectFounded = chords[chord].find(elem => elem.suffix === 'major')
+        chordObjectFounded = chords[chord].find(elem => elem.suffix === 'major')
 
-        positions = chordObjectFounded.positions
+    } else if (keys.some(key => `${key}m` === chord)) {
+        chordObjectFounded = chords[`${chord.slice(0, chord.length - 1)}`].find(elem => elem.suffix === 'minor')
+
+    } else {
+        if (chord[1] === '#' || chord[1] === 'b') {
+            chordObjectFounded = chords[`${chord.slice(0, 2)}`].find(elem => elem.suffix === `${chord.slice(2)}`)
+        } else {
+            chordObjectFounded = chords[`${chord.slice(0, 1)}`].find(elem => elem.suffix === `${chord.slice(1)}`)
+        }
     }
 
-    return positions.map(position => {
-        const { fingers, frets, barres, capo, baseFret } = position
-        return (
-            <figure className="px-2 w-full border border-gray-600"><Chord
-                chord={{ frets, fingers, barres, capo, baseFret }}
+    try {
+        const positions = chordObjectFounded.positions || null
 
-                instrument={GUITAR}
+        return positions.map((position, index) => {
+            const { fingers, frets, barres, capo, baseFret } = position
+            return (
+                <figure key={index} className="px-2 w-full border border-gray-600">
+                    <Chord
+                        chord={{ frets, fingers, barres, capo, baseFret }}
 
-                lite={false}
-            /></figure>
-        )
-    })
+                        instrument={GUITAR}
+
+                        lite={false}
+                    />
+                </figure>
+            )
+        })
+    } catch (error) {
+        return console.log('no positions founded')
+    }
 }

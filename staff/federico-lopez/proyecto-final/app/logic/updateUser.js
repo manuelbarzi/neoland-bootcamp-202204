@@ -1,5 +1,6 @@
 import { validateJWT, validateStringNotEmptyOrBlank, validateDateOfBirth } from 'validators'
 import Apium from '../vendor/Apium'
+import { context } from './context'
 
 export async function updateUser(token, { firstName, lastName, dateOfBirth }) {
     validateJWT(token)

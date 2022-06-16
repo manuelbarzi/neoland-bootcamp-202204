@@ -1,21 +1,31 @@
 import { validateJWT } from 'validators'
-import Apium from '../vendor/Apium'
+import berreApium from '../vendor/Apium4'
 import { context } from './context'
 
 export async function retrieveUser(token) {
     validateJWT(token)
 
-    const api = new Apium(context.API_URL)
+    // const api = new Apium(context.API_URL)
 
-    const { status, payload } = await api.get(
-        'users',
-        {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        })
+    const hola = await berreApium(
+            'GET',
+            'http://localhost:8080/api/users',
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            })
 
-    const data = JSON.parse(payload)
+    // const { status, payload } = await api.get(
+    //     'users',
+    //     {
+    //         headers: {
+    //             Authorization: `Bearer ${token}`
+    //         }
+    //     })
+    
+    debugger
+    const data = JSON.parse(hola)
 
     if (status === 200) return data
 

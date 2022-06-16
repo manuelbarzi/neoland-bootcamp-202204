@@ -1,8 +1,9 @@
-const { connect, disconnect, Types: { ObjectId }, isValidObjectId } = require('mongoose')
+const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Artist, Song } = require('../models')
 const { NotFoundError, AuthError, FormatError } = require('errors')
 const addInterpretationToSong = require('./addInterpretationToSong')
 const { expect } = require('chai')
+const { validateObjectId } = require('../validators')
 
 describe('addInterpretationToSong', () => {
 
@@ -101,7 +102,7 @@ describe('addInterpretationToSong', () => {
 
                 const result = await addInterpretationToSong(user._id.toString(), song._id.toString(), content)
 
-                expect(result).to.be.undefined
+                validateObjectId(result)
 
                 const savedSong = await Song.findById(song._id)
 

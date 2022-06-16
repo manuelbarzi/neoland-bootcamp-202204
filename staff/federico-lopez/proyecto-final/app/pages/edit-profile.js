@@ -1,12 +1,14 @@
 // import { useContext } from 'react'
-import { updateUser } from '../logic'
+import { retrieveUser, updateUser } from '../logic'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import { verifyTokenWithAPICall } from './helpers'
+import { useRouter } from 'next/router'
 // import Context from './Context'
 
-function editProfile({ token }) {
+function editProfile({ user }) {
     // const { handleFeedback } = useContext(Context)
+    const router = useRouter()
 
     const handleFormSubmit = event => {
         event.preventDefault()
@@ -16,12 +18,10 @@ function editProfile({ token }) {
         const dateOfBirth = new Date(event.target.dateOfBirth.value)
 
         try {
-            updateUser(sessionStorage.token, { firstName, lastName, dateOfBirth })
+            updateUser(token, { firstName, lastName, dateOfBirth })
 
-            console.log('user updated')
-            // props.onChangedName()
+            router.push('/home')
 
-            // props.onChangedNameHome(firstName)
         } catch (error) {
             console.error(error)
         }
@@ -34,7 +34,7 @@ function editProfile({ token }) {
                 <h2>Edit Profile</h2>
                 <input type="text" name="firstName" id="firstName" placeholder="firstName" />
                 <input type="text" name="lastName" id="lastName" placeholder="lastName" />
-                <input type="date" name="dateOfBirth" id="dateOfBirth" min="1990-01-01" max="2022-01-01" />
+                <input type="date" name="dateOfBirth" id="dateOfBirth" />
                 <button type="submit" >Save</button>
             </form>
         </main>
@@ -45,5 +45,11 @@ function editProfile({ token }) {
 export default editProfile
 
 export async function getServerSideProps({ req, res }) {
-    return verifyTokenWithAPICall(req, res)
+    debugger
+    const { props: { token } } = await verifyTokenWithAPICall(req, res)
+    const user = await retrieveUser(token)
+
+    return {
+        props: { user, token }
+    }
 }

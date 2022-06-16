@@ -7,7 +7,7 @@ async function createSong(userId, { artist, name, genres, album, date }) {
     validateObjectId(userId)
     validateObjectId(artist)
     validateStringNotEmptyOrBlank(name, 'song name')
-    validateGenres(genres)
+    if (genres) validateGenres(genres)
     if (album) validateStringNotEmptyOrBlank(album, 'album')
     if (date) validateDate(date)
 

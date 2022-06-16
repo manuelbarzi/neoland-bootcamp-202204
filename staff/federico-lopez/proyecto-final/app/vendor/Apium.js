@@ -61,31 +61,34 @@ class Apium {
                 xhr.send(body)
             } else xhr.send()
         } else return new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest
+            if (typeof window !== 'undefined') {
+                const xhr = new XMLHttpRequest
 
-            xhr.addEventListener('load', event => {
-                const { status, responseText: payload } = event.target
+                xhr.addEventListener('load', event => {
+                    const { status, responseText: payload } = event.target
 
-                resolve({ status, payload })
-            })
+                    resolve({ status, payload })
+                })
 
-            xhr.addEventListener('error', () => {
-                reject(new Error('API call fail'))
-            })
+                xhr.addEventListener('error', () => {
+                    reject(new Error('API call fail'))
+                })
 
-            const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}/${urlOrPath}`
+                const url = urlOrPath.toLowerCase().startsWith('http://') || urlOrPath.toLowerCase().startsWith('https://') ? urlOrPath : `${this.baseUrl}/${urlOrPath}`
 
-            xhr.open(method, url)
+                xhr.open(method, url)
 
-            if (options) {
-                const { headers, body } = options
+                if (options) {
+                    const { headers, body } = options
 
-                if (headers)
-                    for (const key in headers)
-                        xhr.setRequestHeader(key, headers[key])
+                    if (headers)
+                        for (const key in headers)
+                            xhr.setRequestHeader(key, headers[key])
 
-                xhr.send(body)
-            } else xhr.send()
+                    xhr.send(body)
+                } else xhr.send()
+            }
+
         })
     }
 

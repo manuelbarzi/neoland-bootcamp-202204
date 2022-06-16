@@ -26,6 +26,8 @@ async function addInterpretationToSong(user, song, content) {
     songFounded.interpretations.push(interpretation)
 
     await songFounded.save()
+    
+    return interpretation._id.toString()
 }
 
 module.exports = addInterpretationToSong

@@ -19,14 +19,14 @@ export default function Interpretation({ interpretation: serverSideInterpretatio
     artistName = artistName.split('-').join(' ')
     songName = songName.split('-').join(' ')
 
-    useEffect(() => {
-        if (!serverSideInterpretation) {
-            (async () => {
-                const interpretationRetrieved = await retrieveInterpretationFromSong(songId, interpretationId)
-                setInterpretation(interpretationRetrieved)
-            })()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (!serverSideInterpretation) {
+    //         (async () => {
+    //             const interpretationRetrieved = await retrieveInterpretationFromSong(songId, interpretationId)
+    //             setInterpretation(interpretationRetrieved)
+    //         })()
+    //     }
+    // }, [])
 
     const onChordClick = chord => {
 
@@ -45,10 +45,10 @@ export default function Interpretation({ interpretation: serverSideInterpretatio
                     <a>{artistName}</a>
                 </Link>
 
-                <article className="overflow-x-scroll">
+                {/* <article> */}
 
-                    <div> {getChords(interpretation.content).map(chord => <a className="px-2">{chord}</a>)}
-                    </div>
+                    {/* <div> {getChords(interpretation.content).map((chord, index) => <a className="px-2" key={index * 10} >{chord}</a>)}
+                    </div> */}
 
                     {generateInterpretation(interpretation.content, onChordClick)}
 
@@ -56,7 +56,7 @@ export default function Interpretation({ interpretation: serverSideInterpretatio
                         <div className="fixed bottom-20 w-full h-2/5 border border-black bg-gray-200 flex overflow-x-scroll">
                             {generateChordImages(chordView)}
                         </div>}
-                </article>
+                {/* </article> */}
 
                 {/* <p>{interpretation.user.username}</p> */}
                 {/* {interpretation && <p>{interpretation.content}</p>} */}
@@ -67,6 +67,7 @@ export default function Interpretation({ interpretation: serverSideInterpretatio
 }
 
 export async function getServerSideProps({ params }) {
+    
     const res = await fetch(`${context.API_URL}/songs/${params.songId}/interpretations/${params.interpretationId}`)
 
     if (res.ok) {

@@ -11,13 +11,13 @@ const { validateObjectId } = require('../validators')
 async function createArtist(userId, name, genres, country) {
     validateObjectId(userId)
     validateStringNotEmptyOrBlank(name, 'artist name')
-    validateGenres(genres)
-    validateCountryCode(country)
+    if (genres) validateGenres(genres)
+    if (country) validateCountryCode(country)
     
     try {
         const user = await User.findById(userId)
 
-        if(!user) throw NotFoundError(`user with id ${userId} not found`)
+        if(!user) throw new NotFoundError(`user with id ${userId} not found`)
         
         const { _id } = await Artist.create({ name, genres, country })
 

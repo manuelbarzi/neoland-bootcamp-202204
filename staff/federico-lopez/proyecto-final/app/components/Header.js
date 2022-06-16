@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Image from 'next/image'
 import { useState } from 'react'
 
@@ -12,16 +13,18 @@ export default function Header({ pageProps }) {
                     <Image src="/media/music.svg" height={50} width={50} ></Image>
                 </figure>}
 
-            {page === 'profile' && 
+            {page === 'profile' &&
                 <p className="text-3xl">Profile</p>}
 
             <div className="flex justify-around gap-2">
                 <figure>
                     <Image src="/media/bell.svg" height={50} width={50} />
                 </figure>
-                <figure>
-                    <Image src="/media/plus.svg" height={50} width={50} />
-                </figure>
+                <Link href="/create-interpretation">
+                    <figure>
+                        <Image src="/media/plus.svg" height={50} width={50} />
+                    </figure>
+                </Link>
             </div>
         </nav>
     </header>
