@@ -5,10 +5,10 @@ import toggleLikeActivity from '../../logic/toggleLikeActivity'
 import MapView from './MapView'
 import '../../styles/BoxHeader.sass'
 
-function BoxHeader (props) {
+function Activity (props) {
     
     const { handleFeedback } = useContext(Context)
-    const { activity, setDelete, onRemove, setTimestamp } = props
+    const { activity, setDelete, onRemove, onLikeClicked } = props
     const [ likes, setLikes ] = useState(null)
     
     var options = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  };
@@ -39,7 +39,7 @@ function BoxHeader (props) {
             await toggleLikeActivity(sessionStorage.token, activity.id)
 
             handleFeedback({ type: 'success', message: 'Liked!'})
-            setTimestamp(Date.now())
+            onLikeClicked()
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -79,4 +79,4 @@ function BoxHeader (props) {
     </div>
 }
 
-export default BoxHeader
+export default Activity

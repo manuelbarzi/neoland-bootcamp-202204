@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
 import retrieveActivities from '../../logic/retrieveActivities'
-import BoxHeader from './BoxHeader'
+import Activity from './Activity'
 // sin useEffect tambien funciona
 // useEffect maneja los ciclos de vida de comando
 
@@ -35,11 +35,12 @@ function ActivityList(props) { // timestamp son las props desestructuradas
         }
     }
 
+    const handleActivityLikeClicked = () => setTimestamp(Date.now())
 
     return activities &&
         <ul className = "List__activities mw Overflow" >
             {activities.map(activitie => <li className="Li__activity" key={activitie.id} >  
-                <BoxHeader activity={activitie} setTimestamp={setTimestamp} onCommentClicked={props.onCommentClicked}/>
+                <Activity activity={activitie} onLikeClicked={handleActivityLikeClicked} onCommentClicked={props.onCommentClicked}/>
             </li>)}
         </ul>
 }
