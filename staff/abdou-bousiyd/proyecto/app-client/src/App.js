@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Register from "./components/Register/index.jsx";
 import Login from "./components/Login/index.jsx";
 import Project from "./components/Project/index.jsx";
-
+import Dashboards from "./components/Dashboards/index.jsx";
 
 function App() {
+  return (
+    <div className="App Container">
+      <Routes>
+        <Route exact path="/" element={<Project />} />
+        <Route path="/project" element={<Project />} />
 
+        <Route exact path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
 
-  return (<div className="App Container">
-        <Routes>
-          
-          <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path='/project' element={<Project />} />
-
-        </Routes>
-
-      </div>
+        <Route path="/dashboards" element={<Dashboards />} />
+      </Routes>
+    </div>
   );
 }
 

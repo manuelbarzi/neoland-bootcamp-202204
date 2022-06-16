@@ -1,9 +1,12 @@
 .header
-    background-color: #06070d
+    background-color: #7a7b7c
+    // background-color: #06070d
     display: flex
     align-items: center
     width: 100%
+    top: 0
     height: 70px
+    // margin-bottom: 10px
 
     &__content
         overflow: hidden
@@ -16,13 +19,14 @@
 
         &__links
             width: 10%
+            margin: 5px
             display: flex
             justify-content: space-between
             align-items: center
             list-style: none
             @media screen and ( max-width: 768px )
-                width: 130px
-                margin: -30px
+                width: 250px
+                margin: 20px
 
             &__item i 
                 text-decoration: none

@@ -1,0 +1,91 @@
+// .Settings
+//     opacity: 0.8
+//     display: flex
+//     justify-content: center
+//     flex-direction: column
+//     align-items: center
+//     width: 100%
+//     height: 100vh
+//     &____Options
+//         background-color: red
+//         display: flex
+//         // justify-content: space-around
+//         // align-items: center
+//         width: 80%
+//         height: 80vh
+//         border-radius: 50px
+//         box-shadow: 0 1px 3px 0 lavender
+
+
+* 
+  margin: 0
+  padding: 0
+
+
+.switch-list 
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-direction: column
+  gap: 20px
+  height: 100vh
+  width: 100vw
+
+
+.switch 
+  display: flex
+  align-items: center
+  cursor: pointer
+  -webkit-tap-highlight-color: transparent
+  &__input 
+    display: none
+    &:checked + .switch__icon 
+      background-color: #00a4ff
+      &:before 
+        transform: translate3d(18px, 2px, 0) scale3d(0, 0, 0)
+      
+      &:after 
+        transform: translate3d(20px, 2px, 0)
+      
+    
+  
+  &__icon 
+    position: relative
+    display: inline-block
+    max-width: 42px
+    min-width: 42px
+    min-height: 24px
+    max-height: 24px
+    background-color: #bebebe
+    border-radius: 22px
+    vertical-align: text-bottom
+    transition: all 0.3s linear
+    &:before 
+      content: ''
+      position: absolute
+      left: 0
+      width: 38px
+      height: 20px
+      background-color: #bebebe
+      border-radius: 11px
+      transform: translate3d(2px, 2px, 0) scaleX(1)
+      transition: all 0.25s linear
+    
+    &:after 
+      content: ''
+      position: absolute
+      left: 0
+      width: 20px
+      height: 20px
+      background-color: #fff
+      border-radius: 11px
+      box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24)
+      transform: translate3d(2px, 2px, 0)
+      transition: all 0.2s ease-in-out
+    
+  
+  &__span 
+    font-size: 14px
+    margin-left: 5px
+    font-weight: 400
+

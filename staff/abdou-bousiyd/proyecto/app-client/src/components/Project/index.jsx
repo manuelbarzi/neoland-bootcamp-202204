@@ -1,72 +1,133 @@
-import React, {useState} from 'react'
-import Split from 'react-split-grid'
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import Split from "react-split-grid";
 import Editor from "@monaco-editor/react";
 import { emmetHTML, emmetCSS } from "emmet-monaco-es";
-import Navbar from '../Navbar';
-import Modal from '../Modal'
-import Settings from '../Settings'
+import Navbar from "../Navbar";
+import Modal from "../Modal";
+import Settings from "../Settings";
+import ProjectTitle from "../ProjectTitle";
+import Alert from "../Alert";
+import { isJwtValid } from "../../validators";
+import retrieveUser from "../../logic/retrieveUser";
+import saveProject from "../../logic/saveProject";
+import Login from "../Login";
 
-import './splitGrid.css'
-import './index.sass'
-import '../../app.css';
-
+import "./splitGrid.css";
+import "./index.sass";
+import "../../app.css";
 
 const Project = () => {
+  // const [timestamp, setTimestamp] = useState(null)
+  const [alert, setAlert] = useState(null);
+  const [name, setName] = useState(null);
+  const [_, setIsEditorReady] = useState(false);
+  const [active, setActive] = useState(false);
+  const [activeTitle, setActiveTitle] = useState(false);
+  const [projectTitle, setProjectTitle] = useState("");
+  const [editorValues, setEditorValues] = useState({
+    html: "",
+    js: "",
+    css: "",
+  });
+  const [editorOptions, setEditorOptions] = useState({
+    fontSize: 14,
+    minimap: {
+      enabled: true,
+    },
+    lineNumbers: "on",
+    theme: "vs-dark",
+  });
 
-    const toggle = () => {
-        setActive(!active)
-    }
+  const navigate = useNavigate();
 
-    const [_, setIsEditorReady] = useState(false);
-    const [active, setActive] = useState(false)
-    const [editorValues, setEditorValues] = useState({
-        html: "",
-        js: "",
-        css: "",
+  const toggle = () => {
+    setActive(!active);
+  };
+
+  const toggleTitle = () => {
+    setActiveTitle(!activeTitle);
+  };
+
+  const save = () => {
+    const code = JSON.stringify(editorValues);
+    saveProject(sessionStorage.token, null, projectTitle, code, (error) => {
+      if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+
+        return;
+      }
+      // setTimestamp(Date.now())
     });
-    const [editorOptions, setEditorOptions] = useState({
-        fontSize: 14,
-        minimap: {
-        enabled: true
-        },
-        lineNumbers: 'on',
-        theme:  'vs-dark',
-    })
+    toggleTitle();
+  };
 
-    const handleOnOptionsChanged = options => {
-        console.log(options)
-        setEditorOptions(options)
+  const loadUser = (openModal) => {
+    if (isJwtValid(sessionStorage.token)) {
+      retrieveUser(sessionStorage.token, (error, user) => {
+        if (error) {
+          setAlert(<Alert error message={error.message} />);
+          setTimeout(() => {
+            setAlert(null);
+          }, 4000);
+
+          // handleLogout()
+
+          return;
+        }
+        setName(user.name);
+        if (openModal) {
+          console.log(767676);
+          toggleTitle();
+        }
+        // setView('project')
+      });
     }
-    
-    
-    const handleHtmlChange = (html) => {
-        setEditorValues({
-            ...editorValues,
-            html
-        });
-    };
+    // else navigate('/login')
+  };
 
-    const handleCsslChange = (css) => {
-        setEditorValues({
-          ...editorValues,
-          css
-        });
-    };
-      const handleJslChange = (js) => {
-        setEditorValues({
-          ...editorValues,
-          js
-        });
-    };
+  useEffect(() => {
+    loadUser();
+  }, []);
 
-    const handleEditorDidMount = () => {
-        console.log(window.monaco)
-        emmetHTML(window.monaco);
-        emmetCSS(window.monaco);
-        setIsEditorReady(true);
-    };
-    
-    const renderPreview = `
+  const handleOnOptionsChanged = (options) => {
+    setEditorOptions(options);
+  };
+
+  const handleTitleProject = (title) => {
+    setProjectTitle(title);
+  };
+
+  const handleHtmlChange = (html) => {
+    setEditorValues({
+      ...editorValues,
+      html,
+    });
+  };
+
+  const handleCsslChange = (css) => {
+    setEditorValues({
+      ...editorValues,
+      css,
+    });
+  };
+  const handleJslChange = (js) => {
+    setEditorValues({
+      ...editorValues,
+      js,
+    });
+  };
+
+  const handleEditorDidMount = () => {
+    emmetHTML(window.monaco);
+    emmetCSS(window.monaco);
+    setIsEditorReady(true);
+  };
+
+  const renderPreview = `
     <!DOCTYPE html>
       <html>
       <head>
@@ -82,80 +143,88 @@ const Project = () => {
     </html>
     `;
 
-    return(
+  return (
+    <div className="project">
+      <Navbar toggle={toggle} toggleTitle={toggleTitle} name={name} />
 
-        <div className='project'>
-            <Navbar toggle={toggle} />
+      <Modal active={active} toggle={toggle}>
+        <Settings
+          editorOptions={editorOptions}
+          handleOnOptionsChanged={handleOnOptionsChanged}
+        />
+      </Modal>
 
-            <Modal active={active} toggle={toggle}>
-                <Settings editorOptions={editorOptions} handleOnOptionsChanged={handleOnOptionsChanged} />
-            </Modal>
+      <Modal active={activeTitle} toggle={toggleTitle}>
+        {name ? (
+          <ProjectTitle
+            projectTitle={projectTitle}
+            handleTitleProject={handleTitleProject}
+            save={save}
+            toggleTitle={toggleTitle}
+          />
+        ) : (
+          <Login toggleTitle={toggleTitle} loadUser={loadUser} />
+        )}
+      </Modal>
 
-            <Split 
-                render={({ getGridProps, getGutterProps, }) => (
-                    <section className='grid' {...getGridProps()}>
-                        <div>
-                            <Editor 
-                                className='editor html'
-                                defaultLanguage="html"
-                                placeholder='html' 
-                                theme="vs-dark"
-                                height="100%"
-                                onChange={handleHtmlChange} 
-                                defaultValue={editorValues.html}
-                                onMount={handleEditorDidMount}
-                                options={editorOptions}
-                            />
-                        </div>
+      {alert && alert}
+      <Split
+        render={({ getGridProps, getGutterProps }) => (
+          <section className="grid" {...getGridProps()}>
+            <div>
+              <Editor
+                className="editor html"
+                defaultLanguage="html"
+                placeholder="html"
+                theme="vs-dark"
+                height="100%"
+                onChange={handleHtmlChange}
+                defaultValue={editorValues.html}
+                onMount={handleEditorDidMount}
+                options={editorOptions}
+              />
+            </div>
 
-                        <div>
-                            <Editor
-                                className='editor css' 
-                                defaultLanguage="css"
-                                placeholder='css' 
-                                theme="vs-dark"
-                                height="100%"
-                                onChange={handleCsslChange} 
-                                defaultValue={editorValues.css}
-                                editorDidMount={handleEditorDidMount}
-                                onMount={handleEditorDidMount}
-                                options={editorOptions}
-                            />
-                        </div>
-        
-                        <div>
-                            <Editor
-                                className='editor js' 
-                                defaultLanguage="css"
-                                placeholder='js' 
-                                theme="vs-dark"
-                                onChange={handleJslChange} 
-                                defaultValue={editorValues.js}
-                                options={editorOptions}
-                            />
-                        </div>
+            <div>
+              <Editor
+                className="editor css"
+                defaultLanguage="css"
+                placeholder="css"
+                theme="vs-dark"
+                height="100%"
+                onChange={handleCsslChange}
+                defaultValue={editorValues.css}
+                editorDidMount={handleEditorDidMount}
+                onMount={handleEditorDidMount}
+                options={editorOptions}
+              />
+            </div>
 
-                        <div
-                            className="vertical-gutter"
-                            {...getGutterProps("column", 1)}
-                        />
-                
-                        <div
-                            className="horizontal-gutter"
-                            {...getGutterProps("row", 1)}
-                        />
+            <div>
+              <Editor
+                className="editor js"
+                defaultLanguage="js"
+                placeholder="js"
+                theme="vs-dark"
+                onChange={handleJslChange}
+                defaultValue={editorValues.js}
+                options={editorOptions}
+              />
+            </div>
 
-                        {/* <iframe id="iframe"  srcdoc="<p>Hello world!</p>"/> */}
-                        <div>
-                            <iframe id="iframe" scrolling="no" srcdoc={renderPreview}/>
-                        </div>
-                    </section>
-                )}
-                
-                />
-        </div>
-    )
-}
+            <div className="vertical-gutter" {...getGutterProps("column", 1)} />
 
+            <div className="horizontal-gutter" {...getGutterProps("row", 1)} />
+
+            {/* <iframe id="iframe"  srcdoc="<p>Hello world!</p>"/> */}
+            <div>
+              <iframe id="iframe" scrolling="no" srcdoc={renderPreview} />
+            </div>
+          </section>
+        )}
+      />
+    </div>
+  );
+};
 
 export default Project;

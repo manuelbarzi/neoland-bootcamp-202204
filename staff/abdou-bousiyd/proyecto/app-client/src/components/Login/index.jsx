@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { useNavigate,Link } from "react-router-dom";
 import authenticateUser from '../../logic/authenticateUser'
 import Alert from '../Alert'
+import '../Login/index.sass'
 
 
-const Login = () => {
+const Login = ({toggleTitle, loadUser}) => {
+    // console.log(toggle,122)
     const navigate = useNavigate()
 
     const [alert, setAlert] = useState(null)
@@ -28,6 +30,8 @@ const Login = () => {
 
             sessionStorage.token = token
             navigate('/project')
+            loadUser && loadUser(true)
+            toggleTitle()
         } catch (error) {
             if (error) {
                 setAlert(<Alert error message={error.message} />)
@@ -41,30 +45,40 @@ const Login = () => {
 
 
     return(
-        <form className='login_Container' onSubmit={handleSubmit}>
+        <form className='login' onSubmit={handleSubmit}>
+            
             {alert && alert}
-            <div className='login_Container_Auth'>
-                <h1 className='login_Title'>Login</h1>
-                <input 
-                    className='login_Input' 
-                    type='text' 
-                    placeholder='Username' 
-                    name='username'
-                    onChange={handleInputChange}
-                    required 
-                />
 
-                <input 
-                    className='login_Input' 
-                    type='password' 
-                    placeholder='password' 
-                    name='password'
-                    onChange={handleInputChange} 
-                    required
-                />
+            <div className='login__Auth'>
 
-                <Link className='Login_link' to='/Register'>Register</Link>
-                <button className='login_Btn' type='submit'><span>Login</span></button>
+
+                <div className='login__Auth__Items'>
+                    <h1 className='login__Auth__Items__Title'>Login</h1>
+                    <input 
+                        className='login__Auth__Items__Input' 
+                        type='text' 
+                        placeholder='Username' 
+                        name='username'
+                        onChange={handleInputChange}
+                        required 
+                    />
+
+                    <input 
+                        className='login__Auth__Items__Input' 
+                        type='password' 
+                        placeholder='password' 
+                        name='password'
+                        onChange={handleInputChange} 
+                        required
+                    />
+
+                    <Link className='login__Auth__Items__Link' to='/Register'>Register</Link>
+                    <button className='login__Auth__Items__Btn' type='submit'><span>Login</span></button>
+                </div>
+
+                <div className='login__Auth__Img'>
+                    <img className="login__Auth__Img__Tag" src="https://storage.googleapis.com/devitary-image-host.appspot.com/15848031292911696601-undraw_designer_life_w96d.svg" alt="imagen de login"/>
+                </div>
 
             </div>
         </form>

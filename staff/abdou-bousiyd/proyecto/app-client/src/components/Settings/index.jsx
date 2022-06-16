@@ -1,4 +1,7 @@
 import React, { useState,useEffect } from 'react'
+import '../Settings/index.sass'
+
+
 
 const Settings = ({editorOptions: options, handleOnOptionsChanged}) => {
 
@@ -30,26 +33,39 @@ const Settings = ({editorOptions: options, handleOnOptionsChanged}) => {
         setEditorOptions({
           ...editorOptions,
           theme: e.target.value
-      })}
+      })
+    }
   }
 
 
     return (
-        <form className="app">
-          <h3>Settings </h3>
-          <div>
+        <form className="Settings app">
+          <div className="Settings__Options">
+            <h3 >Settings </h3>
 
             <label>Font Size </label>
             <input type="number" name="fontSize" onChange={handleOnchange} />
             <br />
 
-            <label>Minimap </label>
+            {/* <label>Minimap </label>
             <input type="checkbox" name="minimap" onChange={handleOnchange} checked={editorOptions.minimap.enabled === true } />
-            <br />
+            <br /> */}
 
-            <label>Line number </label>
+            <label className="switch">
+              <span className="switch__span">Minimap</span>
+              <input className="switch__input" type="checkbox" name="minimap" onChange={handleOnchange} checked={editorOptions.minimap.enabled === true } />
+              <i className="switch__icon"></i>
+            </label>
+
+            {/* <label>Line number </label>
             <input type="checkbox" name="lineNumbers" onChange={handleOnchange} checked={editorOptions.lineNumbers === 'on' } />
-            <br />
+            <br /> */}
+
+            <label className="switch">
+              <span className="switch__span">Line number</span>
+              <input className="switch__input" type="checkbox" name="lineNumbers" onChange={handleOnchange} checked={editorOptions.lineNumbers === 'on' } />
+              <i className="switch__icon"></i>
+            </label>
             
             <label>Themes </label>
             <select name="theme" onChange={handleOnchange} >
