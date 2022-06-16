@@ -3,7 +3,7 @@ const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
 
-function retrieveEvent(userId) {
+function retrieveOwnerEvent(userId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
 
     return User.findById(userId).lean()
@@ -11,7 +11,7 @@ function retrieveEvent(userId) {
             if (!user)
                 throw new NotFoundError(`owner with id ${userId} does not exist`)
 
-            return Event.find().lean()
+            return Event.find({owner: userId}).lean()
         })
         .then(events => {
             events.forEach(event => {
@@ -20,7 +20,7 @@ function retrieveEvent(userId) {
 
                 delete event.__v
 
-                delete event.user
+                delete event.user//
             })
 
             return events
@@ -28,4 +28,4 @@ function retrieveEvent(userId) {
 
 }
 
-module.exports = retrieveEvent
+module.exports = retrieveOwnerEvent

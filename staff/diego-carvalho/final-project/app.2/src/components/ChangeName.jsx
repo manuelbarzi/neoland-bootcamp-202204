@@ -1,6 +1,6 @@
 import {useContext} from 'react'
 import React from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'vendor/Loggy'
 import Context from './Context'
 import updateUserName from '../logic/updateUserName'
 

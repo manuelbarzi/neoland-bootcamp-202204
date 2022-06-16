@@ -1,15 +1,15 @@
 import { useState, useEffect, useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'vendor/Loggy'
 import Context from './Context'
 import retrieveUser from '../logic/retrieveUser'
 import MyCalendar from './MyCalendar'
 import EventList from './EventList'
 import Profile from './Profile'
 import EventOwner from './EventOwner'
-import { isJwtValid } from '../validators'
+import { isJwtValid } from 'validators'
 import './Home.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
-import { MdHome, MdOutlineCalendarToday, MdLogout, MdSearch, MdPermIdentity, MdOutlineBeachAccess } from "react-icons/md"
+import { MdHome, MdOutlineCalendarToday, MdLogout, MdSearch, MdPermIdentity, MdAddCircleOutline } from "react-icons/md"
 import SearchBar from './SeachBar'
 
 
@@ -106,7 +106,7 @@ function Home({ onUserLogout }) {
             <footer className="Home__footer Container">
                 <nav className='nav'>
                     <a href="#" onClick={handleHomeClick}><MdHome className="icons" /></a>
-                    <a href="#" onClick={handleEventOwnerClik}><MdOutlineBeachAccess className="icons" /></a>
+                    <a href="#" onClick={handleEventOwnerClik}><MdAddCircleOutline className="icons" /></a>
                     <a href="#" onClick={handleMyCalendarClick}><MdOutlineCalendarToday className="icons" /></a>
                     <a href="#" onClick={handleProfileClick}><MdPermIdentity className="icons" /></a>
                 </nav>

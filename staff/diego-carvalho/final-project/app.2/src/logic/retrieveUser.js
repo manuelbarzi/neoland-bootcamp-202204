@@ -1,6 +1,6 @@
-import Logger from '../vendor/Loggy'
-import Apium from '../vendor/Apium'
-import { validateJwt } from '../validators'
+import Logger from 'vendor/Loggy'
+import Apium from 'vendor/Apium'
+import { validateJwt } from 'validators'
 
 function retrieveUser(token, callback) {
     const logger = new Logger('retrieveUser')

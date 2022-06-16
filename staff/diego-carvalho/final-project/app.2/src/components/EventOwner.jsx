@@ -1,12 +1,10 @@
 import { useState, useEffect, useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'vendor/Loggy'
 import Context from './Context'
-import retrieveUser from '../logic/retrieveUser'
 import saveEvent from '../logic/saveEvent'
-import EventList from './EventList'
-import { isJwtValid } from '../validators'
+import { isJwtValid } from 'validators'
 import './Home.sass'
-import { useNavigate, Routes, Route } from 'react-router-dom'
+import { useNavigate} from 'react-router-dom'
 import { MdAddCircle } from "react-icons/md"
 
 
@@ -20,31 +18,30 @@ function EventOwner() {
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
 
-    useEffect(() => {
-        logger.info('componentDidMount')
+    // useEffect(() => {
+    //     logger.info('componentDidMount')
 
-        if (isJwtValid(sessionStorage.token))
-            retrieveUser(sessionStorage.token, (error) => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+    //     if (isJwtValid(sessionStorage.token))
+    //             setView('event')
+    
+    //     else navigate('/login')
+    // }, [])
 
-                    return
-                }
+    const handleSaveSubmit = event => {
+        event.preventDefault()
 
-                setView('list')
-            })
-        else navigate('/login')
-    }, [])
+        const { target: { title: { value: title } } } = event
+        const { target: { text: { value: description } } } = event
 
-    const handleAddClick = () => {
-        saveEvent(sessionStorage.token, null, null, null, error => {
+        saveEvent(sessionStorage.token, null, title, description, error => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 
                 return
             }
+            navigate('/')
 
-            setTimestamp(Date.now())
+            handleFeedback({ level: 'success', message: 'event saved' })
         })
     }
 
@@ -53,12 +50,14 @@ function EventOwner() {
     return isJwtValid(sessionStorage.token) ?
 
         <div className="EventOwner Container">
+            <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-            {view === 'list' && <EventList timestamp={timestamp} />}
+            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title"></textarea>
+            <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Write your description"></textarea>
 
-            <div className='EventOwner__button Container'>
-                <a href="#" onClick={handleAddClick}><MdAddCircle className="EventOwner__button" /></a>
-            </div>
+            <button className="button-event">Save</button>
+
+            </form>
 
         </div> : <></>
 }

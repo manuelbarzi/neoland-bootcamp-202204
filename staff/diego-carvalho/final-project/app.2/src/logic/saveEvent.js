@@ -1,6 +1,6 @@
-import Logger from '../vendor/Loggy'
-import Apium from '../vendor/Apium'
-import { validateJwt } from '../validators'
+import Logger from 'vendor/Loggy'
+import Apium from 'vendor/Apium'
+import { validateJwt } from 'validators'
 
 function saveEvent(token, eventId, title, description, callback) {
     const logger = new Logger('saveEvent')

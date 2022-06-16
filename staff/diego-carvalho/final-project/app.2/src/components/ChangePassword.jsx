@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'vendor/Loggy'
 import Context from './Context'
 import updateUserPassword from '../logic/updateUserPassword'
 

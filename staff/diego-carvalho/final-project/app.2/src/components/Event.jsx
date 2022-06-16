@@ -1,29 +1,30 @@
 import { useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'vendor/Loggy'
 import Context from './Context'
 import deleteEvent from '../logic/deleteEvent'
 import saveEvent from '../logic/saveEvent'
 import './Event.sass'
+import{useNavigate} from 'react-router-dom'
 
 function Event(props) {
     const logger = new Logger('Event')
-
+ console.log(props)
     logger.info('call')
 
     const { handleFeedback } = useContext(Context)
+    const navigate = useNavigate()
+    const { event, onRemove } = props
 
     const handleRemoveClick = () => {
-        const { eventId, onRemove } = props
-
-        if (eventId)
-            deleteEvent(sessionStorage.token, eventId, error => {
+        if (event.id)
+            deleteEvent(sessionStorage.token, event.id, error => {
                 if (error) {
                     handleFeedback({ level: 'error', message: error.message })
 
                     return
                 }
 
-                onRemove(eventId)
+                onRemove(event.id)
             })
     }
 
@@ -40,6 +41,7 @@ function Event(props) {
 
                 return
             }
+            navigate('/')
 
             handleFeedback({ level: 'success', message: 'event saved' })
         })
@@ -48,11 +50,11 @@ function Event(props) {
     logger.info('render')
 
     return <div className="Event">
-
         <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
-            <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
+            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={event.title}></textarea>
+            {/* <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea> */}
+            <h2 className="Input Input--light Event--description" > {event.description} </h2>
 
             <button className="button-event" onClick={handleRemoveClick}>cancelar</button>
             <button className="button-event">Save</button>

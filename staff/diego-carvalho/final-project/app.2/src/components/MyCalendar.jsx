@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
-import Logger from '../vendor/Loggy'
+import Logger from 'vendor/Loggy'
 import Context from './Context'
 import retrieveEvent from '../logic/retrieveEvent'
 import Event from './Event'
@@ -42,7 +42,7 @@ function MyCalendar({ timestamp }) {
     return events && events.length ?
         <ul className="EventList__list Container">
             {events.map(event => <li key={event.id}>
-                <Event eventId={event.id} description={event.description} onRemove={handleRemoveEvent} />
+                <Event eventId={event.id} title={event.title} description={event.description} onRemove={handleRemoveEvent} />
             </li>)}
         </ul>
         :
