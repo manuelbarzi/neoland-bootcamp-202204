@@ -16,7 +16,10 @@ function retrieveUserActivities(token) {  // recuperar
         if (status === 200) {
             const data = JSON.parse(payload)
             const activities = data.activities
-            activities.forEach(activity => activity.date = new Date(activity.date))
+            activities.forEach(activity => {
+                activity.date = new Date(activity.date)
+                activity.points.forEach(point => point.date = new Date(point.date))
+            })
             return activities
         } 
         else if (status >= 400 && status < 500) { 

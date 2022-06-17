@@ -4,7 +4,7 @@ import deleteActivity from '../../logic/deleteActivity'
 import toggleLikeActivity from '../../logic/toggleLikeActivity'
 import MapView from './MapView'
 import '../../styles/BoxHeader.sass'
-import calculateTotalDistance from '../../logic/calculateTotalDistance'
+import calculateActivityData from '../../logic/calculateActivityData'
 
 function Activity (props) {
     
@@ -40,21 +40,18 @@ function Activity (props) {
     }
     
     const { likes: { length : likes }, comments: { length : comments }, date, title, user, points } = activity
-    const totalAlt = points[points.length-1].altitude-points[0].altitude
-    const seconds = (points[points.length-1].date.getTime() - points[0].date.getTime()) / 1000; // calculate the ssecond between start and end
-    const totalTime = new Date(seconds * 1000).toISOString().substring(14, 19) // convert the senconds to time (hours,minutes)
-    const distance = calculateTotalDistance(points)/1000  // calculade the distance between all the points and convert to km
-    
-    const options = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  }
+    const data = calculateActivityData(points)
+
+    const timeOptions = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  }
     
     return <div className='BoxHeader'>
         <div className="Header__activity">
             <h2>{user.name}</h2>
-            <h2>{date.toLocaleDateString("es-ES", options)}</h2>
+            <h2>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
             <h2>{title}</h2>
-            <h2>Altitude: {totalAlt}</h2>
-            <h2>Time: {totalTime}</h2>
-            <h2>Distance: {distance} Km</h2>
+            <h2>Altitude: {data.altitude} m</h2>
+            <h2>Time: {data.time}</h2>
+            <h2>Distance: {data.distance} Km</h2>
         </div>
 
         { setDelete && <div className='Container'> 

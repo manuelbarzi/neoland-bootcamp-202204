@@ -8,24 +8,27 @@ import Timer from './Timer'
 
 function ActivityRecord(props) {
 
-    const [timestamp, setTimestamp] = useState(null)
     const [position, setPosition] = useState(null)
     const [view, setView] = useState('map')
     const { handleFeedback } = useContext(Context)
 
 
     useEffect(() => {
-        watchPosition()
+        refreshLocation()
+
+        const interval = setInterval(() => {
+            refreshLocation()
+        }, 4000);
+        
+        return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
     }, [])
 
-
-    const watchPosition = () => {
-        navigator.geolocation.watchPosition(function(position) {
+    const refreshLocation = () => {
+        navigator.geolocation.getCurrentPosition(function(position) {
             setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
             console.log('set position')
-        }, function(error){
-            handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 400_000 })
+        })
+
     }
 
 
@@ -33,7 +36,6 @@ function ActivityRecord(props) {
         try {
             await addPointToActivity(props.activityId, position)
             handleFeedback({ type: 'success', message: 'New point saved!' })
-            setTimestamp(Date.now())
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         }  
@@ -52,7 +54,6 @@ function ActivityRecord(props) {
     const handleMapClick = () => setView('map')
 
 
-
     return  <div className="Container Overflow mw mh">
     <header className="Header">
         <h1 className="Center"></h1>
@@ -61,8 +62,9 @@ function ActivityRecord(props) {
 
     <main className="Home__body mw mh">
         { view === 'map' && position && <Map position={position} center={true}/> } 
-        { view === 'timer' && <ActivityInfo activityId={props.activityId} onPointRegistered={timestamp}/> } 
+        { view === 'timer' && <Timer activityId={props.activityId}/> } 
     </main>
+
 
     
     <footer className="Footer Footer__activity">

@@ -12,7 +12,7 @@ function Register (props){
         props.onWelcomeLinkClicked()
     }
 
-    const handleFormSubmit = event => {
+    const handleFormSubmit = async(event) => {
         event.preventDefault()
 
         const name = event.target.name.value
@@ -27,21 +27,13 @@ function Register (props){
         }
 
         try {
-            registerUser(name, username, password, email, error => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return 
-                }
+            await registerUser(name, username, password, email)
+            
+            const token = await authenticateUser(username, password)
 
-                authenticateUser(username, password, (error, token) => {
-                    if (error) {
-                        handleFeedback({ type: 'error', message: error.message})
-                        return
-                    }
-                    sessionStorage.token = token
-                    props.onUserLoggedIn()
-                })
-            })
+            sessionStorage.token = token
+            props.onUserLoggedIn()
+
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }

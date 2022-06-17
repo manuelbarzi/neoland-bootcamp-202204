@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { isJwtValid } from 'validators'
+import { isJwtValid, validateUsername } from 'validators'
 import Context from '../Context'
 import ActivityList from './ActivityList'
 import CommentList from './CommentList'
@@ -10,6 +10,7 @@ import ChangePassword from '../settings/ChangePassword'
 import ChangeEmail from '../settings/ChangeEmail'
 import DeleteUser from '../settings/DeleteUser'
 import DeleteActivity from '../settings/DeleteActivity'
+import retrieveUser from '../../logic/retrieveUser'
 import '../../styles/List.sass'
 
 
@@ -22,13 +23,25 @@ function Home(props) {
     const navigate = useNavigate()
 
 
-    // primero renderiza y luego lanza el DidMount
     useEffect(() => {
-        if (isJwtValid(sessionStorage.token)) {
-            setView('Home')
-        } else navigate('/') 
+        validateUser()
     }, [] ) 
 
+    const validateUser = async() => {
+        try {
+        if (isJwtValid(sessionStorage.token)) {
+            await retrieveUser(sessionStorage.token)
+                setView('Home')
+            } else {
+                navigate('/') 
+                handleLogoutClick()
+            } 
+        } catch(error) {
+            navigate('/') 
+            handleLogoutClick()
+            handleFeedback({ type: 'error', message: error.message})
+        }
+    }
 
     const handleHomeClick = () => {
         setView('Home')

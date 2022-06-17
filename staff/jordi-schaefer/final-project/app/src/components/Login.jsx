@@ -11,23 +11,17 @@ function Login (props) {
         props.onWelcomeLinkClicked()
     }
 
-    const handleFormSubmit = event => {
+    const handleFormSubmit = async(event) => {
         event.preventDefault()
 
         const username = event.target.username.value
         const password = event.target.password.value
 
         try {
-            authenticateUser(username, password, (error, token) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
-                }
-        
-                sessionStorage.token = token
-                // la callback son los props de la app
-                props.onUserLoggedIn()
-            })
+            const token = await authenticateUser(username, password)
+
+            sessionStorage.token = token
+            props.onUserLoggedIn()
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }

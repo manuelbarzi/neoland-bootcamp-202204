@@ -1,33 +1,32 @@
 import { validateJwt} from 'validators'
 import Apicaller from 'apicaller'
 
-function retrieveUser(token, callback) {
+function retrieveUser(token) {
     
     validateJwt(token)
 
     const api = new Apicaller(process.env.REACT_APP_API_URL)
 
-    api.get('/users', {
-        headers: { 'Authorization': `Bearer ${token}`}}, (error, {status, payload}) => {
+    return (async () => {
+        
+        const result = await api.get('/users', {
+            headers: { 'Authorization': `Bearer ${token}`}})
 
-            if (error) {
-                callback(error)
-                return
-            }
+        const { status, payload } = result
+
             if (status === 200) {
                 const data = JSON.parse(payload)
                 const user = { name: data.name, username: data.username }
-                callback(null, user)
+                return user
             } 
             else if (status >= 400 && status < 500) { 
-                const data = JSON.parse(payload)
-                callback(new Error(data.error)) 
-            } 
-            else {
-                callback(new Error('server error'))
+                const data = JSON.parse(payload)  
+                throw new Error(data.error) 
             }
-        }
-    )
+            else { 
+                throw new Error('server error')
+            }
+    })()
 }
 
 export default retrieveUser

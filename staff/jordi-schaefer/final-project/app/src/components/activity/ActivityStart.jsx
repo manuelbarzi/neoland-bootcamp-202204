@@ -14,41 +14,32 @@ function ActivityStart(props) {
     const navigate = useNavigate()
     
 
-
     useEffect(() => {
-        refreshLocation()
-        /*         logger.info('useEffect')
-        if (isJwtValid(sessionStorage.token)) {
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    handleLogoutClick()
-                    return
-                }
-                setName(user.name)  */
-                setSport('Cycling')
+        setSport('Cycling')
 
-         /*            })
-            //loadNotes()
-        } else navigate('/') */
-        const interval = setInterval(() => {
-            refreshLocation()
-        }, 4000);
-        
-        return () => clearInterval(interval); // This represents the unmount function, in which you need to clear your interval to prevent memory leaks.
+        getPosition()
     }, [])
-
-
-
-
-    const refreshLocation = () => {
+    
+    
+    const getPosition = () => {
         navigator.geolocation.getCurrentPosition(function(position) {
             setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
-            console.log('set position')
-        })
-
+            console.log('set first position')
+            watchPosition()
+        }, function(error){
+            handleFeedback({ type: 'error', message: 'Position error' })
+        }, { maximumAge: 400_000 })
     }
 
+    const watchPosition = () => {
+        navigator.geolocation.watchPosition(function(position) {
+            setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
+            console.log('set position')
+        }, function(error){
+            handleFeedback({ type: 'error', message: 'Position error' })
+        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 400_000 })    
+    }    
+    
 
 
     const handleCloseClick = () => navigate('/dashboard')
