@@ -1,4 +1,5 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
+const account = require('./account')
 
 const movement = new Schema({
     user: {
@@ -39,7 +40,9 @@ const movement = new Schema({
         type: Date,
         required: true,
         default: Date.now
-    }
+    }, 
+
+    account: [account]
 })
 
 module.exports = movement

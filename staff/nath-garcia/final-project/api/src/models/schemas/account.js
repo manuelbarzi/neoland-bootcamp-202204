@@ -9,8 +9,8 @@ const account = new Schema({
     },
 
     type: {
-        type: String,
-        enum: ['bank account', 'credit card', 'paypal', 'debit card', 'cash'],
+        type: Number,
+        enum: [0, 1, 2, 3, 4],
         require: false
     }, 
     text: {

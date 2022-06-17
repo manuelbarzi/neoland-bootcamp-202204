@@ -20,6 +20,7 @@ function Home({ onUserLogout }) {
 
     const handleLogoutClick = () => {
         handleLogout()
+        
     }
 
     const handleLogout = () => {

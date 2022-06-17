@@ -5,7 +5,7 @@ const deleteUser = require('./deleteUser')
 const { expect } = require('chai')
 
 describe('deleteUser', () => {
-    before(() => connect('mongodb://localhost:27017/notes-db-test'))
+    before(() => connect('mongodb://localhost:27017/final-pro-test'))
 
     beforeEach(() => User.deleteMany())
 
@@ -18,7 +18,7 @@ describe('deleteUser', () => {
                 surname: 'Pig',
                 username: 'lapeppa',
                 email: 'lapeppa@mail.com',
-                phone: 643643643,
+                phone: '643643643',
                 password: '01020300'
             })
 
@@ -58,7 +58,7 @@ describe('deleteUser', () => {
                 surname: 'Pig',
                 username: 'lapeppa',
                 email: 'lapeppa@mail.com',
-                phone: 643643643,
+                phone: '643643643',
                 password: '01020300'
             })
             

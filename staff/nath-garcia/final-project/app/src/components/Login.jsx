@@ -3,6 +3,7 @@ import Logger from '../vendor/Loggy'
 import Context from './Context'
 import authenticateUser from '../logic/authenticateUser'
 import { isJwtValid } from '../validators'
+import { Link } from 'react-router-dom'
 
 function Login(props) {
     const logger = new Logger('Login')
@@ -39,8 +40,9 @@ function Login(props) {
         <form className="Container" onSubmit={handleFormSubmit}>
         <input className="Input Input--light" type="username" name="username" placeholder="username" />
         <input className="Input Input--light" type="password" name="password" placeholder="password" />
-        <button className="Button Button--light">Login</button>
-        <button className="Button Button--light"><a href="#" className="Button Button--light" onClick={handleRegisterLinkClick}>Register</a></button>
+        <button className="Button Button--light" type="submit" >Login</button>
+        {/* <a href="#" className="Button Button--light" onClick={handleRegisterLinkClick}>Register</a> */}
+        <Link className="Button Button--light" to="/register" >Register</Link>
         </form>
     </div>
 }
