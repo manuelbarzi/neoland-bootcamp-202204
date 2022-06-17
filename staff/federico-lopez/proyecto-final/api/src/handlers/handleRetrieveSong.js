@@ -1,6 +1,5 @@
-const { retrieveInterpretationsFromSong } = require("../logic")
+const { retrieveSong } = require("../logic")
 const { handleErrorsAndRespond } = require("./helpers")
-
 
 module.exports = async (req, res) => {
     try {
@@ -9,9 +8,9 @@ module.exports = async (req, res) => {
         songName = songName.split('-').join(' ')
         artistName = artistName.split('-').join(' ')
 
-        const interpretations = await retrieveInterpretationsFromSong(songName, artistName)
+        const song = await retrieveSong(songName, artistName)
 
-        res.status(200).json(interpretations)
+        res.status(200).json(song)
     } catch (error) {
         handleErrorsAndRespond(error, res)
     }

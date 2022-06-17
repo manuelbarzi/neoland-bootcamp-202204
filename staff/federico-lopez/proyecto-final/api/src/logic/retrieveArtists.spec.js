@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { Artist } = require('../models')
-const retrieveArtists = require('./retrieveArtists')
+const { retrieveArtists } = require('./')
 const { expect } = require('chai')
 
 describe('retrieveArtists', () => {

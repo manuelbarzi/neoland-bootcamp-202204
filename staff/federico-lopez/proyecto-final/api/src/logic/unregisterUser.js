@@ -3,7 +3,7 @@ const { User } = require("../models")
 const { validatePassword } = require("validators")
 const { validateObjectId } = require('../validators')
 
-async function unregisterUser(userId, password) {
+module.exports = async (userId, password) => {
     validateObjectId(userId)
     validatePassword(password)
 
@@ -15,5 +15,3 @@ async function unregisterUser(userId, password) {
 
     await User.deleteOne({ _id: userId })
 }
-
-module.exports = unregisterUser

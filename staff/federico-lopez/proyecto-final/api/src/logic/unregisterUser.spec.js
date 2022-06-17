@@ -2,7 +2,7 @@ const { expect } = require('chai')
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { AuthError, NotFoundError } = require('errors')
 const { User } = require('../models')
-const unregisterUser = require('./unregisterUser')
+const { unregisterUser } = require('./')
 
 describe('unregisterUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))

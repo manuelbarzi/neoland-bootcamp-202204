@@ -4,7 +4,7 @@ const { validateStringNotEmptyOrBlank, validateDate} = require('validators')
 const { validateObjectId } = require('../validators')
 
 
-async function updateUser({ userId, firstName, lastName, dateOfBirth }) {
+module.exports = async ({ userId, firstName, lastName, dateOfBirth }) => {
     validateObjectId(userId)
     if (firstName) validateStringNotEmptyOrBlank(firstName, 'first name')
     if (lastName) validateStringNotEmptyOrBlank(lastName, 'last name')
@@ -14,5 +14,3 @@ async function updateUser({ userId, firstName, lastName, dateOfBirth }) {
 
     if (result.matchedCount === 0) throw new NotFoundError(`user with id ${userId} not found`)
 }
-
-module.exports = updateUser

@@ -1,7 +1,7 @@
 // import { useContext } from 'react'
 import Link from 'next/link'
 import { authenticateUser } from '../logic'
-import { verifyTokenWithAPICall } from './helpers'
+import { verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
 
 export default function Login(props) {

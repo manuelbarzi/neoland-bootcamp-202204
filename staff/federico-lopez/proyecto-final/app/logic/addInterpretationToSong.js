@@ -10,7 +10,7 @@ export async function addInterpretationToSong(token, songId, content) {
     const api = new Apium(context.API_URL)
 
     const { status, payload } = await api.post(
-        `songs/${songId}`,
+        `songs/${songId}/interpretations`,
         {
             headers: {
                 Authorization: `Bearer ${token}`,

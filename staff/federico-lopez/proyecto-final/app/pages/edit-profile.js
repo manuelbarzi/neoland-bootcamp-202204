@@ -2,11 +2,11 @@
 import { retrieveUser, updateUser } from '../logic'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import { verifyTokenWithAPICall } from './helpers'
+import { verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
 // import Context from './Context'
 
-function editProfile({ user }) {
+function editProfile({ token, user }) {
     // const { handleFeedback } = useContext(Context)
     const router = useRouter()
 

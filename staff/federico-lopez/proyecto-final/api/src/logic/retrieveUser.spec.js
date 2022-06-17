@@ -1,7 +1,7 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User } = require('../models')
 const { NotFoundError } = require('errors')
-const retrieveUser = require('./retrieveUser')
+const { retrieveUser } = require('./')
 const { expect } = require('chai')
 
 describe('retrieveUser', () => {
@@ -11,7 +11,7 @@ describe('retrieveUser', () => {
 
     beforeEach(async () => {
         await User.deleteMany()
-    
+
         user = await User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
     })
 
@@ -26,15 +26,15 @@ describe('retrieveUser', () => {
         expect(result.__v).to.be.undefined
         expect(result._id).to.be.undefined
     })
-    
-    it('fails on wrong credentials', async() => {
+
+    it('fails on wrong credentials', async () => {
         const wrongUserId = new ObjectId().toString()
         try {
             await retrieveUser(wrongUserId)
 
             throw new Error('it should not reach this point')
 
-        } catch(error) {
+        } catch (error) {
             expect(error).to.be.instanceOf(NotFoundError)
             expect(error.message).to.equal(`user with id ${wrongUserId} not found`)
         }

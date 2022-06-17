@@ -1,12 +1,11 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Artist, Song } = require('../models')
 const { NotFoundError, AuthError, FormatError } = require('errors')
-const addInterpretationToSong = require('./addInterpretationToSong')
+const { addInterpretationToSong } = require('.')
 const { expect } = require('chai')
 const { validateObjectId } = require('../validators')
 
 describe('addInterpretationToSong', () => {
-
 
     before(() => connect('mongodb://localhost:27017/pitch-us-test'))
 

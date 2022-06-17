@@ -3,7 +3,7 @@ const { NotFoundError, ConflictError } = require('errors')
 const { validateRank } = require('validators')
 const { validateObjectId } = require('../validators')
 
-async function addOrUpdateRankToInterpretation(userId, songId, interpretationId, rankAmount) {
+module.exports = async (userId, songId, interpretationId, rankAmount) => {
     validateObjectId(userId)
     validateObjectId(songId)
     validateObjectId(interpretationId)
@@ -39,5 +39,3 @@ async function addOrUpdateRankToInterpretation(userId, songId, interpretationId,
 
     await songFounded.save()
 }
-
-module.exports = addOrUpdateRankToInterpretation

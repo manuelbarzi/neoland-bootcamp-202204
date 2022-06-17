@@ -1,7 +1,7 @@
 const { connect, disconnect, isValidObjectId } = require('mongoose')
 const { User } = require('../models')
 const { AuthError } = require('errors')
-const authenticateUser = require('./authenticateUser')
+const { authenticateUser } = require('./')
 const { expect } = require('chai')
 
 describe('authenticateUser', () => {

@@ -8,7 +8,7 @@ const {
 const { validateObjectId } = require('../validators')
 
 
-async function createArtist(userId, name, genres, country) {
+module.exports = async (userId, name, genres, country) => {
     validateObjectId(userId)
     validateStringNotEmptyOrBlank(name, 'artist name')
     if (genres) validateGenres(genres)
@@ -30,5 +30,3 @@ async function createArtist(userId, name, genres, country) {
         throw error
     }
 }
-
-module.exports = createArtist

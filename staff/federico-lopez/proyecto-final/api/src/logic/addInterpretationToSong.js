@@ -4,7 +4,7 @@ const { validateInterpretationContent } = require('validators')
 const { Comment } = require('../models')
 const { validateObjectId } = require('../validators')
 
-async function addInterpretationToSong(user, song, content) {
+module.exports = async (user, song, content) => {
     validateObjectId(user)
     validateObjectId(song)
     validateInterpretationContent(content, 'interpretation content')
@@ -29,5 +29,3 @@ async function addInterpretationToSong(user, song, content) {
     
     return interpretation._id.toString()
 }
-
-module.exports = addInterpretationToSong

@@ -2,7 +2,7 @@ import { retrieveArtistsAndSongs } from "../logic"
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import SearchBar from "../components/SearchBar"
-import { verifyTokenWithAPICall } from './helpers'
+import { verifyTokenWithAPICall } from '../helpers'
 
 export default function Home({ token }) {
 

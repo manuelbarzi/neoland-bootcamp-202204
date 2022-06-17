@@ -1,7 +1,7 @@
 const { Artist } = require('../models')
 const { validateStringNotEmptyOrBlank } = require('validators')
 
-async function retrieveArtists(query) {
+module.exports = async query => {
     validateStringNotEmptyOrBlank(query)
     
     const re = new RegExp(query)
@@ -18,5 +18,3 @@ async function retrieveArtists(query) {
         return artist
     })
 }
-
-module.exports = retrieveArtists

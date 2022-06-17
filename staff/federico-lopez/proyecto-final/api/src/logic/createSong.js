@@ -3,7 +3,7 @@ const { NotFoundError } = require('errors')
 const { validateStringNotEmptyOrBlank, validateGenres, validateDate } = require('validators')
 const { validateObjectId } = require('../validators')
 
-async function createSong(userId, { artist, name, genres, album, date }) {
+module.exports = async (userId, { artist, name, genres, album, date }) => {
     validateObjectId(userId)
     validateObjectId(artist)
     validateStringNotEmptyOrBlank(name, 'song name')
@@ -23,5 +23,3 @@ async function createSong(userId, { artist, name, genres, album, date }) {
 
     return { id: _id.toString() }
 }
-
-module.exports = createSong

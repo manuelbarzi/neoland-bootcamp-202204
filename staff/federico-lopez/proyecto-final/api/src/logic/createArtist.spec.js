@@ -1,7 +1,7 @@
 const { connect, disconnect } = require('mongoose')
 const { Artist, User } = require('../models')
 const { ConflictError } = require('errors')
-const createArtist = require('./createArtist')
+const { createArtist } = require('./')
 const { validateObjectId } = require('../validators')
 const { expect } = require('chai')
 
@@ -13,7 +13,7 @@ describe('createArtist', () => {
     beforeEach(async () => {
         await User.deleteMany()
         await Artist.deleteMany()
-    
+
         user = await User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
         await Artist.create({ name: 'La Renga', genres: [Artist.ROCK], country: 'AR' })
     })

@@ -3,22 +3,36 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { connect, disconnect } = require('mongoose')
 const { 
+    /* USERS */
     handleRegisterUser, 
     handleAuthenticateUser, 
     handleRetrieveUser, 
     handleUpdateUser, 
     handleUnregisterUser,
+
+    /* TOKEN */
+    handleValidateToken,
+
+    /* ARTISTS */
     handleCreateArtist,
-    handleCreateSong,
     handleRetrieveArtists,
+
+    /* SONGS */
+    handleCreateSong,
     handleRetrieveSongs,
+    handleRetrieveSongsOfArtist,
+    handleRetrieveSong,
+
+    /* ARTISTS AND SONGS */
     handleRetrieveArtistsAndSongs,
+
+    /* INTERPRETATIONS */
     handleAddInterpretationToSong,
     handleRetrieveInterpretationsFromSong,
     handleRetrieveInterpretationFromSong,
-    handleRetrieveSongsOfArtist,
-    handleAddOrUpdateRankToInterpretation,
-    handleValidateToken
+
+    /* RANK */
+    handleAddOrUpdateRankToInterpretation
 } = require('./handlers')
 
 const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
@@ -45,7 +59,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         api.use('/api', routes)
 
-        /* CRUD USERS */
+        /* USERS */
         routes.post('/users', jsonBodyParser, handleRegisterUser)
         routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
         routes.get('/users/auth', handleValidateToken)
@@ -53,44 +67,26 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
-        /* CR ARTISTS */
+        /* ARTISTS */
         routes.post('/artists', jsonBodyParser, handleCreateArtist)
         routes.get('/artists', handleRetrieveArtists)
 
-        /* CR SONGS */
+        /* SONGS */
         routes.post('/songs', jsonBodyParser, handleCreateSong)
         routes.get('/songs', handleRetrieveSongs)
-        routes.get('/songs/artist/:artistId', handleRetrieveSongsOfArtist)
-
-        /* CR INTERPRETATIONS */
-        routes.post('/songs/:songId', jsonBodyParser, handleAddInterpretationToSong)
-        routes.get('/songs/:songId', handleRetrieveInterpretationsFromSong)
-        routes.get('/songs/:songId/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
-
-        /* CU RANK */
-        routes.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
+        routes.get('/songs/:songName/:artistName', handleRetrieveSong)
+        routes.get('/songs/artist/:artistName', handleRetrieveSongsOfArtist)
         
-        /* SEARCH */
+        /* ARTISTS AND SONGS */
         routes.get('/search', handleRetrieveArtistsAndSongs)
 
-        //     api.get('/api/users', handleRetrieveUser)
-        //     api.patch('/api/users', jsonBodyParser, handleUpdateUser)
-        //     api.delete('/api/users', jsonBodyParser, handleDeleteUser)
+        /* INTERPRETATIONS */
+        routes.post('/songs/:songId/interpretations', jsonBodyParser, handleAddInterpretationToSong)
+        routes.get('/songs/:songName/:artistName/interpretations', handleRetrieveInterpretationsFromSong)
+        routes.get('/songs/:songName/artists/:artistName/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
 
-        //     /* CRUD NOTES */
-        //     api.post('/api/notes', jsonBodyParser, handleCreateNote)
-        //     api.get('/api/notes', handleRetrieveNotes)
-        //     api.patch('/api/notes/:noteId', jsonBodyParser, handleUpdateNote)
-        //     api.delete('/api/notes/:noteId', handleDeleteNote)
-        //     api.get('/api/notes/public', handleRetrievePublicNotes)
-
-        //     /* CRUD COMMENTS */
-        //     api.post('/api/notes/:noteId', jsonBodyParser, handleAddCommentToNote)
-        //     api.delete('/api/notes/:noteId/:commentId', handleDeleteComment)
-
-        //     /* REACTIONS */
-        //     api.post('/api/notes/:noteId/reactions/:type', jsonBodyParser, handleToggleReactionToNote)
-
+        /* RANK */
+        routes.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
 
         api.listen(port, () => console.log(`API running on port ${port}`))
 

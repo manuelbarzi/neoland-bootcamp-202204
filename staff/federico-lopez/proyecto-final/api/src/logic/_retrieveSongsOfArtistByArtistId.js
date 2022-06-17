@@ -1,18 +1,17 @@
 const { NotFoundError } = require('errors')
 const { Song, Artist } = require('../models')
+const { validateObjectId } = require('../validators')
 const { validateStringNotEmptyOrBlank } = require('validators')
 
-module.exports = async artistName => {
-    validateStringNotEmptyOrBlank(artistName)
+module.exports = async artistId => {
+    validateObjectId(artistId)
 
-    const re = new RegExp(artistName)
+    const artistExists = await Artist.findById(artistId)
 
-    const artist = await Artist.findOne({ name: { $regex: re , $options: 'i' } })
-    
-    if (!artist) throw new NotFoundError(`artist ${artistName} not found`)
+    if(!artistExists) throw new NotFoundError(`artist with id ${artistId} not found`)
 
-    const songs = await Song.find({ artist: artist._id }).populate('artist', 'name').lean()
-    debugger
+    const songs = await Song.find({ artist: artistId }).lean()
+
     return songs.map(song => {
         song.id = song._id.toString()
         delete song._id
@@ -22,7 +21,7 @@ module.exports = async artistName => {
         delete song.album
         delete song.date
         delete song.interpretations
-        
+
         return song
     })
 }

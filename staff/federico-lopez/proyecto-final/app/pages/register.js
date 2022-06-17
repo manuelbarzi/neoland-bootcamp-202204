@@ -2,7 +2,7 @@
 import Link from 'next/link'
 import { registerUser } from 'logic'
 import { useRouter } from 'next/router'
-import { verifyTokenWithAPICall } from './helpers'
+import { verifyTokenWithAPICall } from '../helpers'
 // import Context from './Context'
 
 export default function Register(props) {

@@ -1,7 +1,7 @@
 const { connect, disconnect } = require('mongoose')
 const { User } = require('../models')
 const { ConflictError } = require('errors')
-const registerUser = require('./registerUser')
+const { registerUser } = require('./')
 const { expect } = require('chai')
 
 describe('registerUser', () => {
@@ -9,7 +9,7 @@ describe('registerUser', () => {
 
     beforeEach(() => {
         User.deleteMany()
-    
+
         User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
     })
 

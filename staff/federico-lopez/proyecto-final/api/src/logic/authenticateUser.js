@@ -2,7 +2,7 @@ const { User } = require('../models')
 const { AuthError } = require('errors')
 const { validatePassword, validateEmail } = require('validators')
 
-async function authenticateUser(email, password) {
+module.exports = async (email, password) => {
     validateEmail(email)
     validatePassword(password)
 
@@ -12,5 +12,3 @@ async function authenticateUser(email, password) {
 
     return user.id
 }
-
-module.exports = authenticateUser

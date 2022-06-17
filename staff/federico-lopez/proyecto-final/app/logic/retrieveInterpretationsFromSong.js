@@ -1,13 +1,15 @@
+import { validateStringNotEmptyOrBlank } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 
-export async function retrieveInterpretationsFromSong(songId) {
-    // TODO validate songId
-    
+export async function retrieveInterpretationsFromSong(songName, artistName) {
+    validateStringNotEmptyOrBlank(songName)
+    validateStringNotEmptyOrBlank(artistName)
+
     const api = new Apium(context.API_URL)
 
     const { status, payload } = await api.get(
-        `songs/${songId}`)
+        `songs/${songName}/${artistName}/interpretations`)
 
     const data = JSON.parse(payload)
 

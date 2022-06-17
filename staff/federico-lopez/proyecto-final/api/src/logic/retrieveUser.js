@@ -2,7 +2,7 @@ const { User } = require('../models')
 const { NotFoundError } = require('errors')
 const { validateObjectId } = require('../validators')
 
-async function retrieveUser(userId) {
+module.exports = async userId => {
     validateObjectId(userId)
 
     const user = await User.findById(userId).lean()
@@ -15,5 +15,3 @@ async function retrieveUser(userId) {
 
     return user
 }
-
-module.exports = retrieveUser

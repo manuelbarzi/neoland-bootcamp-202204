@@ -1,7 +1,7 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Artist, Song } = require('../models')
 const { NotFoundError } = require('errors')
-const createSong = require('./createSong')
+const { createSong } = require('./')
 const { validateObjectId } = require('../validators')
 const { expect } = require('chai')
 
@@ -63,12 +63,12 @@ describe('createSong', () => {
 
     it('fails on unexisting artist', async () => {
         const wrongArtistId = new ObjectId().toString()
-        
+
         try {
             await createSong(user.id, { artist: wrongArtistId, name: 'La razón que te demora', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0) })
 
             throw new Error('it should not reach this point')
-        } catch(error) {
+        } catch (error) {
             expect(error).to.be.instanceof(NotFoundError)
             expect(error.message).to.equal(`artist with id ${wrongArtistId} not found`)
         }

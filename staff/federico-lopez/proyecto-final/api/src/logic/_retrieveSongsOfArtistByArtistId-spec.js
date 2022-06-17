@@ -1,17 +1,25 @@
-const { connect, disconnect } = require('mongoose')
+const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { Song, Artist } = require('../models')
-const { retrieveSongs } = require('./')
+const {retrieveSongsOfArtist} = require('./retrieveSongsOfArtistByArtistId')
 const { expect } = require('chai')
+const { NotFoundError } = require('errors')
 
-describe('retrieveSongs', () => {
+describe('retrieveSongsOfArtist', () => {
     before(() => connect('mongodb://localhost:27017/pitch-us-test'))
+    let laRengaId, bandalosChinosId, divididosId
 
     beforeEach(async () => {
         await Artist.deleteMany()
         await Song.deleteMany()
 
-        const { _id: laRengaId } = await Artist.create({ name: 'La Renga', genres: [Artist.ROCK], country: 'AR' })
-        const { _id: bandalosChinosId } = await Artist.create({ name: 'Bandalos Chinos', genres: [Artist.INDIE], country: 'AR' })
+        const { _id: id1 } = await Artist.create({ name: 'La Renga', genres: [Artist.ROCK], country: 'AR' })
+        laRengaId = id1
+
+        const { _id: id2 } = await Artist.create({ name: 'Bandalos Chinos', genres: [Artist.INDIE], country: 'AR' })
+        bandalosChinosId = id2
+
+        const { _id: id3 } = await Artist.create({ name: 'Divididos', genres: [Artist.ROCK], country: 'AR' })
+        divididosId = id3
 
         await Promise.all([
             Song.create({ artist: laRengaId.toString(), name: 'La razón que te demora', genres: [Song.ROCK], album: 'Detonador de sueños', date: new Date(2003, 0) }),
@@ -21,11 +29,12 @@ describe('retrieveSongs', () => {
         ])
     })
 
-    it('succeeds on existing artists and songs and two matches', async () => {
-        const result = await retrieveSongs('la')
+    it('succeeds on existing artist with three songs', async () => {
+        const result = await retrieveSongsOfArtist(bandalosChinosId)
 
         expect(result).to.be.instanceOf(Array)
-        expect(result).to.have.length(2)
+        debugger
+        expect(result).to.have.length(3)
 
         result.forEach(song => {
             expect(song._id).to.be.undefined
@@ -37,7 +46,7 @@ describe('retrieveSongs', () => {
             expect(song.id).to.exist
         })
 
-        const songNames = ['La razón que te demora', 'La herida']
+        const songNames = ['Que demasiado', 'Dije tu nombre', 'La herida']
 
         songNames.forEach(songName => {
             const songIsIncluded = result.some(song => songName === song.name)
@@ -46,8 +55,8 @@ describe('retrieveSongs', () => {
         })
     })
 
-    it('succeeds on existing artists and songs and one match', async () => {
-        const result = await retrieveSongs('demasiado')
+    it('succeeds on existing artist with one song', async () => {
+        const result = await retrieveSongsOfArtist(laRengaId)
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(1)
@@ -59,14 +68,26 @@ describe('retrieveSongs', () => {
         expect(result[0].interpretations).to.be.undefined
         expect(result[0].__v).to.be.undefined
         expect(result[0].id).to.exist
-        expect(result[0].name).to.equal('Que demasiado')
+        expect(result[0].name).to.equal('La razón que te demora')
     })
 
-    it('succeeds on existing artists and songs, but no matches', async () => {
-        const result = await retrieveSongs('zZzZ')
+    it('succeeds on existing artist with no songs', async () => {
+        const result = await retrieveSongsOfArtist(divididosId)
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(0)
+    })
+
+    it('fails on unexisting artist', async () => {
+        const wrongArtistId = new ObjectId().toString()
+        try {
+            await retrieveSongsOfArtist(wrongArtistId)
+            
+            throw new Error('it should not reach this point')
+        } catch(error) {
+            expect(error).to.be.instanceof(NotFoundError)
+            expect(error.message).to.equal(`artist with id ${wrongArtistId} not found`)
+        }
     })
 
     afterEach(() => {

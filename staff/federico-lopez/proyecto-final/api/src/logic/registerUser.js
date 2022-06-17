@@ -2,7 +2,7 @@ const { User } = require('../models')
 const { ConflictError } = require('errors')
 const { validateUsername, validateEmail, validatePassword } = require('validators')
 
-async function registerUser(username, email, password) {
+module.exports = async (username, email, password) => {
     validateUsername(username)
     validateEmail(email)
     validatePassword(password)
@@ -20,5 +20,3 @@ async function registerUser(username, email, password) {
         throw error
     }
 }
-
-module.exports = registerUser

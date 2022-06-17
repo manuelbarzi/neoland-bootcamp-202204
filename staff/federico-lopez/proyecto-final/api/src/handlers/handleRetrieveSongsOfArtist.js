@@ -3,9 +3,11 @@ const { handleErrorsAndRespond } = require('./helpers')
 
 module.exports = async (req, res) => {
     try {
-        const { params: { artistId } } = req
+        let { params: { artistName } } = req
+
+        artistName = artistName.split('-').join(' ')
         
-        const songsOfArtist = await retrieveSongsOfArtist(artistId)
+        const songsOfArtist = await retrieveSongsOfArtist(artistName)
         
         res.status(200).json(songsOfArtist)
         

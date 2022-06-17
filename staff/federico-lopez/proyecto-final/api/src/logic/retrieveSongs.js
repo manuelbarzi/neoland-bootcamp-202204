@@ -1,7 +1,7 @@
 const { Song } = require('../models')
 const { validateStringNotEmptyOrBlank } = require('validators')
 
-async function retrieveSongs(query) {
+module.exports = async query => {
     validateStringNotEmptyOrBlank(query)
 
     const re = new RegExp(query)
@@ -9,7 +9,6 @@ async function retrieveSongs(query) {
     const songs = await Song.find({ name: { $regex: re , $options: 'i' }}).populate('artist', 'name').lean()
 
     return songs.map(song => {
-        debugger
         song.id = song._id.toString()
 
         delete song._id
@@ -23,5 +22,3 @@ async function retrieveSongs(query) {
         return song
     })
 }
-
-module.exports = retrieveSongs
