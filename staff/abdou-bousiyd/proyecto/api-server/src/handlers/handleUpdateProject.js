@@ -1,16 +1,19 @@
-const { updateProject } = require('../logic')
-const { verifyToken, handleErrorsAndRespond } = require('./helpers')
+const { updateProject } = require("../logic");
+const { verifyToken, handleErrorsAndRespond } = require("./helpers");
 
 module.exports = (req, res) => {
-    try{
-        const userId = verifyToken(req)
+  try {
+    const userId = verifyToken(req);
 
-        const { params: { projectId }, body: { title, code } } = req
+    const {
+      params: { projectId },
+      body: { title },
+    } = req;
 
-        updateProject(userId, projectId, title, code)
-            .then(() => res.status(204).send())
-            .catch(error => handleErrorsAndRespond(error, res))
-    }catch(error) {
-        handleErrorsAndRespond(error, res)
-    }
-}
+    updateProject(userId, projectId, title)
+      .then(() => res.status(204).send())
+      .catch((error) => handleErrorsAndRespond(error, res));
+  } catch (error) {
+    handleErrorsAndRespond(error, res);
+  }
+};

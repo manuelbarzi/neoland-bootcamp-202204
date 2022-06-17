@@ -203,7 +203,7 @@ const Project = () => {
             <div>
               <Editor
                 className="editor js"
-                defaultLanguage="js"
+                defaultLanguage="css"
                 placeholder="js"
                 theme="vs-dark"
                 onChange={handleJslChange}
@@ -218,7 +218,12 @@ const Project = () => {
 
             {/* <iframe id="iframe"  srcdoc="<p>Hello world!</p>"/> */}
             <div>
-              <iframe id="iframe" scrolling="no" srcdoc={renderPreview} />
+              <iframe
+                className="iframeResult"
+                id="iframe"
+                scrolling="no"
+                srcdoc={renderPreview}
+              />
             </div>
           </section>
         )}

@@ -47,7 +47,7 @@ const Dashboards = () => {
       return;
     }
 
-    saveProject(sessionStorage.token, id, newTitle, null, (error) => {
+    saveProject(sessionStorage.token, id, dashName, null, (error) => {
       if (error) {
         setAlert(<Alert error message={error.message} />);
         setTimeout(() => {
@@ -113,20 +113,26 @@ const Dashboards = () => {
 
             return (
               <div className="Dash__Container__Items">
-                {editDashId === id ? (
-                  <input
-                    onChange={handleInputChange}
-                    type="text"
-                    value={dashName === null ? title : dashName}
-                    placeholder="title"
-                  />
-                ) : (
-                  <div className="Dash__Container__Items__Iframe">
-                    <iframe id="iframe" scrolling="no" srcdoc={renderPreview} />
-
-                    {/* <h1>{title}</h1> */}
-                  </div>
-                )}
+                <div className="Dash__Container__Item">
+                  <h1>{title}</h1>
+                  {editDashId === id ? (
+                    <input
+                      onChange={handleInputChange}
+                      type="text"
+                      value={dashName === null ? title : dashName}
+                      placeholder="title"
+                    />
+                  ) : (
+                    <div className="Dash__Container__Items__Iframe">
+                      <iframe
+                        className="Iframe__target"
+                        id="iframe target"
+                        scrolling="no"
+                        srcdoc={renderPreview}
+                      />
+                    </div>
+                  )}
+                </div>
                 {editDashId === id ? (
                   <i onClick={() => save(id)}>SAVE</i>
                 ) : (
