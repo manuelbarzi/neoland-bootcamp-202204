@@ -41,7 +41,7 @@ export const Header = ({ className, ...props }) => {
 
     return <>
         <header {...props}
-            className={`${className} 
+            className={`${className} sticky top-0 z-50
                 w-full h-16 bg-white border-b-2 border-primary py-2 px-1`}>
             <nav className="h-full flex justify-between items-center">
                 <div className='pl-3'>

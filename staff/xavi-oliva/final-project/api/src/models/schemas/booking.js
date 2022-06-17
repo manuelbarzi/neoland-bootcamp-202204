@@ -29,7 +29,7 @@ const booking = new Schema({
         required: true
     },
 
-    notes: {
+    text: {
         type: String,
         required: true,
         default: ''
@@ -39,6 +39,16 @@ const booking = new Schema({
         type: Date,
         required: true,
         default: Date.now
+    },
+
+    from: {
+        type: String,
+        required: true
+    },
+
+    to: {
+        type: String,
+        required: true
     }
 })
 

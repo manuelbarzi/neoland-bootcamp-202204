@@ -1,5 +1,6 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
+const booking = require('./booking')
 
 const flat = new Schema({
     user: {
@@ -26,7 +27,9 @@ const flat = new Schema({
     description: {
         type: String,
         default: null
-    }
+    },
+
+    bookings: [booking]
 })
 
 module.exports = flat
