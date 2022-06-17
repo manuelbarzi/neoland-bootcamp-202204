@@ -7,6 +7,10 @@ const event = new Schema({
         required: true,
         ref: 'User'
     },
+    ownerName: {
+        type: String,
+        ref: 'User'
+    },
 
     // photo:{
     //     type: String,
@@ -21,7 +25,7 @@ const event = new Schema({
     description: {
         type: String,
         default: null,
-       
+
     },
 
     date: {
@@ -30,13 +34,13 @@ const event = new Schema({
         default: Date.now
     },
 
-    direction:{
+    direction: {
         type: String,
     },
 
-    category:{
+    category: {
         type: String,
-        enum : ['sport-activities','social-activities', 'environment'],
+        enum: ['sport-activities', 'social-activities', 'environment'],
         default: 'sport-activities'
 
     },

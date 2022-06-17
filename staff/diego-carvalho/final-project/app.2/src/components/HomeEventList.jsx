@@ -3,9 +3,9 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import retrieveEvent from '../logic/retrieveEvent'
 import EventHome from './EventHome'
-import './EventList.sass'
+import './HomeEventList.sass'
 
-function EventList({ timestamp }) {
+function HomeEventList({ timestamp }) {
     const logger = new Logger('EventList')
 
     logger.info('call')
@@ -49,4 +49,4 @@ function EventList({ timestamp }) {
         <p>no event yet</p>
 }
 
-export default EventList
+export default HomeEventList

@@ -3,7 +3,7 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import retrieveUser from '../logic/retrieveUser'
 import MyCalendar from './MyCalendar'
-import EventList from './EventList'
+import HomeEventList from './HomeEventList'
 import Profile from './Profile'
 import EventOwner from './EventOwner'
 import { isJwtValid } from 'validators'
@@ -95,7 +95,7 @@ function Home({ onUserLogout }) {
 
             <main className="Home__body Container">
                 <Routes>
-                    <Route index element={<EventList timestamp={timestamp} />} />
+                    <Route index element={<HomeEventList timestamp={timestamp} />} />
                     <Route path="/eventOwner" element={<EventOwner />} />
                     <Route path="/myCalendar" element={<MyCalendar />} />
                     <Route path="/profile" element={<Profile />} />

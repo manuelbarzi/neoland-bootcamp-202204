@@ -4,6 +4,7 @@ const { NotFoundError } = require('../errors')
 const createEvent = require('./createEvent')
 const { expect } = require('chai')
 
+
 describe('createEvent', () => {
     before(() => connect('mongodb://127.0.0.1:27017/events-db-test'))
 
@@ -11,15 +12,15 @@ describe('createEvent', () => {
 
     describe('when owner already exists', () => {
         let owner
-    
+
         beforeEach(() => {
             owner = new User({ name: 'Mar lucia', email: 'marlucia@gmail.com', password: '1234' })
 
             return owner.save()
         })
-
+        debugger
         it('succeeds on correct owner data', () =>
-            createEvent(owner.id, 'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.','sport-activities')
+            createEvent(owner.id, 'Surf Session Barceloneta', 'Una exelente oportunidad para disfrutar de las olas de Barceloneta.', 'sport-activities')
                 .then(eventId => {
                     expect(eventId).to.be.a('string')
 
@@ -39,7 +40,7 @@ describe('createEvent', () => {
         it('fails on incorrect owner id', () => {
             const wrongId = new ObjectId().toString()
 
-            return createEvent(wrongId,'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.','sport-activities' )
+            return createEvent(wrongId, 'Mar lucia', 'Surf Session Barceloneta', 'Una exelente oportunidad para disfrutar de las olas de Barceloneta.', 'sport-activities')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -54,7 +55,7 @@ describe('createEvent', () => {
         it('fails on unexisting owner id', () => {
             const unexistingOwnerId = new ObjectId().toString()
 
-            return createEvent(unexistingOwnerId,'Surf Session Barceloneta','Una exelente oportunidad para disfrutar de las olas de Barceloneta.','sport-activities')
+            return createEvent(unexistingOwnerId, 'Mar lucia', 'Surf Session Barceloneta', 'Una exelente oportunidad para disfrutar de las olas de Barceloneta.', 'sport-activities')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

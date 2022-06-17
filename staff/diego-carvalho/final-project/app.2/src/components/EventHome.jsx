@@ -51,10 +51,11 @@ function EventHome(props) {
     return <div className="Event-home">
         <form className="Event__home-form" onSubmit={handleSaveSubmit}>
 
+
             <h1 className='Event__home-title'>Title: {props.title}</h1>
             <p className='Event__home-description'>Description: {props.description}</p>
 
-            {/* <button className="button-event" onClick={handleRemoveClick}>cancelar</button>
+            {/* <button className="button-event" onClick={handleRemoveClick}Apuntarme</button>
             <button className="button-event">Save</button> */}
 
         </form>
