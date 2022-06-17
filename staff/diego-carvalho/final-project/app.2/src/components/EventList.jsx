@@ -42,7 +42,7 @@ function EventList({ timestamp }) {
     return events && events.length ?
         <ul className="EventList__list Container">
             {events.map(event => <li key={event.id}>
-                <EventHome />
+                <EventHome eventId={event.id} title={event.title} description={event.description} />
             </li>)}
         </ul>
         :
