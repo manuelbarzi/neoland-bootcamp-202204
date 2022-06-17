@@ -1,6 +1,5 @@
 .header
     background-color: #7a7b7c
-    // background-color: #06070d
     display: flex
     align-items: center
     width: 100%
@@ -11,15 +10,14 @@
     &__content
         // overflow: hidden
         display: flex
-        width: 80%
+        width: 90%
         margin-left: auto
         margin-right: auto
         justify-content: space-between
         align-items: center
 
         &__links
-            width: 10%
-            margin: 5px
+            width: 20%
             display: flex
             justify-content: space-between
             align-items: center
@@ -29,6 +27,7 @@
                 margin: 20px
 
             &__item i
+                cursor: pointer
                 text-decoration: none
                 color: #dbdbe2
 
@@ -40,11 +39,30 @@
                 width: 300px
 
             &__btn
-                height: 40px
+                cursor: pointer
+                height: 45px
                 margin: 5px
+                padding: 10px
                 border-radius: 4px
                 background-color: #00e59b
                 border-style: none
                 text-transform: uppercase
                 color: #FFFFFF
-                line-height: 26px
+                font-size: 16px
+                font-weight: bolder
+                @media screen and ( max-width: 400px )
+                    font-size: 14px
+                    font-weight: bolder
+
+.header__content__links__item__heartNone
+    display: none
+.header__content__links__item__downloadNone
+    display: none
+.header__content__links__item__codeNone
+    display: none
+.header__content__links__item__addNone
+    display: none
+.header__content__links__item__arrowNone
+    display: none
+.header__content__links__item__tikcodeNone
+    display: none

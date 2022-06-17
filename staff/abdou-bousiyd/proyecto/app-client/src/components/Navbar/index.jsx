@@ -1,84 +1,120 @@
-import React from 'react'
-import { useNavigate } from "react-router-dom";
-import './index.sass'
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import "./index.sass";
 
-const Sidebar = ({toggle, toggleTitle, name}) => {
-    const navigate = useNavigate()
+const Sidebar = ({ toggle, toggleTitle, name }) => {
+  const navigate = useNavigate();
 
-    const handleLogoutClick = () => {
-        delete sessionStorage.token
-        window.location.reload()
-    }
+  const location = useLocation().pathname;
+  const isActive = (path) => location.includes(path);
 
-    const handleToRegister = () => {
-        navigate('/register')
-    }
+  const handleLogoutClick = () => {
+    delete sessionStorage.token;
+    window.location.reload();
+  };
 
-    const handleToLogin = () => {
-        navigate('/register')
-    }
-    
-    return (
-        <header className='header'>
-            <div className='header__content'>
-                <ul className='header__content__links'>
-                    <li className='header__content__links__item'><i className="gg-heart"></i></li>
-                    <li className='header__content__links__item'><i className="gg-software-download"></i></li>
-                    <li className='header__content__links__item' onClick={toggle}><i className="gg-code-slash"></i></li>
-                    <li className='header__content__links__item' onClick={toggleTitle}><i className="gg-add-r"></i></li>
-                </ul>
-                {!name &&
-                <div className='header__content__btns'>
-                    <button className="header__content__btns__btn" onClick={handleToRegister}>Sign Up</button>
-                    <button className="header__content__btns__btn" onClick={handleToLogin}>Log In</button>
-                </div>
-                }
+  const handleToRegister = () => {
+    navigate("/register");
+  };
 
-                {name && 
-                <div className='header__content__btns'>
-                    <button className="header__content__btns__btn" onClick={handleLogoutClick}>log out</button>
-                    <button className="header__content__btns__btn">{name}</button>
-                </div>
-                }
-            </div>
+  const handleToLogin = () => {
+    navigate("/login");
+  };
+  const handleToProject = () => {
+    navigate("/");
+  };
+  const handleToDashboard = () => {
+    navigate("/dashboards");
+  };
 
-        </header>
-    )
-}
+  return (
+    <header className="header">
+      <div className="header__content">
+        <ul className="header__content__links">
+          <li
+            className={`header__content__links__item ${
+              location === "/dashboards" &&
+              "header__content__links__item__heartNone"
+            }`}
+          >
+            <i className="gg-heart"></i>
+          </li>
+          <li
+            className={`header__content__links__item ${
+              location === "/dashboards" &&
+              "header__content__links__item__downloadNone"
+            }`}
+          >
+            <i className="gg-software-download"></i>
+          </li>
+          <li
+            className={`header__content__links__item ${
+              location === "/dashboards" &&
+              "header__content__links__item__codeNone"
+            }`}
+            onClick={toggle}
+          >
+            <i className="gg-code-slash"></i>
+          </li>
+
+          <li
+            className={`header__content__links__item ${
+              location === "/dashboards" &&
+              "header__content__links__item__addNone"
+            }`}
+            onClick={toggleTitle}
+          >
+            <i className="gg-add-r"></i>
+          </li>
+          <li
+            className={`header__content__links__item ${
+              (location === "/" || location === "/project") &&
+              "header__content__links__item__addNone"
+            }`}
+            onClick={handleToProject}
+          >
+            <i class="gg-arrow-left-r"></i>
+          </li>
+          <li
+            className={`header__content__links__item ${
+              location === "/dashboards" &&
+              "header__content__links__item__tikcodeNone"
+            }`}
+            onClick={handleToDashboard}
+          >
+            <i class="gg-tikcode"></i>
+          </li>
+        </ul>
+        {!name && (
+          <div className="header__content__btns">
+            <button
+              className="header__content__btns__btn"
+              onClick={handleToRegister}
+            >
+              Sign Up
+            </button>
+            <button
+              className="header__content__btns__btn"
+              onClick={handleToLogin}
+            >
+              Log In
+            </button>
+          </div>
+        )}
+
+        {name && (
+          <div className="header__content__btns">
+            <button
+              className="header__content__btns__btn"
+              onClick={handleLogoutClick}
+            >
+              log out
+            </button>
+            <button className="header__content__btns__btn">{name}</button>
+          </div>
+        )}
+      </div>
+    </header>
+  );
+};
 export default Sidebar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from 'react'
-// import './index.sass'
-
-// const Sidebar = ({toggle}) => {
-//     return (
-//         <header className='header'>
-//             <div className='header--content'>
-//                 <ul className='header--content--items'>
-//                     <li className='header--content--item'><i className="gg-profile"></i></li>
-//                     <li className='header--content--item'><i className="gg-software-download"></i></li>
-//                     <li className='header--content--item' onClick={toggle}><i className="gg-code-slash"></i></li>
-//                 </ul>
-//                 <div className='buttons'>
-//                     <button className="header--btn">Sign Up</button>
-//                     <button className="header--btn">Log In</button>
-//                 </div>
-//             </div>
-//         </header>
-//     )
-// }
-// export default Sidebar;

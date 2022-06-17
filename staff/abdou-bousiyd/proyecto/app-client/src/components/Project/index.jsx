@@ -80,7 +80,6 @@ const Project = () => {
         }
         setName(user.name);
         if (openModal) {
-          console.log(767676);
           toggleTitle();
         }
         // setView('project')
@@ -203,7 +202,7 @@ const Project = () => {
             <div>
               <Editor
                 className="editor js"
-                defaultLanguage="css"
+                defaultLanguage="js"
                 placeholder="js"
                 theme="vs-dark"
                 onChange={handleJslChange}

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import retrieveProject from "../../logic/retrieveProject";
 import saveProject from "../../logic/saveProject";
+import { isJwtValid } from "../../validators";
+import retrieveUser from "../../logic/retrieveUser";
 import Project from "../Project";
 import Alert from "../Alert";
 
@@ -11,6 +13,7 @@ import deleteProject from "../../logic/deleteProject";
 import { withToken } from "../../containers";
 
 const Dashboards = () => {
+  const [name, setName] = useState(null);
   const [alert, setAlert] = useState(null);
   const [projects, setProjects] = useState(null);
   const [dashName, setDashName] = useState(null);
@@ -19,6 +22,7 @@ const Dashboards = () => {
   // console.log(projects, 87878);
   useEffect(() => {
     getDashboards();
+    getUser();
   }, []);
 
   const handleInputChange = (e) => {
@@ -40,8 +44,8 @@ const Dashboards = () => {
     });
   };
 
-  const save = (id, newTitle) => {
-    console.log(id);
+  const save = (id) => {
+    // console.log(newTitle, 44);
     if (!dashName) {
       setEditDashId(null);
       return;
@@ -56,6 +60,8 @@ const Dashboards = () => {
 
         return;
       }
+      setEditDashId();
+      getDashboards();
     });
   };
 
@@ -82,9 +88,32 @@ const Dashboards = () => {
     setProjectsDash(_projects);
   };
 
+  const getUser = () => {
+    if (isJwtValid(sessionStorage.token)) {
+      retrieveUser(sessionStorage.token, (error, user) => {
+        if (error) {
+          setAlert(<Alert error message={error.message} />);
+          setTimeout(() => {
+            setAlert(null);
+          }, 4000);
+
+          handleLogoutClick();
+
+          return;
+        }
+        setName(user.name);
+      });
+    }
+    // else navigate('/login')
+  };
+  const handleLogoutClick = () => {
+    delete sessionStorage.token;
+    window.location.reload();
+  };
+
   return (
     <>
-      <NavBar />
+      <NavBar name={name} />
 
       {alert && alert}
 
