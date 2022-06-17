@@ -5,9 +5,9 @@ module.exports = (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        const { body: { sport, lat, lng, alt } } = req
+        const { body: { sport } } = req
         
-        createActivity(userId, sport, lat, lng, alt)
+        createActivity(userId, sport )
             .then(activityId => res.status(201).json({ activityId }))
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {

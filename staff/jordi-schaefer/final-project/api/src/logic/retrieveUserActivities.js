@@ -10,21 +10,18 @@ function retrieveUserActivities(userId) {
         .then((user) => {
             if(!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Activity.find({ user: userId }).lean()       
+            return Activity.find({ user: userId }).sort({date: -1}).populate('user', 'name').lean()        
         })
         .then((activities)=>{
-            
-            actvities.forEach(actvity => { 
-                actvity.id = actvity._id.toString()
+            activities.forEach(activity => { 
+                activity.id = activity._id.toString()
                 
-                delete actvity._id
-                delete actvity.__v
-                delete actvity.user
+                delete activity._id
+                delete activity.__v
             })
 
             return activities
-        })
-        
+        })      
 }
 
 module.exports = retrieveUserActivities

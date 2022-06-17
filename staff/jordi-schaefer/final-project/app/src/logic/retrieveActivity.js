@@ -17,6 +17,9 @@ function retrieveActivity(token, activityId) {
         if (status === 200) {
             const data = JSON.parse(payload)
             const activity = data.activity
+
+            activity.date = new Date(activity.date)
+
             return activity
         } 
         else if (status >= 400 && status < 500) { 

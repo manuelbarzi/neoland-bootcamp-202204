@@ -1,12 +1,12 @@
-const { retrivePublicNotes } = require('../logic')
+const { retrieveUserActivities } = require('../logic')
 const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
 module.exports = (req, res) => {
     try {  
         const userId = verifyToken(req)
 
-        retrivePublicNotes(userId)
-            .then(activities => res.status(200).json({activities}))  // devuelvo estatus ok y el token
+        retrieveUserActivities(userId)
+            .then(activities => res.status(200).json({activities}))
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

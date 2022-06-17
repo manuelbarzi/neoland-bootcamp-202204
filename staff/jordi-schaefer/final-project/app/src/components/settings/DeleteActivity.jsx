@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
-import retrieveActivities from '../../logic/retrieveActivities'
-import BoxHeader from '../dashboard/BoxHeader'
+import retrieveUserActivities from '../../logic/retrieveUserActivities'
+import Activity from '../dashboard/Activity'
 // sin useEffect tambien funciona
 // useEffect maneja los ciclos de vida de comando
 
@@ -19,15 +19,11 @@ function DeleteActivity({ timestamp }) { // timestamp son las props desestructur
     // al ponerle las props, tambien ejecutara cuando cambien las props
 
 
-    const loadActivities = () => {
+    const loadActivities = async() => {
         try {
-            retrieveActivities(sessionStorage.token, (error, activities) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
-                }
-                setActivities(activities)
-            })
+            const activities =  await retrieveUserActivities(sessionStorage.token)
+                
+            setActivities(activities)
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -42,7 +38,7 @@ function DeleteActivity({ timestamp }) { // timestamp son las props desestructur
     return activities && activities.length ?
         <ul className = "List__activities mw Overflow" >
             {activities.map(activitie => <li className="mw" key={activitie.id} >  
-                <BoxHeader activity={activitie} setDelete={true} onRemove={handleRemoveActivity}/>
+                <Activity activity={activitie} setDelete={true} onRemove={handleRemoveActivity}/>
             </li>)}
         </ul>
         : 

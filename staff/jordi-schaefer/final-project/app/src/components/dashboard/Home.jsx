@@ -2,8 +2,8 @@ import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { isJwtValid } from 'validators'
 import Context from '../Context'
-import ActivitiesList from './ActivitiesList'
-import Comment from './Comment'
+import ActivityList from './ActivityList'
+import CommentList from './CommentList'
 import Settings from '../settings/Settings'
 import ChangeName from '../settings/ChangeName'
 import ChangePassword from '../settings/ChangePassword'
@@ -89,8 +89,8 @@ function Home(props) {
 
 
         <main className="Home__body mw mh Overflow">
-            {view === 'Home' && <ActivitiesList onCommentClicked={handleCommentClicked}/>}
-            {view === 'Profile' && <ActivitiesList onCommentClicked={handleCommentClicked}/>}
+            {view === 'Home' && <ActivityList onCommentClicked={handleCommentClicked}/>}
+            {view === 'Profile' && <ActivityList private={true} onCommentClicked={handleCommentClicked}/>}
 
             {view === 'Settings' && <Settings onChangeNameClicked={handleChangeNameClick}
                 onChangePasswordClicked={handleChangePasswordClick}
@@ -105,7 +105,7 @@ function Home(props) {
             {view === 'Delete User' && <DeleteUser onDeletedUser={props.onDeletedUser}/>} 
             {view === 'Delete Activity' && <DeleteActivity />}
 
-            {view === 'Comment' && <Comment activityId={activityId}/>}
+            {view === 'Comment' && <CommentList activityId={activityId}/>}
 
         </main>
 

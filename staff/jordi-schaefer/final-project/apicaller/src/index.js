@@ -79,13 +79,13 @@
 
             xhr.open(method, url)
 
-            if (options) {
+            if(options) {
                 const { headers, body } = options
 
-                if (headers)
+                if(headers)
                     for (const key in headers)
                         xhr.setRequestHeader(key, headers[key])
-
+                
                 xhr.send(body)
             } else xhr.send()
         })

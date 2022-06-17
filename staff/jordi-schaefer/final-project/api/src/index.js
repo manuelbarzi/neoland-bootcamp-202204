@@ -53,10 +53,10 @@ const { env: { MONGODB_URL, PORT=8080 }, argv: [ , , port = PORT]} = process
     routes.delete('/activities/:activityId', jsonBodyParser, handleDeleteActivity)
     // RetrieveActivities
     routes.get('/activities', handleRetrieveActivities)
-    // Retrieve Activity
-    routes.get('/activities/:activityId', handleRetrieveActivity)
     // RetrieveUserActivities
     routes.get('/activities/user', handleRetrieveUserActivities)
+    // Retrieve Activity
+    routes.get('/activities/:activityId', handleRetrieveActivity)
     // Save Point
     routes.patch('/activities/:activityId', jsonBodyParser, handleAddPointToActivity)
     // Save Activity

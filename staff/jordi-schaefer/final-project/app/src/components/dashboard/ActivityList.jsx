@@ -1,7 +1,9 @@
 import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
 import retrieveActivities from '../../logic/retrieveActivities'
+import retrieveUserActivities from '../../logic/retrieveUserActivities'
 import Activity from './Activity'
+import ProfileInfo from './ProfileInfo'
 // sin useEffect tambien funciona
 // useEffect maneja los ciclos de vida de comando
 
@@ -12,24 +14,24 @@ function ActivityList(props) { // timestamp son las props desestructuradas
     const [activities, setActivities] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
 
-
     // si se monta el componente, ejecuta esto
     useEffect(() => {
         loadActivities()
-        console.log('useEffect')
     }, [timestamp]) // si pongo un array vacio ejecutara esto la primera vez, cuando carga el componente
     // al ponerle las props, tambien ejecutara cuando cambien las props
 
 
-    const loadActivities = () => {
+    const loadActivities = async() => {
         try {
-            retrieveActivities(sessionStorage.token, (error, activities) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
-                }
-                setActivities(activities) 
-            })
+            let activities
+            
+            if(props.private){
+                activities = await retrieveUserActivities(sessionStorage.token)
+            }
+            else activities = await retrieveActivities(sessionStorage.token)
+
+            setActivities(activities) 
+        
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -39,6 +41,10 @@ function ActivityList(props) { // timestamp son las props desestructuradas
 
     return activities &&
         <ul className = "List__activities mw Overflow" >
+            {props.private && activities && <li className="Li__activity">
+                    <ProfileInfo activities={activities}/>
+                </li>}
+
             {activities.map(activitie => <li className="Li__activity" key={activitie.id} >  
                 <Activity activity={activitie} onLikeClicked={handleActivityLikeClicked} onCommentClicked={props.onCommentClicked}/>
             </li>)}

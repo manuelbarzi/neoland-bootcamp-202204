@@ -4,7 +4,7 @@ import Context from '../Context'
 import '../../styles/List.sass'
 import Map from './Map'
 import createActivity from '../../logic/createActivity'
-
+import addPointToActivity from '../../logic/addPointToActivity'
 
 function ActivityStart(props) {
 
@@ -82,11 +82,12 @@ function ActivityStart(props) {
     const handleStartClick = async() => {
         try {
             const token = sessionStorage.token
-            const activityId = await createActivity(token, sport, position)
+            const activityId = await createActivity(token, sport)
+            await addPointToActivity(activityId, position)
             
-            props.onStartClicked(activityId.activityId)
+            props.onStartClicked(activityId)
         } catch (error) {
-            handleFeedback({ level: 'error', message: error.message })
+            handleFeedback({ type: 'error', message: error.message })
         }   
     }
     

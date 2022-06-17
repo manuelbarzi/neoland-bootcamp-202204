@@ -1,25 +1,22 @@
 import { validateJwt} from 'validators'
 import Apicaller from 'apicaller'
 
-function retrieveActivities(token) {  // recuperar
+function retrieveUserActivities(token) {  // recuperar
     validateJwt(token)
 
     const api = new Apicaller(process.env.REACT_APP_API_URL)
 
     return (async () => {
         
-        const result = await api.get('/activities', {
-        headers: { 'Authorization': `Bearer ${token}`}})
-
+        const result = await api.get('/activities/user', {
+            headers: { 'Authorization': `Bearer ${token}`}})
+        
         const { status, payload } = result
 
         if (status === 200) {
             const data = JSON.parse(payload)
             const activities = data.activities
-            activities.forEach(activity => {
-                activity.date = new Date(activity.date)
-                activity.points.forEach(point => point.date = new Date(point.date))
-            })
+            activities.forEach(activity => activity.date = new Date(activity.date))
             return activities
         } 
         else if (status >= 400 && status < 500) { 
@@ -32,4 +29,4 @@ function retrieveActivities(token) {  // recuperar
     })()
 }
 
-export default retrieveActivities
+export default retrieveUserActivities
