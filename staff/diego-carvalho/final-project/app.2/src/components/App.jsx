@@ -7,7 +7,7 @@ import Home from './Home'
 import Feedback from './Feedback'
 import './App.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
-import { isJwtValid} from 'validators'
+import { isJwtValid } from 'validators'
 
 function App() {
     const logger = new Logger('App')

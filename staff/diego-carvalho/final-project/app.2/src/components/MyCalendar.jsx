@@ -1,12 +1,12 @@
 import { useState, useEffect, useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
-import retrieveEvent from '../logic/retrieveEvent'
+import retrieveOwnerEvent from '../logic/retrieveOwnerEvent'
 import Event from './Event'
-import './EventList.sass'
+import './MyCalendar.sass'
 
 function MyCalendar({ timestamp }) {
-    const logger = new Logger('EventList')
+    const logger = new Logger('MyCalendar')
 
     logger.info('call')
 
@@ -20,7 +20,7 @@ function MyCalendar({ timestamp }) {
     }, [timestamp])
 
     const loadEvents = () =>
-        retrieveEvent(sessionStorage.token, (error, events) => {
+        retrieveOwnerEvent(sessionStorage.token, (error, events) => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 

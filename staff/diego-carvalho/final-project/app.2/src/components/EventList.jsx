@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import retrieveEvent from '../logic/retrieveEvent'
-import Event from './Event'
+import EventHome from './EventHome'
 import './EventList.sass'
 
 function EventList({ timestamp }) {
@@ -27,22 +27,22 @@ function EventList({ timestamp }) {
                 return
             }
 
-            setEvents(events)
+            setEvents(events)//estes event si el botón de salvar y cancelar, solamente el titulo la descripción y un botón de participar
         })
 
-    const handleRemoveEvent = eventId => {
-        const _events = events.filter(event => event.id !== eventId)
+    // const handleRemoveEvent = eventId => {
+    //     const _events = events.filter(event => event.id !== eventId)
 
-        setEvents(_events)
-        handleFeedback({ level: 'success', message: 'event has been removed' })
-    }
+    //     setEvents(_events)
+    //     handleFeedback({ level: 'success', message: 'event has been removed' })
+    // }
 
     logger.info('render')
 
     return events && events.length ?
         <ul className="EventList__list Container">
             {events.map(event => <li key={event.id}>
-                <Event event={event} onRemove={handleRemoveEvent} />
+                <EventHome />
             </li>)}
         </ul>
         :

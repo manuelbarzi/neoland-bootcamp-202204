@@ -1,15 +1,12 @@
-
-/*import { useState } from 'react'
-
-const searchBar = () => {
-
+const SearchBar = () => {
     const handleFormSubmit = event => {
-        //TODO debugger event.target.select y event.target.input
+       
         event.preventDefault()
 
     }
 
-    return <form onSubmit={handleFormSubmit}>
+    return <div>
+        <form onSubmit={handleFormSubmit}>
         <input type="text" placeholder="Search here" name="input" />
         <select name='select'>
             <option value="category1"></option>
@@ -18,7 +15,14 @@ const searchBar = () => {
         </select>
         <button type='submit'>send</button>
     </form>
+
+    </div>
+
+  
+
+
 }
 
-export default searchBar */
+export default SearchBar
 
+//TODO debugger event.target.select y event.target.input

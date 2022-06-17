@@ -4,9 +4,7 @@ import Context from './Context'
 import saveEvent from '../logic/saveEvent'
 import { isJwtValid } from 'validators'
 import './Home.sass'
-import { useNavigate} from 'react-router-dom'
-import { MdAddCircle } from "react-icons/md"
-
+import { useNavigate } from 'react-router-dom'
 
 function EventOwner() {
     const logger = new Logger('Home')
@@ -23,7 +21,7 @@ function EventOwner() {
 
     //     if (isJwtValid(sessionStorage.token))
     //             setView('event')
-    
+
     //     else navigate('/login')
     // }, [])
 
@@ -52,10 +50,10 @@ function EventOwner() {
         <div className="EventOwner Container">
             <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title"></textarea>
-            <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Write your description"></textarea>
+                <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title"></textarea>
+                <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Write your description"></textarea>
 
-            <button className="button-event">Save</button>
+                <button className="button-event">Save</button>
 
             </form>
 

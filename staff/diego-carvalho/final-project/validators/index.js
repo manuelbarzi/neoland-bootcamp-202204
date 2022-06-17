@@ -1,4 +1,4 @@
-const { FormatError } = require('errors')
+const { FormatError, AuthError } = require('../errors')
 
 const EMAIL_REGEX = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
@@ -29,11 +29,11 @@ function validateJwt(token) {
 
     if (parts.length !== 3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
 
-    const [,b64Payload] = parts
+    const [, b64Payload] = parts
 
     const jsonPayload = atob(b64Payload)
 
-    const payload = JSON.parse(jsonPayload) 
+    const payload = JSON.parse(jsonPayload)
 
     const { exp } = payload
 
@@ -47,7 +47,7 @@ function isJwtValid(token) {
         validateJwt(token)
 
         return true
-    } catch(error) {
+    } catch (error) {
         return false
     }
 }

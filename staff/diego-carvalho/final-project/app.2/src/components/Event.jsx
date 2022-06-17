@@ -4,27 +4,26 @@ import Context from './Context'
 import deleteEvent from '../logic/deleteEvent'
 import saveEvent from '../logic/saveEvent'
 import './Event.sass'
-import{useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 function Event(props) {
     const logger = new Logger('Event')
- console.log(props)
     logger.info('call')
 
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
-    const { event, onRemove } = props
+    const { eventId, onRemove } = props
 
     const handleRemoveClick = () => {
-        if (event.id)
-            deleteEvent(sessionStorage.token, event.id, error => {
+        if (eventId)
+            deleteEvent(sessionStorage.token, eventId, error => {
                 if (error) {
                     handleFeedback({ level: 'error', message: error.message })
 
                     return
                 }
 
-                onRemove(event.id)
+                onRemove(eventId)
             })
     }
 
@@ -52,9 +51,9 @@ function Event(props) {
     return <div className="Event">
         <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={event.title}></textarea>
-            {/* <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea> */}
-            <h2 className="Input Input--light Event--description" > {event.description} </h2>
+            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
+            <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
+            {/* <h2 className="Input Input--light Event--description" > {event.description} </h2> */}
 
             <button className="button-event" onClick={handleRemoveClick}>cancelar</button>
             <button className="button-event">Save</button>

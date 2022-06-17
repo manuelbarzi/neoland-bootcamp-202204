@@ -99,7 +99,7 @@ function Home({ onUserLogout }) {
                     <Route path="/eventOwner" element={<EventOwner />} />
                     <Route path="/myCalendar" element={<MyCalendar />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/searchEvent" element={<SearchBar />}/>
+                    <Route path="/searchEvent" element={<SearchBar />} />
                 </Routes>
             </main>
 

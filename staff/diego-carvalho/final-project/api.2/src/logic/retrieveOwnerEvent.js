@@ -11,7 +11,7 @@ function retrieveOwnerEvent(userId) {
             if (!user)
                 throw new NotFoundError(`owner with id ${userId} does not exist`)
 
-            return Event.find({owner: userId}).lean()
+            return Event.find({ user: userId }).lean()
         })
         .then(events => {
             events.forEach(event => {
@@ -20,7 +20,7 @@ function retrieveOwnerEvent(userId) {
 
                 delete event.__v
 
-                delete event.user//
+                delete event.user
             })
 
             return events
