@@ -1,0 +1,5 @@
+const { connect, disconnect } = require('mongoose')
+const { User, Movement } = require('../models')
+const { NotFoundError } = require('../errors')
+const addMovement = require('./addMovement')
+const { expect } = require('chai')
