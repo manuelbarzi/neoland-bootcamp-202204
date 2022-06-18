@@ -2,13 +2,8 @@ const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
 
 const event = new Schema({
-    owner: {
+    ownerEvent: {
         type: ObjectId,
-        required: true,
-        ref: 'User'
-    },
-    ownerName: {
-        type: String,
         ref: 'User'
     },
 

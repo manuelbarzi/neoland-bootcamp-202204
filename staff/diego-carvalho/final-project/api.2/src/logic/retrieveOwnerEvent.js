@@ -4,27 +4,24 @@ const { validateStringNotEmptyNoSpaces } = require('../validators')
 
 
 function retrieveOwnerEvent(userId) {
-    validateStringNotEmptyNoSpaces(userId, 'user id')
+  validateStringNotEmptyNoSpaces(userId, 'user id')
 
-    return User.findById(userId).lean()
-        .then(user => {
-            if (!user)
-                throw new NotFoundError(`owner with id ${userId} does not exist`)
+  return User.findById(userId).lean()
+    .then(user => {
+      if (!user)
+        throw new NotFoundError(`owner with id ${userId} does not exist`)
 
-            return Event.find({ user: userId }).lean()
-        })
-        .then(events => {
-            events.forEach(event => {
-                event.id = event._id.toString()
-                delete event._id
+      return Event.find({ ownerEvent: userId }).populate('ownerEvent', 'name').lean()
+    })
+    .then(events => {
+      events.forEach(event => {
+        event.id = event._id.toString()
+        delete event._id
+        delete event.__v
+      })
 
-                delete event.__v
-
-                delete event.user
-            })
-
-            return events
-        })
+      return events
+    })
 
 }
 

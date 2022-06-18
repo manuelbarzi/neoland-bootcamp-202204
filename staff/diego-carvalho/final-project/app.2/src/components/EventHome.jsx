@@ -52,6 +52,7 @@ function EventHome(props) {
         <form className="Event__home-form" onSubmit={handleSaveSubmit}>
 
 
+            <h1 className='Event__home-title'>Name: {props.name}</h1>
             <h1 className='Event__home-title'>Title: {props.title}</h1>
             <p className='Event__home-description'>Description: {props.description}</p>
 

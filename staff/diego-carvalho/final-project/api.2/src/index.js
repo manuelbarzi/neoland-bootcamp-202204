@@ -38,7 +38,7 @@ const { cors } = require('./helpers')
 
         routes.post('/events', jsonBodyParser, handleCreateEvent)//createEvent
         routes.get('/events', handleRetrieveEvent)//retrieveEvent
-        routes.get('/events/user', handleRetrieveOwnerEvent)//retrieveOwnerEvent
+        routes.get('/events/owner', handleRetrieveOwnerEvent)//retrieveOwnerEvent
         routes.patch('/events/:eventId', jsonBodyParser, handleUpdateEvent)//updateEvent
         routes.delete('/events/:eventId', jsonBodyParser, handleDeleteEvent)//deleteEvent
 

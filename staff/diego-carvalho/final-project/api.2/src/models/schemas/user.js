@@ -15,16 +15,15 @@ const user = new Schema({
 
     password: {
         type: String,
-   
 
     },
 
-    ownerEvents:[{
+    owner: [{
         type: ObjectId,
         ref: 'User'
     }],
-    
-    events:[{
+
+    events: [{
         type: ObjectId,
         ref: 'Event'
     }]

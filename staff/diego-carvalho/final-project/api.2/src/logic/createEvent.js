@@ -1,6 +1,7 @@
 const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateObjectId, validateString } = require('../validators')
+const { user } = require('../models/schemas')
 debugger
 function createEvent(userId, title, description, category) {
     validateObjectId(userId, 'userId')
@@ -9,11 +10,11 @@ function createEvent(userId, title, description, category) {
     if (category != null) validateString(category, 'category')
 
 
-    return User.findById(userId)
+    return User.findById(userId)//user creator
         .then(user => {
-            if (!user) throw new NotFoundError(`owner with id ${userId} does not exist`)
+            if (!user) throw new NotFoundError(`ownerEvent with id ${userId} does not exist`)
 
-            return Event.create({ owner: userId, title, description, category })
+            return Event.create({ ownerEvent: userId, title, description, category })
         })
         .then(event => event.id)
 }

@@ -29,7 +29,7 @@ describe('retrieveOwnerEvent', () => {
                 return Promise.all([event1.save(), event2.save(), event3.save()])
                     .then(events => allEvents = events)
             })
-
+            debugger
             it('succeeds on correct owner data', () =>
                 retrieveOwnerEvent(owner.id)
                     .then(events => {

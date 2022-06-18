@@ -11,16 +11,13 @@ function retrieveEvent(userId) {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Event.find().lean()
+            return Event.find().populate('ownerEvent', 'name').lean()
         })
         .then(events => {
             events.forEach(event => {
                 event.id = event._id.toString()
                 delete event._id
-
                 delete event.__v
-
-                delete event.user
             })
 
             return events

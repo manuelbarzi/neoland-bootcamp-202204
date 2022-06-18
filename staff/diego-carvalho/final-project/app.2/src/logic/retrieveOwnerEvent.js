@@ -13,7 +13,7 @@ function retrieveOwnerEvent(token, callback) {
 
     logger.info('request')
 
-    api.get('events/user', {
+    api.get('events/owner', {
         headers: {
             Authorization: `Bearer ${token}`
         }
