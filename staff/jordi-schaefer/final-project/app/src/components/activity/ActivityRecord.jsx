@@ -2,9 +2,9 @@ import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
 import '../../styles/List.sass'
 import Map from './Map'
-import ActivityInfo from './ActivityInfo'
+import LiveInfo from './LiveInfo'
 import addPointToActivity from '../../logic/addPointToActivity'
-import Timer from './Timer'
+
 
 function ActivityRecord(props) {
 
@@ -61,7 +61,7 @@ function ActivityRecord(props) {
 
     <main className="Home__body mw mh">
         { view === 'map' && position && <Map position={position} center={true}/> } 
-        { view === 'timer' && <ActivityInfo activityId={props.activityId} onPointRegistered={timestamp}/> } 
+        { view === 'timer' && <LiveInfo activityId={props.activityId} onPointRegistered={timestamp}/> } 
     </main>
 
     

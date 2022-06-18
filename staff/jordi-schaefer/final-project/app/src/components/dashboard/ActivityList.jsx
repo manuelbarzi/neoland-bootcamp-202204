@@ -3,11 +3,10 @@ import Context from '../Context'
 import retrieveActivities from '../../logic/retrieveActivities'
 import retrieveUserActivities from '../../logic/retrieveUserActivities'
 import Activity from './Activity'
-import ProfileInfo from './ProfileInfo'
-// sin useEffect tambien funciona
-// useEffect maneja los ciclos de vida de comando
+import ProfileInfoHeader from './ProfileInfoHeader'
 
-function ActivityList(props) { // timestamp son las props desestructuradas
+
+function ActivityList(props) { 
 
     const { handleFeedback } = useContext(Context)
 
@@ -29,9 +28,7 @@ function ActivityList(props) { // timestamp son las props desestructuradas
                 activities = await retrieveUserActivities(sessionStorage.token)
             }
             else activities = await retrieveActivities(sessionStorage.token)
-
             setActivities(activities) 
-        
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -42,7 +39,7 @@ function ActivityList(props) { // timestamp son las props desestructuradas
     return activities &&
         <ul className = "List__activities mw Overflow" >
             {props.private && activities && <li className="Li__activity">
-                    <ProfileInfo activities={activities}/>
+                    <ProfileInfoHeader activities={activities}/>
                 </li>}
 
             {activities.map(activitie => <li className="Li__activity" key={activitie.id} >  

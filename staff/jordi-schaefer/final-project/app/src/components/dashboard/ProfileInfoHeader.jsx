@@ -6,15 +6,11 @@ import { useNavigate } from 'react-router-dom'
 import retrieveUser from '../../logic/retrieveUser'
 import Context from '../Context'
 
-function ProfileInfo ({activities}) {
+function ProfileInfoHeader ({activities}) {
     
     const navigate = useNavigate()
     const { handleFeedback } = useContext(Context)
     const [name, setName] = useState(null)
-     // todo a 0
-
-    // if activities.lenght>0, llamar a la logica que devuelve todosl os valores
-
 
     useEffect(() => {
         getUserName()
@@ -48,4 +44,4 @@ function ProfileInfo ({activities}) {
     </div>
 }
 
-export default ProfileInfo
+export default ProfileInfoHeader

@@ -1,4 +1,4 @@
-import ChangeView from './ChangeView'
+import ChangeMapView from './ChangeMapView'
 import '../../styles/List.sass'
 
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
@@ -7,7 +7,7 @@ import L from 'leaflet';
 function Map(props) {
 
     const newicon = new L.icon({
-    iconUrl: require("./circle.png"),
+    iconUrl: require("../../icons/circle.png"),
     iconSize: [25, 25]
     });
 
@@ -20,7 +20,7 @@ function Map(props) {
                 /* scrollWheelZoom={false} */
                 attributionControl={false}
                 > 
-                {props.center && <ChangeView position={props.position} /> }
+                {props.center && <ChangeMapView position={props.position} /> }
                 <TileLayer
                 attribution=' <a href="https://www.openstreetmap.org/copyright"></a> '
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

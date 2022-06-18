@@ -8,7 +8,7 @@ import Welcome from './Welcome'
 import Login from './Login'
 import Register from './Register'
 import Home from './dashboard/Home'
-import Activity from './activity/Activity'
+import ActivityMain from './activity/ActivityMain'
 import '../styles/App.sass'
 
 function App () {
@@ -57,7 +57,7 @@ function App () {
                 <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onWelcomeLinkClicked={handleWelcomeNavigation} />} />
                 <Route path="/register" element={<Register onUserLoggedIn={handleUserLoggedIn} onWelcomeLinkClicked={handleWelcomeNavigation} />} />
                 <Route path="/dashboard" element={<Home onUserLoggedOut={handleUserLogout} onDeletedUser={handleOnDeletedUser}/>} />
-                <Route path="/activity" element={<Activity />} />
+                <Route path="/activity" element={<ActivityMain />} />
             </Routes>
             {/* si hay feedback pintamelo */}
             {feedback && <Feedback type={feedback.type} message={feedback.message} callback={handleFeedbackTimeout}/> } 

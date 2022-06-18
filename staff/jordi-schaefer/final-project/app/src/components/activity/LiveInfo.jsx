@@ -4,7 +4,7 @@ import retrieveActivity from '../../logic/retrieveActivity'
 import calculateTotalDistance from '../../logic/calculateTotalDistance'
 import Timer from './Timer'
 
-function ActivityInfo({activityId, onPointRegistered}) {
+function LiveInfo({activityId, onPointRegistered}) {
 
     const [ activity, setActivity ] = useState(0)
     const [ totalDistance, setTotalDistance ] = useState(0)
@@ -50,5 +50,5 @@ function ActivityInfo({activityId, onPointRegistered}) {
     )
 }
 
-export default ActivityInfo
+export default LiveInfo
 

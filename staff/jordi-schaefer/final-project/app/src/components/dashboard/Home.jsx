@@ -31,7 +31,7 @@ function Home(props) {
         try {
         if (isJwtValid(sessionStorage.token)) {
             await retrieveUser(sessionStorage.token)
-                setView('Home')
+            setView('Home')
             } else {
                 navigate('/') 
                 handleLogoutClick()

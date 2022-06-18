@@ -33,7 +33,6 @@ function calculateUserData (activities) {
     })
     data.totalMonthAltitude = altitude
 
-
     return data
 }
 

@@ -7,7 +7,7 @@ import ActivityRecord from './ActivityRecord'
 import ActivityFinish from './ActivityFinish'
 
 
-function Activity() {
+function ActivityMain() {
 
     const [view, setView] = useState('start')
     const [activityId, setActivityId] = useState(null)
@@ -39,4 +39,4 @@ function Activity() {
         </div> : <></>
 }
 
-export default Activity
+export default ActivityMain

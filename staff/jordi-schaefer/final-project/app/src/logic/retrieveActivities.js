@@ -7,13 +7,19 @@ function retrieveActivities(token) {  // recuperar
     const api = new Apicaller(process.env.REACT_APP_API_URL)
 
     return (async () => {
-        
         const result = await api.get('/activities', {
-        headers: { 'Authorization': `Bearer ${token}`}})
+            headers: { 'Authorization': `Bearer ${token}`}})
 
         const { status, payload } = result
 
-        if (status === 200) {
+        if (status >= 400 && status < 500) { 
+            const data = JSON.parse(payload)
+            throw new Error(data.error) 
+        } 
+        else if (status >= 500) {
+            throw new Error('server error')
+        }
+        else if (status === 200) {
             const data = JSON.parse(payload)
             const activities = data.activities
             activities.forEach(activity => {
@@ -21,13 +27,6 @@ function retrieveActivities(token) {  // recuperar
                 activity.points.forEach(point => point.date = new Date(point.date))
             })
             return activities
-        } 
-        else if (status >= 400 && status < 500) { 
-            const data = JSON.parse(payload)  
-            throw new Error(data.error) 
-        }
-        else { 
-            throw new Error('server error')
         }
     })()
 }

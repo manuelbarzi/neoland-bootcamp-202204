@@ -7,28 +7,27 @@ function retrieveActivity(token, activityId) {
 
     const api = new Apicaller(process.env.REACT_APP_API_URL)
 
-    return (async () => {
-        
+    return (async () => { 
         const result = await api.get(`/activities/${activityId}`,{
             headers: { 'Authorization': `Bearer ${token}`}})
 
         const { status, payload } = result
-  
-        if (status === 200) {
+        
+        if (status >= 400 && status < 500) { 
+            const data = JSON.parse(payload)
+            throw new Error(data.error) 
+        } 
+        else if (status >= 500) {
+            throw new Error('server error')
+        }
+        else if (status === 200) {
             const data = JSON.parse(payload)
             const activity = data.activity
 
             activity.date = new Date(activity.date)
 
             return activity
-        } 
-        else if (status >= 400 && status < 500) { 
-            const data = JSON.parse(payload)  
-            throw new Error(data.error) 
-        }
-        else { 
-            throw new Error('server error')
-        }
+        }        
     })()
 }
 
