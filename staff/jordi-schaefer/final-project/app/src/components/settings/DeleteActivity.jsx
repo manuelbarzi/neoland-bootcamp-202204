@@ -29,7 +29,7 @@ function DeleteActivity({ timestamp }) {
 
 
     return activities && activities.length ?
-        <ul className = "List__activities mw Overflow" >
+        <ul className = "Activities__list mw overflow" >
             {activities.map(activitie => <li className="mw" key={activitie.id} >  
                 <Activity activity={activitie} setDelete={true} onRemove={handleRemoveActivity}/>
             </li>)}

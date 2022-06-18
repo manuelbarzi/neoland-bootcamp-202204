@@ -1,4 +1,4 @@
-import { validateJwt} from 'validators'
+import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
 import Apicaller from 'apicaller'
 
 function deleteActivity(token, activityId) {

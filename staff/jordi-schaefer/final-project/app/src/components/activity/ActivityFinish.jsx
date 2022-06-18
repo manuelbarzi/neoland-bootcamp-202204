@@ -1,6 +1,5 @@
 import React, { useContext } from 'react'
 import Context from '../Context'
-import '../../styles/List.sass'
 import { useNavigate } from 'react-router-dom'
 import updateActivity from '../../logic/updateActivity'
 import deleteActivity from '../../logic/deleteActivity'

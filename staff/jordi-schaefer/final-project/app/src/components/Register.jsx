@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import Context from './Context'
 import registerUser from '../logic/registerUser'
 import authenticateUser from '../logic/authenticateUser'
+import '../styles/Welcome.sass'
 
 function Register (props){
 
@@ -39,18 +40,18 @@ function Register (props){
         }
     }
 
-    return <div className="Container mw mh Flex__start">
-        <header className="Header">
-            <button className="Button__back" onClick={handleWelcomeLinkClick}>{`< Back`}</button>
-            <h1 className="Center">Register</h1>
+    return <div className="Container mw mh flex__start">
+        <header className="Welcome__header">
+            <button className="Welcome__button--back" onClick={handleWelcomeLinkClick}>{`< Back`}</button>
+            <h1 className="center">Register</h1>
         </header>
-        <form className="Container  mw m__form" onSubmit={handleFormSubmit}>
-            <input className="form" type="text" name="name" placeholder=" Name"/>
-            <input className="form" type="text" name="username" placeholder=" Username"/>
-            <input className="form" type="email" name="email" placeholder=" Email"/>
-            <input className="form" type="password" name="password" placeholder=" Password"/>
-            <input className="form" type="password" name="repeatPassword" placeholder=" Confirm password"/>
-            <button className="Button__color mt_button">Register</button>
+        <form className="Container mw Welcome__form" onSubmit={handleFormSubmit}>
+            <input className="Welcome__imput" type="text" name="name" placeholder=" Name"/>
+            <input className="Welcome__imput" type="text" name="username" placeholder=" Username"/>
+            <input className="Welcome__imput" type="email" name="email" placeholder=" Email"/>
+            <input className="Welcome__imput" type="password" name="password" placeholder=" Password"/>
+            <input className="Welcome__imput" type="password" name="repeatPassword" placeholder=" Confirm password"/>
+            <button className="Welcome__button Welcome__button--form">Register</button>
         </form>
     </div>
 }

@@ -1,3 +1,4 @@
+import '../styles/Welcome.sass'
 
 function Welcome (props) {
 
@@ -11,12 +12,12 @@ function Welcome (props) {
         props.onRegisterLinkClicked()
     }
 
-    return <div className="Container__image Container Flex__end mh mw">
-        <div className="Container Background__box mw Container__buttons pb">
+    return <div className="Container mh mw flex__end Welcome__image">
+        <div className="Container mw Welcome__container">
             <h3>Do you already have an account?</h3>
-            <a href="#" className=" Button__color" onClick={handleLoginLinkClick}>Login</a>
+            <a href="#" className="Welcome__button" onClick={handleLoginLinkClick}>Login</a>
             <h3>First time here?</h3>
-            <a href="#" className=" Button__color Button__register" onClick={handleRegisterLinkClick}>Register</a>
+            <a href="#" className="Welcome__button Welcome__button--register" onClick={handleRegisterLinkClick}>Register</a>
         </div>
     </div>
 }

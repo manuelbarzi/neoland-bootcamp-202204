@@ -1,6 +1,5 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
-import '../../styles/Leaflet.sass'
 import calculateDistanceBetweenTwoPoints from '../../logic/calculateDistanceBetweenTwoPoints'
 
 function MapView({points}) {   
@@ -39,8 +38,6 @@ function MapView({points}) {
     }
     
 
-
-
     return <MapContainer 
             style={{width: '100%', height: '100%'}} 
             center={centerPosition} 
@@ -71,8 +68,6 @@ function MapView({points}) {
                 <Popup> </Popup>
             </Marker> ) : <></>
         }
-
-
 
   </MapContainer>
 }

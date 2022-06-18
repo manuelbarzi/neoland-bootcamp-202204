@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
-import '../../styles/List.sass'
 import Map from './Map'
 import LiveInfo from './LiveInfo'
 import addPointToActivity from '../../logic/addPointToActivity'

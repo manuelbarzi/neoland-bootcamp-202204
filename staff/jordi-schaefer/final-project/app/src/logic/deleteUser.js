@@ -1,4 +1,4 @@
-import { validateJwt} from 'validators'
+import { validateJwt, validatePassword } from 'validators'
 import Apicaller from 'apicaller'
 
 function deleteUser (token, password)  {

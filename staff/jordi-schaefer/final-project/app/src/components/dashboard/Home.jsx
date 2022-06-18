@@ -11,7 +11,7 @@ import ChangeEmail from '../settings/ChangeEmail'
 import DeleteUser from '../settings/DeleteUser'
 import DeleteActivity from '../settings/DeleteActivity'
 import retrieveUser from '../../logic/retrieveUser'
-import '../../styles/List.sass'
+import '../../styles/Home.sass'
 
 
 function Home(props) {
@@ -70,13 +70,12 @@ function Home(props) {
     const handleDataChanged = () => handleBackClick()
 
     const handleBackClick = () => {
-        if (view === 'Settings' || view === 'Comment') {
-            setView('Profile') 
-            setBack(null)
-        }
-        else if (['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User'].includes(view)){
-            setView('Settings'); setBack('Profile')
-        }
+        if ( view === 'Comment')
+            handleHomeClick()
+        else if (view === 'Settings')
+            handleProfileClick()
+        else if (['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User'].includes(view))
+            handleSettingClick()
     }
 
     const handleCommentClicked = (activityId) => {
@@ -88,16 +87,16 @@ function Home(props) {
 
 
     return  isJwtValid(sessionStorage.token) ?
-    <div className="Container Overflow mw mh">
-        <header className="Header">
+    <div className="Container overflow mw mh">
+        <header className="Home__header">
             {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comment'].includes(view)) 
-                && <button className="Button__back" onClick={handleBackClick}>{`< `+back}</button>}
-            <h1 className="Center">{view}</h1>
+                && <button className="Home__button--back" onClick={handleBackClick}>{`< `+back}</button>}
+            <h1 className="center">{view}</h1>
             {view === 'Profile' && <button className="Button__set material-symbols-outlined" onClick={handleSettingClick}>Settings</button>}
         </header>
 
 
-        <main className="Home__body mw mh Overflow">
+        <main className="Home__body mw mh overflow">
             {view === 'Home' && <ActivityList onCommentClicked={handleCommentClicked}/>}
             {view === 'Profile' && <ActivityList private={true} onCommentClicked={handleCommentClicked}/>}
 
@@ -119,17 +118,17 @@ function Home(props) {
         </main>
 
         
-        <footer className="Footer">
-            <div className="Footer__home">
-                <button id="home" className="Button__selected Footer__icon material-symbols-outlined" onClick={handleHomeClick}>home</button>
-                <button className="Footer__icon material-symbols-outlined" onClick={handleActivityClick}>radio_button_checked</button>
-                <button id="profile" className="Footer__icon material-symbols-outlined" onClick={handleProfileClick}>person</button>
+        <footer className="Home__footer">
+            <div className="Home__footer--container">
+                <button id="home" className="Button__selected Home__footer--icon material-symbols-outlined" onClick={handleHomeClick}>home</button>
+                <button className="Home__footer--icon material-symbols-outlined" onClick={handleActivityClick}>radio_button_checked</button>
+                <button id="profile" className="Home__footer--icon material-symbols-outlined" onClick={handleProfileClick}>person</button>
             </div>
 
-            <div className="Footer__home">
-                <h2 id="homeL" className="Button__selected Footer__word m_left_word" onClick={handleHomeClick}>Home</h2>
-                <h2 className="Footer__word m_left_word" onClick={handleActivityClick}>Register</h2>
-                <h2 id="profileL" className="Footer__word m_right_word" onClick={handleProfileClick}>Profile</h2>
+            <div className="Home__footer--container">
+                <h2 id="homeL" className="Button__selected Home__footer--text m_left_word" onClick={handleHomeClick}>Home</h2>
+                <h2 className="Home__footer--text m_left_word" onClick={handleActivityClick}>Register</h2>
+                <h2 id="profileL" className="Home__footer--text m_right_word" onClick={handleProfileClick}>Profile</h2>
             </div>
         </footer>
 

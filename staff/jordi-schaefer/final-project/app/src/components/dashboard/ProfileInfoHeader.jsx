@@ -1,4 +1,3 @@
-import '../../styles/BoxHeader.sass'
 import calculateUserData from '../../logic/calculateUserData'
 import { isJwtValid } from 'validators'
 import { useContext, useEffect, useState } from 'react'

@@ -1,7 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Context from '../Context'
-import '../../styles/List.sass'
 import Map from './Map'
 import createActivity from '../../logic/createActivity'
 import addPointToActivity from '../../logic/addPointToActivity'

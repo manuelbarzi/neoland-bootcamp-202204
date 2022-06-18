@@ -3,8 +3,8 @@ import Context from '../Context'
 import deleteActivity from '../../logic/deleteActivity'
 import toggleLikeActivity from '../../logic/toggleLikeActivity'
 import MapView from './MapView'
-import '../../styles/BoxHeader.sass'
 import calculateActivityData from '../../logic/calculateActivityData'
+import '../../styles/ActivityItem.sass'
 
 function Activity (props) {
     
@@ -41,8 +41,8 @@ function Activity (props) {
 
     const timeOptions = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  }
     
-    return <div className='BoxHeader'>
-        <div className="Header__activity">
+    return <div>
+        <div className="Activity__header">
             <h2>{user.name}</h2>
             <h2>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
             <h2>{title}</h2>
@@ -52,21 +52,21 @@ function Activity (props) {
         </div>
 
         { setDelete && <div className='Container'> 
-            <button className="Button__color Button__delete" onClick={handleDeleteClick}>Delete</button> 
+            <button className="Activity__button--delete" onClick={handleDeleteClick}>Delete</button> 
         </div> }
 
-        { !setDelete && points.length>0 && <div className='BoxHeader__map'>
+        { !setDelete && points.length>0 && <div className='Activity__container--map'>
             <MapView points={points}/>
         </div> }
 
-        { !setDelete && <div className='Box__footer mw'>
-            <div className='Box__buttonFooter Button__borderR'>
-                { likes>0 && <h2 className='Likes__number'>{likes}</h2> }
-                <button className='Button__footer material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
+        { !setDelete && <div className='Activity__footer mw'>
+            <div className='Activity__footer--container Button__borderR'>
+                { likes>0 && <h2 className='Activity__footer--number'>{likes}</h2> }
+                <button className='Activity__footer--button material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
             </div>
-            <div className='Box__buttonFooter'>
-                { comments>0 && <h2 className='Likes__number'>{comments}</h2> }
-                <button className='Button__footer material-symbols-outlined' onClick={handleCommentClick}>chat</button>
+            <div className='Activity__footer--container'>
+                { comments>0 && <h2 className='Activity__footer--number'>{comments}</h2> }
+                <button className='Activity__footer--button material-symbols-outlined' onClick={handleCommentClick}>chat</button>
             </div>
         </div> }
 

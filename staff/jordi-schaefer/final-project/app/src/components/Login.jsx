@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Context from './Context'
 import authenticateUser from '../logic/authenticateUser'
+import '../styles/Welcome.sass'
 
 function Login (props) {
 
@@ -25,15 +26,15 @@ function Login (props) {
         }
     }
 
-    return <div className="Container mw mh Flex__start">
-        <header className="Header">
-            <button className="Button__back" onClick={handleWelcomeLinkClick}>{`< Back`}</button>
-            <h1 className="Center">Login</h1>
+    return <div className="Container mw mh flex__start">
+        <header className="Welcome__header">
+            <button className="Welcome__button--back" onClick={handleWelcomeLinkClick}>{`< Back`}</button>
+            <h1 className="center">Login</h1>
         </header>
-        <form className="Container mw m__form" onSubmit={handleFormSubmit}>
-            <input className="form" type="text" name="username" placeholder=" Username"/>
-            <input className="form" type="password" name="password" placeholder=" Password"/>
-            <button className="Button__color mt_button">Login</button>
+        <form className="Container mw Welcome__form" onSubmit={handleFormSubmit}>
+            <input className="Welcome__imput" type="text" name="username" placeholder=" Username"/>
+            <input className="Welcome__imput" type="password" name="password" placeholder=" Password"/>
+            <button className="Welcome__button Welcome__button--form">Login</button>
         </form>
     </div>
 }

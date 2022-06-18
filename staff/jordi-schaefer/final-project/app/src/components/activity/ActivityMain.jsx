@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import '../../styles/List.sass'
 import { useNavigate } from 'react-router-dom'
 import { isJwtValid } from 'validators'
 import ActivityStart from './ActivityStart'
