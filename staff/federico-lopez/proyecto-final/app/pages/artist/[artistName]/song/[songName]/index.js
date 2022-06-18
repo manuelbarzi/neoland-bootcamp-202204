@@ -14,7 +14,7 @@ export default function Song({ interpretations: interpretationsRetrieved, song: 
         <main>
             <p>{songRetrieved.name}</p>
 
-            <Link href={`/artists/${songRetrieved.artist.name.split(' ').join('-').toLowerCase()}/`}>
+            <Link href={`/artist/${songRetrieved.artist.name.split(' ').join('-').toLowerCase()}/`}>
                 <a>{songRetrieved.artist.name}</a>
             </Link>
 

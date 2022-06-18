@@ -75,7 +75,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.post('/songs', jsonBodyParser, handleCreateSong)
         routes.get('/songs', handleRetrieveSongs)
         routes.get('/songs/:songName/:artistName', handleRetrieveSong)
-        routes.get('/songs/artist/:artistName', handleRetrieveSongsOfArtist)
+        routes.get('/songs/:artistName', handleRetrieveSongsOfArtist)
         
         /* ARTISTS AND SONGS */
         routes.get('/search', handleRetrieveArtistsAndSongs)

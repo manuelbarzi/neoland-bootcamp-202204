@@ -26,12 +26,12 @@ export function generateInterpretation(interpretation, callback) {
         <p>
             {
                 getChords(interpretation).map((chord, index) => {
-                    return <a className="px-2" key={index * 10}
+                    return <button className="px-2" key={index * 10}
                         onClick={event => {
                             event.preventDefault()
 
                             callback(chord)
-                        }}>{chord}</a>
+                        }}>{chord}</button>
                 })
             }
         </p>
@@ -61,11 +61,11 @@ export function generateInterpretation(interpretation, callback) {
                 else if (character === '\n') return <Fragment key={index * Math.random() * 100}><br /></Fragment>
                 else return <Fragment key={index * Math.random() * 100}>{character}</Fragment>
             })}</>
-                <a onClick={event => {
+                <button onClick={event => {
                     event.preventDefault()
 
                     callback(chord)
-                }} className="text-red-400">{chord}</a>
+                }} className="text-red-400">{chord}</button>
                 <>{textLastPart.split('').map((character, index) => {
                     if (character === ' ') return <Fragment key={index * Math.random() * 100}>&nbsp;</Fragment>
                     else if (character === '\n') return <Fragment key={index * Math.random() * 100}><br /></Fragment>

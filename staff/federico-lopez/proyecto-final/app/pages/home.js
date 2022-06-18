@@ -10,7 +10,7 @@ export default function Home({ token }) {
         event.preventDefault()
 
         const query = event.target.search.value
-        
+
         try {
             const artistsAndSongsResults = await retrieveArtistsAndSongs(query)
 
@@ -31,5 +31,14 @@ export default function Home({ token }) {
 
 
 export async function getServerSideProps({ req, res }) {
-    return verifyTokenWithAPICall(req, res)
+    const token = await verifyTokenWithAPICall(req, res)
+    if(token) {
+        return {
+            props: { token }
+        }
+    } else {
+        return {
+            props: {}
+        }
+    }
 }

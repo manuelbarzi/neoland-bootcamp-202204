@@ -7,7 +7,9 @@ if (typeof XMLHttpRequest === 'undefined') {
 }
 
 function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
+  return <div className="box-border w-full min-h-screen h-full bg-primary">
+  <Component {...pageProps} />
+  </div>
 }
 
 export default MyApp

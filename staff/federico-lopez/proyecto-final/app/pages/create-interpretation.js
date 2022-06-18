@@ -108,7 +108,7 @@ export default function CreateInterpretation({ token }) {
 
         if (!artist.id) {
             debugger
-            artist.id = await createArtist(token, artist.name )
+            artist.id = await createArtist(token, artist.name)
         }
 
         if (!song.id) {
@@ -142,7 +142,7 @@ export default function CreateInterpretation({ token }) {
             {artistsDisplayed &&
                 artistsDisplayed.map(artist => {
                     return <li className="w-11/12 h-14 bg-gray-200" key={artist.id}>
-                        <a className="px-2 w-full h-full flex items-center justify-start"
+                        <button className="px-2 w-full h-full flex items-center justify-start"
                             onClick={
                                 event => {
                                     event.preventDefault()
@@ -150,7 +150,7 @@ export default function CreateInterpretation({ token }) {
                                     onClickArtist(artist)
                                 }}
                         >{artist.name}
-                        </a>
+                        </button>
                     </li>
                 })
             }
@@ -182,7 +182,7 @@ export default function CreateInterpretation({ token }) {
             {songsDisplayed &&
                 songsDisplayed.map(song => {
                     return <li className="w-11/12 h-14 bg-gray-200" key={song.id}>
-                        <a className="px-2 w-full h-full flex items-center justify-start"
+                        <button className="px-2 w-full h-full flex items-center justify-start"
                             onClick={
                                 event => {
                                     event.preventDefault()
@@ -190,7 +190,7 @@ export default function CreateInterpretation({ token }) {
                                     onClickSong(song)
                                 }}
                         >{song.name}
-                        </a>
+                        </button>
                     </li>
                 })
             }
@@ -219,5 +219,9 @@ export default function CreateInterpretation({ token }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    return verifyTokenWithAPICall(req, res)
+    const token = await verifyTokenWithAPICall(req, res)
+
+    return {
+        props: { token }
+    }
 }

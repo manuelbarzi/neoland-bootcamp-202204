@@ -5,10 +5,6 @@ import Chord from '@tombatossals/react-chords/lib/Chord'
 export function generateChordImages(chord) {
     let chordObjectFounded
 
-    // if(chord.includes('dim')) {
-    //     chord.replace('dim', '°')
-    // }
-
     if (chord.includes('D#'))
         chord = chord.replace('D#', 'Eb')
     else if (chord.includes('G#'))

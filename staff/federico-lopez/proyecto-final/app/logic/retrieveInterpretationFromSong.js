@@ -1,8 +1,11 @@
+import { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 
 export async function retrieveInterpretationFromSong(songName, artistName, interpretationId) {
-    // TODO validate songId
+    validateStringNotEmptyOrBlank(songName)
+    validateStringNotEmptyOrBlank(artistName)
+    validateStringNotEmptyNoSpaces(interpretationId)
 
     const api = new Apium(context.API_URL)
 

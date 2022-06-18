@@ -31,22 +31,22 @@ export default function SearchBar() {
                 <form className="w-2/3 h-11/12" onSubmit={onFormSubmit} >
                     <input className="w-full text-2xl bg-gray-200" type="search" placeholder="Artists or songs" onChange={onChangeQuery}></input>
                 </form>
-                <a>Cancel</a>
+                <button>Cancel</button>
             </div>
             {artistsAndSongs && artistsAndSongs.artists && artistsAndSongs.artists.map(artist => {
                 return <li className="w-11/12 h-14 bg-gray-200" key={artist.id}>
                     <Link href={`/artist/${artist.name.split(' ').join('-').toLowerCase()}`}>
-                        <a className="px-2 w-full h-full flex items-center justify-start" >{artist.name}</a>
+                        <button className="px-2 w-full h-full flex items-center justify-start" >{artist.name}</button>
                     </Link>
                 </li>
             })}
             {artistsAndSongs && artistsAndSongs.songs && artistsAndSongs.songs.map(song => {
                 return <li className="w-11/12 h-14 bg-gray-200 " key={song.id}>
-                    <Link href={`/artist/${song.artist.name.split(' ').join('-').toLowerCase()}/songs/${song.name.split(' ').join('-').toLowerCase()}`}>
-                        <a className="w-full h-full flex flex-col justify-center">
+                    <Link href={`/artist/${song.artist.name.split(' ').join('-').toLowerCase()}/song/${song.name.split(' ').join('-').toLowerCase()}`}>
+                        <button className="w-full h-full flex flex-col justify-center">
                             <p className="px-2">{song.name}</p>
                             <p className="px-2 text-sm">Artist: {song.artist.name}</p>
-                        </a>
+                        </button>
                     </Link>
                 </li>
             })}

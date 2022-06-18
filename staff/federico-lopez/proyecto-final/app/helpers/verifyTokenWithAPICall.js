@@ -9,8 +9,6 @@ export async function verifyTokenWithAPICall(req, res) {
     const token = cookies.get('token')
 
     if (token) {
-        validateJWT(token)
-
         const api = new Apium(context.API_URL)
 
         const { status, payload } = await api.get('users', {
@@ -24,9 +22,7 @@ export async function verifyTokenWithAPICall(req, res) {
                 res.writeHead(307, { Location: '/home' })
                 res.end()
             } else {
-                return {
-                    props: { token }
-                }
+                return token
             }
         } else {
             cookies.set('token')
@@ -44,7 +40,5 @@ export async function verifyTokenWithAPICall(req, res) {
         res.end()
     }
 
-    return {
-        props: {}
-    }
+    return 
 }

@@ -12,10 +12,7 @@ export default function Interpretation({ interpretation: serverSideInterpretatio
 
     const router = useRouter()
 
-    const onChordClick = chord => {
-
-        setChordView(chord)
-    }
+    const onChordClick = chord => setChordView(chord)
 
     return <>
         <div className="h-screen flex flex-col">

@@ -1,10 +1,10 @@
-import { validateJWT, validateStringNotEmptyOrBlank, validateGenres, validateDate } from 'validators'
+import { validateJWT, validateStringNotEmptyOrBlank, validateGenres, validateDate, validateStringNotEmptyNoSpaces } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 
 export async function createSong(token, { artist, name, genres, album, date }) {
     validateJWT(token)
-    // TODO validate artist
+    validateStringNotEmptyNoSpaces(artist)
 
     validateStringNotEmptyOrBlank(name, 'song name')
     if (genres) validateGenres(genres)
