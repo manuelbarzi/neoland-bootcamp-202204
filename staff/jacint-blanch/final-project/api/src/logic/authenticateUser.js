@@ -7,6 +7,7 @@ function authenticateUser(username, password) {
     validatePassword(password)
 
     return User.findOne({ username, password })
+
         .then(user => {
             if (!user)
                 throw new AuthError('wrong credentials')

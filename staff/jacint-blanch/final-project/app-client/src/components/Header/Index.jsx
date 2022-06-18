@@ -1,6 +1,8 @@
 import './Index.css'
+import './App'
+import Incidence from '../Incidence/Incidence'
 
-const Header = () => {
+const HeaderIndex = () => {
     return (
       <nav>
 
@@ -8,7 +10,7 @@ const Header = () => {
           <h1 className="HeatMap_Title">HeatMap</h1>
         </div>
 
-        <ul class="navigation-links">
+        <ul class="nav-links">
           <li>
             <a href="#">Home</a>
           </li>
@@ -19,12 +21,17 @@ const Header = () => {
             <a href="#">Profile</a>
           </li>
           <li>
-            <a href="#">Nidea</a>
+            <Incidence></Incidence>
           </li>
         </ul>
+        <div class = "burger">
+          <div class = "line1"></div>
+          <div class = "line2"></div>
+          <div class = "line3"></div>
+        </div>
 
       </nav>
     );
 }
 
-export default Header
+export default HeaderIndex

@@ -13,28 +13,84 @@ nav {
     font-family: 'Open Sans', sans-serif;
 }
 
-.HeatMap_Title{
+.logo{
     color: blueviolet;
     text-transform: uppercase;
     letter-spacing: 5px;
     font-size: 20px;
 }
 
-.navigation-links{
+.nav-links{
     display: flex;
-    background-color: red;
     justify-content: space-around;
     width: 30%;
 }
 
-.navigation-links a {
-    color: rgb(226, 226, 226);
+.nav-links li {
+    list-style: none;
+}
+
+.nav-links a {
+    color: red;
     text-decoration: none;
     letter-spacing: 3px;
     font-weight: bold;
     font-size: 14px;
 }
 
-.navigation-links li {
-    list-style: none;
+.burger{
+    display: none;
+    cursor: pointer;
+}
+.burger div{
+    width: 25px;
+    height: 3px;
+    background-color:aquamarine;
+    margin: 5px
+}
+
+@media screen and (max-width:1024px){
+    .nav-links{
+        width: 60%;
+    }
+}
+
+@media screen and (max-width:768px){
+    body{
+        overflow-x: hidden;
+    }
+   .nav-links{
+        position:absolute;
+            right: 0px;
+            height: 92vh;
+            top: 8vh;
+            background-color:blue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 30%;
+            transform: translateX(100%);
+            transition: transform 0.5s ease-in;
+   }
+   .nav-links li{
+        opacity: 0;
+   }
+   .burger{
+        display: block
+   }
+}
+
+.nav-active{
+    transform: translateX(0%);
+}
+
+@keyframes navLinkFade{
+    from{
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0px);
+    }
 }
