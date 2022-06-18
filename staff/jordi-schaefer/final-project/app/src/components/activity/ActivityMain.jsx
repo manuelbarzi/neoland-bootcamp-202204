@@ -9,6 +9,7 @@ import ActivityFinish from './ActivityFinish'
 function ActivityMain() {
 
     const [view, setView] = useState('start')
+    const [point, setPoint] = useState([])
     const [activityId, setActivityId] = useState(null)
     const navigate = useNavigate()
     
@@ -20,8 +21,9 @@ function ActivityMain() {
     }, [])
 
 
-    const handleStartClicked = (activityId) => {
+    const handleStartClicked = (activityId, position) => {
         setActivityId(activityId)
+        setPoint(position)
         setView('record')
     }
     const handleFinishClicked = () => {
@@ -33,7 +35,7 @@ function ActivityMain() {
 
         <div className="Container overflow mw mh">
             { view === 'start' &&   <ActivityStart onStartClicked={handleStartClicked}/> }
-            { view === 'record' &&   <ActivityRecord activityId={activityId} onFinishClicked={handleFinishClicked}/> }
+            { view === 'record' &&   <ActivityRecord activityId={activityId} point={point} onFinishClicked={handleFinishClicked}/> }
             { view === 'finish' &&   <ActivityFinish activityId={activityId} /> }
         </div> : <></>
 }

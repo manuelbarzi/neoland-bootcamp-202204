@@ -75,7 +75,7 @@ function ActivityStart(props) {
             const token = sessionStorage.token
             const activityId = await createActivity(token, sport)
             await addPointToActivity(activityId, position)
-            props.onStartClicked(activityId)
+            props.onStartClicked(activityId, position)
             navigator.geolocation.clearWatch(watchId)
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })

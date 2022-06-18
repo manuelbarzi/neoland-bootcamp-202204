@@ -9,9 +9,9 @@ function MapView({points}) {
     let first, last
     let dis
 
-    const greenIcon = new L.icon({ iconUrl: require('../../icons/2x-green.png'), iconSize: [25, 41], iconAnchor: [12, 41] });
-    const redIcon = new L.icon({ iconUrl: require('../../icons/2x-red.png'), iconSize: [25, 41], iconAnchor: [12, 41] });
-    const blueIcon = new L.icon({ iconUrl: require('../../icons/blue.png'), iconSize: [20, 32], iconAnchor: [10, 32] });
+    const greenIcon = new L.icon({ iconUrl: require('../../icons/2x-green.png'), iconSize: [25, 41], iconAnchor: [12, 41] })
+    const redIcon = new L.icon({ iconUrl: require('../../icons/2x-red.png'), iconSize: [25, 41], iconAnchor: [12, 41] })
+    const blueIcon = new L.icon({ iconUrl: require('../../icons/blue.png'), iconSize: [20, 32], iconAnchor: [10, 32] })
 
  
     const length = points.length
@@ -45,6 +45,8 @@ function MapView({points}) {
             zoomControl={false}
             scrollWheelZoom={false}
             attributionControl={false}
+            doubleClickZoom={false}
+            dragging={false}
             >
         <TileLayer
         attribution=' <a href="https://www.openstreetmap.org/copyright"></a> '
