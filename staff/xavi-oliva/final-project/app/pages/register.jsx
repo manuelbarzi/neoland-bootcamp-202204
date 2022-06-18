@@ -27,7 +27,7 @@ export default function Register(props) {
   }
 
   return <>
-    <Section>
+    <Section className='section'>
       <Form onSubmit={handleFormSubmit}>
         <Input type="text" name="name" placeholder="name"></Input>
         <Input type="text" name="email" placeholder="email"></Input>

@@ -39,7 +39,7 @@ export default function Login(props) {
 	logger.info('render')
 
 	return <> 
-		<Section>
+		<Section className='section'>
 			<h1 className='d:basis-1/2 t-logo text-5xl md:text-5xl'>Brun's <span className="text-secondary">Flats</span></h1>
 			<h3 className='md:basis-1/2 text-center text-secondary'>home sweet home</h3>
 

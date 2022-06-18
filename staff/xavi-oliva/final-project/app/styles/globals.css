@@ -21,6 +21,9 @@
   .section {
     @apply flex flex-col gap-5 h-screen w-screen justify-center items-center
   }
+  .section-scroll {
+    @apply flex-1 flex-col overflow-y-auto
+  }
   .form-input {
     @apply placeholder-primary appearance-none border-0 rounded-lg w-full mb-2 py-4 px-3 text-gray-700 leading-tight focus:outline-none
   }

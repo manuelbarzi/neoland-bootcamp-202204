@@ -2,8 +2,7 @@ export const Div = ({ className, children, ...props }) => {
 
 	return <>
 		<div {...props}
-			className={`${className} 
-                section`}>
+			className={`${className}`}>
 			{children}
 		</div>
 	</>

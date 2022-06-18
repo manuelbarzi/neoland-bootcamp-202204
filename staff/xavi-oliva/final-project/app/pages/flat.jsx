@@ -1,13 +1,11 @@
 import Image from 'next/image'
-import { Header, Footer, CommonMain, Container, Card, PrimaryButton } from "../components";
+import { Div, Card, PrimaryButton, Section } from "../components";
 
 
 export default function Flat() {
     return <>
-        <div className="flex flex-col h-screen">
-            <Header />
-            <CommonMain>
-                <Container>
+        <Section className='section-scroll'>
+            <Div className='min-h-full p-1'>
                     <Card>
                         <h2 className=' text-primary text-sm py-2 font-semibold'>
                             Spacious apartment in downtown area
@@ -67,9 +65,7 @@ export default function Flat() {
                             <PrimaryButton>Save</PrimaryButton>
                         </div>
                     </Card>
-                </Container>
-            </CommonMain>
-            <Footer />
-        </div>
+            </Div>
+        </Section>
     </>
 }
