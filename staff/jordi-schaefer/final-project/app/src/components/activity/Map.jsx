@@ -1,7 +1,6 @@
-import ChangeMapView from './ChangeMapView'
-
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import ChangeMapView from './ChangeMapView'
 
 function Map(props) {
 

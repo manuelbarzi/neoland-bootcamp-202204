@@ -28,15 +28,15 @@ function DeleteUser(props) {
     }
 
 
-    return <div className="Container m__form mw">
+    return <div className="Container Settings__container mw">
         {view === 'delete' && <form className="Container mw" onSubmit={handleDeleteClick}>
-            <input className="form" type="password" name="elemento" placeholder=" Confirm your password"/>
-            <button className="Button__color mt_button">Delete</button>
+            <input className="Settings__input" type="password" name="elemento" placeholder=" Confirm your password"/>
+            <button className="Settings__buttom--submit">Delete</button>
         </form> }
 
         {view === 'confirm' && <div className="Container mw">
-            <p className="Confirm__message">Are you sure you want to delete your user and all your activities permanetly?</p>
-            <button className="Button__color mt_button Button__delete" onClick={handleConfirmClick}>Delete</button>
+            <p className="Settings__delete--text">Are you sure you want to delete your user and all your activities permanetly?</p>
+            <button className="Settings__buttom--submit Settings__button--sub-delete" onClick={handleConfirmClick}>Delete</button>
         </div> }
     </div>
 }

@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Context from '../Context'
 import updateUserEmail from '../../logic/updateUserEmail'
+import '../../styles/Settings.sass'
 
 function ChangeEmail(props) {
 
@@ -26,11 +27,11 @@ function ChangeEmail(props) {
     }
 
 
-    return <div className="Container m__form mw">
+    return <div className="Container Settings__container mw">
         <form className="Container mw" onSubmit={handleSaveClick}>
-            <input className="form" type="text" name="email" placeholder=" New email"/>
-            <input className="form" type="text" name="confirmEmail" placeholder=" Confirm new email"/>
-            <button className="Button__color mt_button">Save</button>
+            <input className="Settings__input" type="text" name="email" placeholder=" New email"/>
+            <input className="Settings__input" type="text" name="confirmEmail" placeholder=" Confirm new email"/>
+            <button className="Settings__buttom--submit">Save</button>
         </form>
     </div>
 }

@@ -42,33 +42,29 @@ function ActivityFinish(props) {
 
 
     
-    return  <div className="Container Overflow mw mh">
-        <header className="Header">
-            <h1 className="Center">Save activity</h1>
+    return  <div className="Container overflow mw mh">
+        <header className="Activity__header">
+            <h1 className="center">Save activity</h1>
         </header>
 
-
-        <main className="Body__finish mw mh">
-            <form id='myform' className="Container Form__finish" onSubmit={handleSaveClick}>
-                <h1 className="Save__text">Title</h1>
-                <input className="Title__form" type="text" name="title" placeholder=" Mountain Activity" />
-                <h1 className="Save__text">Text</h1>
-                <textarea className="Text__form" type="text" name="text" placeholder=" " />
-                <select className="Select__form" name="audience">
+        <main className="Finish__body mw mh">
+            <form id='myform' className="Container Finish__form mw" onSubmit={handleSaveClick}>
+                <h1 className="Finish__form--text">Title</h1>
+                <input className="Finish__input--title" type="text" name="title" placeholder=" Mountain Activity" />
+                <h1 className="Finish__form--text">Text</h1>
+                <textarea className="Finish__input--text" type="text" name="text" placeholder=" " />
+                <select className="Finish__input--selector" name="audience">
                     <option defaultValue="public">public</option>
                     <option value="private">private</option>
                 </select>
             </form>
-            <button className="Button__finish_delete" onClick={handleDeleteClick}>Delete activity</button>  
+            <button className="Finish__button--delete" onClick={handleDeleteClick}>Delete activity</button>           
         </main>
 
-
-        
-        <footer className="Footer Footer__activity">
-            <div className="Footer__home">
+        <footer className="Activity__footer">
+            <div className="Activity__footerContainer__buttons">
+                <button className="Activity__button--start" form='myform' type="submit">Save</button>         
             </div>
-
-            <button className="Button__start" form='myform' type="submit">Save</button>         
         </footer>
 
     </div> 

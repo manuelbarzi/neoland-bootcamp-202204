@@ -42,7 +42,7 @@ function Activity (props) {
     const timeOptions = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  }
     
     return <div>
-        <div className="Activity__header">
+        <div className="ActivityItem__header">
             <h2>{user.name}</h2>
             <h2>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
             <h2>{title}</h2>
@@ -52,21 +52,21 @@ function Activity (props) {
         </div>
 
         { setDelete && <div className='Container'> 
-            <button className="Activity__button--delete" onClick={handleDeleteClick}>Delete</button> 
+            <button className="ActivityItem__button--delete" onClick={handleDeleteClick}>Delete</button> 
         </div> }
 
-        { !setDelete && points.length>0 && <div className='Activity__container--map'>
+        { !setDelete && points.length>0 && <div className='ActivityItem__container--map'>
             <MapView points={points}/>
         </div> }
 
-        { !setDelete && <div className='Activity__footer mw'>
-            <div className='Activity__footer--container Button__borderR'>
-                { likes>0 && <h2 className='Activity__footer--number'>{likes}</h2> }
-                <button className='Activity__footer--button material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
+        { !setDelete && <div className='ActivityItem__footer mw'>
+            <div className='ActivityItem__footer--container Button__borderR'>
+                { likes>0 && <h2 className='ActivityItem__footer--number'>{likes}</h2> }
+                <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
             </div>
-            <div className='Activity__footer--container'>
-                { comments>0 && <h2 className='Activity__footer--number'>{comments}</h2> }
-                <button className='Activity__footer--button material-symbols-outlined' onClick={handleCommentClick}>chat</button>
+            <div className='ActivityItem__footer--container'>
+                { comments>0 && <h2 className='ActivityItem__footer--number'>{comments}</h2> }
+                <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleCommentClick}>chat</button>
             </div>
         </div> }
 

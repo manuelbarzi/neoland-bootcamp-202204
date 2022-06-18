@@ -11,6 +11,7 @@ function ActivityRecord(props) {
     const [position, setPosition] = useState(null)
     const [view, setView] = useState('map')
     const { handleFeedback } = useContext(Context)
+    let watchId
 
 
     useEffect(() => {
@@ -19,7 +20,7 @@ function ActivityRecord(props) {
 
 
     const watchPosition = () => {
-        navigator.geolocation.watchPosition(function(position) {
+        watchId = navigator.geolocation.watchPosition(function(position) {
             setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
             console.log('set position')
         }, function(error){
@@ -41,6 +42,7 @@ function ActivityRecord(props) {
     const handleFinishClick = async() => {
         try {
             await addPointToActivity(props.activityId, position)
+            navigator.geolocation.clearWatch(watchId)
             props.onFinishClicked()
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
@@ -52,26 +54,26 @@ function ActivityRecord(props) {
 
 
 
-    return  <div className="Container Overflow mw mh">
-    <header className="Header">
-        <h1 className="Center"></h1>
+    return  <div className="Container overflow mw mh">
+    <header className="Activity__header mw">
+        <h1 className="center">Recording activity</h1>
     </header>
 
 
-    <main className="Home__body mw mh">
+    <main className="Activity__body mw mh">
         { view === 'map' && position && <Map position={position} center={true}/> } 
         { view === 'timer' && <LiveInfo activityId={props.activityId} onPointRegistered={timestamp}/> } 
     </main>
 
     
-    <footer className="Footer Footer__activity">
-        <div className="Footer__home">
-            <button className="b" onClick={handleTimeClick}>Time</button>
-            <button className="b" onClick={handleMapClick}>Map</button>
+    <footer className="Activity__footer mw">
+        <div className="Activity__footerContainer__selector mw">
+            <button className="Activity__footerButton__selector" onClick={handleTimeClick}>Time</button>
+            <button className="Activity__footerButton__selector" onClick={handleMapClick}>Map</button>
         </div> 
-        <div className="Footer__buttons">
-            <button className="Button__start Button__register" onClick={handleSaveClick}>Register</button>    
-            <button className="Button__start" onClick={handleFinishClick}>Finish</button>      
+        <div className="Activity__footerContainer__buttons">
+            <button className="Activity__button--register" onClick={handleSaveClick}>Register</button>    
+            <button className="Activity__button--start" onClick={handleFinishClick}>Finish</button>      
         </div>
     </footer>
 

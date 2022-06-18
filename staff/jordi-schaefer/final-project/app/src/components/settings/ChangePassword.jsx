@@ -21,13 +21,12 @@ function ChangePassword(props) {
         }
     }
 
-    return <div className="Container m__form mw">
+    return <div className="Container Settings__container mw">
         <form className="Container mw" onSubmit={handleSaveClick}>
-            <input className="form" type="password" name="password" placeholder=" Current password"/>
-            <input className="form" type="password" name="newPassword" placeholder=" New password"/>
-            <input className="form" type="password" name="newPasswordRepeat" placeholder=" Repeat new password"/>
-
-            <button className="Button__color mt_button">Save</button>
+            <input className="Settings__input" type="password" name="password" placeholder=" Current password"/>
+            <input className="Settings__input" type="password" name="newPassword" placeholder=" New password"/>
+            <input className="Settings__input" type="password" name="newPasswordRepeat" placeholder=" Repeat new password"/>
+            <button className="Settings__buttom--submit">Save</button>
         </form>
     </div>
 }

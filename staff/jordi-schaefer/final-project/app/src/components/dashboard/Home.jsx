@@ -92,7 +92,7 @@ function Home(props) {
             {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comment'].includes(view)) 
                 && <button className="Home__button--back" onClick={handleBackClick}>{`< `+back}</button>}
             <h1 className="center">{view}</h1>
-            {view === 'Profile' && <button className="Button__set material-symbols-outlined" onClick={handleSettingClick}>Settings</button>}
+            {view === 'Profile' && <button className="Home__header--settings material-symbols-outlined" onClick={handleSettingClick}>Settings</button>}
         </header>
 
 

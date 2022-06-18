@@ -4,6 +4,7 @@ import Context from '../Context'
 import Map from './Map'
 import createActivity from '../../logic/createActivity'
 import addPointToActivity from '../../logic/addPointToActivity'
+import '../../styles/Activity.sass'
 
 function ActivityStart(props) {
 
@@ -11,7 +12,7 @@ function ActivityStart(props) {
     const [position, setPosition] = useState(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
-    
+    let watchId
 
     useEffect(() => {
         setSport('Cycling')
@@ -31,7 +32,7 @@ function ActivityStart(props) {
     }
 
     const watchPosition = () => {
-        navigator.geolocation.watchPosition(function(position) {
+        watchId = navigator.geolocation.watchPosition(function(position) {
             setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
             console.log('set position')
         }, function(error){
@@ -74,35 +75,36 @@ function ActivityStart(props) {
             const token = sessionStorage.token
             const activityId = await createActivity(token, sport)
             await addPointToActivity(activityId, position)
-            
             props.onStartClicked(activityId)
+            navigator.geolocation.clearWatch(watchId)
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         }   
     }
     
 
-    return  <div className="Container Overflow mw mh">
-        <header className="Header">
-            <button className="Button__back" onClick={handleCloseClick}>Close</button>
-            <h1 className="Center">{sport}</h1>
+    return  <div className="Container overflow mw mh">
+        <header className="Activity__header">
+            <button className="Activity__button--back" onClick={handleCloseClick}>Close</button>
+            <h1 className="center">{sport}</h1>
         </header>
 
 
-        <main className="Home__body mw mh">
+        <main className="Activity__body mw mh">
             { position && <Map position={[position[0], position[1]]} center={false}/> } 
         </main>
 
         
-        <footer className="Footer Footer__activity">
-            <div className="Footer__home">
-                <button id="bike" className="Button__selected Footer__icon material-symbols-outlined" onClick={handleBikeClick}>directions_bike</button>
-                <button id="hike" className="Footer__icon material-symbols-outlined" onClick={handleHikingClick}>hiking</button>
-                <button id="sky" className="Footer__icon material-symbols-outlined" onClick={handleSkiClick}>downhill_skiing</button>
-                <button id="snow" className="Footer__icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
+        <footer className="Activity__footer mw">
+            <div className="Activity__footerContainer__selector">
+                <button id="bike" className="Button__selected Activity__footer--icon material-symbols-outlined" onClick={handleBikeClick}>directions_bike</button>
+                <button id="hike" className="Activity__footer--icon material-symbols-outlined" onClick={handleHikingClick}>hiking</button>
+                <button id="sky" className="Activity__footer--icon material-symbols-outlined" onClick={handleSkiClick}>downhill_skiing</button>
+                <button id="snow" className="Activity__footer--icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
             </div>
-
-            <button className="Button__start" onClick={handleStartClick}>Start</button>         
+            <div className="Activity__footerContainer__buttons">
+                <button className="Activity__button--start" onClick={handleStartClick}>Start</button>         
+            </div>
         </footer>
 
     </div> 

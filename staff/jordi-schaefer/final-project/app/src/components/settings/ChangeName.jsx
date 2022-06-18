@@ -19,10 +19,10 @@ function ChangeName(props) {
     }
 
 
-    return <div className="Container m__form mw">
+    return <div className="Container Settings__container mw">
         <form className="Container mw" onSubmit={handleSaveClick}>
-            <input className="form" type="text" name="name" placeholder=" New name"/>
-            <button className="Button__color mt_button">Save</button>
+            <input className="Settings__input" type="text" name="name" placeholder=" New name"/>
+            <button className="Settings__buttom--submit">Save</button>
         </form>
     </div>
 }

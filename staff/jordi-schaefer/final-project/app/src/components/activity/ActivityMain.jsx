@@ -31,7 +31,7 @@ function ActivityMain() {
 
     return  isJwtValid(sessionStorage.token) ?
 
-        <div className="Container Overflow mw mh">
+        <div className="Container overflow mw mh">
             { view === 'start' &&   <ActivityStart onStartClicked={handleStartClicked}/> }
             { view === 'record' &&   <ActivityRecord activityId={activityId} onFinishClicked={handleFinishClicked}/> }
             { view === 'finish' &&   <ActivityFinish activityId={activityId} /> }

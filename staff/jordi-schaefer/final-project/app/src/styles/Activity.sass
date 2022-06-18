@@ -1,54 +1,135 @@
 @use 'base'
 
-.Body__finish
+.Activity__header
+    top: 0
+    background-color: #fff
+    display: flex
+    flex-direction: row
+    height: 65px
+    width: 99%
+    border-bottom: 2px solid base.$border-color
+
+.Activity__button--back
+    border: none
+    background: none
+    color: base.$main-color
+    font-weight: 600
+
+.Activity__body
+    padding: 0
+    display: flex
+    justify-content: center
+    align-items: baseline
+    background-color: #ebebeb
+
+.Activity__footer
+    bottom: 0
+    display: flex
+    flex-direction: column
+    width: 100%
+    border-top: 2px solid base.$border-color
+    height: 190px
+    justify-content: space-around
+    background-color: #fff
+
+.Activity__footer--icon
+    color: base.$almost-black
+    border: none
+    background: none
+    font-size: 33px
+    padding: 0
+
+.Activity__button--start
+    height: 75px
+    width: 75px
+    border-radius: 50%
+    border: none
+    text-align: center
+    font-weight: 700
+    font-size: 16px
+    color: #fff
+    background-color: base.$main-color
+
+.Activity__button--register
+    height: 75px
+    width: 75px
+    border-radius: 50%
+    text-align: center
+    background-color: white
+    color: base.$main-color
+    border: 3px solid base.$main-color
+    font-size: 15px
+    font-weight: 700
+
+.Activity__footerContainer__selector
+    display: flex
+    flex-direction: row
+    justify-content: space-around
+
+.Activity__footerButton__selector
+
+.Activity__footerContainer__buttons
+    display: flex
+    flex-direction: row
+    justify-content: center
+    gap: 1.4rem
+
+
+
+.Finish__body
     display: flex
     flex-direction: column
     background-color: #e7e7e7
+    align-items: center
+    justify-content: space-between
 
-.Form__finish
-    margin: 0.8rem
+.Finish__form
     padding: 0
     margin-top: 1rem
-    align-items: flex-start
     gap: 0.2rem
     
-
-.Save__text
+.Finish__form--text
+    width: 88%
     margin: 0
     margin-top: 1rem
-    margin-left: 0.3rem
     font-size: 18px
     font-weight: 400
+    text-align: left
 
-.Title__form
-    width: 95%
+.Finish__input--title
+    width: 92%
     height: 35px
     border-radius: 5px
     border-style: none
 
-.Text__form
-    width: 95%
+.Finish__input--text
+    width: 92%
     height: 100px
     border-radius: 5px
     border-style: none
     text-align: top
 
-.Select__form
-    margin-top: 0.3rem
+.Finish__input--selector
+    margin-top: 0.6rem
     width: 110px
     height: 35px
     border-radius: 5px
     border-style: none
+    align-self: flex-start
+    margin-left: 1rem
 
-.Button__finish_delete
-    width: 60%
-    margin: 1rem
+
+.Finish__button--delete
+    width: 94%
     padding: 0.25rem
+    color: #b90000
+    margin-bottom: 1.2rem
+    font-size: 18px
+    font-weight: 500
+    border: 1px solid base.$border-color
+    border-radius: 5px
     text-align: center
     text-decoration: none
-    font-size: 18px
-    font-weight: 600
-    border-radius: 5px
-    border: 1px solid base.$border-color
-    color: #b90000
-    background-color: #fcfcfc
+
+.Button__selected
+    color: base.$main-color
