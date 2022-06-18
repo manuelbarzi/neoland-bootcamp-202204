@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { isJwtValid, validateUsername } from 'validators'
+import { isJwtValid } from 'validators'
 import Context from '../Context'
 import ActivityList from './ActivityList'
 import CommentList from './CommentList'
@@ -15,13 +15,11 @@ import '../../styles/List.sass'
 
 
 function Home(props) {
- 
     const [view, setView] = useState(null)
     const [back, setBack] = useState(null)
     const [activityId, setActivityId] = useState(null)
-    const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
+    const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
-
 
     useEffect(() => {
         validateUser()
@@ -67,9 +65,7 @@ function Home(props) {
     const handleDeleteActivityClick = () => {setView('Delete Activity'); setBack('Settings')}
     const handleDeleteUserClick = () => {setView('Delete User'); setBack('Settings')}
     
-    const handleLogoutClick = () => {
-        props.onUserLoggedOut()
-    }
+    const handleLogoutClick = () => props.onUserLoggedOut()
 
     const handleDataChanged = () => handleBackClick()
 

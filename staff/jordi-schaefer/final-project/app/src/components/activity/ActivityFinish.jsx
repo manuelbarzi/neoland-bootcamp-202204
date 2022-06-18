@@ -8,10 +8,8 @@ import deleteActivity from '../../logic/deleteActivity'
 
 function ActivityFinish(props) {
 
-    const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
+    const { handleFeedback } = useContext(Context) 
     const navigate = useNavigate()
-
-
 
 
     const handleSaveClick = async(event) => {
@@ -26,7 +24,6 @@ function ActivityFinish(props) {
         else audience=false
 
         await updateActivity(props.activityId, title, text, audience)
-
         navigate('/dashboard')
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
@@ -36,8 +33,7 @@ function ActivityFinish(props) {
 
     const handleDeleteClick = async() => {
         try {
-            await deleteActivity(sessionStorage.token, props.activityId)
-                
+            await deleteActivity(sessionStorage.token, props.activityId)     
             navigate('/dashboard')
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})

@@ -8,27 +8,18 @@ function DeleteUser(props) {
     const [password, setPassword] = useState(null)
     const { handleFeedback } = useContext(Context)
 
-
     const handleDeleteClick = (event) => {
         event.preventDefault()
         setPassword(event.target.elemento.value)
-
         setView('confirm')
     }
 
-
-    const handleConfirmClick = () => {
+    const handleConfirmClick = async() => {
         try {
-            deleteUser(sessionStorage.token, password, (error) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
-                }
-
-                handleFeedback({ type: 'success', message: 'User deleted'})
-                delete sessionStorage.token
-                props.onDeletedUser()
-            })
+            await deleteUser(sessionStorage.token, password)
+            handleFeedback({ type: 'success', message: 'User deleted'})
+            delete sessionStorage.token
+            props.onDeletedUser()
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }

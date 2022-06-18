@@ -10,7 +10,7 @@ function ActivityStart(props) {
 
     const [sport, setSport] = useState(null)
     const [position, setPosition] = useState(null)
-    const { handleFeedback } = useContext(Context) // quiero usar del contexto el handleFeedback, "traeme el value y destructurame esto"
+    const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
     
 

@@ -6,22 +6,16 @@ function ChangePassword(props) {
 
     const { handleFeedback } = useContext(Context)
 
-    const handleSaveClick = event => {
+    const handleSaveClick = async(event) => {
         event.preventDefault()
-
         const password = event.target.password.value
         const newPassword = event.target.newPassword.value
         const newPasswordRepeat = event.target.newPasswordRepeat.value
 
         try {
-            updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
-                }
-                handleFeedback({ type: 'success', message: 'Password saved'})
-                props.onDataChanged()
-            })
+            await updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat)
+            handleFeedback({ type: 'success', message: 'Password saved'})
+            props.onDataChanged()
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }

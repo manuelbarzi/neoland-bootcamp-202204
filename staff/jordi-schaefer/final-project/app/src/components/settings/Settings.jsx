@@ -1,9 +1,7 @@
 
 function Settings(props) {
 
-
-    return <div className="Container mw m__form">
-        
+    return <div className="Container mw m__form">     
         <button className="Button__setting" onClick={props.onChangeNameClicked}>Change Name</button>
         <button className="Button__setting" onClick={props.onChangePasswordClicked}>Change Password</button>
         <button className="Button__setting" onClick={props.onChangeEmailClicked}>Change email</button>
@@ -12,7 +10,6 @@ function Settings(props) {
         <p></p>
         <button className="Button__setting" onClick={props.onLogoutClicked}>Logout</button>
         <button className="Button__setting red" onClick={props.onDeleteUserClicked}>Delete User</button>
-
     </div>
 }
 

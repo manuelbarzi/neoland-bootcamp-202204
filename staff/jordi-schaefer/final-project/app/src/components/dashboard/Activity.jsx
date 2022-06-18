@@ -14,15 +14,12 @@ function Activity (props) {
     
     const handleDeleteClick = async() => {
         const activityId= activity.id
-
-        if (activityId) {
-            try {
-                await deleteActivity(sessionStorage.token, activityId) 
-                onRemove(activityId)
-                handleFeedback({ type: 'success', message: 'Sticker deleted'})
-            } catch(error) {
-                handleFeedback({ type: 'error', message: error.message})
-            }
+        try {
+            await deleteActivity(sessionStorage.token, activityId) 
+            onRemove(activityId)
+            handleFeedback({ type: 'success', message: 'Sticker deleted'})
+        } catch(error) {
+            handleFeedback({ type: 'error', message: error.message})
         }
     }
 

@@ -6,9 +6,8 @@ function ChangeEmail(props) {
 
     const { handleFeedback } = useContext(Context)
 
-    const handleSaveClick = event => {
+    const handleSaveClick = async(event) => {
         event.preventDefault()
-
         const email = event.target.email.value
         const confirmEmail = event.target.confirmEmail.value
 
@@ -18,15 +17,9 @@ function ChangeEmail(props) {
         }
 
         try {
-            updateUserEmail(sessionStorage.token, email, (error) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
-                }
-
-                handleFeedback({ type: 'success', message: 'Email changed'})
-                props.onDataChanged()
-            })
+            await updateUserEmail(sessionStorage.token, email)
+            handleFeedback({ type: 'success', message: 'Email changed'})
+            props.onDataChanged()
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }

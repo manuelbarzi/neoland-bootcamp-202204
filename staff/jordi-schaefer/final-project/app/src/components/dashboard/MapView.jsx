@@ -5,12 +5,10 @@ import calculateDistanceBetweenTwoPoints from '../../logic/calculateDistanceBetw
 
 function MapView({points}) {   
 
-    
     let centerPosition= { lat: 42.56990, lng: 1.93214 }
     let markerPosition= { lat: 42.56990, lng: 1.93214 }
     let first, last
     let dis
-
 
     const greenIcon = new L.icon({ iconUrl: require('../../icons/2x-green.png'), iconSize: [25, 41], iconAnchor: [12, 41] });
     const redIcon = new L.icon({ iconUrl: require('../../icons/2x-red.png'), iconSize: [25, 41], iconAnchor: [12, 41] });
@@ -29,10 +27,7 @@ function MapView({points}) {
         n=0
         points.map( elem => n += elem.longitude)
         const lng = n/length
-        //const lat = points.reduce((a, b)=> a.latitude+b.latitude, 0)/length
-        //const lng = points.reduce((a, b)=> a.longitude+b.longitude, 0)/length
-        //const lat = (first[0] + last[0])/2
-        //const lng = (first[1] + last[1])/2
+
         centerPosition = {lat: lat, lng: lng}
         markerPosition = first
 

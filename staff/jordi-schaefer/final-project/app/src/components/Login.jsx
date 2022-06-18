@@ -13,13 +13,11 @@ function Login (props) {
 
     const handleFormSubmit = async(event) => {
         event.preventDefault()
-
         const username = event.target.username.value
         const password = event.target.password.value
 
         try {
             const token = await authenticateUser(username, password)
-
             sessionStorage.token = token
             props.onUserLoggedIn()
         } catch(error) {

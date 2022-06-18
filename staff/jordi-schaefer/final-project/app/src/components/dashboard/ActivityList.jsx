@@ -5,19 +5,16 @@ import retrieveUserActivities from '../../logic/retrieveUserActivities'
 import Activity from './Activity'
 import ProfileInfoHeader from './ProfileInfoHeader'
 
-
 function ActivityList(props) { 
 
     const { handleFeedback } = useContext(Context)
-
     const [activities, setActivities] = useState(null)
     const [timestamp, setTimestamp] = useState(null)
 
-    // si se monta el componente, ejecuta esto
+
     useEffect(() => {
         loadActivities()
-    }, [timestamp]) // si pongo un array vacio ejecutara esto la primera vez, cuando carga el componente
-    // al ponerle las props, tambien ejecutara cuando cambien las props
+    }, [timestamp])
 
 
     const loadActivities = async() => {
