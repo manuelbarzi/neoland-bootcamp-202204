@@ -20,11 +20,23 @@ function App() {
     useEffect(() => {
         if (isJwtValid(sessionStorage.token))
             navigate('/')
-        else {
-            delete sessionStorage.token
-            navigate('/login')
-        }
+        else
+            handleUserLogout()
     }, [])
+
+    const handleUserRegistered = () => handleLoginNavigation()
+
+    const handleUserLoggedIn = () => navigate('/')
+
+    const handleRegisterNavigation = () => navigate('/register')
+
+    const handleLoginNavigation = () => navigate('/login')
+
+    const handleUserLogout = () => {
+        delete sessionStorage.token
+
+        handleLoginNavigation()
+    }
 
     const handleFeedback = feedback => setFeedback(feedback)
 
@@ -35,9 +47,9 @@ function App() {
     return <Context.Provider value={{ handleFeedback }}>
         <div className="App Container">
             <Routes>
-                <Route path="/login" element={<Login   />} />
-                <Route path="/register" element={<Register />} />
-                <Route path="/" element={<Home />} />
+                <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />} />
+                <Route path="/register" element={<Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />} />
+                <Route path="/" element={<Home onUserLogout={handleUserLogout} />} />
             </Routes>
             {feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
         </div>

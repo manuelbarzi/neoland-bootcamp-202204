@@ -1,16 +1,14 @@
-import { useState, useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import Logger from '../vendor/Loggy'
 import Context from '../components/Context'
-// import { retrieveUser } from '../logic'
+import retrieveUser from '../logic/retrieveUser'
 import Profile from '../components/Profile'
 import './Home.sass'
-import { isJwtValid } from '../validators'
 import { useNavigate } from 'react-router-dom'
+import { isJwtValid } from '../validators'
 
-function Home() {
+function Home({ onUserLogout }) {
     const logger = new Logger('Home')
-
-    const navigate = useNavigate()
 
     logger.info('call')
 
@@ -18,15 +16,35 @@ function Home() {
     const [timestamp, setTimestamp] = useState(null)
     const [view, setView] = useState(null)
     const { handleFeedback } = useContext(Context)
+    const navigate = useNavigate()
 
     const handleLogoutClick = () => {
         handleLogout()
+        
     }
 
     const handleLogout = () => {
-        delete sessionStorage.token
-        navigate('/login')
+        onUserLogout()
     }
+
+    /*  useEffect(() => {
+          logger.info('componentDidMount')
+  
+          if (isJwtValid(sessionStorage.token))
+              retrieveUser(sessionStorage.token, (error, user) => {
+                  if (error) {
+                      handleFeedback({ level: 'error', message: error.message })
+  
+                      handleLogout()
+  
+                      return
+                  }
+  
+                  setName(user.name)
+                  setView('list')
+              })
+          else navigate('/login')
+      }, [])*/
 
     const handleAddClick = () => {
 
