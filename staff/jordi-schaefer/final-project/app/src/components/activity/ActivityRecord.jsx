@@ -34,7 +34,8 @@ function ActivityRecord(props) {
         try {
             await addPointToActivity(props.activityId, position)
             handleFeedback({ type: 'success', message: 'New point saved!' })
-            setPoints(points => [...points, position])
+            setPoints(points => [...points, 
+                position])
             setTimestamp(Date.now())
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })

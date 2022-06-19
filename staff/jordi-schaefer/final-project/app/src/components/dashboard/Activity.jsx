@@ -43,12 +43,31 @@ function Activity (props) {
     
     return <div>
         <div className="ActivityItem__header">
-            <h2>{user.name}</h2>
-            <h2>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
-            <h2>{title}</h2>
-            <h2>Altitude: {data.altitude} m</h2>
-            <h2>Time: {data.time}</h2>
-            <h2>Distance: {data.distance} Km</h2>
+            <div className={"Header__container--name"}> 
+                <h2 className={"Header__name"}>{user.name}</h2>
+                <div className={"Header__container--date"}>
+                    {activity.sport === "Cycling" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >directions_bike</span>}
+                    {activity.sport === "Hiking" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >hiking</span>}
+                    {activity.sport === "Skiing" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >downhill_skiing</span>}
+                    {activity.sport === "Snowshoeing" && <span className="Header__icon Activity__footer--icon material-symbols-outlined"  >snowshoeing</span>}
+                    <h2 className={"Header__date"}>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
+                </div>
+                <h2 className={"Header__title"}>{title}</h2>
+            </div>
+            <div className={"Header__container--data"}>   
+                <div className={"Header__data"}>  
+                    <h2 className={"Header__data--name"}>Distance</h2>
+                    <h2 className={"Header__data--value"}>{data.distance} Km</h2>
+                </div>            
+                <div className={"Header__data"}>  
+                    <h2 className={"Header__data--name"}>Altitude</h2>
+                    <h2 className={"Header__data--value"}>{data.altitude} m</h2>
+                </div>            
+                <div className={"Header__data"}>  
+                    <h2 className={"Header__data--name"}>Time</h2>
+                    <h2 className={"Header__data--value"}>{data.time}</h2>
+                </div>            
+            </div>
         </div>
 
         { setDelete && <div className='Container'> 
