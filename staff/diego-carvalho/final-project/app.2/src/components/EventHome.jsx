@@ -48,13 +48,13 @@ function EventHome(props) {
 
     logger.info('render')
 
-    return <div className="Event-home">
-        <form className="Event__home-form" onSubmit={handleSaveSubmit}>
+    return <div>
+        <form className="Event" onSubmit={handleSaveSubmit}>
 
 
-            <h1 className='Event__home-title'>Name: {props.name}</h1>
-            <h1 className='Event__home-title'>Title: {props.title}</h1>
-            <p className='Event__home-description'>Description: {props.description}</p>
+            <h1 className='Event__name'>Name: {props.name}</h1>
+            <h1 className='Event__title'>Title: {props.title}</h1>
+            <p className='Event__description'>Description: {props.description}</p>
 
             {/* <button className="button-event" onClick={handleRemoveClick}Apuntarme</button>
             <button className="button-event">Save</button> */}

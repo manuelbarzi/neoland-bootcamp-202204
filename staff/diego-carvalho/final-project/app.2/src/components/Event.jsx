@@ -48,15 +48,17 @@ function Event(props) {
 
     logger.info('render')
 
-    return <div className="Event">
+    return <div className='Event'>
         <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-            <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
-            <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
-            {/* <h2 className="Input Input--light Event--description" > {event.description} </h2> */}
+            <textarea className='Event__title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
+            <textarea className="Event__description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
 
-            <button className="button-event" onClick={handleRemoveClick}>cancelar</button>
-            <button className="button-event">Save</button>
+            <div className='Event__button-container'>
+                <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>
+                <button className="Event__event-button">Save</button>
+            </div>
+
 
         </form>
     </div>

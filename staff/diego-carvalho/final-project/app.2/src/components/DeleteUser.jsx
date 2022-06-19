@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import React from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
@@ -32,14 +32,14 @@ function DeleteUser() {//passar props como parametro
             //location.reload()
         }
     }
-    
+
     logger.info('render')
 
-    return <div className="DeleteUser">
+    return <div>
         <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="" type="password" name="password" placeholder="password" />
+            <input className="Input" type="password" name="password" placeholder="password" />
 
-            <button className="Delete__button">Delete User</button>
+            <button className="Button">Delete User</button>
         </form>
     </div>
 }

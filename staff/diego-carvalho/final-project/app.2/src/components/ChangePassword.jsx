@@ -21,27 +21,27 @@ function ChangePassword() {
             updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
                 if (error) {
                     handleFeedback({ level: 'error', message: error.message })
-    
+
                     return
                 }
-    
+
                 handleFeedback({ level: 'success', message: 'Password saved' })
             })
-        } catch(error) {
+        } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
     }
 
     logger.info('render')
 
-    return <div className="ChangePassword">
+    return <div>
         <form className="Container" onSubmit={handleSubmit}>
-            <input className="Input Input--light" type="password" name="password" placeholder="current password" />
+            <input className="Input Input__light" type="password" name="password" placeholder="current password" />
 
-            <input className="Input Input--light" type="password" name="newPassword" placeholder="new password" />
-            <input className="Input Input--light" type="password" name="newPasswordRepeat" placeholder="repeat new password" />
+            <input className="Input Input__light" type="password" name="newPassword" placeholder="new password" />
+            <input className="Input Input__light" type="password" name="newPasswordRepeat" placeholder="repeat new password" />
 
-            <button className="Button Button--light">Save</button>
+            <button className="Button">Save</button>
         </form>
     </div>
 }

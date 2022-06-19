@@ -1,4 +1,4 @@
-import {useContext} from 'react'
+import { useContext } from 'react'
 import React from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
@@ -23,20 +23,20 @@ function ChangeName() {
 
                     return
                 }
-                handleFeedback({ level: 'success', message: 'name has been changed'})
-            
-            
+                handleFeedback({ level: 'success', message: 'name has been changed' })
+
+
             })
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
-    } 
+    }
 
     logger.info('render')
 
-    return <div className="ChangeName">
+    return <div>
         <form className="Container" onSubmit={handleFormSubmit}>
-            <input type="text" name="name" placeholder="name" />
+            <input className="Input Input--light" type="text" name="name" placeholder="name" />
             <button className="Button">Save</button>
         </form>
     </div>

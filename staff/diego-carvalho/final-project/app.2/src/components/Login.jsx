@@ -29,19 +29,19 @@ function Login(props) {
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
-    } 
+    }
     const handleRegisterLinkClick = event => {
         event.preventDefault()
-    
+
         props.onRegisterLinkClicked()
     }
-    
+
     logger.info('render')
-    
-    return isJwtValid(sessionStorage.token) ? <></>: <div> 
+
+    return isJwtValid(sessionStorage.token) ? <></> : <div>
         <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Input Input--light" type="text" name="email" placeholder="email" />
-            <input className="Input Input--light" type="password" name="password" placeholder="password" />
+            <input className="Input__register-login" type="text" name="email" placeholder="email" />
+            <input className="Input__register-login" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Login</button>
             <a href="#" onClick={handleRegisterLinkClick}>Register</a>
         </form>

@@ -15,20 +15,20 @@ function Register(props) {
         event.preventDefault()
 
         const name = event.target.name.value
-        const email= event.target.email.value
+        const email = event.target.email.value
         const password = event.target.password.value
 
         try {
             registerUser(name, email, password, error => {
                 if (error) {
                     handleFeedback({ level: 'error', message: error.message })
-    
+
                     return
                 }
-    
+
                 props.onUserRegistered()
             })
-            
+
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
@@ -44,9 +44,9 @@ function Register(props) {
 
     return isJwtValid(sessionStorage.token) ? <></> : <div>
         <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Input Input--light" type="text" name="name" placeholder="name" />
-            <input className="Input Input--light" type="text" name="email" placeholder="email" />
-            <input className="Input Input--light" type="password" name="password" placeholder="password" />
+            <input className="Input__register-login" type="text" name="name" placeholder="name" />
+            <input className="Input__register-login" type="text" name="email" placeholder="email" />
+            <input className="Input__register-login" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Register</button>
             <a href="#" onClick={handleLoginLinkClick}>Login</a>
         </form>

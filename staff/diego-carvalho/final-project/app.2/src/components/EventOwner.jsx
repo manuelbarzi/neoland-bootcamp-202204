@@ -47,13 +47,13 @@ function EventOwner() {
 
     return isJwtValid(sessionStorage.token) ?
 
-        <div className="EventOwner Container">
-            <form className="Event__form" onSubmit={handleSaveSubmit}>
+        <div className="EventCreator">
+            <form className="EventCreator__form" onSubmit={handleSaveSubmit}>
 
-                <textarea className='Input Input--light Event--title' type='text' name="title" placeholder="Title"></textarea>
-                <textarea className="Input Input--light Event--description" type='text' name="text" placeholder="Write your description"></textarea>
+                <textarea className='EventCreator__title' type='text' name="title" placeholder="Title"></textarea>
+                <textarea className='EventCreator__description' type='text' name="text" placeholder="Write your description"></textarea>
 
-                <button className="button-event">Save</button>
+                <button className="EventCreator__button">Save</button>
 
             </form>
 
