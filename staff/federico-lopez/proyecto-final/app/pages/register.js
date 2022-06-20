@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { registerUser } from 'logic'
 import { useRouter } from 'next/router'
 import { verifyTokenWithAPICall } from '../helpers'
+import { FlexColSection, Logo, RegisterForm, QuaternaryAnchor } from '../components'
 // import Context from './Context'
 
 export default function Register(props) {
@@ -28,31 +29,29 @@ export default function Register(props) {
         }
     }
 
-    return <div className="Register">
-        <form className="form" onSubmit={onFormSubmit}>
-            <h1>Register</h1>
-            <fieldset>
-                <label htmlFor="email">Enter your email</label>
-                <input className="input" type="email" name="email" id="email" placeholder="example@example.com" />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="username">Username</label>
-                <input className="input" type="text" name="username" id="username" placeholder="username" />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="password">Password</label>
-                <input className="input" type="password" name="password" id="password" placeholder="*******" />
-            </fieldset>
-            <fieldset>
-                <label htmlFor="repeatPassword">Password</label>
-                <input className="input" type="password" name="repeatPassword" id="repeatPassword" placeholder="*******" />
-            </fieldset>
-            <button className="button" type="submit">Register</button>
-        </form>
-        <p>Have an account? <Link href="/login"><a>Log in</a></Link> </p>
-    </div>
+    return (
+        <FlexColSection className="gap-10 justify-around items-center"
+            onSubmit={onFormSubmit}>
+
+            <Logo className="w-1/3" />
+
+            <RegisterForm />
+            
+            <div className="w-full flex flex-col gap-3 items-center">
+                <p>Have an account?</p>
+                <Link href="/login">
+                    <QuaternaryAnchor className="w-1/3">LOG IN</QuaternaryAnchor>
+                </Link>
+            </div>
+
+        </FlexColSection>
+    )
 }
 
 export async function getServerSideProps({ req, res }) {
-    return verifyTokenWithAPICall(req, res)
+    const token = verifyTokenWithAPICall(req, res)
+
+    return {
+        props: {}
+    }
 }

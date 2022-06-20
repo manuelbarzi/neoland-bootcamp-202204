@@ -2,43 +2,38 @@ import { CHORD_REGEX } from './constants'
 import { validateInterpretationContent } from "validators"
 import { Fragment } from 'react'
 import { getChords } from './'
+import { ChordButton } from '../components'
 
 export function generateInterpretation(interpretation, callback) {
     validateInterpretationContent(interpretation)
     let positions = [], match
-    
+
     while (match = CHORD_REGEX.exec(interpretation)) {
         positions.push({ firstPosition: match.index, lastPosition: CHORD_REGEX.lastIndex })
     }
 
-    // positions = positions.map(position => {
-    //     if(interpretation.slice(position.firstPosition, position.lastPosition +1).includes('º')){
-    //         return { firstPosition: position.firstPosition, lastPosition: position.lastPosition + 1}
-    //     } else {
-    //         return position
-    //     }
-    // })
     if (positions.length === 0) {
-        return <article><p>{interpretation}</p></article>
+        return <p>{interpretation}</p>
     }
 
-    return <article>
-        <p>
+    return <>
+        <div className="flex flex-col">
+        <p>Song chords:</p>
+        <div className="flex gap-2">
             {
                 getChords(interpretation).map((chord, index) => {
-                    return <button className="px-2" key={index * 10}
-                        onClick={event => {
-                            event.preventDefault()
+                    return (
+                        <ChordButton className="pr-2" key={index * 10}
+                            onClick={event => {
+                                event.preventDefault()
 
-                            callback(chord)
-                        }}>{chord}</button>
+                                callback(chord)
+                            }}>{chord}</ChordButton>
+                    )
                 })
             }
-        </p>
-
-        {/* <div> {getChords(interpretation.content).map((chord, index) => <a className="px-2" key={index * 10} >{chord}</a>)}
-                    </div> */}
-
+        </div>
+        </div>
         <p>{positions.map((position, index) => {
             let textFirstPart = ''
             let textLastPart = ''
@@ -61,16 +56,20 @@ export function generateInterpretation(interpretation, callback) {
                 else if (character === '\n') return <Fragment key={index * Math.random() * 100}><br /></Fragment>
                 else return <Fragment key={index * Math.random() * 100}>{character}</Fragment>
             })}</>
-                <button onClick={event => {
-                    event.preventDefault()
+                <ChordButton
+                    onClick={event => {
+                        event.preventDefault()
 
-                    callback(chord)
-                }} className="text-red-400">{chord}</button>
+                        callback(chord)
+                    }}
+                    className="text-red-400">{chord}
+                </ChordButton>
+
                 <>{textLastPart.split('').map((character, index) => {
                     if (character === ' ') return <Fragment key={index * Math.random() * 100}>&nbsp;</Fragment>
                     else if (character === '\n') return <Fragment key={index * Math.random() * 100}><br /></Fragment>
                     else return <Fragment key={index * Math.random() * 100}>{character}</Fragment>
                 })}</></ Fragment>
         })}</p>
-    </article >
+    </>
 }

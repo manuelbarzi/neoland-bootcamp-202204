@@ -1,56 +1,35 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState, useEffect } from "react"
-import Footer from '../../../../../../../components/Footer'
-import Header from '../../../../../../../components/Header'
-import { generateChordImages, generateInterpretation, getChords } from "../../../../../../../helpers"
+import { useState } from "react"
+import { Header, Footer, FlexColSection, InterpretationArticle } from '../../../../../../../components'
 import { retrieveInterpretationFromSong, retrieveSong } from 'logic'
 
-export default function Interpretation({ interpretation: serverSideInterpretation, song }) {
+export default function Interpretation({ interpretation, song }) {
     const [chordView, setChordView] = useState(null)
-    const [interpretation, setInterpretation] = useState(serverSideInterpretation)
+    const artistName = song.artist.name
 
-    const router = useRouter()
 
     const onChordClick = chord => setChordView(chord)
 
     return <>
-        <div className="h-screen flex flex-col">
-            <Header></Header>
-            <main>
-                <Link href={`/artist/${song.artist.name.split(' ').join('-')}/song/${song.name.split(' ').join('-')}`}>
-                    <a className="block">{song.name}</a>
-                </Link>
+        <Header pageProps={`${song.name} by ${interpretation.user.username}`} />
+        <FlexColSection className="p-4 items-center">
+            <InterpretationArticle
+                interpretation={interpretation}
+                artistName={artistName}
+                song={song}
+                onChordClick={onChordClick}
+                chordView={chordView}
+                hrefLinkSong={`/artist/${artistName.split(' ').join('-')}/song/${song.name.split(' ').join('-')}`}
+                hrefLinkArtist={`/artist/${song.artist.name.split(' ').join('-')}`} />
 
-                <Link href={`/artist/${song.artist.name.split(' ').join('-')}`}>
-                    <a>{song.artist.name}</a>
-                </Link>
-
-                {/* <article> */}
-
-                {/* <div> {getChords(interpretation.content).map((chord, index) => <a className="px-2" key={index * 10} >{chord}</a>)}
-                    </div> */}
-
-                {generateInterpretation(interpretation.content, onChordClick)}
-
-                {chordView &&
-                    <div className="fixed bottom-20 w-full h-2/5 border border-black bg-gray-200 flex overflow-x-scroll">
-                        {generateChordImages(chordView)}
-                    </div>}
-                {/* </article> */}
-
-                {/* <p>{interpretation.user.username}</p> */}
-                {/* {interpretation && <p>{interpretation.content}</p>} */}
-            </main>
-            <Footer></Footer>
-        </div>
+        </FlexColSection>
+        <Footer />
     </>
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params: { songName, artistName, interpretationId } }) {
     const [interpretation, song] = await Promise.all([
-        retrieveInterpretationFromSong(params.songName, params.artistName, params.interpretationId),
-        retrieveSong(params.songName, params.artistName)
+        retrieveInterpretationFromSong(songName, artistName, interpretationId),
+        retrieveSong(songName, artistName)
     ])
 
     return {

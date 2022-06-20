@@ -3,6 +3,7 @@ import Apium from '../vendor/Apium'
 import { context } from './context'
 
 export async function updateUser(token, { firstName, lastName, dateOfBirth }) {
+    debugger
     validateJWT(token)
     if (firstName) validateStringNotEmptyOrBlank(firstName, 'first name')
     if (lastName) validateStringNotEmptyOrBlank(lastName, 'last name')

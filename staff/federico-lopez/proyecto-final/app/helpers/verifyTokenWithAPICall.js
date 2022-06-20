@@ -5,7 +5,7 @@ import { context } from '../logic'
 
 export async function verifyTokenWithAPICall(req, res) {
     const cookies = new Cookies(req, res)
-
+    debugger
     const token = cookies.get('token')
 
     if (token) {
@@ -19,7 +19,7 @@ export async function verifyTokenWithAPICall(req, res) {
 
         if (status === 200) {
             if (req.url.includes('/login') || req.url.includes('/register')) {
-                res.writeHead(307, { Location: '/home' })
+                res.writeHead(307, { Location: '/' })
                 res.end()
             } else {
                 return token

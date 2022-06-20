@@ -1,12 +1,12 @@
+import Link from 'next/link'
 // import { useContext } from 'react'
 import { retrieveUser, updateUser } from '../logic'
-import Footer from '../components/Footer'
-import Header from '../components/Header'
 import { verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
+import { EditProfileForm, FlexColSection, Footer, Header, QuaternaryAnchor } from '../components'
 // import Context from './Context'
 
-function editProfile({ token, user }) {
+export default function editProfile({ token, user }) {
     // const { handleFeedback } = useContext(Context)
     const router = useRouter()
 
@@ -20,7 +20,7 @@ function editProfile({ token, user }) {
         try {
             updateUser(token, { firstName, lastName, dateOfBirth })
 
-            router.push('/home')
+            router.push('/')
 
         } catch (error) {
             console.error(error)
@@ -28,25 +28,22 @@ function editProfile({ token, user }) {
     }
 
     return <>
-        <Header pageProps={'profile'}></Header>
-        <main>
-            <form onSubmit={handleFormSubmit}>
-                <h2>Edit Profile</h2>
-                <input type="text" name="firstName" id="firstName" placeholder="firstName" />
-                <input type="text" name="lastName" id="lastName" placeholder="lastName" />
-                <input type="date" name="dateOfBirth" id="dateOfBirth" />
-                <button type="submit" >Save</button>
-            </form>
-        </main>
-        <Footer userRegistered={!!token}></Footer>
+        <Header pageProps="Profile" />
+        <FlexColSection className="py-20 items-center justify-center gap-5">
+            <EditProfileForm
+                onSubmit={handleFormSubmit} user={user} />
+            
+            <Link href="/">
+                <QuaternaryAnchor>CANCEL</QuaternaryAnchor>
+            </Link>
+        </FlexColSection>
+        <Footer userRegistered={!!token} />
     </>
 }
 
-export default editProfile
-
 export async function getServerSideProps({ req, res }) {
-    debugger
-    const { props: { token } } = await verifyTokenWithAPICall(req, res)
+    const token = await verifyTokenWithAPICall(req, res)
+
     const user = await retrieveUser(token)
 
     return {
