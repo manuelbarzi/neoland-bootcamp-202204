@@ -1,6 +1,6 @@
 const { User, Activity } = require('../models')
 const { NotFoundError } = require('errors')
-const { validateStringNotEmptyNoSpaces, validateString, validateNumber } = require('validators')
+const { validateStringNotEmptyNoSpaces, validateString } = require('validators')
 
 function createActivity(userId, sport ) {
     validateStringNotEmptyNoSpaces(userId, 'user id')

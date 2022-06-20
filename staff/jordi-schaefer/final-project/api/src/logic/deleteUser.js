@@ -1,8 +1,10 @@
 const { User } = require('../models')
 const { NotFoundError, AuthError } = require('errors')
+const { validateStringNotEmptyNoSpaces, validatePassword } = require('validators')
 
 function deleteUser(userId, password) {
-    // TODO validate input args
+    validateStringNotEmptyNoSpaces(userId, 'user id')
+    validatePassword(password, 'Password')
 
     return User.findById(userId)
         .then(user => {

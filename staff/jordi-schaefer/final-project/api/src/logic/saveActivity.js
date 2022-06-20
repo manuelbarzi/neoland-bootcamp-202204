@@ -2,10 +2,12 @@ const { Activity } = require('../models')
 const { NotFoundError } = require('errors')
 const { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString } = require('validators')
 
-function saveActivity(activityId, title, text='', audience) {
+function saveActivity(activityId, title, text='', audience, sport, dificult) {
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
     validateStringNotEmptyOrBlank(title, 'title')
     validateString(text, 'text')
+    if(sport) validateString(sport, 'sport')
+    validateString(dificult, 'dificult')
 
     return Activity.findById(activityId)
         .then(activity => {
@@ -14,6 +16,8 @@ function saveActivity(activityId, title, text='', audience) {
             activity.title = title
             activity.text = text
             activity.private = audience
+            if(sport) activity.sport = sport
+            activity.dificult = dificult
 
             return activity.save()
         })

@@ -13,7 +13,6 @@ function createActivity(token, sport){
             body: JSON.stringify({ sport })})
              
         const { status, payload } = result
-  
         
         if (status >= 400 && status < 500) { 
             const data = JSON.parse(payload)

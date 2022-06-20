@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
 import retrieveUserActivities from '../../logic/retrieveUserActivities'
-import Activity from '../dashboard/Activity'
+import ActivityItem from '../dashboard/ActivityItem'
 
 function DeleteActivity({ timestamp }) {
 
@@ -31,7 +31,7 @@ function DeleteActivity({ timestamp }) {
     return activities && activities.length ?
         <ul className = "Activities__list mw overflow" >
             {activities.map(activitie => <li className="mw" key={activitie.id} >  
-                <Activity activity={activitie} setDelete={true} onRemove={handleRemoveActivity}/>
+                <ActivityItem activity={activitie} setDelete={true} onRemove={handleRemoveActivity}/>
             </li>)}
         </ul>
         : 

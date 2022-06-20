@@ -58,25 +58,21 @@ function ActivityRecord(props) {
 
 
     return  <div className="Container overflow mw mh">
-    <header className="Activity__header mw">
-        <h1 className="center">Recording activity</h1>
-    </header>
-
 
     <main className="Activity__body mw mh">
         { view === 'map' && position && <Map position={position} center={true} points={points}/> } 
         { view === 'timer' && <LiveInfo activityId={props.activityId} onPointRegistered={timestamp}/> } 
     </main>
 
-    
+ 
     <footer className="Activity__footer mw">
         <div className="Activity__footerContainer__selector mw">
-            <button className="Activity__footerButton__selector" onClick={handleTimeClick}>Time</button>
-            <button className="Activity__footerButton__selector" onClick={handleMapClick}>Map</button>
+            <button className="Activity__footerButton__selector material-symbols-outlined" onClick={handleTimeClick}>Timer</button>
+            <button className="Activity__footerButton__selector material-symbols-outlined" onClick={handleMapClick}>Pin_drop</button>
         </div> 
         <div className="Activity__footerContainer__buttons">
-            <button className="Activity__button--register" onClick={handleSaveClick}>Register</button>    
-            <button className="Activity__button--start" onClick={handleFinishClick}>Finish</button>      
+            <button className="Activity__button--register" onClick={handleSaveClick}>RECORD</button>    
+            <button className="Activity__button--start" onClick={handleFinishClick}>FINISH</button>      
         </div>
     </footer>
 

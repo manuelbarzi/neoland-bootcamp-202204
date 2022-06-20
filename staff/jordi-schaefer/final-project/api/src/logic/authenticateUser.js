@@ -1,8 +1,10 @@
 const { User } = require('../models')
 const { AuthError } = require('errors')
+const { validateString, validatePassword } = require('validators')
 
 function authenticateUser(username, password) {
-    // TODO validate input args
+    validateString(username, 'Username')
+    validatePassword(password, 'Password')
 
     return User.findOne({ username, password })
         .then(user => {

@@ -3,13 +3,11 @@ const { NotFoundError } = require('errors')
 const { validateStringNotEmptyNoSpaces, validateNumber } = require('validators')
 const retrieveAltitude = require('./retrieveAltitude')
 
-
 function addPointToActivity(activityId, lat, lng, alt) {
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
     validateNumber(lat, 'latitude')
     validateNumber(lng, 'longitude')
     if(alt != null) validateNumber(alt, 'altitude')
-    
 
     return Activity.findById(activityId)
         .then(activity => {

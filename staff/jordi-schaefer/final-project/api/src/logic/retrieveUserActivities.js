@@ -2,7 +2,6 @@ const { User, Activity } = require ('../models')
 const { NotFoundError } = require ('errors')
 const { validateStringNotEmptyNoSpaces } = require('validators')
 
-
 function retrieveUserActivities(userId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
 

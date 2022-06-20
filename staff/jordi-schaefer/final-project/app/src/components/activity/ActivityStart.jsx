@@ -15,7 +15,7 @@ function ActivityStart(props) {
     let watchId
 
     useEffect(() => {
-        setSport('Cycling')
+        setSport('Ride')
 
         getPosition()
     }, [])
@@ -45,25 +45,25 @@ function ActivityStart(props) {
     const handleCloseClick = () => navigate('/dashboard')
     
     const handleBikeClick = () => {
-        setSport('Cycling') 
+        setSport('Ride') 
         document.getElementById("bike").classList.add('Button__selected') 
         document.getElementById("hike").classList.remove('Button__selected')
         document.getElementById("sky").classList.remove('Button__selected')
         document.getElementById("snow").classList.remove('Button__selected') }
     const handleHikingClick = () => {
-        setSport('Hiking')
+        setSport('Hike')
         document.getElementById("hike").classList.add('Button__selected') 
         document.getElementById("sky").classList.remove('Button__selected')
         document.getElementById("snow").classList.remove('Button__selected')
         document.getElementById("bike").classList.remove('Button__selected') }
     const handleSkiClick = () => {
-        setSport('Skiing')
+        setSport('Ski')
         document.getElementById("sky").classList.add('Button__selected') 
         document.getElementById("snow").classList.remove('Button__selected')
         document.getElementById("hike").classList.remove('Button__selected')
         document.getElementById("bike").classList.remove('Button__selected') }
     const handleSnowClick = () => {
-        setSport('Snowshoeing')
+        setSport('Snowshoe')
         document.getElementById("snow").classList.add('Button__selected') 
         document.getElementById("hike").classList.remove('Button__selected')
         document.getElementById("sky").classList.remove('Button__selected')
@@ -103,7 +103,7 @@ function ActivityStart(props) {
                 <button id="snow" className="Activity__footer--icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
             </div>
             <div className="Activity__footerContainer__buttons">
-                <button className="Activity__button--start" onClick={handleStartClick}>Start</button>         
+                <button className="Activity__button--start" onClick={handleStartClick}>START</button>         
             </div>
         </footer>
 

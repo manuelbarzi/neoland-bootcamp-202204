@@ -1,11 +1,9 @@
-import { validateStringNotEmptyNoSpaces, validateNumber } from 'validators'
+import { validateStringNotEmptyNoSpaces, validatePosition } from 'validators'
 import Apicaller from 'apicaller'
 
 function addPointToActivity(activityId, position){
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
-    validateNumber(position[0], 'latitude')
-    validateNumber(position[1], 'longitude')
-    if(position[2] != null) validateNumber(position[2], 'altitude')
+    validatePosition(position)
     
     const api = new Apicaller(process.env.REACT_APP_API_URL)
     

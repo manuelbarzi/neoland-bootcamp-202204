@@ -2,10 +2,10 @@ const { User } = require('../models')
 const { NotFoundError } = require('errors')
 
 function retrieveUser(userId) {
-    // TODO validate input args
+    validateStringNotEmptyNoSpaces(userId, 'user id')
 
     return User.findById(userId).lean()
-        .then(user => { // {_id: ObjectId, name: 'Papa Gayo', username: 'papagayo', password: '123123123', __v: 0}
+        .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
 

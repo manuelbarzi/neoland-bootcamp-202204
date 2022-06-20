@@ -51,7 +51,7 @@ function CommentList({activityId}) { // TODO rename to Comments or CommentList
         </ul> }
 
         <form className="Container mw Comments__new-comment" onSubmit={handleSaveClick}>
-            <textarea className="Comments__text-input" type="text" name="text" placeholder=" Add new comment.."/>
+            <textarea className="Comments__text-input" type="text" name="text" placeholder=" Add a comment"/>
             <button className="Comments__button">Send</button>
         </form>
     </div>  

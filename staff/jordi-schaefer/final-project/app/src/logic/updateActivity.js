@@ -2,17 +2,20 @@ import { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validate
 import Apicaller from 'apicaller'
 
 
-function updateActivity(activityId, title, text='', audience){
+function updateActivity(activityId, title, text='', audience, sport, dificult){
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
     validateStringNotEmptyOrBlank(title, 'title')
     validateString(text, 'text')
-
+    validateString(sport, 'sport')
+    validateString(dificult, 'dificult')
+    if(sport === '') sport=null
+    
     const api = new Apicaller(process.env.REACT_APP_API_URL)
 
     return (async () => {      
         const result = await api.patch(`/activities/${activityId}/save`, 
             {headers: {'Content-Type': 'application/json'}, 
-            body: JSON.stringify({ title, text, audience })})
+            body: JSON.stringify({ title, text, audience, sport, dificult })})
              
         const { status, payload } = result
   

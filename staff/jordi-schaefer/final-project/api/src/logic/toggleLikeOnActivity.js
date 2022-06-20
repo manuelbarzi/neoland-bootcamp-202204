@@ -16,9 +16,8 @@ function toggleLikeOnActivity(userId, activityId) {
             if (!activity) throw new NotFoundError(`Activity with id ${activityId} does not exist`)
             
             const index = activity.likes.findIndex(like => like._id.toString() === userId)
-            if (index < 0) {
+            if (index < 0)
                 activity.likes.push(userId)
-            }
             else
                 activity.likes.splice(index, 1)
 

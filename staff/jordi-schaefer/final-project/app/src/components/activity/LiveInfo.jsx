@@ -3,6 +3,7 @@ import Context from '../Context'
 import retrieveActivity from '../../logic/retrieveActivity'
 import calculateTotalDistance from '../../logic/calculateTotalDistance'
 import Timer from './Timer'
+import '../../styles/LiveInfo.sass'
 
 function LiveInfo({activityId, onPointRegistered}) {
 
@@ -29,9 +30,12 @@ function LiveInfo({activityId, onPointRegistered}) {
             const s = new Date(initialTime).getSeconds()
             setInitialTime({h,m,s})
 
-            setTotalDistance(calculateTotalDistance(activity.points))
-            setAltitude(activity.points[activity.points.length-1].altitude-activity.points[0].altitude)
-            setCAltitude(activity.points[activity.points.length-1].altitude)
+            setTotalDistance((calculateTotalDistance(activity.points)/1000).toFixed(2))
+            
+            if(activity.altitude != null) {
+                setAltitude(activity.points[activity.points.length-1].altitude-activity.points[0].altitude)
+                setCAltitude(activity.points[activity.points.length-1].altitude)
+            }
             
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
@@ -39,13 +43,29 @@ function LiveInfo({activityId, onPointRegistered}) {
     }
 
 
-    return (<div>
+    return (<div className="Live mw mh">
 
         {initialTime && <Timer initialTime={initialTime}/> }
-        {activity && <h2>Points registered: {activity.points.length}</h2>}
-        {activity && <h2>Total distance: {totalDistance} km</h2>}
-        {activity && <h2>Start-current altitude: {altitude} m</h2>}
-        {activity && <h2>Current altitude: {caltitude} m</h2>}
+
+        <div className="Live__container mw mh">  
+            <div className="Live__container-data">
+                {activity && <h2 className="Live__text">Points</h2>}
+                {activity && <h2 className="Live__value">{activity.points.length}</h2>}
+            </div>
+            <div className="Live__container-data">
+                {activity && <h2 className="Live__text">Elevation</h2>}
+                {activity && <h2 className="Live__value">{caltitude} m</h2>}
+            </div>
+            <div className="Live__container-data">
+                {activity && <h2 className="Live__text">Elevation Gain</h2>}
+                {activity && <h2 className="Live__value">{altitude} m</h2>}
+            </div>
+            <div className="Live__container-data">
+                {activity && <h2 className="Live__text">Distance</h2>}
+                {activity && <h2 className="Live__value">{totalDistance} km</h2>}
+            </div>  
+
+        </div>  
     </div>
     )
 }

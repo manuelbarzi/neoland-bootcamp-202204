@@ -2,6 +2,7 @@ const axios = require('axios');
 const { NotFoundError } = require('errors');
 
 function retrieveAltitude(latitude, longitude) {
+  validatePosition([latitude, longitude])
 
 return axios
   .get(`https://api.open-elevation.com/api/v1/lookup?locations=${latitude},${longitude}`)

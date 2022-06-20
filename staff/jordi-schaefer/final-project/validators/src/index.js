@@ -88,6 +88,15 @@ function validateEmail(email, explain = 'email') {
         throw new FormatError(`${explain} is not an email`)
 }
 
+function validatePosition(position) {
+    if (position[0]===null || position[1]===null)
+        throw new Error('Position not found')
+
+    validateNumber(position[0], 'latitude')
+    validateNumber(position[1], 'longitude')
+    if(position[2] != null) validateNumber(position[2], 'altitude')
+}
+
 module.exports = {
     validateString,
     validateStringNotEmptyOrBlank,
@@ -100,5 +109,6 @@ module.exports = {
     validateNumber,
     validatePositiveInteger,
     validateEmail,
+    validatePosition,
     isJwtValid
 }

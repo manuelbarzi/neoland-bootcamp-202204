@@ -70,7 +70,7 @@ function Home(props) {
     const handleDataChanged = () => handleBackClick()
 
     const handleBackClick = () => {
-        if ( view === 'Comment')
+        if ( view === 'Comments')
             handleHomeClick()
         else if (view === 'Settings')
             handleProfileClick()
@@ -79,7 +79,7 @@ function Home(props) {
     }
 
     const handleCommentClicked = (activityId) => {
-        setView('Comment')
+        setView('Comments')
         setBack('Back')
         setActivityId(activityId)
     }
@@ -89,8 +89,11 @@ function Home(props) {
     return  isJwtValid(sessionStorage.token) ?
     <div className="Container overflow mw mh">
         <header className="Home__header">
-            {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comment'].includes(view)) 
-                && <button className="Home__button--back" onClick={handleBackClick}>{`< `+back}</button>}
+            {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comments'].includes(view)) 
+                && <div className="Home__container-back">
+                    <span className="Home__icon-back material-symbols-outlined">arrow_back_ios_new</span>
+                    <button className="Home__button-back" onClick={handleBackClick}>{back}</button>
+                </div>}
             <h1 className="center">{view}</h1>
             {view === 'Profile' && <button className="Home__header--settings material-symbols-outlined" onClick={handleSettingClick}>Settings</button>}
         </header>
@@ -113,7 +116,7 @@ function Home(props) {
             {view === 'Delete User' && <DeleteUser onDeletedUser={props.onDeletedUser}/>} 
             {view === 'Delete Activity' && <DeleteActivity />}
 
-            {view === 'Comment' && <CommentList activityId={activityId}/>}
+            {view === 'Comments' && <CommentList activityId={activityId}/>}
 
         </main>
 
@@ -127,7 +130,7 @@ function Home(props) {
 
             <div className="Home__footer--container">
                 <h2 id="homeL" className="Button__selected Home__footer--text m_left_word" onClick={handleHomeClick}>Home</h2>
-                <h2 className="Home__footer--text m_left_word" onClick={handleActivityClick}>Register</h2>
+                <h2 className="Home__footer--text" onClick={handleActivityClick}>Record</h2>
                 <h2 id="profileL" className="Home__footer--text m_right_word" onClick={handleProfileClick}>Profile</h2>
             </div>
         </footer>

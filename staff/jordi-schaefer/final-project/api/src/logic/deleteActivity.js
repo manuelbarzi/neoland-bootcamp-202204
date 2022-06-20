@@ -2,7 +2,6 @@ const { Activity } = require ('../models')
 const { NotFoundError, ConflictError } = require ('errors')
 const { validateStringNotEmptyNoSpaces } = require('validators')
 
-
 function deleteActivity(userId, activityId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
     validateStringNotEmptyNoSpaces(activityId, 'activity id')
@@ -13,11 +12,9 @@ function deleteActivity(userId, activityId) {
 
             if (activity.user.toString() !== userId) throw new ConflictError(`activity with id ${activityId} does not belong to user with id ${userId}`)
 
-
             return Activity.deleteOne({ _id: activityId, user: userId })     
         })
         .then(() => { })     
 }
-
 
 module.exports = deleteActivity

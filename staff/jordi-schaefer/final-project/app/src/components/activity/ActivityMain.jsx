@@ -26,9 +26,8 @@ function ActivityMain() {
         setPoint(position)
         setView('record')
     }
-    const handleFinishClicked = () => {
-        setView('finish') 
-    } 
+    const handleFinishClicked = () => setView('finish') 
+    const handleContinueClicked = () => setView('record')
     
 
     return  isJwtValid(sessionStorage.token) ?
@@ -36,7 +35,7 @@ function ActivityMain() {
         <div className="Container overflow mw mh">
             { view === 'start' &&   <ActivityStart onStartClicked={handleStartClicked}/> }
             { view === 'record' &&   <ActivityRecord activityId={activityId} point={point} onFinishClicked={handleFinishClicked}/> }
-            { view === 'finish' &&   <ActivityFinish activityId={activityId} /> }
+            { view === 'finish' &&   <ActivityFinish activityId={activityId} onContinueClicked={handleContinueClicked}/> }
         </div> : <></>
 }
 

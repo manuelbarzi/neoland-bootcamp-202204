@@ -21,7 +21,7 @@ const { Activity, Point, User } = require('./models')
             const p9 = await Point.create({altitude: 351, latitude: 41.4033, longitude: 2.1041})
             const p10 = await Point.create({altitude: 360, latitude: 41.4050, longitude: 2.1054})
 
-            let activity = new Activity({user: user.id, title: 'populate activity', sport: 'bike' })
+            let activity = new Activity({user: user.id, title: 'populate activity', sport: 'Ride' })
             activity.points.push(p1)
             activity.points.push(p2)
             activity.points.push(p3)

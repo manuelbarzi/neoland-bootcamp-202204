@@ -39,13 +39,13 @@ function ProfileInfoHeader ({activities}) {
                 <div className={"Info__container--data"}>  
                     <h2 className={"Info__data--title"}>Total</h2>
                     <h2 className={"Info__data--value"}>Activities: {data.totalActivities}</h2>
-                    <h2 className={"Info__data--value"}>Positive altitude</h2>
+                    <h2 className={"Info__data--value"}>Elevation Gain</h2>
                     <h2 className={"Info__data--number"}>{data.totalAltitude} m</h2>
                 </div>                      
                 <div className={"Info__container--data"}>  
                     <h2 className={"Info__data--title"}>Last Month</h2>
                     <h2 className={"Info__data--value"}>Activities:  {data.totalMonthActivities}</h2>
-                    <h2 className={"Info__data--value"}>Positive altitude</h2>
+                    <h2 className={"Info__data--value"}>Elevation Gain</h2>
                     <h2 className={"Info__data--number"}>{data.totalMonthAltitude} m</h2>
                 </div>            
             </div>

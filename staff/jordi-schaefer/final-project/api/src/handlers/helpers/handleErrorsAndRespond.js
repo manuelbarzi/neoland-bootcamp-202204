@@ -12,6 +12,5 @@ module.exports = (error, res) => {
     else if (error instanceof ConflictError)
         status = 409
 
-    res.status(status).json({ error: error.message })// respondo con un status de error 
-    // .json combina la funcion send y transformar a json
+    res.status(status).json({ error: error.message })
 }

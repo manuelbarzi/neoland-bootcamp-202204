@@ -24,6 +24,9 @@ const activity = new Schema({
         type: String,
         required: true
     },
+    dificult: {
+        type: String,
+    },
     text: {
         type: String,
     },

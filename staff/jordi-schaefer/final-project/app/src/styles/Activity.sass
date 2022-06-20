@@ -45,7 +45,7 @@
     border-radius: 50%
     border: none
     text-align: center
-    font-weight: 700
+    font-weight: 600
     font-size: 16px
     color: #fff
     background-color: base.$main-color
@@ -67,12 +67,19 @@
     justify-content: space-around
 
 .Activity__footerButton__selector
+    color: base.$main-color
+    border: none
+    background-color: none
+    background: none
+    font-size: 36px
+    margin-top: 0px
+    margin-bottom: 0px
 
 .Activity__footerContainer__buttons
     display: flex
     flex-direction: row
     justify-content: center
-    gap: 1.4rem
+    gap: 1.6rem
 
 
 
@@ -110,22 +117,24 @@
     text-align: top
 
 .Finish__input--selector
-    margin-top: 0.6rem
-    width: 110px
+    margin-top: 0.8rem
+    width: 93%
     height: 35px
     border-radius: 5px
+    color: base.$text-grey
     border-style: none
-    align-self: flex-start
-    margin-left: 1rem
+    align-self: center
+    padding-left: 10px
 
 
 .Finish__button--delete
-    width: 94%
+    width: 93%
+    height: 38px
+    font-weight: 600
     padding: 0.25rem
     color: #b90000
     margin-bottom: 1.2rem
-    font-size: 18px
-    font-weight: 500
+    font-size: 17px
     border: 1px solid base.$border-color
     border-radius: 5px
     text-align: center
@@ -133,3 +142,26 @@
 
 .Button__selected
     color: base.$main-color
+
+
+
+.Activity__footer-finish
+    bottom: 0
+    display: flex
+    flex-direction: column
+    width: 100%
+    border-top: 2px solid base.$border-color
+    height: 120px
+    justify-content: space-around
+    background-color: #fff
+
+.Activity__button-finish
+    height: 40px
+    width: 94%
+    border: none
+    border-radius: 5px
+    text-align: center
+    font-weight: 700
+    font-size: 17px
+    color: #fff
+    background-color: base.$main-color

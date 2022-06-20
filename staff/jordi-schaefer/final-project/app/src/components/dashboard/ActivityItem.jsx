@@ -6,7 +6,7 @@ import MapView from './MapView'
 import calculateActivityData from '../../logic/calculateActivityData'
 import '../../styles/ActivityItem.sass'
 
-function Activity (props) {
+function ActivityItem (props) {
     
     const { handleFeedback } = useContext(Context)
     const { activity, setDelete, onRemove, onLikeClicked } = props
@@ -46,10 +46,10 @@ function Activity (props) {
             <div className={"Header__container--name"}> 
                 <h2 className={"Header__name"}>{user.name}</h2>
                 <div className={"Header__container--date"}>
-                    {activity.sport === "Cycling" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >directions_bike</span>}
-                    {activity.sport === "Hiking" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >hiking</span>}
-                    {activity.sport === "Skiing" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >downhill_skiing</span>}
-                    {activity.sport === "Snowshoeing" && <span className="Header__icon Activity__footer--icon material-symbols-outlined"  >snowshoeing</span>}
+                    {activity.sport === "Ride" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >directions_bike</span>}
+                    {activity.sport === "Hike" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >hiking</span>}
+                    {activity.sport === "Ski" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >downhill_skiing</span>}
+                    {activity.sport === "Snowshoe" && <span className="Header__icon Activity__footer--icon material-symbols-outlined"  >snowshoeing</span>}
                     <h2 className={"Header__date"}>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
                 </div>
                 <h2 className={"Header__title"}>{title}</h2>
@@ -60,7 +60,7 @@ function Activity (props) {
                     <h2 className={"Header__data--value"}>{data.distance} Km</h2>
                 </div>            
                 <div className={"Header__data"}>  
-                    <h2 className={"Header__data--name"}>Altitude</h2>
+                    <h2 className={"Header__data--name"}>Elev Gain</h2>
                     <h2 className={"Header__data--value"}>{data.altitude} m</h2>
                 </div>            
                 <div className={"Header__data"}>  
@@ -71,7 +71,7 @@ function Activity (props) {
         </div>
 
         { setDelete && <div className='Container'> 
-            <button className="ActivityItem__button--delete" onClick={handleDeleteClick}>Delete</button> 
+            <button className="ActivityItem__button--delete" onClick={handleDeleteClick}>Delete Activity</button> 
         </div> }
 
         { !setDelete && points.length>0 && <div className='ActivityItem__container--map'>
@@ -92,4 +92,4 @@ function Activity (props) {
     </div>
 }
 
-export default Activity
+export default ActivityItem

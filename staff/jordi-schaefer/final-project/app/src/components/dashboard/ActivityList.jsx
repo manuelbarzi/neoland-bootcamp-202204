@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from 'react'
 import Context from '../Context'
 import retrieveActivities from '../../logic/retrieveActivities'
 import retrieveUserActivities from '../../logic/retrieveUserActivities'
-import Activity from './Activity'
+import ActivityItem from './ActivityItem'
 import ProfileInfoHeader from './ProfileInfoHeader'
 import '../../styles/ActivityList.sass'
 
@@ -41,7 +41,7 @@ function ActivityList(props) {
                 </li>}
 
             {activities.map(activitie => <li className="Activity__list--item" key={activitie.id} >  
-                <Activity activity={activitie} onLikeClicked={handleActivityLikeClicked} onCommentClicked={props.onCommentClicked}/>
+                <ActivityItem activity={activitie} onLikeClicked={handleActivityLikeClicked} onCommentClicked={props.onCommentClicked}/>
             </li>)}
         </ul>
 }
