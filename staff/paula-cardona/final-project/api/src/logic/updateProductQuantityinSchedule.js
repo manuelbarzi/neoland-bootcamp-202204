@@ -19,10 +19,10 @@ function updateProductQuantityinSchedule(userId, day, productId) {
         if (!schedule) throw new NotFoundError(`schedule from user ${userId} does not exist`)
 
         if(day==='monday') {
+            
             const foundItem = schedule.monday.find(item => item.product.toString() === productId)
 
             if(foundItem != undefined) {
-                if (foundItem.quantity >= 1)
                     foundItem.quantity++
             }
         }

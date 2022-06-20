@@ -10,7 +10,7 @@ function authenticateUser(username, password) {
         .then(user => {
             
             if (!user)
-                throw new AuthError('wrong credentials')
+                throw new AuthError('Error de credenciales')
 
             return user.id
         })

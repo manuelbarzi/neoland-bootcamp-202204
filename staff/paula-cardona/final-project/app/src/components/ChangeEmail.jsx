@@ -14,11 +14,11 @@ function ChangeEmail(props) {
         try {
             updateUserName(sessionStorage.token, newEmail, (error) => {
                 if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
+                    handleFeedback({ level: 'error', message: error.message})
                     return
                 }
 
-                handleFeedback({ type: 'success', message: 'Name changed'})
+                handleFeedback({ level: 'success', message: 'Nombre cambiado'})
                 props.onProfileChanged()
             })
         } catch(error) {
@@ -37,7 +37,7 @@ function ChangeEmail(props) {
         <form className="Container mw" onSubmit={handleSaveNameClick}>
             <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
             <input className="form" type="text" name="email" placeholder="Nuevo email"/>
-            <button className="Button__Save">Save</button>
+            <button className="Button__Save">Guardar</button>
         </form>
     </div>
 }

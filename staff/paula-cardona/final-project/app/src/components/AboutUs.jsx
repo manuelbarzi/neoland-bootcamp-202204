@@ -1,16 +1,8 @@
 import Logger from '../vendor/Loggy'
+import { Link} from 'react-router-dom'
 
-function AboutUs (props) {
+function AboutUs () {
 
-    const logger = new Logger('AboutUs')
-    logger.info('call')
-
-    const handleNextArrow = event =>{
-        event.preventDefault()
-        props.onNextArrow()
-    }
-
-    logger.info('render')
     return <div className= "AboutUs">
         <div>
             <h1 className= "AboutUs__h1"> Título </h1>
@@ -24,7 +16,7 @@ function AboutUs (props) {
                 <p className= "AboutUs__text"> aisuhfgwe </p>
         </div>
         <div>
-            <a href="#" className="Arrow" onClick={handleNextArrow}>  ➡</a>
+            <Link className="Arrow" to="/login">  ➡</Link>
         </div>
 
     </div>

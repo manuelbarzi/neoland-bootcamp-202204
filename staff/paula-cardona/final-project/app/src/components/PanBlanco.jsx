@@ -14,7 +14,7 @@ function PanBlanco () {
             
             <img className="Image" src={imagePan} alt="logo" width="150" height="150"/>
             
-            <button button__Pan> Baguette </button>
+            <button button__Pan PanBlanco> Pan Blanco </button>
             <button button__Pan> Baguette </button>
             <button button__Pan> Baguette </button>
             <button button__Pan> Baguette </button>

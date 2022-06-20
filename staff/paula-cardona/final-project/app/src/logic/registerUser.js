@@ -1,11 +1,13 @@
 import Logger from '../vendor/Loggy'
-import { validateUsername, validatePassword } from '../validators'
+import { validateUsername, validatePassword, validateEmail, validateStringNotEmptyOrBlank } from '../validators'
 import Apium from '../vendor/Apium'
 
-function registerUser (name, surname, username, email, password, address){ 
-    
+function registerUser (name, username, email, password, address){ 
+    validateStringNotEmptyOrBlank(name, 'name')
     validateUsername(username)
-    validatePassword(password, 'password')
+    validateEmail(email)
+    validatePassword(password)
+    validateStringNotEmptyOrBlank (address)
 
     const logger = new Logger('register user')
     logger.info('call')
@@ -17,7 +19,7 @@ function registerUser (name, surname, username, email, password, address){
         headers : {
             'Content-Type': 'application/json'
         }, 
-        body: JSON.stringify({ name, surname, username, email, password, address })
+        body: JSON.stringify({ name, username, email, password, address })
     }) 
         .then (({status, payload}) => {
 

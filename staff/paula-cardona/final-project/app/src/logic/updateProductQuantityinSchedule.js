@@ -3,7 +3,7 @@ import { validateJwt, validateStringNotEmptyOrBlank} from '../validators'
 import Apium from '../vendor/Apium'
 
 
-function updateUserName(token, newName) {
+function updateProductQuantityinSchedule(token, newName) {
 
     validateJwt(token)
     validateStringNotEmptyOrBlank(newName, 'newName')
@@ -41,4 +41,4 @@ function updateUserName(token, newName) {
         })
 }
 
-export default updateUserName
+export default updateProductQuantityinSchedule

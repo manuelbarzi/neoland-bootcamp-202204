@@ -14,18 +14,21 @@ function ChangePassword (props) {
         const newPasswordRepeat = event.target.newPasswordRepeat.value
 
         try {
+    
             updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
+                
                 if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
+                    handleFeedback({ level: 'error', message: error.message})
                     return
                 }
-                handleFeedback({ type: 'success', message: 'Password saved'})
+                handleFeedback({ level: 'success', message: 'Contraseña guardada'})
                 props.onProfileChanged()
             })
         } catch(error) {
-            handleFeedback({ type: 'error', message: error.message})
+            handleFeedback({ level: 'error', message: error.message})
         }
     }
+    
     const handleClickBackToProfile = event => {
         event.preventDefault()
         props.onClickedBackToProfile()
@@ -39,7 +42,7 @@ function ChangePassword (props) {
             <input className="form" type="password" name="newPassword" placeholder=" Constraseña nueva"/>
             <input className="form" type="password" name="newPasswordRepeat" placeholder="Confirmación contraseña"/>
 
-            <button className="Button">Save</button>
+            <button className="Button">Guardar</button>
         </form>
     </div>
 }
