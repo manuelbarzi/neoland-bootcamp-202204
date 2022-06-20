@@ -5,7 +5,7 @@ import retrieveEvent from '../logic/retrieveEvent'
 import EventHome from './EventHome'
 import './HomeEventList.sass'
 
-function HomeEventList() {
+function HomeEventList(timestamp) {
 
     const logger = new Logger('EventList')
 
@@ -28,11 +28,13 @@ function HomeEventList() {
 
                 return
             }
+
             setEvents(_events)
         })
 
     const handleSignUpToEventClick = () => {
-        // setReload(reload + [timestamp])
+        console.log(timestamp)
+        setReload(reload + [timestamp])
     }
 
     logger.info('render')
