@@ -1,7 +1,7 @@
 const { User, Event } = require('../models')
 const { NotFoundError, AuthError } = require('../errors')
 const { validateObjectId } = require('../validators')
-debugger
+
 function addEventToUser(eventId, userId) {
   validateObjectId(eventId)
   validateObjectId(userId)
@@ -23,7 +23,6 @@ function addEventToUser(eventId, userId) {
 
           return event.save()
         })
-
     })
     .then(() => { })
 }

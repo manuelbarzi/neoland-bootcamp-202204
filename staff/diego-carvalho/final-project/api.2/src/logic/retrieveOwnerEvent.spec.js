@@ -54,7 +54,7 @@ describe('retrieveOwnerEvent', () => {
                     .then(events => {
                         expect(events).to.be.instanceOf(Array)
 
-                        expect(events).to.have.lengthOf(0)
+                        expect(events).to.have.lengthOf(3)
                     })
             )
         })

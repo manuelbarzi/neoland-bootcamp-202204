@@ -3,6 +3,7 @@ const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
 const addEventToUser = require('./addEventToUser')
 const { expect } = require('chai')
+const { user } = require('../models/schemas')
 
 describe('addEventToUser', () => {
   before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
@@ -32,23 +33,59 @@ describe('addEventToUser', () => {
           .then(() => {
             return User.findById({ _id: diegoUser.id })
               .then(user => {
-                const eventOnArrayEvents = user.events.find(function (_event) {
+                const eventOnEventsArray = user.events.find(function (_event) {
 
                   return (_event._id.toString() === event.id)
                 })
 
-                expect(eventOnArrayEvents.toString()).to.be.equal(event.id)
+                expect(eventOnEventsArray.toString()).to.be.equal(event.id)
 
               })
           })
-
       })
     })
 
   })
 
+  describe('addEventToUser', () => {
+    let jordiUser
+
+    beforeEach(() => {
+      jordiUser = new User({ name: 'Jordi Shefer', email: 'jordishefer@gmail.com', password: '1234' })
+
+      return jordiUser.save()
+
+    })
+    describe('when event exists', () => {
+      let event
+
+      beforeEach(() => {
+        event = new Event({ user: jordiUser.id, title: 'Olá!', description: "test jordi" })
+
+        return event.save()
+      })
+
+      it('succeeds on correct data', () => {
+        return addEventToUser(event.id, jordiUser.id)
+          .then(() => {
+            return Event.findById({ _id: event.id })
+              .then(event => {
+                const participantOnParticipantsArray = event.participants.find(function (_user) {
+
+                  return (_user._id.toString() === jordiUser.id)
+                })
+
+                expect(participantOnParticipantsArray.toString()).to.be.equal(jordiUser.id)
+
+              })
+          })
+      })
+    })
+  })
 
   afterEach(() => User.deleteMany())
 
   after(() => disconnect())
+
 })
+

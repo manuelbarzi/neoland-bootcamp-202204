@@ -10,23 +10,23 @@ function EventHome(props) {
     const logger = new Logger('Event')
     logger.info('call')
 
-    // const [events, setEvents] = useState(null)
+    const [events, setEvents] = useState(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
     const { eventId } = props
 
-    // const handleSignUpToEventClick = () => {
-    //     if (eventId)
-    //         signUpToEvent(sessionStorage.token, eventId, error => {
-    //             if (error) {
-    //                 handleFeedback({ level: 'error', message: error.message })
+    const handleSignUpToEventClick = () => {
+        if (eventId)
+            signUpToEvent(sessionStorage.token, eventId, error => {
+                if (error) {
+                    handleFeedback({ level: 'error', message: error.message })
 
-    //                 return
-    //             }
+                    return
+                }
 
-    //             setUsers(events)
-    //         })
-    // }
+                setUsers(events)
+            })
+    }
 
     const handleSaveSubmit = event => {
         event.preventDefault()
@@ -56,7 +56,7 @@ function EventHome(props) {
             <h1 className='EventHome__title'>Title: {props.title}</h1>
             <p className='EventHome__description'>Description: {props.description}</p>
 
-            {/* <button className="Button--light" onClick={handleSignUpToEventClick}>Apuntarme</button> */}
+            <button className="Button--light" onClick={handleSignUpToEventClick}>Apuntarme</button>
 
 
         </form>
