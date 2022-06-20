@@ -11,8 +11,8 @@ function EventCreator() {
 
     logger.info('call')
 
-    const [timestamp, setTimestamp] = useState(null)
-    const [view, setView] = useState(null)
+    // const [timestamp, setTimestamp] = useState(null)
+    // const [view, setView] = useState(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
 

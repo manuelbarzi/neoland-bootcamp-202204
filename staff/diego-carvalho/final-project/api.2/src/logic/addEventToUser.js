@@ -11,13 +11,19 @@ function addEventToUser(eventId, userId) {
       if (!event) throw new NotFoundError(`event with id ${eventId} not found`)
 
       return User.findById({ _id: userId })
-    })
-    .then(user => {
-      if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+        .then(user => {
+          if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-      user.events.push(eventId)
+          user.events.push(eventId)
 
-      return user.save()
+          return user.save()
+        })
+        .then(() => {
+          event.participants.push(userId)
+
+          return event.save()
+        })
+
     })
     .then(() => { })
 }

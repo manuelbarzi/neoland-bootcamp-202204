@@ -24,6 +24,8 @@ function Event(props) {
                 }
 
                 onRemove(eventId)
+                handleFeedback({ level: 'success', message: 'event has been removed' })
+
             })
     }
 
@@ -42,7 +44,7 @@ function Event(props) {
             }
             navigate('/')
 
-            handleFeedback({ level: 'success', message: 'event saved' })
+
         })
     }
 

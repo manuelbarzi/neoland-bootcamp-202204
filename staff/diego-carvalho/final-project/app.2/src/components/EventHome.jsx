@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
-import deleteEvent from '../logic/deleteEvent'
+import signUpToEvent from '../logic/signUpToEvent'
 import saveEvent from '../logic/saveEvent'
 import './EventHome.sass'
 import { useNavigate } from 'react-router-dom'
@@ -10,20 +10,21 @@ function EventHome(props) {
     const logger = new Logger('Event')
     logger.info('call')
 
+    // const [events, setEvents] = useState(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
-    const { eventId, onRemove } = props
+    const { eventId } = props
 
-    // const handleRemoveClick = () => {
+    // const handleSignUpToEventClick = () => {
     //     if (eventId)
-    //         deleteEvent(sessionStorage.token, eventId, error => {
+    //         signUpToEvent(sessionStorage.token, eventId, error => {
     //             if (error) {
     //                 handleFeedback({ level: 'error', message: error.message })
 
     //                 return
     //             }
 
-    //             onRemove(eventId)
+    //             setUsers(events)
     //         })
     // }
 
@@ -55,8 +56,8 @@ function EventHome(props) {
             <h1 className='EventHome__title'>Title: {props.title}</h1>
             <p className='EventHome__description'>Description: {props.description}</p>
 
-            {/* <button className="button-event" onClick={handleRemoveClick}Apuntarme</button>
-            <button className="button-event">Save</button> */}
+            {/* <button className="Button--light" onClick={handleSignUpToEventClick}>Apuntarme</button> */}
+
 
         </form>
     </div>

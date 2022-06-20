@@ -8,6 +8,7 @@ const retrieveEvent = require('./retrieveEvent')
 const retrieveOwnerEvent = require('./retrieveOwnerEvent')
 const updateEvent = require('./updateEvent')
 const deleteEvent = require('./deleteEvent')
+const addEventToUser = require('./addEventToUser')
 
 module.exports = {
     registerUser,
@@ -20,5 +21,6 @@ module.exports = {
     retrieveOwnerEvent,
     updateEvent,
     deleteEvent,
+    addEventToUser
 
 }

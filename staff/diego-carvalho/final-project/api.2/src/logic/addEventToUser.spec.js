@@ -26,15 +26,14 @@ describe('addEventToUser', () => {
 
         return event.save()
       })
-      debugger
+
       it('succeeds on correct data ', () => {
         return addEventToUser(event.id, diegoUser.id)
           .then(() => {
             return User.findById({ _id: diegoUser.id })
               .then(user => {
-
                 const eventOnArrayEvents = user.events.find(function (_event) {
-                  debugger
+
                   return (_event._id.toString() === event.id)
                 })
 

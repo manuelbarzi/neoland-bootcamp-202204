@@ -9,6 +9,5 @@ module.exports = {
     handleRetrieveOwnerEvent: require('./handleRetrieveOwnerEvent'),
     handleUpdateEvent: require('./handleUpdateEvent'),
     handleDeleteEvent: require('./handleDeleteEvent'),
-
-
+    handleAddEventToUser: require('./handleAddEventToUser'),
 }

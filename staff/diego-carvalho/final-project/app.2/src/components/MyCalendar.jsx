@@ -34,7 +34,7 @@ function MyCalendar({ timestamp }) {
         const _events = events.filter(event => event.id !== eventId)
 
         setEvents(_events)
-        handleFeedback({ level: 'success', message: 'event has been removed' })
+
     }
 
     logger.info('render')
