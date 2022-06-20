@@ -2,7 +2,7 @@ const { User, Event } = require('../models')
 const { NotFoundError, AuthError } = require('../errors')
 const { validateObjectId } = require('../validators')
 debugger
-function addEventToOwner(eventId, userId) {
+function addEventToUser(eventId, userId) {
   validateObjectId(eventId)
   validateObjectId(userId)
 
@@ -19,8 +19,8 @@ function addEventToOwner(eventId, userId) {
       user.events.push(eventId)
 
       return user.save()
-        .then(() => eventId)
     })
+    .then(() => { })
 }
 
 /*

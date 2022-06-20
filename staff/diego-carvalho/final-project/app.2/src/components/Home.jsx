@@ -5,7 +5,7 @@ import retrieveUser from '../logic/retrieveUser'
 import MyCalendar from './MyCalendar'
 import HomeEventList from './HomeEventList'
 import Profile from './Profile'
-import EventOwner from './EventOwner'
+import EventCreator from './EventCreator'
 import { isJwtValid } from 'validators'
 import './Home.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
@@ -62,10 +62,10 @@ function Home({ onUserLogout }) {
         navigate('/searchEvent')
     }
 
-    const handleEventOwnerClik = event => {
+    const handleEventCreatorClick = event => {
         event.preventDefault()
 
-        navigate('/eventOwner')
+        navigate('/eventCreator')
     }
 
     const handleMyCalendarClick = event => {
@@ -85,28 +85,28 @@ function Home({ onUserLogout }) {
     return isJwtValid(sessionStorage.token) ?
 
         <div className="Home Container">
-            <header className="Home__header Container Container--row Container--spread-sides">
-                <div className='Header__nav'>
+            <header className="Home__header">
+                <div className='Home__header-nav'>
                     <h1>Hello {name}</h1>
                     <a href='#' onClick={handleSearchBarClick}>< MdSearch /></a>
                     <a href="#" onClick={handleLogoutClick}><MdLogout /></a>
                 </div>
             </header>
 
-            <main className="Home__body Container">
+            <main className="Home__body">
                 <Routes>
                     <Route index element={<HomeEventList timestamp={timestamp} />} />
-                    <Route path="/eventOwner" element={<EventOwner />} />
+                    <Route path="/eventCreator" element={<EventCreator />} />
                     <Route path="/myCalendar" element={<MyCalendar />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/searchEvent" element={<SearchBar />} />
                 </Routes>
             </main>
 
-            <footer className="Home__footer Container">
-                <nav className='nav'>
+            <footer className="Home__footer">
+                <nav className='Home__footer-nav'>
                     <a href="#" onClick={handleHomeClick}><MdHome className="icons" /></a>
-                    <a href="#" onClick={handleEventOwnerClik}><MdAddCircleOutline className="icons" /></a>
+                    <a href="#" onClick={handleEventCreatorClick}><MdAddCircleOutline className="icons" /></a>
                     <a href="#" onClick={handleMyCalendarClick}><MdOutlineCalendarToday className="icons" /></a>
                     <a href="#" onClick={handleProfileClick}><MdPermIdentity className="icons" /></a>
                 </nav>

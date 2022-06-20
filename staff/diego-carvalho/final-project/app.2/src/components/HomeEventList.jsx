@@ -27,7 +27,7 @@ function HomeEventList({ timestamp }) {
                 return
             }
 
-            setEvents(events)//estes event si el botón de salvar y cancelar, solamente el titulo la descripción y un botón de participar
+            setEvents(events)
         })
 
     // const handleRemoveEvent = eventId => {

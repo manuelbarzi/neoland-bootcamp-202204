@@ -1,12 +1,12 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import saveEvent from '../logic/saveEvent'
 import { isJwtValid } from 'validators'
-import './Home.sass'
+import './EventCreator.sass'
 import { useNavigate } from 'react-router-dom'
 
-function EventOwner() {
+function EventCreator() {
     const logger = new Logger('Home')
 
     logger.info('call')
@@ -15,15 +15,6 @@ function EventOwner() {
     const [view, setView] = useState(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     logger.info('componentDidMount')
-
-    //     if (isJwtValid(sessionStorage.token))
-    //             setView('event')
-
-    //     else navigate('/login')
-    // }, [])
 
     const handleSaveSubmit = event => {
         event.preventDefault()
@@ -60,7 +51,7 @@ function EventOwner() {
         </div> : <></>
 }
 
-export default EventOwner
+export default EventCreator
 
 
 

@@ -1,11 +1,10 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
-const addEventToOwner = require('./addEventToOwner')
+const addEventToUser = require('./addEventToUser')
 const { expect } = require('chai')
 
-
-describe('addEventToOwner', () => {
+describe('addEventToUser', () => {
   before(() => connect('mongodb://127.0.0.1:27017/notes-db-test'))
 
   beforeEach(() => Promise.all([User.deleteMany(), Event.deleteMany()]))
@@ -29,17 +28,14 @@ describe('addEventToOwner', () => {
       })
 
       it('succeeds on correct data ', () => {
-        return addEventToOwner(event.id, diegoUser.id)
-          .then(eventId => {
-            expect(eventId).to.be.a('string')
-            debugger
-            return User.findById(event.id)
-              // Note.findOne({ comments: [ _id: commentId]})
+        return addEventToUser(event.id, diegoUser.id)
+          .then(() => {
+            return User.findById(user.id)
               .then(user => {
 
-                const ownerEvent = user.events.find(ownerEvent => ownerEvent._id.toString() === eventId)
+                const participantEvent = user.events.find(event => event._id.toString() === eventId)
 
-                expect(ownerEvent.user.toString()).to.be.equal(diegoUser.id)
+                expect(participantEvent.user.toString()).to.be.equal(diegoUser.id)
 
               })
           })

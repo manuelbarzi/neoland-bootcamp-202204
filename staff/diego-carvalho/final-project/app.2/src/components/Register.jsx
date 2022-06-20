@@ -44,9 +44,9 @@ function Register(props) {
 
     return isJwtValid(sessionStorage.token) ? <></> : <div>
         <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Input__register-login" type="text" name="name" placeholder="name" />
-            <input className="Input__register-login" type="text" name="email" placeholder="email" />
-            <input className="Input__register-login" type="password" name="password" placeholder="password" />
+            <input className="Input__register-login" type="text" name="name" placeholder="Name" />
+            <input className="Input__register-login" type="text" name="email" placeholder="Email" />
+            <input className="Input__register-login" type="password" name="password" placeholder="Password" />
             <button className="Button Button--light">Register</button>
             <a href="#" onClick={handleLoginLinkClick}>Login</a>
         </form>
