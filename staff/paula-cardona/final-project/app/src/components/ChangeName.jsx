@@ -3,29 +3,26 @@ import Context from './Context'
 import updateUserName from '../logic/updateUserName'
 
 function ChangeName(props) {
-
     
 
     const { handleFeedback } = useContext(Context)
 
     const handleSaveNameClick = event => {
         event.preventDefault()
-
-        const newName = event.target.name.value
-
-        try {
-            updateUserName(sessionStorage.token, newName, (error) => {
-                if (error) {
-                    handleFeedback({ type: 'error', message: error.message})
-                    return
+        
+        const newName = event.target.name.value;
+            (async () => {
+                try {
+                    await updateUserName(sessionStorage.token, newName)
+                    
+                    handleFeedback({ level: 'success', message: 'Nombre cambiado'})
+                    props.onProfileChanged()
+                    
+                } catch(error) {
+                    handleFeedback({ level: 'error', message: error.message})
                 }
-
-                handleFeedback({ type: 'success', message: 'Name changed'})
-                props.onProfileChanged()
-            })
-        } catch(error) {
-            handleFeedback({ type: 'error', message: error.message})
-        }
+            })();
+    
     }
     
     const handleClickBackToProfile = event => {

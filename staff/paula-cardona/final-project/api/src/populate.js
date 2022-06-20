@@ -1,15 +1,20 @@
 require('dotenv').config()
+
 const { connect, disconnect } = require('mongoose')
-const { Product } = require('./models')
+const { User, Schedule, Item, Product } = require('./models')
 
     ; (async () => {
         try {
             // await connect(process.env.TEST_MONGODB_URL)
             await connect(process.env.MONGODB_URL)
 
-            await Product.deleteMany()
+            await Promise.all([User.deleteMany(), Schedule.deleteMany(), Product.deleteMany()])
 
-            await Promise.all([
+            const user = await User.create({ name: 'Wendy Bread', username: 'wendybread', email: 'wendy@bread.com', password: '123123123', address: 'Pans St. 23'})
+
+            const schedule = await Schedule.create({ user: user.id })
+
+            const products = await Promise.all([
                 Product.create({ title: 'Baguette', type: Product.BLANCO }),
                 Product.create({ title: 'Pan de agua', type: Product.BLANCO }),
                 Product.create({ title: 'Pan gallego', type: Product.BLANCO }),
@@ -44,6 +49,62 @@ const { Product } = require('./models')
                 Product.create({ title: 'Barra de pan sin gluten', type: Product.SIN_GLUTEN }),
                 Product.create({ title: 'Barra de medio sin gluten', type: Product.SIN_GLUTEN })
             ])
+
+            {
+                const item = new Item({
+                    product: products[0].id,
+                    quantity: 10
+                })
+    
+                schedule.monday.push(item)
+            }
+
+            {
+                const item = new Item({
+                    product: products[1].id,
+                    quantity: 11
+                })
+    
+                schedule.monday.push(item)
+            }
+
+            {
+                const item = new Item({
+                    product: products[2].id,
+                    quantity: 12
+                })
+    
+                schedule.wednesday.push(item)
+            }
+
+            {
+                const item = new Item({
+                    product: products[3].id,
+                    quantity: 13
+                })
+    
+                schedule.wednesday.push(item)
+            }
+
+            {
+                const item = new Item({
+                    product: products[4].id,
+                    quantity: 14
+                })
+    
+                schedule.friday.push(item)
+            }
+
+            {
+                const item = new Item({
+                    product: products[5].id,
+                    quantity: 15
+                })
+    
+                schedule.friday.push(item)
+            }
+
+            await schedule.save()
 
             await disconnect()
         } catch (error) {

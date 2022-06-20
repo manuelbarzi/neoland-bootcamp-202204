@@ -6,24 +6,21 @@ function ChangeEmail(props) {
 
     const { handleFeedback } = useContext(Context)
 
-    const handleSaveNameClick = event => {
+    const handleSaveEmailClick = event => {
         event.preventDefault()
 
-        const newEmail = event.target.email.value
-
-        try {
-            updateUserName(sessionStorage.token, newEmail, (error) => {
-                if (error) {
+        const newEmail = event.target.email.value;
+            (async () => {
+                try {
+                    await updateUserName(sessionStorage.token, newEmail)
+                        
+                    handleFeedback({ level: 'success', message: 'Email cambiado'})
+                    props.onProfileChanged()
+                    
+                } catch(error) {
                     handleFeedback({ level: 'error', message: error.message})
-                    return
                 }
-
-                handleFeedback({ level: 'success', message: 'Nombre cambiado'})
-                props.onProfileChanged()
-            })
-        } catch(error) {
-            handleFeedback({ type: 'error', message: error.message})
-        }
+            })();
     }
 
     const handleClickBackToProfile = event => {
@@ -34,7 +31,7 @@ function ChangeEmail(props) {
 
 
     return <div className="changeName Container">
-        <form className="Container mw" onSubmit={handleSaveNameClick}>
+        <form className="Container mw" onSubmit={handleSaveEmailClick}>
             <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
             <input className="form" type="text" name="email" placeholder="Nuevo email"/>
             <button className="Button__Save">Guardar</button>

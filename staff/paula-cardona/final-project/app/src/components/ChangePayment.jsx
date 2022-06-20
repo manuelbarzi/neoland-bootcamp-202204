@@ -1,10 +1,4 @@
-import { useContext } from 'react'
-import Context from './Context'
-
-
 function ChangePassword (props) {
-
-    const { handleFeedback } = useContext(Context)
 
     const handleClickBackToProfile = event => {
         event.preventDefault()
@@ -12,14 +6,18 @@ function ChangePassword (props) {
     }
    
 
-    return <div className="Payment Container">
-        <form className="Container" >
-            <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
-            <p>Explicación como la de aboutus</p>
+    return <div className="ChangePayment Container">
+    <form className="Container" >
+        <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
+        <input className="form" type="text" name="name" placeholder="Nombre del titular de la tarjeta"/>
+        <input className="form" type="password" name="password" placeholder="Número de la targeta"/>
+        <input className="form" type="date" name="date" placeholder="Fecha de vencimiento"/>
+        <input className="form" type="text" name="code" placeholder="Número del código de seguridad"/>
+        
 
-            <button className="Button">Save</button>
-        </form>
-    </div>
+        <button className="Button">Guardar</button>
+    </form>
+</div>
 }
 
 export default ChangePassword

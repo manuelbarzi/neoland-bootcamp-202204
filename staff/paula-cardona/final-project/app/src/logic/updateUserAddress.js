@@ -2,19 +2,18 @@ import { validateJwt, validateStringNotEmptyOrBlank} from '../validators'
 import Apium from '../vendor/Apium'
 
 
-function updateUserName(token, newName) {
-
+function updateUserAddress(token, newAddress) {
+  
     validateJwt(token)
-    validateStringNotEmptyOrBlank(newName, 'newName')
-    
+    validateStringNotEmptyOrBlank(newAddress)
+
     const api = new Apium (process.env.REACT_APP_API_URL)
 
-    
     return (async () => {
 
         const result= await api.patch(`users`,
         {headers: {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'},
-        body: JSON.stringify({ name: newName })})
+        body: JSON.stringify({ address: newAddress })})
 
         const {status, payload} = result
                
@@ -29,8 +28,6 @@ function updateUserName(token, newName) {
         }
 
     })()
-
-
 }
 
-export default updateUserName
+export default updateUserAddress

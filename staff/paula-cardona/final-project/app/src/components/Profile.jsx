@@ -4,7 +4,7 @@ import ChangePassword from './ChangePassword'
 import ChangeEmail from './ChangeEmail'
 import ChangePayment from './ChangePayment'
 import ChangeAddress from './ChangeAddress'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 
 function Profile(props) {
@@ -40,7 +40,7 @@ function Profile(props) {
         {view === 'profile' && <div>
             <header className="Week__header Container">
                 <div>
-                    <h1 className="Profile__h1">Profile</h1>
+                    <h1 className="Profile__h1">Mi perfil</h1>
                 </div>
             </header>
         
@@ -59,10 +59,10 @@ function Profile(props) {
 
         {view === 'changename' && <ChangeName onClickedBackToProfile={handleClickedBackToProfile} onProfileChanged={handleProfileChanged}/>}
         {view === 'changepassword' && <ChangePassword onClickedBackToProfile={handleClickedBackToProfile} onProfileChanged={handleProfileChanged}/>}
-        {view === 'changeemail' && <ChangeEmail onClickedBackToProfile= {handleClickedBackToProfile}/>}
+        {view === 'changeemail' && <ChangeEmail onClickedBackToProfile= {handleClickedBackToProfile} onProfileChanged={handleProfileChanged}/>}
 
-        {view === 'changepayment' && <ChangePayment onClickedBackToProfile= {handleClickedBackToProfile} />}
-        {view === 'changeaddress' && <ChangeAddress onClickedBackToProfile= {handleClickedBackToProfile}/>}
+        {view === 'changepayment' && <ChangePayment onClickedBackToProfile= {handleClickedBackToProfile}  />}
+        {view === 'changeaddress' && <ChangeAddress onClickedBackToProfile= {handleClickedBackToProfile}onProfileChanged={handleProfileChanged}/>}
 
         
         {/* // {view === 'deleteaccount' && <DeleteAccount />}    */} 

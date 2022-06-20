@@ -11,10 +11,16 @@ function retrieveSchedule(userId) { // recivimos el user id al que les buscaremo
         .then(user => {
             if(!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Schedule.findOne({user: userId})  
+            return Schedule.findOne({user: userId}).populate({ 
+                path: 'monday tuesday wednesday thursday friday',
+                populate: {
+                  path: 'product',
+                  model: 'Product'
+                } 
+             })
         })
         .then(schedule => {
-            debugger
+            
             if (!schedule) throw new NotFoundError(`schedule from user ${userId} does not exist`)
 
             schedule.id = schedule._id.toString()

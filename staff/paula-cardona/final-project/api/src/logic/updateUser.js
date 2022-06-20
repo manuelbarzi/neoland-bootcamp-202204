@@ -3,6 +3,7 @@ const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyOrBlank, validateStringNotEmptyNoSpaces, validateEmail, validatePositiveInteger, validatePassword } = require('../validators')
 
 function updateUser(userId, name, email, password, address) {
+    
     validateStringNotEmptyNoSpaces(userId, 'user id')
     if (name !=null) validateStringNotEmptyOrBlank(name, 'name')
     if (email != null)  validateEmail(email, 'email')

@@ -1,44 +1,33 @@
-import Logger from '../vendor/Loggy'
 import { validateEmail, validateJwt, validateEmail} from '../validators'
 import Apium from '../vendor/Apium'
 
 
 function updateUserEmail(token, newEmail) {
-
+  
     validateJwt(token)
     validateEmail(newEmail)
-   
 
-    const logger = new Logger('updateUserEmail')
-
-    logger.info('call')
     const api = new Apium (process.env.REACT_APP_API_URL)
 
-    logger.info('request')
-    return api.post('users', {
-        headers : { 
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'  }, 
-        body: JSON.stringify({ email: newEmail })
-    })
-        .then (({ status, payload}) => {
-            logger.info('response')
+    return (async () => {
 
-            if (status === 204) {
-                return null
-            
-            } else if (status >=400 && status <500) {
-                logger.warn ('response - client error status ' + status)
+        const result= await api.patch(`users`,
+        {headers: {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'},
+        body: JSON.stringify({ email: newEmail })})
 
-                const data = JSON.parse(payload)
+        const {status, payload} = result
+               
+        if (status >= 400 && status < 500) {
+            const data = JSON.parse(payload)
+            throw new Error(data.error)
+        } else if (status >= 500){
+            throw new Error('server error')
+        } else if (status ===204) {
 
-                throw new Error(data.error)
-            } else {
-                logger.error('response - server error status ' + status)
+            return 
+        }
 
-                throw new Error('server error')
-            }
-        })
+    })()
 }
 
 export default updateUserEmail

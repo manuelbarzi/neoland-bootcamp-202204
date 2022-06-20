@@ -2,6 +2,7 @@ import { useState, useEffect, useContext} from 'react'
 import Context from './Context'
 import retrieveProductsOfType from '../logic/retrieveProductsOfType'
 import Product from './Product'
+import './ProductsList.sass'
 
 function ProductsList ({day, typeClicked}) {
 
@@ -26,15 +27,7 @@ function ProductsList ({day, typeClicked}) {
         }
     } 
 
-
-    // Necesito cargar botones por cada pan que tengo
-
-    // map de un array, recorremos cada elemento del array
-    // map de productos, recorremos cada producto
-
-    // para cada producto: creamos un boton
-    
-    return products && <div>
+    return products && <div classname="Container">
             <div>
                 <h1 className= "h1__Pan">{typeClicked}</h1> 
             </div>
@@ -46,7 +39,7 @@ function ProductsList ({day, typeClicked}) {
                 </li>)}
             </ul>
 
-            <button > X </button> 
+            <button className='Cross Container'> X </button> 
         </div>
 }
 

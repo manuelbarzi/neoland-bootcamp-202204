@@ -78,27 +78,27 @@ describe ('retrieveProductsOfType' , () => {
             
 
         })
-        describe('when user does not exist', () => {
-            let product
-            
-            beforeEach (() => {
-                product = new Product({ title: 'baguette', type: 0 })
-                return product.save()
-            })
-                
-            it('fails on user id from non-existing user', () => {
-                const unexistingUserId = new ObjectId().toString()
-    
-                return retrieveProductsOfType(unexistingUserId, Product.BLANCO)
-                    .then(() => {
-                        throw new Error('should not reach this point')
-                    })
-                    .catch(error => {
-                        expect(error).to.be.instanceOf(NotFoundError)
-                        expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
-                    })
-            })
+    describe('when user does not exist', () => {
+        let product
+        
+        beforeEach (() => {
+            product = new Product({ title: 'baguette', type: 0 })
+            return product.save()
         })
+            
+        it('fails on user id from non-existing user', () => {
+            const unexistingUserId = new ObjectId().toString()
+
+            return retrieveProductsOfType(unexistingUserId, Product.BLANCO)
+                .then(() => {
+                    throw new Error('should not reach this point')
+                })
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)
+                })
+        })
+    })
     })
 
     after(() => disconnect())

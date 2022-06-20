@@ -1,10 +1,8 @@
-import Logger from '../vendor/Loggy'
 import { validateJwt, validatePassword} from '../validators'
 import Apium from '../vendor/Apium'
 
 function updateUserPassword(token, password, newPassword, newPasswordRepeat) {
-    const logger = new Logger('updateUserPassword')
-
+    
     // Esto es una responsabilidad ( valida los parámetros de entrada [robusta])
     validateJwt(token)
     validatePassword(password, 'password')
@@ -12,43 +10,34 @@ function updateUserPassword(token, password, newPassword, newPasswordRepeat) {
     validatePassword(newPasswordRepeat, 'newPasswordRepeat' )
 
     if (password === newPassword) {
-        
-        throw new Error('La contraseña actual y la contraseña nueva son iguales')
-        
+        throw new Error('La contraseña actual y la contraseña nueva son iguales')   
     }
 
     if (newPassword !== newPasswordRepeat) {
         throw new Error('La contraseña nueva y la repetición de contraseña nueva no coinciden')
     }
 
-    logger.info('call')
-    
     const api = new Apium (process.env.REACT_APP_API_URL)
 
-    logger.info('request')
-    return api.patch('users', {
-        headers : { 
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'  }, 
-        body: JSON.stringify({ oldPassword: password, password: newPassword })
-    }) 
-        .then(({ status, payload}) => {
+    return (async () => {
 
-            if (status ===204) {
-                return null
+        const result= await api.patch(`users`,
+        {headers: {Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'},
+        body: JSON.stringify({ oldPassword: password, password: newPassword })})
 
-            } else if (status >= 400 && status < 500) {
-                logger.warn('response - client error status ' + status)
+        const {status, payload} = result
+               
+        if (status >= 400 && status < 500) {
+            const data = JSON.parse(payload)
+            throw new Error(data.error)
+        } else if (status >= 500){
+            throw new Error('server error')
+        } else if (status ===204) {
 
-                const data = JSON.parse(payload)
+            return 
+        }
 
-                throw new Error(data.error)
-            } else {
-                logger.error('response - server error status ' + status)
-
-                throw new Error('server error')
-            }
-        })
+    })()
 }
 export default updateUserPassword
 

@@ -11,22 +11,19 @@ function ChangePassword (props) {
 
         const password = event.target.password.value
         const newPassword = event.target.newPassword.value
-        const newPasswordRepeat = event.target.newPasswordRepeat.value
+        const newPasswordRepeat = event.target.newPasswordRepeat.value;
+            (async () => {
 
-        try {
-    
-            updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
-                
-                if (error) {
+                try {
+                    await updateUserPassword(sessionStorage.token, password, newPassword, newPasswordRepeat, error => {
+                    
+                        handleFeedback({ level: 'success', message: 'Contraseña guardada'})
+                        props.onProfileChanged()
+                    })
+                } catch(error) {
                     handleFeedback({ level: 'error', message: error.message})
-                    return
                 }
-                handleFeedback({ level: 'success', message: 'Contraseña guardada'})
-                props.onProfileChanged()
-            })
-        } catch(error) {
-            handleFeedback({ level: 'error', message: error.message})
-        }
+            })();
     }
     
     const handleClickBackToProfile = event => {

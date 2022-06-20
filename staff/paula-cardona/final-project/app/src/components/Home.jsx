@@ -9,8 +9,6 @@ import './Home.sass'
 import { useNavigate } from 'react-router-dom'
 import { isJwtValid } from '../validators'
 
-
-
 function Home() {
 
     const [view, setView] = useState('home')
@@ -20,32 +18,27 @@ function Home() {
     const navigate = useNavigate()
     const { handleFeedback } = useContext(Context)
 
-
     const handleProfileClick = () => setView('profile')
     const handleMiSemanaClick = () => { setView('home'); setDay(null)}
 
-    const handleClickMondayDay = () => { setView('day');  setDay('Lunes')}
-    const handleClickTuesdayDay = () => { setView('day');  setDay('Martes')}
-    const handleClickWednesdayDay = () => { setView('day');  setDay('Miércoles')}
-    const handleClickThrusdayDay = () => { setView('day');  setDay('Jueves')}
-    const handleClickFridayDay = () => { setView('day');  setDay('Viernes')}
-    const handleClickSaturdayDay = () => { setView('day');  setDay('Sábado')}
-    const handleClickSundayDay = () => { setView('day');  setDay('Domingo')}
-
-
+    const handleClickMondayDay = () => { setView('Lunes');  setDay('Lunes')}
+    const handleClickTuesdayDay = () => { setView('Martes');  setDay('Martes')}
+    const handleClickWednesdayDay = () => { setView('Miércoles');  setDay('Miércoles')}
+    const handleClickThrusdayDay = () => { setView('Jueves');  setDay('Jueves')}
+    const handleClickFridayDay = () => { setView('Viernes');  setDay('Viernes')}
+    const handleClickSaturdayDay = () => { setView('Sábado');  setDay('Sábado')}
+    const handleClickSundayDay = () => { setView('Domingo');  setDay('Domingo')}
 
     useEffect(() => {
         if (isJwtValid(sessionStorage.token))
             retrieveUser(sessionStorage.token, (error, user) => {
                 if (error) {
                     handleFeedback({ level: 'error', message: error.message })
-
                     return
-                }
-                setName(user.name)
-                
+                }         
+                setName(user.name)  
             })
-            else navigate('/login')
+        else navigate('/login')
     }, [])
         
 
@@ -54,45 +47,70 @@ function Home() {
     }, [view])
 
 
-
-    const getSchedule = async () => {
-        
-        try{ const result= await retrieveSchedule (sessionStorage.token)
+    const getSchedule = async () => {   
+        try{ const result= await retrieveSchedule(sessionStorage.token)
             setSchedule(result)
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
     }
 
-
-   
-
-    
     return isJwtValid(sessionStorage.token) ?
         <div className="Home__Container">
         
             {view=== 'home' && <header className="Home__header Container">
                 <div>
-                    <h1 className="Home__h1">Resumen de tu semana</h1>
+                    <h1 className="Home__h1">Resumen de mi semana</h1>
                 </div>
             </header>}
 
-
             <main >
                 {view === 'home' && schedule && <div className="Home__buttons">
+                    
                     <button className="Button Button Home__Day" onClick= {handleClickMondayDay}>Lunes</button>
+                    {schedule.monday.map((elem) => <div key={elem.id}>
+                        <h4>{elem.product.title}: {elem.quantity}</h4>   
+                    </div>)}
+                    
                     <button className="Button Button Home__Day" onClick= {handleClickTuesdayDay}> Martes</button>
+                        {schedule.tuesday.map((elem) => <div key={elem.id}>
+                            <h4>{elem.product.title}: {elem.quantity}</h4>   
+                        </div>)}
+    
                     <button className="Button Button Home__Day" onClick= {handleClickWednesdayDay}>Miércoles</button>
+                        {schedule.wednesday.map((elem) => <div key={elem.id}>
+                                <h4>{elem.product.title}: {elem.quantity}</h4>   
+                            </div>)}
+
                     <button className="Button Button Home__Day" onClick= {handleClickThrusdayDay}>Jueves</button>
+                        {schedule.thursday.map((elem) => <div key={elem.id}>
+                                <h4>{elem.product.title}: {elem.quantity}</h4>   
+                            </div>)}
+
                     <button className="Button Button Home__Day" onClick= {handleClickFridayDay}>Viernes</button>
-                    <h1>{schedule.friday[0].product.title}</h1>
+                        {schedule.friday.map((elem) => <div key={elem.id}>
+                                <h4>{elem.product.title}: {elem.quantity}</h4>   
+                            </div>)}
+
                     <button className="Button Button Home__Day" onClick= {handleClickSaturdayDay}>Sábado</button>
+                        {schedule.saturday.map((elem) => <div key={elem.id}>
+                                <h4>{elem.product.title}: {elem.quantity}</h4>   
+                            </div>)}
+
                     <button className="Button Button Home__Day" onClick= {handleClickSundayDay}>Domingo</button>
+                        {schedule.sunday.map((elem) => <div key={elem.id}>
+                                <h4>{elem.product.title}: {elem.quantity}</h4>   
+                            </div>)}
                 </div>}
 
-                {view === 'day' && day && <Day dayClicked={day}/>}
-
-                {view === 'profile' && <Profile />}
+                {view === 'Lunes' && day && <Day dayClicked={day} scheduleHome={schedule.monday}/>}
+                {view === 'Martes' && day && <Day dayClicked={day} scheduleHome={schedule.tuesday}/>}
+                {view === 'Miércoles' && day && <Day dayClicked={day} scheduleHome={schedule.wednesday}/>}
+                {view === 'Jueves' && day && <Day dayClicked={day} scheduleHome={schedule.thursday}/>}
+                {view === 'Friday' && day && <Day dayClicked={day} scheduleHome={schedule.friday}/>}
+                {view === 'Saturday' && day && <Day dayClicked={day} scheduleHome={schedule.saturday}/>}
+                {view === 'Sunday' && day && <Day dayClicked={day} scheduleHome={schedule.sunday}/>}
+                {view === 'profile' && <Profile name={name}/>}
             </main>
             
             <footer className="Home__footer Container Container--row Container--spread-sides">

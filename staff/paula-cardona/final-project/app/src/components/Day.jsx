@@ -2,19 +2,16 @@ import { useState, useEffect } from 'react'
 import { isJwtValid } from '../validators'
 import ProductsList from './ProductsList'
 
-
-
-function Day ({dayClicked}) {
+function Day ({dayClicked, scheduleHome}) {
 
     const [day, setDay] = useState(null)
     const [view, setView] = useState('main')
     const [type, setType] = useState(null)
-
+    // const [schedule, setSchedule] = useState(null)
 
     useEffect(() => { //cuando cargue la pagina nos guardaremos el dayClicked que viene por arriba en el nuevo day de DAY. ponemos este nuevo day en title
         setDay(dayClicked) //con el day con el qye venga de dayclicked
     }, [])
-
 
     const handleClickBack = () => {
         if (day === 'Lunes') setDay('Domingo')  //si el valor que guardo es el de lunes, el valor del click back en lunes será domingo
@@ -55,15 +52,18 @@ function Day ({dayClicked}) {
                     <button className="Button Button__Day__Flecha" onClick ={handleClickNext}>siguiente</button>
                 </div>
             </header>
-            <br>
-            
-            </br>
+
+            {scheduleHome.map((elem) => <div key={elem.id}>
+                        <h4>{elem.product.title}: {elem.quantity}</h4>   
+                    </div>)}
+
             <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>Pan blanco</button>
                 <button className="Button Button__Day__Bread" onClick= {handleClickonPanIntegral}>Pan integral</button>
                 <button className="Button Button__Day__Bread" onClick= {handleClickonPanVariedades}>Pan de variedades</button>
                 <button className="Button Button__Day__Bread" onClick= {handleClickonBolleria}>Bolleria</button>
                 <button className="Button Button__Day__Bread" onClick= {handleClickonPanSinGluten}>Pan sin gluten</button>
             </div>}
+
 
            
             {view === 'productsList' && <ProductsList  day={day} typeClicked={type} />}
