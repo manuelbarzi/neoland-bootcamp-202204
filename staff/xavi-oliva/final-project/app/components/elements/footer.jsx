@@ -9,6 +9,10 @@ export const Footer = ({ className, ...props }) => {
         router.push('/')
     }
 
+    const handleAddFlatClick = () => {
+        router.push('/flat/add-flat')
+    }
+
     return <>
         <footer {...props}
             className={`${className} 
@@ -17,7 +21,7 @@ export const Footer = ({ className, ...props }) => {
                 <h3 onClick={handleHomeCLick} className='text-primary font-semibold cursor-pointer'>
                     Apartments
                 </h3>
-                <AddButton />
+                <AddButton onClick={handleAddFlatClick} />
             </nav>
         </footer>
     </>

@@ -1,21 +1,49 @@
-import { ProfileListButton, Section } from "../components";
+import { ChangeName, ChangePassword, DeleteAccount, FormContainer, ProfileListButton, Section } from "../components"
+import { useState } from "react"
 
+export default function Profile({ router }) {
+    const [view, setView] = useState(null)
 
-export default function Profile() {
+    const handleChangeNameClick = () => {
+        if (view === 'changeName') setView(null)
+        
+        else setView('changeName')
+    }
+    const handleChangePasswordClick = () => {
+        if (view === 'changePassword') setView(null)
+        
+        else setView('changePassword')
+    }
+
+    const handleDeleteAccountClick = () => {
+        if (view === 'deleteAccount') setView(null)
+        
+        else setView('deleteAccount')
+    }
+
     return <>
         <Section className='section-scroll'>
             <div className="text-secondary bg-white w-full">
-                <ProfileListButton>
-                    Change name
-                </ProfileListButton>
+                <FormContainer>
+                    <ProfileListButton onClick={handleChangeNameClick}>
+                        Change name
+                    </ProfileListButton>
+                    {view === 'changeName' && <ChangeName />}
+                </FormContainer>
 
-                <ProfileListButton>
-                    Change password
-                </ProfileListButton>
+                <FormContainer>
+                    <ProfileListButton onClick={handleChangePasswordClick}>
+                        Change password
+                    </ProfileListButton>
+                    {view === 'changePassword' && <ChangePassword />}
+                </FormContainer>
 
-                <ProfileListButton>
-                    Delete account
-                </ProfileListButton>
+                <FormContainer>
+                    <ProfileListButton onClick={handleDeleteAccountClick}>
+                        Delete account
+                    </ProfileListButton>
+                    {view === 'deleteAccount' && <DeleteAccount />}
+                </FormContainer>
             </div>
         </Section>
     </>

@@ -23,23 +23,19 @@ function validateStringNotEmptyNoSpaces(string, explain = 'string') {
 }
 
 function validateJwt(token) {
-    validateString(token, 'token')
+    const hasPartsFull = token.split('.').every(part => part.length > 0)
 
-    const parts = token.split('.')
+    if (token.split('.').length !== 3 || !hasPartsFull) throw new AuthError('invalid token')
 
-    if (parts.length !== 3 || !parts.every(part => part.length > 0)) throw new FormatError('invalid token format')
+    const otherFormatPart2 = token.split('.')[1]
+    
+    const jsonPart2 = atob(otherFormatPart2)
 
-    const [,b64Payload] = parts
+    const part2 = JSON.parse(jsonPart2)
 
-    const jsonPayload = atob(b64Payload)
+    const { exp } = part2
 
-    const payload = JSON.parse(jsonPayload) 
-
-    const { exp } = payload
-
-    const now = Math.round(Date.now() / 1000)
-
-    if (now > exp) throw new AuthError('token expired')
+    if(exp < Math.round(Date.now()/1000)) throw new AuthError('token expired')
 }
 
 function isValidJWT(token) {

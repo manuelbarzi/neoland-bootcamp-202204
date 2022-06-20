@@ -63,6 +63,11 @@ export default function Login(props) {
 	</>
 }
 
-export async function getServerSideProps({ req, res }) {
-    return verifyTokenWithAPICall(req, res)
+export const getServerSideProps = async ({ req, res }) => {
+
+  return {
+    props: {
+      token: await verifyTokenWithAPICall(req, res) || null
+    }
+  }
 }

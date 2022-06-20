@@ -6,6 +6,7 @@ module.exports = {
     handleUnregisterUser: require('./handleUnregisterUser'),
     handleCreateFlat: require('./handleCreateFlat'),
     handleRetrieveFlats: require('./handleRetrieveFlats'),
+    handleRetrieveFlat: require('./handleRetrieveFlat'),
     handleUpdateFlat: require('./handleUpdateFlat'),
     handleDeleteFlat: require('./handleDeleteFlat'),
     handleValidateToken: require('./handleValidateToken'),

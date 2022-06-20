@@ -5,6 +5,7 @@ const updateUser = require('./updateUser')
 const unregisterUser = require('./unregisterUser')
 const createFlat = require('./createFlat')
 const retrieveFlats = require('./retrieveFlats')
+const retrieveFlat = require('./retrieveFlat')
 const updateFlat = require('./updateFlat')
 const deleteFlat = require('./deleteFlat')
 const addBookingToFlat = require('./addBookingToFlat')
@@ -18,6 +19,7 @@ module.exports = {
     unregisterUser,
     createFlat,
     retrieveFlats,
+    retrieveFlat,
     updateFlat,
     deleteFlat,
     addBookingToFlat,

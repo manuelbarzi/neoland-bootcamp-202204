@@ -28,7 +28,7 @@ export default function Register(props) {
 
   return <>
     <Section className='section'>
-      <Form onSubmit={handleFormSubmit}>
+      <Form className='px-8' onSubmit={handleFormSubmit}>
         <Input type="text" name="name" placeholder="name"></Input>
         <Input type="text" name="email" placeholder="email"></Input>
         <Input type="password" name="password" placeholder="password"></Input>
@@ -48,5 +48,9 @@ export default function Register(props) {
 }
 
 export async function getServerSideProps({ req, res }) {
-  return verifyTokenWithAPICall(req, res)
+  const token = verifyTokenWithAPICall(req, res)
+
+  return {
+      props: {}
+  }
 }

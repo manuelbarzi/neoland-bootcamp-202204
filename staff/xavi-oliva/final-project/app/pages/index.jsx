@@ -1,6 +1,7 @@
 import { verifyTokenWithAPICall } from './helpers'
 import { Section, Thumbnail, EditButton } from '../components'
 import { retrieveFlats } from '../logic'
+import Link from 'next/link'
 
 export default function Home({ token, flats }) { /*flats: _flats*/
 
@@ -15,8 +16,12 @@ export default function Home({ token, flats }) { /*flats: _flats*/
         w-full px-4 py-3 text-xs font-medium border-b-2 border-gray-200'>
           <div className="w-full flex items-center">
             {/* <Thumbnail src={flat.images[0]} className='w-6 h-6 mr-2' /> */}
-            <Thumbnail className='w-6 h-6 mr-2' />
-            <p className='truncate w-56'>{flat.title}</p>
+            <Link href={`/flat/${flat.id}/`}>
+              <a className='contents'>
+                <Thumbnail className='w-6 h-6 mr-2' />
+                <p className='truncate w-56'>{flat.title}</p>
+              </a>
+            </Link>
           </div>
           <EditButton />
         </li>)}
@@ -27,7 +32,7 @@ export default function Home({ token, flats }) { /*flats: _flats*/
 
 export const getServerSideProps = async ({ req, res }) => {
 
-  const { props: { token } } = await verifyTokenWithAPICall(req, res)
+  const token = await verifyTokenWithAPICall(req, res)
 
   return {
     props: {

@@ -12,7 +12,8 @@ const {
     handleRetrieveFlats,
     handleUpdateFlat,
     handleDeleteFlat,
-    handleValidateToken} = require('./handlers')
+    handleValidateToken,
+    handleRetrieveFlat} = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const cors = require('cors')
 
@@ -40,6 +41,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         routes.post('/flats', jsonBodyParser, handleCreateFlat)
         routes.get('/flats', handleRetrieveFlats)
+        routes.get('/flats/:flatId', handleRetrieveFlat)
         routes.patch('/flats/:flatId', jsonBodyParser, handleUpdateFlat)
         routes.delete('/flats/:flatId', jsonBodyParser, handleDeleteFlat)
 
