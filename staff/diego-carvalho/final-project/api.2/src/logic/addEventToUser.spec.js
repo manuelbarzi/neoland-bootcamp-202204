@@ -26,16 +26,19 @@ describe('addEventToUser', () => {
 
         return event.save()
       })
-
+      debugger
       it('succeeds on correct data ', () => {
         return addEventToUser(event.id, diegoUser.id)
           .then(() => {
-            return User.findById(user.id)
+            return User.findById({ _id: diegoUser.id })
               .then(user => {
 
-                const participantEvent = user.events.find(event => event._id.toString() === eventId)
+                const eventOnArrayEvents = user.events.find(function (_event) {
+                  debugger
+                  return (_event._id.toString() === event.id)
+                })
 
-                expect(participantEvent.user.toString()).to.be.equal(diegoUser.id)
+                expect(eventOnArrayEvents.toString()).to.be.equal(event.id)
 
               })
           })

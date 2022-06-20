@@ -15,7 +15,6 @@ function addEventToUser(eventId, userId) {
     .then(user => {
       if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-      // const userComment = new Comment({ user: userId, text: text})
       user.events.push(eventId)
 
       return user.save()
@@ -23,9 +22,4 @@ function addEventToUser(eventId, userId) {
     .then(() => { })
 }
 
-/*
-    return note.save()
-                .then(() => comment.id)
-        })
- */
-module.exports = addEventToOwner
+module.exports = addEventToUser
