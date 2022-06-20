@@ -8,6 +8,8 @@ const {
     handleRetrieveUser,
     handleUpdateUser,
     handleDeleteUser,
+    handleAddMovement,
+    handleRetrieveMovements
 } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
@@ -37,8 +39,8 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.delete('/users', jsonBodyParser, handleDeleteUser )
 
-        //routes.post('/notes', jsonBodyParser, handleCreateNote)
-        //routes.get('/notes', handleRetrieveNotes)
+        routes.post('/movements', jsonBodyParser, handleAddMovement)
+        routes.get('/movements', handleRetrieveMovements)
         //routes.patch('/notes/:noteId', jsonBodyParser, handleUpdateNote)
         //routes.delete('/notes/:noteId', jsonBodyParser, handleDeleteNote)
 

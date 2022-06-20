@@ -1,7 +1,6 @@
 const { User, Movement } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateString, validateStringNotEmptyNoSpaces, validateNumber } = require('../validators')
-const { movement, user } = require('../models/schemas')
 
 function addMovement(userId, type, category, concept, amount, accountId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
@@ -15,7 +14,7 @@ function addMovement(userId, type, category, concept, amount, accountId) {
         .then(user => {
             if(!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
-            return Movement.addListener({ user: userId, type, category, concept, amount, accountId })
+            return Movement.create({ user: userId, type, category, concept, amount, accountId })
         })
         .then(movement => movement.id)
 }

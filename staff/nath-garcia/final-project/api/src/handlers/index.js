@@ -3,5 +3,7 @@ module.exports = {
     handleAuthenticateUser: require('./handleAuthenticateUser'),
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
-    handleDeleteUser: require('./handleDeleteUser')
+    handleDeleteUser: require('./handleDeleteUser'),
+    handleAddMovement: require('./handleAddMovement'),
+    handleRetrieveMovements: require('./handleRetrieveMovements')
 }
