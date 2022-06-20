@@ -22,9 +22,9 @@ describe('retrieveOwnerEvent', () => {
             let event1, event2, event3, allEvents
 
             beforeEach(() => {
-                event1 = new Event({ owner: owner.id, title: 'event 1', description: 'test event 1', category: 'sport-activities' })
-                event2 = new Event({ owner: owner.id, title: 'event 2', description: 'test event 2', category: 'social-activities' })
-                event3 = new Event({ owner: owner.id, title: 'event 3', description: 'test event 3', category: 'environment' })
+                event1 = new Event({ ownerEvent: owner.id, title: 'event 1', description: 'test event 1', category: 'sport-activities' })
+                event2 = new Event({ ownerEvent: owner.id, title: 'event 2', description: 'test event 2', category: 'social-activities' })
+                event3 = new Event({ ownerEvent: owner.id, title: 'event 3', description: 'test event 3', category: 'environment' })
 
                 return Promise.all([event1.save(), event2.save(), event3.save()])
                     .then(events => allEvents = events)
@@ -54,7 +54,7 @@ describe('retrieveOwnerEvent', () => {
                     .then(events => {
                         expect(events).to.be.instanceOf(Array)
 
-                        expect(events).to.have.lengthOf(3)
+                        expect(events).to.have.lengthOf(0)
                     })
             )
         })

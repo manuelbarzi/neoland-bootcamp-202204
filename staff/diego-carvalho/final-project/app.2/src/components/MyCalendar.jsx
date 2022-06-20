@@ -34,7 +34,6 @@ function MyCalendar({ timestamp }) {
         const _events = events.filter(event => event.id !== eventId)
 
         setEvents(_events)
-
     }
 
     logger.info('render')

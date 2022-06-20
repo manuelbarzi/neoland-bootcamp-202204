@@ -15,12 +15,10 @@ function signUpToEvent(token, eventId, callback) {
   const api = new Apium('http://localhost:8080/api')
 
   if (eventId)
-    api.post('/users/:eventId', {
+    api.post(`/users/${eventId}`, {
       headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ eventId })
+        Authorization: `Bearer ${token}`
+      }
     }, (error, response) => {
       if (error) return callback(error)
 

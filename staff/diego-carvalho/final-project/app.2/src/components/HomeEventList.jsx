@@ -5,44 +5,44 @@ import retrieveEvent from '../logic/retrieveEvent'
 import EventHome from './EventHome'
 import './HomeEventList.sass'
 
-function HomeEventList({ timestamp }) {
+function HomeEventList() {
     const logger = new Logger('EventList')
 
     logger.info('call')
 
     const [events, setEvents] = useState(null)
     const { handleFeedback } = useContext(Context)
+    const [reload, setReload] = useState(1)
 
     useEffect(() => {
         logger.info('componentDidMount | componentWillReceiveProps')
 
         loadEvents()
-    }, [timestamp])
+    }, [reload])
 
     const loadEvents = () =>
-        retrieveEvent(sessionStorage.token, (error, events) => {
+        retrieveEvent(sessionStorage.token, (error, _events) => {
             if (error) {
                 handleFeedback({ level: 'error', message: error.message })
 
                 return
             }
 
-            setEvents(events)
+            setEvents(_events)
         })
 
-    // const handleRemoveEvent = eventId => {
-    //     const _events = events.filter(event => event.id !== eventId)
+    const handleSignUpToEventClick = () => {
 
-    //     setEvents(_events)
-    //     handleFeedback({ level: 'success', message: 'event has been removed' })
-    // }
+        setReload(reload + 1)
+
+    }
 
     logger.info('render')
 
     return events && events.length ?
         <ul className="EventList__list Container">
             {events.map(event => <li key={event.id}>
-                <EventHome eventId={event.id} title={event.title} description={event.description} name={event.ownerEvent.name} />
+                <EventHome event={event} onSignUp={handleSignUpToEventClick} />
             </li>)}
         </ul>
         :

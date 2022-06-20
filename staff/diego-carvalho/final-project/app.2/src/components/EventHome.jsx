@@ -1,66 +1,44 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import signUpToEvent from '../logic/signUpToEvent'
-import saveEvent from '../logic/saveEvent'
 import './EventHome.sass'
-import { useNavigate } from 'react-router-dom'
 
 function EventHome(props) {
-    const logger = new Logger('Event')
-    logger.info('call')
+  const logger = new Logger('Event')
+  logger.info('call')
 
-    const [events, setEvents] = useState(null)
-    const { handleFeedback } = useContext(Context)
-    const navigate = useNavigate()
-    const { eventId } = props
+  const { handleFeedback } = useContext(Context)
+  const { event } = props
 
-    const handleSignUpToEventClick = () => {
-        if (eventId)
-            signUpToEvent(sessionStorage.token, eventId, error => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+  const handleSignUpToEventClick = () => {
+    if (event.id)
 
-                    return
-                }
+      signUpToEvent(sessionStorage.token, event.id, error => {
+        if (error) {
+          handleFeedback({ level: 'error', message: error.message })
 
-                setUsers(events)
-            })
-    }
+          return
+        }
+        handleFeedback({ level: 'success', message: 'Apuntado' })
+        props.onSignUp()
 
-    const handleSaveSubmit = event => {
-        event.preventDefault()
+      })
+  }
 
-        const { eventId } = props
-        const { target: { title: { value: title } } } = event
-        const { target: { text: { value: description } } } = event
+  logger.info('render')
 
-        saveEvent(sessionStorage.token, eventId, title, description, error => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
+  return <div>
+    <div className="EventHome__form">
 
-                return
-            }
-            navigate('/')
+      <h1 className='EventHome__name'>Name: {event.name}</h1>
+      <h1 className='EventHome__title'>Title: {event.title}</h1>
+      <p className='EventHome__description'>Description: {event.description}</p>
+      <h1 className='EventHome__title'>Participants: {event.participants.length}</h1>
 
-            handleFeedback({ level: 'success', message: 'event saved' })
-        })
-    }
-
-    logger.info('render')
-
-    return <div>
-        <form className="EventHome__form" onSubmit={handleSaveSubmit}>
-
-            <h1 className='EventHome__name'>Name: {props.name}</h1>
-            <h1 className='EventHome__title'>Title: {props.title}</h1>
-            <p className='EventHome__description'>Description: {props.description}</p>
-
-            <button className="Button--light" onClick={handleSignUpToEventClick}>Apuntarme</button>
-
-
-        </form>
+      <button className="Button--light" onClick={handleSignUpToEventClick}>Apuntarme</button>
     </div>
+  </div>
 }
 
 export default EventHome

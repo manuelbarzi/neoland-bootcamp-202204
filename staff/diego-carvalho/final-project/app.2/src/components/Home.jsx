@@ -19,7 +19,6 @@ function Home({ onUserLogout }) {
     logger.info('call')
 
     const [name, setName] = useState(null)
-    const [timestamp] = useState(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
 
@@ -95,7 +94,7 @@ function Home({ onUserLogout }) {
 
             <main className="Home__body">
                 <Routes>
-                    <Route index element={<HomeEventList timestamp={timestamp} />} />
+                    <Route index element={<HomeEventList />} />
                     <Route path="/eventCreator" element={<EventCreator />} />
                     <Route path="/myCalendar" element={<MyCalendar />} />
                     <Route path="/profile" element={<Profile />} />
