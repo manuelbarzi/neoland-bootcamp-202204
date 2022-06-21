@@ -13,7 +13,9 @@ const {
     handleUpdateMovement,
     handleDeleteMovement,
     handleCreateAccount,
-    handleRetrieveAccounts
+    handleRetrieveAccounts,
+    handleUpdateAccount,
+    handleDeleteAccount
 } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
@@ -50,6 +52,8 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         routes.post('/accounts', jsonBodyParser, handleCreateAccount)
         routes.get('/accounts', handleRetrieveAccounts)
+        routes.patch('/accounts/:accountId', jsonBodyParser, handleUpdateAccount)
+        routes.delete('/accounts/:accountId', jsonBodyParser, handleDeleteAccount)
 
         api.use('/api', routes)
 

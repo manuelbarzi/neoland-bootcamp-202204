@@ -9,5 +9,7 @@ module.exports = {
     handleUpdateMovement: require('./handleUpdatemovement'),
     handleDeleteMovement: require('./handleDeleteMovement'),
     handleCreateAccount: require('./handleCreateAccount'),
-    handleRetrieveAccounts: require('./handleRetrieveAccounts')
+    handleRetrieveAccounts: require('./handleRetrieveAccounts'),
+    handleUpdateAccount: require('./handleUpdateAccount'),
+    handleDeleteAccount: require('./handleDeleteAccount')
 }

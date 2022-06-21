@@ -52,9 +52,7 @@ describe('updateMovement', () => {
                         expect(_movement1.concept).to.equal('full salary for january')
                         expect(_movement1.amount).to.equal(2100)
                     })
-
             })
-            
 
         })
 
@@ -74,7 +72,7 @@ describe('updateMovement', () => {
         })
     })
 
-   describe('when user does not exist', () => {
+    describe('when user does not exist', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
             const unexistingMovementId = new ObjectId().toString()

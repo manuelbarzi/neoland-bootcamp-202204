@@ -5,7 +5,6 @@ const { User, Account } = require('../models')
 const { NotFoundError } = require('../errors')
 const retrieveAccounts = require('./retrieveAccounts')
 const { expect } = require('chai')
-const { account } = require('../models/schemas')
 
 describe('retrieveAccounts', () => {
     before(() => connect(process.env.TEST_MONGODB_URL))

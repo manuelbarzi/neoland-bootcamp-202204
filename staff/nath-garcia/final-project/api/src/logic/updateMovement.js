@@ -10,7 +10,7 @@ function updateMovement(userId, movementId, type, category, concept, amount, acc
     if (concept != null) validateString(concept)
     validateNumber(amount)
     if (accountId != null) validateStringNotEmptyNoSpaces(accountId, 'account id')
-debugger
+
     return User.findById(userId)
         .then(user => {
             if (!user)
@@ -19,7 +19,7 @@ debugger
             return Movement.findById(movementId)
         })
         .then(movement => {
-            debugger
+            
             if (!movement)
                 throw new NotFoundError(`movement with id ${movementId} does not exist`)
 

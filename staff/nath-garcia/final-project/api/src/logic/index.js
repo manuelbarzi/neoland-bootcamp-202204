@@ -9,6 +9,8 @@ const updateMovement = require('./updateMovement')
 const deleteMovement = require('./deleteMovement')
 const createAccount = require('./createAccount')
 const retrieveAccounts = require('./retrieveAccounts')
+const updateAccount = require('./updateAccount')
+const deleteAccount = require('./deleteAccount')
 
 module.exports = {
     registerUser,
@@ -21,5 +23,7 @@ module.exports = {
     updateMovement,
     deleteMovement,
     createAccount,
-    retrieveAccounts
+    retrieveAccounts,
+    updateAccount,
+    deleteAccount
 }
