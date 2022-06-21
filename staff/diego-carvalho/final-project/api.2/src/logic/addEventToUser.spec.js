@@ -120,7 +120,6 @@ describe('addEventToUser', () => {
     afterEach(() => User.deleteMany())
 
     after(() => disconnect())
-
   })
 })
 

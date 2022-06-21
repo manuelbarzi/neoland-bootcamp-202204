@@ -7,46 +7,45 @@ import './HomeEventList.sass'
 
 function HomeEventList(timestamp) {
 
-    const logger = new Logger('EventList')
+  const logger = new Logger('EventList')
 
-    logger.info('call')
+  logger.info('call')
 
-    const [events, setEvents] = useState(null)
-    const { handleFeedback } = useContext(Context)
-    const [reload, setReload] = useState(null)
+  const [events, setEvents] = useState(null)
+  const { handleFeedback } = useContext(Context)
+  const [reload, setReload] = useState(null)
 
-    useEffect(() => {
-        logger.info('componentDidMount | componentWillReceiveProps')
+  useEffect(() => {
+    logger.info('componentDidMount | componentWillReceiveProps')
 
-        loadEvents()
-    }, [reload])
+    loadEvents()
+  }, [reload])
 
-    const loadEvents = () =>
-        retrieveEvent(sessionStorage.token, (error, _events) => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
+  const loadEvents = () =>
+    retrieveEvent(sessionStorage.token, (error, _events) => {
+      if (error) {
+        handleFeedback({ level: 'error', message: error.message })
 
-                return
-            }
+        return
+      }
+      setEvents(_events)
+    })
 
-            setEvents(_events)
-        })
+  const handleSignUpToEventClick = () => {
+    console.log(timestamp)
+    setReload(reload + [timestamp])
+  }
 
-    const handleSignUpToEventClick = () => {
-        console.log(timestamp)
-        setReload(reload + [timestamp])
-    }
+  logger.info('render')
 
-    logger.info('render')
-
-    return events && events.length ?
-        <ul className="EventList__list Container">
-            {events.map(event => <li key={event.id}>
-                <EventHome event={event} onSignUp={handleSignUpToEventClick} />
-            </li>)}
-        </ul>
-        :
-        <p>no event yet</p>
+  return events && events.length ?
+    <ul className="EventList__list Container">
+      {events.map(event => <li key={event.id}>
+        <EventHome event={event} onSignUp={handleSignUpToEventClick} />
+      </li>)}
+    </ul>
+    :
+    <p>no event yet</p>
 }
 
 export default HomeEventList
