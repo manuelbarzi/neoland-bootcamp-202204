@@ -1,5 +1,5 @@
 const { expect } = require('chai')
-const { connect, disconnect, Types:{ObjectId}} = require('mongoose')
+const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { AuthError } = require('../errors')
 const { User } = require('../models')
 const deleteUser = require('./deleteUser')
@@ -45,7 +45,7 @@ describe('deleteUser', () => {
                     throw new Error('it should not reach this point')
                 })
                 .catch(error => {
-                    debugger
+
                     expect(error).to.be.instanceOf(AuthError)
                     expect(error.message).to.equal('incorrect Id')
                 })

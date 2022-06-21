@@ -32,7 +32,7 @@ function HomeEventList() {
         })
 
     const handleSignUpToEventClick = () => {
-        // setReload(reload + [timestamp])
+        setReload(reload)//mirar como actualizar el reload
     }
 
     logger.info('render')

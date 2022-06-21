@@ -1,5 +1,4 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
-const event = require('./event')
 
 const user = new Schema({
     name: {

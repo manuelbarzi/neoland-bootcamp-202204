@@ -1,5 +1,5 @@
 const { connect, disconnect } = require('mongoose')
-    
+
 const { User } = require('../models')
 const { AuthError } = require('../errors')
 const authenticateUser = require('./authenticateUser')
@@ -18,7 +18,7 @@ describe('authenticateUser', () => {
 
             return user.save()
         })
-    debugger
+
         it('succeeds on correct credentials', () =>
             authenticateUser('diegocarve@gmail.com', '1234')
                 .then(userId => {
@@ -38,7 +38,7 @@ describe('authenticateUser', () => {
                     expect(error.message).to.equal('wrong credentials')
                 })
         })
-      
+
         it('fails on incorrect email', () => {
             authenticateUser('diegocarve@gmail.com', '1234')
                 .then(() => {
@@ -64,7 +64,7 @@ describe('authenticateUser', () => {
     })
 
     afterEach(() => User.deleteMany())
-    
+
     after(() => disconnect())
 
 })

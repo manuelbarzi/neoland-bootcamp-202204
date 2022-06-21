@@ -10,7 +10,7 @@ describe('updateEvent', () => {
     before(() => connect('mongodb://127.0.0.1:27017/events-db-test'))
 
     beforeEach(() => User.deleteMany())
-debugger
+
     describe('when user exists', () => {
         let userId
 
@@ -24,11 +24,11 @@ debugger
         it('succeeds events and correct credentials', () => {
             let eventId
 
-            return Event.create({ owner: userId, photo:'', title: 'After Work Mar Bella', description:'Únete a nosotros si quieres disfrutar...', direction:''})
+            return Event.create({ owner: userId, photo: '', title: 'After Work Mar Bella', description: 'Únete a nosotros si quieres disfrutar...', direction: '' })
                 .then((result) => {
                     eventId = result.id
-             
-                    return updateEvent(userId, eventId,'', 'After Work Mar Bella', 'Únete a nosotros si quieres disfrutar...', '')
+
+                    return updateEvent(userId, eventId, '', 'After Work Mar Bella', 'Únete a nosotros si quieres disfrutar...', '')
                 })
                 .then((result) => {
                     expect(result).to.be.undefined
@@ -44,10 +44,10 @@ debugger
                 })
         })
 
-        it ('fails with no events', () => {
+        it('fails with no events', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateEvent(userId, wrongId, '','After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', '')
+            return updateEvent(userId, wrongId, '', 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', '')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -57,11 +57,11 @@ debugger
                 })
         })
 
-        it ('fails when owner does not exist', () => {
+        it('fails when owner does not exist', () => {
             const wrongId = new ObjectId().toString()
             const eventId = new ObjectId().toString()
 
-            return updateEvent(wrongId, eventId, '','After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', '')
+            return updateEvent(wrongId, eventId, '', 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', '')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

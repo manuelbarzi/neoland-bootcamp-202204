@@ -1,6 +1,6 @@
 // const { connect, disconnect } = require('mongoose')
 // const { User, Event, Category, Participant } = require('./models')
-// debugger
+
 //     ; (async () => {
 //         try {
 //             await connect('mongodb://127.0.0.1:27017/notes-db')//coneccíon a la db de mongo

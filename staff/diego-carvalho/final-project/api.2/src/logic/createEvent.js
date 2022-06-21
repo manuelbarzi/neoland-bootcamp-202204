@@ -1,8 +1,7 @@
 const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateObjectId, validateString } = require('../validators')
-const { user } = require('../models/schemas')
-debugger
+
 function createEvent(userId, title, description, category) {
     validateObjectId(userId, 'userId')
     if (title != null) validateString(title, 'title')
