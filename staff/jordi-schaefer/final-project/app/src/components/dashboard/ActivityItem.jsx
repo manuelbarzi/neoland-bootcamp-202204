@@ -36,7 +36,7 @@ function ActivityItem (props) {
         props.onCommentClicked(activity.id)
     }
     
-    const { likes: { length : likes }, comments: { length : comments }, date, title, user, points } = activity
+    const { likes: { length : likes }, comments: { length : comments }, date, title, user, points, images } = activity
     const data = calculateActivityData(points)
 
     const timeOptions = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  }
@@ -77,6 +77,10 @@ function ActivityItem (props) {
         { !setDelete && points.length>0 && <div className='ActivityItem__container--map'>
             <MapView points={points}/>
         </div> }
+
+        { !setDelete && images && (images.length>0) ? <div >
+            <img className='ActivityItem__image' src={images[0]}/>
+            </div>: '' }
 
         { !setDelete && <div className='ActivityItem__footer mw'>
             <div className='ActivityItem__footer--container Button__borderR'>

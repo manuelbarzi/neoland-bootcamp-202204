@@ -34,16 +34,19 @@ const activity = new Schema({
         type: Boolean,
         default: false
     },
-    
+
     points: [point],
-    
+
     comments: [comment],
-    
+
     likes: [{
         type: ObjectId,
         ref: 'User'
     }],
-
+    images: [{
+        type: String,
+        ref: 'Image'
+    }]
 
 })
 

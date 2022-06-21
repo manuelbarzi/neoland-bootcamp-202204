@@ -1,5 +1,6 @@
 const axios = require('axios');
 const { NotFoundError } = require('errors');
+const { validatePosition } = require('validators')
 
 function retrieveAltitude(latitude, longitude) {
   validatePosition([latitude, longitude])

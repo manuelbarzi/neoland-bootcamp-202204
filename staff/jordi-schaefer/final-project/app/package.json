@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.2.0",
     "@testing-library/user-event": "^13.5.0",
     "apicaller": "file:../apicaller",
+    "compress.js": "^1.2.2",
     "errors": "file:../errors",
     "react": "^18.2.0",
     "react-dom": "^18.1.0",
