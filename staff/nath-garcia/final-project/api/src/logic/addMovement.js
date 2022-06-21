@@ -4,7 +4,7 @@ const { validateString, validateStringNotEmptyNoSpaces, validateNumber } = requi
 
 function addMovement(userId, type, category, concept, amount, accountId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
-    validateString(type)
+    validateString(type, 'type')
     validateNumber(category)
     if (concept != null) validateString(concept)
     validateNumber(amount)

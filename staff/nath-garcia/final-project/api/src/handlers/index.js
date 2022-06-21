@@ -5,5 +5,9 @@ module.exports = {
     handleUpdateUser: require('./handleUpdateUser'),
     handleDeleteUser: require('./handleDeleteUser'),
     handleAddMovement: require('./handleAddMovement'),
-    handleRetrieveMovements: require('./handleRetrieveMovements')
+    handleRetrieveMovements: require('./handleRetrieveMovements'),
+    handleUpdateMovement: require('./handleUpdatemovement'),
+    handleDeleteMovement: require('./handleDeleteMovement'),
+    handleCreateAccount: require('./handleCreateAccount'),
+    handleRetrieveAccounts: require('./handleRetrieveAccounts')
 }

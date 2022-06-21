@@ -26,6 +26,7 @@ Account.CREDITCARD = 1
 Account.DEBITCARD = 2
 Account.PAYPAL = 3
 Account.CASH = 4
+Account.OTHER = 5
 
 module.exports = {
     User,

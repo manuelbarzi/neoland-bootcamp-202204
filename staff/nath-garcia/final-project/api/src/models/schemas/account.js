@@ -10,9 +10,10 @@ const account = new Schema({
 
     type: {
         type: Number,
-        enum: [0, 1, 2, 3, 4],
+        enum: [0, 1, 2, 3, 4, 5],
         require: false
     }, 
+
     text: {
         type: String,
         require: false

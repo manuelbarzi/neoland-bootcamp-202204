@@ -10,8 +10,8 @@ function updateMovement(userId, movementId, type, category, concept, amount, acc
     if (concept != null) validateString(concept)
     validateNumber(amount)
     if (accountId != null) validateStringNotEmptyNoSpaces(accountId, 'account id')
-
-    return User.findById(userId, movementId, type, category, concept, amount, accountId)
+debugger
+    return User.findById(userId)
         .then(user => {
             if (!user)
                 throw new NotFoundError(`user with id ${userId} does not exist`)
@@ -19,11 +19,12 @@ function updateMovement(userId, movementId, type, category, concept, amount, acc
             return Movement.findById(movementId)
         })
         .then(movement => {
+            debugger
             if (!movement)
-                throw new NotFoundError(`note with id ${noteId} does not exist`)
+                throw new NotFoundError(`movement with id ${movementId} does not exist`)
 
             if (movement.user.toString() !== userId)
-                throw new AuthError(`note with id ${noteId} does not belong to user with id ${userId}`)
+                throw new AuthError(`movement with id ${movementId} does not belong to user with id ${userId}`)
 
             movement.type = type
             movement.category = category
