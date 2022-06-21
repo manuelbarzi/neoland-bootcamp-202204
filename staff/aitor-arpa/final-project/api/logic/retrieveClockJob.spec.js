@@ -1,12 +1,10 @@
 const { User, Clock, Job } = require('../models')
-const retrieveJobWorker = require('./retrieveJobWorker')
+const retrieveClockJob = require('./retrieveClockJob')
 const { connect, disconnect } = require('mongoose')
 const { expect } = require('chai')
-const {  NotFoundError } = require('errors')
-const { user } = require('../models/schemas')
 
 
-describe('retrieveJobWorker', () => {
+describe('retrieveClockJob', () => {
 
     before(() => connect('mongodb://localhost:27017/test')) // conexion a la base de datos 
     
@@ -26,7 +24,7 @@ describe('retrieveJobWorker', () => {
 
     it('sucees on user exist', () => {
        
-        return retrieveJobWorker(newuser.id, newjob.id)        
+        return retrieveClockJob(newuser.id, newjob.id)        
             .then(find => {
                 expect(find.length).to.be.equal(1)
                 expect(find).to.instanceOf(Array)
@@ -35,5 +33,7 @@ describe('retrieveJobWorker', () => {
             })
 
     })
+    after(() => disconnect())
 })
+
     

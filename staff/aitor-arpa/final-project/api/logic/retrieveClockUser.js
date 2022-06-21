@@ -1,22 +1,19 @@
-const { NotFoundError } = require('errors')
-const { Clock, User } = require('../models')
+const { NotFoundError } = require("errors");
+const { Clock, User } = require("../models");
+const { validateId } = require("validator");
 
 function retrieveClockUser(userid) {
-    return User.findById(userid)
-        .then(user => {
-            if (!user)
-                throw new NotFoundError('User Not Found')
-            return Clock.find({ _user: userid })
-        })
-        .then(clock => {
-            if (clock.length === 0)
-                throw new NotFoundError('Clock Not Found')
-            return clock
-        })
-        .catch(error => {
-            return error
-        })
+  validateId(userid);
+  return User.findById(userid)
+    .then((user) => {
+      if (!user) throw new NotFoundError(`${userid} Not Found`);
+      return Clock.find({ user: userid, job: null });
+    })
+    .then((clock) => {
+      if (!clock) throw new NotFoundError("search failed");
 
+      return clock;
+    });
 }
 
-module.exports = retrieveClockUser
+module.exports = retrieveClockUser;

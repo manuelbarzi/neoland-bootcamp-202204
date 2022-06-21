@@ -1,25 +1,32 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
-const user = require('./User')
+const { obj } = require('./User')
+
 
 const Job = new Schema({
-  
+    title: {
+        type: String,
 
-title: {
-    type: String,
+    },
     
-},
-description: {
-    type: String
-},
-address: {
-    type: String
-},
-duration: {
-    type: Number,
+    description: {
+        type: String
+    },
+
+    address: {
+        type: String
+    },
+
+    duration: {
+        type: Number,
+
+    },
+
+    workers: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
+
     
-},
-    
-workers: [ObjectId]
 })
 
 module.exports = Job

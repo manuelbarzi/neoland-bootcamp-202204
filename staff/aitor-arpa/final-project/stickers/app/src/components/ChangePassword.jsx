@@ -3,7 +3,7 @@ import updateUserPassword from "../logic/updateUserPassword"
 import Context from "./Context"
 
 
-// TODO implementar logica y combertir a Funcion 
+
 function ChangePassword(props) {
   const { handleFeedback } = useContext(Context)
 

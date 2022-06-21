@@ -9,7 +9,9 @@ module.exports = (error, res) => {
     else if (error instanceof NotFoundError)
         status = 404
     else if (error instanceof ConflictError)
+    
         status = 409
+        
 
     res.status(status).json({ error: error.message })
 }

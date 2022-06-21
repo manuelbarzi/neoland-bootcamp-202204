@@ -1,26 +1,22 @@
 const { ConflictError } = require('errors')
-const { validateObjectId } = require('validator')
+const { validateId } = require('validator')
 const { User, Clock } = require('../models')
 
 function clockUserIn(userId) {
-    
-    validateObjectId(userId)
+    validateId(userId)
 
-    return Promise.all([User.findById(userId), Clock.findOne({ user: userId, job: null })])
-        .then(([user, job]) => {
+    return Promise.all([User.findById(userId), Clock.findOne({ user: userId, job: null, timein: { $ne: null }, timeout: null })])
+        .then(([user, clock]) => {
             if (!user)
-                throw new ConflictError(`${userId} not found`) 
-            if (!job)
-                throw new ConflictError(`${userid} clock no found`)
-            if (job.job !== null)
-                throw new ConflictError(`${userId} you can't register a job`)
-            return Clock.create({ user: userId })
+                throw new ConflictError(`${userId} not found`)
+
+            if (clock)
+                throw new ConflictError(`clock in already exists`)
+
+            return Clock.create({ user: userId, job: null, timeout: null  })
         })
         .then(clock => {
             return clock._id
-        })
-        .catch(error => {
-            return error
         })
 }
 module.exports = clockUserIn

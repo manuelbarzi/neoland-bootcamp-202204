@@ -1,16 +1,19 @@
-const { updateUser } = require('../logic')
-const { verifyToken, handleErrorsAndRespond } = require('./helpers')
+const { UpdateUser } = require("../logic");
+const updateUser = require("../logic/updateUser");
+const { verifyToken, handleErrorsAndRespond } = require("./helpers");
 
 module.exports = (req, res) => {
-    try {
-        const userId = verifyToken(req)
+  try {
+    const { userId } = verifyToken(req);
 
-        const { body: {name, username, password, role, nid, email,date} } = req
+    const {
+      body: { name, username, password, nid, email, role },
+    } = req;
 
-        updateUser(userId, name, username, password,role, email, nid, direccion,date)
-            .then(() => res.status(204).send())  
-            .catch(error => handleErrorsAndRespond(error, res))
-    } catch (error) {
-        handleErrorsAndRespond(error, res)
-    }
-}
+    updateUser(userId, name, username, password, nid, email, role)
+      .then(() => res.status(200).send()) // devuelvo estatus ok y el token
+      .catch((error) => handleErrorsAndRespond(error, res));
+  } catch (error) {
+    handleErrorsAndRespond(error, res);
+  }
+};

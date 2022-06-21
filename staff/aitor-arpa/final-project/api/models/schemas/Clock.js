@@ -1,6 +1,5 @@
 const { ObjectId } = require('bson')
 const { Schema } = require('mongoose')
-const{ job } =require('./Job')
 
 const clock = new Schema({
    

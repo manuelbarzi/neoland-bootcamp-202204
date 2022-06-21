@@ -91,9 +91,10 @@ function validateEmail(email, explain = 'email') {
     if (!EMAIL_REGEX.test(email))
         throw new FormatError(`${explain} is not an email`)
 }
-function validateObjectId(object, explain = 'object') {
-    if(!object instanceof Object) 
-    throw new TypeError(`${explain} is not an Object`)
+function validateId(id, explain = 'id') {
+    validateString(id, explain)
+    
+    if (id.length !== 24) throw new FormatError('id length is not 24 characters')
 }
 
 module.exports = {
@@ -109,5 +110,5 @@ module.exports = {
     validateNumber,
     validatePositiveInteger,
     validateEmail,
-    validateObjectId    
+    validateId    
 }

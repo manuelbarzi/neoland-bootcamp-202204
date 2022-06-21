@@ -1,24 +1,27 @@
 const { Job, User } = require("../models");
+const { validateId } = require('validator')
+const { AuthError, NotFoundError } = require("errors");
 
-const { AuthError } = require("errors");
+function deleteJob(adminId, jobId) {
+  validateId(adminId)
+  validateId(jobId)
 
-function deleteJob(adminId, id) {
-  debugger
-  return User.findOne({ _id: adminId })
-    .then(userfind => {
-      if (userfind.role === 'worker')
+  return User.findById(adminId)
+    .then(user => {
+      if (!user)
+        throw new NotFoundError(`User with ${adminId} not found`)
+
+      if (user.role === 'worker')
         throw new AuthError(`${adminId} conctat for you Manager`)
-      return Job.deleteOne({ id: id })
+      return Job.deleteOne({ id: jobId })
     })
-    .then(res => {
-      if (!res)
-        throw new AuthError('User no found')
-      return res
-    })
-    .catch(error => {
-      return error
+    .then(job => {
+      if (!job)
+        throw new NotFoundError(`User with ${jobId} not found`)
+      return job
     })
 }
+
 
 
 module.exports = deleteJob

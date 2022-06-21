@@ -41,7 +41,7 @@ function validatename(name, explain = 'name'){
         
         const namefind = name.indexOf("/^([0-9])*$/")
         
-        if (namefind.length >= 1 ) // TODO si es undefine o null cuenta como largo ¿?
+        if (namefind.length >= 1 ) 
         throw new FormatError (`${explain} the name cannot contain symbols or spaces`)
 
 }

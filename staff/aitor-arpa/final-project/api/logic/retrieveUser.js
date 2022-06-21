@@ -1,20 +1,20 @@
-const { User } = require('../models')
-const { NotFoundError } = require('errors')
+const { User } = require("../models");
+const { NotFoundError } = require("errors");
+const { validateId } = require("validator");
 
 function retrieveUser(userId) {
-   
-    return User.findOne({_id:userId})
-        .then(user => {
-            if (!user)
-                throw new NotFoundError(`user with id ${userId} does not exist`)
+  validateId(userId);
 
-            const doc = user._doc 
-            delete doc._id
-            delete doc.__v
-            delete doc.password
+  return User.findById(userId).then((user) => {
+    if (!user) throw new NotFoundError(`user with id ${userId} does not exist`);
 
-            return doc
-        })
+    const doc = user._doc;
+    delete doc._id;
+    delete doc.__v;
+    delete doc.password;
+
+    return doc;
+  });
 }
 
-module.exports = retrieveUser
+module.exports = retrieveUser;

@@ -1,4 +1,6 @@
+const { AuthError } = require('errors')
 const { verify } = require('jsonwebtoken')
+
 
 
 /**
@@ -10,15 +12,15 @@ const { verify } = require('jsonwebtoken')
 */
 function verifyToken(req) {
     const { headers: { authorization } } = req
-    if (!authorization)
 
+    if (!authorization)
         throw new AuthError('no authorization header received (with token)')
 
     const [, token] = authorization.split(' ')
 
-    const { sub: userId , role: role } = verify(token, process.env.JWT_SECRET)
+    const { sub: userId } = verify(token, process.env.JWT_SECRET)
 
-    return {userId, role }
+    return { userId }
 }
 
 module.exports = verifyToken

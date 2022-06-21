@@ -1,14 +1,11 @@
 const { expect } = require('chai')
 const { connect, disconnect } = require('mongoose')
 const { User, Job, Clock, } = require('../models')
-const  clockUserOutJob = require('./clockUserOutJob')
+const  clockUserJobOut = require('./clockUserJobOut')
 const { AuthError, NotFoundError } = require('errors')
 
 
-
-
-
-describe('clockUserOutJob', () => {
+describe('clockUserJobOut', () => {
 
     before(() => connect('mongodb://localhost:27017/test')) // conexion a la base de datos 
     let userId
@@ -34,7 +31,7 @@ describe('clockUserOutJob', () => {
 
     it('sucess on Worker exist', () => {
         
-        return clockUserOutJob(userId, jobId, clockid.id)
+        return clockUserJobOut(userId, jobId, clockid.id)
             .then(result => {
                 expect(result.modifiedCount).to.be.equal(1)
                 expect(result.matchedCount).to.be.equal(1)
@@ -51,7 +48,7 @@ describe('clockUserOutJob', () => {
 
     it('error on Worker not  exist', () => {
         
-        return clockUserOutJob(jobId, jobId, clockid.id)
+        return clockUserJobOut(jobId, jobId, clockid.id)
             .then(result => {
 
                 expect(result.message).to.be.equals(`user with id ${jobId} does not exist`)
