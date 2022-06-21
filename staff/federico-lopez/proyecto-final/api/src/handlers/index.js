@@ -36,5 +36,6 @@ module.exports = {
 
     /* SPOTIFY */
     handleRequestSpotifyAccesToken: require('./handleRequestSpotifyAccesToken'),
+    handleCheckSpotifySession: require('./handleCheckSpotifySession')
 }
 

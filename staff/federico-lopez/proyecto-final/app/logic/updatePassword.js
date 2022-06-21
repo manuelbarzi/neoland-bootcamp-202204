@@ -1,8 +1,10 @@
-import { ConflictError } from 'errors'
-import { validateJWT, validatePassword } from '../validators'
+import { AuthError, ConflictError } from 'errors'
+import { validateJWT, validatePassword } from 'validators'
 import Apium from '../vendor/Apium'
+import { context } from '.'
 
-export function updatePassword(token, oldPassword, password, repeatPassword) {
+export async function updatePassword(token, oldPassword, password, repeatPassword) {
+    debugger
     validateJWT(token)
     validatePassword(oldPassword, 'previous password')
     validatePassword(password, 'new password')
@@ -11,9 +13,9 @@ export function updatePassword(token, oldPassword, password, repeatPassword) {
     if (password !== repeatPassword) throw new ConflictError('new password and new password repeat do not match')
     if (oldPassword === password) throw new ConflictError('previous and new password are the same')
 
-    const api = new Apium('http://b00tc4mp.herokuapp.com/api/v2')
+    const api = new Apium(context.API_URL)
 
-    const { status, payload } = api.patch(
+    const { status, payload } = await api.patch(
         'users/auth',
         {
             headers: {
@@ -23,8 +25,10 @@ export function updatePassword(token, oldPassword, password, repeatPassword) {
             body: JSON.stringify({ oldPassword, password })
         })
 
-    if (status === 200) return
+    if (status === 204) return
 
+    else if (status === 401) throw new AuthError('wrong credentials')
+    
     else if (status >= 400 && status < 500) {
         const data = JSON.parse(payload)
 

@@ -26,6 +26,9 @@ const user = new Schema({
     },
     dateOfBirth: {
         type: Date
+    },
+    spotifySession: {
+        type: Object
     }
 })
 

@@ -1,28 +1,21 @@
-// import { useContext, useEffect } from 'react'
-import { updateUserPassword } from '../logic'
-// import { isValidJWT } from 'validators'
-// import Context from './Context'
+import { updatePassword } from '../logic'
+import { verifyTokenWithAPICall } from '../helpers'
 
-export default function ChangePassword(props) {
-    // const { handleFeedback } = useContext(Context)
-
-    // const navigate = useNavigate()
-
-    // useEffect(() => {
-    //     if (isValidJWT(sessionStorage.token)) navigate('./')
-    // }, [])
+export default function ChangePassword({ token }) {
 
     const onFormSubmit = async event => {
+        debugger
         event.preventDefault()
 
-        const previousPassword = event.target.previousPassword.value
+        const oldPassword = event.target.oldPassword.value
         const password = event.target.password.value
         const repeatPassword = event.target.repeatPassword.value
 
         event.target.reset()
 
         try {
-            await updateUserPassword(sessionStorage.token, previousPassword, password, repeatPassword)
+            debugger
+            await updatePassword(token, oldPassword, password, repeatPassword)
 
             console.log('successfully updated')
 
@@ -35,18 +28,13 @@ export default function ChangePassword(props) {
         }
     }
 
-    const onRegisterNavigationClick = event => {
-        event.preventDefault()
-
-        // props.onRegisterNavigation()
-    }
-
-    return /*isValidJWT(sessionStorage.token) ? <></> : */ <div>
+    return (
+    <div>
         <form onSubmit={onFormSubmit}>
             <h1>Change Password</h1>
             <fieldset>
-                <label htmlFor="previousPassword">Previous Password</label>
-                <input type="password" name="previousPassword" id="previousPassword" placeholder="*******" required />
+                <label htmlFor="oldPassword">Previous Password</label>
+                <input type="password" name="oldPassword" id="oldPassword" placeholder="*******" required />
             </fieldset>
             <fieldset>
                 <label htmlFor="password">Password</label>
@@ -59,4 +47,13 @@ export default function ChangePassword(props) {
             <button type="submit">SAVE</button>
         </form>
     </div>
+    )
+}
+
+export async function getServerSideProps({ req, res }) {
+    const token = await verifyTokenWithAPICall(req, res)
+
+    return {
+        props: { token }
+    }
 }

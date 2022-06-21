@@ -2,10 +2,8 @@ import { validateJWT } from 'validators'
 import { context } from '.'
 import Apium from '../vendor/Apium'
 
-export async function getTopArtists(token, access_token) {
-    debugger
+export async function getTopArtists(token) {
     validateJWT(token)
-    // TODO VALIDATE ACCESS_TOKEN
 
     const api = new Apium(context.API_URL)
 
@@ -16,7 +14,6 @@ export async function getTopArtists(token, access_token) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ access_token })
         })
 
     const data = JSON.parse(payload)

@@ -2,6 +2,8 @@ module.exports = {
     /* USERS */
     registerUser: require('./registerUser'),
     authenticateUser: require('./authenticateUser'),
+    userExists: require('./userExists'),
+    updatePassword: require('./updatePassword'),
     retrieveUser: require('./retrieveUser'),
     updateUser: require('./updateUser'),
     unregisterUser: require('./unregisterUser'),
@@ -30,5 +32,6 @@ module.exports = {
     addOrUpdateRankToInterpretation: require('./addOrUpdateRankToInterpretation.js'),
 
     /* SPOTIFY */
+    checkSpotifySession: require('./checkSpotifySession'),
     requestSpotifyAccessToken: require('./requestSpotifyAccessToken')
 }

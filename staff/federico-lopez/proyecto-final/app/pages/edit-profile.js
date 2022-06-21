@@ -47,7 +47,6 @@ export default function editProfile({ token, user }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    debugger
     const token = await verifyTokenWithAPICall(req, res)
 
     const user = await retrieveUser(token)

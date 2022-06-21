@@ -1,5 +1,6 @@
 import { FlexColSection, Footer, Header } from "../components";
 import { verifyTokenWithAPICall } from "../helpers";
+import { checkSpotifySession, getTopArtists } from '../logic'
 const querystring = require('query-string');
 
 export default function Home({ token }) {
@@ -14,30 +15,62 @@ export default function Home({ token }) {
   return <>
     <Header pageProps="Explore" />
 
-    {token && <a href={`https://accounts.spotify.com/authorize?${querystring.stringify({
-      response_type: 'code',
-      client_id: client_id,
-      scope: scope,
-      redirect_uri: redirect_uri,
-      state: state
-    })}`} >Spotify Login</a>
-    }
 
-    <FlexColSection />
+
+    {/* {token &&  */}
+
+    {/* } */}
+
+    <FlexColSection>
+      <a className="p-24 text-2xl-red-800" href={`https://accounts.spotify.com/authorize?${querystring.stringify({
+        response_type: 'code',
+        client_id: client_id,
+        scope: scope,
+        redirect_uri: redirect_uri,
+        state: state
+      })}`} >Spotify Login</a>
+    </FlexColSection>
     <Footer userRegistered={!!token} />
   </>
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps(ctx) {
+  const { req, res } = ctx
   const token = await verifyTokenWithAPICall(req, res)
 
-  if(token){
+  if (token) {
+    if (ctx.query && ctx.query.code) {
+      const isSessionActive = await checkSpotifySession(token, ctx.query.code)
+
+      if (isSessionActive) {
+        const topArtists = await getTopArtists(token)
+
+        return {
+          props: {
+            token,
+            topArtists,
+            isSessionActive
+          }
+        }
+ 
+      } else {
+        return {
+          token,
+          isSessionActive
+        }
+      }
+
+    } const isSessionActive = await checkSpotifySession(token)
+
+
+
+
     return {
       props: { token }
     }
-  } else {
-    return {
-      props: {}
-    }
+  }
+  // else {
+  return {
+    props: {}
   }
 }

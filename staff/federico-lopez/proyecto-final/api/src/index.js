@@ -6,6 +6,7 @@ const {
     /* USERS */
     handleRegisterUser,
     handleAuthenticateUser,
+    handleUpdatePassword,
     handleRetrieveUser,
     handleUpdateUser,
     handleUnregisterUser,
@@ -36,7 +37,8 @@ const {
     handleAddOrUpdateRankToInterpretation,
 
     /* SPOTIFY */
-    handleRequestSpotifyAccesToken
+    handleRequestSpotifyAccesToken,
+    handleCheckSpotifySession
 } = require('./handlers')
 
 var XMLHttpRequest = require('xhr2');
@@ -70,6 +72,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.post('/users', jsonBodyParser, handleRegisterUser)
         routes.post('/users/auth', jsonBodyParser, handleAuthenticateUser)
         routes.get('/users/auth', handleValidateToken)
+        routes.patch('/users/auth', jsonBodyParser, handleUpdatePassword)
         routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
@@ -97,7 +100,9 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
 
         /* SPOTIFY */
-        routes.post('/spotify/auth', jsonBodyParser, handleRequestSpotifyAccesToken)
+        routes.post('/spotify/auth', jsonBodyParser, handleCheckSpotifySession)
+
+        // routes.post('/spotify/auth', jsonBodyParser, handleRequestSpotifyAccesToken)
 
         api.listen(port, () => console.log(`API running on port ${port}`))
 
