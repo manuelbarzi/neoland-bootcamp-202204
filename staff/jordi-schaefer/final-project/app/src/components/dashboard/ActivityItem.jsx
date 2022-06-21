@@ -1,4 +1,5 @@
-import { useContext } from 'react'
+import { useContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import Context from '../Context'
 import deleteActivity from '../../logic/deleteActivity'
 import toggleLikeActivity from '../../logic/toggleLikeActivity'
@@ -10,6 +11,15 @@ function ActivityItem (props) {
     
     const { handleFeedback } = useContext(Context)
     const { activity, setDelete, onRemove, onLikeClicked } = props
+    const [editable, setEditable] = useState(null)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        let dateNow = new Date()
+        const hours = Math.abs(dateNow - activity.date) / 36e5
+        if(props.edit && hours<12)
+            setEditable(true)
+    }, [])
 
     
     const handleDeleteClick = async() => {
@@ -35,16 +45,22 @@ function ActivityItem (props) {
     const handleCommentClick = () => {
         props.onCommentClicked(activity.id)
     }
+    const handleResumeClick = () => {
+        navigate('/activity', {state: {activityId: activity.id}})
+    }
     
     const { likes: { length : likes }, comments: { length : comments }, date, title, user, points, images } = activity
     const data = calculateActivityData(points)
-
+    
     const timeOptions = {hour:'numeric', minute:'numeric' , day:'numeric', month:'numeric', year:'numeric'  }
     
     return <div>
         <div className="ActivityItem__header">
             <div className={"Header__container--name"}> 
-                <h2 className={"Header__name"}>{(user)? user.name: 'User deleted'}</h2>
+                <div className={"Header__container-resume"}>   
+                    <h2 className={"Header__name"}>{(user)? user.name: 'User deleted'}</h2>
+                    {editable && <button className="Header__button-resume" onClick={handleResumeClick}>resume</button>}
+                </div>
                 <div className={"Header__container--date"}>
                     {activity.sport === "Ride" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >directions_bike</span>}
                     {activity.sport === "Hike" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >hiking</span>}
@@ -78,8 +94,8 @@ function ActivityItem (props) {
             <MapView points={points}/>
         </div> }
 
-        { !setDelete && images && (images.length>0) ? <div >
-            <img className='ActivityItem__image' src={images[0]}/>
+        { !setDelete && images && (images.length>0) ? <div>
+            {images.map(image=> <img className='ActivityItem__image' src={image}/>)}
             </div>: '' }
 
         { !setDelete && <div className='ActivityItem__footer mw'>

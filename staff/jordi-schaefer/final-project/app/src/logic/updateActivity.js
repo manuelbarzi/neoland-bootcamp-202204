@@ -9,10 +9,12 @@ function updateActivity(activityId, title, text='', audience, sport, dificult, i
     validateString(sport, 'sport')
     validateString(dificult, 'dificult')
     if(sport === '') sport=null
-    images.forEach(image => {
-        validateString(image, 'image')
-    })
-    
+    if(images){
+        images.forEach(image => {
+            validateString(image, 'image')
+        })
+    }
+        
     const api = new Apicaller(process.env.REACT_APP_API_URL)
 
     return (async () => {      

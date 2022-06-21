@@ -72,11 +72,14 @@ function ActivityStart(props) {
 
     const handleStartClick = async() => {
         try {
-            const token = sessionStorage.token
-            const activityId = await createActivity(token, sport)
-            await addPointToActivity(activityId, position)
-            props.onStartClicked(activityId, position)
-            navigator.geolocation.clearWatch(watchId)
+            if(position) {
+                const token = sessionStorage.token
+                const activityId = await createActivity(token, sport)
+                await addPointToActivity(activityId, position)
+                props.onStartClicked(activityId, position)
+                navigator.geolocation.clearWatch(watchId)
+            }
+            else handleFeedback({ type: 'error', message: 'Position not found' })
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         }   

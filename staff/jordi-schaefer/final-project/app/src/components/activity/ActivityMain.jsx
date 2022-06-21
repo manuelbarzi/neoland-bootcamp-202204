@@ -1,21 +1,27 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { isJwtValid } from 'validators'
 import ActivityStart from './ActivityStart'
 import ActivityRecord from './ActivityRecord'
 import ActivityFinish from './ActivityFinish'
 
-
 function ActivityMain() {
 
-    const [view, setView] = useState('start')
+    const [view, setView] = useState(null)
     const [point, setPoint] = useState([])
     const [activityId, setActivityId] = useState(null)
-    const navigate = useNavigate()
+    const navigate = useNavigate()    
+    const state = useLocation().state
     
-
     useEffect(() => {
         if (isJwtValid(sessionStorage.token)) {
+            if(state) {
+                setActivityId(state.activityId)
+                setPoint(false)
+                setView('record')
+            }
+            else
+                setView('start')
             return
         } else navigate('/') 
     }, [])

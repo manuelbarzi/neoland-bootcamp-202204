@@ -8,9 +8,11 @@ function saveActivity(activityId, title, text='', audience, sport, dificult, ima
     validateString(text, 'text')
     if(sport) validateString(sport, 'sport')
     validateString(dificult, 'dificult')
-    images.forEach(image => {
+    if(images) {
+        images.forEach(image => {
         validateString(image, 'image')
-    })
+        })
+    }
 
     return Activity.findById(activityId)
         .then(activity => {
@@ -21,9 +23,11 @@ function saveActivity(activityId, title, text='', audience, sport, dificult, ima
             activity.private = audience
             if(sport) activity.sport = sport
             activity.dificult = dificult
-            images.forEach(image => {
+            if(images) {
+                images.forEach(image => {
                 activity.images.push(image)
-            })
+                })
+            }
 
             return activity.save()
         })
