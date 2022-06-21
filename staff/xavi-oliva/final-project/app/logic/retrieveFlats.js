@@ -7,7 +7,7 @@ export async function retrieveFlats(token) {
     
     validateJwt(token)
 
-    const api = new Apium('http://localhost:8080/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     logger.info('request')
 

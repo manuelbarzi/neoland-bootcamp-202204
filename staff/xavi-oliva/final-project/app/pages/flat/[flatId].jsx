@@ -65,7 +65,7 @@ export default function Flat({token, flat}) {
 }
 
 export async function getServerSideProps({ req, res, params: { flatId }}) {
-    const api = new Apium('http://localhost:8080/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     const token = await verifyTokenWithAPICall(req, res)
     const flat = await retrieveFlat(token, flatId)

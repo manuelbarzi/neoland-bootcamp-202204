@@ -11,7 +11,7 @@ export async function registerUser(name, email, password) {
     validateEmail(email, 'email')
     validatePassword(password)
 
-    const api = new Apium('http://localhost:8081/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     logger.info('request')
 

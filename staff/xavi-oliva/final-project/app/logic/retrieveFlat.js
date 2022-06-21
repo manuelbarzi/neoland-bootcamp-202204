@@ -6,7 +6,7 @@ export async function retrieveFlat(token, flatId) {
     validateJwt(token)
     validateStringNotEmptyNoSpaces(flatId, 'flat id')
 
-    const api = new Apium('http://localhost:8080/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     const { status, payload } = await api.get(
         `flats/${flatId}`,

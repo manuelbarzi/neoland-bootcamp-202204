@@ -8,7 +8,7 @@ export async function createFlat(token, { title, description, address, images })
     validateStringNotEmptyOrBlank(description, 'description')
     validateStringNotEmptyOrBlank(address, 'address')
 
-    const api = new Apium('http://localhost:8080/api')
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
     const { status, payload } = await api.post(
         'flats',
