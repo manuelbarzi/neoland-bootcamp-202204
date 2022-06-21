@@ -13,14 +13,13 @@ function retrieveProjects(userId) {
             return Project.find({ user: userId }).lean()
         })
         .then(projects => {
-            // console.log(project)
+            
             projects.forEach(project => {
                 project.id = project._id.toString()
                 delete project._id
 
                 delete project.__v
 
-                // delete note.user
             })
 
             return projects

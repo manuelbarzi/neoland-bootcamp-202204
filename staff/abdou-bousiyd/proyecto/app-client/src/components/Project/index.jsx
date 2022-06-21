@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate,  useParams  } from "react-router-dom";
 import Split from "react-split-grid";
 import Editor from "@monaco-editor/react";
 import { emmetHTML, emmetCSS } from "emmet-monaco-es";
@@ -11,6 +11,7 @@ import Alert from "../Alert";
 import { isJwtValid } from "../../validators";
 import retrieveUser from "../../logic/retrieveUser";
 import saveProject from "../../logic/saveProject";
+import retrieveProject from "../../logic/retrieveProject";
 import Login from "../Login";
 
 import "./splitGrid.css";
@@ -20,11 +21,13 @@ import "../../app.css";
 const Project = () => {
   // const [timestamp, setTimestamp] = useState(null)
   const [alert, setAlert] = useState(null);
+//   const [project, setProject] = useState(null);
   const [name, setName] = useState(null);
   const [_, setIsEditorReady] = useState(false);
   const [active, setActive] = useState(false);
   const [activeTitle, setActiveTitle] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
+  let { projectId } = useParams();
   const [editorValues, setEditorValues] = useState({
     html: "",
     js: "",
@@ -90,7 +93,38 @@ const Project = () => {
 
   useEffect(() => {
     loadUser();
+    if (projectId) {
+        getProject()
+    }
+
   }, []);
+
+  const getProject = () => {
+    retrieveProject(sessionStorage.token, projectId, (error, _project) => {
+        console.log(_project.id, 9898989)
+        if (error) {
+          setAlert(<Alert error message={error.message} />);
+          setTimeout(() => {
+            setAlert(null);
+          }, 4000);
+          return;
+        }
+
+       setTimeout( () => {
+            const code = JSON.parse(_project.code)
+            setEditorValues(code)
+            console.log(editorValues)
+       }, 200)
+
+
+//   console.log(code, 67670000111)
+        // setProject(_project);
+        // navigate(`/previewProject/${_project.id}`)
+      });
+  }
+
+
+//   console.log(project.code, 99000)
 
   const handleOnOptionsChanged = (options) => {
     setEditorOptions(options);

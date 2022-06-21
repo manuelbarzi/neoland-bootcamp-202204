@@ -4,6 +4,7 @@ import Register from "./components/Register/index.jsx";
 import Login from "./components/Login/index.jsx";
 import Project from "./components/Project/index.jsx";
 import Dashboards from "./components/Dashboards/index.jsx";
+import PreviewProject from "./components/PreviewProject/index.jsx";
 
 function App() {
   return (
@@ -16,6 +17,8 @@ function App() {
         <Route path="/register" element={<Register />} />
 
         <Route path="/dashboards" element={<Dashboards />} />
+
+        <Route path="/previewProject/:projectId" element={<Project />} />
       </Routes>
     </div>
   );

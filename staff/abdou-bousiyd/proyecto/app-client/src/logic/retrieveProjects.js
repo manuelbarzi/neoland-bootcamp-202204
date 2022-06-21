@@ -1,11 +1,10 @@
 import Apium from '../vendor/Apium'
 
-function retrieveProject(token, projectId, callback) {
+function retrieveProjects(token, callback) {
 
     const api = new Apium('http://localhost:8080/api')
 
-    // api.get('project', {
-    api.get(`project/${projectId}`, {
+    api.get('projects', {
         headers: {
             'Authorization': `Bearer ${token}`
         }
@@ -28,4 +27,4 @@ function retrieveProject(token, projectId, callback) {
     })
 }
 
-export default retrieveProject;
+export default retrieveProjects;

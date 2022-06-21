@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import retrieveProjects from "../../logic/retrieveProjects";
 import retrieveProject from "../../logic/retrieveProject";
 import saveProject from "../../logic/saveProject";
 import { isJwtValid } from "../../validators";
 import retrieveUser from "../../logic/retrieveUser";
-import Project from "../Project";
 import Alert from "../Alert";
 
 import NavBar from "../Navbar";
@@ -13,9 +14,12 @@ import deleteProject from "../../logic/deleteProject";
 import { withToken } from "../../containers";
 
 const Dashboards = () => {
+
+  const navigate = useNavigate();
   const [name, setName] = useState(null);
   const [alert, setAlert] = useState(null);
   const [projects, setProjects] = useState(null);
+  const [project, setProject] = useState(null);
   const [dashName, setDashName] = useState(null);
   const [editDashId, setEditDashId] = useState(null);
   const [projectsDash, setProjectsDash] = useState(null);
@@ -32,7 +36,7 @@ const Dashboards = () => {
   };
 
   const getDashboards = () => {
-    retrieveProject(sessionStorage.token, (error, _projects) => {
+    retrieveProjects(sessionStorage.token, (error, _projects) => {
       if (error) {
         setAlert(<Alert error message={error.message} />);
         setTimeout(() => {
@@ -41,6 +45,7 @@ const Dashboards = () => {
         return;
       }
       setProjects(_projects);
+      // console.log(_projects, 9090)
     });
   };
 
@@ -111,6 +116,22 @@ const Dashboards = () => {
     window.location.reload();
   };
 
+  const previewProject = (projectId) => {
+    retrieveProject(sessionStorage.token, projectId, (error, _project) => {
+      console.log(_project.id, 9898989)
+      if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        return;
+      }
+
+      setProject(_project);
+      navigate(`/previewProject/${_project.id}`)
+    });
+  }
+
   return (
     <>
       <NavBar name={name} />
@@ -143,7 +164,7 @@ const Dashboards = () => {
             return (
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
-                  <h1>{title}</h1>
+                  <h1  onClick={() => previewProject(id)}>{title}</h1>
                   {editDashId === id ? (
                     <input
                       onChange={handleInputChange}
