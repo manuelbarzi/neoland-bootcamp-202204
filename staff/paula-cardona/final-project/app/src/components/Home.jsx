@@ -38,7 +38,7 @@ function Home() {
                 }         
                 setName(user.name)  
             })
-        else navigate('/login')
+        else navigate("/aboutUs")
     }, [])
         
 
@@ -56,9 +56,9 @@ function Home() {
     }
 
     return isJwtValid(sessionStorage.token) ?
-        <div className="Home__Container">
+        <div className="Home">
         
-            {view=== 'home' && <header className="Home__header Container">
+            {view=== 'home' && <header>
                 <div>
                     <h1 className="Home__h1">Resumen de mi semana</h1>
                 </div>
@@ -67,17 +67,17 @@ function Home() {
             <main >
                 {view === 'home' && schedule && <div className="Home__buttons">
                     
-                    <button className="Button Button Home__Day" onClick= {handleClickMondayDay}>Lunes</button>
+                    <button className="Button Home__Day" onClick= {handleClickMondayDay}>Lunes</button>
                     {schedule.monday.map((elem) => <div key={elem.id}>
                         <h4>{elem.product.title}: {elem.quantity}</h4>   
                     </div>)}
                     
-                    <button className="Button Button Home__Day" onClick= {handleClickTuesdayDay}> Martes</button>
-                        {schedule.tuesday.map((elem) => <div key={elem.id}>
+                    <button className="Button Home__Day" onClick= {handleClickTuesdayDay}> Martes</button>
+                        {schedule.tuesday.map((elem) => <div classname="pan__quantity" key={elem.id}>
                             <h4>{elem.product.title}: {elem.quantity}</h4>   
                         </div>)}
     
-                    <button className="Button Button Home__Day" onClick= {handleClickWednesdayDay}>Miércoles</button>
+                    <button className="Button Home__Day" onClick= {handleClickWednesdayDay}>Miércoles</button>
                         {schedule.wednesday.map((elem) => <div key={elem.id}>
                                 <h4>{elem.product.title}: {elem.quantity}</h4>   
                             </div>)}
@@ -113,9 +113,9 @@ function Home() {
                 {view === 'profile' && <Profile name={name}/>}
             </main>
             
-            <footer className="Home__footer Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home" onClick={handleMiSemanaClick}>Mi semana</button>
-                <button className="Button Button--no-border Home__profile" onClick={handleProfileClick}>Perfil</button>
+            <footer className="Home__footer Container">
+                <button className="Home__button" onClick={handleMiSemanaClick}>Mi semana</button>
+                <button className="Home__button" onClick={handleProfileClick}>Perfil</button>
             </footer> 
         </div> : <></>
         

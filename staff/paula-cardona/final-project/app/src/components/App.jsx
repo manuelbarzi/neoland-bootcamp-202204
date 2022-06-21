@@ -5,6 +5,7 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Feedback from './Feedback'
+import AboutUs from './AboutUs'
 import './App.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import { isJwtValid } from '../validators'
@@ -22,7 +23,7 @@ function App() {
             navigate('/')
         else {
             delete sessionStorage.token
-            navigate('/login')
+            navigate('/AboutUs')
         }
     }, [])
 
@@ -35,6 +36,7 @@ function App() {
     return <Context.Provider value={{ handleFeedback }}>
         <div className="App Container">
             <Routes>
+                <Route path="/aboutUs" element={<AboutUs />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Home />} />

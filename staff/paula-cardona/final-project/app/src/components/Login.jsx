@@ -4,6 +4,7 @@ import Context from './Context'
 import authenticateUser from '../logic/authenticateUser'
 import { isJwtValid } from '../validators'
 import { Link, useNavigate } from 'react-router-dom'
+import './Container.sass'
 
 function Login(props) {
     const logger = new Logger('Login')
@@ -33,12 +34,15 @@ function Login(props) {
     logger.info('render')
 
     return isJwtValid(sessionStorage.token) ? <></> : <div>
-        <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Input Input--light" type="username" name="username" placeholder="Nombre de usuario" />
-            <input className="Input Input--light" type="password" name="password" placeholder="Contraseña" />
-            <button className="Button Button--light" type="submit" >Iniciar sesión</button>
-            <Link className="Button Button--light" to="/register" >Registarse</Link>
-        </form>
+        <div>
+            <form className="Container" onSubmit={handleFormSubmit}>
+                <input className="Input" type="username" name="username" placeholder="Nombre de usuario" />
+                <input className="Input" type="password" name="password" placeholder="Contraseña" />
+                <button className="Button__orange " type="submit" >Iniciar sesión</button>
+                <Link className="alink" to="/register" >Registrarse</Link>
+            </form>
+        </div>
+
     </div>
 }
 

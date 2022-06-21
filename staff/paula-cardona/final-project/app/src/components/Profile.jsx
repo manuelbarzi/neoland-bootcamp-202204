@@ -38,7 +38,7 @@ function Profile(props) {
     return <div className="Profile Container ">
 
         {view === 'profile' && <div>
-            <header className="Week__header Container">
+            <header className="Container">
                 <div>
                     <h1 className="Profile__h1">Mi perfil</h1>
                 </div>
