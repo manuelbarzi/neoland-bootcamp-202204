@@ -1,4 +1,4 @@
-import { Input } from '../../components'
+import { Input, SearchImage } from '../../components'
 
 export function SelectOrCreateArtistForm({ className, children, onChangeInput, onCancelClick, ...props }) {
     return (

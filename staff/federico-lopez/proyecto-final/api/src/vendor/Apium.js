@@ -34,7 +34,6 @@ class Apium {
      * @param {function} callback  The callback function that attends the response's result ({ status, payload})
      */
     call(method, urlOrPath, options, callback) {
-        debugger
         if (callback) {
             const xhr = new XMLHttpRequest
 
@@ -70,10 +69,7 @@ class Apium {
                 resolve({ status, payload })
             })
 
-            xhr.addEventListener('error', error => {
-                debugger
-                console.log(error)
-                
+            xhr.addEventListener('error', () => {
                 reject(new Error('API call fail'))
             })
 
@@ -118,4 +114,4 @@ class Apium {
     }
 }
 
-export default Apium
+module.exports = Apium

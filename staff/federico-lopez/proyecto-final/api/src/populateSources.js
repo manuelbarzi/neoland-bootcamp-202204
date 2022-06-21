@@ -176,8 +176,68 @@ Final:
 
 Bm`
 
+const sinSenalLyrics1 = `Intro: Dm7 - Gm7 - C7 - F - A7
+
+
+Dm7    Gm7        C7           F   A7
+Hoy salí para olvidar, una vez más
+Dm7       Gm7          C7
+Ya no hay culpa ni perdón, amor
+F      A7        Bbmaj7
+Yo perdí el control
+
+(Bbmaj7)               Am7 A7
+Borracho, loco y sin señal
+          Bbmaj7              Am7   A7
+En mi planeta todo mal, ya no estás
+
+        Dmaj7    Bm7
+Pero si voy acercándome
+G                 A7                 Dmaj7
+Todas las dudas se van, sólo queda la cura
+      Bm7     G                 A7
+En este bar, sólo quedamos los dos
+
+F       A7       Bbmaj7
+Yo perdí el control
+(Bbmaj7)             Am7   A7
+Borracho, loco y sin señal
+         Bbmaj7               Am7   A7
+En mi planeta todo mal, ya no estás
+
+        Dmaj7    Bm7
+Pero si voy acercándome
+G                 A7                  Dmaj7
+Todas las dudas se van, sólo queda la cura
+      Bm7     G                 A7
+En este bar, sólo quedamos los dos
+
+G         A7                   Dmaj7
+Tal vez entiendas que yo estoy mejor
+todo en mis manos
+G         A7  Dmaj7
+Y que la suerte nos abandonó, ah-ah
+G         A7
+Si la locura nos acaba
+F#m           Bm7           E7
+Tengo que aprender a bajar igual, mmmh
+A7          Bb
+No es fácil
+
+    Ebmaj7         Cm7
+Pero si voy acercándome
+Ab       Bb7                     Ebmaj7
+Todas las dudas se van, sólo queda la cura
+Cm7          Ab                Bb7
+En este bar, sólo quedamos los dos
+
+(outro)
+
+Ebmaj7 Cm7 Ab Bb7 x2`
+
 module.exports = {
     laRazonLyrics1,
     laRazonLyrics2,
-    demasiadoLyrics1
+    demasiadoLyrics1,
+    sinSenalLyrics1
 }

@@ -119,31 +119,9 @@ export default function CreateInterpretation({ token }) {
         router.push(`/artists/${artist.name}/${artist.id}/songs/${song.name}/${song.id}/interpretations/${interpretationId}`)
     }
 
-    return <>
-        <Header />
-        <FlexColSection>
-            {!artist &&
-                <form className="w-2/3 h-11/12"
-                    onSubmit={onClickCreateArtist}
-                >
-                    <input className="w-full text-2xl bg-gray-200" type="search" name="artist" id="artist" placeholder="Artist"
-                        onChange={onChangeQueryArtist}
-                    ></input>
-                    {queryArtist && artistsDisplayed && artistsDisplayed.length === 0 &&
-                        <>
-                            <p>We don't have interpretations for this artist. Want to create?</p>
-                            <button type="submit">Accept</button>
-                        </>
-                    }
-                </form>}
-
-        </FlexColSection>
-        <Footer />
-    </>
     // return <>
     //     <Header />
-    //     <main>
-
+    //     <FlexColSection>
     //         {!artist &&
     //             <form className="w-2/3 h-11/12"
     //                 onSubmit={onClickCreateArtist}
@@ -159,83 +137,105 @@ export default function CreateInterpretation({ token }) {
     //                 }
     //             </form>}
 
-    //         {artistsDisplayed &&
-    //             artistsDisplayed.map(artist => {
-    //                 return <li className="w-11/12 h-14 bg-gray-200" key={artist.id}>
-    //                     <button className="px-2 w-full h-full flex items-center justify-start"
-    //                         onClick={
-    //                             event => {
-    //                                 event.preventDefault()
-
-    //                                 onClickArtist(artist)
-    //                             }}
-    //                     >{artist.name}
-    //                     </button>
-    //                 </li>
-    //             })
-    //         }
-
-    //         {artist &&
-    //             <div>
-    //                 <p className="inline">Artist: {artist.name}</p>
-    //                 <button className="mx-1 bg-gray-200"
-    //                     onClick={onClickChangeArtist}
-    //                 >Change</button>
-    //             </div>
-    //         }
-
-    //         {artist && !song &&
-    //             <form className="w-2/3 h-11/12"
-    //                 onSubmit={onClickCreateSong}
-    //             >
-    //                 <input className="w-full text-2xl bg-gray-200" type="search" name="song" id="song" placeholder="Song"
-    //                     onChange={onChangeQuerySong}>
-    //                 </input>
-    //                 {!songsDisplayed &&
-    //                     <>
-    //                         <p>We don't have interpretations for this song. Want to create the first version?</p>
-    //                         <button type="submit">Accept</button>
-    //                     </>
-    //                 }
-    //             </form>}
-
-    //         {songsDisplayed &&
-    //             songsDisplayed.map(song => {
-    //                 return <li className="w-11/12 h-14 bg-gray-200" key={song.id}>
-    //                     <button className="px-2 w-full h-full flex items-center justify-start"
-    //                         onClick={
-    //                             event => {
-    //                                 event.preventDefault()
-
-    //                                 onClickSong(song)
-    //                             }}
-    //                     >{song.name}
-    //                     </button>
-    //                 </li>
-    //             })
-    //         }
-
-    //         {artist && song &&
-    //             <div>
-    //                 <p className="inline">Song: {song.name}</p>
-    //                 <button className="mx-1 bg-gray-200"
-    //                     onClick={onClickChangeSong}
-    //                 >Change</button>
-    //             </div>
-    //         }
-
-    //         {artist && song &&
-    //             <form
-    //                 onSubmit={onSubmitInterpretation}
-    //             >
-    //                 <textarea className="w-96 h-96" name="textarea" placeholder="write your interpretation here"></textarea>
-    //                 <button type="submit">Save</button>
-    //             </form>
-    //         }
-
-    //     </main>
-    //     <Footer></Footer>
+    //     </FlexColSection>
+    //     <Footer />
     // </>
+    return <>
+        <Header />
+        <main>
+
+            {!artist &&
+                <form className="w-2/3 h-11/12"
+                    onSubmit={onClickCreateArtist}
+                >
+                    <input className="w-full text-2xl bg-gray-200" type="search" name="artist" id="artist" placeholder="Artist"
+                        onChange={onChangeQueryArtist}
+                    ></input>
+                    {queryArtist && artistsDisplayed && artistsDisplayed.length === 0 &&
+                        <>
+                            <p>We don't have interpretations for this artist. Want to create?</p>
+                            <button type="submit">Accept</button>
+                        </>
+                    }
+                </form>}
+
+            {artistsDisplayed &&
+                artistsDisplayed.map(artist => {
+                    return <li className="w-11/12 h-14 bg-gray-200" key={artist.id}>
+                        <button className="px-2 w-full h-full flex items-center justify-start"
+                            onClick={
+                                event => {
+                                    event.preventDefault()
+
+                                    onClickArtist(artist)
+                                }}
+                        >{artist.name}
+                        </button>
+                    </li>
+                })
+            }
+
+            {artist &&
+                <div>
+                    <p className="inline">Artist: {artist.name}</p>
+                    <button className="mx-1 bg-gray-200"
+                        onClick={onClickChangeArtist}
+                    >Change</button>
+                </div>
+            }
+
+            {artist && !song &&
+                <form className="w-2/3 h-11/12"
+                    onSubmit={onClickCreateSong}
+                >
+                    <input className="w-full text-2xl bg-gray-200" type="search" name="song" id="song" placeholder="Song"
+                        onChange={onChangeQuerySong}>
+                    </input>
+                    {!songsDisplayed &&
+                        <>
+                            <p>We don't have interpretations for this song. Want to create the first version?</p>
+                            <button type="submit">Accept</button>
+                        </>
+                    }
+                </form>}
+
+            {songsDisplayed &&
+                songsDisplayed.map(song => {
+                    return <li className="w-11/12 h-14 bg-gray-200" key={song.id}>
+                        <button className="px-2 w-full h-full flex items-center justify-start"
+                            onClick={
+                                event => {
+                                    event.preventDefault()
+
+                                    onClickSong(song)
+                                }}
+                        >{song.name}
+                        </button>
+                    </li>
+                })
+            }
+
+            {artist && song &&
+                <div>
+                    <p className="inline">Song: {song.name}</p>
+                    <button className="mx-1 bg-gray-200"
+                        onClick={onClickChangeSong}
+                    >Change</button>
+                </div>
+            }
+
+            {artist && song &&
+                <form
+                    onSubmit={onSubmitInterpretation}
+                >
+                    <textarea className="w-96 h-96" name="textarea" placeholder="write your interpretation here"></textarea>
+                    <button type="submit">Save</button>
+                </form>
+            }
+
+        </main>
+        <Footer></Footer>
+    </>
 }
 
 export async function getServerSideProps({ req, res }) {

@@ -2,12 +2,12 @@ require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
 const { connect, disconnect } = require('mongoose')
-const { 
+const {
     /* USERS */
-    handleRegisterUser, 
-    handleAuthenticateUser, 
-    handleRetrieveUser, 
-    handleUpdateUser, 
+    handleRegisterUser,
+    handleAuthenticateUser,
+    handleRetrieveUser,
+    handleUpdateUser,
     handleUnregisterUser,
 
     /* TOKEN */
@@ -16,6 +16,7 @@ const {
     /* ARTISTS */
     handleCreateArtist,
     handleRetrieveArtists,
+    handleGetTopArtists,
 
     /* SONGS */
     handleCreateSong,
@@ -32,11 +33,17 @@ const {
     handleRetrieveInterpretationFromSong,
 
     /* RANK */
-    handleAddOrUpdateRankToInterpretation
+    handleAddOrUpdateRankToInterpretation,
+
+    /* SPOTIFY */
+    handleRequestSpotifyAccesToken
 } = require('./handlers')
 
-const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
+var XMLHttpRequest = require('xhr2');
 
+global.XMLHttpRequest = XMLHttpRequest
+
+const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
     ; (async () => {
         await connect(MONGODB_URL)
@@ -70,13 +77,14 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         /* ARTISTS */
         routes.post('/artists', jsonBodyParser, handleCreateArtist)
         routes.get('/artists', handleRetrieveArtists)
+        routes.post('/artists/top', jsonBodyParser, handleGetTopArtists)
 
         /* SONGS */
         routes.post('/songs', jsonBodyParser, handleCreateSong)
         routes.get('/songs', handleRetrieveSongs)
         routes.get('/songs/:songName/:artistName', handleRetrieveSong)
         routes.get('/songs/:artistName', handleRetrieveSongsOfArtist)
-        
+
         /* ARTISTS AND SONGS */
         routes.get('/search', handleRetrieveArtistsAndSongs)
 
@@ -87,6 +95,9 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         /* RANK */
         routes.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
+
+        /* SPOTIFY */
+        routes.post('/spotify/auth', jsonBodyParser, handleRequestSpotifyAccesToken)
 
         api.listen(port, () => console.log(`API running on port ${port}`))
 

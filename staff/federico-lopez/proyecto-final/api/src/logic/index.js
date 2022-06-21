@@ -9,6 +9,7 @@ module.exports = {
     /* ARTISTS */
     createArtist: require('./createArtist'),
     retrieveArtists: require('./retrieveArtists'),
+    getTopArtists: require('./getTopArtists'),
 
     /* SONGS */
     createSong: require('./createSong'),
@@ -26,5 +27,8 @@ module.exports = {
     removeInterpretationFromSong: require('./removeInterpretationFromSong'),
 
     /* RANK */
-    addOrUpdateRankToInterpretation: require('./addOrUpdateRankToInterpretation.js')
+    addOrUpdateRankToInterpretation: require('./addOrUpdateRankToInterpretation.js'),
+
+    /* SPOTIFY */
+    requestSpotifyAccessToken: require('./requestSpotifyAccessToken')
 }

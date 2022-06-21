@@ -1,17 +1,17 @@
 import Cookies from 'cookies'
 import Apium from '../vendor/Apium'
-import { validateJWT } from 'validators'
 import { context } from '../logic'
 
 export async function verifyTokenWithAPICall(req, res) {
-    const cookies = new Cookies(req, res)
     debugger
+    const cookies = new Cookies(req, res)
+
     const token = cookies.get('token')
 
     if (token) {
         const api = new Apium(context.API_URL)
 
-        const { status, payload } = await api.get('users', {
+        const { status, payload } = await api.get('users/auth', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

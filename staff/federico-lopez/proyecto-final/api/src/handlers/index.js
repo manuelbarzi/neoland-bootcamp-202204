@@ -1,7 +1,10 @@
+const handleRequestSpotifyAccesToken = require('./handleRequestSpotifyAccesToken');
+
 module.exports = {
     /* USERS */ 
     handleRegisterUser: require('./handleRegisterUser'),
     handleAuthenticateUser: require('./handleAuthenticateUser'),
+    handleUpdatePassword: require('./handleUpdatePassword'),
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
     handleUnregisterUser: require('./handleUnregisterUser'),
@@ -12,6 +15,7 @@ module.exports = {
     /* ARTISTS */
     handleCreateArtist: require('./handleCreateArtist'),
     handleRetrieveArtists: require('./handleRetrieveArtists'),
+    handleGetTopArtists: require('./handleGetTopArtists'),
 
     /* SONGS */
     handleCreateSong: require('./handleCreateSong'),
@@ -28,6 +32,9 @@ module.exports = {
     handleRetrieveInterpretationFromSong: require('./handleRetrieveInterpretationFromSong'),
 
     /* RANK */
-    handleAddOrUpdateRankToInterpretation: require('./handleAddOrUpdateRankToInterpretation')
+    handleAddOrUpdateRankToInterpretation: require('./handleAddOrUpdateRankToInterpretation'),
+
+    /* SPOTIFY */
+    handleRequestSpotifyAccesToken: require('./handleRequestSpotifyAccesToken'),
 }
 

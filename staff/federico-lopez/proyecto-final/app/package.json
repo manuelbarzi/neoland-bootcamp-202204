@@ -16,6 +16,7 @@
     "errors": "file:../errors",
     "logic": "file:./logic",
     "next": "12.1.6",
+    "query-string": "^7.1.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
     "validators": "file:../validators",

@@ -27,9 +27,14 @@ export default function editProfile({ token, user }) {
         }
     }
 
+    const onLogOutClick = () => {
+        router.push('/logout')
+    }
+
     return <>
         <Header pageProps="Profile" />
         <FlexColSection className="py-20 items-center justify-center gap-5">
+            <button onClick={onLogOutClick}>LogOut</button>
             <EditProfileForm
                 onSubmit={handleFormSubmit} user={user} />
             
@@ -42,6 +47,7 @@ export default function editProfile({ token, user }) {
 }
 
 export async function getServerSideProps({ req, res }) {
+    debugger
     const token = await verifyTokenWithAPICall(req, res)
 
     const user = await retrieveUser(token)

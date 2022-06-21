@@ -40,6 +40,10 @@ const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1 } = require('./populate
                 user: userPepito._id.toString(), content: demasiadoLyrics1
             })
 
+            const interpretationSinSenal1 = new Interpretation({
+                user: userPepito._id.toString(), content: sinSenalLyrics1
+            })
+
             /* CREATE SONGS */
 
             const songLaRazon = await Song.create({ artist: artistLaRenga._id.toString(), name: 'La razón que te demora', genres: [Song.ROCK], interpretations: [interpretationLaRazon1, interpretationLaRazon2] })
@@ -49,6 +53,8 @@ const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1 } = require('./populate
             const songDemasiado = await Song.create({ artist: artistBandalosChinos._id.toString(), name: 'Demasiado', genres: [Song.INDIE], interpretations: [interpretationDemasiado1] })
             const songLosPuntos = await Song.create({ artist: artistBandalosChinos._id.toString(), name: 'Los Puntos', genres: [Song.INDIE] })
             const songVamonosDeViaje = await Song.create({ artist: artistBandalosChinos._id.toString(), name: 'Vamonos de viaje', genres: [Song.INDIE] })
+            const songSinSenal = await Song.create({ artist: artistBandalosChinos._id.toString(), name: 'Sin Señal', genres: [Song.INDIE], interpretations: [interpretationSinSenal1] })
+
 
             const songOjosAsi = await Song.create({ artist: artistShakira._id.toString(), name: 'Ojos asi', genres: [Song.POP] })
             const songCreo = await Song.create({ artist: artistShakira._id.toString(), name: 'Creo', genres: [Song.POP] })

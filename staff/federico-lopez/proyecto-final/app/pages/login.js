@@ -48,7 +48,9 @@ export default function Login(props) {
     )
 }
 
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps(ctx) {
+    debugger
+    const { req, res } = ctx
     const token = await verifyTokenWithAPICall(req, res)
 
     return {
