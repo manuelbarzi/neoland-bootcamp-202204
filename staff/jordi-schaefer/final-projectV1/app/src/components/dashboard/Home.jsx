@@ -101,7 +101,7 @@ function Home(props) {
 
         <main className="Home__body mw mh overflow">
             {view === 'Home' && <ActivityList onCommentClicked={handleCommentClicked}/>}
-            {view === 'Profile' && <ActivityList private={true} onCommentClicked={handleCommentClicked}/>}
+            {view === 'Profile' && <ActivityList private={true} onCommentClicked={handleCommentClicked} />}
 
             {view === 'Settings' && <Settings onChangeNameClicked={handleChangeNameClick}
                 onChangePasswordClicked={handleChangePasswordClick}

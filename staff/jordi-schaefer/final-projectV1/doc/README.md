@@ -16,12 +16,21 @@ It's a social media where users can comment and like each other's activities
 ### Use Cases
 
 - Record an activity
+    - record diferents positions and altitude
+    - show live data (distance, time, elevation, points in map)
+    - save sport, dificult, text and photos
+- Resume activities made within the last 6 
+    - upload new o diferent information if its needed
 - List activities from all users
+    - Like activities
+    - Comment activities
 - List your activities
-- Like activities
-- Comment activities
-- Change your information (name, password...)
-- Delete activities
+    - including a sumary of your total and last month data
+    - including private activities
+- Change your information 
+    - name, email, password
+    - delete activities
+    - delete user
 
 ### Wireframes
 
@@ -39,20 +48,23 @@ TODO list data entities
 #### User
 - id (ObjectId)
 - name (String)
-- surname (String)
 - usermame (String)
 - password (String)
 - email (String)
-- birthday (Number)
 
 #### Activity
 - id (ObjectId)
 - user (ObjectId)
 - title (String)
-- time (Date)
+- text (String)
+- date (Date)
+- sport (String)
+- dificult (String)
+- private (Boolean)
+- points ([point])
+- comments ([comment])
 - likes ([UserId])
-- comments ([Comment])
-- checkpoints ([Point])
+- images ([String])
 
 #### Point
 - id (ObjectId)
@@ -60,8 +72,6 @@ TODO list data entities
 - latitude (Number)
 - longitude (Number)
 - time (Date)
-- foto
-- text (String)
 
 #### Comment
 - id (ObjectId)

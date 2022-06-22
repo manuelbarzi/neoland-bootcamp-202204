@@ -41,7 +41,8 @@ function ActivityList(props) {
                 </li>}
 
             {activities.map(activitie => <li className="Activity__list--item" key={activitie.id} >  
-                <ActivityItem activity={activitie} onLikeClicked={handleActivityLikeClicked} onCommentClicked={props.onCommentClicked}/>
+                <ActivityItem activity={activitie} onLikeClicked={handleActivityLikeClicked} 
+                onCommentClicked={props.onCommentClicked} edit={props.private}/>
             </li>)}
         </ul>
 }

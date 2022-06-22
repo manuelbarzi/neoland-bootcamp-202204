@@ -3,13 +3,13 @@ import Context from '../Context'
 import Map from './Map'
 import LiveInfo from './LiveInfo'
 import addPointToActivity from '../../logic/addPointToActivity'
-
+import retrieveActivity from '../../logic/retrieveActivity'
 
 function ActivityRecord(props) {
 
     const [timestamp, setTimestamp] = useState(null)
     const [position, setPosition] = useState(null)
-    const [points, setPoints] = useState([props.point])
+    const [points, setPoints] = useState(null)
     const [view, setView] = useState('map')
     const { handleFeedback } = useContext(Context)
     let watchId
@@ -17,8 +17,26 @@ function ActivityRecord(props) {
     
     useEffect(() => {
         watchPosition()
+        if(props.point) {
+            setPoints([props.point])
+        }
+        else {
+            resumeActivity()
+        }
     }, [])
 
+    const resumeActivity = async() => {
+        try {
+            const activity = await retrieveActivity(sessionStorage.token, props.activityId)
+            setPoints([])
+            activity.points.forEach(point =>{ 
+                setPoints(points => [...points, 
+                    [point.latitude, point.longitude]])
+            })
+        } catch (error) {
+            handleFeedback({ type: 'error', message: error.message })
+        } 
+    }
 
     const watchPosition = () => {
         watchId = navigator.geolocation.watchPosition(function(position) {
@@ -60,7 +78,7 @@ function ActivityRecord(props) {
     return  <div className="Container overflow mw mh">
 
     <main className="Activity__body mw mh">
-        { view === 'map' && position && <Map position={position} center={true} points={points}/> } 
+        { view === 'map' && position && points && <Map position={position} center={true} points={points}/> } 
         { view === 'timer' && <LiveInfo activityId={props.activityId} onPointRegistered={timestamp}/> } 
     </main>
 
