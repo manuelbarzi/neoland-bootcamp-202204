@@ -37,6 +37,15 @@
   .feedback {
     @apply bg-yellow-50 p-4 absolute opacity-90 rounded-lg
   }
+  .feedback-success {
+    @apply text-green-800 bg-green-300 border-green-400 
+  }
+  .feedback-error {
+    @apply text-red-800 bg-red-300 border-red-400
+  }
+  .feedback--warn {
+    @apply text-yellow-800 bg-yellow-300 border-yellow-400
+  }
 }
 
 @layer utilities {

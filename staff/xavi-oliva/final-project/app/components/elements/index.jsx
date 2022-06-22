@@ -1,7 +1,6 @@
 export * from './card'
 export * from './section'
 export * from './container'
-export * from './feedback'
 export * from './footer'
 export * from './form'
 export * from './form-container'

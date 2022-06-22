@@ -8,15 +8,16 @@ describe('addBookingToFlat', () => {
     before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Flat.deleteMany()]))
+    afterEach(() => Promise.all([User.deleteMany(), Flat.deleteMany()]))
 
     describe('when user already exists', () => {
-        let user1, user2
+        let user, user2
 
         beforeEach(() => {
-            user1 = new User({ name: 'Papa Gayo', email: 'papa@gayo.com', password: '123123123' })
+            user = new User({ name: 'Papa Gayo', email: 'papa@gayo.com', password: '123123123' })
             user2 = new User({ name: 'Mama Chicho', email: 'mama@chicho.com', password: '123123123' })
 
-            Promise.all(user1.save(), user2.save())
+            Promise.all(user.save(), user2.save())
         })
 
         describe('When flat already exists', () => {
@@ -24,7 +25,7 @@ describe('addBookingToFlat', () => {
 
             beforeEach(() => {
                 flat = new Flat({
-                    user: user1.id,
+                    user: user.id,
                     title: 'This is a title',
                     description: 'this is a description',
                     address: 'this is an address',
@@ -34,7 +35,7 @@ describe('addBookingToFlat', () => {
             })
 
             it('succeeds on correct data credentials', () => {
-                return addBookingToFlat(user1.id, flat.id, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
+                return addBookingToFlat(user.id, flat.id, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
                     .then(bookingId => {
                         expect(bookingId).to.be.a('string')
 
@@ -42,7 +43,7 @@ describe('addBookingToFlat', () => {
                             .then(flat => {
                                 const booking = flat.bookings.find(booking => booking._id.toString() === bookingId)
 
-                                expect(booking.user.toString()).to.be.equal(user1.id)
+                                expect(booking.user.toString()).to.be.equal(user.id)
                                 expect(booking.flat.toString()).to.be.equal(flat.id)
                                 expect(booking.name).to.be.equal('Fulanito')
                                 expect(booking.phone).to.be.equal('+34654321987')
@@ -71,7 +72,7 @@ describe('addBookingToFlat', () => {
             it('fails on correct user but incorrect flat credentials', () => {
                 const wrongId = new ObjectId().toString()
 
-                return addBookingToFlat(user1.id, wrongId, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
+                return addBookingToFlat(user.id, wrongId, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
                     .then(result => {
                         throw new Error('should not reach this point')
                     })
@@ -86,7 +87,7 @@ describe('addBookingToFlat', () => {
             it('fails on unexisting flat id', () => {
                 const unexistingFlatId = new ObjectId().toString()
 
-                return addBookingToFlat(user1.id, unexistingFlatId, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
+                return addBookingToFlat(user.id, unexistingFlatId, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
                     .then(result => {
                         throw new Error('should not reach this point')
                     })
@@ -103,7 +104,7 @@ describe('addBookingToFlat', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
             const unexistingFlatId = new ObjectId().toString()
-    
+
             return addBookingToFlat(unexistingUserId, unexistingFlatId, 'Fulanito', '+34654321987', 'fula@nito.com', 'esto es un texto', '01/07/2022', '10/07/2022')
                 .then(result => {
                     throw new Error('should not reach this point')
@@ -114,8 +115,6 @@ describe('addBookingToFlat', () => {
                 })
         })
     })
-
-    afterEach(() => User.deleteMany())
 
     after(() => disconnect())
 })

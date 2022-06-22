@@ -1,4 +1,3 @@
-export * from './context'
 export * from './registerUser'
 export * from './authenticateUser'
 export * from './retrieveUser'

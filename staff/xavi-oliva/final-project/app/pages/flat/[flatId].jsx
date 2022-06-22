@@ -1,18 +1,34 @@
-import Image from 'next/image'
 import { Div, Card, PrimaryButton, Section, CardContent } from "../../components";
-import { retrieveFlat } from '../../logic'
+import { retrieveFlat, deleteFlat } from '../../logic'
 import Apium from 'apium'
 import { verifyTokenWithAPICall } from '../helpers'
+import { useRouter } from 'next/router';
 
 
-export default function Flat({token, flat}) {
+export default function Flat({ token, flat }) {
+    const router = useRouter()
     // TODO
+    const handleRemoveClick = async () => {
+        const { flatId, onRemove } = props
+
+        try {
+            await deleteFlat(token, { flatId })
+            // handleFeedback
+
+            onRemove(flatId)
+            router.push('/')
+
+        } catch (error) {
+            console.error(error)
+            // handleFeedback(error.message)
+        }            
+    }
 
     return <>
         <Section className='section-scroll'>
             <Div className='min-h-full p-1'>
                 <Card>
-                    <CardContent flat={flat}/>
+                    <CardContent flat={flat} />
 
                     <div className='card-group flex flex-row content-start gap-4 pb-4'>
                         <div className='left basis-1/2'>
@@ -55,7 +71,7 @@ export default function Flat({token, flat}) {
                         </ul>
                     </div>
                     <div className='flex flex-row basis-auto gap-2'>
-                        <PrimaryButton className='bg-red-500'>Delete</PrimaryButton>
+                        <PrimaryButton className='bg-red-500' onClick={handleRemoveClick}>Delete</PrimaryButton>
                         <PrimaryButton>Edit</PrimaryButton>
                     </div>
                 </Card>
@@ -64,7 +80,7 @@ export default function Flat({token, flat}) {
     </>
 }
 
-export async function getServerSideProps({ req, res, params: { flatId }}) {
+export async function getServerSideProps({ req, res, params: { flatId } }) {
     const api = new Apium(process.env.REACT_APP_API_URL)
 
     const token = await verifyTokenWithAPICall(req, res)

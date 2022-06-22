@@ -4,7 +4,7 @@ const { NotFoundError } = require('errors')
 const retrieveFlat = require('./retrieveFlat')
 const { expect } = require('chai')
 
-describe.only('retrieveFlat', () => {
+describe('retrieveFlat', () => {
     before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
     beforeEach(() => Promise.all([User.deleteMany(), Flat.deleteMany()]))
