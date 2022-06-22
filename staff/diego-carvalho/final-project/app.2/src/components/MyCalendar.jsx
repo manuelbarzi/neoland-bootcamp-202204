@@ -6,46 +6,47 @@ import Event from './Event'
 import './MyCalendar.sass'
 
 function MyCalendar({ timestamp }) {
-    const logger = new Logger('MyCalendar')
+  const logger = new Logger('MyCalendar')
 
-    logger.info('call')
+  logger.info('call')
 
-    const [events, setEvents] = useState(null)
-    const { handleFeedback } = useContext(Context)
+  const [events, setEvents] = useState(null)
+  const { handleFeedback } = useContext(Context)
 
-    useEffect(() => {
-        logger.info('componentDidMount | componentWillReceiveProps')
+  useEffect(() => {
+    logger.info('componentDidMount | componentWillReceiveProps')
 
-        loadEvents()
-    }, [timestamp])
+    loadEvents()
+  }, [timestamp])
 
-    const loadEvents = () =>
-        retrieveOwnerEvent(sessionStorage.token, (error, events) => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
+  const loadEvents = () =>
+    retrieveOwnerEvent(sessionStorage.token, (error, events) => {
+      if (error) {
+        handleFeedback({ level: 'error', message: error.message })
 
-                return
-            }
+        return
+      }
 
-            setEvents(events)
-        })
+      setEvents(events)
+    })
 
-    const handleRemoveEvent = eventId => {
-        const _events = events.filter(event => event.id !== eventId)
+  const handleRemoveEvent = eventId => {
+    const _events = events.filter(event => event.id !== eventId)
 
-        setEvents(_events)
-    }
+    setEvents(_events)
 
-    logger.info('render')
+  }
 
-    return events && events.length ?
-        <ul className="EventList__list Container">
-            {events.map(event => <li key={event.id}>
-                <Event eventId={event.id} title={event.title} description={event.description} onRemove={handleRemoveEvent} />
-            </li>)}
-        </ul>
-        :
-        <p>no event yet</p>
+  logger.info('render')
+
+  return events && events.length ?
+    <ul className="EventList__list Container">
+      {events.map(event => <li key={event.id}>
+        <Event eventId={event.id} title={event.title} description={event.description} onRemove={handleRemoveEvent} />
+      </li>)}
+    </ul>
+    :
+    <p>no event yet</p>
 }
 
 export default MyCalendar

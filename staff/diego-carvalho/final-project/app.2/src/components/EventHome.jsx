@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import signUpToEvent from '../logic/signUpToEvent'

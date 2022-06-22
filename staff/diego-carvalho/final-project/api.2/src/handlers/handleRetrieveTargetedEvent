@@ -1,0 +1,15 @@
+const { retrieveTargetedEvent } = require('../logic')
+const { verifyToken, handleErrorsAndRespond } = require('./helpers')
+
+module.exports = (req, res) => {
+    try {
+        const userId = verifyToken(req)
+        const { param: { eventId } } = req
+
+        retrieveTargetedEvent(userId, eventId)
+            .then(eventId => res.status(200).json(eventId))
+            .catch(error => handleErrorsAndRespond(error, res))
+    } catch (error) {
+        handleErrorsAndRespond(error, res)
+    }
+}

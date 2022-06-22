@@ -48,3 +48,5 @@ function HomeEventList() {
 }
 
 export default HomeEventList
+
+//const handleSignUpToEventClick= () => setTimestamp(Date.now())

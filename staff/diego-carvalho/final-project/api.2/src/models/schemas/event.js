@@ -20,7 +20,6 @@ const event = new Schema({
     description: {
         type: String,
         default: null,
-
     },
 
     date: {
@@ -37,7 +36,6 @@ const event = new Schema({
         type: String,
         enum: ['sport-activities', 'social-activities', 'environment'],
         default: 'sport-activities'
-
     },
 
     participants: [{
