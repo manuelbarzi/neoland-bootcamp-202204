@@ -1,6 +1,5 @@
 import retrieveClockUser from "../../logic/retrieveClockUser";
 import { useState, useEffect } from "react";
-import CardJob from "../Jobs/CardJob";
 import toast from "react-hot-toast";
 
 export default function ClockAll() {
