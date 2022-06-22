@@ -95,7 +95,7 @@ function ActivityItem (props) {
         </div> }
 
         { !setDelete && images && (images.length>0) ? <div>
-            {images.map(image=> <img className='ActivityItem__image' src={image}/>)}
+            {images.map((image, index)=> <img className='ActivityItem__image' src={image}  key={index}/>)}
             </div>: '' }
 
         { !setDelete && <div className='ActivityItem__footer mw'>

@@ -33,7 +33,7 @@ function ActivityMain() {
         setView('record')
     }
     const handleFinishClicked = () => setView('finish') 
-    const handleContinueClicked = () => setView('record')
+    const handleContinueClicked = () => { setPoint(false); setView('record') }
     
 
     return  isJwtValid(sessionStorage.token) ?
