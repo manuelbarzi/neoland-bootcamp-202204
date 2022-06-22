@@ -2,7 +2,7 @@ const { User, Job } = require("../models");
 const { NotFoundError, ConflictError } = require("errors");
 const { validateId } = require("validator");
 
-function retrieveJobs(userId) {
+function retrieveUserJobs(userId) {
   validateId(userId);
 
   return User.findById(userId)
@@ -12,10 +12,13 @@ function retrieveJobs(userId) {
 
       return Job.findById(userId);
     })
-    .then((job) => {
-      if (!job) throw new ConflictError("not job with the indicated filter");
-      return job;
+    .then((jobs) => {
+      jobs.forEach((job) => {
+        // TODO sanitise
+      });
+
+      return jobs;
     });
 }
 
-module.exports = retrieveJobs;
+module.exports = retrieveUserJobs;
