@@ -35,7 +35,7 @@ function Home(props) {
                 handleLogoutClick()
             } 
         } catch(error) {
-            navigate('/') 
+            navigate('/welcome') 
             handleLogoutClick()
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -130,8 +130,8 @@ function Home(props) {
 
             <div className="Home__footer--container">
                 <h2 id="homeL" className="Button__selected Home__footer--text m_left_word" onClick={handleHomeClick}>Home</h2>
-                <h2 className="Home__footer--text" onClick={handleActivityClick}>Record</h2>
-                <h2 id="profileL" className="Home__footer--text m_right_word" onClick={handleProfileClick}>Profile</h2>
+                <h2 className="Home__footer--text m_left_word" onClick={handleActivityClick}>Record</h2>
+                <h2 id="profileL" className="Home__footer--text m_right_word m_left_word" onClick={handleProfileClick}>Profile</h2>
             </div>
         </footer>
 

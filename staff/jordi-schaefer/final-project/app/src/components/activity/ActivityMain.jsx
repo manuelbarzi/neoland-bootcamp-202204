@@ -23,7 +23,7 @@ function ActivityMain() {
             else
                 setView('start')
             return
-        } else navigate('/') 
+        } else navigate('/welcome') 
     }, [])
 
 

@@ -44,14 +44,14 @@ function ActivityRecord(props) {
             console.log('set position')
         }, function(error){
             handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 400_000 })
+        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 600_000 })
     }
 
 
     const handleSaveClick = async() => {
         try {
             await addPointToActivity(props.activityId, position)
-            handleFeedback({ type: 'success', message: 'New point saved!' })
+            handleFeedback({ type: 'success', message: 'Point saved!' })
             setPoints(points => [...points, 
                 position])
             setTimestamp(Date.now())
@@ -83,15 +83,11 @@ function ActivityRecord(props) {
     </main>
 
  
-    <footer className="Activity__footer mw">
-        <div className="Activity__footerContainer__selector mw">
-            <button className="Activity__footerButton__selector material-symbols-outlined" onClick={handleTimeClick}>Timer</button>
-            <button className="Activity__footerButton__selector material-symbols-outlined" onClick={handleMapClick}>Pin_drop</button>
-        </div> 
-        <div className="Activity__footerContainer__buttons">
-            <button className="Activity__button--register" onClick={handleSaveClick}>RECORD</button>    
-            <button className="Activity__button--start" onClick={handleFinishClick}>FINISH</button>      
-        </div>
+    <footer className="Activity__footer-record mw"> 
+        <button className="Activity__footerButton__selector material-symbols-outlined" onClick={handleTimeClick}>Timer</button>
+        <button className="Activity__button--register" onClick={handleSaveClick}>RECORD</button>    
+        <button className="Activity__button--start" onClick={handleFinishClick}>FINISH</button>      
+        <button className="Activity__footerButton__selector material-symbols-outlined" onClick={handleMapClick}>Pin_drop</button>
     </footer>
 
     </div>

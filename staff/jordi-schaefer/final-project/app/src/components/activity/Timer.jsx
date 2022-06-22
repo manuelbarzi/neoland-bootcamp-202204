@@ -27,7 +27,7 @@ function Timer({initialTime}) {
 
 
     return (
-        <div className='Timer__container'>
+        <div className='Timer__container mw'>
             <h1 className='Timer__number'> {hours<10 ? `0${hours}`: hours}:{minutes<10 ? `0${minutes}`: minutes}:{seconds<10 ? `0${seconds}`: seconds}</h1> 
         </div>
     )

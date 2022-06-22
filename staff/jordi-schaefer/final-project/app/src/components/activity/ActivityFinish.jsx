@@ -25,7 +25,7 @@ function ActivityFinish(props) {
             const dificult = event.target.dificult.value
             
             await updateActivity(props.activityId, title, text, audience, sport, dificult, images)
-            navigate('/dashboard')
+            navigate('/')
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         } 
@@ -34,7 +34,7 @@ function ActivityFinish(props) {
     const handleDeleteClick = async() => {
         try {
             await deleteActivity(sessionStorage.token, props.activityId)     
-            navigate('/dashboard')
+            navigate('/')
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -93,11 +93,11 @@ function ActivityFinish(props) {
     
     return  <div className="Container overflow mw mh">
         <header className="Activity__header">
-        <button className="Activity__button--back" onClick={handleContinueClick}>Resume</button>
+            <button className="Activity__button--back" onClick={handleContinueClick}>Resume</button>
             <h1 className="center">Save activity</h1>
         </header>
 
-        <main className="Finish__body mw mh">
+        <main className="Finish__body mw mh overflow">
             <form id='myform' className="Container Finish__form mw" onSubmit={handleSaveClick}>
                 <h1 className="Finish__form-text">Title</h1>
                 <input className="Finish__input-title" type="text" name="title" placeholder=" Mountain Activity" />
@@ -111,8 +111,9 @@ function ActivityFinish(props) {
                     <option value="Snowshoe">Snowshoe</option>
                 </select>
                 <select className="Finish__input-selector" name="dificult">
+                    <option value="Easy">dificulty</option>
                     <option value="Easy">easy</option>
-                    <option defaultValue="Moderate">moderate</option>
+                    <option value="Moderate">moderate</option>
                     <option value="Hard">hard</option>
                     <option value="Very hard">very hard</option>
                 </select>

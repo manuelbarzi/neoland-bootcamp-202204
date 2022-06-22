@@ -37,7 +37,7 @@ function ActivityStart(props) {
             console.log('set position')
         }, function(error){
             handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 400_000 })    
+        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 600_000 })    
     }    
     
 
@@ -79,7 +79,7 @@ function ActivityStart(props) {
                 props.onStartClicked(activityId, position)
                 navigator.geolocation.clearWatch(watchId)
             }
-            else handleFeedback({ type: 'error', message: 'Position not found' })
+            else handleFeedback({ type: 'error', message: 'Position not found (https)' })
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         }   

@@ -7,10 +7,10 @@ import '../../styles/LiveInfo.sass'
 
 function LiveInfo({activityId, onPointRegistered}) {
 
-    const [ activity, setActivity ] = useState(0)
-    const [ totalDistance, setTotalDistance ] = useState(0)
-    const [ altitude, setAltitude ] = useState(0)
-    const [ elevation, setElevation ] = useState(0)
+    const [ activity, setActivity ] = useState(null)
+    const [ totalDistance, setTotalDistance ] = useState(null)
+    const [ altitude, setAltitude ] = useState(null)
+    const [ elevation, setElevation ] = useState(null)
     const [ initialTime, setInitialTime ] = useState(null)
     const { handleFeedback } = useContext(Context)
 
@@ -32,8 +32,8 @@ function LiveInfo({activityId, onPointRegistered}) {
 
             setTotalDistance((calculateTotalDistance(activity.points)/1000).toFixed(2))
             
-            setAltitude(activity.points[activity.points.length-1].altitude-activity.points[0].altitude)
-            setElevation(activity.points[activity.points.length-1].altitude)            
+            setAltitude((activity.points[activity.points.length-1].altitude-activity.points[0].altitude).toFixed(0))
+            setElevation((activity.points[activity.points.length-1].altitude).toFixed(0))
             
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
@@ -41,11 +41,11 @@ function LiveInfo({activityId, onPointRegistered}) {
     }
 
 
-    return (<div className="Live mw mh">
+    return ( <div className="Live mw mh">
 
-        {initialTime && <Timer initialTime={initialTime}/> }
+        { elevation && initialTime &&  <Timer initialTime={initialTime}/> }
 
-        <div className="Live__container mw mh">  
+        { elevation && <div className="Live__container mw mh">  
             <div className="Live__container-data">
                 {activity && <h2 className="Live__text">Points</h2>}
                 {activity && <h2 className="Live__value">{activity.points.length}</h2>}
@@ -62,9 +62,8 @@ function LiveInfo({activityId, onPointRegistered}) {
                 {activity && <h2 className="Live__text">Distance</h2>}
                 {activity && <h2 className="Live__value">{totalDistance} km</h2>}
             </div>  
-
-        </div>  
-    </div>
+        </div>  }
+    </div>  
     )
 }
 

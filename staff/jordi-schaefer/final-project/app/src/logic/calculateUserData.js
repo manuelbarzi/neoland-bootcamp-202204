@@ -12,7 +12,7 @@ function calculateUserData (activities) {
         if (n>0)
         altitude += n
     })
-    data.totalAltitude = altitude
+    data.totalAltitude = altitude.toFixed(0)
 
 
     // get only last month activities
@@ -31,7 +31,7 @@ function calculateUserData (activities) {
         if (n>0)
         altitude += n
     })
-    data.totalMonthAltitude = altitude
+    data.totalMonthAltitude = altitude.toFixed(0)
 
     return data
 }

@@ -17,7 +17,7 @@ function App () {
 
     useEffect(() => {
         if (isJwtValid(sessionStorage.token))
-            navigate('/dashboard')
+            navigate('/')
         else
             handleUserLogout()
     }, [])
@@ -28,10 +28,10 @@ function App () {
         handleWelcomeNavigation()
     }
     
-    const handleWelcomeNavigation = () => navigate('/')
+    const handleWelcomeNavigation = () => navigate('/welcome')
     const handleLoginNavigation = () => navigate('/login')
     const handleRegisterNavigation = () => navigate('/register')
-    const handleUserLoggedIn = () => navigate('/dashboard')
+    const handleUserLoggedIn = () => navigate('/')
 
     const handleFeedback = feedback => { 
         setFeedback(feedback) }
@@ -43,10 +43,10 @@ function App () {
     return <Context.Provider value={{ handleFeedback }} >
         <div className="App">
             <Routes>
-                <Route path="/" element={<Welcome onLoginLinkClicked={handleLoginNavigation} onRegisterLinkClicked={handleRegisterNavigation} />} />
+                <Route path="/welcome" element={<Welcome onLoginLinkClicked={handleLoginNavigation} onRegisterLinkClicked={handleRegisterNavigation} />} />
                 <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onWelcomeLinkClicked={handleWelcomeNavigation} />} />
                 <Route path="/register" element={<Register onUserLoggedIn={handleUserLoggedIn} onWelcomeLinkClicked={handleWelcomeNavigation} />} />
-                <Route path="/dashboard" element={<Home onUserLoggedOut={handleUserLogout} onDeletedUser={handleOnDeletedUser}/>} />
+                <Route path="/" element={<Home onUserLoggedOut={handleUserLogout} onDeletedUser={handleOnDeletedUser}/>} />
                 <Route path="/activity" element={<ActivityMain />} />
             </Routes>
             {feedback && <Feedback type={feedback.type} message={feedback.message} callback={handleFeedbackTimeout}/> } 
