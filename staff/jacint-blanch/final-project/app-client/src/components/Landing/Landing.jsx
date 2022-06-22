@@ -1,14 +1,20 @@
 import React from 'react';
+import Navbar from './Navbar';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './Landing.css'
-import Navbar from './Navbar';
-import './Navbar.css';
+import Home from './pages/Home'
+
 
 
 const Landing = () => { 
     return(
             <div>
-                <Navbar />
+                <div>
+                    <Navbar />
+                </div>
+                <div>
+                    <Home />
+                </div>
             </div>
     )
 }
