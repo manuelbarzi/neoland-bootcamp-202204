@@ -2,7 +2,8 @@ const { NotFoundError, ConflictError } = require("errors");
 const { User, Clock, Job } = require("../models");
 const { validateId } = require("validator");
 
-function clockUserJobOut(userId, jobId, clockId) {
+function clockUserJobOut(userId, clockId, jobId) {
+  debugger;
   validateId(userId);
   validateId(jobId);
   validateId(clockId);

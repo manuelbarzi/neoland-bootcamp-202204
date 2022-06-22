@@ -4,31 +4,35 @@ import { toast } from "react-hot-toast";
 
 export default function FormRegister() {
   const handelRegisterUser = (event) => {
-    event.preventDefault();
-    const name = event.target.name.value;
-    const username = event.target.username.value;
-    const password = event.target.password.value;
-    const role = event.target.role.value;
-    const nid = event.target.username.value;
-    const email = event.target.email.value;
-    const address = event.target.address.value;
+    try {
+      event.preventDefault();
+      const name = event.target.name.value;
+      const username = event.target.username.value;
+      const password = event.target.password.value;
+      const role = event.target.role.value;
+      const nid = event.target.username.value;
+      const email = event.target.email.value;
+      const address = event.target.address.value;
 
-    registerUser(
-      sessionStorage.token,
-      name,
-      username,
-      password,
-      role,
-      nid,
-      email,
-      address
-    )
-      .then((user) => {
-        toast.success(` User register`);
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+      registerUser(
+        sessionStorage.token,
+        name,
+        username,
+        password,
+        role,
+        nid,
+        email,
+        address
+      )
+        .then((user) => {
+          toast.success(` User register`);
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (

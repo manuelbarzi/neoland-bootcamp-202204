@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import NavbarAdmin from "../Components/NavbarAdmin";
+import NavbarAdmin from "../components/NavbarAdmin";
 import { withTokenAndRol } from "../container";
 
 export default withTokenAndRol(function Clocked() {

@@ -1,6 +1,6 @@
 import React from "react";
-import CardJob from "../Components/Jobs/CardJob";
-import Navbar from "../Components/Navbar";
+import CardJob from "../components/jobs/CardJob";
+import Navbar from "../components/Navbar";
 import { withTokenAndRol } from "../container";
 
 export default withTokenAndRol(function Jobs() {

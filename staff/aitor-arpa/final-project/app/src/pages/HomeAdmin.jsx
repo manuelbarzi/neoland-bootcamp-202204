@@ -1,6 +1,6 @@
-import ListJobAdmin from "../Components/Jobs/ListJobAdmin";
+import ListJobAdmin from "../components/jobs/ListJobAdmin";
 import { withTokenAndRol } from "../container";
-import NavbarAdmin from "../Components/NavbarAdmin";
+import NavbarAdmin from "../components/NavbarAdmin";
 
 export default withTokenAndRol(function HomeAdmin() {
   return (

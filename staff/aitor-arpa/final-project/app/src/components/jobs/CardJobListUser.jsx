@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import CardJob from "./CardJob";
-import retrieveJobs from "../../logic/retrieveJob";
+import retrieveJobsUser from "../../logic/retrieveClockUser";
 import toast from "react-hot-toast";
 
 export default function CardJobList() {
@@ -11,7 +11,7 @@ export default function CardJobList() {
 
   const loadJobs = () => {
     try {
-      retrieveJobs(sessionStorage.token)
+      retrieveJobsUser(sessionStorage.token)
         .then((jobs) => {
           setJobs(jobs);
         })
@@ -22,8 +22,8 @@ export default function CardJobList() {
       toast.error(error);
     }
   };
-
-  return jobs && jobs.length ? (
+  debugger;
+  return jobs && jobs.length <= 0 ? (
     <ul>
       {jobs.map((job) => (
         <li jobId={job.id}>

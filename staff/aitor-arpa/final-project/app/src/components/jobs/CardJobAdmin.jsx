@@ -1,36 +1,44 @@
-import stop from "../../Img/stop.png";
-import play from "../../Img/play.png";
+import stop from "../../images/stop.png";
+import play from "../../images/play.png";
 import clockUserInJob from "../../logic/clockUserInJob";
 import clockUserOutJob from "../../logic/clockUserOutJob";
 import toast, { Toaster } from "react-hot-toast";
 import "./CardJob.sass";
 export default function CardJobAdmin(props) {
   const RegisterClockJobIn = (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const jobId = event.target.jobId.value;
-    clockUserInJob(sessionStorage.token, jobId)
-      .then((result) => {
-        const clockId = result;
-        toast.success(`Start the job 🙏 🤙`);
-      })
-      .catch((error) => {
-        toast.error(`${error} ⛔`);
-      });
+      const jobId = event.target.jobId.value;
+      clockUserInJob(sessionStorage.token, jobId)
+        .then((result) => {
+          const clockId = result;
+          toast.success(`Start the job 🙏 🤙`);
+        })
+        .catch((error) => {
+          toast.error(`${error} ⛔`);
+        });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   const RegisterClockJobOut = (event) => {
-    event.preventDefault();
-    const clockId = event.target.clockId.value;
-    const jobId = event.target.jobid.value;
+    try {
+      event.preventDefault();
+      const clockId = event.target.clockId.value;
+      const jobId = event.target.jobid.value;
 
-    clockUserOutJob(sessionStorage.token, jobId, clockId)
-      .then((result) => {
-        if (result) toast.success(`Start the job 🙏 🤙`);
-      })
-      .catch((error) => {
-        toast.error(`${error} ⛔`);
-      });
+      clockUserOutJob(sessionStorage.token, jobId, clockId)
+        .then((result) => {
+          if (result) toast.success(`Start the job 🙏 🤙`);
+        })
+        .catch((error) => {
+          toast.error(`${error} ⛔`);
+        });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (

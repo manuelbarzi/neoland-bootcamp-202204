@@ -1,8 +1,11 @@
 const { User } = require("../models");
 const { NotFoundError, AuthError } = require("errors");
+const { validateId, validateStringNotEmptyOrBlank } = require("validator");
 
 function retrieveUsersByRole(userId, role) {
-  // TODO validate input args
+  validateId(userId);
+  validateStringNotEmptyOrBlank(role);
+  s;
 
   return User.findById(userId)
     .then((user) => {
@@ -16,7 +19,9 @@ function retrieveUsersByRole(userId, role) {
     })
     .then((users) => {
       users.forEach((user) => {
-        // TODO sanitize (_id -> id)
+        const doc = user._doc;
+        delete doc.password;
+        delete doc._v;
       });
 
       return users;

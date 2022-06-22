@@ -3,6 +3,7 @@ const { verifyToken, handleErrorsAndRespond } = require("./helpers");
 
 module.exports = (req, res) => {
   try {
+    debugger;
     const { userId } = verifyToken(req);
 
     const {

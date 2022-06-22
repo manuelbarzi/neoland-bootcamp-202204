@@ -3,26 +3,31 @@ import authenticateUser from "../../logic/authenticateUser";
 import getUserRole from "../../logic/getUserRole";
 import { AuthError } from "errors";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function FormLogin() {
   const navigate = useNavigate();
 
   const handelUserLogin = (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
 
-    const username = event.target.username.value;
-    const password = event.target.password.value;
+      const username = event.target.username.value;
+      const password = event.target.password.value;
 
-    authenticateUser(username, password)
-      .then((token) => {
-        sessionStorage.token = token;
-        const role = getUserRole(token);
-        if (!(role === "worker" || role === "admin"))
-          throw new AuthError(`${username}contact your manager`);
-        if (role === "worker") navigate("/");
-        if (role === "admin") navigate("/admin");
-      })
-      .catch();
+      authenticateUser(username, password)
+        .then((token) => {
+          sessionStorage.token = token;
+          const role = getUserRole(token);
+          if (!(role === "worker" || role === "admin"))
+            throw new AuthError(`${username}contact your manager`);
+          if (role === "worker") navigate("/");
+          if (role === "admin") navigate("/admin");
+        })
+        .catch();
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (

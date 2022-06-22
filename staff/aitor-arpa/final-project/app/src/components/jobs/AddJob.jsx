@@ -1,4 +1,4 @@
-import addJob from "../../Img/addJob.png";
+import addJob from "../../images/addJob.png";
 export default function AddJob() {
   return (
     <div>

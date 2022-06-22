@@ -1,17 +1,16 @@
 import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.sass";
-import "../src/Components/Logout.sass";
-import Login from "./Pages/Login";
-import Clock from "./Pages/Clock";
-import Profile from "./Pages/Profile";
-import HomeAdmin from "./Pages/HomeAdmin";
-import Home from "./Pages/Home";
-import Jobs from "./Pages/Jobs";
-import ProfileAdmin from "./Pages/ProfileAdmin";
-import JobsAdmin from "./Pages/JobsAdmin";
-import ClockAdmin from "./Pages/ClockAdmin";
-import Users from "./Pages/Users";
+import Login from "./pages/Login";
+import Clock from "./pages/Clock";
+import Profile from "./pages/Profile";
+import HomeAdmin from "./pages/HomeAdmin";
+import Home from "./pages/Home";
+import Jobs from "./pages/Jobs";
+import ProfileAdmin from "./pages/ProfileAdmin";
+import JobsAdmin from "./pages/JobsAdmin";
+import ClockAdmin from "./pages/ClockAdmin";
+import Users from "./pages/Users";
 
 export default function App() {
   return (

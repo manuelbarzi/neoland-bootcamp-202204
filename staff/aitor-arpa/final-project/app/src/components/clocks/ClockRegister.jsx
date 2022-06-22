@@ -1,6 +1,6 @@
 import React from "react";
-import exit from "../../Img/salida.png";
-import In from "../../Img/entrada.png";
+import exit from "../../images/salida.png";
+import In from "../../images/entrada.png";
 import "./ClockRegister.sass";
 import clockUserIn from "../../logic/clockUserIn";
 import toast, { Toaster } from "react-hot-toast";
@@ -22,17 +22,20 @@ export default function ClockRegister() {
   };
 
   const registerTimeOut = (event) => {
-    event.preventDefault();
-    const clockId = event.target.clockId.value;
-    clockUserOut(sessionStorage.token, clockId)
-      .then((result) => {
-        if (!result) toast.error(` Error !!!`);
+    try {
+      event.preventDefault();
+      debugger;
+      const clockId = event.target.clockId.value;
+      clockUserOut(sessionStorage.token, clockId)
+        .then((result) => {
+          if (!result) toast.error(` Error !!!`);
 
-        toast.success(` Cloked out register`);
-      })
-      .catch((error) => {
-        toast.error(`${error}`);
-      });
+          toast.success(` Cloked out register`);
+        })
+        .catch((error) => {
+          toast.error(`${error}`);
+        });
+    } catch (error) {}
   };
   return (
     <div className="center_row">

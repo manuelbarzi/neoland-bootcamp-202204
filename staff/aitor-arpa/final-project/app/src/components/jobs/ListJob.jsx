@@ -10,13 +10,17 @@ export default function CardJobList() {
   }, []);
 
   const loadJobs = () => {
-    retrieveJobs(sessionStorage.token)
-      .then((jobs) => {
-        setJobs(jobs);
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+    try {
+      retrieveJobs(sessionStorage.token)
+        .then((jobs) => {
+          setJobs(jobs);
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return jobs && jobs.length ? (

@@ -38,7 +38,6 @@ export default function CardUser(props) {
           type="username"
           name="username"
           placeholder="Username"
-          value={props.username}
         ></input>
         <input
           className="borderDawn"
@@ -52,22 +51,39 @@ export default function CardUser(props) {
           type="text"
           name="nid"
           placeholder="nid"
-          value={props.nid}
         ></input>
         <input
           className="borderDawn"
           type="email"
           name="email"
           placeholder="email"
-          value={props.email}
         ></input>
         <input
           className="borderDawn"
           type="text"
           name="address"
           placeholder="Addres"
-          value={props.address}
         ></input>
+        <select name="role">
+          <option value="" disabled selected>
+            Rol
+          </option>
+          <option value="admin">Admin</option>
+          <option value="worker">Trabajador</option>
+        </select>
+        <button
+          type="onSubmit"
+          className="btn_form"
+          onSubmit={handelRegisterUser}
+        >
+          Register
+        </button>
+        <button type="onSubmit" className="btn_form">
+          Edit
+        </button>
+        <button type="onSubmit" className="btn_form">
+          Delete
+        </button>
       </form>
       <Toaster />
     </div>

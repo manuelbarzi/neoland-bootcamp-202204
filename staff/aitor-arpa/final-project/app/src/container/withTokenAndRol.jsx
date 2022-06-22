@@ -13,7 +13,6 @@ export const withTokenAndRol = (Component, token = true, rol = "admin") => {
     const role = sessionStorage.token
       ? getUserRole(sessionStorage.token)
       : null;
-    console.log(location);
     return !sessionStorage.token && !token ? (
       <Component />
     ) : !sessionStorage.token ? (

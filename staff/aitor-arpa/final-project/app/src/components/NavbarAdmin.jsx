@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import "./NavbarAdmin.sass";
-import perfil from "../Img/profile.png";
-import clock from "../Img/clock.png";
-import addJob from "../Img/addJob.png";
-import addUser from "../Img/addUser.png";
-import home from "../Img/home.png";
+import perfil from "../images/profile.png";
+import clock from "../images/clock.png";
+import addJob from "../images/addJob.png";
+import addUser from "../images/addUser.png";
+import home from "../images/home.png";
 
 export default function NavbarAdmin() {
   return (

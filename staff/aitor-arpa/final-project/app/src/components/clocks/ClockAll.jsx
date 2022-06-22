@@ -7,15 +7,18 @@ export default function ClockAll() {
   useEffect(() => {
     loadclocks();
   }, []);
-
   const loadclocks = () => {
-    retrieveClockUser(sessionStorage.token)
-      .then((clocks) => {
-        setClok(clocks);
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+    try {
+      retrieveClockUser(sessionStorage.token)
+        .then((clocks) => {
+          setClok(clocks);
+        })
+        .catch((error) => {
+          toast.error(error);
+        });
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return clocks && clocks.length ? (

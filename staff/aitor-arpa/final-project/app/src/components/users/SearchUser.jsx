@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import retrieveUsersRol from "../../logic/retrieveUsersRol";
 import toast from "react-hot-toast";
-import './CardUserList.sass'
-import search from "../../Img/search.png"
+import "./CardUserList.sass";
+import search from "../../images/search.png";
 import CardUser from "./CardUser";
-
-
-
 
 export default function searchUser() {
   /* const [user, setUsers] = useState(null)
@@ -30,11 +27,13 @@ export default function searchUser() {
 
   return (
     <>
-      <form /* onSubmit={loadUsersRol} */ className='CardUser'>
-        <input type="text" name='role'placeholder="role"></input>
-        <button type="onSubmit" ><img src={search} alt='' /></button>
+      <form /* onSubmit={loadUsersRol} */ className="CardUser">
+        <input type="text" name="role" placeholder="role"></input>
+        <button type="onSubmit">
+          <img src={search} alt="" />
+        </button>
       </form>
-       {/*  users && users.length || users === undefine ?
+      {/*  users && users.length || users === undefine ?
     
       <ul>
         {user.map(users => <li key={users._id}>
@@ -44,8 +43,5 @@ export default function searchUser() {
       :
       <p>No hay usuarios añada alguno para empezar</p>  */}
     </>
-
-  )
-
+  );
 }
-

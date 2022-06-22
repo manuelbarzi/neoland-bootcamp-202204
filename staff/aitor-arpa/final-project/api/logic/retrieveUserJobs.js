@@ -1,5 +1,5 @@
 const { User, Job } = require("../models");
-const { NotFoundError, ConflictError } = require("errors");
+const { NotFoundError } = require("errors");
 const { validateId } = require("validator");
 
 function retrieveUserJobs(userId) {
@@ -7,14 +7,19 @@ function retrieveUserJobs(userId) {
 
   return User.findById(userId)
     .then((user) => {
+      debugger;
       if (!user)
         throw new NotFoundError(`user with id ${userId} does not exist`);
 
-      return Job.findById(userId);
+      return Job.find({ user: userId });
     })
     .then((jobs) => {
+      if (!jobs) return [];
       jobs.forEach((job) => {
-        // TODO sanitise
+        const doc = job._doc;
+        delete doc._v;
+
+        return doc;
       });
 
       return jobs;

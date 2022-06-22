@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import ClockAll from "../Components/Cloks/ClockAll";
-import ClockRegister from "../Components/Cloks/ClockRegister";
-import Navbar from "../Components/Navbar";
+import ClockAll from "../components/clocks/ClockAll";
+import ClockRegister from "../components/clocks/ClockRegister";
+import Navbar from "../components/Navbar";
 import { withTokenAndRol } from "../container";
 
 export default withTokenAndRol(function Clocked() {

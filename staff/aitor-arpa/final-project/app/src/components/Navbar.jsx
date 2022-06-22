@@ -1,9 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./navar.sass";
-import perfil from "../Img/profile.png";
-import clock from "../Img/clock.png";
-import home from "../Img/home.png";
+import "./Navbar.sass";
+import perfil from "../images/profile.png";
+import clock from "../images/clock.png";
+import home from "../images/home.png";
 
 export default function Navbar() {
   return (

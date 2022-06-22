@@ -1,8 +1,8 @@
 import { Route, Routes } from "react-router-dom";
-import FormProfile from "../Components/Users/FormProfile";
+import FormProfile from "../components/users/FormProfile";
 
-import Navbar from "../Components/Navbar";
-import Logout from "../Components/Logout";
+import Navbar from "../components/Navbar";
+import Logout from "../components/users/Logout";
 import { withTokenAndRol } from "../container";
 
 export default withTokenAndRol(function Profile() {

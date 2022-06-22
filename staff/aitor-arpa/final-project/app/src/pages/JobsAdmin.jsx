@@ -1,7 +1,6 @@
 import React from "react";
-import AddJob from "../Components/Jobs/AddJob";
-import CardJob from "../Components/Jobs/CardJob";
-import NavbarAdmin from "../Components/NavbarAdmin";
+import AddJob from "../components/jobs/AddJob";
+import NavbarAdmin from "../components/NavbarAdmin";
 import { withTokenAndRol } from "../container";
 
 export default withTokenAndRol(function JobsAdmin() {
