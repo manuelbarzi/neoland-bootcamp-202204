@@ -1,4 +1,4 @@
-const { Activity, Point } = require('../models')
+const { User, Activity, Point } = require('../models')
 const { NotFoundError } = require('errors')
 const { validateStringNotEmptyNoSpaces, validateNumber } = require('validators')
 const retrieveAltitude = require('./retrieveAltitude')
@@ -12,13 +12,18 @@ const retrieveAltitude = require('./retrieveAltitude')
  * @param {*} alt The altitud of the geo point
  * @returns Promise
  */
-function addPointToActivity(activityId, lat, lng, alt) {
+function addPointToActivity(userId, activityId, lat, lng, alt) {
+    validateStringNotEmptyNoSpaces(userId, 'user Id')
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
     validateNumber(lat, 'latitude')
     validateNumber(lng, 'longitude')
     if(alt != null) validateNumber(alt, 'altitude')
 
-    return Activity.findById(activityId)
+    return User.findById(userId)
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+            return Activity.findById(activityId)
+        })
         .then(activity => {
             if (!activity) throw new NotFoundError(`activity with id ${activityId} does not exist`)
 

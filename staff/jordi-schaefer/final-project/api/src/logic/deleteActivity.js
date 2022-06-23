@@ -1,4 +1,4 @@
-const { Activity } = require ('../models')
+const { User, Activity } = require ('../models')
 const { NotFoundError, ConflictError } = require ('errors')
 const { validateStringNotEmptyNoSpaces } = require('validators')
 
@@ -6,7 +6,11 @@ function deleteActivity(userId, activityId) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
     validateStringNotEmptyNoSpaces(activityId, 'activity id')
 
-    return Activity.findById(activityId)    
+    return User.findById(userId)
+        .then(user => {
+            if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+            return Activity.findById(activityId)
+        })   
         .then((activity) => {
             if(!activity) throw new NotFoundError(`activity with id ${activityId} does not exist`)
 

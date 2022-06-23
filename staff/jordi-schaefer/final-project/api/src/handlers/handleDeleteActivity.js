@@ -8,7 +8,7 @@ module.exports = (req, res) => {
         const { params: { activityId } } = req
 
         deleteActivity(userId, activityId)
-            .then(() => res.status(204).send())  // devuelvo estatus ok y el token
+            .then(() => res.status(204).send())
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

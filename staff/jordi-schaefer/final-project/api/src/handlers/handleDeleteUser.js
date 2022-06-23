@@ -8,7 +8,7 @@ module.exports = (req, res) => {
         const { body: { password } } = req
 
         deleteUser(userId, password)
-            .then(() => res.status(204).send())  // devuelvo estatus ok y el token
+            .then(() => res.status(204).send()) 
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)
