@@ -3,14 +3,13 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import deleteEvent from '../logic/deleteEvent'
 import './Event.sass'
-import { useNavigate } from 'react-router-dom'
 
 function EventTargeted(props) {
   const logger = new Logger('EventTargeted')
   logger.info('call')
 
   const { handleFeedback } = useContext(Context)
-  const navigate = useNavigate()
+
   const { eventId, onRemove } = props
 
   const handleRemoveClick = () => {
@@ -24,8 +23,6 @@ function EventTargeted(props) {
 
         onRemove(eventId)
         handleFeedback({ level: 'success', message: 'event has been removed' })
-        navigate('/myCalendar')
-
       })
   }
 
@@ -34,8 +31,8 @@ function EventTargeted(props) {
   return <div className='Event'>
     <form className="Event__form">
 
-      <h1 className='Event__title' defaultValue={props.title}></h1>
-      <h1 className="Event__description" defaultValue={props.description}></h1>
+      <h1 className='Event__title'>{props.title}</h1>
+      <h1 className="Event__description">{props.description}</h1>
 
       <div className='Event__button-container'>
         <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>

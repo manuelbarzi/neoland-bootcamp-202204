@@ -49,18 +49,16 @@ function MyCalendar({ timestamp }) {
   logger.info('render')
 
   return <div>
-    <div className='EventTargeted' >
+    <div className='myCalendar__container' >
       <button className='Button' onClick={handleEventTargetedClick}>Eventos Apuntados</button>
       <Routes>
         <Route index element={events && events.length ?
 
-          <ul className="EventList__list Container">
+          <ul className="myCalendar__list">
             {events.map(event => <li key={event.id}>
               <Event eventId={event.id} title={event.title} description={event.description} onRemove={handleRemoveEvent} />
             </li>)}
           </ul>
-
-
           :
           <p>no event yet</p>} />
         <Route path="retrieveTargetedEvent" element={<RetrieveTargetedEvent />} />

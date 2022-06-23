@@ -15,7 +15,6 @@ function RetrieveTargetedEvent({ timestamp }) {
 
   useEffect(() => {
     logger.info('componentDidMount | componentWillReceiveProps')
-
     loadEvents()
   }, [timestamp])
 
@@ -39,8 +38,8 @@ function RetrieveTargetedEvent({ timestamp }) {
 
   return events && events.length ?
     <ul className="EventList__list Container">
-      {events.map(event => <li key={event.id}>
-        <EventTargeted event={event} onRemove={handleRemoveEventTargeted} />
+      {events.map(event => <li key={event._id}>
+        <EventTargeted eventId={event._id} title={event.title} description={event.description} onRemove={handleRemoveEventTargeted} />
       </li>)}
     </ul>
     :

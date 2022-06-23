@@ -38,7 +38,7 @@ function HomeEventList() {
     logger.info('render')
 
     return events && events.length ?
-        <ul className="EventList__list Container">
+        <ul className="EventList__list">
             {events.map(event => <li key={event.id}>
                 <EventHome event={event} onSignUp={handleSignUpToEventClick} />
             </li>)}

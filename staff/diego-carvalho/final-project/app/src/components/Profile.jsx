@@ -7,15 +7,24 @@ function Profile() {
     const [view, setView] = useState(null)
 
     const handleChangeNameClick = () => {
-        setView('change-name' )
+        if(view === 'change-name')
+            setView(null)
+        else
+            setView('change-name' )
     }
 
     const handleChangePasswordClick = () => {
-        setView('change-password')
+        if(view === 'change-password')
+            setView(null)
+        else
+            setView('change-password')
     }
 
     const handleDeleteUserClick = () => {
-        setView('delete-user')
+        if(view === 'delete-user')
+            setView(null)
+        else
+            setView('delete-user')
     }
 
     return <div className="Container">
