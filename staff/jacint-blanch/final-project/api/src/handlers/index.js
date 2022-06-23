@@ -3,5 +3,6 @@ module.exports = {
     handleAuthenticateUser: require('./handleAuthenticateUser'),
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
-    handleIncidence: require('./handleIncidence')
+    handleIncidence: require('./handleIncidence'),
+    handleIncidenceNearMe: require('./handleIncidenceNearMe')
 }

@@ -3,6 +3,7 @@ const authenticateUser = require('./authenticateUser')
 const retrieveUser = require('./retrieveUser')
 const updateUser = require('./updateUser')
 const createIncidence = require('./createIncidence')
+const retrieveIncidenceNearMe = require('./retrieveIncidenceNearMe')
 
 
 module.exports = {
@@ -10,6 +11,6 @@ module.exports = {
     authenticateUser,
     retrieveUser,
     updateUser,
-    createIncidence
-
+    createIncidence,
+    retrieveIncidenceNearMe
 }
