@@ -2,20 +2,18 @@ const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateObjectId, validateString } = require('../validators')
 
-function createEvent(userId, photo, title, description, direction, category) {
+function createEvent(userId, title, description, category) {
     validateObjectId(userId, 'userId')
-    if(photo != null)validateString(photo, 'photo')
-    if(title != null)validateString(title, 'title')
-    if (description != null)validateString(description, 'description')
-    if (direction != null)validateString(direction, 'direction')
-    if (category != null)validateString(category, 'category')
-   
+    if (title != null) validateString(title, 'title')
+    if (description != null) validateString(description, 'description')
+    if (category != null) validateString(category, 'category')
 
-    return User.findById(userId)
+
+    return User.findById(userId)//user creator
         .then(user => {
-            if (!user) throw new NotFoundError(`owner with id ${userId} does not exist`)
+            if (!user) throw new NotFoundError(`ownerEvent with id ${userId} does not exist`)
 
-            return Event.create({ owner: userId, photo, title, description, direction, category})
+            return Event.create({ ownerEvent: userId, title, description, category })
         })
         .then(event => event.id)
 }

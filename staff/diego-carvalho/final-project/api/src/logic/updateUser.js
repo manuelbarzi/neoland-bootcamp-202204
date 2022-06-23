@@ -8,9 +8,6 @@ function updateUser(userId, name, email, password) {
     if (email != null)  validateEmail(email, 'email')
     if(password != null)validatePassword(password, 'password')
     
-  
-    
-
     return User.updateOne({ _id: userId }, { $set: { name, email, password}})
         .then((result) => {
             if (result.matchedCount === 0)

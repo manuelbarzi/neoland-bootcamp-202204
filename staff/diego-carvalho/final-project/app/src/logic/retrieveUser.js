@@ -1,10 +1,17 @@
+import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
 import { validateJwt } from 'validators'
 
 function retrieveUser(token, callback) {
+    const logger = new Logger('retrieveUser')
+
+    logger.info('call')
+
     validateJwt(token)
 
     const api = new Apium('http://localhost:8080/api')
+
+    logger.info('request')
 
     return api.get('users', {
         headers: {
@@ -12,6 +19,8 @@ function retrieveUser(token, callback) {
         }
     }, (error, response) => {
         if (error) return callback(error)
+
+        logger.info('response')
 
         const { status, payload } = response
 

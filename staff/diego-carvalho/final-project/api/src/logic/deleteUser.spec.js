@@ -45,7 +45,6 @@ describe('deleteUser', () => {
                     throw new Error('it should not reach this point')
                 })
                 .catch(error => {
-
                     expect(error).to.be.instanceOf(AuthError)
                     expect(error.message).to.equal('incorrect Id')
                 })

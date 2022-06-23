@@ -1,10 +1,16 @@
-
+import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
 import {validateJwt, validatePassword} from 'validators'
 
 function deleteUser(token, password, callback) {
+    const logger = new Logger('deleteUser')
+
+    logger.info('call')
+
     validateJwt(token)
     validatePassword(password)
+
+    logger.info('request')
 
     const api = new Apium('http://localhost:8080/api')
 
@@ -17,6 +23,8 @@ function deleteUser(token, password, callback) {
     }, 
     (error, {status, payload} ) => {
         if (error) return callback(error)
+
+        logger.info('response')
 
         if (status >= 400 && status < 500) {
             const data = JSON.parse(payload)

@@ -5,8 +5,12 @@ const updateUser = require('./updateUser')
 const deleteUser = require('./deleteUser')
 const createEvent = require('./createEvent')
 const retrieveEvent = require('./retrieveEvent')
+const retrieveOwnerEvent = require('./retrieveOwnerEvent')
 const updateEvent = require('./updateEvent')
 const deleteEvent = require('./deleteEvent')
+const addEventToUser = require('./addEventToUser')
+const toggleUserToEvent = require('./toggleUserToEvent')
+const retrieveTargetedEvent = require('./retrieveTargetedEvent')
 
 module.exports = {
     registerUser,
@@ -16,7 +20,11 @@ module.exports = {
     deleteUser,
     createEvent,
     retrieveEvent,
+    retrieveOwnerEvent,
     updateEvent,
     deleteEvent,
-  
+    addEventToUser,
+    toggleUserToEvent,
+    retrieveTargetedEvent
+
 }

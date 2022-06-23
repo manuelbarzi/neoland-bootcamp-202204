@@ -24,11 +24,11 @@ describe('updateEvent', () => {
         it('succeeds events and correct credentials', () => {
             let eventId
 
-            return Event.create({ owner: userId, photo: '', title: 'After Work Mar Bella', description: 'Únete a nosotros si quieres disfrutar...', direction: '' })
+            return Event.create({ owner: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres disfrutar...'})
                 .then((result) => {
                     eventId = result.id
-
-                    return updateEvent(userId, eventId, '', 'After Work Mar Bella', 'Únete a nosotros si quieres disfrutar...', '')
+             
+                    return updateEvent(userId, eventId, 'After Work Mar Bella', 'Únete a nosotros si quieres disfrutar...')
                 })
                 .then((result) => {
                     expect(result).to.be.undefined
@@ -36,18 +36,16 @@ describe('updateEvent', () => {
                     return Event.findById(eventId)
                 })
                 .then((event) => {
-                    expect(event.photo).to.be.equal('')
                     expect(event.title).to.be.equal('After Work Mar Bella')
                     expect(event.description).to.be.equal('Únete a nosotros si quieres disfrutar...')
-                    expect(event.direction).to.be.equal('')
-
+            
                 })
         })
 
-        it('fails with no events', () => {
+        it ('fails with no events', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateEvent(userId, wrongId, '', 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', '')
+            return updateEvent(userId, wrongId,'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -57,11 +55,11 @@ describe('updateEvent', () => {
                 })
         })
 
-        it('fails when owner does not exist', () => {
+        it ('fails when owner does not exist', () => {
             const wrongId = new ObjectId().toString()
             const eventId = new ObjectId().toString()
 
-            return updateEvent(wrongId, eventId, '', 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', '')
+            return updateEvent(wrongId, eventId,'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

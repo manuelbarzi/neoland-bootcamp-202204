@@ -1,5 +1,4 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
-const event = require('./event')
 
 const user = new Schema({
     name: {
@@ -15,16 +14,15 @@ const user = new Schema({
 
     password: {
         type: String,
-        required: true,
 
     },
 
-    ownerEvents:[{
+    owner: [{
         type: ObjectId,
         ref: 'User'
     }],
-    
-    events:[{
+
+    events: [{
         type: ObjectId,
         ref: 'Event'
     }]

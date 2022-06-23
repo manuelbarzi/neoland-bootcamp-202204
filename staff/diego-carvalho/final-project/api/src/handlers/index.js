@@ -1,3 +1,4 @@
+
 module.exports = {
     handleRegisterUser: require('./handleRegisterUser'),
     handleAuthenticateUser: require('./handleAuthenticateUser'),
@@ -6,7 +7,10 @@ module.exports = {
     handleDeleteUser: require('./handleDeleteUser'),
     handleCreateEvent: require('./handleCreateEvent'),
     handleRetrieveEvent: require('./handleRetrieveEvent'),
+    handleRetrieveOwnerEvent: require('./handleRetrieveOwnerEvent'),
     handleUpdateEvent: require('./handleUpdateEvent'),
     handleDeleteEvent: require('./handleDeleteEvent'),
- 
+    handleAddEventToUser: require('./handleAddEventToUser'),
+    handleToggleUserToEvent: require('./handleToggleUserToEvent'),
+    handleRetrieveTargetedEvent: require('./handleRetrieveTargetedEvent'),
 }

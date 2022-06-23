@@ -2,16 +2,15 @@ const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
 
 const event = new Schema({
-    owner: {
+    ownerEvent: {
         type: ObjectId,
-        required: true,
         ref: 'User'
     },
 
-    photo:{
-        type: String,
-        default: 'https://metaverso247.com/wp-content/uploads/2022/05/Metaverso-ETF.jpg'
-    },
+    // photo:{
+    //     type: String,
+    //     default: 'https://metaverso247.com/wp-content/uploads/2022/05/Metaverso-ETF.jpg'
+    // },
 
     title: {
         type: String,
@@ -21,7 +20,6 @@ const event = new Schema({
     description: {
         type: String,
         default: null,
-       
     },
 
     date: {
@@ -30,15 +28,14 @@ const event = new Schema({
         default: Date.now
     },
 
-    direction:{
+    direction: {
         type: String,
     },
 
-    category:{
+    category: {
         type: String,
-        enum : ['sport-activities','social-activities', 'environment'],
+        enum: ['sport-activities', 'social-activities', 'environment'],
         default: 'sport-activities'
-
     },
 
     participants: [{
