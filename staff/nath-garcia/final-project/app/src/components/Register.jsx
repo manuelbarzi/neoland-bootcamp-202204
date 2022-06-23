@@ -45,7 +45,7 @@ function Register(props) {
             <input className="Input Input--light" type="number" name="phone" placeholder="phone" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Register</button>
-            <Link className="Button Button--light" to="/login">Login</Link>
+            <Link className="Button Link" to="/login">Log in</Link>
         </form>
     </div>
 }

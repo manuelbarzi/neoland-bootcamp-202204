@@ -37,7 +37,7 @@ function Login(props) {
             <input className="Input Input--light" type="username" name="username" placeholder="username" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />
             <button className="Button Button--light" type="submit" >Login</button>
-            <Link className="Button Button--light" to="/register" >Register</Link>
+            <Link className="Button Link" to="/register" >Register</Link>
         </form>
     </div>
 }

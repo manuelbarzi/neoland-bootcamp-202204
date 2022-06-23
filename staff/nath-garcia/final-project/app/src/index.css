@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
 h1, h2, h3 {
   font-size: inherit;
 }
@@ -9,7 +9,7 @@ a {
 }
 
 * {
-  font-family: Poppins;
+  font-family: Bad Script;
 }
 
 html, body, #root {
@@ -38,28 +38,33 @@ body {
 
 .Button {
   margin: 0.5rem;
-  font-size: inherit;
+  font-size: 1.3rem;
 }
 
 .Button {
   button: 1px solid black;
+  border: 1.5px solid #3A5673;
   border-radius: 0.25rem;
-  background-color: transparent;
+  background-color: #3A5673;
   cursor: pointer;
-  color: black;
-}
-
-.Button > a {
-  color: #4CACBC;
+  color: #3A5673;
+  width: 230px;
 }
 
 .Button--light {
   border-color: white;
-  color: #4CACBC;
+  color: #F8E5E6;
 }
 
 .Button--no-border {
   border: none;
+}
+
+.Link {
+  font-size: 1.3rem;
+  background-color: transparent;
+  border: 1.5px solid;
+  text-align: center;
 }
 
 .Plus {
@@ -73,27 +78,27 @@ body {
 
 .Input {
   margin: 0.5rem;
-  font-size: inherit;
-  text-indent: 0.5rem;
+  font-size: 1.3rem;
 }
 
 .Input {
-  border: 1px solid black;
+  border: 1.5px solid;
   border-top: none;
   border-left: none;
   border-right: none;
-  background-color: #4CACBC;
+  background-color: transparent;
   cursor: pointer;
   color: black;
+  text-align: center;
 }
 
 .Input--light {
-  border-color: white;
-  color: white;
+  border-color: #3A5673;
+  color: #3A5673;
 }
 
 .Input--light::placeholder {
-  color: #EEE;
+  color: #3A5673;
 }
 
 .Box {
