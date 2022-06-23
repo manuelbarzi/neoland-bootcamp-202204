@@ -18,10 +18,6 @@ export default function Home({ token, isSessionActive, topArtists }) {
       topArtists.map(artist => <li>{artist.name}</li>
       )}
 
-    {/* {token &&  */}
-
-    {/* } */}
-
     <FlexColSection>
       
       {!isSessionActive && <a className="p-24 text-2xl-red-800" href={`https://accounts.spotify.com/authorize?${querystring.stringify({
@@ -34,7 +30,7 @@ export default function Home({ token, isSessionActive, topArtists }) {
       }
 
     </FlexColSection>
-    <Footer userRegistered={!!token} />
+    <Footer userLoggedIn={!!token} page="home" />
   </>
 }
 

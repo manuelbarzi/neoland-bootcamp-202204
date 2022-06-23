@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-export const SearchImage = ({ className, children, ...props }) => {
+export const SearchImage = ({ className, children, pageOn, ...props }) => {
     return (
         <figure className={`${className}`} {...props}>
-            <Image src="/media/search.svg" height={48} width={48} />
+            <Image src={pageOn ? '/media/search-on.svg': '/media/search-off.svg'} height={40} width={40} />
         </figure>
     )
 }

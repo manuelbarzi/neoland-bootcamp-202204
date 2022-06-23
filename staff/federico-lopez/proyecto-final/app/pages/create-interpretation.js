@@ -234,7 +234,7 @@ export default function CreateInterpretation({ token }) {
             }
 
         </main>
-        <Footer></Footer>
+        <Footer page="create-interpretation" />
     </>
 }
 

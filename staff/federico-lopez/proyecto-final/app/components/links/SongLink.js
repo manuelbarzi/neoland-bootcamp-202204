@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-export const SongLink = ({ className, children, artistName, ...props }) => {
+export const SongLink = ({ className, children, artistName, pageOn, ...props }) => {
     return (
         <Link
             href={`/artist/${artistName}`}

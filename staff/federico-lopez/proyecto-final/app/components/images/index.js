@@ -1,5 +1,6 @@
 export * from './Logo'
 export * from './BellImage'
-export * from './ExploreImage'
+export * from './HomeImage'
 export * from './SearchImage'
 export * from './CreateInterpretationImage'
+export * from './UserSessionImage'

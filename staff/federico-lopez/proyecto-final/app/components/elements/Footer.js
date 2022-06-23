@@ -1,31 +1,38 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
-import { SearchLink, ExploreLink, CreateInterPretationLink } from '../../components'
+import { useEffect, useState } from 'react'
+import { SearchLink, HomeLink, CreateInterPretationLink, UserSessionLink } from '../../components'
 
-export function Footer({ userRegistered }) {
-    return <footer className="w-full h-20 sticky bottom-0 border-t-2 bg-primary shadow-tertiary shadow-custom-footer py-2" >
-        <nav className="flex justify-around items-center">
-            <ExploreLink />
-            <SearchLink />
-            <CreateInterPretationLink />
+export function Footer({ userLoggedIn, page }) {
+    const [pageHome, setPageHome] = useState(false)
+    const [pageSearch, setPageSearch] = useState(false)
+    const [pageCreateInterpretation, setPageCreateInterpretation] = useState(false)
+    const [pageUserSession, setPageUserSession] = useState(false)
 
-            {!userRegistered &&
-                <Link href="/login">
-                    <figure>
-                        <Image src="/media/user.svg" height={48} width={48} />
-                    </figure>
-                </Link>
-            }
+    useEffect(() => {
+        switch (page) {
+            case 'home':
+                setPageHome(true)
+                break;
+            case 'search':
+                setPageSearch(true)
+                break;
+            case 'create-interpretation':
+                setPageCreateInterpretation(true)
+                break;
+            case 'user-session':
+                setPageUserSession(true)
+                break;
+        }
+    }, [])
 
-            {userRegistered &&
-                <Link href="/edit-profile">
-                    <figure>
-                        <Image className="rounded-full" src="/media/profile.jpg" height={48} width={48} />
-                    </figure>
-                </Link>
-            }
 
+    return <footer className="w-full h-20 sticky bottom-0 bg-white shadow-custom-footer flex justify-center" >
+        <nav className="w-4/5 flex justify-between items-center">
+            <HomeLink pageOn={pageHome} />
+            <SearchLink pageOn={pageSearch} />
+            <CreateInterPretationLink pageOn={pageCreateInterpretation }/>
+            <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} />
         </nav>
     </footer>
 }

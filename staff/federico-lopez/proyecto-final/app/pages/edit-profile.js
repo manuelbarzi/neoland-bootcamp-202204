@@ -42,7 +42,7 @@ export default function editProfile({ token, user }) {
                 <QuaternaryAnchor>CANCEL</QuaternaryAnchor>
             </Link>
         </FlexColSection>
-        <Footer userRegistered={!!token} />
+        <Footer userRegistered={!!token} page="user-session" />
     </>
 }
 

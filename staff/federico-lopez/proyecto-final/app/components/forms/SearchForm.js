@@ -2,11 +2,13 @@ import { Input, SearchImage } from '../../components'
 
 export function SearchForm({ className, children, onChangeInput, onCancelClick, ...props }) {
     return (
-        <form className={`my-2 w-11/12 h-14 py-2 px-2 rounded-md flex items-center justify-between gap-2 bg-secondary ${className}`} >
-            <SearchImage />
-            <Input className="bg-secondary border-0 placeholder-black placeholder-opacity-50 text-lg" type="search" placeholder="Artists or songs"
-                onChange={onChangeInput} />
-            <button type="reset" onClick={onCancelClick}>Cancel</button>
+        <form className={`w-full h-10 flex items-center justify-between gap-2 ${className}`} >
+            <div className="w-full border border-inputBorder rounded-lg bg-inputBg flex">
+                <SearchImage className="w-6 h-6" />
+                <Input className="bg-inputBg border-inputBg placeholder-black placeholder-opacity-50 text-lg" type="search" placeholder="Artists or songs"
+                    onChange={onChangeInput} />
+            </div>
+            <button className="font-bold text-myblue" type="reset" onClick={onCancelClick}>Cancel</button>
         </form>
     )
 }

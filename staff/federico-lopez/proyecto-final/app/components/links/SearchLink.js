@@ -1,10 +1,10 @@
 import Link from 'next/link'
 import { SearchImage } from "../../components"
 
-export const SearchLink = ({ className, children, ...props }) => {
+export const SearchLink = ({ className, children, pageOn, ...props }) => {
     return (
         <Link href="/search" className={`${className}`} {...props}>
-            <SearchImage />
+            <SearchImage pageOn={pageOn} />
         </Link>
     )
 }

@@ -9,7 +9,7 @@ module.exports = {
   theme: {
     extend: {
       boxShadow: {
-        "custom-footer": "0 0 30px -15px rgba(0, 0, 0, 0.3)",
+        "custom-footer": "inset 0px 1px 0px #DADADA",
         "custom-header": "0 0 30px -15px rgba(0, 0, 0, 0.3)"
       },
       colors: {

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { registerUser } from 'logic'
 import { useRouter } from 'next/router'
 import { verifyTokenWithAPICall } from '../helpers'
-import { FlexColSection, Logo, RegisterForm, QuaternaryAnchor } from '../components'
+import { FlexColSection, Logo, BlueAnchor, RegisterForm, QuaternaryAnchor } from '../components'
 // import Context from './Context'
 
 export default function Register(props) {
@@ -30,20 +30,16 @@ export default function Register(props) {
     }
 
     return (
-        <FlexColSection className="gap-10 justify-around items-center"
+        <FlexColSection className="gap-10 justify-center items-center"
             onSubmit={onFormSubmit}>
-
-            <Logo className="w-1/3" />
-
+            <Logo />
             <RegisterForm />
-            
-            <div className="w-full flex flex-col gap-3 items-center">
-                <p>Have an account?</p>
+            <div className="w-full gap-2 flex justify-center">
+                <p class="text-myblack text-xs">Already have an account ?</p>
                 <Link href="/login">
-                    <QuaternaryAnchor className="w-1/3">LOG IN</QuaternaryAnchor>
+                    <BlueAnchor>Log In</BlueAnchor>
                 </Link>
             </div>
-
         </FlexColSection>
     )
 }

@@ -30,20 +30,10 @@ export default function Login(props) {
         }
     }
     return (
-        <FlexColSection className="gap-10 justify-around items-center"
+        <FlexColSection className="gap-10 justify-center items-center"
             onSubmit={onFormSubmit}>
-                {/* <div className="w-80 h-80 rounded-full border bg-white flex align-center justify-center"> */}
             <Logo />
-            {/* </div> */}
             <LoginForm />
-
-            <div className="w-full flex flex-col gap-3 items-center">
-                <p>Don't have an account yet?</p>
-                <Link href="/register">
-                    <QuaternaryAnchor className="w-1/3">REGISTER</QuaternaryAnchor>
-                </Link>
-            </div>
-
         </FlexColSection>
     )
 }
