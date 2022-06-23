@@ -1,7 +1,8 @@
-import { validateStringNotEmptyNoSpaces, validatePosition } from 'validators'
+import { validateStringNotEmptyNoSpaces, validatePosition, validateJwt } from 'validators'
 import Apicaller from 'apicaller'
 
-function addPointToActivity(activityId, position){
+function addPointToActivity(token, activityId, position){
+    validateJwt(token)
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
     validatePosition(position)
     
@@ -9,7 +10,7 @@ function addPointToActivity(activityId, position){
     
     return (async () => {
         const result = await api.patch(`/activities/${activityId}`, 
-            {headers: {'Content-Type': 'application/json'}, 
+            {headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}, 
             body: JSON.stringify({ lat: position[0], lng: position[1], alt: position[2] })})
              
         const { status, payload } = result

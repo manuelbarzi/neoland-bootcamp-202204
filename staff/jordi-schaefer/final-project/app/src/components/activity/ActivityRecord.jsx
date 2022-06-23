@@ -50,7 +50,7 @@ function ActivityRecord(props) {
 
     const handleSaveClick = async() => {
         try {
-            await addPointToActivity(props.activityId, position)
+            await addPointToActivity(sessionStorage.token, props.activityId, position)
             handleFeedback({ type: 'success', message: 'Point saved!' })
             setPoints(points => [...points, 
                 position])
@@ -62,7 +62,7 @@ function ActivityRecord(props) {
 
     const handleFinishClick = async() => {
         try {
-            await addPointToActivity(props.activityId, position)
+            await addPointToActivity(sessionStorage.token, props.activityId, position)
             navigator.geolocation.clearWatch(watchId)
             props.onFinishClicked()
         } catch (error) {

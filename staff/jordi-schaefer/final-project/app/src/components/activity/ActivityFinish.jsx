@@ -24,7 +24,7 @@ function ActivityFinish(props) {
             const sport = event.target.sport.value
             const dificult = event.target.dificult.value
             
-            await updateActivity(props.activityId, title, text, audience, sport, dificult, images)
+            await updateActivity(sessionStorage.token, props.activityId, title, text, audience, sport, dificult, images)
             navigate('/')
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })

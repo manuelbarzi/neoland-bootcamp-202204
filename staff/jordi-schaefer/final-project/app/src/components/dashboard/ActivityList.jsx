@@ -40,7 +40,7 @@ function ActivityList(props) {
                     <ProfileInfoHeader activities={activities}/>
                 </li>}
 
-            {activities.map(activitie => <li className="Activity__list--item" key={activitie.id} >  
+            {activities.map(activitie => (activitie.points.length > 0) && <li className="Activity__list--item" key={activitie.id} >  
                 <ActivityItem activity={activitie} onLikeClicked={handleActivityLikeClicked} 
                 onCommentClicked={props.onCommentClicked} edit={props.private}/>
             </li>)}

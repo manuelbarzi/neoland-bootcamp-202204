@@ -37,7 +37,7 @@ function App () {
         setFeedback(feedback) }
 
     const handleFeedbackTimeout = () => setFeedback(null)
-    const handleOnDeletedUser = () => navigate('/')
+    const handleOnDeletedUser = () => navigate('/welcome')
 
 
     return <Context.Provider value={{ handleFeedback }} >

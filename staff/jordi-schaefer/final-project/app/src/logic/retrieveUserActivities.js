@@ -8,7 +8,7 @@ function retrieveUserActivities(token) {
 
     return (async () => {      
         const result = await api.get('/activities/user', {
-            headers: { 'Authorization': `Bearer ${token}`}})
+            headers: {'Authorization': `Bearer ${token}`}})
         
         const { status, payload } = result
         

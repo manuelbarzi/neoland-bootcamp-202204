@@ -1,8 +1,9 @@
-import { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString } from 'validators'
+import { validateStringNotEmptyNoSpaces, validateStringNotEmptyOrBlank, validateString, validateJwt } from 'validators'
 import Apicaller from 'apicaller'
 
 
-function updateActivity(activityId, title, text='', audience, sport, dificult, images){
+function updateActivity(token, activityId, title, text='', audience, sport, dificult, images){
+    validateJwt(token)
     validateStringNotEmptyNoSpaces(activityId, 'activity Id')
     validateStringNotEmptyOrBlank(title, 'title')
     validateString(text, 'text')
@@ -19,7 +20,7 @@ function updateActivity(activityId, title, text='', audience, sport, dificult, i
 
     return (async () => {      
         const result = await api.patch(`/activities/${activityId}/save`, 
-            {headers: {'Content-Type': 'application/json'}, 
+            {headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json'}, 
             body: JSON.stringify({ title, text, audience, sport, dificult, images})})
              
         const { status, payload } = result
