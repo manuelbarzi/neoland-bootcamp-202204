@@ -96,9 +96,10 @@ function Home({ onUserLogout }) {
                 <Routes>
                     <Route index element={<HomeEventList />} />
                     <Route path="/eventCreator" element={<EventCreator />} />
-                    <Route path="/myCalendar" element={<MyCalendar />} />
+                    <Route path="/myCalendar/*" element={<MyCalendar />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/searchEvent" element={<SearchBar />} />
+
                 </Routes>
             </main>
 

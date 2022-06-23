@@ -7,63 +7,62 @@ import './Event.sass'
 import { useNavigate } from 'react-router-dom'
 
 function Event(props) {
-    const logger = new Logger('Event')
-    logger.info('call')
+  const logger = new Logger('Event')
+  logger.info('call')
 
-    const { handleFeedback } = useContext(Context)
-    const navigate = useNavigate()
-    const { eventId, onRemove } = props
+  const { handleFeedback } = useContext(Context)
+  const navigate = useNavigate()
+  const { eventId, onRemove } = props
 
-    const handleRemoveClick = () => {
-        if (eventId)
-            deleteEvent(sessionStorage.token, eventId, error => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+  const handleRemoveClick = () => {
+    if (eventId)
+      deleteEvent(sessionStorage.token, eventId, error => {
+        if (error) {
+          handleFeedback({ level: 'error', message: error.message })
 
-                    return
-                }
+          return
+        }
 
-                onRemove(eventId)
-                handleFeedback({ level: 'success', message: 'event has been removed' })
+        onRemove(eventId)
+        handleFeedback({ level: 'success', message: 'event has been removed' })
 
-            })
-    }
+      })
+  }
 
-    const handleSaveSubmit = event => {
-        event.preventDefault()
+  const handleSaveSubmit = event => {
+    event.preventDefault()
 
-        const { eventId } = props
-        const { target: { title: { value: title } } } = event
-        const { target: { text: { value: description } } } = event
+    const { eventId } = props
+    const { target: { title: { value: title } } } = event
+    const { target: { text: { value: description } } } = event
 
-        saveEvent(sessionStorage.token, eventId, title, description, error => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
+    saveEvent(sessionStorage.token, eventId, title, description, error => {
+      if (error) {
+        handleFeedback({ level: 'error', message: error.message })
 
-                return
-            }
-            navigate('/')
+        return
+      }
+      navigate('/')
+
+    })
+  }
+
+  logger.info('render')
+
+  return <div className='Event'>
+    <form className="Event__form" onSubmit={handleSaveSubmit}>
+
+      <textarea className='Event__title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
+      <textarea className="Event__description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
+
+      <div className='Event__button-container'>
+        <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>
+        <button className="Event__event-button">Save</button>
+      </div>
 
 
-        })
-    }
-
-    logger.info('render')
-
-    return <div className='Event'>
-        <form className="Event__form" onSubmit={handleSaveSubmit}>
-
-            <textarea className='Event__title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
-            <textarea className="Event__description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
-
-            <div className='Event__button-container'>
-                <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>
-                <button className="Event__event-button">Save</button>
-            </div>
-
-
-        </form>
-    </div>
+    </form>
+  </div>
 }
 
 export default Event
