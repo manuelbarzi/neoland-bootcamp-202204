@@ -32,9 +32,9 @@ export default function Login(props) {
     return (
         <FlexColSection className="gap-10 justify-around items-center"
             onSubmit={onFormSubmit}>
-
-            <Logo className="w-1/3" />
-
+                {/* <div className="w-80 h-80 rounded-full border bg-white flex align-center justify-center"> */}
+            <Logo />
+            {/* </div> */}
             <LoginForm />
 
             <div className="w-full flex flex-col gap-3 items-center">

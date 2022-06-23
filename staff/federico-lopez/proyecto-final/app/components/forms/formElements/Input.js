@@ -2,7 +2,7 @@ export const Input = ({ className, children, ...props }) => {
 
     return (
         <input {...props}
-            className={`h-9 w-full p-2 rounded-md border border-gray-600 bg-primary ${className}`}>
+            className={`h-10 w-full py-3 px-4 rounded-lg border border-inputBorder bg-inputBg placeholder-placeholder text-sm text-mygrey ${className}`}>
             {children}
         </input>
     )

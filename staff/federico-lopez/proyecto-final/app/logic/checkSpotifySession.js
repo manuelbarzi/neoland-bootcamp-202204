@@ -4,7 +4,9 @@ import { context } from './context'
 
 export async function checkSpotifySession(token, code) {
     validateJWT(token)
+    debugger
     //TODO VALIDATE CODE
+
     const api = new Apium(context.API_URL)
 
     let url = 'spotify/auth'
@@ -13,7 +15,7 @@ export async function checkSpotifySession(token, code) {
         url += `?code=${code}`
 
     const { status, payload } = await api.post(
-        `spotify/auth`,
+        url,
         {
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -22,6 +24,7 @@ export async function checkSpotifySession(token, code) {
 
     const data = JSON.parse(payload)
 
+    debugger
     if (status === 200) return data.isSessionActive
 
     else if (status >= 400 && status < 500) throw new Error(data.error)
