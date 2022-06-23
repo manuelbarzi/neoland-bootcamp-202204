@@ -4,7 +4,7 @@ import Context from './Context'
 import registerUser from '../logic/registerUser'
 import { isJwtValid } from '../validators'
 import { Link, useNavigate } from 'react-router-dom'
-
+import './Register.sass'
 
 function Register(props) {
     const logger = new Logger('Register')
@@ -35,18 +35,17 @@ function Register(props) {
 
     logger.info('render')
 
-    return isJwtValid(sessionStorage.token) ? <></> : <div>
+    return isJwtValid(sessionStorage.token) ? <></> : 
         <div>
-        <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Container__Input" type="text" name="name" placeholder="Nombre y Apellidos" />
-            <input className="Container__Input" type="text" name="username" placeholder="Nombre de usuario" />
-            <input className="Container__Input" type="email" name="email" placeholder="Email" />
-            <input className="Container__Input" type="password" name="password" placeholder="Contraseña" />
-            <input className="" type="text" name="address" placeholder="Dirección de envío" />
+        <form className="Register" onSubmit={handleFormSubmit}>
+            <input className="Input" type="text" name="name" placeholder="Nombre y Apellidos" />
+            <input className="Input" type="text" name="username" placeholder="Nombre de usuario" />
+            <input className="Input" type="email" name="email" placeholder="Email" />
+            <input className="Input" type="password" name="password" placeholder="Contraseña" />
+            <input className="Input" type="text" name="address" placeholder="Dirección de envío" />
             <button className="Button__orange">Registrarse</button>
-            <Link className="a" to="/login">Iniciar sesión</Link>
+            <Link className="aLogin" to="/login">Iniciar sesión</Link>
         </form>
-        </div>
     </div>
 }
 

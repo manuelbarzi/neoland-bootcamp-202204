@@ -32,6 +32,7 @@ function Product({day, product}) {
 
     return <div className="Product">
         <h4>{product.title}</h4>
+        <img src={product.imagen} />
             
         <button className="Button" onClick={handleAdd}>Añadir cantidad</button>
         <button className="Button" onClick={handleRemove}>Eliminar cantidad</button>

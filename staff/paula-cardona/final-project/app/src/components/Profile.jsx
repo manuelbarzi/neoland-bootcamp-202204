@@ -5,6 +5,7 @@ import ChangeEmail from './ChangeEmail'
 import ChangePayment from './ChangePayment'
 import ChangeAddress from './ChangeAddress'
 import { useNavigate } from 'react-router-dom'
+import './Profile.sass'
 
 
 function Profile(props) {
@@ -35,14 +36,16 @@ function Profile(props) {
 
 
 
-    return <div className="Profile Container ">
+    return <div className="Profile">
 
         {view === 'profile' && <div>
-            <header className="Container">
+            <header className="Profile__h1">
                 <div>
                     <h1 className="Profile__h1">Mi perfil</h1>
                 </div>
             </header>
+
+            <div>
         
             <button className="Button__profile" onClick={handleChangeName}>Cambiar nombre</button>
             <button className="Button__profile" onClick={handleChangePassword}> Cambiar contraseña</button>
@@ -53,7 +56,8 @@ function Profile(props) {
             <p></p>
             <button className="Button__profile" onClick={handleLogout}>Cerrar sesión</button>
 
-            <button className="Button__profile" onClick={handleDeleteAccount}>Eliminar cuenta</button>
+            <button className="Button__profile_delete" onClick={handleDeleteAccount}>Eliminar cuenta</button>
+            </div>
         </div>}
 
 

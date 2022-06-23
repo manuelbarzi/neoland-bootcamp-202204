@@ -42,26 +42,27 @@ function Day ({dayClicked, scheduleHome}) {
 
 
     return isJwtValid (sessionStorage.token) ?
-        <div className='Lunes Day'>
+        <div className='Day'>
             
             {view === 'main' && <div >
             <header className="Header__Day">
                 <div>
-                    <button className="Button Button__Day__Flecha" onClick={handleClickBack}>anterior</button>
-                    <h1 className= "h1__Day">{day}</h1> 
-                    <button className="Button Button__Day__Flecha" onClick ={handleClickNext}>siguiente</button>
+                    <button className="Button Button__Day__Flecha" onClick={handleClickBack}>Anterior</button>
+                    <button className="Button Button__Day__Flecha2" onClick ={handleClickNext}>Siguiente </button>
+                    <h1 className= "Day__h1">{day}</h1> 
                 </div>
             </header>
 
             {scheduleHome.map((elem) => <div key={elem.id}>
-                        <h4>{elem.product.title}: {elem.quantity}</h4>   
+                        {elem.imagen && <img src={elem.imagen}/>}
+                        <h4 className="element">{elem.product.title}: {elem.quantity} </h4>   
                     </div>)}
 
-            <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>Pan blanco</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonPanIntegral}>Pan integral</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonPanVariedades}>Pan de variedades</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonBolleria}>Bolleria</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonPanSinGluten}>Pan sin gluten</button>
+            <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>PAN BLANCO</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonPanIntegral}>PAN INTEGRAL</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonPanVariedades}>PAN DE VARIEDADES</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonBolleria}>BOLLERIA</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonPanSinGluten}>PAN SIN GLUTEN</button>
             </div>}
 
 

@@ -34,7 +34,8 @@ function ProductsList ({day, typeClicked}) {
             
             <ul className="PanesList Container">
                 {products.map(product => <li key={product.id}>
-                    <Product product={product} day={day}/>
+        
+                    <Product product={product} day={day} />
                     
                 </li>)}
             </ul>
