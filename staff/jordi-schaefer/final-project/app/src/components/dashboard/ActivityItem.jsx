@@ -17,7 +17,7 @@ function ActivityItem (props) {
     useEffect(() => {
         let dateNow = new Date()
         const hours = Math.abs(dateNow - activity.date) / 36e5
-        if(props.edit && hours<12)
+        if(props.edit && hours<6)
             setEditable(true)
     }, [])
 
@@ -27,7 +27,7 @@ function ActivityItem (props) {
         try {
             await deleteActivity(sessionStorage.token, activityId) 
             onRemove(activityId)
-            handleFeedback({ type: 'success', message: 'Sticker deleted'})
+            handleFeedback({ type: 'success', message: 'Activity deleted'})
         } catch(error) {
             handleFeedback({ type: 'error', message: error.message})
         }
@@ -62,10 +62,10 @@ function ActivityItem (props) {
                     {editable && <button className="Header__button-resume" onClick={handleResumeClick}>resume</button>}
                 </div>
                 <div className={"Header__container--date"}>
-                    {activity.sport === "Ride" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >directions_bike</span>}
-                    {activity.sport === "Hike" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >hiking</span>}
-                    {activity.sport === "Ski" && <span className="Header__icon Activity__footer--icon material-symbols-outlined" >downhill_skiing</span>}
-                    {activity.sport === "Snowshoe" && <span className="Header__icon Activity__footer--icon material-symbols-outlined"  >snowshoeing</span>}
+                    {activity.sport === "Ride" && <span className="Header__icon material-symbols-outlined" >directions_bike</span>}
+                    {activity.sport === "Hike" && <span className="Header__icon material-symbols-outlined" >hiking</span>}
+                    {activity.sport === "Ski" && <span className="Header__icon material-symbols-outlined" >downhill_skiing</span>}
+                    {activity.sport === "Snowshoe" && <span className="Header__icon material-symbols-outlined"  >snowshoeing</span>}
                     <h2 className={"Header__date"}>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
                 </div>
                 <h2 className={"Header__title"}>{title}</h2>
@@ -77,7 +77,7 @@ function ActivityItem (props) {
                 </div>            
                 <div className={"Header__data"}>  
                     <h2 className={"Header__data--name"}>Elev Gain</h2>
-                    <h2 className={"Header__data--value"}>{data.altitude} m</h2>
+                    <h2 className={"Header__data--value"}>{(data.altitude === '-0')? 0 : data.altitude} m</h2>
                 </div>            
                 <div className={"Header__data"}>  
                     <h2 className={"Header__data--name"}>Time</h2>

@@ -1,18 +1,18 @@
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Polyline } from 'react-leaflet';
 import L from 'leaflet';
 import calculateDistanceBetweenTwoPoints from '../../logic/calculateDistanceBetweenTwoPoints'
 
 function MapView({points}) {   
 
-    let centerPosition= { lat: 42.56990, lng: 1.93214 }
-    let markerPosition= { lat: 42.56990, lng: 1.93214 }
+    let centerPosition= []
+    let markerPosition= []
     let first, last
     let dis
+    let polyline
 
-    const greenIcon = new L.icon({ iconUrl: require('../../icons/2x-green.png'), iconSize: [25, 41], iconAnchor: [12, 41] })
-    const redIcon = new L.icon({ iconUrl: require('../../icons/2x-red.png'), iconSize: [25, 41], iconAnchor: [12, 41] })
-    const blueIcon = new L.icon({ iconUrl: require('../../icons/blue.png'), iconSize: [20, 32], iconAnchor: [10, 32] })
-
+    const greenIcon = new L.icon({ iconUrl: require('../../icons/2x-green.png'), iconSize: [20, 32], iconAnchor: [10, 32] })
+    const redIcon = new L.icon({ iconUrl: require('../../icons/2x-red.png'), iconSize: [20, 32], iconAnchor: [10, 32] })
+    const blueIcon = new L.icon({ iconUrl: require('../../icons/blue.png'), iconSize: [14, 22], iconAnchor: [7, 22] })
  
     const length = points.length
     
@@ -27,49 +27,52 @@ function MapView({points}) {
         points.map( elem => n += elem.longitude)
         const lng = n/length
 
-        centerPosition = {lat: lat, lng: lng}
-        markerPosition = first
+        centerPosition = [lat, lng]
+        markerPosition = [points[0].latitude, points[1].longitude]
 
         dis = calculateDistanceBetweenTwoPoints(first, last)/1000
+        
+
+        // create a line between points
+        polyline = []
+        points.forEach(point => polyline.push([point.latitude, point.longitude]))       
     }
     else {
-        centerPosition = {lat: points[0].latitude, lng: points[0].longitude}
+        centerPosition = [points[0].latitude, points[0].longitude]
         markerPosition = centerPosition
     }
-    
+
+    const blueOptions = { color: '#4D83F9', weight: 2}
 
     return <MapContainer 
             style={{width: '100%', height: '100%'}} 
             center={centerPosition} 
-            zoom={ (dis > 7)? 11: (dis > 4.5)? 12: (dis > 3)? 13: 14 } 
+            zoom={ (dis > 20)? 10: (dis > 7)? 11: (dis > 3.5)? 12: (dis > 2.5)? 13: 14 } 
             zoomControl={false}
             scrollWheelZoom={false}
             attributionControl={false}
             doubleClickZoom={false}
             dragging={false}
             >
-        <TileLayer
-        attribution=' <a href="https://www.openstreetmap.org/copyright"></a> '
+        <TileLayer attribution=' <a href="https://www.openstreetmap.org/copyright"></a> '
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
 
-
         <Marker position={markerPosition}  icon={greenIcon}>
-            <Popup> </Popup>
         </Marker>
 
         { points.slice(1, -1).map(point => {     // le quito el primer y ultimo elemento
             return (
                 <Marker position={[point.latitude, point.longitude]} icon={blueIcon} key={point._id}>
-                    <Popup> </Popup>
                 </Marker> )
         })}
 
         {(length > 1)?     // si hay mas de uno pinto el ultimo
             (<Marker position={last} icon={redIcon}>
-                <Popup> </Popup>
             </Marker> ) : <></>
         }
+
+        { polyline && <Polyline pathOptions={blueOptions} positions={polyline} /> }
 
   </MapContainer>
 }

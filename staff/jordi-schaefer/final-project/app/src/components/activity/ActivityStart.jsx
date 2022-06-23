@@ -42,7 +42,7 @@ function ActivityStart(props) {
     
 
 
-    const handleCloseClick = () => navigate('/dashboard')
+    const handleCloseClick = () => navigate('/')
     
     const handleBikeClick = () => {
         setSport('Ride') 
