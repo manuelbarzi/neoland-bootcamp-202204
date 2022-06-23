@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Register from "./components/Register/index.jsx";
 import Login from "./components/Login/index.jsx";
 import Project from "./components/Project/index.jsx";
 import Dashboards from "./components/Dashboards/index.jsx";
-import PreviewProject from "./components/PreviewProject/index.jsx";
+import Pens from "./components/pens/index.jsx";
+// import PreviewProject from "./components/PreviewProject/index.jsx";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
         <Route path="/dashboards" element={<Dashboards />} />
 
         <Route path="/previewProject/:projectId" element={<Project />} />
+
+        <Route path="/pens" element={<Pens />} />
       </Routes>
     </div>
   );

@@ -1,8 +1,8 @@
 body {
-    /* background: #7a7b7c; */
     margin: 0;
     padding: 0;
-    /* overflow: hidden; */
+    background-color: #7a7b7c;
+
   }
   .app {
       width: 100%;
@@ -65,7 +65,7 @@ body {
       transform: rotate(15deg) scale(var(--ggs,1));
       width: 2px;
       height: 16px;
-      background: currentColor
+      background: currentColor;
   }
   .gg-code-slash::after,
   .gg-code-slash::before {

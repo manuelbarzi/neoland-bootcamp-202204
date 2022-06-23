@@ -1,168 +1,151 @@
-body {
-    overflow: hidden;
-}
+
 .header{
     background-color: #7a7b7c;
-    height: 75px;
-    width: 100%;
+    width: calc(100% - 3rem);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    top: 0;
+    padding: 0rem 1.5rem;
+    /* position: fixed; */
 }
+
+.header__Logo {
+    font-weight: bold;
+    font-size: 34px;
+    line-height: 50px;
+    text-align: center;
+    text-decoration: none;
+    color: black;
+}
+
 .header__content {
-    background-color: red;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
+    /* border-bottom: 1px solid rgba(255, 255, 255, 0.2); */
 }
 
 .header__content__links {
-    width: 30%;
-    margin: 0 20px;
     display: flex;
-    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    display: flex;
     align-items: center;
-    list-style: none;
-    /* background-color: yellow; */
 }
-.header__Logo {
-    color: #fff;
-    font-size: 35px;
-    padding: 0 80px;
-    font-weight: bold;
-}
+
+.header__content__links:hover .header__content__links__item:not(:hover) i {
+    opacity: 0.2;
+    /* color: #ffffff; */
+  }
+
 .header__content__links__item{
-    display: flex;
-    list-style: none;
-    /* border-radius: 3px; */
-    /* margin: 0 5px; */
-} 
-.header__content__links__item i{
+    position: relative;
+    padding: 20px 25px 20px 25px;
     cursor: pointer;
-    text-decoration: none;
-    color: #dbdbe2;
+} 
+@media screen and ( max-width: 850px ) {
+    .header__content__links__item{
+        padding: 20px 15px 20px 15px;
+        cursor: pointer;
+    } 
 }
+@media screen and ( max-width: 650px ) {
+    .header__content__links__item{
+        padding: 20px 10px 20px 10px;
+        cursor: pointer;
+    } 
+    .header__Logo {
+        font-weight: bold;
+        font-size: 20px;
+        margin: 0 0 0 -20px;
+    }
+    
+}
+
+.header__content__links__item::after {
+    
+    position: absolute;
+    content: "";
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #3498db;
+    transform: scaleX(0);
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  }
+.header__content__links li:hover::after, .header__content__links li.active::after {
+    transform: scaleX(1);
+  }
+.header__content__links li i {
+    position: relative;
+    display: flex;
+    color: black;
+    font-family: Lato, sans-serif;
+    text-decoration: none;
+    transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.header__content__links li i:hover {
+    color: rgb(254, 254, 254);
+}
+
 .header__content__btns{
     display: flex;
     justify-content: flex-end;
-    /* width: 200px; */
 }
+@media only screen and (max-width: 650px) {
+    .header__content__btns{
+        display: none;
+    }
+}
+
 .header__content__btns__btn{
     cursor: pointer;
     height: 45px;
-    margin: 0 0 0 5px;
+    margin: 0 0 0 10px;
     padding: 10px;
-    border-radius: 4px;
-    background-color: #00e59b;
+    border-radius: 5px;
+    background-color: #5ec881;
+    /* background-color: #248c46; */
     border-style: none;
     text-transform: uppercase;
-    color: #FFFFFF;
+    color: black;
     font-size: 16px;
-    font-weight: bolder;
-}
-@media screen and (max-width: 952px) {
-    .header__Logo {
-        font-size: 25px;
-        padding-left: 10px;
-    }
-    .header__content__links li i{
-        font-size: 16px;
-    }
+    /* font-weight: 500; */
+} 
+@media only screen and (max-width: 650px) {
+
     .header__content__btns__btn{
         cursor: pointer;
-        height: 40px;
-        padding: 8px;
-    }
-    .header__content {
-        width: 70%;
-        margin-left: auto;
-        margin-right: auto;
-    }
-    .header__content__links {
-        width: 40%;
-        margin: 0 10px;
-    }
-    .header__content__btns__btn{
-        height: 45px;
-        margin-left: auto;
-        width: 80px;
-        border-radius: 4px;
-        background-color: #00e59b;
-        border-style: none;
-        text-transform: uppercase;
-        color: #FFFFFF;
-    }
-    .header__content__btns{
-        margin: 0 80px 0 0;
-    }
-
+        margin: 0 0px 0 5px;
+        padding: 5px;
+        /* background-color: #248c46; */
+        font-size: 16px;
+        /* font-weight: 500; */
+    } 
 }
-/*
-.header__content__btnResposive{
-    margin-right: 30px;
-    font-size: 25px;
-    color: #fff;
-    cursor: pointer;
+
+.header__content__select{
     display: none;
 }
-ul.show{
-    top: 65px;
-} */
-/*
-@media screen and (max-width: 858px) {
-    .header{
-        height: 65px;
+
+@media only screen and (max-width: 650px) {
+
+    .header__content__select{
+        display: block;
     }
-    .header__content__btnResposive{
-        display: inline-flex;
-    }
-    .header__content__Items {
-        position: fixed;
-        width: 100vw;
-        height: calc(100% - 65px);
-        background: #f33b3b;
-        background: #414141;
-        top: -100vh;
-        text-align: center;
-        transition: all .4s;
-        flex-direction: column;
-    } */
-    /* .header__content__Items li{
-        display: flex;
-        justify-content: flex-end;
-        margin: -30px 80px 30px ;
-        margin: 30px 0 0 0;
-        line-height: 30px;
-    }
-    .header__content__Items li:hover{
-        background: none;
-    }
-    .header__content__Items li i{
-        font-size: 20px;
-        color: #fff;
-        font-weight: bold;
-    }
-    .header__Logo {
-        font-size: 25px;
-        padding-left: 35px;
-    }
-} */
-/* @media screen and (max-width: 858px) and (orientation: landscape) {
-    .header__content__Items li{
-        margin: 5px 0 0 0;
-    }
-    .header__content__Items{
-        overflow: scroll;
-        height: calc(100% - 65px);
-    }
-} */
+}
+
+.header__content__btns__btn:hover{
+    background-color: #4cbe72;
+    color: #eee;
+} 
+
+
 
 .header__content__links__item__heartNone {
-    display: none;
+    display: none !important;
 }
 .header__content__links__item__downloadNone{
     display: none;

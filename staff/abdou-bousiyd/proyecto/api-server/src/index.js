@@ -11,6 +11,8 @@ const {
   handleUpdateProject,
   handleDeleteProject,
   handleRetrieveProject,
+  handleToggleLikeOnProject,
+  handleRetrievePens
 } = require("./handlers");
 const { connect, disconnect } = require("mongoose");
 const { cors } = require("./helpers.js");
@@ -30,10 +32,15 @@ const { cors } = require("./helpers.js");
   routes.patch("/users", jsonBodyParser, handleUpdateUser);
 
   routes.post("/project", jsonBodyParser, handleCreateProject);
+  // routes.get("/project", jsonBodyParser, handleRetrieveProjects);
   routes.get("/projects", jsonBodyParser, handleRetrieveProjects);
   routes.patch("/project/:projectId", jsonBodyParser, handleUpdateProject);
   routes.delete("/project/:projectId", jsonBodyParser, handleDeleteProject);
   routes.get("/project/:projectId", jsonBodyParser, handleRetrieveProject);
+
+  routes.patch('/project/:projectId/like', handleToggleLikeOnProject)
+
+  routes.get("/pens", jsonBodyParser, handleRetrievePens);
 
   api.use("/api", routes);
   api.listen(8080, () => console.log("API running"));

@@ -9,6 +9,10 @@ const updateProject = require("./updateProject");
 const deleteProject = require("./deleteProject");
 const retrieveProject = require("./retrieveProject");
 
+const toggleLikeOnProject = require("./toggleLikeOnProject");
+
+const retrievePens = require("./retrievePens");
+
 module.exports = {
   registerUser,
   authenticateUser,
@@ -20,4 +24,8 @@ module.exports = {
   updateProject,
   deleteProject,
   retrieveProject,
+
+  toggleLikeOnProject,
+
+  retrievePens
 };

@@ -27,6 +27,11 @@ const project = new Schema({
         required: true,
     },
 
+    likes: [{
+        type: ObjectId,
+        ref: 'User'
+    }],
+
 
     // audience: {
     //     type: Number,

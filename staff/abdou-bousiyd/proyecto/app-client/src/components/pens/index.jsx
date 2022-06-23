@@ -1,20 +1,15 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import retrieveProjects from "../../logic/retrieveProjects";
-import retrieveProject from "../../logic/retrieveProject";
+import retrievePens from "../../logic/retrievePens";
 import saveProject from "../../logic/saveProject";
-import { isJwtValid } from "../../validators";
-import retrieveUser from "../../logic/retrieveUser";
 import Alert from "../Alert";
-
+import retrieveUser from "../../logic/retrieveUser";
+import deleteProject from "../../logic/deleteProject";
 import NavBar from "../Navbar";
 
 import "./index.sass";
-import deleteProject from "../../logic/deleteProject";
-import { withToken } from "../../containers";
 
-const Dashboards = () => {
-
+const Pens = () => {
   const navigate = useNavigate();
   const [name, setName] = useState(null);
   const [alert, setAlert] = useState(null);
@@ -23,28 +18,45 @@ const Dashboards = () => {
   const [dashName, setDashName] = useState(null);
   const [editDashId, setEditDashId] = useState(null);
   const [projectsDash, setProjectsDash] = useState(null);
- 
+
   useEffect(() => {
-
-    getDashboards();
-    getUser();
+    getPens();
+    getUser()
   }, []);
-
-  const handleInputChange = (e) => {
-    const newTitle = e.target.value;
-    setDashName(newTitle);
-  };
-console.log(project, 121)
-  const getDashboards = () => {
-    retrieveProjects(sessionStorage.token, (error, _projects) => {
+  const getUser = (openModal) => {
+    retrieveUser(sessionStorage.token, (error, user) => {
       if (error) {
         setAlert(<Alert error message={error.message} />);
         setTimeout(() => {
           setAlert(null);
         }, 4000);
+
         return;
       }
-      setProjects(_projects);
+      setName(user.name);
+      if (openModal) {
+        // toggleTitle();
+      }
+    });
+  };
+
+  const handleInputChange = (e) => {
+    const newTitle = e.target.value;
+    setDashName(newTitle);
+  };
+
+  const getPens = () => {
+    retrievePens((error, projects) => {
+        console.log(projects, 90099)
+      if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        console.log(error, 900);
+        return;
+      }
+      setProjects(projects);
     });
   };
 
@@ -56,7 +68,6 @@ console.log(project, 121)
 
     saveProject(sessionStorage.token, id, dashName, null, (error) => {
       if (error) {
-
         setAlert(<Alert error message={error.message} />);
         setTimeout(() => {
           setAlert(null);
@@ -65,12 +76,11 @@ console.log(project, 121)
         return;
       }
       setEditDashId();
-      getDashboards();
+      getPens();
     });
   };
 
   const deleteDash = (projectId) => {
-    // console.log(projectId, "delete")
     if (projectId) {
       deleteProject(sessionStorage.token, projectId, (error) => {
         if (error) {
@@ -81,7 +91,7 @@ console.log(project, 121)
           return;
         }
         handleRemoveSticker(projectId);
-        getDashboards();
+        getPens();
       });
     }
   };
@@ -92,44 +102,12 @@ console.log(project, 121)
     setProjectsDash(_projects);
   };
 
-  const getUser = () => {
-    if (isJwtValid(sessionStorage.token)) {
-      retrieveUser(sessionStorage.token, (error, user) => {
-        if (error) {
-          setAlert(<Alert error message={error.message} />);
-          setTimeout(() => {
-            setAlert(null);
-          }, 4000);
-
-          handleLogoutClick();
-
-          return;
-        }
-        setName(user.name);
-      });
-    }
-    // else navigate('/login')
-  };
   const handleLogoutClick = () => {
     delete sessionStorage.token;
     window.location.reload();
   };
 
-  const previewProject = (projectId) => {
-    retrieveProject(sessionStorage.token, projectId, (error, _project) => {
-      if (error) {
-        setAlert(<Alert error message={error.message} />);
-        setTimeout(() => {
-          setAlert(null);
-        }, 4000);
-        return;
-      }
 
-      setProject(_project);
-      navigate(`/previewProject/${_project.id}`)
-     
-    });
-  }
 
   return (
     <>
@@ -140,9 +118,9 @@ console.log(project, 121)
       <div className="Dash">
         <div className="Dash__Container">
           {(projects || []).map((dash) => {
-            const { title, id, code } = dash;
+            const { title, id, code = {} } = dash;
 
-            const parsedCode = JSON.parse(code);
+            const parsedCode = JSON.parse(code );
 
             const renderPreview = `
             <!DOCTYPE html>
@@ -163,7 +141,7 @@ console.log(project, 121)
             return (
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
-                  <h1  onClick={() => previewProject(id)}>{title}</h1>
+                  <h1>{title}</h1>
                   {editDashId === id ? (
                     <input
                       onChange={handleInputChange}
@@ -197,4 +175,4 @@ console.log(project, 121)
   );
 };
 
-export default withToken(Dashboards);
+export default Pens;

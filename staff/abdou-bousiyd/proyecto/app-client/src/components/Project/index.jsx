@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import JSZip from "jszip";
 import { useNavigate,  useParams  } from "react-router-dom";
 import Split from "react-split-grid";
 import Editor from "@monaco-editor/react";
@@ -13,21 +14,26 @@ import retrieveUser from "../../logic/retrieveUser";
 import saveProject from "../../logic/saveProject";
 import retrieveProject from "../../logic/retrieveProject";
 import Login from "../Login";
+import { FILE_NAME, EXTENSIONS } from "../../constants";
 
 import "./splitGrid.css";
 import "./index.sass";
 import "../../app.css";
+import Skypack from "../Skypack";
 
 const Project = () => {
-  // const [timestamp, setTimestamp] = useState(null)
+
+  const [timestamp, setTimestamp] = useState(null)
+  const [activeSkypack, setActiveSkypack] = useState(false);
   const [alert, setAlert] = useState(null);
-//   const [project, setProject] = useState(null);
   const [name, setName] = useState(null);
   const [_, setIsEditorReady] = useState(false);
   const [active, setActive] = useState(false);
   const [activeTitle, setActiveTitle] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
   let { projectId } = useParams();
+  const [download, setDownload] = useState(false);
+  const [project, setProject] = useState(null);
   const [editorValues, setEditorValues] = useState({
     html: "",
     js: "",
@@ -42,7 +48,18 @@ const Project = () => {
     theme: "vs-dark",
   });
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    loadUser();
+    getProject()
+
+    if (projectId) {
+      getProject()
+    }
+    if (download) {
+      downloadFiles();
+      setDownload(false);
+    }
+  }, [timestamp, download]);
 
   const toggle = () => {
     setActive(!active);
@@ -77,31 +94,20 @@ const Project = () => {
             setAlert(null);
           }, 4000);
 
-          // handleLogout()
-
           return;
         }
         setName(user.name);
         if (openModal) {
           toggleTitle();
         }
-        // setView('project')
       });
     }
     // else navigate('/login')
   };
-
-  useEffect(() => {
-    loadUser();
-    if (projectId) {
-        getProject()
-    }
-
-  }, []);
-
+  
   const getProject = () => {
-    retrieveProject(sessionStorage.token, projectId, (error, _project) => {
-        console.log(_project.id, 9898989)
+    retrieveProject(sessionStorage.token, projectId, (error, project) => {
+
         if (error) {
           setAlert(<Alert error message={error.message} />);
           setTimeout(() => {
@@ -109,22 +115,12 @@ const Project = () => {
           }, 4000);
           return;
         }
+        const code = JSON.parse(project.code)
 
-       setTimeout( () => {
-            const code = JSON.parse(_project.code)
-            setEditorValues(code)
-            console.log(editorValues)
-       }, 200)
-
-
-//   console.log(code, 67670000111)
-        // setProject(_project);
-        // navigate(`/previewProject/${_project.id}`)
+        setEditorValues(code)
+        setProject(project)
       });
-  }
-
-
-//   console.log(project.code, 99000)
+    }
 
   const handleOnOptionsChanged = (options) => {
     setEditorOptions(options);
@@ -140,7 +136,6 @@ const Project = () => {
       html,
     });
   };
-
   const handleCsslChange = (css) => {
     setEditorValues({
       ...editorValues,
@@ -160,6 +155,69 @@ const Project = () => {
     setIsEditorReady(true);
   };
 
+  const handleProjectLikeClicked = () => setTimestamp(Date.now())
+
+  const createCodeFile = (content, extension) => {
+    const name = `${FILE_NAME[extension]}.${extension}`;
+    return new window.File([content], name);
+  };
+
+  const getZip = (files) => {
+    const zip = new JSZip();
+
+    for (const file of files) {
+      const filename = file.name;
+      zip.file(filename, file);
+    }
+
+    return zip;
+  };
+
+  const downloadZip = (zip) => {
+    zip.generateAsync({ type: "blob" }).then((blobdata) => {
+      const zipblob = new window.Blob([blobdata]);
+      const elem = window.document.createElement("a");
+      elem.href = window.URL.createObjectURL(zipblob);
+      elem.download = "codi-link.zip";
+      elem.click();
+    });
+  };
+
+  const downloadFiles = () => {
+    const files = EXTENSIONS.map((extension) => {
+      let content = editorValues[extension];
+
+      if (extension === "html") {
+        content = `
+        <!DOCTYPE html>
+          <html>
+          <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width">
+            <link rel="stylesheet" href="styles.css">
+            <title>Codepen</title>
+          </head>
+          <body>${editorValues.html}</body>
+          <script src="main.js"></script>
+        </html>
+        `;
+      }
+
+      return createCodeFile(content, extension);
+    });
+
+    const zip = getZip(files);
+    downloadZip(zip);
+  };
+
+  const handleDownload = () => {
+    setDownload(true)
+  }
+
+  const toggleSkypack = () => {
+    setActiveSkypack(!activeSkypack);
+  };
+
   const renderPreview = `
     <!DOCTYPE html>
       <html>
@@ -168,22 +226,37 @@ const Project = () => {
         <meta name="viewport" content="width=device-width">
         <title>JS Bin</title>
         <style>${editorValues.css}</style>
-        
       </head>
       <body>${editorValues.html}</body>
-      <script>${editorValues.js}</script>
-
+      <script type="module">
+        import react from 'https://cdn.skypack.dev/react';
+        ${editorValues.js}
+      </script>
     </html>
     `;
-
+    
   return (
     <div className="project">
-      <Navbar toggle={toggle} toggleTitle={toggleTitle} name={name} />
+      <Navbar 
+        toggleSkypack={toggleSkypack}
+        download={handleDownload} 
+        toggle={toggle} 
+        toggleTitle={toggleTitle} 
+        name={name} 
+        projectId={projectId} 
+        onLikeClicked={handleProjectLikeClicked} 
+        project={project}
+    />
 
       <Modal active={active} toggle={toggle}>
         <Settings
           editorOptions={editorOptions}
           handleOnOptionsChanged={handleOnOptionsChanged}
+        />
+      </Modal>
+
+      <Modal active={active} toggle={toggle}>
+        <Skypack
         />
       </Modal>
 
@@ -211,8 +284,9 @@ const Project = () => {
                 placeholder="html"
                 theme="vs-dark"
                 height="100%"
+                // defaultValue={editorValues.html}
+                value={editorValues.html}
                 onChange={handleHtmlChange}
-                defaultValue={editorValues.html}
                 onMount={handleEditorDidMount}
                 options={editorOptions}
               />
@@ -225,8 +299,9 @@ const Project = () => {
                 placeholder="css"
                 theme="vs-dark"
                 height="100%"
+                // defaultValue={editorValues.css}
+                value={editorValues.css}
                 onChange={handleCsslChange}
-                defaultValue={editorValues.css}
                 editorDidMount={handleEditorDidMount}
                 onMount={handleEditorDidMount}
                 options={editorOptions}
@@ -239,8 +314,11 @@ const Project = () => {
                 defaultLanguage="js"
                 placeholder="js"
                 theme="vs-dark"
+                // defaultValue={editorValues.js}
+                value={editorValues.js}
                 onChange={handleJslChange}
-                defaultValue={editorValues.js}
+                // editorDidMount={handleEditorDidMount}
+                // onMount={handleEditorDidMount}
                 options={editorOptions}
               />
             </div>
@@ -254,7 +332,6 @@ const Project = () => {
               <iframe
                 className="iframeResult"
                 id="iframe"
-                scrolling="no"
                 srcdoc={renderPreview}
               />
             </div>

@@ -9,4 +9,10 @@ module.exports = {
   handleUpdateProject: require("./handleUpdateProject"),
   handleDeleteProject: require("./handleDeleteProject"),
   handleRetrieveProject: require("./handleRetrieveProject"),
+
+  handleToggleLikeOnProject: require("./handleToggleLikeOnProject"),
+
+  handleRetrievePens: require("./handleRetrievePens"),
+
+
 };

@@ -1,9 +1,9 @@
 const { User, Project } = require('../models')
 const { NotFoundError } = require('../errors')
-// const { validateStringNotEmptyNoSpaces } = require('../validators')
+const { validateStringNotEmptyNoSpaces } = require('../validators')
 
 function retrieveProjects(userId) {
-    // validateStringNotEmptyNoSpaces(userId, 'user id')
+    validateStringNotEmptyNoSpaces(userId, 'user id')
 
     return User.findById(userId).lean()
         .then(user => {
