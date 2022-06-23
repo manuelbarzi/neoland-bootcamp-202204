@@ -5,7 +5,7 @@ export const Header = ({ className, ...props }) => {
     const router = useRouter()
 
     const handleHomeCLick = () => {
-        router.push('/')
+        router.push('/admin')
     }
 
     const handleProfileClick = () => {
@@ -21,7 +21,7 @@ export const Header = ({ className, ...props }) => {
     return <>
         <header {...props}
             className={`${className} 
-                w-full h-16 bg-white border-b-2 border-primary py-2 px-1`}>
+                w-full h-16 bg-white border-b-2 border-primary py-2 px-1 shadow-lg`}>
             <nav className="h-full flex justify-between items-center">
                 <div className='pl-3'>
                     <h1 onClick={handleHomeCLick} 

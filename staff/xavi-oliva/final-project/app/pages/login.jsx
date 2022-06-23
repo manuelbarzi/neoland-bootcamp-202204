@@ -26,13 +26,11 @@ export default function Login(props) {
 
       document.cookie = `token=${token}; max-age=86400;`
 
-      router.push('/')
+      router.push('/admin')
     } catch (error) {
       // handleFeedback(error.message)
     }
   }
-
-  logger.info('render')
 
   return <>
     <Section className='section'>

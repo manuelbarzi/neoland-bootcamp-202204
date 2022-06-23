@@ -1,29 +1,30 @@
-import { createFlat } from '../../logic'
-import { PrimaryButton, Input, Section, Form, Textarea } from '../../components'
-import { verifyTokenWithAPICall } from '../helpers'
+import { updateFlat } from 'logic'
+import { PrimaryButton, Input, Section, Form, Textarea } from '../../../../components'
+import { verifyTokenWithAPICall } from '../../../helpers'
 import { useRouter } from 'next/router'
 import Apium from 'apium'
 
-export default function AddFlat({token}) {
+export default function EditFlat({ token, flatId }) {
   const router = useRouter()
 
   // const { handleFeedback } = useContext(Context)
 
-  const handleFormSubmit = async event => {
+  const handleUpdateFlatFormSubmit = async event => {
     event.preventDefault()
-    
+
     const title = event.target.title.value
     const description = event.target.description.value
     const address = event.target.address.value
+    // const images = event.target.images.value
 
     try {
 
       event.target.reset()
-      
-      await createFlat(token, { title, description, address })
+
+      await updateFlat(token, { title, description, address })
       // handleFeedback
 
-      router.push('/')
+      router.push('/admin')
 
     } catch (error) {
       console.error(error)
@@ -33,7 +34,7 @@ export default function AddFlat({token}) {
 
   return <>
     <Section className='section'>
-      <Form className='px-8' onSubmit={handleFormSubmit}>
+      <Form className='px-8' onSubmit={handleUpdateFlatFormSubmit}>
         <Input type="text" name="title" placeholder="Title"></Input>
         <Textarea name="description" rows="5" placeholder='Description' />
         <Input type="text" name="address" placeholder="address"></Input>
@@ -45,27 +46,14 @@ export default function AddFlat({token}) {
   </>
 }
 
-// export async function getServerSideProps({ req, res }) {
-//   const api = new Apium('http://localhost:8080/api')
-
-//   const token = await verifyTokenWithAPICall(req, res)
-//   const flat = await createFlat(token, { title, description, address, images })
-
-
-//   return {
-//     props: {
-//       token: token || null,
-//       flat
-//     }
-//   }
-// }
-export async function getServerSideProps({ req, res }) {
+export async function getServerSideProps({ req, res, params: { flatId } }) {
 
   const token = await verifyTokenWithAPICall(req, res)
 
   return {
-      props: {
-        token: token || null
-      }
+    props: {
+      token: token || null,
+      flatId
+    }
   }
 }

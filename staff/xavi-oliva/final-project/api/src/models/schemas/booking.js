@@ -8,11 +8,11 @@ const booking = new Schema({
         ref: 'User'
     },
 
-    flat: {
-        type: ObjectId,
-        required: true,
-        ref: 'Flat'
-    },
+    // flat: {
+    //     type: ObjectId,
+    //     required: true,
+    //     ref: 'Flat'
+    // },
 
     name: {
         type: String,

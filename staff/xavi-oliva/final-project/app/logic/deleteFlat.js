@@ -1,7 +1,7 @@
 import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
 import Apium from 'apium'
 
-function deleteFlat(token, flatId) {
+export async function deleteFlat(token, flatId) {
     validateJwt(token)
     validateStringNotEmptyNoSpaces(flatId, 'flat Id')
 
@@ -25,5 +25,3 @@ function deleteFlat(token, flatId) {
         }
     })()
 }
-
-export default deleteFlat

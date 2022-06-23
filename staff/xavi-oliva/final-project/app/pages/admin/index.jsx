@@ -1,6 +1,6 @@
-import { verifyTokenWithAPICall } from './helpers'
-import { Section, Thumbnail, EditButton } from '../components'
-import { retrieveFlats } from '../logic'
+import { verifyTokenWithAPICall } from '../helpers'
+import { Section, Thumbnail, EditButton } from '../../components'
+import { retrieveFlats } from 'logic'
 import Link from 'next/link'
 
 export default function Home({ token, flats }) { /*flats: _flats*/
@@ -9,14 +9,14 @@ export default function Home({ token, flats }) { /*flats: _flats*/
   // console.log(_flats[0])
 
   return <>
-    <Section className='section-scroll'> {/* min-h-[calc(100vh-64px-64px)] */}
+    <Section className='section-scroll mt-1'> {/* min-h-[calc(100vh-64px-64px)] */}
       <ul className='text-secondary bg-white w-full min-w-[315px]'>
         {flats.map((flat, i) => <li key={flat.id + i}
           className='bg-white inline-flex items-center justify-between
         w-full px-4 py-3 text-xs font-medium border-b-2 border-gray-200'>
           <div className="w-full flex items-center">
             {/* <Thumbnail src={flat.images[0]} className='w-6 h-6 mr-2' /> */}
-            <Link href={`/flat/${flat.id}/`}>
+            <Link href={`/flats/${flat.id}/`}>
               <a className='contents'>
                 <Thumbnail className='w-6 h-6 mr-2' />
                 <p className='truncate w-56'>{flat.title}</p>
