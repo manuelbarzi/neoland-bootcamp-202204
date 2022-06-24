@@ -1,4 +1,4 @@
-import { Input, SearchImage } from '../../components'
+import { Input, SearchImage, ButtonBlue } from '../../components'
 
 export function SearchForm({ className, children, onChangeInput, onCancelClick, ...props }) {
     return (
@@ -8,7 +8,7 @@ export function SearchForm({ className, children, onChangeInput, onCancelClick, 
                 <Input className="bg-inputBg border-inputBg focus:outline-none placeholder-black placeholder-opacity-50 text-lg" type="search" placeholder="Artists or songs"
                     onChange={onChangeInput} />
             </div>
-            <button className="font-bold text-myblue" type="reset" onClick={onCancelClick}>Cancel</button>
+            <ButtonBlue type="reset" onClick={onCancelClick}>Cancel</ButtonBlue>
         </form>
     )
 }

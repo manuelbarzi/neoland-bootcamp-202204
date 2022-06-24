@@ -2,7 +2,7 @@ import { ArtistItem, SongItem } from '../../components'
 
 export const ArtistsAndSongsResultsList = ({ className, children, results, songs, ...props }) => {
     return (
-        <ul className={`w-11/12 flex flex-col gap-1 list-none ${className}`} {...props}>{children}
+        <ul className={`w-full bg-primary flex flex-col list-none shadow-custom-items ${className}`} {...props}>{children}
 
             {results && results.artists &&
                     results.artists.map(artist => <ArtistItem artist={artist} />)

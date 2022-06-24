@@ -42,10 +42,10 @@ export default function Search({ token }) {
     }
 
     return <>
-        <Header pageProps="Search" />
-        <FlexColSection className="py-24 items-center" >
+        <Header className="pb-2" title="Search" />
+        <FlexColSection className="items-center gap-4" >
             
-            <SearchForm
+            <SearchForm className="px-4"
                 onChangeInput={onChangeQuery}
                 onCancelClick={onCancelClick} />
 
