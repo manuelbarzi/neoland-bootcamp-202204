@@ -3,6 +3,7 @@ import React from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import updateUserName from '../logic/updateUserName'
+import './Profile.sass'
 
 function ChangeName() {
     const logger = new Logger('ChangeName')
@@ -35,9 +36,9 @@ function ChangeName() {
     logger.info('render')
 
     return <div>
-        <form className="Container" onSubmit={handleFormSubmit}>
+        <form className="ChangeName__form" onSubmit={handleFormSubmit}>
             <input className="Input Input--light" type="text" name="name" placeholder="name" />
-            <button className="Button">Save</button>
+            <button className="Button--no-border">Save</button>
         </form>
     </div>
 }

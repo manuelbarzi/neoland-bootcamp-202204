@@ -36,10 +36,10 @@ function DeleteUser() {//passar props como parametro
     logger.info('render')
 
     return <div>
-        <form className="Container" onSubmit={handleFormSubmit}>
-            <input className="Input" type="password" name="password" placeholder="password" />
+        <form className="DeleteUser__form" onSubmit={handleFormSubmit}>
+            <input className="Input Input__light" type="password" name="password" placeholder="password" />
 
-            <button className="Button">Delete User</button>
+            <button className="Button--no-border">Delete User</button>
         </form>
     </div>
 }

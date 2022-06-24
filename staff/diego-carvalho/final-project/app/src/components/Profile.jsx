@@ -29,14 +29,14 @@ function Profile() {
 
     return <div className="Container">
             
-        <div className='Contaneir__buttons'>
-            <button className="Input Profile__changeName" onClick={handleChangeNameClick}>Change Name</button>
+        <div className='Profile__buttons'>
+            <button className="Input" onClick={handleChangeNameClick}>Change Name</button>
                 {view === 'change-name' && <ChangeName />}
 
-            <button className="Input Profile__changePassword" onClick={handleChangePasswordClick}>Change Password</button>
+            <button className="Input" onClick={handleChangePasswordClick}>Change Password</button>
                 {view === 'change-password' && <ChangePassword />}
     
-            <button className="Input Profile__deleteUser" onClick={handleDeleteUserClick}>Delete user</button>
+            <button className="Input" onClick={handleDeleteUserClick}>Delete user</button>
                 {view === 'delete-user' && <DeleteUser />} 
         </div>
     </div>

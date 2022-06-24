@@ -39,11 +39,11 @@ function Login(props) {
     logger.info('render')
 
     return isJwtValid(sessionStorage.token) ? <></> : <div>
-        <form className="Container" onSubmit={handleFormSubmit}>
+        <form className="Login__form" onSubmit={handleFormSubmit}>
             <input className="Input__register-login" type="text" name="email" placeholder="Email" />
             <input className="Input__register-login" type="password" name="password" placeholder="Password" />
-            <button className="Button Button--light">Login</button>
-            <a href="#" onClick={handleRegisterLinkClick}>Register</a>
+            <button className="Button">Login</button>
+            <a href="#" className='Button--no-border' onClick={handleRegisterLinkClick}>Register</a>
         </form>
     </div>
 }
