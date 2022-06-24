@@ -1,6 +1,6 @@
 const { connect, disconnect } = require('mongoose')
 const { User, Artist, Song, Interpretation } = require('./models')
-const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1 } = require('./populateSources')
+const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1, sinSenalLyrics1 } = require('./populateSources')
 
 ;(async () => {
         try {

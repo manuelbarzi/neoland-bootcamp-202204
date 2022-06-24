@@ -6,8 +6,7 @@ module.exports = async (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        if (req.query) 
-            var { query: { code } } = req
+        const { query: { code } } = req
 
         const isSessionActive = await checkSpotifySession(userId, code)
         

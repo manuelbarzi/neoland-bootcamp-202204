@@ -2,6 +2,7 @@ const { User } = require('../models')
 const { NotFoundError } = require("errors")
 const { requestSpotifyTokenSendingCode } = require("../handlers/helpers")
 const { validateObjectId } = require("../validators")
+const Apium = require('../vendor/Apium')
 
 module.exports = async (userId, code) => {
     debugger
@@ -14,13 +15,14 @@ module.exports = async (userId, code) => {
     if (code) {
         try {
             const spotifyToken = await requestSpotifyTokenSendingCode(code)
-
+            debugger
             user.spotifySession = spotifyToken
             await user.save()
 
             return true
 
         } catch (error) {
+            debugger
             return false
         }
     }
@@ -44,21 +46,27 @@ module.exports = async (userId, code) => {
             debugger
 
             if (status === 200) {
-                const spotifyToken = JSON.parse(payload)
+                const spotifySession = JSON.parse(payload)
 
-                const now = Date.now()
+            const now = new Date(Date.now())
 
-                const expireDate = now + spotifyToken.expires_in
+            const expireDate = new Date(new Date(now).setMinutes(now.getMinutes() + spotifySession.expires_in / 60) - 1)
 
-                spotifyToken.expireDate = expireDate
+            spotifySession.expireDate = expireDate
 
-                user.spotifySession = spotifyToken
-
-                await user.save()
+            user.spotifySession = { ...user.spotifySession, ...spotifySession }
+          
+            await user.save()
 
                 return true
 
-            } else throw new Error('Spotify refresh_token error')
+            } else {
+                user.spotifySession = null
+
+                await user.save()
+
+                return false
+            }
         }
 
         return true

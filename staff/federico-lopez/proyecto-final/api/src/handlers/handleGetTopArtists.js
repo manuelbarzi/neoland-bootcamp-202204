@@ -5,7 +5,7 @@ module.exports = async (req, res) => {
     try {
         debugger
         const userId = verifyToken(req)
-
+        
         const access_token = await getSpotifySession(userId)
 
         const topArtists = await getTopArtists(userId, access_token)

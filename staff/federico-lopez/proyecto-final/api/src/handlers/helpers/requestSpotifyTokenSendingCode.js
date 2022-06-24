@@ -17,9 +17,9 @@ module.exports = async code => {
     if (status === 200) {
         const spotifyToken = JSON.parse(payload)
 
-        const now = Date.now()
+        const now = new Date(Date.now())
         
-        const expireDate = now + spotifyToken.expires_in
+        const expireDate = new Date(new Date(now).setMinutes(now.getMinutes() + spotifyToken.expires_in / 60))
 
         spotifyToken.expireDate = expireDate
 
