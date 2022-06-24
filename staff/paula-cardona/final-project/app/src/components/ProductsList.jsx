@@ -27,20 +27,22 @@ function ProductsList ({day, typeClicked}) {
         }
     } 
 
-    return products && <div classname="Container">
-            <div>
-                <h1 className= "h1__Pan">{typeClicked}</h1> 
-            </div>
-            
-            <ul className="PanesList Container">
-                {products.map(product => <li key={product.id}>
-        
-                    <Product product={product} day={day} />
-                    
-                </li>)}
-            </ul>
 
-            <button className='Cross Container'> X </button> 
+    return products && <div >
+            <button className='Cross'> ✗ </button> 
+            {/* <h1 className= "ProductsType">{typeClicked}</h1>  */}
+
+            <div >
+            <ul className='jelou'>
+                {products.map(product => <div > 
+                    <li key={product.id}>
+                        <Product product={product} day={day} />
+                    </li>
+                </div>)}
+            </ul>
+    
+            </div>
+
         </div>
 }
 

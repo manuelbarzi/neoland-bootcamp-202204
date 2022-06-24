@@ -1,3 +1,5 @@
+import './Changes.sass'
+
 function ChangePassword (props) {
 
     const handleClickBackToProfile = event => {
@@ -6,13 +8,15 @@ function ChangePassword (props) {
     }
    
 
-    return <div className="ChangePayment Container">
+    return <div>
+        <div className='back'>
+            <button  className="atras" onClick={handleClickBackToProfile}>atrás</button>
+        </div>
     <form className="Container" >
-        <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
-        <input className="form" type="text" name="name" placeholder="Nombre del titular de la tarjeta"/>
+        <input className="form" type="text" name="name" placeholder="Titular de la tarjeta"/>
         <input className="form" type="password" name="password" placeholder="Número de la targeta"/>
         <input className="form" type="date" name="date" placeholder="Fecha de vencimiento"/>
-        <input className="form" type="text" name="code" placeholder="Número del código de seguridad"/>
+        <input className="form" type="text" name="code" placeholder="Código de seguridad"/>
         
 
         <button className="Button">Guardar</button>

@@ -5,7 +5,7 @@ function AboutUs () {
 
     return <div className= "AboutUs ">
         <div>
-            <h1 className= "AboutUs__h1"> Título </h1>
+            <h1 className= "AboutUs__h1"> PA PER TU </h1>
         </div>
         <div className= "AboutUs Modelo">
             <h2 className= "AboutUs__numbers"> 1 </h2>

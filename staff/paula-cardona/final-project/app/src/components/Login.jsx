@@ -36,8 +36,8 @@ function Login(props) {
     return isJwtValid(sessionStorage.token) ? <></> : <div>
         <div>
             <form className="Login" onSubmit={handleFormSubmit}>
-                <input className="Input" type="username" name="username" placeholder="Nombre de usuario" />
-                <input className="Input" type="password" name="password" placeholder="Contraseña" />
+                <input className="Input_entrada" type="username" name="username" placeholder="Nombre de usuario" />
+                <input className="Input_entrada" type="password" name="password" placeholder="Contraseña" />
                 <button className="Button__orange " type="submit" >Iniciar sesión</button>
                 <Link className="aRegister" to="/register" >Registrarse</Link>
             </form>

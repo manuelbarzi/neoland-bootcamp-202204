@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Context from './Context'
 import updateUserName from '../logic/updateUserName'
+import './Changes.sass'
 
 function ChangeName(props) {
     
@@ -32,11 +33,13 @@ function ChangeName(props) {
     
 
 
-    return  <div className="changeName Container">
-        <form className="Container mw" onSubmit={handleSaveNameClick}>
-            <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
+    return  <div>
+        <div className=" back" >
+            <button className=" atras" onClick={handleClickBackToProfile}>atrás</button>
+        </div>
+        <form className="Container" onSubmit={handleSaveNameClick}>
             <input className="form" type="text" name="name" placeholder=" Nuevo nombre y apellidos"/>
-            <button className="Button__Save">Guardar</button>
+            <button className="Button">Guardar</button>
         </form>
     </div>
 }

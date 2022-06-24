@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Context from './Context'
 import removeProductfromSchedule from '../logic/removeProductfromSchedule'
 import addProductToSchedule from '../logic/addProductToSchedule'
-
+import './ProductsList.sass'
 
 
 function Product({day, product}) {
@@ -30,12 +30,17 @@ function Product({day, product}) {
 
     
 
-    return <div className="Product">
-        <h4>{product.title}</h4>
-        <img src={product.imagen} />
-            
-        <button className="Button" onClick={handleAdd}>Añadir cantidad</button>
-        <button className="Button" onClick={handleRemove}>Eliminar cantidad</button>
+    return <div >
+            <h4 className='text'>{product.title}</h4>
+            <div className='Products'>
+                <div className='Quantity'>
+                    <button className="ButtonPan" onClick={handleRemove}>-</button>
+                </div>
+                    <img src={product.imagen} />
+                <div className='Quantity'>
+                    <button className="ButtonPan" onClick={handleAdd}>+</button>
+                </div>
+            </div>
 
     </div>
 }

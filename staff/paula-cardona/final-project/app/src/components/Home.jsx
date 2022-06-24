@@ -67,8 +67,8 @@ function Home() {
             <main >
                 {view === 'home' && schedule && <div className="Home__buttons">
 
-                    <div className="prueba">
-                    <button className="Button Home__Day" onClick= {handleClickMondayDay}>Lunes</button>
+                    <div className="prueba" onClick= {handleClickMondayDay}>
+                    <button className="Button Home__Day" >Lunes</button>
                         <div className="cajita">
                             {schedule.monday.map((elem) => <div key={elem.id}>
                                 {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
@@ -77,8 +77,8 @@ function Home() {
                         </div>
                     </div>
 
-                    <div className="prueba">
-                    <button className="Button Home__Day" onClick= {handleClickTuesdayDay}> Martes</button>
+                    <div className="prueba" onClick= {handleClickTuesdayDay}>
+                    <button className="Button Home__Day"> Martes</button>
                         <div  className="cajita">
                             {schedule.tuesday.map((elem) => <div key={elem.id}>
                                 {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
@@ -87,8 +87,8 @@ function Home() {
                         </div>
                     </div>
 
-                    <div className="prueba">
-                        <button className="Button Home__Day" onClick= {handleClickWednesdayDay}>Miércoles</button>
+                    <div className="prueba" onClick= {handleClickWednesdayDay}>
+                        <button className="Button Home__Day">Miércoles</button>
                         <div className="cajita">
                             {schedule.wednesday.map((elem) => <div key={elem.id}>
                                     {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
@@ -97,8 +97,8 @@ function Home() {
                         </div>
                     </div>
 
-                    <div className="prueba">
-                    <button className="Button Button Home__Day" onClick= {handleClickThrusdayDay}>Jueves</button>
+                    <div className="prueba" onClick= {handleClickThrusdayDay}>
+                    <button className="Button Button Home__Day">Jueves</button>
                         <div className="cajita">
                             {schedule.thursday.map((elem) => <div key={elem.id}>
                                     {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
@@ -107,18 +107,18 @@ function Home() {
                         </div>
                     </div>
 
-                    <div className="prueba">
-                    <button className="Button Button Home__Day" onClick= {handleClickFridayDay}>Viernes</button>
+                    <div className="prueba" onClick= {handleClickFridayDay}>
+                    <button className="Button Button Home__Day" >Viernes</button>
                         <div className="cajita">
-                            {schedule.friday.map((elem) => <div className="img" key={elem.id}>
-                                    {elem.product.imagen && <img src={elem.product.imagen}/>} 
+                            {schedule.friday.map((elem) => <div key={elem.id}>
+                                    {elem.product.imagen && <img className="img"  src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
                     </div>
 
-                    <div className="prueba">
-                    <button className="Button Button Home__Day" onClick= {handleClickSaturdayDay}>Sábado</button>
+                    <div className="prueba" onClick= {handleClickSaturdayDay}>
+                    <button className="Button Button Home__Day">Sábado</button>
                         <div className="cajita">
                             {schedule.saturday.map((elem) => <div className="img" key={elem.id}>
                                     {elem.product.imagen && <img src={elem.product.imagen}/>} 
@@ -127,8 +127,8 @@ function Home() {
                         </div>
                     </div>
 
-                    <div className="prueba">
-                    <button className="Button Button Home__Day" onClick= {handleClickSundayDay}>Domingo</button>
+                    <div className="prueba" onClick= {handleClickSundayDay}>
+                    <button className="Button Button Home__Day">Domingo</button>
                         <div className="cajita">
                             {schedule.sunday.map((elem) => <div className="img" key={elem.id}>
                                     {elem.product.imagen && <img src={elem.product.imagen}/>} 

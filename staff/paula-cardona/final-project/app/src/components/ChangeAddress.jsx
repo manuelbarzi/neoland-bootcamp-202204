@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import Context from './Context'
 import updateUserAddress from '../logic/updateUserAddress'
+import './Changes.sass'
 
 
 function ChangeAddress(props) {
@@ -30,10 +31,12 @@ function ChangeAddress(props) {
     }
    
 
-    return <div className="Address Container">
+    return <div >
+        <div className='back'>
+            <button className='atras' onClick={handleClickBackToProfile}>atràs</button>
+        </div>
         <form className="Container" onSubmit={handleSaveAddressClick}>
-            <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
-            <input className="form" type="text" name="address" placeholder="Nueva dirección de domicilio"/>
+            <input className="form" type="text" name="address" placeholder="Nueva dirección de envío"/>
             <button className="Button">Guardar</button>
         </form>
     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { isJwtValid } from '../validators'
 import ProductsList from './ProductsList'
+import './Day.sass'
 
 function Day ({dayClicked, scheduleHome}) {
 
@@ -58,11 +59,11 @@ function Day ({dayClicked, scheduleHome}) {
                         <h4 className="element">{elem.product.title}: {elem.quantity} </h4>   
                     </div>)}
 
-            <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>PAN BLANCO</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonPanIntegral}>PAN INTEGRAL</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonPanVariedades}>PAN DE VARIEDADES</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonBolleria}>BOLLERIA</button>
-                <button className="Button Button__Day__Bread" onClick= {handleClickonPanSinGluten}>PAN SIN GLUTEN</button>
+            <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>PAN BLANCO →</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonPanIntegral}>PAN INTEGRAL →</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonPanVariedades}>PAN DE VARIEDADES →</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonBolleria}>BOLLERIA →</button>
+                <button className="Button Button__Day__Bread" onClick= {handleClickonPanSinGluten}>PAN SIN GLUTEN →</button>
             </div>}
 
 

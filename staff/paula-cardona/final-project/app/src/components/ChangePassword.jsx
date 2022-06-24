@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import Context from './Context'
+import './Changes.sass'
 import updateUserPassword from '../logic/updateUserPassword'
 
 function ChangePassword (props) {
@@ -32,9 +33,11 @@ function ChangePassword (props) {
     }
 
 
-    return <div className="ChangePassword Container">
+    return <div>
+        <div className='back'> 
+            <button className="atras" onClick={handleClickBackToProfile}>atrás</button>
+        </div>
         <form className="Container" onSubmit={handleSaveClick}>
-            <button className="Button Button__Day__Flecha" onClick={handleClickBackToProfile}>atrás</button>
             <input className="form" type="password" name="password" placeholder=" Contraseña actual"/>
             <input className="form" type="password" name="newPassword" placeholder=" Constraseña nueva"/>
             <input className="form" type="password" name="newPasswordRepeat" placeholder="Confirmación contraseña"/>
