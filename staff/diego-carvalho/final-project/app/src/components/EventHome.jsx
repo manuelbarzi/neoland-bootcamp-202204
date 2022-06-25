@@ -5,15 +5,15 @@ import signUpToEvent from '../logic/signUpToEvent'
 import './EventHome.sass'
 
 function EventHome(props) {
-  const logger = new Logger('Event')
+  const logger = new Logger('EventHome')
   logger.info('call')
 
   const { handleFeedback } = useContext(Context)
-  const { event } = props
+  const { event, onSignUp } = props
 
   const handleSignUpToEventClick = () => {
-    if (event.id)
 
+    if (event.id)
       signUpToEvent(sessionStorage.token, event.id, error => {
         if (error) {
           handleFeedback({ level: 'error', message: error.message })
@@ -21,7 +21,7 @@ function EventHome(props) {
           return
         }
         handleFeedback({ level: 'success', message: 'Apuntado' })
-        props.onSignUp()
+        onSignUp(event.id)
 
       })
   }

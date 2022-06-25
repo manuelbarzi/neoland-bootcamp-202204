@@ -7,49 +7,49 @@ import './EventCreator.sass'
 import { useNavigate } from 'react-router-dom'
 
 function EventCreator() {
-    const logger = new Logger('Home')
+  const logger = new Logger('Home')
 
-    logger.info('call')
+  logger.info('call')
 
-    // const [timestamp, setTimestamp] = useState(null)
-    // const [view, setView] = useState(null)
-    const { handleFeedback } = useContext(Context)
-    const navigate = useNavigate()
+  // const [timestamp, setTimestamp] = useState(null)
+  // const [view, setView] = useState(null)
+  const { handleFeedback } = useContext(Context)
+  const navigate = useNavigate()
 
-    const handleSaveSubmit = event => {
-        event.preventDefault()
+  const handleSaveSubmit = event => {
+    event.preventDefault()
 
-        const { target: { title: { value: title } } } = event
-        const { target: { text: { value: description } } } = event
+    const { target: { title: { value: title } } } = event
+    const { target: { text: { value: description } } } = event
 
-        saveEvent(sessionStorage.token, null, title, description, error => {
-            if (error) {
-                handleFeedback({ level: 'error', message: error.message })
+    saveEvent(sessionStorage.token, null, title, description, error => {
+      if (error) {
+        handleFeedback({ level: 'error', message: error.message })
 
-                return
-            }
-            handleFeedback({ level: 'success', message: 'event saved' })
-            navigate('/')
+        return
+      }
+      handleFeedback({ level: 'success', message: 'event saved' })
+      navigate('/')
 
 
-        })
-    }
+    })
+  }
 
-    logger.info('render')
+  logger.info('render')
 
-    return isJwtValid(sessionStorage.token) ?
+  return isJwtValid(sessionStorage.token) ?
 
-        <div className="EventCreator">
-            <form className="EventCreator__form" onSubmit={handleSaveSubmit}>
+    <div className="EventCreator">
+      <form className="EventCreator__form" onSubmit={handleSaveSubmit}>
 
-                <textarea className='EventCreator__title' type='text' name="title" placeholder="Title"></textarea>
-                <textarea className='EventCreator__description' type='text' name="text" placeholder="Write your description"></textarea>
+        <textarea className='EventCreator__title' type='text' name="title" placeholder="Title"></textarea>
+        <textarea className='EventCreator__description' type='text' name="text" placeholder="Write your description"></textarea>
 
-                <button className="EventCreator__button">Save</button>
+        <button className="EventCreator__button">Save</button>
 
-            </form>
+      </form>
 
-        </div> : <></>
+    </div> : <></>
 }
 
 export default EventCreator

@@ -5,18 +5,20 @@ import './MyCalendar.sass'
 import retrieveTargetedEvent from '../logic/retrieveTargetedEvent'
 import EventTargeted from './EventTargeted'
 
-function RetrieveTargetedEvent({ timestamp }) {
+function RetrieveTargetedEvent() {
   const logger = new Logger('RetrieveTargetedEvent')
 
   logger.info('call')
 
   const [events, setEvents] = useState(null)
   const { handleFeedback } = useContext(Context)
+  // const [reload, setReload] = useState(null)
 
   useEffect(() => {
     logger.info('componentDidMount | componentWillReceiveProps')
+
     loadEvents()
-  }, [timestamp])
+  }, [])
 
   const loadEvents = () =>
     retrieveTargetedEvent(sessionStorage.token, (error, events) => {
