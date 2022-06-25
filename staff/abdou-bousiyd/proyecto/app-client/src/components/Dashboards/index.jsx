@@ -14,7 +14,6 @@ import deleteProject from "../../logic/deleteProject";
 import { withToken } from "../../containers";
 
 const Dashboards = () => {
-
   const navigate = useNavigate();
   const [name, setName] = useState(null);
   const [alert, setAlert] = useState(null);
@@ -23,9 +22,8 @@ const Dashboards = () => {
   const [dashName, setDashName] = useState(null);
   const [editDashId, setEditDashId] = useState(null);
   const [projectsDash, setProjectsDash] = useState(null);
- 
-  useEffect(() => {
 
+  useEffect(() => {
     getDashboards();
     getUser();
   }, []);
@@ -34,14 +32,13 @@ const Dashboards = () => {
     const newTitle = e.target.value;
     setDashName(newTitle);
   };
-console.log(project, 121)
   const getDashboards = () => {
     retrieveProjects(sessionStorage.token, (error, _projects) => {
       if (error) {
-        setAlert(<Alert error message={error.message} />);
-        setTimeout(() => {
-          setAlert(null);
-        }, 4000);
+        // setAlert(<Alert error message={error.message} />);
+        // setTimeout(() => {
+        //   setAlert(null);
+        // }, 4000);
         return;
       }
       setProjects(_projects);
@@ -53,10 +50,8 @@ console.log(project, 121)
       setEditDashId(null);
       return;
     }
-
     saveProject(sessionStorage.token, id, dashName, null, (error) => {
       if (error) {
-
         setAlert(<Alert error message={error.message} />);
         setTimeout(() => {
           setAlert(null);
@@ -94,19 +89,19 @@ console.log(project, 121)
 
   const getUser = () => {
     if (isJwtValid(sessionStorage.token)) {
-      retrieveUser(sessionStorage.token, (error, user) => {
+        retrieveUser(sessionStorage.token, (error, user) => {
         if (error) {
-          setAlert(<Alert error message={error.message} />);
-          setTimeout(() => {
+            setAlert(<Alert error message={error.message} />);
+            setTimeout(() => {
             setAlert(null);
-          }, 4000);
+            }, 4000);
 
-          handleLogoutClick();
+            handleLogoutClick();
 
-          return;
+            return;
         }
         setName(user.name);
-      });
+        });
     }
     // else navigate('/login')
   };
@@ -126,10 +121,9 @@ console.log(project, 121)
       }
 
       setProject(_project);
-      navigate(`/previewProject/${_project.id}`)
-     
+      navigate(`/previewProject/${_project.id}`);
     });
-  }
+  };
 
   return (
     <>
@@ -163,9 +157,10 @@ console.log(project, 121)
             return (
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
-                  <h1  onClick={() => previewProject(id)}>{title}</h1>
+                  <h1 className="Dash__Container__Item__Title" onClick={() => previewProject(id)}>{title}</h1>
                   {editDashId === id ? (
                     <input
+                      className="dash_input "
                       onChange={handleInputChange}
                       type="text"
                       value={dashName === null ? title : dashName}
@@ -181,13 +176,16 @@ console.log(project, 121)
                       />
                     </div>
                   )}
+                    <div className="Dash__Container__Items__Btn">
+                        {editDashId === id ? (
+                        <i onClick={() => save(id)}  className="far fa-save save-icon actiones"></i>
+                        ) : (
+                        <i onClick={() => setEditDashId(id)} className="fas fa-pen edit-icon actiones"></i>
+                        )}
+                        <i onClick={() => deleteDash(id)} className="far fa-trash-alt remove-icon actiones"></i>
+                    </div>
+
                 </div>
-                {editDashId === id ? (
-                  <i onClick={() => save(id)}>SAVE</i>
-                ) : (
-                  <i onClick={() => setEditDashId(id)}>EDIT</i>
-                )}
-                <i onClick={() => deleteDash(id)}>DELETE</i>
               </div>
             );
           })}

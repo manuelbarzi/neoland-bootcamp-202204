@@ -70,7 +70,7 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                     <i className="gg-software-download"></i>
                 </li>
                 
-                <li className='header__content__links__item' 
+                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__skypackNone"}` }
                     onClick={toggleSkypack}
                 >
                     <i class="gg-profile">SP</i>
@@ -114,23 +114,27 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
             )}
 
             <select className="header__content__select">
-                {/* <option value="#">Home</option>
-                <option value="#">About</option>
-                <option value="#">Clients</option> */}
-
-                {!name && (
-                <select className="header__content__btns">
-                    <option className="header__content__btns__btn"  onClick={handleToRegister}> Sign Up </option>
-                    <option className="header__content__btns__btn" onClick={handleToLogin} >Log In </option>
-                </select>
+              <div>
+                <button>okys</button>
+                {/* <ul className="header__content__btns">
+                    <li className="header__content__btns__btn"  onClick={handleToRegister}> Sign Up </li>
+                    <li className="header__content__btns__btn" onClick={handleToLogin} >Log In </li>
+                </ul> */}
+                {/* {!name && (
+                <ul className="header__content__btns">
+                    <li className="header__content__btns__btn"  onClick={handleToRegister}> Sign Up </li>
+                    <li className="header__content__btns__btn" onClick={handleToLogin} >Log In </li>
+                </ul>
                 )}
 
                 {name && (
-                <select className="header__content__btns">
-                    <option className="header__content__btns__btn" onClick={handleLogoutClick}> log out </option>
-                    <option className="header__content__btns__btn">{name}</option>
-                </select>
-                )}
+                <ul className="header__content__btns">
+                    <li className="header__content__btns__btn" onClick={handleLogoutClick}> log out </li>
+                    <li className="header__content__btns__btn">{name}</li>
+                </ul>
+                )} */}
+              </div>
+
             </select>
 
 

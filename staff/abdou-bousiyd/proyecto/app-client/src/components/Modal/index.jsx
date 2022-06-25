@@ -1,11 +1,11 @@
 import Portal from '../../portal/index'
 import './index.sass'
 
-const Modal = ({ children, toggle, active }) => {
+const Modal = ({ children, toggle, active, activeSkypack }) => {
 
     return (
         <Portal>
-            {active && (
+            {active &&(
                 <div className='modale-wrapper'>
                     <div className='modale-window'>
                         <a href="#" className="modale-closebtn" onClick={toggle}>&times;</a>

@@ -24,11 +24,11 @@ import Skypack from "../Skypack";
 const Project = () => {
 
   const [timestamp, setTimestamp] = useState(null)
-  const [activeSkypack, setActiveSkypack] = useState(false);
   const [alert, setAlert] = useState(null);
   const [name, setName] = useState(null);
   const [_, setIsEditorReady] = useState(false);
   const [active, setActive] = useState(false);
+  const [activeSkypack, setActiveSkypack] = useState(false);
   const [activeTitle, setActiveTitle] = useState(false);
   const [projectTitle, setProjectTitle] = useState("");
   let { projectId } = useParams();
@@ -50,7 +50,6 @@ const Project = () => {
 
   useEffect(() => {
     loadUser();
-    getProject()
 
     if (projectId) {
       getProject()
@@ -63,6 +62,10 @@ const Project = () => {
 
   const toggle = () => {
     setActive(!active);
+  };
+  
+  const toggleSkypack = () => {
+    setActiveSkypack(!activeSkypack);
   };
 
   const toggleTitle = () => {
@@ -214,9 +217,7 @@ const Project = () => {
     setDownload(true)
   }
 
-  const toggleSkypack = () => {
-    setActiveSkypack(!activeSkypack);
-  };
+
 
   const renderPreview = `
     <!DOCTYPE html>
@@ -255,7 +256,7 @@ const Project = () => {
         />
       </Modal>
 
-      <Modal active={active} toggle={toggle}>
+      <Modal activeSkypack={activeSkypack}>
         <Skypack
         />
       </Modal>

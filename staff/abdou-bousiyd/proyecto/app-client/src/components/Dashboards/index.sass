@@ -2,44 +2,113 @@
     display: flex
     justify-content: center
     align-items: center
+    background-color: #fff
+    // height: 100vh
+    @media screen and ( max-width: 400px )
+        height: 190vh
 
     &__Container
-        // background-color: yellow
         padding: 10px
         text-decoration: none
         margin: 15px
-        width: 700px
+        width: 80%
         display: flex
         flex-wrap: wrap
+        justify-content: center
+
         &__Items
+            position: relative
             display: flex
+            justify-content: center
             align-items: center
             flex-direction: column
-            // background-color: red
         &__Item
-            border: 1px solid
-            width: 300px
-            height: 300px
+            // display: flex
+            // justify-content: center
+            width: 350px
+            height: 350px
             margin: 20px
             position: relative
             border-radius: 10px
             background-color: #7a7b7c
+            box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.4)
 
-            &__Iframe
+            &__Title
                 display: flex
                 justify-content: center
                 align-items: center
+                cursor: pointer
+                text-align: right
+                text-transform: uppercase
+                letter-spacing: 4px
+                font-size: 30px
+                font-weight: bold
+                font-weight: normal
+                color: black
+                border-radius: 5px
+                width: 60%
+                transform: translateX(30%)
+                background-color: #fff
+                margin: 5px
+
+            &__Btn
+                background-color: red
+
+            i
                 position: relative
-                width: 100px
-                height: 100%
+                top: 270px
+                display: flex
+                justify-content: space-around
+                align-items: center
 
 .Iframe__target
-    background-color: #eee
+    background-color: #fff
     border: none
-    width: 95%
-    height: 80%
     transform: scale(1)
     transform-origin: 0 0
     position: absolute
     left: 0
     border-radius: 5px
+    width:99%
+    height:270px
+    border: 1px groove black
+    margin-top: 25px
+
+.actiones 
+    visibility: hidden
+.Dash__Container__Items:hover .actiones 
+    visibility: visible
+
+
+.edit-icon, .save-icon 
+    position: absolute
+    color: #fff
+    font-size: 20px
+    bottom: 0
+    right: 0px
+    margin: 10px
+    margin-top: -315px
+    margin-left: 300px 
+
+.remove-icon
+    position: absolute
+    color: #fff
+    font-size: 20px
+    top: 0
+    right: 0
+    margin: 10px
+    margin-left: 300px 
+    
+.dash_input 
+    color: #333
+    font-size: 16px
+    width: 75%
+    border: 2px solid rgb(193, 207, 213)
+    border-radius: 5px
+    font-weight: 600
+    height: 35px
+    text-align: center
+    // transform: translateX(4%)
+    transform: translateY(-100%)
+    margin: 0px 40px  !important
+    position: absolute
