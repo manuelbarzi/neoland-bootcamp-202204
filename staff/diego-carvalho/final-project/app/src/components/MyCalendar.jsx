@@ -50,7 +50,9 @@ function MyCalendar({ timestamp }) {
 
   return <div>
     <div className='myCalendar__container' >
-      <button className='Button' onClick={handleEventTargetedClick}>Eventos Apuntados</button>
+      <div className='myCalendar__button-container'>
+        <button className='myCalendar__eventTargeted-button' onClick={handleEventTargetedClick}>Eventos Apuntados</button>
+      </div>
       <Routes>
         <Route index element={events && events.length ?
 
@@ -60,7 +62,7 @@ function MyCalendar({ timestamp }) {
             </li>)}
           </ul>
           :
-          <p>no event yet</p>} />
+          <p className='myCalendar__p' >no event yet</p>} />
         <Route path="retrieveTargetedEvent" element={<RetrieveTargetedEvent />} />
       </Routes>
     </div>

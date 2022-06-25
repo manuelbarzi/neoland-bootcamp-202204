@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
-import deleteEvent from '../logic/deleteEvent'
+import deleteTargetedEvent from '../logic/deleteTargetedEvent'
 import './Event.sass'
 
 function EventTargeted(props) {
@@ -14,7 +14,7 @@ function EventTargeted(props) {
 
   const handleRemoveClick = () => {
     if (eventId)
-      deleteEvent(sessionStorage.token, eventId, error => {
+      deleteTargetedEvent(sessionStorage.token, eventId, error => {
         if (error) {
           handleFeedback({ level: 'error', message: error.message })
 

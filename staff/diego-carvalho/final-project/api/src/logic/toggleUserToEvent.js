@@ -14,7 +14,7 @@ function toggleUserToEvent(userId, eventId) {
     })
     .then(event => {
       if (!event) throw new NotFoundError(`event with id ${eventId} does not exist`)
-      debugger
+
       const index = event.participants.findIndex(_userId => _userId._id.toString() === userId)
       if (index < 0)
         event.participants.push(userId)

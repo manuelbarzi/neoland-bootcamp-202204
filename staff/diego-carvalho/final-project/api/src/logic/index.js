@@ -11,6 +11,7 @@ const deleteEvent = require('./deleteEvent')
 const addEventToUser = require('./addEventToUser')
 const toggleUserToEvent = require('./toggleUserToEvent')
 const retrieveTargetedEvent = require('./retrieveTargetedEvent')
+const deleteTargetedEvent = require('./deleteTargetedEvent')
 
 module.exports = {
     registerUser,
@@ -25,6 +26,8 @@ module.exports = {
     deleteEvent,
     addEventToUser,
     toggleUserToEvent,
-    retrieveTargetedEvent
+    retrieveTargetedEvent,
+    deleteTargetedEvent
+
 
 }

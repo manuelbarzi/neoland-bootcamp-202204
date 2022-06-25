@@ -12,7 +12,7 @@ describe('retrieveTargetedEvent', () => {
     let user
 
     beforeEach(() => {
-      user = new User({ name: 'Papa Gayo', email: 'papagayo@gmail.com', password: '1234', events: [] })
+      user = new User({ name: 'Papa Gayo', email: 'papagayo@gmail.com', password: '1234' })
 
       return user.save()
     })
@@ -29,7 +29,6 @@ describe('retrieveTargetedEvent', () => {
           .then(events => {
             allEvents = events
             return user.events.push(...allEvents.map(event => event._id))
-
           })
           .then(() => {
             return user.save()

@@ -37,13 +37,13 @@ function RetrieveTargetedEvent({ timestamp }) {
   logger.info('render')
 
   return events && events.length ?
-    <ul className="EventList__list Container">
+    <ul className="myCalendar__list">
       {events.map(event => <li key={event._id}>
         <EventTargeted eventId={event._id} title={event.title} description={event.description} onRemove={handleRemoveEventTargeted} />
       </li>)}
     </ul>
     :
-    <p>no event yet</p>
+    <p className='myCalendar__p'>no event yet</p>
 }
 
 export default RetrieveTargetedEvent

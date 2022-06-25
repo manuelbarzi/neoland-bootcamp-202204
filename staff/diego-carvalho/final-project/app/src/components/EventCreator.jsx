@@ -28,9 +28,10 @@ function EventCreator() {
 
                 return
             }
+            handleFeedback({ level: 'success', message: 'event saved' })
             navigate('/')
 
-            handleFeedback({ level: 'success', message: 'event saved' })
+
         })
     }
 

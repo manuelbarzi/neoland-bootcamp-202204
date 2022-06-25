@@ -15,7 +15,8 @@ const {
   handleDeleteEvent,
   handleAddEventToUser,
   handleToggleUserToEvent,
-  handleRetrieveTargetedEvent } = require('./handlers')
+  handleRetrieveTargetedEvent,
+  handleDeleteTargetedEvent } = require('./handlers')
 
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers')
@@ -40,13 +41,14 @@ const { cors } = require('./helpers')
     routes.delete('/users', jsonBodyParser, handleDeleteUser)//deleteUser
     routes.post('/users/:eventId', jsonBodyParser, handleAddEventToUser)//addEventToUser
     routes.get('/users/events', jsonBodyParser, handleRetrieveTargetedEvent)//RetrieveTargetedEvent
+    routes.delete('/users/events', jsonBodyParser, handleDeleteTargetedEvent)//deleteTargetedEvent
 
     routes.post('/events', jsonBodyParser, handleCreateEvent)//createEvent
     routes.get('/events', handleRetrieveEvent)//retrieveEvent
     routes.get('/events/owner', handleRetrieveOwnerEvent)//retrieveOwnerEvent
     routes.patch('/events/:eventId', jsonBodyParser, handleUpdateEvent)//updateEvent
     routes.delete('/events/:eventId', jsonBodyParser, handleDeleteEvent)//deleteEvent
-    routes.patch('/events/:eventId/participants', jsonBodyParser, handleToggleUserToEvent)//deleteEvent
+    routes.patch('/events/:eventId/participants', jsonBodyParser, handleToggleUserToEvent)//toggleUserToEvent
 
     api.use('/api', routes)//ruta
 

@@ -44,7 +44,7 @@ function HomeEventList() {
             </li>)}
         </ul>
         :
-        <p>no event yet</p>
+        <p className='EventList__p'>no event yet</p>
 }
 
 export default HomeEventList
