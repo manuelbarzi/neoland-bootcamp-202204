@@ -1,10 +1,10 @@
-import { updateFlat } from 'logic'
+import { updateFlat, retrieveFlat } from 'logic'
 import { PrimaryButton, Input, Section, Form, Textarea } from '../../../../components'
 import { verifyTokenWithAPICall } from '../../../helpers'
 import { useRouter } from 'next/router'
 import Apium from 'apium'
 
-export default function EditFlat({ token, flatId }) {
+export default function EditFlat({ token, flat }) {
   const router = useRouter()
 
   // const { handleFeedback } = useContext(Context)
@@ -21,7 +21,7 @@ export default function EditFlat({ token, flatId }) {
 
       event.target.reset()
 
-      await updateFlat(token, { title, description, address })
+      await updateFlat(token, flat._id, title, description, address )
       // handleFeedback
 
       router.push('/admin')
@@ -35,9 +35,9 @@ export default function EditFlat({ token, flatId }) {
   return <>
     <Section className='section'>
       <Form className='px-8' onSubmit={handleUpdateFlatFormSubmit}>
-        <Input type="text" name="title" placeholder="Title"></Input>
-        <Textarea name="description" rows="5" placeholder='Description' />
-        <Input type="text" name="address" placeholder="address"></Input>
+        <Input type="text" name="title" placeholder="Title" defaultValue={flat.title}></Input>
+        <Textarea defaultValue={flat.description} name="description" rows="5" placeholder='Description' />
+        <Input type="text" defaultValue={flat.address} name="address" placeholder="address"></Input>
 
         <PrimaryButton className='mb-4' type="submit">Save</PrimaryButton>
 
@@ -49,11 +49,12 @@ export default function EditFlat({ token, flatId }) {
 export async function getServerSideProps({ req, res, params: { flatId } }) {
 
   const token = await verifyTokenWithAPICall(req, res)
+  const flat = await retrieveFlat(token, flatId)
 
   return {
     props: {
       token: token || null,
-      flatId
+      flat
     }
   }
 }

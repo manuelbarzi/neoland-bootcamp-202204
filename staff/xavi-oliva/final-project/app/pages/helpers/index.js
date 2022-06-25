@@ -35,7 +35,7 @@ export async function verifyTokenWithAPICall(req, res) {
         }
     }
 
-    if (req.url === '/admin' || req.url.includes('/flat') || req.url.includes('/profile')) {
+    if (req.url === '/admin' || req.url.includes('/flats') || req.url.includes('/profile')) {
         res.writeHead(307, { Location: '/login' })
         res.end()
     }

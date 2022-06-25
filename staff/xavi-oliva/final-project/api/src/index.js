@@ -14,8 +14,9 @@ const {
     handleDeleteFlat,
     handleValidateToken,
     handleRetrieveFlat,
-    handleAddBookingToFlat,
-    handleDeleteBookingFromFlat} = require('./handlers')
+    handleCreateBooking,
+    handleRetrieveBookings,
+    handleDeleteBooking} = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const cors = require('cors')
 
@@ -47,8 +48,9 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/flats/:flatId', jsonBodyParser, handleUpdateFlat)
         routes.delete('/flats/:flatId', jsonBodyParser, handleDeleteFlat)
 
-        routes.post('/flats/:flatId/bookings', jsonBodyParser, handleAddBookingToFlat)
-        routes.delete('/flats/:flatId/bookings/:bookingId', jsonBodyParser, handleDeleteBookingFromFlat)
+        routes.post('/flats/:flatId/bookings', jsonBodyParser, handleCreateBooking)
+        routes.get('/flats/:flatId/bookings', handleRetrieveBookings)
+        routes.delete('/flats/:flatId/bookings/:bookingId', jsonBodyParser, handleDeleteBooking)
 
         api.use('/api', routes)
 

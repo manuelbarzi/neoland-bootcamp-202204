@@ -18,7 +18,7 @@ function retrieveFlat(userId, flatId) {
             flat.id = flat._id.toString()
 
             delete flat.__v
-            // delete flat._id
+            delete flat._id
 
             return flat
         })

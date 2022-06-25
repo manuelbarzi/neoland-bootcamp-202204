@@ -10,6 +10,7 @@ module.exports = {
     handleUpdateFlat: require('./handleUpdateFlat'),
     handleDeleteFlat: require('./handleDeleteFlat'),
     handleValidateToken: require('./handleValidateToken'),
-    handleAddBookingToFlat: require('./handleAddBookingToFlat'),
-    handleDeleteBookingFromFlat: require('./handleDeleteBookingFromFlat')
+    handleCreateBooking: require('./handleCreateBooking'),
+    handleRetrieveBookings: require('./handleRetrieveBookings'),
+    handleDeleteBooking: require('./handleDeleteBooking')
 }

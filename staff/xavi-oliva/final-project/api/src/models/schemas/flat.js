@@ -27,9 +27,7 @@ const flat = new Schema({
     description: {
         type: String,
         default: null
-    },
-
-    bookings: [booking]
+    }
 })
 
 module.exports = flat

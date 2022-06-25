@@ -6,9 +6,9 @@ const {
     validateStringNotEmptyOrBlank,
     validateEmail} = require('validators')
 
-function addBookingToFlat(userId, flatId, name, phone, email, text, from, to) {
+function createBooking(userId, flatId, name, phone, email, text, from, to) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
-    validateStringNotEmptyNoSpaces(flatId, 'note id')
+    validateStringNotEmptyNoSpaces(flatId, 'flat id')
     validateStringNotEmptyOrBlank(name, 'name')
     if (phone != null)  validateString(phone, 'phone')
     if (email != null)  validateEmail(email, 'email')
@@ -25,13 +25,8 @@ function addBookingToFlat(userId, flatId, name, phone, email, text, from, to) {
         .then(flat => {
             if (!flat) throw new NotFoundError(`flat with id ${flatId} does not exist`)
 
-            const booking = new Booking({ user: userId, flat: flatId, name: name, phone: phone, email: email, text: text, from: from, to: to})
-            flat.bookings.push(booking)
-
-            return flat.save()
-                .then(() => {
-                    return booking.id
-                })
+            return Booking.create({ user: userId, flat: flatId, name, phone, email, text, from, to })
         })
+        .then(booking => booking.id)
 }
-module.exports = addBookingToFlat
+module.exports = createBooking
