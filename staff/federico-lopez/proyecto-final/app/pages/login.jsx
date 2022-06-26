@@ -1,14 +1,14 @@
-// import { useContext } from 'react'
-import Link from 'next/link'
+import { useContext } from 'react'
+// import Link from 'next/link'
 import { authenticateUser } from '../logic'
 import { setCookie, verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
-import { FlexColSection, Logo, LoginForm, QuaternaryAnchor } from '../components'
+import { FlexColSection, Logo, LoginForm, Context } from '../components'
 
 export default function Login(props) {
     const router = useRouter()
 
-    // const { handleFeedback } = useContext(Context)
+    const { handleFeedback } = useContext(Context)
 
     const onFormSubmit = async event => {
         event.preventDefault()
@@ -20,13 +20,14 @@ export default function Login(props) {
             event.target.reset()
 
             const token = await authenticateUser(email, password)
-            // handleFeedback
+            
+            handleFeedback('success', 'Login', 'successfully logged in')
+            
             setCookie('token', token, '3600')
 
             router.push('/')
         } catch (error) {
-            console.error(error)
-            // handleFeedback(error.message)
+            handleFeedback('error', 'Login failed', error.message)
         }
     }
     return (
@@ -39,9 +40,8 @@ export default function Login(props) {
 }
 
 export async function getServerSideProps(ctx) {
-    debugger
     const { req, res } = ctx
-    const token = await verifyTokenWithAPICall(req, res)
+    await verifyTokenWithAPICall(req, res)
 
     return {
         props: {}

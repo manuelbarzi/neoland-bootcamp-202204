@@ -22,13 +22,15 @@ export async function verifyTokenWithAPICall(req, res) {
                 res.writeHead(307, { Location: '/' })
                 res.end()
             } else {
-                return token
+                const { userId } = JSON.parse(payload)
+
+                return { token, userId }
             }
         } else {
             cookies.set('token')
 
-            if (req.url.includes('/edit-profile') || req.url.includes('/create-interpretation') || req.url.includes('/change-password'))  {
-                
+            if (req.url.includes('/edit-profile') || req.url.includes('/create-interpretation') || req.url.includes('/change-password')) {
+
                 //TODO FEEDBACKS IN THIS CASES
                 res.writeHead(307, { Location: '/login' })
                 res.end()
@@ -37,10 +39,10 @@ export async function verifyTokenWithAPICall(req, res) {
         }
     }
 
-    if (req.url.includes('/edit-profile') || req.url.includes('/create-interpretation') || req.url.includes('/change-password'))  {
+    if (req.url.includes('/edit-profile') || req.url.includes('/create-interpretation') || req.url.includes('/change-password')) {
         res.writeHead(307, { Location: '/login' })
         res.end()
     }
 
-    return 
+    return
 }

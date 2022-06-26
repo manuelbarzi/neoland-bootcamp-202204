@@ -21,8 +21,9 @@ export default function Song({ interpretations, song }) {
     return <>
         <header className="w-full fixed top-0 bg-white p-4 gap-4 shadow-custom-items z-50">
             <div className="flex flex-col gap-4">
-                <ChevronLeftImage className="w-8 h-8" onClick={onBackClick} />
-                <div className="flex flex-col justify-between gap-2">
+                <button className="w-8 h-8" onClick={onBackClick} >
+                    <ChevronLeftImage />
+                </button>                <div className="flex flex-col justify-between gap-2">
                     <div className="flex gap-2">
                         <SongIconImage className="w-6 h-6" grey={true} />
                         <Title2>Song</Title2>
@@ -33,7 +34,7 @@ export default function Song({ interpretations, song }) {
                     </div>
                 </div>
                 <Link href={`/artist/${artistName}`}>
-                    <a>
+                    <a className="w-fit">
                         <Title3>{artistName}</Title3>
                     </a>
                 </Link>
@@ -68,7 +69,7 @@ export default function Song({ interpretations, song }) {
                 {interpretations.length === 0 && <p>There are not available interpretations for this song</p>}
 
             </FlexColSection>
-            </div>
+        </div>
         <Footer />
     </>
 }

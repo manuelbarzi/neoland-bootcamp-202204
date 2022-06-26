@@ -1,4 +1,4 @@
-import { FlexColSection, Footer, Header } from "../components";
+import { Feedback, FlexColSection, Footer, Header } from "../components";
 import { verifyTokenWithAPICall } from "../helpers";
 import { checkSpotifySession, getTopArtists } from '../logic'
 const querystring = require('query-string');
@@ -19,7 +19,7 @@ export default function Home({ token, isSessionActive, topArtists }) {
       )}
 
     <FlexColSection>
-      
+
       {!isSessionActive && <a className="p-24 text-2xl-red-800" href={`https://accounts.spotify.com/authorize?${querystring.stringify({
         response_type: 'code',
         client_id: client_id,
@@ -35,11 +35,12 @@ export default function Home({ token, isSessionActive, topArtists }) {
 }
 
 export async function getServerSideProps(ctx) {
-  debugger
   const { req, res } = ctx
-  const token = await verifyTokenWithAPICall(req, res)
+  const obj = await verifyTokenWithAPICall(req, res)
 
-  if (token) {
+  if (obj) {
+    const { token } = obj
+    
     if (ctx.query.code) {
       debugger
       const isSessionActive = await checkSpotifySession(token, ctx.query.code)

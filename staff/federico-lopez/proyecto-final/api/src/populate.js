@@ -52,7 +52,7 @@ const { laRazonContent1, laRazonContent2, demasiadoContent1, sinSenalContent1, o
             })
 
             const interpretationLaRazon2 = new Interpretation({
-                user: userWendy._id.toString(), content: laRazonContent2, ranks: [rank1FromJohn]
+                user: userWendy._id.toString(), content: laRazonContent2, ranks: [rank4FromPepito]
             })
 
             const interpretationATuLado1 = new Interpretation({

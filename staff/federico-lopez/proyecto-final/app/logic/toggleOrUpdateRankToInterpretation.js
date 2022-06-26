@@ -1,4 +1,4 @@
-import { validateInterpretationContent, validateJWT, validateStringNotEmptyNoSpaces } from 'validators'
+import { validateJWT, validateStringNotEmptyNoSpaces, validateRank } from 'validators'
 import Apium from '../vendor/Apium'
 import { context } from './context'
 

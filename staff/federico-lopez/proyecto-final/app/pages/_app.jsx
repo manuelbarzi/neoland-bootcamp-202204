@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import Head from 'next/head'
+import { AppWrapper } from '../components';
 
 if (typeof XMLHttpRequest === 'undefined') {
   var XMLHttpRequest = require('xhr2');
@@ -13,7 +14,9 @@ function MyApp({ Component, pageProps }) {
       <title>PitchUs</title>
     </Head>
     <div className="box-border w-full min-h-screen h-full bg-white">
-      <Component {...pageProps} />
+      <AppWrapper>
+        <Component {...pageProps} />
+      </AppWrapper>
     </div>
   </>
 }

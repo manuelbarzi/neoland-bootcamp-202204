@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
 
         await userExists(userId)
 
-        res.status(200).send()
+        res.status(200).json({ userId })
     } catch (error) {
         handleErrorsAndRespond(error, res)
     }

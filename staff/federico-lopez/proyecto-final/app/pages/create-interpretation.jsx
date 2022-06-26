@@ -48,7 +48,7 @@ export default function CreateInterpretation({ token }) {
         setArtistsDisplayed(null)
 
         try {
-            const songs = await retrieveSongsOfArtist(artistChosen.id)
+            const songs = await retrieveSongsOfArtist(artistChosen.name)
 
             if (songs.length > 0) {
                 setSongsOfArtist(songs)

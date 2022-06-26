@@ -1,13 +1,12 @@
-// import { useContext } from 'react'
+import { useContext } from 'react'
 import Link from 'next/link'
 import { registerUser } from 'logic'
 import { useRouter } from 'next/router'
 import { verifyTokenWithAPICall } from '../helpers'
-import { FlexColSection, Logo, BlueAnchor, RegisterForm, QuaternaryAnchor } from '../components'
-// import Context from './Context'
+import { FlexColSection, Logo, BlueAnchor, RegisterForm, Context } from '../components'
 
 export default function Register(props) {
-    // const { handleFeedback } = useContext(Context)
+    const { handleFeedback } = useContext(Context)
     const router = useRouter()
 
     const onFormSubmit = async event => {
@@ -21,11 +20,11 @@ export default function Register(props) {
         try {
             await registerUser(username, email, password, repeatPassword)
 
-            router.push('/login')
+            handleFeedback('success', 'Register', 'successfully registered')
 
+            router.push('/login')
         } catch (error) {
-            console.error(error)
-            // handleFeedback(error.message)
+            handleFeedback('error', 'Sign up failed', error.message)
         }
     }
 

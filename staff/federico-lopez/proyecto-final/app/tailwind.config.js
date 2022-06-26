@@ -18,7 +18,10 @@ module.exports = {
       },
       colors: {
         primary: "#FAFAFA",
-        secondary: "#27A080",
+        mygreen: "#27A080",
+        mygreenLight: "#EEF7F5",
+        myorange: "#FF9F0A",
+        myorangeLight: "#FFF7EB",
         myblue: "#007C9E",
         quaternary: "#EF476F",
         myblack: "#292929",
@@ -26,7 +29,10 @@ module.exports = {
         inputBg: "#EAEAEA",
         inputBorder: "#D9D9D9",
         mygrey: "#474747",
-        secondarygrey: "#8E8E93" 
+        secondarygrey: "#8E8E93",
+        purpleBg: "#F2F2FD",
+        mymagenta: "#EF476F",
+        mymagentaLight: "#FEF0F3"
       },
       fontFamily: {
         "sans": ["Roboto", ...defaultTheme.fontFamily.sans]

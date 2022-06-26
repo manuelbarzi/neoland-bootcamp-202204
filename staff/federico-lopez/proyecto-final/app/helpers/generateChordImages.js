@@ -1,6 +1,6 @@
 const { data: { keys, chords } } = require('../data/guitar')
 const { GUITAR } = require('./constants')
-import { ChordFigure } from '../components' 
+import { ChordFigure, CircleChordButton, CrossClose17Image } from '../components'
 
 export function generateChordImages(chord) {
     let chordObjectFounded
@@ -36,12 +36,12 @@ export function generateChordImages(chord) {
         return positions.map((position, index) => {
             const { fingers, frets, barres, capo, baseFret } = position
             return (
-                <ChordFigure
-                key={index}
-                chord={{ frets, fingers, barres, capo, baseFret }}
-                instrument={GUITAR}
-                lite={false}
-                />
+                    <ChordFigure
+                        key={index}
+                        chord={{ frets, fingers, barres, capo, baseFret }}
+                        instrument={GUITAR}
+                        lite={false}
+                    />
             )
         })
     } catch (error) {

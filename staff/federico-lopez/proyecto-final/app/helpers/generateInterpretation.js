@@ -4,7 +4,7 @@ import { Fragment } from 'react'
 import { getChords } from './'
 import { ButtonBlue, ChordButton } from '../components'
 
-export function generateInterpretation(interpretation, handlerChordClick, handlerRankClick) {
+export function generateInterpretation(interpretation, handlerChordClick) {
     validateInterpretationContent(interpretation)
     let positions = [], match
 
@@ -16,50 +16,7 @@ export function generateInterpretation(interpretation, handlerChordClick, handle
         return <p>{interpretation}</p>
     }
 
-    return <>
-        <div className="flex flex-col">
-
-            {/* RANK TEST */}
-        <div>
-            <p>Rank the interpretation</p>
-            <ButtonBlue className="w-5" onClick={function() {
-                handlerRankClick(1)
-            }}
-            >1</ButtonBlue>
-            <ButtonBlue className="w-5" onClick={function() {
-                handlerRankClick(2)
-            }}
-            >2</ButtonBlue>
-            <ButtonBlue className="w-5" onClick={function() {
-                handlerRankClick(3)
-            }}
-            >3</ButtonBlue>
-            <ButtonBlue className="w-5" onClick={function() {
-                handlerRankClick(4)
-            }}
-            >4</ButtonBlue>
-            <ButtonBlue className="w-5" onClick={function() {
-                handlerRankClick(5)
-            }}
-            >5</ButtonBlue>
-        </div>
-
-        <p>Song chords:</p>
-        <div className="flex gap-2">
-            {
-                getChords(interpretation).map((chord, index) => {
-                    return (
-                        <ChordButton className="pr-2" key={index * 10}
-                            onClick={event => {
-                                event.preventDefault()
-
-                                handlerChordClick(chord)
-                            }}>{chord}</ChordButton>
-                    )
-                })
-            }
-        </div>
-        </div>
+    return (
         <p>{positions.map((position, index) => {
             let textFirstPart = ''
             let textLastPart = ''
@@ -88,7 +45,7 @@ export function generateInterpretation(interpretation, handlerChordClick, handle
 
                         handlerChordClick(chord)
                     }}
-                    className="text-red-400">{chord}
+                    >{chord}
                 </ChordButton>
 
                 <>{textLastPart.split('').map((character, index) => {
@@ -97,5 +54,5 @@ export function generateInterpretation(interpretation, handlerChordClick, handle
                     else return <Fragment key={index * Math.random() * 100}>{character}</Fragment>
                 })}</></ Fragment>
         })}</p>
-    </>
+    )
 }
