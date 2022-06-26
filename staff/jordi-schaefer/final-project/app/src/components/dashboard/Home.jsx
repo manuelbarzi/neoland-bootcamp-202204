@@ -87,7 +87,7 @@ function Home(props) {
 
 
     return  isJwtValid(sessionStorage.token) ?
-    <div className="Container overflow mw mh">
+    <div className="Container Home__container overflow mw mh">
         <header className="Home__header">
             {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comments'].includes(view)) 
                 && <div className="Home__container-back">

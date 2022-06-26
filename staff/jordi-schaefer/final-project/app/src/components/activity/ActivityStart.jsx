@@ -16,10 +16,8 @@ function ActivityStart(props) {
 
     useEffect(() => {
         setSport('Ride')
-
         getPosition()
     }, [])
-    
     
     const getPosition = () => {
         navigator.geolocation.getCurrentPosition(function(position) {
@@ -28,19 +26,35 @@ function ActivityStart(props) {
             watchPosition()
         }, function(error){
             handleFeedback({ type: 'error', message: 'Position error' })
-        }, { maximumAge: 400_000 })
-    }
+        }, { maximumAge: 400_000 }) // si pones otra cosa, o no lo pones, tarde mucho en encontrar
+    } // funciona con 400_000
 
     const watchPosition = () => {
         watchId = navigator.geolocation.watchPosition(function(position) {
             setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
             console.log('set position')
+            //navigator.geolocation.clearWatch(watchId)
         }, function(error){
             handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 600_000 })    
-    }    
+        }, { enableHighAccuracy: true, distanceFilter: 10, maximumAge: 8_000 })    
+    } 
+    //  timeout: 4000, tiempo permitido para optener la posicion yen caso contrario salta error
+    // maximun age, tiempo maximo que utilizara la posicion encontrada 
     
-
+    const handleStartClick = async() => {
+        try {
+            if(position) {
+                const token = sessionStorage.token
+                const activityId = await createActivity(token, sport)
+                await addPointToActivity(sessionStorage.token, activityId, position)
+                props.onStartClicked(activityId, position)
+                navigator.geolocation.clearWatch(watchId)
+            }
+            else handleFeedback({ type: 'error', message: 'Position not found (https)' })
+        } catch (error) {
+            handleFeedback({ type: 'error', message: error.message })
+        }   
+    }
 
     const handleCloseClick = () => navigate('/')
     
@@ -69,21 +83,6 @@ function ActivityStart(props) {
         document.getElementById("sky").classList.remove('Button__selected')
         document.getElementById("bike").classList.remove('Button__selected') }
     
-
-    const handleStartClick = async() => {
-        try {
-            if(position) {
-                const token = sessionStorage.token
-                const activityId = await createActivity(token, sport)
-                await addPointToActivity( activityId, position)
-                props.onStartClicked(activityId, position)
-                navigator.geolocation.clearWatch(watchId)
-            }
-            else handleFeedback({ type: 'error', message: 'Position not found (https)' })
-        } catch (error) {
-            handleFeedback({ type: 'error', message: error.message })
-        }   
-    }
     
 
     return  <div className="Container overflow mw mh">

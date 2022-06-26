@@ -11,6 +11,9 @@ function ActivityRecord(props) {
     const [position, setPosition] = useState(null)
     const [points, setPoints] = useState(null)
     const [view, setView] = useState('map')
+    const [unlock, setUnlock] = useState(0)
+    const [hide, setHide] = useState(false)
+    const [activated, setActivated] = useState(false)
     const { handleFeedback } = useContext(Context)
     let watchId
 
@@ -42,19 +45,25 @@ function ActivityRecord(props) {
         watchId = navigator.geolocation.watchPosition(function(position) {
             setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
             console.log('set position')
+            if(activated) {
+                handleSaveClick()
+            }
+            //navigator.geolocation.clearWatch(watchId)
         }, function(error){
             handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 600_000 })
+        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 8_000 })
     }
-
 
     const handleSaveClick = async() => {
         try {
-            await addPointToActivity(sessionStorage.token, props.activityId, position)
-            handleFeedback({ type: 'success', message: 'Point saved!' })
-            setPoints(points => [...points, 
-                position])
-            setTimestamp(Date.now())
+            if(position) {
+                await addPointToActivity(sessionStorage.token, props.activityId, position)
+                handleFeedback({ type: 'success', message: 'Point saved!' })
+                setPoints(points => [...points, 
+                    position])
+                setTimestamp(Date.now())
+            }
+            else handleFeedback({ type: 'error', message: 'Position not found' })
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         }  
@@ -62,9 +71,11 @@ function ActivityRecord(props) {
 
     const handleFinishClick = async() => {
         try {
-            await addPointToActivity(sessionStorage.token, props.activityId, position)
-            navigator.geolocation.clearWatch(watchId)
-            props.onFinishClicked()
+            if(position) {
+                await addPointToActivity(sessionStorage.token, props.activityId, position)
+                props.onFinishClicked()
+            }
+            else handleFeedback({ type: 'error', message: 'Position not found' })
         } catch (error) {
             handleFeedback({ type: 'error', message: error.message })
         } 
@@ -74,8 +85,29 @@ function ActivityRecord(props) {
     const handleMapClick = () => setView('map')
 
 
+    /* ------ turbo mode for developer ------- */
+    const handleDevelopClick = () => {
+        setUnlock(unlock+1)
+        if (unlock === 5) setHide(true)
+        else if (unlock > 5) { setHide(false); setActivated(false); setUnlock(0) }
+    }
+    
+    const handleTurboClick = () => {
+        if(activated) {
+            document.getElementById('dev').classList.remove('dev-activated')
+            setActivated(false) }
+        else {
+            document.getElementById('dev').classList.add('dev-activated')
+            setActivated(true) }
+    }
+    /* ------   ------------   ------- */
+
+
 
     return  <div className="Container overflow mw mh">
+    
+    <button className="Activity__button-hide" onClick={handleDevelopClick}></button>
+    {hide && <button id='dev' className="Activity__button-dev material-symbols-outlined" onClick={handleTurboClick}>offline_bolt</button>}
 
     <main className="Activity__body mw mh">
         { view === 'map' && position && points && <Map position={position} center={true} points={points}/> } 

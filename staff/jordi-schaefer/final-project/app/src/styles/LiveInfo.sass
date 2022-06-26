@@ -13,7 +13,6 @@
     display: flex
     flex-direction: column
     align-items: center
-    margin-top: -2rem
 
 .Live__container-data
     display: flex
@@ -39,3 +38,15 @@
     font-weight: 600
     margin: 1.5rem
     text-align: center
+
+
+@media only screen and (min-width: base.$width-dimensions)
+    .Live__container
+        max-width: 500px
+
+@media only screen and (min-height: base.$height-dimensions)
+    .Live
+        justify-content: center
+    .Live__container
+        margin: 0
+

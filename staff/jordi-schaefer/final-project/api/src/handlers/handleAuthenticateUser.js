@@ -8,9 +8,7 @@ module.exports = (req, res) => {
         authenticateUser(username, password)
             .then(userId => {
                 const token = generateToken(userId)
-
-                res.status(200).json({ token }) 
-            })  
+                res.status(200).json({ token })  })  
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

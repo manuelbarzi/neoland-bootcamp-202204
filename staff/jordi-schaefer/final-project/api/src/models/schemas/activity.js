@@ -32,7 +32,7 @@ const activity = new Schema({
     },
     private: {
         type: Boolean,
-        default: false
+        default: true
     },
 
     points: [point],

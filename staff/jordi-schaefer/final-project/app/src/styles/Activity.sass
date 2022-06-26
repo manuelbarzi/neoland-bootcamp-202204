@@ -48,7 +48,8 @@
     border: none
     background: none
     font-size: 33px
-    padding: 0
+    padding: 0 0 0 0
+    margin: 0 0 0 0 
 
 .Activity__button--start
     display: flex
@@ -76,7 +77,6 @@
     border: 3px solid base.$main-color
     font-size: 15px
     font-weight: 700
-    margin-right: 0.5rem
 
 .Activity__footerContainer__selector
     display: flex
@@ -91,6 +91,7 @@
     font-size: 36px
     margin-top: 0px
     margin-bottom: 0px
+    padding: 0
 
 .Activity__footerContainer__buttons
     display: flex
@@ -151,7 +152,10 @@
     color: base.$text-grey
     align-self: center
     border: 1px solid #ccc
-    padding: 1.2rem
+    padding: 1rem
+    display: flex
+    justify-content: center
+    text-align: center
     
 
 .Finish__button-delete
@@ -192,3 +196,74 @@
     font-size: 17px
     color: #fff
     background-color: base.$main-color
+
+
+
+
+
+
+.Activity__button-hide
+    position: absolute
+    right: 0
+    z-index: 999
+    width: 3rem
+    height: 3rem
+    background: none
+    border: none
+
+.Activity__button-dev
+    position: absolute
+    left: 1rem
+    top: 1rem
+    z-index: 999
+    font-weight: 500
+    background: none
+    border: none
+    color: #000000
+    font-size: 2.5rem
+    margin: 0
+    padding: 0
+    
+.dev-activated
+    color: #af0b0b
+
+
+
+
+@media only screen and (min-width: base.$width-dimensions)
+    .Activity__header
+        position: absolute
+        z-index: 900
+        height: 3rem
+        max-width: 500px
+        border-left: 1px solid base.$border-color
+        border-right: 1px solid base.$border-color
+        border-bottom-left-radius: 6px
+        border-bottom-right-radius: 6px
+    .Activity__footer, .Activity__footer-record, .Activity__footer-finish
+        position: absolute
+        bottom: 0
+        z-index: 900
+        max-width: 500px
+        border-left: 1px solid base.$border-color
+        border-right: 1px solid base.$border-color
+        border-top-left-radius: 6px
+        border-top-right-radius: 6px
+    .Activity__button--back
+        padding-left: 1rem
+    .Finish__form
+        max-width: 500px
+    .Finish__button-delete
+        max-width: 425px
+        margin-top: 3rem
+    .Finish__body
+        justify-content: center
+        padding-top: 6rem
+        padding-bottom: 6rem
+    
+
+
+@media only screen and (min-height: base.$height-dimensions)
+    .Activity__footer
+        height: 8rem
+        padding-top: 1rem

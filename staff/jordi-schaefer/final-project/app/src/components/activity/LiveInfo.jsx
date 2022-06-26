@@ -45,7 +45,7 @@ function LiveInfo({activityId, onPointRegistered}) {
 
         { elevation && initialTime &&  <Timer initialTime={initialTime}/> }
 
-        { elevation && <div className="Live__container mw mh">  
+        { elevation && <div className="Live__container mw">  
             <div className="Live__container-data">
                 {activity && <h2 className="Live__text">Points</h2>}
                 {activity && <h2 className="Live__value">{activity.points.length}</h2>}

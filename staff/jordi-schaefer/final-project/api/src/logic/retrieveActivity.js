@@ -15,6 +15,10 @@ function retrieveActivity(userId, activityId) {
         .then(activity => {
             if (!activity) throw new NotFoundError(`Activity with id ${activityId} does not exist`)
 
+            activity.id = activity._id.toString()   
+            delete activity._id
+            delete activity.__v
+            
             return activity
         })
 }

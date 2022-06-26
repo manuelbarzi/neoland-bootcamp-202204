@@ -12,6 +12,7 @@ function ActivityItem (props) {
     const { handleFeedback } = useContext(Context)
     const { activity, setDelete, onRemove, onLikeClicked } = props
     const [editable, setEditable] = useState(null)
+    const [imgview, setImgview] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -45,6 +46,13 @@ function ActivityItem (props) {
     const handleCommentClick = () => {
         props.onCommentClicked(activity.id)
     }
+
+    const handleImagesClick = () => {
+        if (imgview) { setImgview(false) }
+        else setImgview(true)
+    }
+
+
     const handleResumeClick = () => {
         navigate('/activity', {state: {activityId: activity.id}})
     }
@@ -94,20 +102,27 @@ function ActivityItem (props) {
             <MapView points={points}/>
         </div> }
 
-        { !setDelete && images && (images.length>0) ? <div>
-            {images.map((image, index)=> <img className='ActivityItem__image' src={image}  key={index}/>)}
-            </div>: '' }
-
         { !setDelete && <div className='ActivityItem__footer mw'>
             <div className='ActivityItem__footer--container Button__borderR'>
                 { likes>0 && <h2 className='ActivityItem__footer--number'>{likes}</h2> }
                 <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
             </div>
-            <div className='ActivityItem__footer--container'>
+            <div className='ActivityItem__footer--container Button__borderR'>
                 { comments>0 && <h2 className='ActivityItem__footer--number'>{comments}</h2> }
                 <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleCommentClick}>chat</button>
             </div>
+            <div className='ActivityItem__footer--container'>
+                { images && images.length>0 && <h2 className='ActivityItem__footer--number'>{images.length}</h2> }
+                <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleImagesClick}>photo_library</button>
+            </div>
         </div> }
+
+        { !setDelete && images && imgview && (images.length>0) ? <div className='ActivityItem__image-movement'>
+            {images.map((image, index)=> <img className='ActivityItem__image' src={image}  key={index}/>)}
+            <div className='ActivityItem__footer mw'>
+                <button className='ActivityItem__footer--button mw material-symbols-outlined' onClick={handleImagesClick}>expand_less</button>
+            </div>
+            </div>: '' }
 
     </div>
 }

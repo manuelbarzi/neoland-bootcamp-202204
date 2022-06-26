@@ -42,6 +42,7 @@ function App () {
 
     return <Context.Provider value={{ handleFeedback }} >
         <div className="App">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
             <Routes>
                 <Route path="/welcome" element={<Welcome onLoginLinkClicked={handleLoginNavigation} onRegisterLinkClicked={handleRegisterNavigation} />} />
                 <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onWelcomeLinkClicked={handleWelcomeNavigation} />} />

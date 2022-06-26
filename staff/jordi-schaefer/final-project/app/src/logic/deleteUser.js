@@ -21,7 +21,7 @@ function deleteUser (token, password)  {
             else if (status >= 500) {
                 throw new Error('server error')
             }
-            else if (status === 204) {
+            else if (status === 200) {
                 return
             }
     })()

@@ -8,7 +8,7 @@ module.exports = (req, res) => {
         const { body: { name, password, email } } = req
 
         updateUserData(userId, name, password, email )
-            .then(() => res.status(204).send())  // devuelvo estatus modificado ok
+            .then(() => res.status(204).send()) 
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)
