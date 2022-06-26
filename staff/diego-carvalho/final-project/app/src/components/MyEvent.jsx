@@ -3,11 +3,11 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import deleteEvent from '../logic/deleteEvent'
 import saveEvent from '../logic/saveEvent'
-import './Event.sass'
+import './MyEvent.sass'
 import { useNavigate } from 'react-router-dom'
 
-function Event(props) {
-  const logger = new Logger('Event')
+function MyEvent(props) {
+  const logger = new Logger('MyEvent')
   logger.info('call')
 
   const { handleFeedback } = useContext(Context)
@@ -51,17 +51,17 @@ function Event(props) {
 
   logger.info('render')
 
-  return <div className='Event'>
-    <form className="Event__form" onSubmit={handleSaveSubmit}>
+  return <div className='MyEvent'>
+    <form className="MyEvent__form" onSubmit={handleSaveSubmit}>
 
-      <textarea className='Event__title' type='text' name="title" placeholder="Titulo" defaultValue={props.title}></textarea>
-      <textarea className="Event__description" type='text' name="text" placeholder="Descripción" defaultValue={props.description}></textarea>
-      <textarea className="Event__location" type='text' name="location" placeholder="Localización" defaultValue={props.location}></textarea>
-      <textarea className="Event__date" type='text' name="eventDate" placeholder="Fecha" defaultValue={props.eventDate}></textarea>
+      <textarea className='MyEvent__title' type='text' name="title" placeholder="Titulo" defaultValue={props.title}></textarea>
+      <textarea className="MyEvent__description" type='text' name="text" placeholder="Descripción" defaultValue={props.description}></textarea>
+      <textarea className="MyEvent__location" type='text' name="location" placeholder="Localización" defaultValue={props.location}></textarea>
+      <textarea className="MyEvent__date" type='text' name="eventDate" placeholder="Fecha" defaultValue={props.eventDate}></textarea>
 
-      <div className='Event__button-container'>
-        <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>
-        <button className="Event__event-button">Save</button>
+      <div className='MyEvent__button-container'>
+        <button className="MyEvent__event-button" onClick={handleRemoveClick}>cancelar</button>
+        <button className="MyEvent__event-button">Save</button>
       </div>
 
 
@@ -69,7 +69,7 @@ function Event(props) {
   </div>
 }
 
-export default Event
+export default MyEvent
 
 
 

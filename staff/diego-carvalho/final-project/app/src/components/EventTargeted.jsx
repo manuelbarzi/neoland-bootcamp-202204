@@ -2,7 +2,8 @@ import { useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import deleteTargetedEvent from '../logic/deleteTargetedEvent'
-import './Event.sass'
+import './MyEvent.sass'
+import { MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
 
 function EventTargeted(props) {
   const logger = new Logger('EventTargeted')
@@ -28,17 +29,20 @@ function EventTargeted(props) {
 
   logger.info('render')
 
-  return <div className='Event'>
-    <form className="Event__form">
+  return <div className='MyEvent'>
+    <p className='MyEvent__title'>{props.title}</p>
+    <p className="MyEvent__description">{props.description}</p>
+    <MdOutlineLocationOn className='EventHome__icons' />
+    <p className='EventHome__location'>{props.location}</p>
+    < MdCalendarToday className='EventHome__icons' />
+    <p className='EventHome__date' >{props.eventDate}</p>
 
-      <h1 className='Event__title'>{props.title}</h1>
-      <h1 className="Event__description">{props.description}</h1>
 
-      <div className='Event__button-container'>
-        <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>
-      </div>
+    <div className='MyEvent__button-container'>
+      <button className="MyEvent__event-button" onClick={handleRemoveClick}>cancelar</button>
+    </div>
 
-    </form>
+
   </div>
 }
 

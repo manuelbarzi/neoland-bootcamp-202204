@@ -38,8 +38,10 @@ function EventHome(props) {
       < MdCalendarToday className='EventHome__icons' />
       <p className='EventHome__date' >{event.eventDate}</p>
 
+      <div className='EventHome__contanier-button'>
+        <button className="EventHome__button" onClick={handleSignUpToEventClick}>Apuntarme</button>
+      </div>
 
-      <button className="Button--light EventHome__button" onClick={handleSignUpToEventClick}>Apuntarme</button>
     </div>
   </div>
 }

@@ -2,14 +2,15 @@ import { useState, useEffect, useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import retrieveUser from '../logic/retrieveUser'
-import MyCalendar from './MyCalendar'
+import MyEventList from './MyEventList'
 import HomeEventList from './HomeEventList'
 import Profile from './Profile'
 import EventCreator from './EventCreator'
+import RetrieveTargetedEvent from './RetrieveTargetedEvent'
 import { isJwtValid } from 'validators'
 import './Home.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
-import { MdHome, MdOutlineCalendarToday, MdLogout, MdPermIdentity, MdAddCircleOutline } from "react-icons/md"
+import { MdHome, MdOutlineCalendarToday, MdLogout, MdPermIdentity, MdAddCircleOutline, MdListAlt } from "react-icons/md"
 
 
 
@@ -55,28 +56,27 @@ function Home({ onUserLogout }) {
         navigate('/')
     }
 
-    const handleSearchBarClick = event => {
-        event.preventDefault()
-
-        navigate('/searchEvent')
-    }
-
     const handleEventCreatorClick = event => {
         event.preventDefault()
 
         navigate('/eventCreator')
     }
 
-    const handleMyCalendarClick = event => {
+    const handleMyEventListClick = event => {
         event.preventDefault()
 
-        navigate('/myCalendar')
+        navigate('/myEventList')
     }
 
     const handleProfileClick = event => {
         event.preventDefault()
 
         navigate('/profile')
+    }
+
+    const handleEventTargetedClick = () => {
+
+        navigate('retrieveTargetedEvent')
     }
 
     logger.info('render')
@@ -87,6 +87,7 @@ function Home({ onUserLogout }) {
             <header className="Home__header">
                 <div className='Home__header-nav'>
                     <h1>Hello {name}</h1>
+                    <a href="#" onClick={handleEventCreatorClick}><MdAddCircleOutline className="icons" /></a>
                     <a href="#" onClick={handleLogoutClick}><MdLogout /></a>
                 </div>
             </header>
@@ -95,17 +96,17 @@ function Home({ onUserLogout }) {
                 <Routes>
                     <Route index element={<HomeEventList />} />
                     <Route path="/eventCreator" element={<EventCreator />} />
-                    <Route path="/myCalendar/*" element={<MyCalendar />} />
+                    <Route path="/myEventList" element={<MyEventList />} />
+                    <Route path="/retrieveTargetedEvent" element={<RetrieveTargetedEvent />} />
                     <Route path="/profile" element={<Profile />} />
-
                 </Routes>
             </main>
 
             <footer className="Home__footer">
                 <nav className='Home__footer-nav'>
                     <a href="#" onClick={handleHomeClick}><MdHome className="icons" /></a>
-                    <a href="#" onClick={handleEventCreatorClick}><MdAddCircleOutline className="icons" /></a>
-                    <a href="#" onClick={handleMyCalendarClick}><MdOutlineCalendarToday className="icons" /></a>
+                    <a href="#" onClick={handleMyEventListClick}><MdOutlineCalendarToday className="icons" /></a>
+                    <a href="#" onClick={handleEventTargetedClick}><MdListAlt className="icons" /></a>
                     <a href="#" onClick={handleProfileClick}><MdPermIdentity className="icons" /></a>
                 </nav>
 
