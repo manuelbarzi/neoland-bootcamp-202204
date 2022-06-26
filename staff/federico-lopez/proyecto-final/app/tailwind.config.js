@@ -8,6 +8,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      dropShadow: {
+        'custom-logo': '1px 0px 53px rgba(181, 215, 224, 0.3)'
+    },
       boxShadow: {
         "custom-footer": "inset 0px 1px 0px #DADADA",
         "custom-header": "0 0 30px -15px rgba(0, 0, 0, 0.3)",
@@ -30,5 +33,7 @@ module.exports = {
       }
     }
   },
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar-hide')
+  ],
 }

@@ -29,7 +29,7 @@ module.exports = {
     removeInterpretationFromSong: require('./removeInterpretationFromSong'),
 
     /* RANK */
-    addOrUpdateRankToInterpretation: require('./addOrUpdateRankToInterpretation.js'),
+    toggleOrUpdateRankToInterpretation: require('./toggleOrUpdateRankToInterpretation'),
 
     /* SPOTIFY */
     checkSpotifySession: require('./checkSpotifySession'),

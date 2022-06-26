@@ -15,5 +15,6 @@ module.exports = {
     validateArray: require('./validateArray'),
     validateGenres: require('./validateGenres'),
     validateDateOfBirth: require('./validateDateOfBirth'),
-    validateInterpretationContent: require('./validateInterpretationContent')
+    validateInterpretationContent: require('./validateInterpretationContent'),
+    validateRank: require('./validateRank')
 }

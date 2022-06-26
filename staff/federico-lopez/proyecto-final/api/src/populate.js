@@ -1,6 +1,6 @@
 const { connect, disconnect } = require('mongoose')
-const { User, Artist, Song, Interpretation } = require('./models')
-const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1, sinSenalLyrics1 } = require('./populateSources')
+const { User, Artist, Song, Interpretation, Rank } = require('./models')
+const { laRazonContent1, laRazonContent2, demasiadoContent1, sinSenalContent1, ojosAsiContent1, aTuLadoContent1 } = require('./populateSources')
 
 ;(async () => {
         try {
@@ -17,6 +17,7 @@ const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1, sinSenalLyrics1 } = re
 
             const userPepito = await User.create({ email: 'pepitogrillo@pitch-us.com', username: 'pepigri', password: 'Passw0rd' })
             const userWendy = await User.create({ email: 'wendybread@pitch-us.com', username: 'wendy', password: 'Passw0rd' })
+            const userJohn = await User.create({ email: 'johndoed@pitch-us.com', username: 'john', password: 'Passw0rd' })
 
             /* CREATE ARTISTS */
 
@@ -26,28 +27,54 @@ const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1, sinSenalLyrics1 } = re
             const artistNathyPeluso = await Artist.create({ name: 'Nathy Peluso', genres: [Artist.POP, Artist.TRAP], country: 'AR' })
             const artistPtazeta = await Artist.create({ name: 'Ptazeta', genres: [Artist.TRAP, Artist.HIP_HOP], country: 'ES' })
 
+            /* CREATE RANKS */
+
+            const rank4FromPepito = new Rank({
+                user: userPepito._id.toString(), amount: 4
+            })
+
+            const rank4fromWendy = new Rank({
+                user: userWendy._id.toString(), amount: 4
+            })
+
+            const rank3FromWendy = new Rank({
+                user: userWendy._id.toString(), amout: 3
+            })
+
+            const rank1FromJohn = new Rank({
+                user: userJohn._id.toString(), amount: 1
+            })
+
             /* CREATE INTERPRETATIONS */
 
             const interpretationLaRazon1 = new Interpretation({
-                user: userPepito._id.toString(), content: laRazonLyrics1
+                user: userPepito._id.toString(), content: laRazonContent1, ranks: [rank1FromJohn, rank4fromWendy]
             })
 
             const interpretationLaRazon2 = new Interpretation({
-                user: userWendy._id.toString(), content: laRazonLyrics2
+                user: userWendy._id.toString(), content: laRazonContent2, ranks: [rank1FromJohn]
+            })
+
+            const interpretationATuLado1 = new Interpretation({
+                user: userJohn._id.toString(), content: aTuLadoContent1, ranks: [rank4FromPepito]
             })
 
             const interpretationDemasiado1 = new Interpretation({
-                user: userPepito._id.toString(), content: demasiadoLyrics1
+                user: userPepito._id.toString(), content: demasiadoContent1
             })
 
             const interpretationSinSenal1 = new Interpretation({
-                user: userPepito._id.toString(), content: sinSenalLyrics1
+                user: userPepito._id.toString(), content: sinSenalContent1
+            })
+
+            const interpretationOjosAsi1 = new Interpretation({
+                user: userJohn._id.toString(), content: ojosAsiContent1
             })
 
             /* CREATE SONGS */
 
             const songLaRazon = await Song.create({ artist: artistLaRenga._id.toString(), name: 'La razón que te demora', genres: [Song.ROCK], interpretations: [interpretationLaRazon1, interpretationLaRazon2] })
-            const songATuLado = await Song.create({ artist: artistLaRenga._id.toString(), name: 'A tu lado', genres: [Song.ROCK] })
+            const songATuLado = await Song.create({ artist: artistLaRenga._id.toString(), name: 'A tu lado', genres: [Song.ROCK], interpretations: [interpretationATuLado1] })
             const songLaBalada = await Song.create({ artist: artistLaRenga._id.toString(), name: 'La balada del diablo y la muerte', genres: [Song.ROCK] })
 
             const songDemasiado = await Song.create({ artist: artistBandalosChinos._id.toString(), name: 'Demasiado', genres: [Song.INDIE], interpretations: [interpretationDemasiado1] })
@@ -56,7 +83,7 @@ const { laRazonLyrics1, laRazonLyrics2, demasiadoLyrics1, sinSenalLyrics1 } = re
             const songSinSenal = await Song.create({ artist: artistBandalosChinos._id.toString(), name: 'Sin Señal', genres: [Song.INDIE], interpretations: [interpretationSinSenal1] })
 
 
-            const songOjosAsi = await Song.create({ artist: artistShakira._id.toString(), name: 'Ojos asi', genres: [Song.POP] })
+            const songOjosAsi = await Song.create({ artist: artistShakira._id.toString(), name: 'Ojos asi', genres: [Song.POP], interpretations: [interpretationOjosAsi1] })
             const songCreo = await Song.create({ artist: artistShakira._id.toString(), name: 'Creo', genres: [Song.POP] })
             const songCiegaSordomuda = await Song.create({ artist: artistShakira._id.toString(), name: 'Ciega sordomuda', genres: [Song.POP] })
 

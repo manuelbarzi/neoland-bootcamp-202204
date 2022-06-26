@@ -3,10 +3,9 @@ const validateNumber = require('./validateNumber')
 
 module.exports = rank => {
     validateNumber(rank, 'rank')
-
     let isAnIntegerFrom1To5 = false
 
-    for (let i = 1; i > 6; i++){
+    for (let i = 1; i < 6; i++){
         if(rank === i) isAnIntegerFrom1To5 = true
     }
 

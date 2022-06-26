@@ -32,7 +32,7 @@ module.exports = {
     handleRetrieveInterpretationFromSong: require('./handleRetrieveInterpretationFromSong'),
 
     /* RANK */
-    handleAddOrUpdateRankToInterpretation: require('./handleAddOrUpdateRankToInterpretation'),
+    handleToggleOrUpdateRankToInterpretation: require('./handleToggleOrUpdateRankToInterpretation'),
 
     /* SPOTIFY */
     handleRequestSpotifyAccesToken: require('./handleRequestSpotifyAccesToken'),

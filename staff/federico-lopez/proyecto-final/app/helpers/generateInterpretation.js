@@ -2,9 +2,9 @@ import { CHORD_REGEX } from './constants'
 import { validateInterpretationContent } from "validators"
 import { Fragment } from 'react'
 import { getChords } from './'
-import { ChordButton } from '../components'
+import { ButtonBlue, ChordButton } from '../components'
 
-export function generateInterpretation(interpretation, callback) {
+export function generateInterpretation(interpretation, handlerChordClick, handlerRankClick) {
     validateInterpretationContent(interpretation)
     let positions = [], match
 
@@ -18,6 +18,32 @@ export function generateInterpretation(interpretation, callback) {
 
     return <>
         <div className="flex flex-col">
+
+            {/* RANK TEST */}
+        <div>
+            <p>Rank the interpretation</p>
+            <ButtonBlue className="w-5" onClick={function() {
+                handlerRankClick(1)
+            }}
+            >1</ButtonBlue>
+            <ButtonBlue className="w-5" onClick={function() {
+                handlerRankClick(2)
+            }}
+            >2</ButtonBlue>
+            <ButtonBlue className="w-5" onClick={function() {
+                handlerRankClick(3)
+            }}
+            >3</ButtonBlue>
+            <ButtonBlue className="w-5" onClick={function() {
+                handlerRankClick(4)
+            }}
+            >4</ButtonBlue>
+            <ButtonBlue className="w-5" onClick={function() {
+                handlerRankClick(5)
+            }}
+            >5</ButtonBlue>
+        </div>
+
         <p>Song chords:</p>
         <div className="flex gap-2">
             {
@@ -27,7 +53,7 @@ export function generateInterpretation(interpretation, callback) {
                             onClick={event => {
                                 event.preventDefault()
 
-                                callback(chord)
+                                handlerChordClick(chord)
                             }}>{chord}</ChordButton>
                     )
                 })
@@ -60,7 +86,7 @@ export function generateInterpretation(interpretation, callback) {
                     onClick={event => {
                         event.preventDefault()
 
-                        callback(chord)
+                        handlerChordClick(chord)
                     }}
                     className="text-red-400">{chord}
                 </ChordButton>

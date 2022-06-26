@@ -34,7 +34,7 @@ const {
     handleRetrieveInterpretationFromSong,
 
     /* RANK */
-    handleAddOrUpdateRankToInterpretation,
+    handleToggleOrUpdateRankToInterpretation,
 
     /* SPOTIFY */
     handleRequestSpotifyAccesToken,
@@ -97,12 +97,10 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.get('/songs/:songName/artists/:artistName/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
 
         /* RANK */
-        routes.post('songs/:songId/:interpretationId/', jsonBodyParser, handleAddOrUpdateRankToInterpretation)
+        routes.post('/rank/songs/:songId/interpretations/:interpretationId', jsonBodyParser, handleToggleOrUpdateRankToInterpretation)
 
         /* SPOTIFY */
         routes.post('/spotify/auth', jsonBodyParser, handleCheckSpotifySession)
-
-        // routes.post('/spotify/auth', jsonBodyParser, handleRequestSpotifyAccesToken)
 
         api.listen(port, () => console.log(`API running on port ${port}`))
 
