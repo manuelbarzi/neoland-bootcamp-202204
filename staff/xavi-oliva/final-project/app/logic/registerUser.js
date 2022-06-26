@@ -1,19 +1,14 @@
 import { validateStringNotEmptyOrBlank, validateEmail, validatePassword } from 'validators'
 import Apium from 'apium'
-import Logger from 'loggy'
 
 
 
 export async function registerUser(name, email, password) {
-    const logger = new Logger('registerUser')
-
     validateStringNotEmptyOrBlank(name, 'name')
     validateEmail(email, 'email')
     validatePassword(password)
 
     const api = new Apium(process.env.REACT_APP_API_URL)
-
-    logger.info('request')
 
     const { status, payload } = await api.post(
         'users',

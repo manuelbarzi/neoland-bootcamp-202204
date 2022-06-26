@@ -3,6 +3,7 @@ module.exports = {
     handleAuthenticateUser: require('./handleAuthenticateUser'),
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
+    handleUpdateUserPassword: require('./handleUpdateUserPassword'),
     handleUnregisterUser: require('./handleUnregisterUser'),
     handleCreateFlat: require('./handleCreateFlat'),
     handleRetrieveFlats: require('./handleRetrieveFlats'),

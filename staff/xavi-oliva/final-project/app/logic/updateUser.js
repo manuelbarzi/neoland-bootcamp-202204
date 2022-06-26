@@ -1,24 +1,22 @@
+import { validateStringNotEmptyOrBlank, validateJwt, validateString } from 'validators'
 import Apium from 'apium'
-import { validateJwt, validatePassword } from 'validators'
 
-export async function unregisterUser(token, { password, repeatPassword }) {
-    debugger
+export async function updateUser(token, { name, surnames, phone }) {
     validateJwt(token)
-    validatePassword(password, 'password')
-    validatePassword(repeatPassword, 'password repeat')
-
-    if (password !== repeatPassword) throw new Error('password and password repeat do not match')
+    validateStringNotEmptyOrBlank(name, 'name')
+    if (surnames != null) validateString(surnames, 'surnames')
+    if (phone != null) validateString(phone, 'phone')
 
     const api = new Apium(process.env.REACT_APP_API_URL)
 
-    const { payload, status } = await api.delete(
+    const { status, payload } = await api.patch(
         'users',
         {
             headers: {
                 Authorization: `Bearer ${token}`,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ password })
+            body: JSON.stringify({ name, surnames, phone })
         })
 
     if (status === 204) return

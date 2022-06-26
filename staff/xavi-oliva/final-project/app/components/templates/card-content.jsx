@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import mypic from '../../public/media/default-image.png'
 
 export const CardContent = ({ className, children, flat, ...props }) => {
 
@@ -10,8 +11,10 @@ export const CardContent = ({ className, children, flat, ...props }) => {
             {flat.address}
         </h4>
         <figure className='pb-4'>
-            <Image src="/media/default-image.png" layout='responsive' width='400' height='225'
+            <Image src={mypic} layout='responsive' width='400' height='225'
                 className='object-contain w-full h-full relative' />
+            {/* <Image src={flat.images} layout='responsive' width='400' height='225'
+                className='object-contain w-full h-full relative' /> */}
         </figure>
         <p className='text-[13px] text-gray-600 pb-4'>
             {flat.description}

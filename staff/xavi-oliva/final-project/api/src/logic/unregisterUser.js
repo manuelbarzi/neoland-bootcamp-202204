@@ -4,7 +4,7 @@ const { validateStringNotEmptyNoSpaces, validatePassword } = require("validators
 
 async function unregisterUser(userId, password) {
     validateStringNotEmptyNoSpaces(userId, 'user id')
-    validatePassword(password)
+    validatePassword(password, 'password')
 
     const result = await User.findById(userId)
 

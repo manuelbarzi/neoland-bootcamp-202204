@@ -1,15 +1,10 @@
-import Logger from 'loggy'
 import { validateJwt } from 'validators'
 import Apium from 'apium'
 
 export async function retrieveUser(token) {
-    const logger = new Logger('retrieveUser')
-    
     validateJwt(token)
 
     const api = new Apium(process.env.REACT_APP_API_URL)
-
-    logger.info('request')
 
     const { status, payload } = await api.get(
         'users',

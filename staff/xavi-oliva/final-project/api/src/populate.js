@@ -13,27 +13,6 @@ const { User, Flat, Booking } = require('./models')
 
         await Promise.all([admin.save(), admin2.save()])
 
-        const booking1 = new Booking({
-            user: admin.id,
-            // flat: flat1.id,
-            name: 'Pedro',
-            phone: '+34675421869',
-            email: 'pedro@email.com',
-            text: 'Familia con dos hijos',
-            from: '01/07/2022',
-            to: '10/07/2022'
-        })
-        const booking2 = new Booking({
-            user: admin.id,
-            // flat: flat1.id,
-            name: 'María',
-            phone: '+34614258369',
-            email: 'maria@email.com',
-            text: 'Reparar persiana salón',
-            from: '16/07/2022',
-            to: '18/07/2022'
-        })
-
         const flat1 = new Flat({
             user: admin.id,
             address: 'Carrer de València, Eixample, Barcelona',
@@ -41,8 +20,7 @@ const { User, Flat, Booking } = require('./models')
                 'https://i.imgur.com/eF2lJ7g.jpg'
             ],
             title: 'Lujoso ático con vistas',
-            description: 'Se encuentra a 2,5 km de Nova Icaria y ofrece alojamiento con aire acondicionado, balcón y WiFi gratuita. Dispone de cocina con lavavajillas y microondas, TV de pantalla plana vía satélite, utensilios de planchado, escritorio y zona de estar con sofá. El baño incluye bidet, secador de pelo y artículos de aseo gratuitos. La playa de Somorrostro y Bogatell se encuentran a 2,6 km del apartamento.',
-            bookings: [booking1, booking2]
+            description: 'Se encuentra a 2,5 km de Nova Icaria y ofrece alojamiento con aire acondicionado, balcón y WiFi gratuita. Dispone de cocina con lavavajillas y microondas, TV de pantalla plana vía satélite, utensilios de planchado, escritorio y zona de estar con sofá. El baño incluye bidet, secador de pelo y artículos de aseo gratuitos. La playa de Somorrostro y Bogatell se encuentran a 2,6 km del apartamento.'
         })
         const flat2 = new Flat({
             user: admin.id,
@@ -74,7 +52,28 @@ const { User, Flat, Booking } = require('./models')
 
         await Promise.all([flat1.save(), flat2.save(), flat3.save(), flat4.save()])
 
+        const booking1 = new Booking({
+            user: admin.id,
+            flat: flat1.id,
+            name: 'Pedro',
+            phone: '+34675421869',
+            email: 'pedro@email.com',
+            text: 'Familia con dos hijos',
+            from: '01/07/2022',
+            to: '10/07/2022'
+        })
+        const booking2 = new Booking({
+            user: admin.id,
+            flat: flat1.id,
+            name: 'María',
+            phone: '+34614258369',
+            email: 'maria@email.com',
+            text: 'Reparar persiana salón',
+            from: '16/07/2022',
+            to: '18/07/2022'
+        })
 
+        await Promise.all([booking1.save(), booking2.save()])
 
         await disconnect()
     } catch (error) {

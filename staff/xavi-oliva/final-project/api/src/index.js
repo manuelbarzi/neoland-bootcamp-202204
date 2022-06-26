@@ -8,7 +8,7 @@ const {
     handleRetrieveUser,
     handleUpdateUser,
     handleUnregisterUser,
-    handleCreateFlat, 
+    handleCreateFlat,
     handleRetrieveFlats,
     handleUpdateFlat,
     handleDeleteFlat,
@@ -16,7 +16,8 @@ const {
     handleRetrieveFlat,
     handleCreateBooking,
     handleRetrieveBookings,
-    handleDeleteBooking} = require('./handlers')
+    handleDeleteBooking,
+    handleUpdateUserPassword } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const cors = require('cors')
 
@@ -40,6 +41,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.get('/users/auth', handleValidateToken)
         routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
+        routes.patch('/users/auth', jsonBodyParser, handleUpdateUserPassword)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
         routes.post('/flats', jsonBodyParser, handleCreateFlat)

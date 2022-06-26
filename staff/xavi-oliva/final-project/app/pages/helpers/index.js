@@ -26,6 +26,13 @@ export async function verifyTokenWithAPICall(req, res) {
             }
         } else {
             cookies.set('token')
+
+            if (req.url.includes('/admin') || req.url.includes('/flats') || req.url.includes('/profile'))  {
+                
+                //TODO FEEDBACKS IN THIS CASES
+                res.writeHead(307, { Location: '/login' })
+                res.end()
+            }
             //TODO FEEDBACKS
             // if(status === 401) throw AuthError('wrong or timed out credentials')
 

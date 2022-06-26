@@ -1,4 +1,4 @@
-export const CardContactInfo = ({ className, children, flat, ...props }) => {
+export const CardContactInfo = ({ className, children, user, ...props }) => {
 
     return <>
         <div className='card-group flex flex-row content-start gap-4 pb-4'>
@@ -7,7 +7,7 @@ export const CardContactInfo = ({ className, children, flat, ...props }) => {
                     Contact Phone
                 </h3>
                 <h3 className='text-[13px] text-gray-600'>
-                    687 966 017
+                    {user.phone}
                 </h3>
             </div>
             <div className='right basis-1/2'>
@@ -15,7 +15,7 @@ export const CardContactInfo = ({ className, children, flat, ...props }) => {
                     Contact Email
                 </h3>
                 <h3 className='text-[13px] text-gray-600'>
-                    brun@flats.com
+                    {user.email}
                 </h3>
             </div>
         </div>

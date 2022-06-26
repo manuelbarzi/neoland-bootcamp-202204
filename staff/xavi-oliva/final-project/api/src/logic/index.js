@@ -2,6 +2,7 @@ const registerUser = require('./registerUser')
 const authenticateUser = require('./authenticateUser')
 const retrieveUser = require('./retrieveUser')
 const updateUser = require('./updateUser')
+const updateUserPassword = require('./updateUserPassword')
 const unregisterUser = require('./unregisterUser')
 const createFlat = require('./createFlat')
 const retrieveFlats = require('./retrieveFlats')
@@ -17,6 +18,7 @@ module.exports = {
     authenticateUser,
     retrieveUser,
     updateUser,
+    updateUserPassword,
     unregisterUser,
     createFlat,
     retrieveFlats,

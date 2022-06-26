@@ -1,21 +1,18 @@
 import { Div, Card, PrimaryButton, Section, CardContent, CardBookingList, CardContactInfo } from "../../components";
-import { retrieveFlat, deleteFlat } from 'logic'
+import { retrieveFlat, deleteFlat, retrieveBookings, retrieveUser } from 'logic'
 import { verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 
-export default function Flat({ token, flat }) {
+export default function Flat({ token, user, flat, bookings }) {
     const router = useRouter()
     
     const handleRemoveClick = async () => {
-        // const { flatId, onRemove } = props
 
         try {
             await deleteFlat(token, flat._id)
             // handleFeedback
 
-            // onRemove(flatId)
             router.push('/admin')
 
         } catch (error) {
@@ -32,9 +29,9 @@ export default function Flat({ token, flat }) {
                 <Card>
                     <CardContent flat={flat} />
 
-                    <CardContactInfo />
+                    <CardContactInfo user={user} />
                     
-                    <CardBookingList flat={flat} />
+                    {/* <CardBookingList flat={flat} bookings={bookings} /> */}
 
                     <div className='flex flex-row basis-auto gap-2'>
                         <PrimaryButton className='bg-red-500' onClick={handleRemoveClick}>Delete</PrimaryButton>
@@ -50,12 +47,15 @@ export async function getServerSideProps({ req, res, params: { flatId } }) {
         
     const token = await verifyTokenWithAPICall(req, res)
     const flat = await retrieveFlat(token, flatId)
+    const user = await retrieveUser(token)
 
 
     return {
         props: {
             token: token || null,
-            flat
+            flat,
+            bookings: await retrieveBookings(token, flatId),
+            user
         }
     }
 }

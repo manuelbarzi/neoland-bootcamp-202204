@@ -1,5 +1,4 @@
-export const CardBookingList = ({ className, children, flat, ...props }) => {
-
+export const CardBookingList = ({ className, children, flat, bookings, ...props }) => {
     return <>
         <div className='pb-4'>
             <div className='pb-2'>
@@ -8,7 +7,7 @@ export const CardBookingList = ({ className, children, flat, ...props }) => {
                 </h3>
             </div>
             <ul className='text-xs text-gray-600 divide-y-2 border-y border-primary'>
-                {flat.bookings.map((booking, i) => <li key={booking._id + i}
+                {bookings.map((booking, i) => <li key={booking.id + i}
                     className='flex flex-row flex-wrap content-start box-border py-2'>
                     <div className="basis-full mb-2">
                         <h4 className="font-semibold py-1">{booking.name}</h4>
