@@ -41,6 +41,8 @@ function Day ({dayClicked, scheduleHome}) {
     const handleClickonBolleria = () => { setView('productsList');  setType(3)}
     const handleClickonPanSinGluten = () => { setView('productsList');  setType(4)}
 
+    const handlehola = () => setView ('main')
+
 
     return isJwtValid (sessionStorage.token) ?
         <div className='Day'>
@@ -53,12 +55,12 @@ function Day ({dayClicked, scheduleHome}) {
                     <h1 className= "Day__h1">{day}</h1> 
                 </div>
             </header>
-
+            
             {scheduleHome.map((elem) => <div key={elem.id}>
-                        {elem.imagen && <img src={elem.imagen}/>}
+                        {elem.product.imagen && <img className='img' src={elem.product.imagen}/>}
                         <h4 className="element">{elem.product.title}: {elem.quantity} </h4>   
                     </div>)}
-
+           
             <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>PAN BLANCO →</button>
                 <button className="Button Button__Day__Bread" onClick= {handleClickonPanIntegral}>PAN INTEGRAL →</button>
                 <button className="Button Button__Day__Bread" onClick= {handleClickonPanVariedades}>PAN DE VARIEDADES →</button>
@@ -66,9 +68,9 @@ function Day ({dayClicked, scheduleHome}) {
                 <button className="Button Button__Day__Bread" onClick= {handleClickonPanSinGluten}>PAN SIN GLUTEN →</button>
             </div>}
 
-
+    
            
-            {view === 'productsList' && <ProductsList  day={day} typeClicked={type} />}
+            {view === 'productsList' && <ProductsList  day={day} typeClicked={type} onCrossClicked={handlehola} />}
             
 
         </div> : <></>

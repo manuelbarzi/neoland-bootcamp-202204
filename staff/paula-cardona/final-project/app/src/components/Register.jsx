@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import Logger from '../vendor/Loggy'
+
 import Context from './Context'
 import registerUser from '../logic/registerUser'
 import { isJwtValid } from '../validators'
@@ -7,13 +7,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import './Register.sass'
 
 function Register(props) {
-    const logger = new Logger('Register')
 
     const navigate = useNavigate()
     const { handleFeedback } = useContext(Context)
-
-    logger.info('call')
-
 
 
     const handleFormSubmit = event => {
@@ -33,7 +29,7 @@ function Register(props) {
             })();
     }
 
-    logger.info('render')
+
 
     return isJwtValid(sessionStorage.token) ? <></> : 
         <div>

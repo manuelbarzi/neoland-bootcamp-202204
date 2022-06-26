@@ -3,12 +3,14 @@ import Context from './Context'
 import retrieveProductsOfType from '../logic/retrieveProductsOfType'
 import Product from './Product'
 import './ProductsList.sass'
+import Day from './Day'
 
-function ProductsList ({day, typeClicked}) {
+function ProductsList ({day, typeClicked, onCrossClicked}) {
 
     
     const [products, setProducts] = useState(null)
     const { handleFeedback } = useContext(Context)
+    const [view, setView] = useState('productslist')
     
 
     useEffect(() => {
@@ -28,11 +30,21 @@ function ProductsList ({day, typeClicked}) {
     } 
 
 
-    return products && <div >
-            <button className='Cross'> ✗ </button> 
+        
+
+    const handleCrossClick  = () => { 
+        onCrossClicked()
+    }
+   
+
+
+
+    return products && <div className='products'>
+            
+            {view === 'productslist' && <div >
+            <button className='Cross' onClick={handleCrossClick}> ✗ </button> 
             {/* <h1 className= "ProductsType">{typeClicked}</h1>  */}
 
-            <div >
             <ul className='jelou'>
                 {products.map(product => <div > 
                     <li key={product.id}>
@@ -40,10 +52,11 @@ function ProductsList ({day, typeClicked}) {
                     </li>
                 </div>)}
             </ul>
-    
-            </div>
+            </div>}
 
-        </div>
+            {view === 'day' && <Day />}
+
+        </div> 
 }
 
 export default ProductsList

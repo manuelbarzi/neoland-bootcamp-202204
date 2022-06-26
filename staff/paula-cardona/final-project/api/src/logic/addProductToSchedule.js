@@ -34,7 +34,9 @@ function addProductToSchedule(userId, day, productId) {
 
             }
             else if (day==='Martes') {
-                const index= schedule.tuesday.findIndex(element=> element.productId=== productId) 
+                const index= schedule.tuesday.findIndex(element=> 
+                    element.product.toString() === productId
+                ) 
                 if (index > -1)
                 schedule.tuesday[index].quantity ++
                 
@@ -43,7 +45,9 @@ function addProductToSchedule(userId, day, productId) {
             }
 
             else if (day==='Miércoles'){
-                const index= schedule.wednesday.findIndex(element=> element.productId=== productId) 
+                const index= schedule.wednesday.findIndex(element=> 
+                    element.product.toString() === productId
+                ) 
                 if (index > -1)
                 schedule.wednesday[index].quantity ++
                 
@@ -51,7 +55,9 @@ function addProductToSchedule(userId, day, productId) {
                 schedule.wednesday.push(item)
             }
             else if (day==='Jueves') {
-                const index= schedule.thursday.findIndex(element=> element.productId=== productId) 
+                const index= schedule.thursday.findIndex(element=> 
+                    element.product.toString() === productId
+                ) 
                 if (index > -1)
                 schedule.thursday[index].quantity ++
                 
@@ -59,7 +65,9 @@ function addProductToSchedule(userId, day, productId) {
                 schedule.thursday.push(item)
             }
             else if (day==='Viernes') {
-                const index= schedule.friday.findIndex(element=> element.productId=== productId) 
+                const index= schedule.friday.findIndex(element=> 
+                    element.product.toString() === productId
+                ) 
                 if (index > -1)
                 schedule.friday[index].quantity ++
                 
@@ -67,15 +75,19 @@ function addProductToSchedule(userId, day, productId) {
                 schedule.friday.push(item)
             }
             else if (day==='Sábado') {
-                const index= schedule.saturday.findIndex(element=> element.productId=== productId) 
-                if (index > -1)
+                const index= schedule.saturday.findIndex(element=> 
+                    element.product.toString() === productId
+                )
+                if(index > -1)
                 schedule.saturday[index].quantity ++
                 
                 else if (index=== -1)
                 schedule.saturday.push(item)
             }
             else if (day==='Domingo'){
-                const index= schedule.sunday.findIndex(element=> element.productId=== productId) 
+                const index= schedule.sunday.findIndex(element=> 
+                    element.product.toString() === productId
+                ) 
                 if (index > -1)
                 schedule.sunday[index].quantity ++
                 

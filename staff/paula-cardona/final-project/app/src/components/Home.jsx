@@ -120,8 +120,8 @@ function Home() {
                     <div className="prueba" onClick= {handleClickSaturdayDay}>
                     <button className="Button Button Home__Day">Sábado</button>
                         <div className="cajita">
-                            {schedule.saturday.map((elem) => <div className="img" key={elem.id}>
-                                    {elem.product.imagen && <img src={elem.product.imagen}/>} 
+                            {schedule.saturday.map((elem) => <div key={elem.id}>
+                                    {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
@@ -130,8 +130,8 @@ function Home() {
                     <div className="prueba" onClick= {handleClickSundayDay}>
                     <button className="Button Button Home__Day">Domingo</button>
                         <div className="cajita">
-                            {schedule.sunday.map((elem) => <div className="img" key={elem.id}>
-                                    {elem.product.imagen && <img src={elem.product.imagen}/>} 
+                            {schedule.sunday.map((elem) => <div key={elem.id}>
+                                    {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
@@ -142,9 +142,9 @@ function Home() {
                 {view === 'Martes' && day && <Day dayClicked={day} scheduleHome={schedule.tuesday}/>}
                 {view === 'Miércoles' && day && <Day dayClicked={day} scheduleHome={schedule.wednesday}/>}
                 {view === 'Jueves' && day && <Day dayClicked={day} scheduleHome={schedule.thursday}/>}
-                {view === 'Friday' && day && <Day dayClicked={day} scheduleHome={schedule.friday}/>}
-                {view === 'Saturday' && day && <Day dayClicked={day} scheduleHome={schedule.saturday}/>}
-                {view === 'Sunday' && day && <Day dayClicked={day} scheduleHome={schedule.sunday}/>}
+                {view === 'Viernes' && day && <Day dayClicked={day} scheduleHome={schedule.friday}/>}
+                {view === 'Sábado' && day && <Day dayClicked={day} scheduleHome={schedule.saturday}/>}
+                {view === 'Domingo' && day && <Day dayClicked={day} scheduleHome={schedule.sunday}/>}
                 {view === 'profile' && <Profile name={name}/>}
             </main>
             
