@@ -14,8 +14,6 @@ function Register(props) {
 
     logger.info('call')
 
-
-
     const handleFormSubmit = event => {
         event.preventDefault()
         const name = event.target.name.value
@@ -45,7 +43,7 @@ function Register(props) {
             <input className="Input Input--light" type="number" name="phone" placeholder="phone" />
             <input className="Input Input--light" type="password" name="password" placeholder="password" />
             <button className="Button Button--light">Register</button>
-            <Link className="Button Link" to="/login">Log in</Link>
+            <Link className="Button Link" to="/login">Login</Link>
         </form>
     </div>
 }

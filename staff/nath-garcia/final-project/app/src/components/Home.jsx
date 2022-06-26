@@ -41,23 +41,23 @@ function Home() {
     return isJwtValid(sessionStorage.token) ?
         <div className="Home Container">
             <header className="Home__header Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home" onClick={handleHomeClick}>📋</button>
-                <div>
-                    <button className="Button Button--no-border Home__profile" onClick={handleProfileClick}>{name}</button>
-                    <button className="Button Button--no-border Home__logout" onClick={handleLogoutClick}>Logout</button>
-                </div>
+                <button className="Button Button--no-border Home__home Link Button--profile" onClick={handleHomeClick}>My profile </button>
+
             </header>
 
-            <main className="Home__body Container">
+            <main className="Home__body Container Container--justify-start">
                 <div className="Box">
                     <button className="Plus">+</button>
                 </div>
                 {view === 'profile' && <Profile />}
             </main>
 
-            <footer className="Home__footer Container">
-                <button className="Home__addMovement" onClick={handleAddClick}>+</button>
+            <footer className="Home__footer">
+                <div>
+                    <button className="Button Link Button--logout" onClick={handleLogoutClick}>Logout</button>
+                </div>
             </footer>
+
         </div> : <></>
 }
 

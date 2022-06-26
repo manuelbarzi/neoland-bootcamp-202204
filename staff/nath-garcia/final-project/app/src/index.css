@@ -36,6 +36,10 @@ body {
   justify-content: space-between;
 }
 
+.Container--justify-start {
+  justify-content: flex-start;
+}
+
 .Button {
   margin: 0.5rem;
   font-size: 1.3rem;
@@ -56,8 +60,16 @@ body {
   color: #F8E5E6;
 }
 
-.Button--no-border {
-  border: none;
+.Button--logout {
+  width: auto;
+  margin-right: 1rem;
+  float: right;
+  border: none !important;
+}
+
+.Button--profile {
+  width: auto;
+  border: none !important;
 }
 
 .Link {
@@ -102,8 +114,8 @@ body {
 }
 
 .Box {
-  width: 40vw;
-  height: 40vw;
+  width: 85vw;
+  height: 85vw;
   background-color: white;
   border-radius: 2rem;
   text-align: center;
