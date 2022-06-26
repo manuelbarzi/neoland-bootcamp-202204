@@ -6,7 +6,7 @@ module.exports = (req, res) => {
   try {
     const { userId } = verifyToken(req);
     const {
-      body: { id: jobId },
+      body: { jobId },
     } = req; // extraigo las propiedades del body que me ha ggenerado jsonBodyParser
 
     clockUserJobIn(userId, jobId) // llamo a mi funcion

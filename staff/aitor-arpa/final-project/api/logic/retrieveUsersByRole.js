@@ -5,7 +5,6 @@ const { validateId, validateStringNotEmptyOrBlank } = require("validator");
 function retrieveUsersByRole(userId, role) {
   validateId(userId);
   validateStringNotEmptyOrBlank(role);
-  s;
 
   return User.findById(userId)
     .then((user) => {

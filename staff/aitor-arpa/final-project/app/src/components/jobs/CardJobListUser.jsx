@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import CardJob from "./CardJob";
-import retrieveJobsUser from "../../logic/retrieveClockUser";
+import retrieveJobsUser from "../../logic/retrieveJobUser";
 import toast from "react-hot-toast";
+import "./CardJobListUser.sass";
 
-export default function CardJobList() {
+export default function CardJobListUser(props) {
   const [jobs, setJobs] = useState(null);
   useEffect(() => {
     loadJobs();
@@ -22,12 +23,13 @@ export default function CardJobList() {
       toast.error(error);
     }
   };
-  debugger;
-  return jobs && jobs.length <= 0 ? (
-    <ul>
-      {jobs.map((job) => (
-        <li jobId={job.id}>
+
+  return jobs && jobs.length >= 0 ? (
+    <ul className="scroll-container">
+      {jobs.map((job, i) => (
+        <li key={i}>
           <CardJob
+            jobid={job._id}
             title={job.title}
             description={job.description}
             address={job.address}
@@ -36,6 +38,6 @@ export default function CardJobList() {
       ))}
     </ul>
   ) : (
-    <p>No tienes trabajos asignados</p>
+    <h1 className="Center logo">No tienes trabajos asignados</h1>
   );
 }

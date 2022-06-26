@@ -19,10 +19,8 @@ function clockUserOutJob(token, jobId, clockId) {
       body: JSON.stringify({ jobId, clockId }),
     })
     .then(({ status, payload }) => {
-      if (status === 201) {
-        const data = JSON.parse(payload);
-
-        return data;
+      if (status === 200) {
+        return payload;
       } else if (status >= 400 && status < 500) {
         const data = JSON.parse(payload);
 

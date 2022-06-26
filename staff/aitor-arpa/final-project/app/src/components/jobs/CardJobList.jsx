@@ -3,7 +3,7 @@ import CardJob from "./CardJob";
 import retrieveJobs from "../../logic/retrieveJob";
 import toast from "react-hot-toast";
 
-export default function CardJobList() {
+export default function CardJobList(props) {
   const [jobs, setJobs] = useState(null);
   useEffect(() => {
     loadJobs();
@@ -25,9 +25,10 @@ export default function CardJobList() {
 
   return jobs && jobs.length ? (
     <ul>
-      {jobs.map((job) => (
-        <li jobId={job.id}>
+      {jobs.map((job, i) => (
+        <li key={i}>
           <CardJob
+            jobid={job.id}
             title={job.title}
             description={job.description}
             address={job.address}
@@ -36,6 +37,6 @@ export default function CardJobList() {
       ))}
     </ul>
   ) : (
-    <p>No tienes trabajos asignados</p>
+    <h1 className="Center logo">No tienes trabajos asignados</h1>
   );
 }

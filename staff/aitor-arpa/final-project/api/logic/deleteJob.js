@@ -9,11 +9,12 @@ function deleteJob(adminId, jobId) {
 
   return User.findById(adminId)
     .then((user) => {
+      debugger;
       if (!user) throw new NotFoundError(`User with ${adminId} not found`);
 
       if (user.role === "worker")
         throw new AuthError(`${adminId} conctat for you Manager`);
-      return Job.deleteOne({ id: jobId });
+      return Job.findOneAndDelete({ _id: jobId });
     })
     .then((job) => {
       if (!job) throw new NotFoundError(`User with ${jobId} not found`);

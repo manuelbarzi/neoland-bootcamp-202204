@@ -1,32 +1,28 @@
-const { Schema, Types: { ObjectId } } = require('mongoose')
-const { obj } = require('./User')
-
+const {
+  Schema,
+  Types: { ObjectId },
+} = require("mongoose");
+const { obj } = require("./User");
 
 const Job = new Schema({
-    title: {
-        type: String,
+  title: {
+    type: String,
+  },
 
+  description: {
+    type: String,
+  },
+
+  address: {
+    type: String,
+  },
+
+  workers: [
+    {
+      type: ObjectId,
+      ref: "User",
     },
-    
-    description: {
-        type: String
-    },
+  ],
+});
 
-    address: {
-        type: String
-    },
-
-    duration: {
-        type: Number,
-
-    },
-
-    workers: [{
-        type: ObjectId,
-        ref: 'User'
-    }],
-
-    
-})
-
-module.exports = Job
+module.exports = Job;

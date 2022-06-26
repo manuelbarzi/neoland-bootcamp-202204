@@ -8,7 +8,6 @@ function authenticateUser(username, password) {
 
   return User.findOne({ username, password }).then((user) => {
     if (!user) throw new AuthError("wrong credentials");
-
     return { userId: user.id, role: user.role };
   });
 }

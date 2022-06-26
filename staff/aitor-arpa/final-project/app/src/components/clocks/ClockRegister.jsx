@@ -1,17 +1,17 @@
 import React from "react";
-import exit from "../../images/salida.png";
 import In from "../../images/entrada.png";
 import "./ClockRegister.sass";
 import clockUserIn from "../../logic/clockUserIn";
 import toast, { Toaster } from "react-hot-toast";
-import clockUserOut from "../../logic/clockUserOut";
+import { useEffect } from "react";
 
-export default function ClockRegister() {
+export default function ClockRegister(props) {
   const registerTimeIn = () => {
     try {
       clockUserIn(sessionStorage.token)
         .then((result) => {
           toast.success(`clocked in register`);
+          sessionStorage.clockUser = true;
         })
         .catch((error) => {
           toast.error(`${error}`);
@@ -21,29 +21,17 @@ export default function ClockRegister() {
     }
   };
 
-  const registerTimeOut = (event) => {
-    try {
-      event.preventDefault();
-      debugger;
-      const clockId = event.target.clockId.value;
-      clockUserOut(sessionStorage.token, clockId)
-        .then((result) => {
-          if (!result) toast.error(` Error !!!`);
-
-          toast.success(` Cloked out register`);
-        })
-        .catch((error) => {
-          toast.error(`${error}`);
-        });
-    } catch (error) {}
-  };
-  return (
+  return sessionStorage.clockUser ? (
     <div className="center_row">
-      <button className="btn" onClick={registerTimeIn}>
-        <img src={In} alt=""></img>
+      <button className="btn off" onClick={registerTimeIn}>
+        <img src={In} alt="" disa></img>
       </button>
-      <button className="btn_red" onClick={registerTimeOut}>
-        <img src={exit} alt=""></img>
+      <Toaster />
+    </div>
+  ) : (
+    <div className="center_row">
+      <button className="btn on" onClick={registerTimeIn}>
+        <img src={In} alt="" disa></img>
       </button>
       <Toaster />
     </div>

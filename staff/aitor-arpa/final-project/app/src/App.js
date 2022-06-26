@@ -21,13 +21,13 @@ export default function App() {
 
         {/* ----- WORKER ----- */}
         <Route path="/clock/*" element={<Clock />} />
-        <Route path="/job" element={<Jobs />} />
+        <Route path="/job/*" element={<Jobs />} />
         <Route path="/profile/*" element={<Profile />} />
 
         {/* ----- ADMIN ----- */}
         <Route path="/admin" element={<HomeAdmin />} />
         <Route path="admin/profile" element={<ProfileAdmin />} />
-        <Route path="admin/clock" element={<ClockAdmin />} />
+        <Route path="admin/clock/*" element={<ClockAdmin />} />
         <Route path="admin/job" element={<JobsAdmin />} />
         <Route path="admin/user" element={<Users />} />
 

@@ -4,52 +4,55 @@ import clockUserInJob from "../../logic/clockUserInJob";
 import clockUserOutJob from "../../logic/clockUserOutJob";
 import toast, { Toaster } from "react-hot-toast";
 import "./CardJob.sass";
+import { useState } from "react";
 export default function CardJob(props) {
+  const [clock, setClockId] = useState();
   const RegisterClockJobIn = (event) => {
     try {
       event.preventDefault();
 
-      const jobId = event.target.jobId.value;
+      const jobId = props.jobid;
       clockUserInJob(sessionStorage.token, jobId)
         .then((result) => {
-          const clockId = result;
           toast.success(`Start the job 🙏 🤙`);
+          sessionStorage.clockjob = result.clockId;
         })
         .catch((error) => {
           toast.error(`${error} ⛔`);
         });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
   const RegisterClockJobOut = (event) => {
-    event.preventDefault();
-    const clockId = event.target.clockId.value;
-    const jobId = event.target.jobid.value;
     try {
-      clockUserOutJob(sessionStorage.token, jobId, clockId)
+      event.preventDefault();
+      const jobid = props.jobid;
+
+      clockUserOutJob(sessionStorage.token, jobid, sessionStorage.clockjob)
         .then((result) => {
-          if (result) toast.success(`Start the job 🙏 🤙`);
+          toast.success(`🤙 Good Job`);
         })
         .catch((error) => {
-          toast.error(`${error} ⛔`);
+          toast.error(`${error.message} `);
         });
     } catch (error) {
-      toast.error(error);
+      toast.error(` need cloked in first`);
     }
   };
 
   return (
     <div className="card_Job_Pos ">
-      <form className="border_radius_medium">
+      <form className="border_radius_medium" onSubmit={RegisterClockJobIn}>
         <div className="gridTwo_reverse ">
           <input
             className="borderDawn"
             type="hidden"
-            name="jobId"
-            defaultValue={props.id}
+            name="jobid"
+            value={props._id}
           />
+
           <label>Title :</label>
           <input
             className="borderDawn"
@@ -71,7 +74,7 @@ export default function CardJob(props) {
             name="address"
             defaultValue={props.address}
           />
-          <button className="btn_small" onClick={RegisterClockJobIn}>
+          <button className="btn_small" type="onsubmit">
             <img src={play} alt=""></img>
           </button>
           <button className="btn_small" onClick={RegisterClockJobOut}>

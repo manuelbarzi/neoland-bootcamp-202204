@@ -1,30 +1,26 @@
 import Apium from "apium";
+const { isJwtValid } = require("validator");
 
-const { isJwtValid, validateStringNotEmptyOrBlank } = require("validator");
-
-function retrieveUsersRol(token, role) {
+function deleteJob(token, jobId) {
+  debugger;
   isJwtValid(token);
-  validateStringNotEmptyOrBlank(role);
-
   const api = new Apium(process.env.REACT_APP_API_URL);
 
   return api
-    .post("users/role", {
+    .delete("job", {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ role }),
+      body: JSON.stringify({ jobId }),
     })
     .then(({ status, payload }) => {
       if (status === 200) {
-        const data = JSON.parse(payload);
-        return data;
+        return payload;
       } else if (status >= 400 && status < 500) {
         const data = JSON.parse(payload);
 
         if (status === 401) throw new Error(data.error);
-        if (status === 400) throw new Error(data.error);
         if (status === 409) throw new Error(data.error);
 
         throw new Error(data.error);
@@ -34,4 +30,4 @@ function retrieveUsersRol(token, role) {
     });
 }
 
-export default retrieveUsersRol;
+export default deleteJob;

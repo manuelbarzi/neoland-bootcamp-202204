@@ -14,7 +14,6 @@ export default function FormProfile() {
 
   const loadUser = () => {
     try {
-      debugger;
       retrieveUser(sessionStorage.token)
         .then((user) => {
           setUser(user);

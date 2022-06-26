@@ -1,5 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
+import ClockListAdmin from "../components/clocks/ClockListAdmin";
 
 import NavbarAdmin from "../components/NavbarAdmin";
 import { withTokenAndRol } from "../container";
@@ -11,7 +12,7 @@ export default withTokenAndRol(function Clocked() {
         index
         element={
           <div>
-            <h1> Retrive all Cloks</h1>
+            <ClockListAdmin />
 
             <NavbarAdmin />
           </div>

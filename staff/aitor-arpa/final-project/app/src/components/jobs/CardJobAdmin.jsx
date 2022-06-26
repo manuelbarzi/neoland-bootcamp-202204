@@ -1,89 +1,116 @@
-import stop from "../../images/stop.png";
-import play from "../../images/play.png";
-import clockUserInJob from "../../logic/clockUserInJob";
-import clockUserOutJob from "../../logic/clockUserOutJob";
+import del from "../../images/delete.png";
+import edit from "../../images/edit.png";
+import updateJob from "../../logic/updateJob";
 import toast, { Toaster } from "react-hot-toast";
 import "./CardJob.sass";
+import deleteJob from "../../logic/deleteJob";
+
 export default function CardJobAdmin(props) {
-  const RegisterClockJobIn = (event) => {
+  const handeldeltejob = (event) => {
     try {
       event.preventDefault();
-
-      const jobId = event.target.jobId.value;
-      clockUserInJob(sessionStorage.token, jobId)
-        .then((result) => {
-          const clockId = result;
-          toast.success(`Start the job 🙏 🤙`);
+      const { jobid } = props;
+      deleteJob(sessionStorage.token, jobid)
+        .then((job) => {
+          toast.success(`job remove`);
+          props.ondeleteclicked();
         })
         .catch((error) => {
-          toast.error(`${error} ⛔`);
+          toast.error(error.message);
         });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
-
-  const RegisterClockJobOut = (event) => {
+  const handelUpdateJob = (event) => {
     try {
       event.preventDefault();
-      const clockId = event.target.clockId.value;
-      const jobId = event.target.jobid.value;
+      const { jobid } = props;
 
-      clockUserOutJob(sessionStorage.token, jobId, clockId)
-        .then((result) => {
-          if (result) toast.success(`Start the job 🙏 🤙`);
+      let title, address, worker, description;
+      if (!event.target.title.value) title = props.title;
+      else {
+        title = event.target.title.value;
+      }
+      if (!event.target.description.value) description = props.description;
+      else {
+        description = event.target.description.value;
+      }
+      if (!event.target.address.value) address = props.address;
+      else {
+        address = event.target.address.value;
+      }
+
+      if (!event.target.worker.value) worker = props.worker;
+      else {
+        worker = event.target.worker.value;
+      }
+
+      updateJob(
+        sessionStorage.token,
+        jobid,
+        title,
+        description,
+        address,
+        worker
+      )
+        .then((jobid) => {
+          toast.success(`job edit`);
+          debugger;
+          props.ondeleteclicked();
         })
         .catch((error) => {
-          toast.error(`${error} ⛔`);
+          toast.error(error.message);
         });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
   return (
     <div className="card_Job_Pos ">
-      <form className="border_radius_medium">
+      <form className="border_radius_medium" onSubmit={handelUpdateJob}>
         <div className="gridTwo_reverse ">
           <input
             className="borderDawn"
             type="hidden"
-            name="jobId"
-            defaultValue={props.id}
+            name="jobid"
+            value={props._id}
           />
           <label>Title :</label>
           <input
             className="borderDawn"
             type="text"
             name="title"
-            defaultValue={props.title}
+            placeholder={props.title}
           />
           <label>Des. :</label>
           <input
             className="borderDawn"
             type="text"
             name="description"
-            defaultValue={props.description}
+            placeholder={props.description}
           />
           <label>Add. :</label>
           <input
             className="borderDawn"
             type="text"
             name="address"
-            defaultValue={props.address}
+            placeholder={props.address}
           />
           <label>Worker :</label>
           <input
             className="borderDawn"
             type="text"
             name="worker"
-            defaultValue={props.worker}
+            placeholder={props.worker}
           />
-          <button className="btn_small" onClick={RegisterClockJobIn}>
-            <img src={play} alt=""></img>
+
+          <button className="btn_small" type="submit">
+            <img src={edit} alt=""></img>
           </button>
-          <button className="btn_small" onClick={RegisterClockJobOut}>
-            <img src={stop} alt=""></img>
+          <button className="btn_small" onClick={handeldeltejob}>
+            <img src={del} alt=""></img>
           </button>
         </div>
       </form>

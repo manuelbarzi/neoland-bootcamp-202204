@@ -16,18 +16,19 @@ export default function CardJobList() {
           setJobs(jobs);
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.message);
         });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
   return jobs && jobs.length ? (
     <ul>
       {jobs.map((job) => (
-        <li jobId={job.id}>
+        <li key={job.id}>
           <CardJob
+            jobid={job.id}
             title={job.title}
             description={job.description}
             address={job.address}
@@ -36,6 +37,6 @@ export default function CardJobList() {
       ))}
     </ul>
   ) : (
-    <p>No tienes trabajos asignados</p>
+    <h1 className="Center logo">No tienes trabajos asignados</h1>
   );
 }

@@ -3,9 +3,9 @@ import authenticateUser from "../../logic/authenticateUser";
 import getUserRole from "../../logic/getUserRole";
 import { AuthError } from "errors";
 import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
-function FormLogin() {
+function FormLogin(props) {
   const navigate = useNavigate();
 
   const handelUserLogin = (event) => {
@@ -14,7 +14,6 @@ function FormLogin() {
 
       const username = event.target.username.value;
       const password = event.target.password.value;
-
       authenticateUser(username, password)
         .then((token) => {
           sessionStorage.token = token;
@@ -24,10 +23,10 @@ function FormLogin() {
           if (role === "worker") navigate("/");
           if (role === "admin") navigate("/admin");
         })
-        .catch();
-    } catch (error) {
-      toast.error(error);
-    }
+        .catch((error) => {
+          toast.error(`${error}`);
+        });
+    } catch (error) {}
   };
 
   return (
@@ -40,15 +39,18 @@ function FormLogin() {
           type="username"
           name="username"
           placeholder="usuario"
+          required
         ></input>
         <input
           className="borderDawn"
           type="password"
           name="password"
           placeholder="contraseña"
+          required
         ></input>
         <button className="btn">Login</button>
       </form>
+      <Toaster />
     </div>
   );
 }

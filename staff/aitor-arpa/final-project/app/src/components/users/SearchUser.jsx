@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/* import React, { useState } from "react";
 import retrieveUsersRol from "../../logic/retrieveUsersRol";
 import toast from "react-hot-toast";
 import "./CardUserList.sass";
@@ -6,28 +6,23 @@ import search from "../../images/search.png";
 import CardUser from "./CardUser";
 
 export default function searchUser() {
-  /* const [user, setUsers] = useState(null)
+  const [user, setUsers] = useState(null);
 
-
-  const loadUsersRol = event => {
-    event.preventDefault()
-    const role = event.target.role.value
+  const loadUsersRol = (event) => {
+    event.preventDefault();
+    const role = event.target.role.value;
     retrieveUsersRol(sessionStorage.token, role)
-      .then(users => {
-
-        setUsers(user)
-
+      .then((users) => {
+        setUsers(user);
       })
-      .catch(error => {
-        toast.error(error)
-
-      })
-
-  } */
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
 
   return (
     <>
-      <form /* onSubmit={loadUsersRol} */ className="CardUser">
+      <form onSubmit={loadUsersRol} className="CardUser">
         <input type="text" name="role" placeholder="role"></input>
         <button type="onSubmit">
           <img src={search} alt="" />
@@ -45,3 +40,4 @@ export default function searchUser() {
     </>
   );
 }
+ */

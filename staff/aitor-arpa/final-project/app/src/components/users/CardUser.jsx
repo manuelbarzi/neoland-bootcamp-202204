@@ -30,22 +30,22 @@ export default function CardUser(props) {
   };
 
   return (
-    <div className="center_form">
-      <form>
+    <div className="center_form ">
+      <form className="Center">
         <input className="borderDawn" type="hidden" name="id" />
         <input
           className="borderDawn"
           type="username"
           name="username"
-          placeholder="Username"
-          value={props.username}
+          placeholder={props.username}
         ></input>
+
         <input
           className="borderDawn"
-          type="name"
+          type="text"
+          disabled
           name="name"
-          placeholder="Name"
-          value={props.name}
+          placeholder={props.name}
         ></input>
         <input
           className="borderDawn"

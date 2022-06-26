@@ -16,9 +16,7 @@ function retrieveAllJobs(userId) {
       return Job.find();
     })
     .then((jobs) => {
-      jobs.forEach((job) => {
-        // TODO sanitise
-      });
+      jobs.forEach((job) => {});
 
       return jobs;
     });

@@ -1,17 +1,16 @@
-const { retrieveUsersByRole } = require("../logic");
+const { UpdateJob } = require("../logic");
 const { verifyToken, handleErrorsAndRespond } = require("./helpers");
 
 module.exports = (req, res) => {
   try {
-    debugger;
     const { userId } = verifyToken(req);
-
     const {
-      body: { role },
+      body: { jobId, title, description, address, workers },
     } = req;
-
-    retrieveUsersByRole(userId, role)
-      .then((users) => res.status(200).json(users)) // devuelvo estatus ok y el token
+    UpdateJob(userId, jobId, title, description, address, workers)
+      .then((data) => {
+        res.status(201).json({ data });
+      })
       .catch((error) => handleErrorsAndRespond(error, res));
   } catch (error) {
     handleErrorsAndRespond(error, res);
