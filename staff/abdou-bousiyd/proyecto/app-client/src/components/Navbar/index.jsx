@@ -58,7 +58,8 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                 >
                     {
                         // name ?
-                        <i className="gg-heart"></i> 
+                        // <i className="gg-heart"></i> 
+                        <span class="material-icons">favorite_border</span>
                         // <Login  />
                     }
                     { likes && likes.length> 0 && <h2>{likes.length}</h2> }
@@ -67,35 +68,40 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__downloadNone"}`}
                     onClick={download}
                 >
-                    <i className="gg-software-download"></i>
+                    {/* <i className="gg-software-download"></i> */}
+                    <span class="material-icons">get_app</span>
                 </li>
                 
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__skypackNone"}` }
                     onClick={toggleSkypack}
                 >
-                    <i class="gg-profile">SP</i>
+                    <span class="material-icons">rocket_launch</span>
                 </li>
 
                 <li className={`header__content__links__item ${( location === "/dashboards" || location === "/pens" )&& "header__content__links__item__codeNone"}`}
                     onClick={toggle}
                 >
-                    <i className="gg-code-slash"></i>
+                    {/* <i className="gg-code-slash"></i> */}
+                    <span class="material-icons">data_object</span>
                 </li>
 
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__addNone"}`}
                     onClick={toggleTitle}
                 >
-                    <i className="gg-add-r"></i>
+                    {/* <i className="gg-add-r"></i> */}
+                    <span class="material-icons">add</span>
                 </li>
                 <li className={`header__content__links__item ${(location === "/" || location === "/project" || location === `/previewProject/${projectId}`) && "header__content__links__item__addNone"}`}
                     onClick={handleToProject}
                 >
-                    <i className="gg-arrow-left-r"></i>
+                    {/* <i className="gg-arrow-left-r"></i> */}
+                    <span class="material-icons">arrow_back</span>
                 </li>
                 <li className={`header__content__links__item ${location === "/dashboards" && "header__content__links__item__tikcodeNone"}`}
                     onClick={handleToDashboard}
                 >
-                    <i className="gg-eye"></i>
+                    {/* <i className="gg-eye"></i> */}
+                    <span class="material-icons">visibility</span>
                 </li>
 
             </ul>
