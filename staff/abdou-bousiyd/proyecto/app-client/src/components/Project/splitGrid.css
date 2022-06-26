@@ -1,14 +1,8 @@
 .grid {
     display: grid;
-    grid-template-rows: 50% 1% 50%;
-    grid-template-columns: 50% .5% 50%;
+    grid-template-rows: 50% 10px 50%;
+    grid-template-columns: 50% 10px 50%;
     height: 100vh;
-}
-@media screen and ( max-width: 850px ) {
-    .grid {
-        grid-template-rows: 50% 1% 50%;
-        grid-template-columns: 50% 2% 50%;
-    }
 }
 .gutter-col {
     grid-row: 1/-1;

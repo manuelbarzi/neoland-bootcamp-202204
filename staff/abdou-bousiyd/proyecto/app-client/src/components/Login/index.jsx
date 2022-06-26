@@ -44,10 +44,10 @@ const Login = ({toggleTitle, loadUser}) => {
     }
 
 
-    return(
+    return(<>
+            {alert && alert}
         <form className='login' onSubmit={handleSubmit}>
             
-            {alert && alert}
 
             <div className='login__Auth'>
 
@@ -82,6 +82,7 @@ const Login = ({toggleTitle, loadUser}) => {
 
             </div>
         </form>
+    </>
     )
 }
 
