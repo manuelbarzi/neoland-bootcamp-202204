@@ -9,8 +9,8 @@ import EventCreator from './EventCreator'
 import { isJwtValid } from 'validators'
 import './Home.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
-import { MdHome, MdOutlineCalendarToday, MdLogout, MdSearch, MdPermIdentity, MdAddCircleOutline } from "react-icons/md"
-import SearchBar from './SeachBar'
+import { MdHome, MdOutlineCalendarToday, MdLogout, MdPermIdentity, MdAddCircleOutline } from "react-icons/md"
+
 
 
 function Home({ onUserLogout }) {
@@ -87,7 +87,6 @@ function Home({ onUserLogout }) {
             <header className="Home__header">
                 <div className='Home__header-nav'>
                     <h1>Hello {name}</h1>
-                    <a href='#' onClick={handleSearchBarClick}>< MdSearch /></a>
                     <a href="#" onClick={handleLogoutClick}><MdLogout /></a>
                 </div>
             </header>
@@ -98,7 +97,6 @@ function Home({ onUserLogout }) {
                     <Route path="/eventCreator" element={<EventCreator />} />
                     <Route path="/myCalendar/*" element={<MyCalendar />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/searchEvent" element={<SearchBar />} />
 
                 </Routes>
             </main>

@@ -38,7 +38,6 @@ function MyCalendar({ timestamp }) {
     const _events = events.filter(event => event.id !== eventId)
 
     setEvents(_events)
-
   }
 
   const handleEventTargetedClick = () => {
@@ -58,7 +57,7 @@ function MyCalendar({ timestamp }) {
 
           <ul className="myCalendar__list">
             {events.map(event => <li key={event.id}>
-              <Event eventId={event.id} title={event.title} description={event.description} onRemove={handleRemoveEvent} />
+              <Event eventId={event.id} title={event.title} description={event.description} location={event.location} eventDate={event.eventDate} onRemove={handleRemoveEvent} />
             </li>)}
           </ul>
           :

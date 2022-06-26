@@ -1,6 +1,4 @@
-//import React from 'react'
-//const { createContext } = React
-import {createContext} from 'react'
+import { createContext } from 'react'
 
 const Context = createContext()
 

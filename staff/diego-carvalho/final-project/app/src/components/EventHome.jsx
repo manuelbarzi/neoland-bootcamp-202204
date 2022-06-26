@@ -3,6 +3,7 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import signUpToEvent from '../logic/signUpToEvent'
 import './EventHome.sass'
+import { MdPeople, MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
 
 function EventHome(props) {
   const logger = new Logger('EventHome')
@@ -12,7 +13,6 @@ function EventHome(props) {
   const { event, onSignUp } = props
 
   const handleSignUpToEventClick = () => {
-
     if (event.id)
       signUpToEvent(sessionStorage.token, event.id, error => {
         if (error) {
@@ -20,9 +20,8 @@ function EventHome(props) {
 
           return
         }
-        handleFeedback({ level: 'success', message: 'Apuntado' })
         onSignUp(event.id)
-
+        handleFeedback({ level: 'success', message: 'Apuntado' })
       })
   }
 
@@ -30,13 +29,17 @@ function EventHome(props) {
 
   return <div>
     <div className="EventHome__form">
+      <MdPeople className='EventHome__participantsIcons' />
+      <p className='EventHome__participants'>Participantes: {event.participants.length}</p>
+      <p className='EventHome__title'>{event.title}</p>
+      <p className='EventHome__description'>{event.description}</p>
+      <MdOutlineLocationOn className='EventHome__icons' />
+      <p className='EventHome__location'>{event.location}</p>
+      < MdCalendarToday className='EventHome__icons' />
+      <p className='EventHome__date' >{event.eventDate}</p>
 
-      <h1 className='EventHome__name'>Name: {event.name}</h1>
-      <h1 className='EventHome__title'>Title: {event.title}</h1>
-      <p className='EventHome__description'>Description: {event.description}</p>
-      <h1 className='EventHome__title'>Participants: {event.participants.length}</h1>
 
-      <button className="Button--light" onClick={handleSignUpToEventClick}>Apuntarme</button>
+      <button className="Button--light EventHome__button" onClick={handleSignUpToEventClick}>Apuntarme</button>
     </div>
   </div>
 }

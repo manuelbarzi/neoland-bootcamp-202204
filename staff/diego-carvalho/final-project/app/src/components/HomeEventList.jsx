@@ -35,7 +35,6 @@ function HomeEventList() {
     setReload(Date.now())
   }
 
-
   logger.info('render')
 
   return events && events.length ?

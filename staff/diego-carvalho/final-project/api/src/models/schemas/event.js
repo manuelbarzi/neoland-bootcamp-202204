@@ -22,13 +22,15 @@ const event = new Schema({
         default: null,
     },
 
-    date: {
-        type: Date,
-        required: true,
-        default: Date.now
+    eventDate: {
+        type: String,
+        default: null
+        // type: Date,
+        // required: true,
+        // default: Date.now
     },
 
-    direction: {
+    location: {
         type: String,
     },
 

@@ -2,7 +2,7 @@ import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
 import { validateJwt } from 'validators'
 
-function saveEvent(token, eventId, title, description, callback) {
+function saveEvent(token, eventId, title, description, location, eventDate, callback) {
   const logger = new Logger('saveEvent')
 
   logger.info('call')
@@ -19,7 +19,7 @@ function saveEvent(token, eventId, title, description, callback) {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ title, description })
+      body: JSON.stringify({ title, description, location, eventDate })
     }, (error, response) => {
       if (error) return callback(error)
 
@@ -38,13 +38,12 @@ function saveEvent(token, eventId, title, description, callback) {
       }
     })
   else
-
     api.patch(`events/${eventId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ eventId, title, description })
+      body: JSON.stringify({ eventId, title, description, location, eventDate })
     }, (error, response) => {
       if (error) return callback(error)
 

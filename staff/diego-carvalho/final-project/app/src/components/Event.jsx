@@ -35,8 +35,10 @@ function Event(props) {
     const { eventId } = props
     const { target: { title: { value: title } } } = event
     const { target: { text: { value: description } } } = event
+    const { target: { location: { value: location } } } = event
+    const { target: { eventDate: { value: eventDate } } } = event
 
-    saveEvent(sessionStorage.token, eventId, title, description, error => {
+    saveEvent(sessionStorage.token, eventId, title, description, location, eventDate, error => {
       if (error) {
         handleFeedback({ level: 'error', message: error.message })
 
@@ -52,8 +54,10 @@ function Event(props) {
   return <div className='Event'>
     <form className="Event__form" onSubmit={handleSaveSubmit}>
 
-      <textarea className='Event__title' type='text' name="title" placeholder="Title" defaultValue={props.title}></textarea>
-      <textarea className="Event__description" type='text' name="text" placeholder="Description" defaultValue={props.description}></textarea>
+      <textarea className='Event__title' type='text' name="title" placeholder="Titulo" defaultValue={props.title}></textarea>
+      <textarea className="Event__description" type='text' name="text" placeholder="Descripción" defaultValue={props.description}></textarea>
+      <textarea className="Event__location" type='text' name="location" placeholder="Localización" defaultValue={props.location}></textarea>
+      <textarea className="Event__date" type='text' name="eventDate" placeholder="Fecha" defaultValue={props.eventDate}></textarea>
 
       <div className='Event__button-container'>
         <button className="Event__event-button" onClick={handleRemoveClick}>cancelar</button>
