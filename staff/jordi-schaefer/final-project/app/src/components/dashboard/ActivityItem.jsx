@@ -103,18 +103,18 @@ function ActivityItem (props) {
         </div> }
 
         { !setDelete && <div className='ActivityItem__footer mw'>
-            <div className='ActivityItem__footer--container Button__borderR'>
+            <button className='ActivityItem__footer-button Button__borderR' onClick={handleLikeClick}>
                 { likes>0 && <h2 className='ActivityItem__footer--number'>{likes}</h2> }
-                <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleLikeClick}>thumb_up</button>
-            </div>
-            <div className='ActivityItem__footer--container Button__borderR'>
+                <span className='ActivityItem__footer-icon material-symbols-outlined' >thumb_up</span>
+            </button>
+            <button className='ActivityItem__footer-button Button__borderR' onClick={handleCommentClick}>
                 { comments>0 && <h2 className='ActivityItem__footer--number'>{comments}</h2> }
-                <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleCommentClick}>chat</button>
-            </div>
-            <div className='ActivityItem__footer--container'>
+                <span className='ActivityItem__footer-icon material-symbols-outlined' >chat</span>
+            </button>
+            <button className='ActivityItem__footer-button' onClick={handleImagesClick}>
                 { images && images.length>0 && <h2 className='ActivityItem__footer--number'>{images.length}</h2> }
-                <button className='ActivityItem__footer--button material-symbols-outlined' onClick={handleImagesClick}>photo_library</button>
-            </div>
+                <span className='ActivityItem__footer-icon material-symbols-outlined' >photo_library</span>
+            </button>
         </div> }
 
         { !setDelete && images && imgview && (images.length>0) ? <div className='ActivityItem__image-movement'>

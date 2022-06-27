@@ -28,10 +28,10 @@ function Login (props) {
 
     return <div className="Container mw mh flex__start">
         <header className="Welcome__header">
-            <div className="Welcome__container-back">
+            <button className="Welcome__button-back" onClick={handleWelcomeLinkClick}>
                 <span className="Welcome__icon-back material-symbols-outlined">arrow_back_ios_new</span>
-                <button className="Welcome__button-back" onClick={handleWelcomeLinkClick}>Back</button>
-            </div>
+                <h2 className="Welcome__text-back" >Back</h2>
+            </button>
             <h1 className="center">Login</h1>
         </header>
         <form className="Container mw Welcome__form" onSubmit={handleFormSubmit}>

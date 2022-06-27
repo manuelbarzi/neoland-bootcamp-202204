@@ -95,18 +95,21 @@ function ActivityList(props) {
     }
 
     return activities && <div className="ActivitiesList mw">
-        <form className="ActivityList__form" onSubmit={handleSearchClicked}>
-            <input className="ActivityList__imput" type="text" name="text" placeholder="Search activities.."/>
-            <button className="ActivityList__button-form material-symbols-outlined">Search</button>
-        </form>
 
-        <div className="ActivityList__search-icons">
-            <button id="all" className="Button__selected Activity__search-icon" onClick={handleAllClick}>All</button>
-            <button id="bike" className="Activity__search-icon material-symbols-outlined" onClick={handleBikeClick}>directions_bike</button>
-            <button id="hike" className="Activity__search-icon material-symbols-outlined" onClick={handleHikingClick}>hiking</button>
-            <button id="sky" className="Activity__search-icon material-symbols-outlined" onClick={handleSkiClick}>downhill_skiing</button>
-            <button id="snow" className="Activity__search-icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
-        </div>
+        {!props.private && <div className="ActivitiesList mw">
+            <form className="ActivityList__form" onSubmit={handleSearchClicked}>
+                <input className="ActivityList__imput" type="text" name="text" placeholder="Search activities"/>
+                <button className="ActivityList__button-form material-symbols-outlined">Search</button>
+            </form>
+
+            <div className="ActivityList__search-icons">
+                <button id="all" className="Button__selected Activity__search-icon" onClick={handleAllClick}>All</button>
+                <button id="bike" className="Activity__search-icon material-symbols-outlined" onClick={handleBikeClick}>directions_bike</button>
+                <button id="hike" className="Activity__search-icon material-symbols-outlined" onClick={handleHikingClick}>hiking</button>
+                <button id="sky" className="Activity__search-icon material-symbols-outlined" onClick={handleSkiClick}>downhill_skiing</button>
+                <button id="snow" className="Activity__search-icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
+            </div>
+        </div> }
 
         <ul className = "Activities__list mw overflow" >
             {props.private && activities && <li className="Activity__list--item">

@@ -42,10 +42,10 @@ function Register (props){
 
     return <div className="Container mw mh flex__start">
         <header className="Welcome__header">
-            <div className="Welcome__container-back">
+            <button className="Welcome__button-back">
                 <span className="Welcome__icon-back material-symbols-outlined">arrow_back_ios_new</span>
-                <button className="Welcome__button-back" onClick={handleWelcomeLinkClick}>Back</button>
-            </div>
+                <h2 className="Welcome__text-back" onClick={handleWelcomeLinkClick}>Back</h2>
+            </button>
             <h1 className="center">Register</h1>
         </header>
         <form className="Container mw Welcome__form" onSubmit={handleFormSubmit}>

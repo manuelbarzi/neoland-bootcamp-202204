@@ -90,10 +90,10 @@ function Home(props) {
     <div className="Container Home__container overflow mw mh">
         <header className="Home__header">
             {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comments'].includes(view)) 
-                && <div className="Home__container-back">
+                && <button className="Home__container-back" onClick={handleBackClick}>
                     <span className="Home__icon-back material-symbols-outlined">arrow_back_ios_new</span>
-                    <button className="Home__button-back" onClick={handleBackClick}>{back}</button>
-                </div>}
+                    <h2 className="Home__button-back">{back}</h2>
+                </button>}
             <h1 className="center">{view}</h1>
             {view === 'Profile' && <button className="Home__header--settings material-symbols-outlined" onClick={handleSettingClick}>Settings</button>}
         </header>
@@ -122,17 +122,18 @@ function Home(props) {
 
         
         <footer className="Home__footer">
-            <div className="Home__footer--container">
-                <button id="home" className="Button__selected Home__footer--icon material-symbols-outlined" onClick={handleHomeClick}>home</button>
-                <button className="Home__footer--icon material-symbols-outlined" onClick={handleActivityClick}>radio_button_checked</button>
-                <button id="profile" className="Home__footer--icon material-symbols-outlined" onClick={handleProfileClick}>person</button>
-            </div>
-
-            <div className="Home__footer--container">
-                <h2 id="homeL" className="Button__selected Home__footer--text m_left_word" onClick={handleHomeClick}>Home</h2>
-                <h2 className="Home__footer--text m_left_word" onClick={handleActivityClick}>Record</h2>
-                <h2 id="profileL" className="Home__footer--text m_right_word m_left_word" onClick={handleProfileClick}>Profile</h2>
-            </div>
+            <button className="Home__footer--container" onClick={handleHomeClick}>
+                <span id="home" className="Button__selected Home__footer--icon material-symbols-outlined">home</span>
+                <h2 id="homeL" className="Button__selected Home__footer--text" >Home</h2>
+            </button>
+            <button className="Home__footer--container" onClick={handleActivityClick}>
+                <span className="Home__footer--icon material-symbols-outlined">radio_button_checked</span>
+                <h2 className="Home__footer--text" >Record</h2>
+            </button>
+            <button className="Home__footer--container" onClick={handleProfileClick}>
+                <span id="profile" className="Home__footer--icon material-symbols-outlined" >person</span>
+                <h2 id="profileL" className="Home__footer--text" >Profile</h2>
+            </button>
         </footer>
 
     </div> : <></>
