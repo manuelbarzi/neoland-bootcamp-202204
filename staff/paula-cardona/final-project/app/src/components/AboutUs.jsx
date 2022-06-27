@@ -1,11 +1,12 @@
 import { Link} from 'react-router-dom'
 import './AboutUs.sass'
+import logo from './logo.png'
 
 function AboutUs () {
 
     return <div className= "AboutUs ">
         <div>
-            <h1 className= "AboutUs__h1"> PA PER TU </h1>
+        <img className= "img" alt="" src={logo}/>            
         </div>
         <div className= "AboutUs Modelo">
             <h2 className= "AboutUs__numbers"> 1 </h2>
@@ -15,6 +16,10 @@ function AboutUs () {
             <h2 className= "AboutUs__numbers"> 3 </h2>
                 <p className= "AboutUs__text"> Solamente debe suscribirse por 20€ mensuales. Nuestro equipo instalará un buzón en su vivienda y recibirá nuestros productos </p>
             <Link className="About__arrow__link" to="/login"> → </Link>
+            
+            
+
+            
         </div>
     </div>
 

@@ -3,16 +3,19 @@ import { isJwtValid } from '../validators'
 import ProductsList from './ProductsList'
 import './Day.sass'
 
-function Day ({dayClicked, scheduleHome}) {
+function Day ({dayClicked, scheduleHome, handleChangeQuantity}) {
 
     const [day, setDay] = useState(null)
     const [view, setView] = useState('main')
     const [type, setType] = useState(null)
-    // const [schedule, setSchedule] = useState(null)
 
     useEffect(() => { //cuando cargue la pagina nos guardaremos el dayClicked que viene por arriba en el nuevo day de DAY. ponemos este nuevo day en title
-        setDay(dayClicked) //con el day con el qye venga de dayclicked
+        setDay(dayClicked) //con el day con el qye venga de dayclicked  
+        
     }, [])
+
+    
+
 
     const handleClickBack = () => {
         if (day === 'Lunes') setDay('Domingo')  //si el valor que guardo es el de lunes, el valor del click back en lunes será domingo
@@ -41,7 +44,8 @@ function Day ({dayClicked, scheduleHome}) {
     const handleClickonBolleria = () => { setView('productsList');  setType(3)}
     const handleClickonPanSinGluten = () => { setView('productsList');  setType(4)}
 
-    const handlehola = () => setView ('main')
+    const handlehola = () =>  setView ('main')
+    
 
 
     return isJwtValid (sessionStorage.token) ?
@@ -57,8 +61,8 @@ function Day ({dayClicked, scheduleHome}) {
             </header>
             
             {scheduleHome.map((elem) => <div key={elem.id}>
-                        {elem.product.imagen && <img className='img' src={elem.product.imagen}/>}
-                        <h4 className="element">{elem.product.title}: {elem.quantity} </h4>   
+                        {elem.product.imagen && <img className='imgg' src={elem.product.imagen}/>}
+                        <h4 className="element"> {elem.product.title}: {elem.quantity} </h4>   
                     </div>)}
            
             <button className="Button Button__Day__Bread" onClick= {handleClickonPanBlanco}>PAN BLANCO →</button>
@@ -70,7 +74,7 @@ function Day ({dayClicked, scheduleHome}) {
 
     
            
-            {view === 'productsList' && <ProductsList  day={day} typeClicked={type} onCrossClicked={handlehola} />}
+            {view === 'productsList' && <ProductsList  day={day} typeClicked={type} onCrossClicked={handlehola} handleChangeQuantity={handleChangeQuantity}/>}
             
 
         </div> : <></>

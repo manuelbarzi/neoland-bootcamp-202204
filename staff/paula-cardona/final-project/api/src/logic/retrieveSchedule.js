@@ -12,7 +12,7 @@ function retrieveSchedule(userId) { // recivimos el user id al que les buscaremo
             if(!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
             return Schedule.findOne({user: userId}).populate({ 
-                path: 'monday tuesday wednesday thursday friday',
+                path: 'monday tuesday wednesday thursday friday saturday sunday',
                 populate: {
                   path: 'product',
                   model: 'Product'

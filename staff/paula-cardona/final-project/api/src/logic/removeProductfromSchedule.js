@@ -71,7 +71,7 @@ function removeProductFromSchedule(userId, day, productId) {
         } 
         else if (day==='Viernes'){
             const foundItem = schedule.friday.find(item => item.product.toString() === productId)
-            debugger
+            
             if(foundItem != undefined) {
 
                 if (foundItem.quantity > 1)

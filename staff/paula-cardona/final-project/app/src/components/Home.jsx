@@ -8,6 +8,7 @@ import Day from './Day'
 import './Home.sass'
 import { useNavigate } from 'react-router-dom'
 import { isJwtValid } from '../validators'
+import logo from './logo.png'
 
 function Home() {
 
@@ -50,9 +51,14 @@ function Home() {
     const getSchedule = async () => {   
         try{ const result= await retrieveSchedule(sessionStorage.token)
             setSchedule(result)
+
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
+    }
+
+    const handleChangeQuantity = () => {
+        getSchedule()
     }
 
     return isJwtValid(sessionStorage.token) ?
@@ -60,18 +66,19 @@ function Home() {
         
             {view=== 'home' && <header>
                 <div>
-                    <h1 className="Home__h1"> RESUMEN DE MI SEMANA</h1>
+                    <img className="logo" alt="" src={logo}/>   
+                    <h1 className="Home__h1"> MI SEMANA</h1>
                 </div>
             </header>}
 
-            <main >
+            <main className='main'>
                 {view === 'home' && schedule && <div className="Home__buttons">
 
                     <div className="prueba" onClick= {handleClickMondayDay}>
                     <button className="Button Home__Day" >Lunes</button>
                         <div className="cajita">
                             {schedule.monday.map((elem) => <div key={elem.id}>
-                                {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
+                                {elem.product.imagen && <img className="imagen" src={elem.product.imagen}/>} 
                                 <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                             </div>)}
                         </div>
@@ -81,7 +88,7 @@ function Home() {
                     <button className="Button Home__Day"> Martes</button>
                         <div  className="cajita">
                             {schedule.tuesday.map((elem) => <div key={elem.id}>
-                                {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
+                                {elem.product.imagen && <img className="imagen" src={elem.product.imagen}/>} 
                                 <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                             </div>)}
                         </div>
@@ -91,7 +98,7 @@ function Home() {
                         <button className="Button Home__Day">Miércoles</button>
                         <div className="cajita">
                             {schedule.wednesday.map((elem) => <div key={elem.id}>
-                                    {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
+                                    {elem.product.imagen && <img className="imagen" src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
@@ -101,7 +108,7 @@ function Home() {
                     <button className="Button Button Home__Day">Jueves</button>
                         <div className="cajita">
                             {schedule.thursday.map((elem) => <div key={elem.id}>
-                                    {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
+                                    {elem.product.imagen && <img className="imagen" src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
@@ -111,7 +118,7 @@ function Home() {
                     <button className="Button Button Home__Day" >Viernes</button>
                         <div className="cajita">
                             {schedule.friday.map((elem) => <div key={elem.id}>
-                                    {elem.product.imagen && <img className="img"  src={elem.product.imagen}/>} 
+                                    {elem.product.imagen && <img className="imagen"  src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
@@ -121,8 +128,8 @@ function Home() {
                     <button className="Button Button Home__Day">Sábado</button>
                         <div className="cajita">
                             {schedule.saturday.map((elem) => <div key={elem.id}>
-                                    {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
-                                    <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
+                                    {elem.product.imagen && <img className="imagen" src={elem.product.imagen}/>} 
+                                    <h4 className="Home__h4"> {elem.product.title} : {elem.quantity}</h4>   
                                 </div>)}
                         </div>
                     </div>
@@ -131,20 +138,20 @@ function Home() {
                     <button className="Button Button Home__Day">Domingo</button>
                         <div className="cajita">
                             {schedule.sunday.map((elem) => <div key={elem.id}>
-                                    {elem.product.imagen && <img className="img" src={elem.product.imagen}/>} 
+                                    {elem.product.imagen && <img className="imagen" src={elem.product.imagen}/>} 
                                     <h4 className="Home__h4">{elem.product.title}: {elem.quantity}</h4>   
                                 </div>)}
                         </div>
                     </div>
                 </div>}
 
-                {view === 'Lunes' && day && <Day dayClicked={day} scheduleHome={schedule.monday}/>}
-                {view === 'Martes' && day && <Day dayClicked={day} scheduleHome={schedule.tuesday}/>}
-                {view === 'Miércoles' && day && <Day dayClicked={day} scheduleHome={schedule.wednesday}/>}
-                {view === 'Jueves' && day && <Day dayClicked={day} scheduleHome={schedule.thursday}/>}
-                {view === 'Viernes' && day && <Day dayClicked={day} scheduleHome={schedule.friday}/>}
-                {view === 'Sábado' && day && <Day dayClicked={day} scheduleHome={schedule.saturday}/>}
-                {view === 'Domingo' && day && <Day dayClicked={day} scheduleHome={schedule.sunday}/>}
+                {view === 'Lunes' && day && <Day dayClicked={day} scheduleHome={schedule.monday} handleChangeQuantity={handleChangeQuantity}/>}
+                {view === 'Martes' && day && <Day dayClicked={day} scheduleHome={schedule.tuesday} handleChangeQuantity={handleChangeQuantity}/>}
+                {view === 'Miércoles' && day && <Day dayClicked={day} scheduleHome={schedule.wednesday} handleChangeQuantity={handleChangeQuantity}/>}
+                {view === 'Jueves' && day && <Day dayClicked={day} scheduleHome={schedule.thursday} handleChangeQuantity={handleChangeQuantity}/>}
+                {view === 'Viernes' && day && <Day dayClicked={day} scheduleHome={schedule.friday} handleChangeQuantity={handleChangeQuantity}/>}
+                {view === 'Sábado' && day && <Day dayClicked={day} scheduleHome={schedule.saturday} handleChangeQuantity={handleChangeQuantity}/>}
+                {view === 'Domingo' && day && <Day dayClicked={day} scheduleHome={schedule.sunday} handleChangeQuantity={handleChangeQuantity}/>}
                 {view === 'profile' && <Profile name={name}/>}
             </main>
             

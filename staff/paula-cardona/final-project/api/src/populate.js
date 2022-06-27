@@ -97,6 +97,14 @@ const { User, Schedule, Item, Product } = require('./models')
     
                 schedule.friday.push(item)
             }
+            {
+                const item = new Item({
+                    product: products[17].id,
+                    quantity: 2
+                })
+    
+                schedule.saturday.push(item)
+            }
 
             await schedule.save()
 

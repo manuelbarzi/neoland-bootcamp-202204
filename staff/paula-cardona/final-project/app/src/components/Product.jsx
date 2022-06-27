@@ -5,7 +5,7 @@ import addProductToSchedule from '../logic/addProductToSchedule'
 import './ProductsList.sass'
 
 
-function Product({day, product}) {
+function Product({day, product, onChangeQuantity}) {
     
 
     const { handleFeedback } = useContext(Context)
@@ -14,6 +14,8 @@ function Product({day, product}) {
     const handleAdd = async () => {
         try{ await addProductToSchedule(sessionStorage.token, day, product._id)          
             handleFeedback({ level: 'success', message: 'Cantidad añadida' })
+            onChangeQuantity()
+
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
@@ -22,6 +24,8 @@ function Product({day, product}) {
     const handleRemove = async () => {
         try{ await removeProductfromSchedule(sessionStorage.token, day, product._id)          
             handleFeedback({ level: 'success', message: 'Cantidad eliminada' })
+            onChangeQuantity()
+
         } catch (error) {
             handleFeedback({ level: 'error', message: error.message })
         }
@@ -36,7 +40,7 @@ function Product({day, product}) {
                 <div className='Quantity'>
                     <button className="ButtonPan" onClick={handleRemove}>-</button>
                 </div>
-                    <img src={product.imagen} />
+                    <img className="imggg" src={product.imagen} />
                 <div className='Quantity'>
                     <button className="ButtonPan" onClick={handleAdd}>+</button>
                 </div>

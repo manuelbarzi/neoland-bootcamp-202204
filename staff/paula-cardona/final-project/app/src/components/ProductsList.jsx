@@ -5,7 +5,7 @@ import Product from './Product'
 import './ProductsList.sass'
 import Day from './Day'
 
-function ProductsList ({day, typeClicked, onCrossClicked}) {
+function ProductsList ({day, typeClicked, onCrossClicked, handleChangeQuantity}) {
 
     
     const [products, setProducts] = useState(null)
@@ -46,9 +46,9 @@ function ProductsList ({day, typeClicked, onCrossClicked}) {
             {/* <h1 className= "ProductsType">{typeClicked}</h1>  */}
 
             <ul className='jelou'>
-                {products.map(product => <div > 
+                {products.map(product => <div> 
                     <li key={product.id}>
-                        <Product product={product} day={day} />
+                        <Product product={product} day={day} onChangeQuantity={handleChangeQuantity}/>
                     </li>
                 </div>)}
             </ul>
