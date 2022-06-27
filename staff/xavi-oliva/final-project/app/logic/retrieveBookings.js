@@ -2,14 +2,13 @@ import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
 import Apium from 'apium'
 
 export async function retrieveBookings(token, flatId) {
-
     validateJwt(token)
     validateStringNotEmptyNoSpaces(flatId, 'flat id')
 
     const api = new Apium(process.env.REACT_APP_API_URL)
 
     const { status, payload } = await api.get(
-        `flats/${flatId}`,
+        `flats/${flatId}/bookings`,
         {
             headers: {
                 Authorization: `Bearer ${token}`

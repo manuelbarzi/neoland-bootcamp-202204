@@ -3,9 +3,10 @@ import { registerUser } from 'logic'
 import { Section, Form, Input, PrimaryButton } from '../components'
 import { useRouter } from 'next/router'
 import { verifyTokenWithAPICall } from './helpers'
+import { FunctionalContext } from '../contexts/functional-context'
 
 export default function Register(props) {
-  // const { handleFeedback } = useContext(Context)
+  const { setFeedback } = FunctionalContext.useFeedback()
   const router = useRouter()
 
   const handleFormSubmit = async event => {
@@ -18,11 +19,12 @@ export default function Register(props) {
       try {
           await registerUser(name, email, password)
 
+          setFeedback({ level: 'success', message: 'Successfully registered' })
           router.push('/login')
 
       } catch (error) {
           console.error(error)
-          // handleFeedback(error.message)
+          setFeedback({ level: 'error', message: error.message })
       }
   }
 

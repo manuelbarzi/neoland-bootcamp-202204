@@ -2,6 +2,7 @@ import Head from 'next/head'
 import '../styles/globals.css'
 import { Header, Footer } from '../components'
 import { useRouter } from "next/router"
+import { FunctionalContext } from '../contexts/functional-context';
 
 if (typeof XMLHttpRequest === 'undefined') {
   var XMLHttpRequest = require('xhr2');
@@ -24,13 +25,20 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <title>Brun's Flats</title>
       </Head>
+      <FunctionalContext.Provider>
         <main className='flex flex-col w-full h-screen'>
           {showCompo && <Header />}
           <Component {...pageProps} />
           {showCompo && <Footer />}
         </main>
+      </FunctionalContext.Provider>
     </>
   )
 }
 
 export default MyApp
+
+// formas de englobar partes de código
+
+// etoquetas html y dentro todo el contenido de la app
+// usar un middleware

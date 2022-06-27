@@ -5,9 +5,12 @@ import { PrimaryButton, Input, Section, Form } from '../components'
 
 import { verifyTokenWithAPICall } from './helpers'
 import { useRouter } from 'next/router'
+import { FunctionalContext } from "../contexts/functional-context"
+
 
 export default function Login(props) {
 
+  const { setFeedback } = FunctionalContext.useFeedback()
   const router = useRouter()
 
   // const { handleFeedback } = useContext(Context)
@@ -22,13 +25,13 @@ export default function Login(props) {
       event.target.reset()
 
       const token = await authenticateUser(email, password)
-      // handleFeedback
 
       document.cookie = `token=${token}; max-age=86400;`
-
+      setFeedback({ level: 'success', message: 'successfully logged in' })
       router.push('/admin')
     } catch (error) {
       // handleFeedback(error.message)
+      setFeedback({ level: 'error', message: error.message })
     }
   }
 

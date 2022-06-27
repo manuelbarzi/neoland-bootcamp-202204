@@ -12,7 +12,7 @@ function deleteBooking(userId, flatId, bookingId) {
             if (!booking) throw new NotFoundError(`booking with id ${bookingId} does not exist`)
             if (booking.user.toString() !== userId) throw new ConflictError(`booking with id ${bookingId} does not belong to flat with id ${flatId}`)
 
-            return Booking.deleteOne({ id: bookingId, user: userId, flat: flatId })
+            return Booking.deleteOne({ _id: bookingId, user: userId, flat: flatId })
         })
         .then(() => {})
 }

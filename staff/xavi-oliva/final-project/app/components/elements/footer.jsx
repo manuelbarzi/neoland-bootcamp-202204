@@ -1,5 +1,4 @@
-import Image from 'next/image'
-import { AddButton } from '../buttons'
+import { AddButton } from '../../components'
 import { useRouter } from 'next/router'
 
 export const Footer = ({ className, ...props }) => {

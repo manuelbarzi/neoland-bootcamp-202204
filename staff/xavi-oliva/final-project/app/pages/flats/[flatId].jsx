@@ -31,7 +31,7 @@ export default function Flat({ token, user, flat, bookings }) {
 
                     <CardContactInfo user={user} />
                     
-                    {/* <CardBookingList flat={flat} bookings={bookings} /> */}
+                    <CardBookingList token={token} flat={flat} bookings={bookings} />
 
                     <div className='flex flex-row basis-auto gap-2'>
                         <PrimaryButton className='bg-red-500' onClick={handleRemoveClick}>Delete</PrimaryButton>
@@ -44,17 +44,17 @@ export default function Flat({ token, user, flat, bookings }) {
 }
 
 export async function getServerSideProps({ req, res, params: { flatId } }) {
-        
     const token = await verifyTokenWithAPICall(req, res)
     const flat = await retrieveFlat(token, flatId)
     const user = await retrieveUser(token)
+    const bookings = await retrieveBookings(token, flatId)
 
 
     return {
         props: {
             token: token || null,
             flat,
-            bookings: await retrieveBookings(token, flatId),
+            bookings,
             user
         }
     }

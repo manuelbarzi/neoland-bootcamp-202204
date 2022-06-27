@@ -62,4 +62,16 @@
   .pre-anchor {
     @apply text-white block text-center;
   }
+  .title-edit {
+    @apply p-2 mb-1 font-semibold text-sm;
+  }
+  .feedback--success {
+    @apply bg-green-500 text-white;
+  }
+  .feedback--warn {
+    @apply bg-yellow-400 text-black;
+  }
+  .feedback--error {
+    @apply bg-red-500 text-white;
+  }
 }

@@ -3,12 +3,11 @@ import { useState } from "react"
 import { verifyTokenWithAPICall } from './helpers'
 import { retrieveUser, unregisterUser, updateUser, updateUserPassword } from "../logic"
 import { useRouter } from 'next/router'
-import Cookies from 'cookies'
+import { FunctionalContext } from "../contexts/functional-context"
 
 export default function Profile({ token, user }) {
     const router = useRouter()
-    
-    const cookies = new Cookies(req, res)
+    const { setFeedback } = FunctionalContext.useFeedback()
 
     const [view, setView] = useState(null)
 
@@ -43,7 +42,7 @@ export default function Profile({ token, user }) {
             router.push('/admin')
 
         } catch (error) {
-            console.error(error)
+            setFeedback({message: error.message, level: 1})
         }
     }
 
@@ -57,7 +56,8 @@ export default function Profile({ token, user }) {
         try {
             updateUserPassword(token, { oldPassword, password, repeatPassword })
 
-            console.log('successfully updated')
+            setFeedback({message: 'successfully updated', level: 0})
+
             router.push('/admin')
 
         } catch (error) {
@@ -95,7 +95,7 @@ export default function Profile({ token, user }) {
     return <>
         <Section className='section-scroll'>
             <Div className="text-secondary bg-white w-full">
-                <Div className='p-4 border-b border-primary'>
+                <Div className='p-4 border-b border-primary bg-primary bg-opacity-5'>
                     <h4 className='text-sm font-semibold text-secondary'>Hello {user.name} {user.surnames}</h4>
                 </Div>
                 <FormContainer>
@@ -111,12 +111,11 @@ export default function Profile({ token, user }) {
                     </ProfileListButton>
                     {view === 'changePassword' && <ChangePassword onSubmit={handleChangePasswordSubmit} user={user} />}
                 </FormContainer>
-
                 <FormContainer>
                     <ProfileListButton onClick={handleDeleteAccountClick}>
                         Delete account
                     </ProfileListButton>
-                    {view === 'deleteAccount' && <DeleteAccount onSubmit={handleDeleteAccountSubmit} user={user} />}
+                    {view === 'deleteAccount' && <DeleteAccount /* onSubmit={handleDeleteAccountSubmit} */ user={user} />}
                 </FormContainer>
             </Div>
         </Section>
