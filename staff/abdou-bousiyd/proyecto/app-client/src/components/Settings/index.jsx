@@ -2,7 +2,6 @@ import React, { useState,useEffect } from 'react'
 import '../Settings/index.sass'
 
 
-
 const Settings = ({editorOptions: options, handleOnOptionsChanged}) => {
 
   const [editorOptions, setEditorOptions] = useState(options)
@@ -39,39 +38,34 @@ const Settings = ({editorOptions: options, handleOnOptionsChanged}) => {
 
 
     return (
-        <form className="Settings app">
+        <form className="Settings">
           <div className="Settings__Options">
-            <h3 >Settings </h3>
+            <h2 className='Settings__Options__Title'>Settings </h2>
 
-            <label>Font Size </label>
-            <input type="number" name="fontSize" onChange={handleOnchange} />
-            <br />
-
-            {/* <label>Minimap </label>
-            <input type="checkbox" name="minimap" onChange={handleOnchange} checked={editorOptions.minimap.enabled === true } />
-            <br /> */}
-
-            <label className="switch">
-              <span className="switch__span">Minimap</span>
-              <input className="switch__input" type="checkbox" name="minimap" onChange={handleOnchange} checked={editorOptions.minimap.enabled === true } />
-              <i className="switch__icon"></i>
+            <label className='Settings__Options__FontSize'>
+                <label>Font Size </label>
+                <input type="number" placeholder='14' name="fontSize" onChange={handleOnchange} />
             </label>
 
-            {/* <label>Line number </label>
-            <input type="checkbox" name="lineNumbers" onChange={handleOnchange} checked={editorOptions.lineNumbers === 'on' } />
-            <br /> */}
+            <label className='Settings__Options__Minimap'>
+                <label>Minimap</label>
+                <input className="switch__input" type="checkbox" name="minimap" onChange={handleOnchange} checked={editorOptions.minimap.enabled === true } />
+                <i className="switch__icon"></i>
+            </label>
 
-            <label className="switch">
-              <span className="switch__span">Line number</span>
-              <input className="switch__input" type="checkbox" name="lineNumbers" onChange={handleOnchange} checked={editorOptions.lineNumbers === 'on' } />
-              <i className="switch__icon"></i>
+            <label className='Settings__Options__LineNumber switch'>
+                <label className="switch__span">Line number</label>
+                <input className="switch__input" type="checkbox" name="lineNumbers" onChange={handleOnchange} checked={editorOptions.lineNumbers === 'on' } />
+                <i className="switch__icon"></i>
             </label>
             
-            <label>Themes </label>
-            <select name="theme" onChange={handleOnchange} >
-              <option selected value="vs-dark">Visual Studio Dark</option>
-              <option value="light">Visual Studio Light</option>
-            </select>
+            <label className='Settings__Options__Themes'>
+                <label>Themes </label>
+                <select name="theme" onChange={handleOnchange} >
+                    <option selected value="vs-dark">Visual Studio Dark</option>
+                    <option value="light">Visual Studio Light</option>
+                </select>
+            </label>
 
           </div>
     </form>

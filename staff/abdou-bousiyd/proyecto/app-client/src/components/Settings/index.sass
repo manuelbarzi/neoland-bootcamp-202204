@@ -1,26 +1,48 @@
-// .Settings
-//     opacity: 0.8
-//     display: flex
-//     justify-content: center
-//     flex-direction: column
-//     align-items: center
-//     width: 100%
-//     height: 100vh
-//     &____Options
-//         background-color: red
-//         display: flex
-//         // justify-content: space-around
-//         // align-items: center
-//         width: 80%
-//         height: 80vh
-//         border-radius: 50px
-//         box-shadow: 0 1px 3px 0 lavender
 
+.Settings
+    display: flex
+    justify-content: center
+    flex-direction: column
+    align-items: center
+    width: 100%
+    height: 100vh
+    &__Options
+        display: flex
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        width: 300px
+        height: 50vh
+        border-radius: 5px
+        box-shadow: 0 1px 3px 0 lavender
 
-* 
-  margin: 0
-  padding: 0
+        z-index: 5
 
+        &__Title
+            color: red
+            margin: 0px
+            font-size: 30px
+            margin-bottom: 30px
+            font-weight: bold
+            color: white
+
+        &__FontSize, &__Minimap, &__LineNumber, &__Themes
+            padding: 5px
+            height: 40px
+            width: 250px
+            display: flex
+            align-items: center
+            justify-content: space-between
+            // background-color: red
+            font-size: 16px
+        input
+            width: 40%
+            padding: 10px
+            border-radius: 3px
+            outline: none
+            border: none
+            font-size: 14px
+            transition: 0.5s
 
 .switch-list 
   display: flex
@@ -30,7 +52,6 @@
   gap: 20px
   height: 100vh
   width: 100vw
-
 
 .switch 
   display: flex
@@ -46,9 +67,7 @@
       
       &:after 
         transform: translate3d(20px, 2px, 0)
-      
-    
-  
+
   &__icon 
     position: relative
     display: inline-block
@@ -82,10 +101,3 @@
       box-shadow: 0 2px 2px rgba(0, 0, 0, 0.24)
       transform: translate3d(2px, 2px, 0)
       transition: all 0.2s ease-in-out
-    
-  
-  &__span 
-    font-size: 14px
-    margin-left: 5px
-    font-weight: 400
-

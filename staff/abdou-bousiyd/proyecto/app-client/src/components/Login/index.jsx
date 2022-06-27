@@ -43,44 +43,39 @@ const Login = ({toggleTitle, loadUser}) => {
         }
     }
     return(<>
-            {alert && alert}
         <form className='login' onSubmit={handleSubmit}>
-        
 
-            <div className='login__Auth'>
+            <div className='login__auth'>
+                {alert && alert}
+            
+                <h1 className='login__auth__title'>Login</h1>
 
-                <h1 className='login__Auth__Items__Title'>Login</h1>
-
-                <div className='login__Auth__Items'>
+                <div className='login__auth__Row'>
+                    <label>Username</label>
                     <input 
-                        className='login__Auth__Items__Input' 
                         type='text' 
-                        // placeholder='Username' 
+                        placeholder='Username' 
                         name='username'
                         onChange={handleInputChange}
                         required 
                     />
-                    <label>Username</label>
                 </div>
 
-                <div className='login__Auth__Items'>
+                <div className='login__auth__Row'>
+                    <label>Password</label>
                     <input 
-                        className='login__Auth__Items__Input' 
                         type='password' 
-                        // placeholder='password' 
+                        placeholder='password' 
                         name='password'
                         onChange={handleInputChange} 
                         required
                     />
-                    <label>Password</label>
                 </div>
 
-                <div className='login__Auth__Btn'>
-                    <button className='login__Auth__Btn__Login' type='submit'><span>Login</span></button>
-                </div>
-                    <Link className='login__Auth__Btn__Link' to='/Register'>Register</Link>
-
+                <button className='login__auth__btn' type='submit'><span>Login</span></button>
+                <Link className='login__auth__link' to='/Register'>Register</Link>
             </div>
+
         </form>
     </>
     )
