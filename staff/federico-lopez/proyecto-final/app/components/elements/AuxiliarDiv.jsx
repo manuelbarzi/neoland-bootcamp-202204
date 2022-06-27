@@ -2,7 +2,7 @@ import { ArtistIconImage, SongIconImage, InterpretationIconImage } from "../../c
 
 export function AuxiliarDiv({ className, children, color, type, ...props }) {
     return (
-        <div className={"min-w-fit rounded-3xl px-4 py-4 flex gap-2 justify-center items-center " + (color === "white" ? "bg-myblue" : color === "blue" ? "border-2 border-myblue bg-white" : "bg-white" )}>
+        <div className={"min-w-fit rounded-3xl px-4 py-2 flex gap-2 justify-center items-center " + (color === "white" ? "bg-myblue" : color === "blue" ? "border-2 border-myblue bg-white" : "bg-white" )}>
             {
             type === "artist" ? <ArtistIconImage color={color} /> :
             type === "song" ? <SongIconImage color={color} /> : 
