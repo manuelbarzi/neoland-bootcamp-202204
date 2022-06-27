@@ -5,7 +5,7 @@ export function SearchForm({ className, children, onChangeInput, onCancelClick, 
         <form className={`w-full h-10 flex items-center justify-between gap-2 ${className}`} >
             <div className="w-full border border-inputBorder rounded-lg bg-inputBg pl-4 flex items-center">
                 <SearchImage className="w-6 h-6" />
-                <Input className="bg-inputBg border-inputBg focus:outline-none placeholder-black placeholder-opacity-50 text-lg"
+                <input className="h-10 w-full py-3 px-4 bg-inputBg focus:outline-none placeholder-black placeholder-opacity-50 text-sm text-mygrey"
                 type="search"
                 placeholder="Artists or songs"
                     onChange={onChangeInput} />

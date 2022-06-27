@@ -1,9 +1,13 @@
 import Image from 'next/image'
 
-export const InterpretationIconImage = ({ className, children, grey, ...props }) => {
+export const InterpretationIconImage = ({ className, children, color, ...props }) => {
     return (
         <figure className={`${className}`} {...props}>
-            <Image src="/media/interpretation-icon.svg" height={21} width={18} />
+            <Image 
+            src={color === 'blue' ? "/media/interpretation-icon-blue.svg" :
+            color === 'light-blue' ? "/media/interpretation-icon-blue.svg" :
+            "/media/interpretation-icon"}
+            height={22} width={18} />
         </figure>
     )
 }

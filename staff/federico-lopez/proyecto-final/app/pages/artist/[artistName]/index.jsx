@@ -16,13 +16,13 @@ export default function Artist({ songs }) {
 
     const onFavoriteClick = () => likedArtist === false ? setLikedArtist(true) : setLikedArtist(false)
 
-    return <>
-        <header className="w-full fixed top-0 bg-white p-4 gap-4 shadow-custom-items">
+    return <div className="flex flex-col h-screen">
+        <header className="w-full bg-white p-4 gap-4 shadow-custom-items">
             <div className="flex flex-col">
                 <ChevronLeftImage className="w-8 h-8" onClick={onBackClick} />
                 <div className="flex flex-col justify-between gap-2">
                     <div className="flex gap-2">
-                        <ArtistIconImage className="w-6 h-6" grey={true} />
+                        <ArtistIconImage className="w-6 h-6" color="grey" />
                         <Title2>Artist</Title2>
                     </div>
                     <div className="flex justify-between items-center">
@@ -33,7 +33,7 @@ export default function Artist({ songs }) {
             </div>
         </header>
 
-        <FlexColSection className="py-36 items-center">
+        <FlexColSection className="items-center">
             <div className="w-full h-14 px-4 bg-primary flex items-center justify-between">
                 <h3 className="text-xl text-myblack font-bold">Songs</h3>
                 <ButtonBlue>Add New Song</ButtonBlue>
@@ -41,7 +41,7 @@ export default function Artist({ songs }) {
             <ArtistsAndSongsResultsList songs={songs} />
         </FlexColSection>
         <Footer />
-    </>
+    </div>
 }
 
 export async function getServerSideProps({ params }) {

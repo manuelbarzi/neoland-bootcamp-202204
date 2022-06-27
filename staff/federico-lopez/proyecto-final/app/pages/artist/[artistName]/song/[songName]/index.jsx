@@ -18,8 +18,8 @@ export default function Song({ interpretations, song }) {
 
     const onFavoriteClick = () => likedSong === false ? setLikedSong(true) : setLikedSong(false)
 
-    return <>
-        <header className="w-full fixed top-0 bg-white p-4 gap-4 shadow-custom-items z-50">
+    return <div className="flex flex-col h-screen">
+        <header className="w-full bg-white p-4 gap-4 shadow-custom-items z-50">
             <div className="flex flex-col gap-4">
                 <button className="w-8 h-8" onClick={onBackClick} >
                     <ChevronLeftImage />
@@ -49,7 +49,7 @@ export default function Song({ interpretations, song }) {
         </header>
 
         {/* <FlexColSection class="w-full min-h-screen h-full overflow-scroll flex flex-col items-center"> */}
-        <div className="pt-64">
+        <div className="flex-1 overflow-y-auto">
             <FlexColSection className="items-center">
 
                 <div className="w-full h-14 px-4 bg-primary flex items-center justify-between">
@@ -71,7 +71,7 @@ export default function Song({ interpretations, song }) {
             </FlexColSection>
         </div>
         <Footer />
-    </>
+    </div>
 }
 
 export async function getServerSideProps({ params }) {

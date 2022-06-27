@@ -58,9 +58,9 @@ export default function Search({ token }) {
         setArtistsAndSongs(null)
     }
 
-    return <>
+    return <div className="flex flex-col h-screen">
         <Header className="pb-2" title="Search" />
-        <FlexColSection className="items-center gap-4" >
+        <FlexColSection className="py-4 flex-1 overflow-y-auto items-center gap-4" >
 
             <SearchForm className="px-4"
                 onChangeInput={onChangeQuery}
@@ -71,7 +71,7 @@ export default function Search({ token }) {
 
         </FlexColSection>
         <Footer userRegistered={!!token} page="search" ></Footer>
-    </>
+    </div>
 }
 
 

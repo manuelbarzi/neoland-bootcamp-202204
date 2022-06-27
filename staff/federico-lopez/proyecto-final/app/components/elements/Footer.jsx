@@ -27,7 +27,16 @@ export function Footer({ userLoggedIn, page }) {
     }, [])
 
 
-    return <footer className="w-full h-20 fixed bottom-0 bg-white shadow-custom-footer flex justify-center" >
+    // return <footer className="w-full h-20 fixed bottom-0 bg-white shadow-custom-footer flex justify-center" >
+    //     <nav className="w-4/5 flex justify-between items-center">
+    //         <HomeLink pageOn={pageHome} />
+    //         <SearchLink pageOn={pageSearch} />
+    //         <CreateInterPretationLink pageOn={pageCreateInterpretation }/>
+    //         <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} />
+    //     </nav>
+    // </footer>
+
+    return <footer className="w-full h-20 bg-white shadow-custom-footer flex justify-center" >
         <nav className="w-4/5 flex justify-between items-center">
             <HomeLink pageOn={pageHome} />
             <SearchLink pageOn={pageSearch} />
@@ -35,4 +44,6 @@ export function Footer({ userLoggedIn, page }) {
             <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} />
         </nav>
     </footer>
+
+
 }
