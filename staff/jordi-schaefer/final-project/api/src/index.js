@@ -11,6 +11,7 @@ const { handleRegisterUser,
     handleRetrieveActivities, handleRetrieveUserActivities,
     handleAddPointToActivity, handleSaveActivity,
     handleToggleLikeOnActivity, handleRetrieveActivity,
+    handleRetrieveSearchedActivities, handleRetrieveSportActivities, 
     handleSaveComment } = require('./handlers')
 
 const { env: { MONGODB_URL, PORT=8080 }, argv: [ , , port = PORT]} = process
@@ -51,6 +52,10 @@ const { env: { MONGODB_URL, PORT=8080 }, argv: [ , , port = PORT]} = process
     routes.get('/activities/user', handleRetrieveUserActivities)
     // Retrieve Activity
     routes.get('/activities/:activityId', handleRetrieveActivity)
+    // Retrieve Searched Activity
+    routes.get('/activities/search/:search', handleRetrieveSearchedActivities)
+    // Retrieve Sport Activity
+    routes.get('/activities/sport/:sport', handleRetrieveSportActivities)
     // Save Point
     routes.patch('/activities/:activityId', jsonBodyParser, handleAddPointToActivity)
     // Save Activity

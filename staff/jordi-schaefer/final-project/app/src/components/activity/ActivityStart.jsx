@@ -99,10 +99,10 @@ function ActivityStart(props) {
         
         <footer className="Activity__footer mw">
             <div className="Activity__footerContainer__selector">
-                <button id="bike" className="Button__selected Activity__footer--icon material-symbols-outlined" onClick={handleBikeClick}>directions_bike</button>
-                <button id="hike" className="Activity__footer--icon material-symbols-outlined" onClick={handleHikingClick}>hiking</button>
-                <button id="sky" className="Activity__footer--icon material-symbols-outlined" onClick={handleSkiClick}>downhill_skiing</button>
-                <button id="snow" className="Activity__footer--icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
+                <button id="bike" className="Button__selected Activity__footer-icon material-symbols-outlined" onClick={handleBikeClick}>directions_bike</button>
+                <button id="hike" className="Activity__footer-icon material-symbols-outlined" onClick={handleHikingClick}>hiking</button>
+                <button id="sky" className="Activity__footer-icon material-symbols-outlined" onClick={handleSkiClick}>downhill_skiing</button>
+                <button id="snow" className="Activity__footer-icon material-symbols-outlined" onClick={handleSnowClick}>snowshoeing</button>
             </div>
             <div className="Activity__footerContainer__buttons">
                 <button className="Activity__button--start" onClick={handleStartClick}>START</button>         

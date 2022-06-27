@@ -7,6 +7,8 @@ const deleteUser = require('./deleteUser')
 const registerUser = require('./registerUser')
 const retrieveActivities = require('./retrieveActivities')
 const retrieveActivity = require('./retrieveActivity')
+const retrieveSearchedActivities = require('./retrieveSearchedActivities')
+const retrieveSportActivities = require('./retrieveSportActivities')
 const retrieveUser = require('./retrieveUser')
 const retrieveUserActivities = require('./retrieveUserActivities')
 const saveActivity = require('./saveActivity')
@@ -27,6 +29,8 @@ module.exports = {
     retrieveActivity,
     retrieveUser,
     retrieveUserActivities,
+    retrieveSearchedActivities,
+    retrieveSportActivities,
     saveActivity,
     toggleLikeOnActivity,
     updateUserData

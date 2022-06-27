@@ -1,3 +1,5 @@
+@use 'base'
+    
 .Feedback
     z-index: 9999!important
     position: fixed
@@ -31,3 +33,8 @@
     font-weight: bold
     margin: 0
 
+
+@media only screen and (min-width: base.$width-dimensions)
+    .Feedback
+        max-width: 22rem
+        border-radius: 6px

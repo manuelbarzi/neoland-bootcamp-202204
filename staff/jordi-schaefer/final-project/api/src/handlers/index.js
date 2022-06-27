@@ -8,6 +8,8 @@ module.exports = {
     handleRegisterUser: require('./handleRegisterUser'),
     handleRetrieveActivities: require('./handleRetrieveActivities'),
     handleRetrieveActivity: require('./handleRetrieveActivity'),
+    handleRetrieveSearchedActivities: require('./handleRetrieveSearchedActivities'),
+    handleRetrieveSportActivities: require('./handleRetrieveSportActivities'),
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleRetrieveUserActivities: require('./handleRetrieveUserActivities'),
     handleSaveActivity: require('./handleSaveActivity'),

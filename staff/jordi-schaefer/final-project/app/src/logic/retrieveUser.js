@@ -8,7 +8,7 @@ function retrieveUser(token) {
 
     return (async () => {
         const result = await api.get('/users', {
-            headers: { 'Authorization': `Bearer ${token}`}})
+            headers: {'Authorization': `Bearer ${token}`}})
 
         const { status, payload } = result
 

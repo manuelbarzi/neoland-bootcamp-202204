@@ -28,7 +28,10 @@ function Login (props) {
 
     return <div className="Container mw mh flex__start">
         <header className="Welcome__header">
-            <button className="Welcome__button--back" onClick={handleWelcomeLinkClick}>{`< Back`}</button>
+            <div className="Welcome__container-back">
+                <span className="Welcome__icon-back material-symbols-outlined">arrow_back_ios_new</span>
+                <button className="Welcome__button-back" onClick={handleWelcomeLinkClick}>Back</button>
+            </div>
             <h1 className="center">Login</h1>
         </header>
         <form className="Container mw Welcome__form" onSubmit={handleFormSubmit}>
