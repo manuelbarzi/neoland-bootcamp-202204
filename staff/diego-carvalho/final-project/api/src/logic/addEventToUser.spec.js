@@ -40,7 +40,7 @@ describe('addEventToUser', () => {
               })
           })
       })
-      debugger
+
       describe('when user already has event', () => {
         beforeEach(() => {
           diegoUser.events.push(event.id)
@@ -63,7 +63,7 @@ describe('addEventToUser', () => {
       })
     })
   })
-
+  debugger
   describe('addEventToUser', () => {
     let jordiUser
 

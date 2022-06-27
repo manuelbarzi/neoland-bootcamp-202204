@@ -1,4 +1,4 @@
-function createCustomError(name) {
+module.exports = function createCustomError(name) {
     const customError = class extends Error {
         constructor(message) {
             super(message)
@@ -9,4 +9,3 @@ function createCustomError(name) {
 
     return customError
 }
-export default createCustomError

@@ -31,9 +31,8 @@ function HomeEventList() {
       setEvents(_events)
     })
 
-  const handleSignUpToEventClick = () => {
-    setReload(Date.now())
-  }
+  const handleSignUpToEventClick = () => setReload(Date.now())
+
 
   logger.info('render')
 

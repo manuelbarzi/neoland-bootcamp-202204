@@ -12,13 +12,13 @@ function RetrieveTargetedEvent() {
 
   const [events, setEvents] = useState(null)
   const { handleFeedback } = useContext(Context)
-  // const [reload, setReload] = useState(null)
+  const [reload, setReload] = useState(null)
 
   useEffect(() => {
     logger.info('componentDidMount | componentWillReceiveProps')
 
     loadEvents()
-  }, [])
+  }, [reload])
 
   const loadEvents = () =>
     retrieveTargetedEvent(sessionStorage.token, (error, events) => {
@@ -34,6 +34,7 @@ function RetrieveTargetedEvent() {
     const _events = events.filter(event => event.id !== eventId)
 
     setEvents(_events)
+    setReload(Date.now())
   }
 
   logger.info('render')

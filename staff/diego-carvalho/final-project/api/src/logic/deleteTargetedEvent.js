@@ -1,12 +1,12 @@
-const { NotFoundError, ConflictError } = require("../errors")
+const { NotFoundError } = require("../errors")
 const { validateStringNotEmptyNoSpaces } = require("../validators")
 const { User } = require('../models')
 
 function deleteTargetedEvent(userId, eventId) {
   validateStringNotEmptyNoSpaces(userId, 'user id')
   validateStringNotEmptyNoSpaces(eventId, 'event id')
-  debugger
-  return User.findById(userId).populate('events').lean()
+
+  return User.findById(userId).populate('events')
     .then((user) => {
       if (!user) throw new NotFoundError(`user id ${userId} does not found`)
 

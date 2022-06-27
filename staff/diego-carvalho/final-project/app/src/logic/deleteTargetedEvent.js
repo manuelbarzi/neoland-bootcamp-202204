@@ -14,7 +14,7 @@ function deleteTargetedEvent(token, eventId, callback) {
 
     logger.info('request')
 
-    api.delete(`users/events`, {
+    api.delete(`/users/events/${eventId}`, {
         headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json'

@@ -10,8 +10,6 @@ function updateEvent(userId, eventId, title, description, location, eventDate) {
     validateString(location, 'location')
     validateString(eventDate, 'eventDate')
 
-
-
     return User.findById(userId)
         .then((user) => {
             if (!user) throw new NotFoundError(`owner id ${userId} does not exist`)

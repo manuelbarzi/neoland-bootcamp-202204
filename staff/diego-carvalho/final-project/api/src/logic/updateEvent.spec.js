@@ -24,11 +24,11 @@ describe('updateEvent', () => {
         it('succeeds events and correct credentials', () => {
             let eventId
 
-            return Event.create({ owner: userId, title: 'After Work Mar Bella', description:'Únete a nosotros si quieres disfrutar...'})
+            return Event.create({ owner: userId, title: 'After Work Mar Bella', description: 'Únete a nosotros si quieres disfrutar...', location: 'Playa de Mar Bella', eventDate: '30/08/2022' })
                 .then((result) => {
                     eventId = result.id
-             
-                    return updateEvent(userId, eventId, 'After Work Mar Bella', 'Únete a nosotros si quieres disfrutar...')
+
+                    return updateEvent(userId, eventId, 'After Work Mar Bella', 'Únete a nosotros si quieres disfrutar...', 'Playa de Mar Bella', '30/08/2022')
                 })
                 .then((result) => {
                     expect(result).to.be.undefined
@@ -38,14 +38,16 @@ describe('updateEvent', () => {
                 .then((event) => {
                     expect(event.title).to.be.equal('After Work Mar Bella')
                     expect(event.description).to.be.equal('Únete a nosotros si quieres disfrutar...')
-            
+                    expect(event.location).to.be.equal('Playa de Mar Bella')
+                    expect(event.eventDate).to.be.equal('30/08/2022')
+
                 })
         })
 
-        it ('fails with no events', () => {
+        it('fails with no events', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateEvent(userId, wrongId,'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...')
+            return updateEvent(userId, wrongId, 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', 'Playa de Mar Bella', '30/08/2022')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -55,11 +57,11 @@ describe('updateEvent', () => {
                 })
         })
 
-        it ('fails when owner does not exist', () => {
+        it('fails when owner does not exist', () => {
             const wrongId = new ObjectId().toString()
             const eventId = new ObjectId().toString()
 
-            return updateEvent(wrongId, eventId,'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...')
+            return updateEvent(wrongId, eventId, 'After Work Mar Bella', 'Únete a nosotros si quieres  disfrutar...', 'Playa de Mar Bella', '30/08/2022')
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

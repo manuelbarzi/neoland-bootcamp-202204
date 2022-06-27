@@ -19,7 +19,7 @@ function EventCreator() {
     event.preventDefault()
 
     const { target: { title: { value: title } } } = event
-    const { target: { text: { value: description } } } = event
+    const { target: { description: { value: description } } } = event
     const { target: { location: { value: location } } } = event
     const { target: { eventDate: { value: eventDate } } } = event
 

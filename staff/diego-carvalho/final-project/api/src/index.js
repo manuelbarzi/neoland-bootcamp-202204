@@ -41,7 +41,7 @@ const { cors } = require('./helpers')
     routes.delete('/users', jsonBodyParser, handleDeleteUser)//deleteUser
     routes.post('/users/:eventId', jsonBodyParser, handleAddEventToUser)//addEventToUser
     routes.get('/users/events', jsonBodyParser, handleRetrieveTargetedEvent)//RetrieveTargetedEvent
-    routes.delete('/users/events', jsonBodyParser, handleDeleteTargetedEvent)//deleteTargetedEvent
+    routes.delete('/users/events/:eventId', jsonBodyParser, handleDeleteTargetedEvent)//deleteTargetedEvent
 
     routes.post('/events', jsonBodyParser, handleCreateEvent)//createEvent
     routes.get('/events', handleRetrieveEvent)//retrieveEvent

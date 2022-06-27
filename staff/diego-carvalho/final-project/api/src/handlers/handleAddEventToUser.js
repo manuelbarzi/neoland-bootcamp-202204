@@ -8,7 +8,7 @@ module.exports = (req, res) => {
         const { params: { eventId } } = req
 
         addEventToUser(eventId, userId)
-            .then(eventId => res.status(201).json({ eventId }))
+            .then(() => res.status(200).send())
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {
         handleErrorsAndRespond(error, res)

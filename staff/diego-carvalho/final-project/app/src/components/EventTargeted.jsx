@@ -37,7 +37,6 @@ function EventTargeted(props) {
     < MdCalendarToday className='EventHome__icons' />
     <p className='EventHome__date' >{props.eventDate}</p>
 
-
     <div className='MyEvent__button-container'>
       <button className="MyEvent__event-button" onClick={handleRemoveClick}>cancelar</button>
     </div>

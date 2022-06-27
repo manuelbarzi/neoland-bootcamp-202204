@@ -9,8 +9,6 @@ function createEvent(userId, title, description, location, eventDate) {
     if (description != null) validateString(location, 'location')
     if (description != null) validateString(eventDate, 'eventDate')
 
-
-
     return User.findById(userId)//user creator
         .then(user => {
             if (!user) throw new NotFoundError(`ownerEvent with id ${userId} does not exist`)
