@@ -1,10 +1,8 @@
-
 const { expect } = require('chai')
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { NotFoundError } = require('../errors')
 const { User, Event } = require('../models')
 const deleteTargetedEvent = require('./deleteTargetedEvent')
-
 
 describe('deleteTargetedEvent', () => {
   before(() => connect('mongodb://127.0.0.1:27017/users-db-test'))
@@ -13,12 +11,14 @@ describe('deleteTargetedEvent', () => {
   beforeEach(() => Event.deleteMany())
 
   describe('when user already exists', () => {
-    let crisUser
+    let crisUser, brunoUser, diegoUser
 
     beforeEach(() => {
       crisUser = new User({ name: 'Cris', email: 'cris@gmail.com', password: '1234' })
+      brunoUser = new User({ name: 'Bruno', email: 'bruno@gmail.com', password: '1234' })
+      diegoUser = new User({ name: 'Diego', email: 'diego1@gmail.com', password: '1234' })
 
-      return crisUser.save()
+      return Promise.all([crisUser.save(), brunoUser.save(), diegoUser.save()])
     })
     debugger
     describe('when user already has events', () => {
@@ -32,25 +32,30 @@ describe('deleteTargetedEvent', () => {
         return Promise.all([event1.save(), event2.save(), event3.save()])
           .then(events => {
             allEvents = events
-            crisUser.events.push(...allEvents.map(event => event._id))
+            diegoUser.events.push(...allEvents.map(event => event._id))
 
-            return crisUser.save()
+            return diegoUser.save()
           })
       })
 
       it('succeeds on correct data ', () => {
-        return deleteTargetedEvent(crisUser.id, event1.id)
+        return deleteTargetedEvent(diegoUser.id, event1.id)
           .then(result => {
             expect(result).to.be.undefined
 
-            return User.findById(crisUser.id)
+            return User.findById(diegoUser.id)
           })
           .then((user) => {
-
             const exist = user.events.some(_eventId => _eventId._id.toString() === event1.id)
 
             expect(exist).to.be.false
 
+            return Event.findById(event1.id)
+              .then(event => {
+                const _exist = event.participants.find(_userId => _userId._id.toString() === diegoUser.id)
+
+                expect(_exist).to.be.undefined
+              })
           })
       })
 
@@ -66,9 +71,11 @@ describe('deleteTargetedEvent', () => {
             expect(error.message).to.equal(`event with id ${wrongId} does not exist`)
           })
       })
+
+      afterEach(() => User.deleteMany())
+      after(() => disconnect())
     })
   })
-
-  afterEach(() => User.deleteMany())
-  after(() => disconnect())
 })
+
+

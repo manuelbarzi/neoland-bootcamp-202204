@@ -10,10 +10,10 @@ function deleteUser(userId, password) {
         .then(result => {
             if (result === null) throw new AuthError('incorrect Id')
 
-            if(result.password !== password) throw new AuthError('wrong credentials')
+            if (result.password !== password) throw new AuthError('wrong credentials')
 
-            return User.deleteOne({_id: userId})
+            return User.deleteOne({ _id: userId })
         })
-        .then(() => {})
+        .then(() => { })
 }
 module.exports = deleteUser

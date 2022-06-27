@@ -17,7 +17,7 @@ function addEventToUser(eventId, userId) {
       if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
 
       const eventIdAlreadyExists = user.events.some(_eventId => {
-        debugger
+
         return _eventId.toString() === eventId
       })
 
@@ -28,10 +28,10 @@ function addEventToUser(eventId, userId) {
       return user.save()
     })
     .then(() => {
-      debugger
+
       const participantIdAlreadyExists = event.participants.some(_userId => _userId.toString() === userId)
-      // si ese evento ya tiene ese usuario, si lo tiene lo quita y si no lo pone(push)
-      debugger
+
+
       if (participantIdAlreadyExists) throw new ConflictError(`user with id ${userId} already signed up.`)
 
       event.participants.push(userId)
