@@ -1,38 +1,48 @@
-import Logger from '../vendor/Loggy'
+const Logger = require('../vendor/Loggy')
+const Apium = require('../vendor/Apium')
+const { validateStringNotEmptyOrBlank, validateStringNotEmptyNoSpaces, validateUsername, validatePassword, validateEmail, validateUsername} = require('../validators')
 
-function registerUser(name, username, password, callback) {
+function registerUser(name, surname, username, email, phone, password) {
+    validateStringNotEmptyOrBlank(name, 'name')
+    validateStringNotEmptyNoSpaces(surname, 'surname')
+    validateUsername(username)
+    validateEmail(email)
+    validateStringNotEmptyOrBlank(phone)
+    validatePassword(password)
+
     const logger = new Logger('registerUser')
 
     logger.info('call')
 
-    // TODO validate input args
 
-    const xhr = new XMLHttpRequest
+    const api = new Apium(process.env.REACT_APP_API_URL)
 
-    xhr.addEventListener('load', event => {
-        //const { target: { status } } = event
-        const status = event.target.status
-
-        if (status === 201)
-            callback(null)
-        else if (status >= 400 && status < 500) {
-            const json = event.target.responseText
-
-            const data = JSON.parse(json)
-
-            callback(new Error(data.error))
-        } else callback(new Error('server error'))
+    logger.info('request')
+    return api = post('users', {
+        headers: {
+            'Content-Type': 'application/json'
+        }, 
+        body: JSON.stringify({ name, surname, username, email, phone, password })
     })
 
-    xhr.open('POST', 'http://localhost:8080/api/users')
+    .then(({status, payload}) => {
 
-    xhr.setRequestHeader('Content-Type', 'application/json')
+        if (status===201) {
+            return null
+        } else if (status >= 400 && status < 500) {
+            logger.warn('response - client error status ' + status)
 
-    const data = { name, username, password }
+            const data = JSON.parse(payload)
 
-    const json = JSON.stringify(data)
+            throw new Error(data.error)
+        } else { 
+            logger.error('response - client error status ' + status)
 
-    xhr.send(json)
+            throw new Error('server error')
+            
+        }
+    })
+
 }
 
 export default registerUser

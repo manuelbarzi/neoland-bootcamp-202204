@@ -5,6 +5,7 @@ import Login from './Login'
 import Register from './Register'
 import Home from './Home'
 import Feedback from './Feedback'
+import Profile from './Profile'
 import './App.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import { isJwtValid } from '../validators'
@@ -35,7 +36,7 @@ function App() {
     return <Context.Provider value={{ handleFeedback }}>
         <div className="App Container">
             <Routes>
-                <Route path="/login" element={<Login   />} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/" element={<Home />} />
             </Routes>
