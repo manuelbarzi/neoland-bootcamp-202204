@@ -1,7 +1,6 @@
 const { createBooking } = require('../logic')
 const { verifyToken, handleErrorsAndRespond } = require('./helpers')
 
-
 module.exports = (req, res) => {
     try {
         const userId = verifyToken(req)

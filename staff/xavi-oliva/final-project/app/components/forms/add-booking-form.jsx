@@ -10,7 +10,7 @@ export const AddBookingForm = ({ className, children, flat, ...props }) => {
             <Input className='border border-primary' type="text" name="from" placeholder="Initial date" />
             <Input className='border border-primary' type="text" name="to" placeholder="End date" />
             <PrimaryButton type="submit">Save Booking</PrimaryButton>
-          </Form>
+        </Form>
     </>
 }
 

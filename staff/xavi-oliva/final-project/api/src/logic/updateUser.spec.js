@@ -10,7 +10,6 @@ describe('updateUser', () => {
     beforeEach(() => User.deleteMany())
     afterEach(() => User.deleteMany())
 
-
     describe('when user already exists', () => {
         let user 
         
@@ -60,7 +59,6 @@ describe('updateUser', () => {
                 })
         })
     })
-
 
     after(() => disconnect())
 

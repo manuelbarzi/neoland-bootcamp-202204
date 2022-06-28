@@ -8,7 +8,6 @@ export default function EditFlat({ token, flat }) {
   const router = useRouter()
   const { setFeedback } = FunctionalContext.useFeedback()
 
-
   const handleUpdateFlatFormSubmit = async event => {
     event.preventDefault()
 

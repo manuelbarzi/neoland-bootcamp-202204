@@ -13,8 +13,6 @@ export default function Login(props) {
   const { setFeedback } = FunctionalContext.useFeedback()
   const router = useRouter()
 
-  // const { handleFeedback } = useContext(Context)
-
   const submitFormLogin = async event => {
     event.preventDefault()
 

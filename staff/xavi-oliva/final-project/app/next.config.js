@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['cdn.sanity.io']
+    domains: ['i.imgur.com'],
   },
   env: {
     userName: process.env.userName,

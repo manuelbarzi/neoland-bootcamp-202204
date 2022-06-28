@@ -5,6 +5,6 @@ export const Input = ({ className, children, ...props }) => {
             className={`${className}
             form-input`}>
             {children}
-        </input> 
-        </>
-  }
+        </input>
+    </>
+}

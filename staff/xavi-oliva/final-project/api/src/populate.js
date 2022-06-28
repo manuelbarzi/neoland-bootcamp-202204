@@ -17,7 +17,7 @@ const { User, Flat, Booking } = require('./models')
             user: admin.id,
             address: 'Carrer de València, Eixample, Barcelona',
             images: [
-                'https://i.imgur.com/eF2lJ7g.jpg'
+                'https://i.imgur.com/pkgCtei.jpg'
             ],
             title: 'Lujoso ático con vistas',
             description: 'Se encuentra a 2,5 km de Nova Icaria y ofrece alojamiento con aire acondicionado, balcón y WiFi gratuita. Dispone de cocina con lavavajillas y microondas, TV de pantalla plana vía satélite, utensilios de planchado, escritorio y zona de estar con sofá. El baño incluye bidet, secador de pelo y artículos de aseo gratuitos. La playa de Somorrostro y Bogatell se encuentran a 2,6 km del apartamento.'
@@ -26,7 +26,7 @@ const { User, Flat, Booking } = require('./models')
             user: admin.id,
             address: 'Carrer de Sants, Sants-Montjuïc, Barcelona',
             images: [
-                'https://i.imgur.com/aNVtGei.jpg'
+                'https://i.imgur.com/YmiKZfN.jpg'
             ],
             title: 'Agradable entresuelo',
             description: 'Alojamiento elegante con aire acondicionado, situado a solo 5 minutos a pie del estadio Camp Nou del FC Barcelona. Dispone de WiFi gratuita de alta velocidad. Luminoso e incluye zona de cocina bien equipada y TV de pantalla plana con canales vía satélite. Presenta una decoración moderna y funcional y ofrece vistas a la calle. La zona de cocina dispone de nevera, microondas y lavavajillas. Hay caja fuerte disponible por un suplemento.'
@@ -35,7 +35,7 @@ const { User, Flat, Booking } = require('./models')
             user: admin.id,
             address: 'Sarrià-Sant Gervasi, Barcelona',
             images: [
-                'https://i.imgur.com/2gmwLqv.jpg'
+                'https://i.imgur.com/UD2bYaS.jpg'
             ],
             title: 'Confortable piso en Sants',
             description: 'Moderno establecimiento para estudiantes y personal académico en estancia de trabajo ofrece una terraza en la azotea y vistas fantásticas a Barcelona. Las habitaciones están equipadas con aire acondicionado, WiFi gratuita, nevera pequeña y baño privado.'
@@ -44,7 +44,7 @@ const { User, Flat, Booking } = require('./models')
             user: admin.id,
             address: 'Sants-Hostafrancs, Barcelona',
             images: [
-                'https://i.imgur.com/4eO2ZVP.jpg'
+                'https://i.imgur.com/EoVLToQ.jpg'
             ],
             title: 'Magnifico apartamento para 4 personas',
             description: 'Dispone de dos dormitorios dobles, una cocina totalmente equipada con lavadora, nevera, horno, microondas, tostadora, hervidor de agua y una amplia gama de utensilios de cocina. El salón tiene un sofá, un televisor de pantalla plana y una conexión Wi-Fi gratuita.'

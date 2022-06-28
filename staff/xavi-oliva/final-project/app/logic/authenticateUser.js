@@ -7,9 +7,6 @@ export async function authenticateUser(email, password) {
     validatePassword(password)
 
     const api = new Apium(process.env.REACT_APP_API_URL)
-    
-    // const api = new Apium('http://localhost:8080/api')
-
 
     const { status, payload } = await api.post(
         'users/auth',

@@ -41,7 +41,7 @@ export default function Profile({ token, user }) {
 
             setFeedback({ level: 'success', message: 'Name, Surnames and/or Phone successfully updated' })
 
-            router.push('/admin')
+            router.reload(`/profile`)
 
         } catch (error) {
             setFeedback({ level: 'error', message: error.message })
@@ -60,7 +60,7 @@ export default function Profile({ token, user }) {
 
             setFeedback({ level: 'success', message: 'Password successfully updated' })
 
-            router.push('/admin')
+            router.reload(`/profile`)
 
         } catch (error) {
             setFeedback({ level: 'error', message: error.message })
@@ -68,7 +68,6 @@ export default function Profile({ token, user }) {
     }
 
     const handleDeleteAccountSubmit = async event => {
-        debugger
         event.preventDefault()
 
         const password = event.target.password.value
@@ -79,7 +78,7 @@ export default function Profile({ token, user }) {
         try {
             await unregisterUser(token, { password, repeatPassword })
 
-            cookies.set('token')
+            document.cookie = "token= ; expires = Thu, 01 Jan 1970 00:00:00 GMT"
 
             setFeedback({ level: 'success', message: 'Successfully deleted, we are sorry to see you go!' })
 
@@ -89,7 +88,6 @@ export default function Profile({ token, user }) {
             setFeedback({ level: 'error', message: error.message })
         }
     }
-
 
     return <>
         <Section className='section-scroll'>
@@ -114,7 +112,7 @@ export default function Profile({ token, user }) {
                     <ProfileListButton onClick={handleDeleteAccountClick}>
                         Delete account
                     </ProfileListButton>
-                    {view === 'deleteAccount' && <DeleteAccount /* onSubmit={handleDeleteAccountSubmit} */ user={user} />}
+                    {view === 'deleteAccount' && <DeleteAccount onSubmit={handleDeleteAccountSubmit} user={user} />}
                 </FormContainer>
             </Div>
         </Section>
@@ -122,7 +120,6 @@ export default function Profile({ token, user }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    debugger
     const token = await verifyTokenWithAPICall(req, res)
 
     const user = await retrieveUser(token)

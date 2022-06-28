@@ -14,10 +14,11 @@ const flat = new Schema({
         default: null
     },
 
-    images: {
-        type: [String],
-        default: null
-    },
+    images: [{
+        type: String,
+        default: null,
+        ref: 'Image'
+    }],
 
     title: {
         type: String,

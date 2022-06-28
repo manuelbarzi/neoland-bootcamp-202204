@@ -29,16 +29,9 @@ export async function verifyTokenWithAPICall(req, res) {
 
             if (req.url.includes('/admin') || req.url.includes('/flats') || req.url.includes('/profile'))  {
                 
-                //TODO FEEDBACKS IN THIS CASES
                 res.writeHead(307, { Location: '/login' })
                 res.end()
             }
-            //TODO FEEDBACKS
-            // if(status === 401) throw AuthError('wrong or timed out credentials')
-
-            // else if (status >=400 && status < 500) throw new Error(data.error)
-
-            // else if (status >= 500) throw new Error('server error')
         }
     }
 

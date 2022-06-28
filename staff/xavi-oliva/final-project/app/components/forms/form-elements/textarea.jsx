@@ -5,6 +5,6 @@ export const Textarea = ({ className, children, ...props }) => {
             className={`${className}
             form-input`}>
             {children}
-        </textarea> 
-        </>
-  }
+        </textarea>
+    </>
+}

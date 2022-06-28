@@ -8,8 +8,9 @@ export async function updateUserPassword(token, { oldPassword, password, repeatP
     validatePassword(password, 'new password')
     validatePassword(repeatPassword, 'new password repeat')
 
-    if (password !== repeatPassword) throw new ConflictError('new password and new password repeat do not match')
-    if (oldPassword === password) throw new ConflictError('previous and new password are the same')
+    if (password !== repeatPassword) {
+        throw new ConflictError('new password and new password repeat do not match')
+    } else if (oldPassword === password) throw new ConflictError('previous and new password are the same')
 
     const api = new Apium(process.env.REACT_APP_API_URL)
 

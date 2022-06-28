@@ -12,13 +12,8 @@ if (typeof XMLHttpRequest === 'undefined') {
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter()
-  // const [feedback, setFeedback] = useState(null)
 
   const showCompo = router.pathname === "/login" ? false : true && router.pathname === "/register" ? false : true;
-
-  // const handleFeedback = feedback => setFeedback(feedback)
-
-  // const handleFeedbackTimeout = () => setFeedback(null)
 
   return (
     <>
@@ -37,8 +32,3 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp
-
-// formas de englobar partes de código
-
-// etoquetas html y dentro todo el contenido de la app
-// usar un middleware

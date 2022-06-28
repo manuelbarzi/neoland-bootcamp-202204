@@ -4,7 +4,6 @@ import { verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
 import { FunctionalContext } from "../../contexts/functional-context";
 
-
 export default function Flat({ token, user, flat, bookings }) {
     const router = useRouter()
     const { setFeedback } = FunctionalContext.useFeedback()
@@ -50,7 +49,6 @@ export async function getServerSideProps({ req, res, params: { flatId } }) {
     const flat = await retrieveFlat(token, flatId)
     const user = await retrieveUser(token)
     const bookings = await retrieveBookings(token, flatId)
-
 
     return {
         props: {

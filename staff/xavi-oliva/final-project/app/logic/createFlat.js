@@ -2,7 +2,6 @@ import { validateJwt, validateStringNotEmptyOrBlank } from 'validators'
 import Apium from 'apium'
 
 export async function createFlat(token, { title, description, address, images }) {
-    
     validateJwt(token)
     validateStringNotEmptyOrBlank(title, 'title')
     validateStringNotEmptyOrBlank(description, 'description')
