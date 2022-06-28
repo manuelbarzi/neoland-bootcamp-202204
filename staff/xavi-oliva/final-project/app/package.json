@@ -1,0 +1,35 @@
+{
+  "name": "app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "dev-inspect": "cross-env NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "apium": "file:../apium",
+    "cookies": "^0.8.0",
+    "errors": "file:../errors",
+    "loggy": "file:../loggy",
+    "logic": "file:./logic",
+    "next": "12.1.6",
+    "prop-types": "^15.8.1",
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "rxjs": "^7.5.5",
+    "utils": "file:../utils",
+    "validators": "file:../validators",
+    "xhr2": "^0.2.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.7",
+    "cross-env": "^7.0.3",
+    "eslint": "8.17.0",
+    "eslint-config-next": "12.1.6",
+    "postcss": "^8.4.14",
+    "tailwindcss": "^3.0.24"
+  }
+}
