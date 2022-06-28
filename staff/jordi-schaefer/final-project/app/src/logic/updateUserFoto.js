@@ -14,6 +14,9 @@ function updateUserFoto (token, foto)  {
 
             const { status, payload } = result
 
+            if (status === 413){
+                throw new Error("Images are too big")
+            }
             if (status >= 400 && status < 500) { 
                 const data = JSON.parse(payload)
                 throw new Error(data.error) 

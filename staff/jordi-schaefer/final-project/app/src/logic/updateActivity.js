@@ -26,7 +26,7 @@ function updateActivity(token, activityId, title, text='', audience, sport, difi
         const { status, payload } = result
   
         if (status === 413){
-            throw new Error("Images are too big")
+            throw new Error("Image is too big")
         }
         else if (status >= 400 && status < 500) { 
             const data = JSON.parse(payload)

@@ -64,7 +64,7 @@ function ActivityItem (props) {
     
     return <div>
         <div className="ActivityItem__header">
-            <div className={"Header__container-name"}> 
+            <div className="Header__container-name"> 
                 <div className="Header__container-foto">
                     {user && user.foto && <img className='Foto__view-activity' src={user.foto}/>}
                     <div className={"Header__container-name-date"}> 
@@ -109,15 +109,15 @@ function ActivityItem (props) {
 
         { !setDelete && <div className='ActivityItem__footer mw'>
             <button className='ActivityItem__footer-button Button__borderR' onClick={handleLikeClick}>
-                { likes>0 && <h2 className='ActivityItem__footer--number'>{likes}</h2> }
+                { likes>0 && <h2 className='ActivityItem__footer-number'>{likes}</h2> }
                 <span className='ActivityItem__footer-icon material-symbols-outlined' >thumb_up</span>
             </button>
             <button className='ActivityItem__footer-button Button__borderR' onClick={handleCommentClick}>
-                { comments>0 && <h2 className='ActivityItem__footer--number'>{comments}</h2> }
+                { comments>0 && <h2 className='ActivityItem__footer-number'>{comments}</h2> }
                 <span className='ActivityItem__footer-icon material-symbols-outlined' >chat</span>
             </button>
             <button className='ActivityItem__footer-button' onClick={handleImagesClick}>
-                { images && images.length>0 && <h2 className='ActivityItem__footer--number'>{images.length}</h2> }
+                { images && images.length>0 && <h2 className='ActivityItem__footer-number'>{images.length}</h2> }
                 <span className='ActivityItem__footer-icon material-symbols-outlined' >photo_library</span>
             </button>
         </div> }
