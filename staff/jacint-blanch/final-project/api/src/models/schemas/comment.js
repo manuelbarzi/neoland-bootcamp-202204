@@ -1,15 +1,18 @@
 const { Schema } = require('mongoose')
 const { Types: { ObjectId } } = Schema
-const reaction = require('./reaction')
 
 const comment = new Schema({
     user: {
         type: ObjectId,
-        required: true,
+        // required: true,
         ref: 'User'
     },
-
-    text: {
+    incidence: {
+        type: ObjectId,
+        required: true,
+        ref: 'Incidence'
+    },
+    message: {
         type: String,
         required: true,
         default: ''
@@ -19,9 +22,7 @@ const comment = new Schema({
         type: Date,
         required: true,
         default: Date.now
-    },
-
-    reactions: [reaction]
+    }
 })
 
 module.exports = comment

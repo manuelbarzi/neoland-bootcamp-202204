@@ -8,14 +8,11 @@ import Home from './pages/Home'
 
 const Landing = () => { 
     return(
-            <div>
-                <div>
+            <>
                     <Navbar />
-                </div>
-                <div>
+      
                     <Home />
-                </div>
-            </div>
+            </>
     )
 }
 

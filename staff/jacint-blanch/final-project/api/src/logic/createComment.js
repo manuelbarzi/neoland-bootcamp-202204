@@ -2,15 +2,15 @@ const { Incidence, Comment } = require('../models')
 const { ConflictError } = require('../errors')
 // const { validateStringNotEmptyOrBlank, validateUsername, validatePassword } = require('../validators')
 
-function createIncidence(latitude, longitude, description, user) {
+function createComment(chat, incidence, user) {
     // validateStringNotEmptyOrBlank(name, 'name')
     // validateUsername(username)
     // validatePassword(password)
     const date = Date.now()
 
-    return Incidence.create({latitude, longitude, description, date, user})
-        .then((incidence) => {
-            return Comment.create({ incidence: incidence._id, message: 'Need help', date})
+    return Comment.create({message: chat, date, incidence, user})
+        .then(() => {
+            return 'ok'
         })
         .catch(error => {
 
@@ -18,4 +18,4 @@ function createIncidence(latitude, longitude, description, user) {
         })
 }
 
-module.exports = createIncidence
+module.exports = createComment

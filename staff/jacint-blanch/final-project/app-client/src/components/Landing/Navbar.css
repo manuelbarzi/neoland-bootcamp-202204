@@ -93,6 +93,8 @@
   }
 
   .nav-menu.active {
+    justify-content: space-around;
+    font-size: 25px;
     background: #242222;
     left: 0;
     opacity: 1;

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate, Link } from "react-router-dom";
 import Alert from '../Alert/Alert'
 import registerUser from '../../logic/registerUser'
+import './Register.sass'
 
 const Register = () => {
     const navigate = useNavigate()
@@ -38,41 +39,50 @@ const Register = () => {
             }
         }
     }
-
     return (
-        <form className='Register_Container' onSubmit={handleFormSubmit}>
-            {alert && alert}
-            <div>
-                <h1 className='Register_Title'>Register</h1>
-                <input
-                    className='Register_input'
-                    type='text'
-                    placeholder='Name'
-                    name='name'
-                    onChange={handleInputChange}
-                    required
-                />
+        <form className='register' onSubmit={handleFormSubmit}>
 
-                <input
-                    className='Register_input'
-                    type='text'
-                    placeholder='Username'
-                    name='username'
-                    onChange={handleInputChange}
-                    required
-                />
+            <div className='register__auth'>
+                {alert && alert}
 
-                <input
-                    className='Register_input'
-                    type='password'
-                    placeholder='Password'
-                    name='password'
-                    onChange={handleInputChange}
-                    required
-                />
+                <h1 className='register__auth__title'>Register</h1>
 
-                <Link className='Register_link' to='/Login'>Login</Link>
-                <button className='Register_Btn'><span>Register</span></button>
+                <div className='register__auth__Row'>
+                    <label>Name</label>
+                    <input
+                        type='text'
+                        placeholder='Name'
+                        name='name'
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+
+                <div className='register__auth__Row'>
+                    <label>Username</label>
+                    <input
+                        type='text'
+                        placeholder='Username'
+                        name='username'
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+
+                <div className='register__auth__Row'>
+                    <label>Password</label>
+                    <input
+                        type='password'
+                        placeholder='Password'
+                        name='password'
+                        onChange={handleInputChange}
+                        required
+                    />
+                </div>
+                <div className='login__auth__btns'>
+                    <button className='login__auth__btns__login' to='/login'>Login</button>
+                    <button className='login__auth__btns__toRegister' to='/register'>Register</button>
+                </div>
             </div>
         </form>
     )

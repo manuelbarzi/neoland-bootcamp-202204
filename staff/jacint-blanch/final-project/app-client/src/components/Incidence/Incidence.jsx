@@ -4,12 +4,10 @@ import useGeolocation from 'react-hook-geolocation'
 
 
 
-const Incidence = () => {
+const Incidence = ({geolocation}) => {
     
 
     const [description, setDescription] = useState("")
-
-    const geolocation = useGeolocation();
 
 
 
@@ -17,29 +15,30 @@ const Incidence = () => {
         setDescription(e.target.value)
     }
 
-    const handleSubmit = async (event) => {
+    const handleSubmit = (event) => {
       event.preventDefault();
       try {
         if (!geolocation.latitude || !geolocation.longitude) {
           return null;
         }
-        await createIncidence(geolocation.latitude, geolocation.longitude, description)
+        createIncidence(geolocation.latitude, geolocation.longitude, description).then(function() {
+          setDescription('')
+        })
       } catch (error) {}
     };
 
 
 
     return(
-        <form className='login_Container' onSubmit={handleSubmit}>
+        <form className='login_Container incidents' onSubmit={handleSubmit}>
             <div className='login_Container_Auth'>
 
                 <input 
                     className='login_Input' 
-                    type='password' 
                     placeholder='description' 
-                    name='password'
+                    name='create incidence'
                     onChange={handleInputChange} 
-                    required
+                    value={description}
                 />
 
                 <button className='login_Btn' type='submit'><span>Incidence</span></button>

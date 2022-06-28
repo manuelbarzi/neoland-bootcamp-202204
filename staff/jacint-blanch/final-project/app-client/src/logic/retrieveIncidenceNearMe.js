@@ -14,7 +14,6 @@ function retrieveIncidenceNearMe(lat, long) {
 
       .then(({ status, payload }) => {
         if (status == 200) {
-          console.log(payload)
 
           return JSON.parse(payload);
         } else {

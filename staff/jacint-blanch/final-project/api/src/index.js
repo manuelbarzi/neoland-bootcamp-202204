@@ -2,7 +2,7 @@ require('dotenv').config()
 
 const express = require('express')
 const bodyParser = require('body-parser')
-const { handleRegisterUser, handleAuthenticateUser, handleRetrieveUser, handleUpdateUser, handleIncidence, handleIncidenceNearMe } = require('./handlers')
+const { handleRegisterUser, handleAuthenticateUser, handleRetrieveUser, handleUpdateUser, handleIncidence, handleIncidenceNearMe, handleComment } = require('./handlers')
 const { connect, disconnect } = require('mongoose')
 const { cors } = require('./helpers.js')
 
@@ -21,6 +21,8 @@ const { cors } = require('./helpers.js')
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         
         routes.post('/incidence', jsonBodyParser, handleIncidence)
+        routes.post('/comment', jsonBodyParser, handleComment)
+
         routes.get('/incidents-near-me/:lat/:long', jsonBodyParser, handleIncidenceNearMe)
 
         

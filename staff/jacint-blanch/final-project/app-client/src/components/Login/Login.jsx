@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate,Link } from "react-router-dom";
 import authenticateUser from '../../logic/authenticateUser'
 import Alert from '../Alert/Alert'
+import './Login.sass'
 
 
 const Login = () => {
@@ -27,7 +28,7 @@ const Login = () => {
             const token = await authenticateUser(username, password)
 
             sessionStorage.token = token
-            // navigate('/pen')
+            navigate('/landing')
         } catch (error) {
             if (error) {
                 setAlert(<Alert error message={error.message} />)
@@ -40,34 +41,44 @@ const Login = () => {
     }
 
 
-    return(
-        <form className='login_Container' onSubmit={handleSubmit}>
-            {alert && alert}
-            <div className='login_Container_Auth'>
-                <h1 className='login_Title'>Login</h1>
-                <input 
-                    className='login_Input' 
-                    type='text' 
-                    placeholder='Username' 
-                    name='username'
-                    onChange={handleInputChange}
-                    required 
-                />
+    return(<>
+        <form className='login' onSubmit={handleSubmit}>
 
-                <input 
-                    className='login_Input' 
-                    type='password' 
-                    placeholder='password' 
-                    name='password'
-                    onChange={handleInputChange} 
-                    required
-                />
+            <div className='login__auth'>
+                {alert && alert}
+            
+                <h1 className='login__auth__title'>Login</h1>
 
-                <Link className='Login_link' to='/Register'>Register</Link>
-                <button className='login_Btn' type='submit'><span>Login</span></button>
+                <div className='login__auth__Row'>
+                    <label>Username</label>
+                    <input 
+                        type='text' 
+                        placeholder='Username' 
+                        name='username'
+                        onChange={handleInputChange}
+                        required 
+                    />
+                </div>
 
+                <div className='login__auth__Row'>
+                    <label>Password</label>
+                    <input 
+                        type='password' 
+                        placeholder='Password' 
+                        name='password'
+                        onChange={handleInputChange} 
+                        required
+                    />
+                </div>
+
+                <div className='login__auth__btns'>
+                    <button className='login__auth__btns__login'>Login</button>
+                    <button className='login__auth__btns__toRegister' to='/register'>Register</button>
+                </div>
             </div>
+
         </form>
+    </>
     )
 }
 

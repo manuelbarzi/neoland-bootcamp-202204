@@ -1,13 +1,14 @@
-const { createIncidence } = require('../logic')
+const { createComment } = require('../logic')
 const { handleErrorsAndRespond, verifyToken } = require('./helpers')
 
 module.exports = (req, res) => { 
     try {
-        const { body: {latitude, longitude, description } } = req
+        const { body: { chat, incidentsId } } = req
+ 
         const userId = verifyToken(req)
 
 
-        createIncidence(latitude, longitude, description, userId)
+        createComment(chat, incidentsId, userId)
             .then(() => res.status(201).send())
             .catch(error => handleErrorsAndRespond(error, res))
     } catch (error) {

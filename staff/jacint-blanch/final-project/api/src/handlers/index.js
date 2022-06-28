@@ -4,5 +4,6 @@ module.exports = {
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
     handleIncidence: require('./handleIncidence'),
-    handleIncidenceNearMe: require('./handleIncidenceNearMe')
+    handleIncidenceNearMe: require('./handleIncidenceNearMe'),
+    handleComment: require('./handleComment')
 }

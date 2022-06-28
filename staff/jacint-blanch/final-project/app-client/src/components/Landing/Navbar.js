@@ -1,11 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './Button';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navbar.css';
+
+function getToken() {
+  var token = sessionStorage.getItem('token')
+  return token
+}
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const [button, setButton] = useState(true);
+  const location = useLocation().pathname
 
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -24,12 +30,14 @@ function Navbar() {
 
   window.addEventListener('resize', showButton);
 
+  const isMap =  !getToken() && location !== '/HeatMap'
+
   return (
     <>
       <nav className='navbar'>
         <div className='navbar-container'>
           <Link to='/landing' className='navbar-logo' onClick={closeMobileMenu}>
-            TRVL
+            Safetyium
             <i className='fab fa-typo3' />
           </Link>
           <div className='menu-icon' onClick={handleClick}>
@@ -43,16 +51,16 @@ function Navbar() {
             </li>
             <li className='nav-item'>
               <Link
-                to='/landing'
+                to='/HeatMap'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
-                Services
+                HeatMap
               </Link>
             </li>
             <li className='nav-item'>
               <Link
-                to='/landing'
+                to='/products'
                 className='nav-links'
                 onClick={closeMobileMenu}
               >
@@ -60,17 +68,17 @@ function Navbar() {
               </Link>
             </li>
 
-            <li>
+            {isMap &&<li>
               <Link
-                to='/sign-up'
+                to='/register'
                 className='nav-links-mobile'
                 onClick={closeMobileMenu}
               >
                 Sign Up
               </Link>
-            </li>
+            </li>}
           </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+          {button && isMap &&<Button buttonStyle='btn--outline'>SIGN UP</Button>}
         </div>
       </nav>
     </>

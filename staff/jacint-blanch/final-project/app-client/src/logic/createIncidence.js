@@ -1,5 +1,10 @@
 import Apium from '../vendor/Apium'
 
+function getToken() {
+  var token = sessionStorage.getItem('token')
+  return token
+}
+
 function createIncidence(latitude, longitude, description) {
 
 
@@ -9,6 +14,7 @@ function createIncidence(latitude, longitude, description) {
       .post("/incidence", {
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + getToken()
         },
         body: JSON.stringify({ latitude, longitude, description }),
       })

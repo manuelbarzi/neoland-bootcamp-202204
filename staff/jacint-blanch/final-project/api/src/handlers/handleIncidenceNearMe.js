@@ -4,10 +4,10 @@ const { handleErrorsAndRespond, verifyToken} = require('./helpers')
 
 module.exports = (req, res) => { 
     try {
-       var lat = req.params.lat
-       var long = req.params.long
+       const {params: {lat, long}} = req;
+
        retrieveIncidenceNearMe(lat, long)
-            .then(result => res.status(200).json(result))
+            .then(user => res.status(200).json(user))
             .catch(error => handleErrorsAndRespond(error, res))
     } catch(error) {
         handleErrorsAndRespond(error, res)
