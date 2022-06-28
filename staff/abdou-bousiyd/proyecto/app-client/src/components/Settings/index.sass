@@ -15,16 +15,15 @@
         height: 50vh
         border-radius: 5px
         box-shadow: 0 1px 3px 0 lavender
-
-        z-index: 5
+        background: white
+        color: black
 
         &__Title
-            color: red
             margin: 0px
             font-size: 30px
             margin-bottom: 30px
             font-weight: bold
-            color: white
+            color: black
 
         &__FontSize, &__Minimap, &__LineNumber, &__Themes
             padding: 5px
@@ -35,14 +34,27 @@
             justify-content: space-between
             // background-color: red
             font-size: 16px
-        input
-            width: 40%
+        input, select
+            width: 120px
             padding: 10px
             border-radius: 3px
             outline: none
             border: none
             font-size: 14px
-            transition: 0.5s
+            border: 1px solid
+        select
+            width: 160px
+            padding: 10px
+            border-radius: 3px
+            outline: none
+            border: none
+            font-size: 14px
+            border: 1px solid
+        label
+            font-size: 18px
+            font-weight: 600
+        
+
 
 .switch-list 
   display: flex

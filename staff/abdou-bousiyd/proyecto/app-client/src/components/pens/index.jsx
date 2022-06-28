@@ -21,24 +21,7 @@ const Pens = () => {
 
   useEffect(() => {
     getPens();
-    getUser()
   }, []);
-  const getUser = (openModal) => {
-    retrieveUser(sessionStorage.token, (error, user) => {
-      if (error) {
-        setAlert(<Alert error message={error.message} />);
-        setTimeout(() => {
-          setAlert(null);
-        }, 4000);
-
-        return;
-      }
-      setName(user.name);
-      if (openModal) {
-        // toggleTitle();
-      }
-    });
-  };
 
   const handleInputChange = (e) => {
     const newTitle = e.target.value;
@@ -60,54 +43,17 @@ const Pens = () => {
     });
   };
 
-  const save = (id) => {
-    if (!dashName) {
-      setEditDashId(null);
-      return;
-    }
-
-    saveProject(sessionStorage.token, id, dashName, null, (error) => {
-      if (error) {
-        setAlert(<Alert error message={error.message} />);
-        setTimeout(() => {
-          setAlert(null);
-        }, 4000);
-
-        return;
+  const getCode = (code) => {
+    try {
+      const parsedCode =  JSON.parse(code)
+      if (parsedCode instanceof Object) {
+        return parsedCode
       }
-      setEditDashId();
-      getPens();
-    });
-  };
-
-  const deleteDash = (projectId) => {
-    if (projectId) {
-      deleteProject(sessionStorage.token, projectId, (error) => {
-        if (error) {
-          setAlert(<Alert error message={error.message} />);
-          setTimeout(() => {
-            setAlert(null);
-          }, 4000);
-          return;
-        }
-        handleRemoveSticker(projectId);
-        getPens();
-      });
+      return null
+    } catch (error) {
+      return null
     }
-  };
-
-  const handleRemoveSticker = (projectId) => {
-    const _projects = projects.filter((project) => project.id !== projectId);
-
-    setProjectsDash(_projects);
-  };
-
-  const handleLogoutClick = () => {
-    delete sessionStorage.token;
-    window.location.reload();
-  };
-
-
+  }
 
   return (
     <>
@@ -118,9 +64,11 @@ const Pens = () => {
       <div className="Dash">
         <div className="Dash__Container">
           {(projects || []).map((dash) => {
-            const { title, id, code = {} } = dash;
+            const { title, id, code } = dash;
 
-            const parsedCode = JSON.parse(code );
+            const parsedCode = getCode(code);
+
+            if (!parsedCode) return null
 
             const renderPreview = `
             <!DOCTYPE html>
@@ -160,12 +108,6 @@ const Pens = () => {
                     </div>
                   )}
                 </div>
-                {editDashId === id ? (
-                  <i onClick={() => save(id)}>SAVE</i>
-                ) : (
-                  <i onClick={() => setEditDashId(id)}>EDIT</i>
-                )}
-                <i onClick={() => deleteDash(id)}>DELETE</i>
               </div>
             );
           })}

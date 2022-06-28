@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import toggleLikeProject from '../../logic/toggleLikeProject'
 import Login from "../Login";
 // import "./index.sass";
+
 import "./index.css";
 
 const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId, onLikeClicked, project }) => {
@@ -10,7 +11,6 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
   const navigate = useNavigate();
 
   const location = useLocation().pathname;
-//   const isActive = (path) => location.includes(path);
 
   const handleLogoutClick = () => {
     delete sessionStorage.token;
@@ -47,7 +47,8 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
     <>
       <header className="header">
 
-        <a href="#" className="header__Logo" htmlFor="" onClick={handleToPens}>CodePen</a>
+        {/* <a className="header__Logo" htmlFor="" onClick={handleToPens}>CP</a> */}
+        <img className="svg" src="https://www.svgrepo.com/show/327338/logo-apple-ar.svg" alt="codepen" onClick={handleToPens} /> 
 
         <nav className="header__content">
                 
@@ -56,54 +57,47 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__heartNone"}`}
                   onClick={handleLikeClick}
                 >
+                  <div className="header__content__links__item__likes">
+                    { likes && likes.length> 0 && <h2 >{likes.length}</h2> }
                     {
-                        // name ?
-                        // <i className="gg-heart"></i> 
-                        <span class="material-icons">favorite_border</span>
-                        // <Login  />
+                      name && <span className="material-icons">favorite_border</span> 
                     }
-                    { likes && likes.length> 0 && <h2>{likes.length}</h2> }
+                  </div>
                 </li>
 
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__downloadNone"}`}
                     onClick={download}
                 >
-                    {/* <i className="gg-software-download"></i> */}
-                    <span class="material-icons">get_app</span>
+                    <span className="material-icons">get_app</span>
                 </li>
                 
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__skypackNone"}` }
                     onClick={toggleSkypack}
                 >
-                    <span class="material-icons">rocket_launch</span>
+                    <span className="material-icons">rocket_launch</span>
                 </li>
 
                 <li className={`header__content__links__item ${( location === "/dashboards" || location === "/pens" )&& "header__content__links__item__codeNone"}`}
                     onClick={toggle}
                 >
-                    {/* <i className="gg-code-slash"></i> */}
-                    <span class="material-icons">data_object</span>
+                    <span className="material-icons">data_object</span>
                 </li>
 
                 <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__addNone"}`}
                     onClick={toggleTitle}
                 >
-                    {/* <i className="gg-add-r"></i> */}
-                    <span class="material-icons">add</span>
+                    <span className="material-icons">add</span>
                 </li>
                 <li className={`header__content__links__item ${(location === "/" || location === "/project" || location === `/previewProject/${projectId}`) && "header__content__links__item__addNone"}`}
                     onClick={handleToProject}
                 >
-                    {/* <i className="gg-arrow-left-r"></i> */}
-                    <span class="material-icons">arrow_back</span>
+                    <span className="material-icons">arrow_back</span>
                 </li>
                 <li className={`header__content__links__item ${location === "/dashboards" && "header__content__links__item__tikcodeNone"}`}
                     onClick={handleToDashboard}
                 >
-                    {/* <i className="gg-eye"></i> */}
-                    <span class="material-icons">visibility</span>
+                    <span className="material-icons">visibility</span>
                 </li>
-
             </ul>
             {!name && (
             <div className="header__content__btns">
@@ -114,36 +108,18 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
 
             {name && (
             <div className="header__content__btns">
-                <button className="header__content__btns__btn" onClick={handleLogoutClick}> log out </button>
-                <button className="header__content__btns__btn">{name}</button>
+              <button className="header__content__btns__btn" onClick={handleLogoutClick}> log out </button>
+              <button className="header__content__btns__btn">{name}</button>
             </div>
             )}
 
-            <select className="header__content__select">
-              <div>
-                <button>okys</button>
-                {/* <ul className="header__content__btns">
-                    <li className="header__content__btns__btn"  onClick={handleToRegister}> Sign Up </li>
-                    <li className="header__content__btns__btn" onClick={handleToLogin} >Log In </li>
-                </ul> */}
-                {/* {!name && (
-                <ul className="header__content__btns">
-                    <li className="header__content__btns__btn"  onClick={handleToRegister}> Sign Up </li>
-                    <li className="header__content__btns__btn" onClick={handleToLogin} >Log In </li>
-                </ul>
-                )}
-
-                {name && (
-                <ul className="header__content__btns">
-                    <li className="header__content__btns__btn" onClick={handleLogoutClick}> log out </li>
-                    <li className="header__content__btns__btn">{name}</li>
-                </ul>
-                )} */}
-              </div>
-
-            </select>
-
-
+            {/* <div class="header__content__select">
+                <select>
+                    <option value="Brooklyn">Brooklyn</option>
+                    <option value="Manhattan">Manhattan</option>
+                    <option value="Queens">Queens</option>
+                </select>
+            </div> */}
         </nav>
       </header>
     </>

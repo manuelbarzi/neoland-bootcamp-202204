@@ -6,6 +6,8 @@
     justify-content: space-between;
     align-items: center;
     padding: 0rem 1.5rem;
+    position: sticky;
+    top: 0;
 }
 
 .header__Logo {
@@ -13,7 +15,11 @@
     font-size: 30px;
     text-align: center;
     text-decoration: none;
-    color: wheat;
+    color: white;
+}
+.svg {
+    width: 20px;
+    height: 20px;
 }
 
 .header__content {
@@ -29,27 +35,31 @@
     list-style-type: none;
     display: flex;
     align-items: center;
-    color: wheat;
+    color: white;
 }
-
+.header__content__links__item__likes {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
 .header__content__links:hover .header__content__links__item:not(:hover) span {
     opacity: 0.2;
   }
 
 .header__content__links__item{
     position: relative;
-    padding: 15px 25px 15px 25px;
+    padding: 10px 25px 10px 25px;
     cursor: pointer;
 } 
 @media screen and ( max-width: 850px ) {
     .header__content__links__item{
-        padding: 15px 10px 15px 10px;
+        padding: 10px 10px 10px 10px;
         cursor: pointer;
     } 
 }
 @media screen and ( max-width: 650px ) {
     .header__content__links__item{
-        padding: 15px 10px 15px 10px;
+        padding: 10px 10px 10px 10px;
         cursor: pointer;
     } 
     .header__Logo {
@@ -67,7 +77,7 @@
     left: 0;
     width: 90%;
     height: 2px;
-    background: #3498db;
+    background: white;
     transform: scaleX(0);
     transition: 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
   }
@@ -83,14 +93,14 @@
 
 .header__content__btns__btn{
     cursor: pointer;
-    height: 45px;
+    height: 40px;
     margin: 0 0 0 10px;
     padding: 10px;
     border-radius: 5px;
     background-color: #2c65e1;
     border-style: none;
     text-transform: uppercase;
-    color: wheat;
+    color: white;
     font-size: 16px;
 } 
 .header__content__btns__btn:hover{
@@ -98,10 +108,11 @@
     color: #eee;
 } 
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 550px) {
     .header__content__btns{
-        display: none;
+        /* display: none; */
     }
+    
 }
 @media only screen and (max-width: 650px) {
 
@@ -148,5 +159,8 @@
     display: none;
 }
 .header__content__links__item__skypackNone{
+    display: none;
+}
+.material-icons__None{
     display: none;
 }

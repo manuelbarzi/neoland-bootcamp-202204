@@ -43,24 +43,24 @@ const Settings = ({editorOptions: options, handleOnOptionsChanged}) => {
             <h2 className='Settings__Options__Title'>Settings </h2>
 
             <label className='Settings__Options__FontSize'>
-                <label>Font Size </label>
+                <label>Font Size :</label>
                 <input type="number" placeholder='14' name="fontSize" onChange={handleOnchange} />
             </label>
 
             <label className='Settings__Options__Minimap'>
-                <label>Minimap</label>
+                <label>Minimap :</label>
                 <input className="switch__input" type="checkbox" name="minimap" onChange={handleOnchange} checked={editorOptions.minimap.enabled === true } />
                 <i className="switch__icon"></i>
             </label>
 
             <label className='Settings__Options__LineNumber switch'>
-                <label className="switch__span">Line number</label>
+                <label className="switch__span">Line number :</label>
                 <input className="switch__input" type="checkbox" name="lineNumbers" onChange={handleOnchange} checked={editorOptions.lineNumbers === 'on' } />
                 <i className="switch__icon"></i>
             </label>
             
             <label className='Settings__Options__Themes'>
-                <label>Themes </label>
+                <label>Themes :</label>
                 <select name="theme" onChange={handleOnchange} >
                     <option selected value="vs-dark">Visual Studio Dark</option>
                     <option value="light">Visual Studio Light</option>

@@ -18,8 +18,10 @@ const ProjectTitle = ({projectTitle: title, handleTitleProject, save, toggleTitl
 
     return (
             <div className="container">
-                <input type="text" name="title" placeholder="title"  onChange={handleOnChange} required value={title} />
-                <button onClick={save}>ok</button>
+                <h1 className='container__title'>Title</h1>
+                <input className='container__input' type="text" name="title" placeholder="title"  onChange={handleOnChange} required value={title} />
+                <button className='container__btn' onClick={save}><span class="material-icons">check</span></button>
+                
             </div>
     )
 }

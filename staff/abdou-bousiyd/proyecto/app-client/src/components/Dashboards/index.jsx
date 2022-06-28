@@ -33,7 +33,7 @@ const Dashboards = () => {
     setDashName(newTitle);
   };
   const getDashboards = () => {
-    retrieveProjects(sessionStorage.token, (error, _projects) => {
+    retrieveProjects(sessionStorage.token, (error, projects) => {
       if (error) {
         // setAlert(<Alert error message={error.message} />);
         // setTimeout(() => {
@@ -41,7 +41,7 @@ const Dashboards = () => {
         // }, 4000);
         return;
       }
-      setProjects(_projects);
+      setProjects(projects);
     });
   };
 
@@ -65,7 +65,6 @@ const Dashboards = () => {
   };
 
   const deleteDash = (projectId) => {
-    // console.log(projectId, "delete")
     if (projectId) {
       deleteProject(sessionStorage.token, projectId, (error) => {
         if (error) {
@@ -103,7 +102,7 @@ const Dashboards = () => {
         setName(user.name);
         });
     }
-    // else navigate('/login')
+    else navigate('/login')
   };
   const handleLogoutClick = () => {
     delete sessionStorage.token;

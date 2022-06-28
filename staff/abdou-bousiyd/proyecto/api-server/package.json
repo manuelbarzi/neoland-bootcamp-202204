@@ -9,7 +9,8 @@
     "start-watch": "nodemon src",
     "start-watch-inspect": "nodemon --inspect-brk src",
     "test": "npx mocha src/logic/*.spec.js",
-    "test-inspect": "npx mocha --inspect-brk src/**/*.spec.js"
+    "test-inspect": "npx mocha --inspect-brk src/**/*.spec.js",
+    "test:coverage": "jest --coverage"
   },
   "keywords": [],
   "author": "",

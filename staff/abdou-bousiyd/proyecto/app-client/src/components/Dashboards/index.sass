@@ -4,16 +4,12 @@ body
     display: flex
     justify-content: center
     align-items: center
-    background-color: #fff
-    // height: 100vh
-    @media screen and ( max-width: 400px )
-        height: 190vh
 
     &__Container
         padding: 10px
         text-decoration: none
         margin: 15px
-        width: 80%
+        width: 100%
         display: flex
         flex-wrap: wrap
         justify-content: center
@@ -25,14 +21,13 @@ body
             align-items: center
             flex-direction: column
         &__Item
-            // display: flex
-            // justify-content: center
-            width: 350px
-            height: 350px
+            // width: 350px
+            width: 95%
+            height: 370px
             margin: 20px
             position: relative
             border-radius: 10px
-            background-color: #7a7b7c
+            background-color: #202c4a
             box-shadow: 4px 8px 16px 0 rgba(0, 0, 0, 0.4)
 
             &__Title
@@ -42,23 +37,19 @@ body
                 cursor: pointer
                 text-align: right
                 text-transform: uppercase
-                letter-spacing: 4px
-                font-size: 30px
-                font-weight: bold
+                font-size: 25px
                 font-weight: normal
-                color: black
                 border-radius: 5px
                 width: 60%
                 transform: translateX(30%)
                 background-color: #fff
-                margin: 5px
-
+                // margin:15px
             &__Btn
                 background-color: red
 
             i
                 position: relative
-                top: 270px
+                top: 260px
                 display: flex
                 justify-content: space-around
                 align-items: center
@@ -81,16 +72,16 @@ body
 .Dash__Container__Items:hover .actiones 
     visibility: visible
 
-
 .edit-icon, .save-icon 
     position: absolute
-    color: #fff
+    color: white
     font-size: 20px
     bottom: 0
     right: 0px
-    margin: 10px
     margin-top: -315px
     margin-left: 300px 
+.edit-icon:hover, .save-icon:hover, .remove-icon:hover
+    transition: 0.6s
 
 .remove-icon
     position: absolute
@@ -102,15 +93,15 @@ body
     margin-left: 300px 
     
 .dash_input 
+    text-transform: uppercase
     color: #333
-    font-size: 16px
-    width: 75%
-    border: 2px solid rgb(193, 207, 213)
+    font-size: 15px
+    width: 60%
+    border: none
     border-radius: 5px
     font-weight: 600
-    height: 35px
+    height: 30px
     text-align: center
-    // transform: translateX(4%)
-    transform: translateY(-100%)
-    margin: 0px 40px  !important
+    transform: translateY(-150%)
+    margin: 0px 60px  !important
     position: absolute
