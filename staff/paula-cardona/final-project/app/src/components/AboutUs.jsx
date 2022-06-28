@@ -16,10 +16,6 @@ function AboutUs () {
             <h2 className= "AboutUs__numbers"> 3 </h2>
                 <p className= "AboutUs__text"> Solamente debe suscribirse por 20€ mensuales. Nuestro equipo instalará un buzón en su vivienda y recibirá nuestros productos </p>
             <Link className="About__arrow__link" to="/login"> → </Link>
-            
-            
-
-            
         </div>
     </div>
 

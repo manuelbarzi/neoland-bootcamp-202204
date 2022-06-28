@@ -4,7 +4,9 @@ import ChangePassword from './ChangePassword'
 import ChangeEmail from './ChangeEmail'
 import ChangePayment from './ChangePayment'
 import ChangeAddress from './ChangeAddress'
+import DeleteUser from './DeleteUser'
 import { useNavigate } from 'react-router-dom'
+
 import './Profile.sass'
 
 
@@ -31,6 +33,7 @@ function Profile(props) {
     const handleClickedBackToProfile = () => setView ('profile')
 
     const handleProfileChanged =() => setView ('profile')
+
     
 
 
@@ -69,7 +72,7 @@ function Profile(props) {
         {view === 'changeaddress' && <ChangeAddress onClickedBackToProfile= {handleClickedBackToProfile}onProfileChanged={handleProfileChanged}/>}
 
         
-        {/* // {view === 'deleteaccount' && <DeleteAccount />}    */} 
+        {/* {view === 'deleteaccount' && <DeleteUser onDeletedUser={handleDeletedUser}/>}     */}
     
     </div>
 }
