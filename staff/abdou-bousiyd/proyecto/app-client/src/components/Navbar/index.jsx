@@ -45,7 +45,6 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
     <>
       <header className="header">
 
-        {/* <a className="header__Logo" htmlFor="" onClick={handleToPens}>CP</a> */}
         <img className="svg" src="https://www.svgrepo.com/show/327338/logo-apple-ar.svg" alt="codepen" onClick={handleToPens} /> 
 
         <nav className="header__content">
@@ -56,7 +55,7 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                   onClick={handleLikeClick}
                 >
                   <div className="header__content__links__item__likes">
-                    { likes && likes.length> 0 && <h2 className="header__content__links__item__like">{likes.length}</h2> }
+                    { !name || likes && likes.length> 0 && <h2 className="header__content__links__item__like">{likes.length}</h2> }
                     {
                       name && <span className="material-icons">favorite_border</span> 
                     }

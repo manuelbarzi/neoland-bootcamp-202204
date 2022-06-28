@@ -174,3 +174,6 @@
 .header__content__btns__NoneBtn{
     display: none;
 }
+.header__content__links__item__likeNone {
+    display: none;
+}

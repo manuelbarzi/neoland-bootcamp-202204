@@ -14,7 +14,7 @@ import retrieveUser from "../../logic/retrieveUser";
 import saveProject from "../../logic/saveProject";
 import retrieveProject from "../../logic/retrieveProject";
 import Login from "../Login";
-import { FILE_NAME, EXTENSIONS } from "../../constants";
+import { FILE_NAME, EXTENSIONS, DEFAULT_VALUES } from "../../constants";
 
 import "./splitGrid.css";
 import "./index.sass";
@@ -23,7 +23,6 @@ import Skypack from "../Skypack";
 
 const Project = () => {
 
-  const navigate = useNavigate();
   const [timestamp, setTimestamp] = useState(null)
   const [alert, setAlert] = useState(null);
   const [name, setName] = useState(null);
@@ -36,12 +35,12 @@ const Project = () => {
   const [download, setDownload] = useState(false);
   const [project, setProject] = useState(null);
   const [editorValues, setEditorValues] = useState({
-    html: "",
-    js: "",
-    css: "",
+    html: DEFAULT_VALUES.html,
+    js: DEFAULT_VALUES.js,
+    css: DEFAULT_VALUES.css,
   });
   const [editorOptions, setEditorOptions] = useState({
-    fontSize: 14,
+    fontSize: 18,
     minimap: {
       enabled: true,
     },

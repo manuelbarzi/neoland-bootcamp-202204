@@ -2,19 +2,34 @@ import { useState, useEffect } from "react";
 import retrievePens from "../../logic/retrievePens";
 import Alert from "../Alert";
 import retrieveUser from "../../logic/retrieveUser";
+import retrieveProject from "../../logic/retrieveProject";
 import NavBar from "../Navbar";
+import { useNavigate } from "react-router-dom";
 
 import "./index.sass";
 
 const Pens = () => {
-
+  const navigate = useNavigate();
   const [name, setName] = useState(null);
   const [alert, setAlert] = useState(null);
   const [projects, setProjects] = useState(null);
+  const [project, setProject] = useState(null);
 
   useEffect(() => {
     getPens();
   }, []);
+
+  retrieveUser(sessionStorage.token, (error, user) => {
+    if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+        setAlert(null);
+        }, 4000);
+
+        return;
+    }
+    setName(user.name);
+    });
 
   const getPens = () => {
     retrievePens((error, projects) => {
@@ -43,6 +58,22 @@ const Pens = () => {
     }
   }
 
+  const previewProject = (projectId) => {
+    retrieveProject(sessionStorage.token, projectId, (error, _project) => {
+      if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+        return;
+      }
+
+      setProject(_project);
+      navigate(`/previewProject/${_project.id}`);
+    });
+  };
+
+
   return (
     <>
       <NavBar name={name} />
@@ -52,7 +83,7 @@ const Pens = () => {
       <div className="Dash">
         <div className="Dash__Container">
           {(projects || []).map((dash) => {
-            const { title, id, code } = dash;
+            const { title, _id, code } = dash;
 
             const parsedCode = getCode(code);
 
@@ -77,9 +108,9 @@ const Pens = () => {
             return (
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
-                  <h1 className="Dash__Container__Item__Title">{title}</h1>
+                  <h1 className="Dash__Container__Item__Title" onClick={() => previewProject(_id)}>{title}</h1>
                   
-                    <div className="Dash__Container__Items__Iframe">
+                    <div className="Dash__Container__Items__Iframe" onClick={() => previewProject(_id)}>
                       <iframe
                         className="Iframe__target"
                         id="iframe target"
