@@ -5,7 +5,7 @@ const {
   validateString,
 } = require("../validators");
 
-function updateProject(userId, projectId, title) {
+function updateProject(userId, projectId, title, code) {
   validateStringNotEmptyNoSpaces(userId, "user id");
   validateStringNotEmptyNoSpaces(projectId, "project id");
   validateString(title, "title");
@@ -27,7 +27,13 @@ function updateProject(userId, projectId, title) {
           `project with id ${projectId} does not belong to user with id ${userId}`
         );
 
-      project.title = title;
+        if(title) {
+          project.title = title;
+        }
+        if(code) {
+          project.code = code;
+        }
+
 
       return project.save();
     })

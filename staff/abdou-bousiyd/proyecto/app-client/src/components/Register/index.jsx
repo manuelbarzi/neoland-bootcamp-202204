@@ -52,7 +52,7 @@ const Register = () => {
                     <h1 className='register__auth__title'>Register</h1>
 
                     <div className='register__auth__Row'>
-                        <label>Username</label>
+                        <label>Name</label>
                         <input
                             type='text'
                             placeholder='Name'
@@ -74,7 +74,7 @@ const Register = () => {
                     </div>
 
                     <div className='register__auth__Row'>
-                        <label>Username</label>
+                        <label>Password</label>
                         <input
                             type='password'
                             placeholder='Password'

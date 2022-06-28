@@ -7,10 +7,10 @@ module.exports = (req, res) => {
 
     const {
       params: { projectId },
-      body: { title },
+      body: { title, code },
     } = req;
 
-    updateProject(userId, projectId, title)
+    updateProject(userId, projectId, title, code)
       .then(() => res.status(204).send())
       .catch((error) => handleErrorsAndRespond(error, res));
   } catch (error) {

@@ -23,6 +23,7 @@ import Skypack from "../Skypack";
 
 const Project = () => {
 
+  const navigate = useNavigate();
   const [timestamp, setTimestamp] = useState(null)
   const [alert, setAlert] = useState(null);
   const [name, setName] = useState(null);
@@ -83,29 +84,42 @@ const Project = () => {
 
         return;
       }
-      // setTimestamp(Date.now())
     });
     toggleTitle();
   };
 
-  const loadUser = (openModal) => {
-    if (isJwtValid(sessionStorage.token)) {
-      retrieveUser(sessionStorage.token, (error, user) => {
-        if (error) {
-          setAlert(<Alert error message={error.message} />);
-          setTimeout(() => {
-            setAlert(null);
-          }, 4000);
+  const updateProject = () => {
+    
+    const code = JSON.stringify(editorValues);
+    saveProject(sessionStorage.token, projectId, projectTitle, code, (error) => {
+      if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
 
-          return;
-        }
-        setName(user.name);
-        if (openModal) {
-          toggleTitle();
-        }
-      });
-    }
-    // else navigate('/login')
+        return;
+      }
+    });
+    console.log('saved')
+
+  }
+
+  const loadUser = (openModal) => {
+    retrieveUser(sessionStorage.token, (error, user) => {
+      if (error) {
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
+
+        return;
+      }
+      setName(user.name);
+      if (openModal) {
+        toggleTitle();
+      }
+    });
   };
   
   const getProject = () => {
@@ -181,7 +195,7 @@ const Project = () => {
       const zipblob = new window.Blob([blobdata]);
       const elem = window.document.createElement("a");
       elem.href = window.URL.createObjectURL(zipblob);
-      elem.download = "codi-link.zip";
+      elem.download = "code-neoland.zip";
       elem.click();
     });
   };
@@ -217,8 +231,6 @@ const Project = () => {
     setDownload(true)
   }
 
-
-
   const renderPreview = `
     <!DOCTYPE html>
       <html>
@@ -235,19 +247,20 @@ const Project = () => {
       </script>
     </html>
     `;
-    
+
   return (
     <div className="project">
-      <Navbar 
+      <Navbar
         toggleSkypack={toggleSkypack}
-        download={handleDownload} 
-        toggle={toggle} 
-        toggleTitle={toggleTitle} 
-        name={name} 
-        projectId={projectId} 
-        onLikeClicked={handleProjectLikeClicked} 
+        download={handleDownload}
+        toggle={toggle}
+        toggleTitle={toggleTitle}
+        name={name}
+        projectId={projectId}
+        onLikeClicked={handleProjectLikeClicked}
         project={project}
-    />
+        updateProject={updateProject}
+      />
 
       <Modal active={active} toggle={toggle}>
         <Settings
@@ -285,7 +298,6 @@ const Project = () => {
                 placeholder="html"
                 theme="vs-dark"
                 height="100%"
-                // defaultValue={editorValues.html}
                 value={editorValues.html}
                 onChange={handleHtmlChange}
                 onMount={handleEditorDidMount}
@@ -300,7 +312,6 @@ const Project = () => {
                 placeholder="css"
                 theme="vs-dark"
                 height="100%"
-                // defaultValue={editorValues.css}
                 value={editorValues.css}
                 onChange={handleCsslChange}
                 editorDidMount={handleEditorDidMount}
@@ -312,14 +323,11 @@ const Project = () => {
             <div>
               <Editor
                 className="editor js"
-                defaultLanguage="js"
+                defaultLanguage="javascript"
                 placeholder="js"
                 theme="vs-dark"
-                // defaultValue={editorValues.js}
                 value={editorValues.js}
                 onChange={handleJslChange}
-                // editorDidMount={handleEditorDidMount}
-                // onMount={handleEditorDidMount}
                 options={editorOptions}
               />
             </div>

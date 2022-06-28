@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useNavigate,Link } from "react-router-dom";
+import { useNavigate, Link, useLocation } from "react-router-dom";
 import authenticateUser from '../../logic/authenticateUser'
 import Alert from '../Alert'
 import '../Login/index.sass'
@@ -7,8 +7,10 @@ import NavBar from "../Navbar";
 
 
 const Login = ({toggleTitle, loadUser}) => {
-    // console.log(toggle,122)
+
     const navigate = useNavigate()
+  const location = useLocation().pathname;
+
 
     const [alert, setAlert] = useState(null)
     const [datos, setDatos] = useState({
@@ -44,7 +46,8 @@ const Login = ({toggleTitle, loadUser}) => {
         }
     }
     return(<>
-        <NavBar />
+        {location === "/login" && <NavBar />}
+
         <form className='login' onSubmit={handleSubmit}>
 
             <div className='login__auth'>
@@ -75,7 +78,7 @@ const Login = ({toggleTitle, loadUser}) => {
                 </div>
 
                 <button className='login__auth__btn' type='submit'><span>Login</span></button>
-                <Link className='login__auth__link' to='/Register'>Register</Link>
+                <Link className='login__auth__link' to='/register'>Register</Link>
             </div>
 
         </form>

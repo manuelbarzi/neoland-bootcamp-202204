@@ -1,12 +1,11 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
+import saveProject from "../../logic/saveProject";
 import toggleLikeProject from '../../logic/toggleLikeProject'
-import Login from "../Login";
-// import "./index.sass";
 
 import "./index.css";
 
-const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId, onLikeClicked, project }) => {
+const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId, onLikeClicked, project, updateProject }) => {
 
   const navigate = useNavigate();
 
@@ -38,11 +37,10 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
         await toggleLikeProject(sessionStorage.token, projectId)
         onLikeClicked()
     } catch(error) {
-        console.log('error like')
+
     }
   }
   const { likes = [] } = project || {}
-
   return (
     <>
       <header className="header">
@@ -54,11 +52,11 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                 
             <ul className="header__content__links">
 
-                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register" || location === "/") && "header__content__links__item__heartNone"}`}
+                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register" || location === "/" || location === "/project") && "header__content__links__item__heartNone"}`}
                   onClick={handleLikeClick}
                 >
                   <div className="header__content__links__item__likes">
-                    { likes && likes.length> 0 && <h2 >{likes.length}</h2> }
+                    { likes && likes.length> 0 && <h2 className="header__content__links__item__like">{likes.length}</h2> }
                     {
                       name && <span className="material-icons">favorite_border</span> 
                     }
@@ -77,11 +75,21 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                     <span className="material-icons">data_object</span>
                 </li>
 
-                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register") && "header__content__links__item__addNone"}`}
+                { !projectId &&
+                  <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register") && "header__content__links__item__addNone"}`}
                     onClick={toggleTitle}
-                >
-                    <span className="material-icons">add</span>
-                </li>
+                  >
+                      <span className="material-icons">add</span>
+                  </li>
+                  }
+                  { projectId &&
+                  <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register") && "header__content__links__item__addNone"}`}
+                    onClick={updateProject}
+                  >
+                      <span className="material-icons">save</span>
+                  </li>
+                  }
+
                 <li className={`header__content__links__item ${(location === "/" || location === "/project" || location === `/previewProject/${projectId}`) && "header__content__links__item__addNone"}`}
                     onClick={handleToProject}
                 >

@@ -35,10 +35,10 @@ const Dashboards = () => {
   const getDashboards = () => {
     retrieveProjects(sessionStorage.token, (error, projects) => {
       if (error) {
-        // setAlert(<Alert error message={error.message} />);
-        // setTimeout(() => {
-        //   setAlert(null);
-        // }, 4000);
+        setAlert(<Alert error message={error.message} />);
+        setTimeout(() => {
+          setAlert(null);
+        }, 4000);
         return;
       }
       setProjects(projects);
@@ -156,8 +156,11 @@ const Dashboards = () => {
             return (
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
-                  <h1 className="Dash__Container__Item__Title" onClick={() => previewProject(id)}>{title}</h1>
-                  {editDashId === id ? (
+                  <h1 className="Dash__Container__Item__Title" onClick={() => previewProject(id)}>
+                  {/* <a className="Dash__Container__Item__Author">Author: {name}</a> */}
+                    <span>{title}</span>
+                  </h1>
+                  {editDashId === id && (
                     <input
                       className="dash_input "
                       onChange={handleInputChange}
@@ -165,8 +168,8 @@ const Dashboards = () => {
                       value={dashName === null ? title : dashName}
                       placeholder="title"
                     />
-                  ) : (
-                    <div className="Dash__Container__Items__Iframe">
+                  ) }
+                    <div className="Dash__Container__Items__Iframe pointer" onClick={() => previewProject(id)}>
                       <iframe
                         className="Iframe__target"
                         id="iframe target"
@@ -174,8 +177,7 @@ const Dashboards = () => {
                         srcdoc={renderPreview}
                       />
                     </div>
-                  )}
-                    <div className="Dash__Container__Items__Btn">
+                    <div className="Dash__Container__Item__Btn">
                         {editDashId === id ? (
                         <i onClick={() => save(id)}  className="far fa-save save-icon actiones"></i>
                         ) : (

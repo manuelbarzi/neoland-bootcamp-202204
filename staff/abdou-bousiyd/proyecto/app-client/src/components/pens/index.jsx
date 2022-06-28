@@ -1,42 +1,30 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import retrievePens from "../../logic/retrievePens";
-import saveProject from "../../logic/saveProject";
 import Alert from "../Alert";
 import retrieveUser from "../../logic/retrieveUser";
-import deleteProject from "../../logic/deleteProject";
 import NavBar from "../Navbar";
 
 import "./index.sass";
 
 const Pens = () => {
-  const navigate = useNavigate();
+
   const [name, setName] = useState(null);
   const [alert, setAlert] = useState(null);
   const [projects, setProjects] = useState(null);
-  const [project, setProject] = useState(null);
-  const [dashName, setDashName] = useState(null);
-  const [editDashId, setEditDashId] = useState(null);
-  const [projectsDash, setProjectsDash] = useState(null);
 
   useEffect(() => {
     getPens();
   }, []);
 
-  const handleInputChange = (e) => {
-    const newTitle = e.target.value;
-    setDashName(newTitle);
-  };
-
   const getPens = () => {
     retrievePens((error, projects) => {
-        console.log(projects, 90099)
+
       if (error) {
         setAlert(<Alert error message={error.message} />);
         setTimeout(() => {
           setAlert(null);
         }, 4000);
-        console.log(error, 900);
+
         return;
       }
       setProjects(projects);
@@ -89,15 +77,8 @@ const Pens = () => {
             return (
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
-                  <h1>{title}</h1>
-                  {editDashId === id ? (
-                    <input
-                      onChange={handleInputChange}
-                      type="text"
-                      value={dashName === null ? title : dashName}
-                      placeholder="title"
-                    />
-                  ) : (
+                  <h1 className="Dash__Container__Item__Title">{title}</h1>
+                  
                     <div className="Dash__Container__Items__Iframe">
                       <iframe
                         className="Iframe__target"
@@ -106,7 +87,7 @@ const Pens = () => {
                         srcdoc={renderPreview}
                       />
                     </div>
-                  )}
+                  
                 </div>
               </div>
             );

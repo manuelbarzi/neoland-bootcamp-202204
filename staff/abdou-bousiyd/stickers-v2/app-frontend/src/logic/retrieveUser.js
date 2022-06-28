@@ -21,7 +21,7 @@ function retrieveUser(token, callback) {
             callback(new Error('server error'))
 
         else if (status === 200) {
-            console.log(status, 98988)
+
             const data = JSON.parse(payload)
             callback(null, data)
         }
