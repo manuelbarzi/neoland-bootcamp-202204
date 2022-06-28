@@ -7,13 +7,9 @@ function deleteComment(userId, activityId, commentId) {
     validateStringNotEmptyNoSpaces(activityId, 'activity id')
     validateStringNotEmptyNoSpaces(commentId, 'comment id')
     
-    return User.findById(userId)
-        .then(user => {
+    return Promise.all([User.findById(userId), Activity.findById(activityId)])
+        .then(([user, activity]) => {
             if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
-
-            return Activity.findById(activityId)
-        })
-        .then(activity => {
             if (!activity) throw new NotFoundError(`activity with id ${activityId} does not exist`)
 
             const comment= activity.comments.find(comment => comment._id.toString() === commentId)

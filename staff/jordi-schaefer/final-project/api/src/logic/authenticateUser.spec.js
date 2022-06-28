@@ -5,8 +5,10 @@ const authenticateUser = require('./authenticateUser')
 const { expect } = require('chai')
 require('dotenv').config()
 const { env: { MONGODB_URL_TEST}} = process
+const bcrypt = require('bcryptjs')
 
 describe('authenticateUser', () => {
+    
     before(() => connect(MONGODB_URL_TEST))
 
     beforeEach(() => User.deleteMany())
@@ -15,7 +17,10 @@ describe('authenticateUser', () => {
         let user
 
         beforeEach(() => {
-            user = new User({name:'Jordi', username: 'Jorgesito', password: '123123123', email: 'jordi@gmail.com'})
+            const hash = bcrypt.hashSync('123123123', 10)
+
+            user = new User({name:'Jordi', username: 'Jorgesito', password: hash, email: 'jordi@gmail.com'})
+
             return user.save()
         })
         afterEach(() => User.deleteMany())

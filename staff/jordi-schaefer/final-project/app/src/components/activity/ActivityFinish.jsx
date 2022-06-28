@@ -11,7 +11,6 @@ function ActivityFinish(props) {
     const navigate = useNavigate()
     const [images, setImages] = useState(null)
 
-
     const handleSaveClick = async(event) => {
         event.preventDefault()
         try {
@@ -44,7 +43,6 @@ function ActivityFinish(props) {
         props.onContinueClicked()
     }
 
-    
     const onImageChange = async(e) => {
         setImages([])
         const files = e.target.files
@@ -75,15 +73,14 @@ function ActivityFinish(props) {
         const resizedImage = await compress.compress([file], {
           size: 2, // the max size in MB, defaults to 2MB
           quality: 1, // the quality of the image, max is 1,
-          maxWidth: 270, // the max width of the output image, defaults to 1920px
-          maxHeight: 270, // the max height of the output image, defaults to 1920px
+          maxWidth: 250, // the max width of the output image, defaults to 1920px
+          maxHeight: 250, // the max height of the output image, defaults to 1920px
           resize: true // defaults to true, set false if you do not want to resize the image width and height
         })
         const img = resizedImage[0];
         const base64str = img.data
         const imgExt = img.ext
         const resizedFiile = Compress.convertBase64ToFile(base64str, imgExt)
-        console.log('reducido')
         return resizedFiile;
     }
 

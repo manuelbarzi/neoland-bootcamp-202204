@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { isJwtValid } from 'validators'
@@ -23,7 +24,7 @@ function ActivityMain() {
             else
                 setView('start')
             return
-        } else navigate('/welcome') 
+        } else navigate('/welcome')
     }, [])
 
 

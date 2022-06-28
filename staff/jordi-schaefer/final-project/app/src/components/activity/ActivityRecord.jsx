@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import Context from '../Context'
 import Map from './Map'
 import LiveInfo from './LiveInfo'
@@ -13,9 +13,10 @@ function ActivityRecord(props) {
     const [view, setView] = useState('map')
     const [unlock, setUnlock] = useState(0)
     const [hide, setHide] = useState(false)
-    const [activated, setActivated] = useState(false)
+    //const [activated, setActivated] = useState(false)
+    const activated = useRef(false)
+    const watchId = useRef(null)
     const { handleFeedback } = useContext(Context)
-    let watchId
 
     
     useEffect(() => {
@@ -42,25 +43,27 @@ function ActivityRecord(props) {
     }
 
     const watchPosition = () => {
-        watchId = navigator.geolocation.watchPosition(function(position) {
-            setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
-            console.log('set position')
-            if(activated) {
-                handleSaveClick()
-            }
-            //navigator.geolocation.clearWatch(watchId)
-        }, function(error){
-            handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 8_000 })
+        if(!watchId.current) {
+            watchId.current = navigator.geolocation.watchPosition(function(pos) {
+                setPosition([pos.coords.latitude, pos.coords.longitude, pos.coords.altitude])
+                //console.log('set position record')
+                if(activated.current) {
+                    handleSaveClick([pos.coords.latitude, pos.coords.longitude, pos.coords.altitude])
+                }
+            }, function(error){
+                handleFeedback({ type: 'error', message: 'Position error' })
+            }, { enableHighAccuracy: true, distanceFilter: 10,  maximumAge: 80_000 })
+        }
     }
 
-    const handleSaveClick = async() => {
+    const handleSaveClick = async(pos) => {
         try {
-            if(position) {
-                await addPointToActivity(sessionStorage.token, props.activityId, position)
+            if(pos || position) {
+                if (position) pos = position
+                await addPointToActivity(sessionStorage.token, props.activityId, pos)
                 handleFeedback({ type: 'success', message: 'Point saved!' })
                 setPoints(points => [...points, 
-                    position])
+                    pos])
                 setTimestamp(Date.now())
             }
             else handleFeedback({ type: 'error', message: 'Position not found' })
@@ -73,6 +76,7 @@ function ActivityRecord(props) {
         try {
             if(position) {
                 await addPointToActivity(sessionStorage.token, props.activityId, position)
+                navigator.geolocation.clearWatch(watchId.current)
                 props.onFinishClicked()
             }
             else handleFeedback({ type: 'error', message: 'Position not found' })
@@ -89,16 +93,16 @@ function ActivityRecord(props) {
     const handleDevelopClick = () => {
         setUnlock(unlock+1)
         if (unlock === 5) setHide(true)
-        else if (unlock > 5) { setHide(false); setActivated(false); setUnlock(0) }
+        else if (unlock > 5) { setHide(false); activated.current=false; setUnlock(0) }
     }
     
     const handleTurboClick = () => {
-        if(activated) {
+        if(activated.current) {
             document.getElementById('dev').classList.remove('dev-activated')
-            setActivated(false) }
+            activated.current = false }
         else {
             document.getElementById('dev').classList.add('dev-activated')
-            setActivated(true) }
+            activated.current = true }
     }
     /* ------   ------------   ------- */
 

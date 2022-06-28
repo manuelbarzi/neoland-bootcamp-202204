@@ -8,7 +8,8 @@
     "start-inspect": "node --inspect-brk src",
     "start-watch": "nodemon src",
     "test": "npx mocha src/logic/*.spec.js",
-    "test-inspect": "npx mocha --inspect-brk src/logic/*.spec.js"
+    "test-inspect": "npx mocha --inspect-brk src/logic/*.spec.js",
+    "test-coverage": "npx nyc --reporter=text --reporter=html mocha src/logic/*.spec.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
   "dependencies": {
     "apicaller": "file:../apicaller",
     "axios": "^0.27.2",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
     "dotenv": "^16.0.1",
     "errors": "file:../errors",

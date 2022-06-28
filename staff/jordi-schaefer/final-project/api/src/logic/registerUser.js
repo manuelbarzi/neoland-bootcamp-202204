@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const { ConflictError } = require('errors')
 const { validateStringNotEmptyOrBlank, validateUsername, validatePassword, validateEmail} = require('validators')
+const bcrypt = require('bcryptjs')
 
 function registerUser(name, username, password, email) {
     validateStringNotEmptyOrBlank(name, 'name')
@@ -8,7 +9,8 @@ function registerUser(name, username, password, email) {
     validatePassword(password)
     validateEmail(email, 'email')
 
-    return User.create({ name, username, password, email })
+    return bcrypt.hash(password, 10)
+        .then(hash => User.create({ name, username, password: hash, email }))
         .then(() => { })
         .catch(error => {    
             if (error.code = 11000)

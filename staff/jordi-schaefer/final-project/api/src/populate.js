@@ -1,13 +1,15 @@
 require('dotenv').config()
 const { connect, disconnect } = require('mongoose')
 const { Activity, Point, User } = require('./models')
+const bcrypt = require('bcryptjs')
 
-
- ;(async () => {
+;(async () => {
         try {
             await connect(process.env.MONGODB_URL)
 
-            const user = await User.create({ name: 'populate', username: 'populate', password: '12121212', email: 'populate@gmail.com' })
+            const hash = await bcrypt.hash('12121212', 10)
+
+            const user = await User.create({ name: 'populate', username: 'populate', password: hash, email: 'populate@gmail.com' })
 
 
             const p1 = await Point.create({altitude: 259, latitude: 41.3958, longitude: 2.10411})

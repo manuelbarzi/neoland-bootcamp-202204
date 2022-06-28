@@ -11,7 +11,7 @@ function retrieveSearchedActivities(userId, search) {
 
             const re = new RegExp(search)
 
-            return Activity.find({ title: { $regex: re , $options: 'i' } }).sort({date: -1}).populate('user', 'name foto').lean()        
+            return Activity.find({ private: false, title: { $regex: re , $options: 'i' } }).sort({date: -1}).populate('user', 'name foto').lean()        
         })
         .then((activities)=>{
             activities.forEach(activity => { 

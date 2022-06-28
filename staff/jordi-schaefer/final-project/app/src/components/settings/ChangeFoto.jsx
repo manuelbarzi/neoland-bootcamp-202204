@@ -59,7 +59,6 @@ function ChangeFoto(props) {
         const base64str = img.data
         const imgExt = img.ext
         const resizedFiile = Compress.convertBase64ToFile(base64str, imgExt)
-        console.log('reducido')
         return resizedFiile;
     }
 

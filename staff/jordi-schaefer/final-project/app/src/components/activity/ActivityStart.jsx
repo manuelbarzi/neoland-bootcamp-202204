@@ -1,4 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useState, useRef, useEffect, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Context from '../Context'
 import Map from './Map'
@@ -10,35 +11,27 @@ function ActivityStart(props) {
 
     const [sport, setSport] = useState(null)
     const [position, setPosition] = useState(null)
+    const watchId = useRef(null)
     const { handleFeedback } = useContext(Context)
     const navigate = useNavigate()
-    let watchId
 
     useEffect(() => {
         setSport('Ride')
-        getPosition()
+        watchPosition()
     }, [])
-    
-    const getPosition = () => {
-        navigator.geolocation.getCurrentPosition(function(position) {
-            setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
-            console.log('set first position')
-            watchPosition()
-        }, function(error){
-            handleFeedback({ type: 'error', message: 'Position error' })
-        }, { maximumAge: 400_000 }) // si pones otra cosa, o no lo pones, tarde mucho en encontrar
-    } // funciona con 400_000
+
 
     const watchPosition = () => {
-        watchId = navigator.geolocation.watchPosition(function(position) {
-            setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
-            console.log('set position')
-            //navigator.geolocation.clearWatch(watchId)
-        }, function(error){
-            handleFeedback({ type: 'error', message: 'Position error' })
-        }, { enableHighAccuracy: true, distanceFilter: 10, maximumAge: 8_000 })    
+        if(!watchId.current) {
+            watchId.current= navigator.geolocation.watchPosition(function(position) {
+                setPosition([position.coords.latitude, position.coords.longitude, position.coords.altitude])
+                //console.log('set position de Start')
+            }, function(error){
+                handleFeedback({ type: 'error', message: 'Position error' })
+            }, { enableHighAccuracy: true, distanceFilter: 10, maximumAge: 10_000 })    
+        }
     } 
-    //  timeout: 4000, tiempo permitido para optener la posicion yen caso contrario salta error
+    // timeout: 4000, tiempo permitido para optener la posicion yen caso contrario salta error
     // maximun age, tiempo maximo que utilizara la posicion encontrada 
     
     const handleStartClick = async() => {
@@ -47,8 +40,8 @@ function ActivityStart(props) {
                 const token = sessionStorage.token
                 const activityId = await createActivity(token, sport)
                 await addPointToActivity(sessionStorage.token, activityId, position)
+                navigator.geolocation.clearWatch(watchId.current)
                 props.onStartClicked(activityId, position)
-                navigator.geolocation.clearWatch(watchId)
             }
             else handleFeedback({ type: 'error', message: 'Position not found (https)' })
         } catch (error) {
