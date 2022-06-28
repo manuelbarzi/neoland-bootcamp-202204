@@ -64,7 +64,6 @@ function MyEvent(props) {
         <button className="MyEvent__event-button">Save</button>
       </div>
 
-
     </form>
   </div>
 }

@@ -1,40 +1,40 @@
 import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
-import {validateJwt, validateString} from 'validators'
+import { validateJwt, validateString } from 'validators'
 
 function updateUserName(token, newName, callback) {
-    const logger = new Logger('updateUserName')
+  const logger = new Logger('updateUserName')
 
-    logger.info('call')
+  logger.info('call')
 
-    validateJwt(token)
-    validateString(newName, 'newName')
-    
-    logger.info('request')
+  validateJwt(token)
+  validateString(newName, 'newName')
 
-    const api = new Apium('http://localhost:8080/api')
+  logger.info('request')
 
-    api.patch('users', {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name: newName })
-    }, (error, response) => {
-        if (error) return callback(error)
+  const api = new Apium('http://localhost:8080/api')
 
-        logger.info('response')
+  api.patch('users', {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name: newName })
+  }, (error, response) => {
+    if (error) return callback(error)
 
-        const { status, payload } = response
+    logger.info('response')
 
-        if (status >= 400 && status < 500) {
-            const data = JSON.parse(payload)
+    const { status, payload } = response
 
-            callback(new Error(data.error))
-        } else if (status >= 500)
-            callback(new Error('server error'))
-        else if (status === 204)
-            callback(null)
-    })
+    if (status >= 400 && status < 500) {
+      const data = JSON.parse(payload)
+
+      callback(new Error(data.error))
+    } else if (status >= 500)
+      callback(new Error('server error'))
+    else if (status === 204)
+      callback(null)
+  })
 }
 export default updateUserName

@@ -5,47 +5,47 @@ import authenticateUser from '../logic/authenticateUser'
 import { isJwtValid } from 'validators'
 
 function Login(props) {
-    const logger = new Logger('Login')
+  const logger = new Logger('Login')
 
-    logger.info('call')
+  logger.info('call')
 
-    const { handleFeedback } = useContext(Context)
+  const { handleFeedback } = useContext(Context)
 
-    const handleFormSubmit = event => {
-        event.preventDefault()
+  const handleFormSubmit = event => {
+    event.preventDefault()
 
-        const email = event.target.email.value
-        const password = event.target.password.value
+    const email = event.target.email.value
+    const password = event.target.password.value
 
-        try {
-            authenticateUser(email, password)
-                .then(token => {
-                    sessionStorage.token = token
+    try {
+      authenticateUser(email, password)
+        .then(token => {
+          sessionStorage.token = token
 
-                    props.onUserLoggedIn()
+          props.onUserLoggedIn()
 
-                })
-                .catch(error => handleFeedback({ level: 'error', message: error.message }))
-        } catch (error) {
-            handleFeedback({ level: 'error', message: error.message })
-        }
+        })
+        .catch(error => handleFeedback({ level: 'error', message: error.message }))
+    } catch (error) {
+      handleFeedback({ level: 'error', message: error.message })
     }
-    const handleRegisterLinkClick = event => {
-        event.preventDefault()
+  }
+  const handleRegisterLinkClick = event => {
+    event.preventDefault()
 
-        props.onRegisterLinkClicked()
-    }
+    props.onRegisterLinkClicked()
+  }
 
-    logger.info('render')
+  logger.info('render')
 
-    return isJwtValid(sessionStorage.token) ? <></> : <div>
-        <form className="Login__form" onSubmit={handleFormSubmit}>
-            <input className="Input__register-login" type="text" name="email" placeholder="Email" />
-            <input className="Input__register-login" type="password" name="password" placeholder="Password" />
-            <button className="Button">Login</button>
-            <a href="#" className='Button--no-border' onClick={handleRegisterLinkClick}>Register</a>
-        </form>
-    </div>
+  return isJwtValid(sessionStorage.token) ? <></> : <div>
+    <form className="Login__form" onSubmit={handleFormSubmit}>
+      <input className="Input__register-login" type="text" name="email" placeholder="Email" />
+      <input className="Input__register-login" type="password" name="password" placeholder="Password" />
+      <button className="Button">Login</button>
+      <a href="#" className='Button--no-border' onClick={handleRegisterLinkClick}>Register</a>
+    </form>
+  </div>
 }
 
 export default Login

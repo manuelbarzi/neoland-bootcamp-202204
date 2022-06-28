@@ -6,112 +6,108 @@ import MyEventList from './MyEventList'
 import HomeEventList from './HomeEventList'
 import Profile from './Profile'
 import EventCreator from './EventCreator'
-import RetrieveTargetedEvent from './RetrieveTargetedEvent'
+import TargetedEventList from './TargetedEventList'
 import { isJwtValid } from 'validators'
 import './Home.sass'
 import { useNavigate, Routes, Route } from 'react-router-dom'
 import { MdHome, MdOutlineCalendarToday, MdLogout, MdPermIdentity, MdAddCircleOutline, MdListAlt } from "react-icons/md"
 
-
-
 function Home({ onUserLogout }) {
-    const logger = new Logger('Home')
+  const logger = new Logger('Home')
 
-    logger.info('call')
+  logger.info('call')
 
-    const [name, setName] = useState(null)
-    const { handleFeedback } = useContext(Context)
-    const navigate = useNavigate()
+  const [name, setName] = useState(null)
+  const { handleFeedback } = useContext(Context)
+  const navigate = useNavigate()
 
-    const handleLogoutClick = () => {
-        handleLogout()
-    }
+  const handleLogoutClick = () => {
+    handleLogout()
+  }
 
-    const handleLogout = () => {
-        onUserLogout()
-    }
+  const handleLogout = () => {
+    onUserLogout()
+  }
 
-    useEffect(() => {
-        logger.info('componentDidMount')
+  useEffect(() => {
+    logger.info('componentDidMount')
 
-        if (isJwtValid(sessionStorage.token))
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+    if (isJwtValid(sessionStorage.token))
+      retrieveUser(sessionStorage.token, (error, user) => {
+        if (error) {
+          handleFeedback({ level: 'error', message: error.message })
 
-                    handleLogout()
+          handleLogout()
 
-                    return
-                }
+          return
+        }
+        setName(user.name)
+      })
+    else navigate('/login')
+  }, [])
 
-                setName(user.name)
+  const handleHomeClick = event => {
+    event.preventDefault()
 
-            })
-        else navigate('/login')
-    }, [])
+    navigate('/')
+  }
 
-    const handleHomeClick = event => {
-        event.preventDefault()
+  const handleEventCreatorClick = event => {
+    event.preventDefault()
 
-        navigate('/')
-    }
+    navigate('/eventCreator')
+  }
 
-    const handleEventCreatorClick = event => {
-        event.preventDefault()
+  const handleMyEventListClick = event => {
+    event.preventDefault()
 
-        navigate('/eventCreator')
-    }
+    navigate('/myEventList')
+  }
 
-    const handleMyEventListClick = event => {
-        event.preventDefault()
+  const handleProfileClick = event => {
+    event.preventDefault()
 
-        navigate('/myEventList')
-    }
+    navigate('/profile')
+  }
 
-    const handleProfileClick = event => {
-        event.preventDefault()
+  const handleTargetedEventClick = () => {
 
-        navigate('/profile')
-    }
+    navigate('/targetedEventList')
+  }
 
-    const handleEventTargetedClick = () => {
+  logger.info('render')
 
-        navigate('retrieveTargetedEvent')
-    }
+  return isJwtValid(sessionStorage.token) ?
 
-    logger.info('render')
+    <div className="Home Container">
+      <header className="Home__header">
+        <div className='Home__header-nav'>
+          <h1>Hello {name}</h1>
+          <a href="#" onClick={handleEventCreatorClick}><MdAddCircleOutline className="icons" /></a>
+          <a href="#" onClick={handleLogoutClick}><MdLogout /></a>
+        </div>
+      </header>
 
-    return isJwtValid(sessionStorage.token) ?
+      <main className="Home__body">
+        <Routes>
+          <Route index element={<HomeEventList />} />
+          <Route path="/eventCreator" element={<EventCreator />} />
+          <Route path="/myEventList" element={<MyEventList />} />
+          <Route path="/targetedEventList" element={<TargetedEventList />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </main>
 
-        <div className="Home Container">
-            <header className="Home__header">
-                <div className='Home__header-nav'>
-                    <h1>Hello {name}</h1>
-                    <a href="#" onClick={handleEventCreatorClick}><MdAddCircleOutline className="icons" /></a>
-                    <a href="#" onClick={handleLogoutClick}><MdLogout /></a>
-                </div>
-            </header>
+      <footer className="Home__footer">
+        <nav className='Home__footer-nav'>
+          <a href="#" onClick={handleHomeClick}><MdHome className="icons" /></a>
+          <a href="#" onClick={handleMyEventListClick}><MdOutlineCalendarToday className="icons" /></a>
+          <a href="#" onClick={handleTargetedEventClick}><MdListAlt className="icons" /></a>
+          <a href="#" onClick={handleProfileClick}><MdPermIdentity className="icons" /></a>
+        </nav>
 
-            <main className="Home__body">
-                <Routes>
-                    <Route index element={<HomeEventList />} />
-                    <Route path="/eventCreator" element={<EventCreator />} />
-                    <Route path="/myEventList" element={<MyEventList />} />
-                    <Route path="/retrieveTargetedEvent" element={<RetrieveTargetedEvent />} />
-                    <Route path="/profile" element={<Profile />} />
-                </Routes>
-            </main>
-
-            <footer className="Home__footer">
-                <nav className='Home__footer-nav'>
-                    <a href="#" onClick={handleHomeClick}><MdHome className="icons" /></a>
-                    <a href="#" onClick={handleMyEventListClick}><MdOutlineCalendarToday className="icons" /></a>
-                    <a href="#" onClick={handleEventTargetedClick}><MdListAlt className="icons" /></a>
-                    <a href="#" onClick={handleProfileClick}><MdPermIdentity className="icons" /></a>
-                </nav>
-
-            </footer>
-        </div> : <></>
+      </footer>
+    </div> : <></>
 }
 
 export default Home

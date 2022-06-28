@@ -3,10 +3,10 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import './MyEventList.sass'
 import retrieveTargetedEvent from '../logic/retrieveTargetedEvent'
-import EventTargeted from './EventTargeted'
+import TargetedEvent from './TargetedEvent'
 
-function RetrieveTargetedEvent() {
-  const logger = new Logger('RetrieveTargetedEvent')
+function TargetedEventList() {
+  const logger = new Logger('TargetedEventList')
 
   logger.info('call')
 
@@ -44,7 +44,7 @@ function RetrieveTargetedEvent() {
     {events && events.length ?
       <ul className="myEventList__list">
         {events.map(event => <li key={event._id}>
-          <EventTargeted eventId={event._id} title={event.title} description={event.description} location={event.location} eventDate={event.eventDate} onRemove={handleRemoveEventTargeted} />
+          <TargetedEvent eventId={event._id} title={event.title} description={event.description} location={event.location} eventDate={event.eventDate} onRemove={handleRemoveEventTargeted} />
         </li>)}
       </ul>
       :
@@ -52,4 +52,4 @@ function RetrieveTargetedEvent() {
   </div>
 }
 
-export default RetrieveTargetedEvent
+export default TargetedEventList

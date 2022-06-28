@@ -5,43 +5,43 @@ import Context from './Context'
 import deleteUser from '../logic/deleteUser'
 
 function DeleteUser() {//passar props como parametro
-    const logger = new Logger('DeleteUser')
+  const logger = new Logger('DeleteUser')
 
-    logger.info('call')
+  logger.info('call')
 
-    const { handleFeedback } = useContext(Context)
+  const { handleFeedback } = useContext(Context)
 
-    const handleFormSubmit = event => {
-        event.preventDefault()
+  const handleFormSubmit = event => {
+    event.preventDefault()
 
-        const password = event.target.password.value
+    const password = event.target.password.value
 
-        try {
-            deleteUser(sessionStorage.token, password, error => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+    try {
+      deleteUser(sessionStorage.token, password, error => {
+        if (error) {
+          handleFeedback({ level: 'error', message: error.message })
 
-                    return
-                }
-                //user props aqui
-            })
-
-        } catch (error) {
-            handleFeedback({ level: 'error', message: error.message })
-            //delete sessionStorage.token
-            //location.reload()
+          return
         }
+        //user props aqui
+      })
+
+    } catch (error) {
+      handleFeedback({ level: 'error', message: error.message })
+      //delete sessionStorage.token
+      //location.reload()
     }
+  }
 
-    logger.info('render')
+  logger.info('render')
 
-    return <div>
-        <form className="DeleteUser__form" onSubmit={handleFormSubmit}>
-            <input className="Input Input__light" type="password" name="password" placeholder="password" />
+  return <div>
+    <form className="DeleteUser__form" onSubmit={handleFormSubmit}>
+      <input className="Input Input__light" type="password" name="password" placeholder="password" />
 
-            <button className="Button--no-border">Delete User</button>
-        </form>
-    </div>
+      <button className="Button--no-border">Delete User</button>
+    </form>
+  </div>
 }
 export default DeleteUser
 

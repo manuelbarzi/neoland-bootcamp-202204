@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
-import retrieveOwnerEvent from '../logic/retrieveOwnerEvent'
+import retrieveMyEvent from '../logic/retrieveMyEvent'
 import MyEvent from './MyEvent'
 import './MyEventList.sass'
 
@@ -21,13 +21,12 @@ function MyEventList({ timestamp }) {
   }, [timestamp])
 
   const loadEvents = () =>
-    retrieveOwnerEvent(sessionStorage.token, (error, events) => {
+    retrieveMyEvent(sessionStorage.token, (error, events) => {
       if (error) {
         handleFeedback({ level: 'error', message: error.message })
 
         return
       }
-
       setEvents(events)
     })
 

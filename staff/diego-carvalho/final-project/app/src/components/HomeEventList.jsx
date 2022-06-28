@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
-import retrieveEvent from '../logic/retrieveEvent'
-import EventHome from './EventHome'
+import retrieveHomeEvent from '../logic/retrieveHomeEvent'
+import HomeEvent from './HomeEvent'
 import './HomeEventList.sass'
 
 function HomeEventList() {
 
-  const logger = new Logger('EventList')
+  const logger = new Logger('HomeEventList')
 
   logger.info('call')
 
@@ -22,7 +22,7 @@ function HomeEventList() {
   }, [reload])
 
   const loadEvents = () =>
-    retrieveEvent(sessionStorage.token, (error, _events) => {
+    retrieveHomeEvent(sessionStorage.token, (error, _events) => {
       if (error) {
         handleFeedback({ level: 'error', message: error.message })
 
@@ -33,13 +33,12 @@ function HomeEventList() {
 
   const handleSignUpToEventClick = () => setReload(Date.now())
 
-
   logger.info('render')
 
   return events && events.length ?
     <ul className="EventList__list">
       {events.map(event => <li key={event.id}>
-        <EventHome event={event} onSignUp={handleSignUpToEventClick} />
+        <HomeEvent event={event} onSignUp={handleSignUpToEventClick} />
       </li>)}
     </ul>
     :

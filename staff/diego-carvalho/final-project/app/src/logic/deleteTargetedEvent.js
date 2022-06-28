@@ -3,39 +3,39 @@ import Apium from 'vendor/Apium'
 import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
 
 function deleteTargetedEvent(token, eventId, callback) {
-    const logger = new Logger('deleteEvent')
+  const logger = new Logger('deleteEvent')
 
-    logger.info('call')
+  logger.info('call')
 
-    validateJwt(token)
-    validateStringNotEmptyNoSpaces(eventId, 'eventId')
+  validateJwt(token)
+  validateStringNotEmptyNoSpaces(eventId, 'eventId')
 
-    const api = new Apium('http://localhost:8080/api')
+  const api = new Apium('http://localhost:8080/api')
 
-    logger.info('request')
+  logger.info('request')
 
-    api.delete(`/users/events/${eventId}`, {
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        }
-    }, (error, response) => {
-        if (error) return callback(error)
+  api.delete(`/users/events/${eventId}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    }
+  }, (error, response) => {
+    if (error) return callback(error)
 
-        logger.info('response')
+    logger.info('response')
 
-        const { status, payload } = response
+    const { status, payload } = response
 
-        if (status >= 400 && status < 500) {
-            const data = JSON.parse(payload)
+    if (status >= 400 && status < 500) {
+      const data = JSON.parse(payload)
 
-            callback(new Error(data.error))
-        } else if (status >= 500)
-            callback(new Error('server error'))
-        else if (status === 204) {
-            callback(null)
-        }
-    })
+      callback(new Error(data.error))
+    } else if (status >= 500)
+      callback(new Error('server error'))
+    else if (status === 204) {
+      callback(null)
+    }
+  })
 }
 
 export default deleteTargetedEvent

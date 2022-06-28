@@ -5,8 +5,8 @@ import deleteTargetedEvent from '../logic/deleteTargetedEvent'
 import './MyEvent.sass'
 import { MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
 
-function EventTargeted(props) {
-  const logger = new Logger('EventTargeted')
+function TargetedEvent(props) {
+  const logger = new Logger('TargetedEvent')
   logger.info('call')
 
   const { handleFeedback } = useContext(Context)
@@ -40,9 +40,7 @@ function EventTargeted(props) {
     <div className='MyEvent__button-container'>
       <button className="MyEvent__event-button" onClick={handleRemoveClick}>cancelar</button>
     </div>
-
-
   </div>
 }
 
-export default EventTargeted
+export default TargetedEvent

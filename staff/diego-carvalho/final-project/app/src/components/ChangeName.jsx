@@ -6,41 +6,40 @@ import updateUserName from '../logic/updateUserName'
 import './Profile.sass'
 
 function ChangeName() {
-    const logger = new Logger('ChangeName')
+  const logger = new Logger('ChangeName')
 
-    logger.info('call')
+  logger.info('call')
 
-    const { handleFeedback } = useContext(Context)
+  const { handleFeedback } = useContext(Context)
 
-    const handleFormSubmit = event => {
-        event.preventDefault()
+  const handleFormSubmit = event => {
+    event.preventDefault()
 
-        const newName = event.target.name.value
+    const newName = event.target.name.value
 
-        try {
-            updateUserName(sessionStorage.token, newName, error => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
+    try {
+      updateUserName(sessionStorage.token, newName, error => {
+        if (error) {
+          handleFeedback({ level: 'error', message: error.message })
 
-                    return
-                }
-                handleFeedback({ level: 'success', message: 'name has been changed' })
-
-
-            })
-        } catch (error) {
-            handleFeedback({ level: 'error', message: error.message })
+          return
         }
+        handleFeedback({ level: 'success', message: 'name has been changed' })
+
+      })
+    } catch (error) {
+      handleFeedback({ level: 'error', message: error.message })
     }
+  }
 
-    logger.info('render')
+  logger.info('render')
 
-    return <div>
-        <form className="ChangeName__form" onSubmit={handleFormSubmit}>
-            <input className="Input Input--light" type="text" name="name" placeholder="name" />
-            <button className="Button--no-border">Save</button>
-        </form>
-    </div>
+  return <div>
+    <form className="ChangeName__form" onSubmit={handleFormSubmit}>
+      <input className="Input Input--light" type="text" name="name" placeholder="name" />
+      <button className="Button--no-border">Save</button>
+    </form>
+  </div>
 }
 export default ChangeName
 
@@ -64,33 +63,3 @@ export default ChangeName
 
 
 
-/*function ChangeName() {
-    Component.call(this, `<div class="ChangeName">
-        <form class="Container">
-
-            <input type="text" name="name" placeholder="Name">
-            <input type="text" name="newName" placeholder="New name">
-
-            <button>Save</button>
-        </form>
-    </div>`)
-
-    this.container.querySelector('form').addEventListener('submit', event => {
-        event.preventDefault()
-
-        const name = event.target.name.value
-        const newName = event.target.newName.value
-
-        updateUserName(sessionStorage.username, name, newName, error => {
-            if (error) {
-                alert(error.message)
-
-                return
-            }
-
-            alert('New name saved!')
-        })
-    })
-}
-
-chainPrototypes(Component, ChangeName) */

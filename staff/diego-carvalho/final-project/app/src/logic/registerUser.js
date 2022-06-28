@@ -1,49 +1,49 @@
 import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
-import {validateString, validateEmail,validatePassword} from 'validators'
+import { validateString, validateEmail, validatePassword } from 'validators'
 
 function registerUser(name, email, password, callback) {
-    const logger = new Logger('registerUser')
+  const logger = new Logger('registerUser')
 
-    logger.info('call')
+  logger.info('call')
 
-    validateString(name, 'name')
-    validateEmail(email, 'email')
-    validatePassword(password)
+  validateString(name, 'name')
+  validateEmail(email, 'email')
+  validatePassword(password)
 
-    logger.info('request')
+  logger.info('request')
 
-    const api = new Apium('http://localhost:8080/api')
+  const api = new Apium('http://localhost:8080/api')
 
-    api.post('users', {
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, password })
-    }, (error, { status, payload }) => {
-        logger.info('response')
+  api.post('users', {
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ name, email, password })
+  }, (error, { status, payload }) => {
+    logger.info('response')
 
-        if (error) {
-            callback(error)
+    if (error) {
+      callback(error)
 
-            return
-        }
+      return
+    }
 
-        if (status === 201) {
-            callback(null)
-        } else if (status >= 400 && status < 500) {
+    if (status === 201) {
+      callback(null)
+    } else if (status >= 400 && status < 500) {
 
-            logger.warn('response - client error status ' + status)
+      logger.warn('response - client error status ' + status)
 
-            const data = JSON.parse(payload)
+      const data = JSON.parse(payload)
 
-            callback(new Error(data.error))
-        } else {
-            logger.error('response - server error status ' + status)
+      callback(new Error(data.error))
+    } else {
+      logger.error('response - server error status ' + status)
 
-            callback(new Error('server error'))
-        }
-    })
+      callback(new Error('server error'))
+    }
+  })
 }
 export default registerUser
 

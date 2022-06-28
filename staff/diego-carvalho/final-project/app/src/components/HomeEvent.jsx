@@ -2,11 +2,11 @@ import { useContext } from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import signUpToEvent from '../logic/signUpToEvent'
-import './EventHome.sass'
+import './HomeEvent.sass'
 import { MdPeople, MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
 
-function EventHome(props) {
-  const logger = new Logger('EventHome')
+function HomeEvent(props) {
+  const logger = new Logger('HomeEvent')
   logger.info('call')
 
   const { handleFeedback } = useContext(Context)
@@ -46,7 +46,7 @@ function EventHome(props) {
   </div>
 }
 
-export default EventHome
+export default HomeEvent
 
 
 

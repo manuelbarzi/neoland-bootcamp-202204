@@ -10,52 +10,50 @@ import { useNavigate, Routes, Route } from 'react-router-dom'
 import { isJwtValid } from 'validators'
 
 function App() {
-    const logger = new Logger('App')
+  const logger = new Logger('App')
 
-    logger.info('call')
+  logger.info('call')
 
-    const [feedback, setFeedback] = useState(null)
-    const navigate = useNavigate()
+  const [feedback, setFeedback] = useState(null)
+  const navigate = useNavigate()
 
-    useEffect(() => {
-        if (isJwtValid(sessionStorage.token))
-            navigate('/')
-        else
-            handleUserLogout()
-    }, [])
+  useEffect(() => {
+    if (isJwtValid(sessionStorage.token))
+      navigate('/')
+    else
+      handleUserLogout()
+  }, [])
 
+  const handleUserRegistered = () => handleLoginNavigation()
 
-    const handleUserRegistered = () => handleLoginNavigation()
+  const handleUserLoggedIn = () => navigate('/')
 
-    const handleUserLoggedIn = () => navigate('/')
+  const handleRegisterNavigation = () => navigate('/register')
 
-    const handleRegisterNavigation = () => navigate('/register')
+  const handleLoginNavigation = () => navigate('/login')
 
-    const handleLoginNavigation = () => navigate('/login')
+  const handleUserLogout = () => {
+    delete sessionStorage.token
 
-    const handleUserLogout = () => {
-        delete sessionStorage.token
+    handleLoginNavigation()
+  }
 
-        handleLoginNavigation()
-    }
+  const handleFeedback = feedback => setFeedback(feedback)
 
-    const handleFeedback = feedback => setFeedback(feedback)
+  const handleFeedbackTimeout = () => setFeedback(null)
 
-    const handleFeedbackTimeout = () => setFeedback(null)
+  logger.info('render')
 
-    logger.info('render')
-
-    return <Context.Provider value={{ handleFeedback }}>
-        <div className="App Container">
-            <Routes>
-                <Route path="/*" element={<Home onUserLogout={handleUserLogout} />} />
-                <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />} />
-                <Route path='/register' element={<Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />} />
-                {/* <Route path='/profile/*' element={<Profile onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />} /> */}
-            </Routes>
-            {feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
-        </div>
-    </Context.Provider>
+  return <Context.Provider value={{ handleFeedback }}>
+    <div className="App Container">
+      <Routes>
+        <Route path="/*" element={<Home onUserLogout={handleUserLogout} />} />
+        <Route path="/login" element={<Login onUserLoggedIn={handleUserLoggedIn} onRegisterLinkClicked={handleRegisterNavigation} />} />
+        <Route path='/register' element={<Register onUserRegistered={handleUserRegistered} onLoginLinkClicked={handleLoginNavigation} />} />
+      </Routes>
+      {feedback && <Feedback level={feedback.level} message={feedback.message} onTimeout={handleFeedbackTimeout} />}
+    </div>
+  </Context.Provider>
 }
 
 export default App

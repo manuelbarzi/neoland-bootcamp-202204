@@ -1,23 +1,21 @@
 import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
-import { validateJwt, validateStringNotEmptyNoSpaces } from 'validators'
+import { validateJwt } from 'validators'
 
-function deleteEvent(token, eventId, callback) {
-  const logger = new Logger('deleteEvent')
+function retrieveHomeEvent(token, callback) {
+  const logger = new Logger('retrieveEvent')
 
   logger.info('call')
 
   validateJwt(token)
-  validateStringNotEmptyNoSpaces(eventId, 'eventId')
 
   const api = new Apium('http://localhost:8080/api')
 
   logger.info('request')
 
-  api.delete(`events/${eventId}`, {
+  api.get('events', {
     headers: {
-      Authorization: `Bearer ${token}`,
-      'Content-Type': 'application/json'
+      Authorization: `Bearer ${token}`
     }
   }, (error, response) => {
     if (error) return callback(error)
@@ -32,10 +30,12 @@ function deleteEvent(token, eventId, callback) {
       callback(new Error(data.error))
     } else if (status >= 500)
       callback(new Error('server error'))
-    else if (status === 204) {
-      callback(null)
+    else if (status === 200) {
+      const data = JSON.parse(payload)
+
+      callback(null, data)
     }
   })
 }
 
-export default deleteEvent
+export default retrieveHomeEvent

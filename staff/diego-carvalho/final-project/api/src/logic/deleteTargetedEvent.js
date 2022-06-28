@@ -10,8 +10,8 @@ function deleteTargetedEvent(userId, eventId) {
     .then((user) => {
       if (!user) throw new NotFoundError(`user id ${userId} does not found`)
 
-      const index = user.events.find(_eventId => _eventId.toString() === eventId)
-      if (index === undefined) throw new NotFoundError(`event with id ${eventId} does not exist`)
+      const index = user.events.findIndex(_eventId => _eventId.toString() === eventId)
+      if (index === -1) throw new NotFoundError(`event with id ${eventId} does not exist`)
 
       user.events.splice(index, 1)
 
@@ -23,8 +23,8 @@ function deleteTargetedEvent(userId, eventId) {
     .then((event) => {
       if (!event) throw new NotFoundError(`event id ${eventId} does not found`)
 
-      const index = event.participants.find(_userId => _userId.toString() === userId)
-      if (index === undefined) throw new NotFoundError(`user with id ${userId} does not exist`)
+      const index = event.participants.findIndex(_userId => _userId.toString() === userId)
+      if (index === -1) throw new NotFoundError(`user with id ${userId} does not exist`)
 
       event.participants.splice(index, 1)
 

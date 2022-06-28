@@ -2,8 +2,8 @@ import Logger from 'vendor/Loggy'
 import Apium from 'vendor/Apium'
 import { validateJwt } from 'validators'
 
-function retrieveEvent(token, callback) {
-  const logger = new Logger('retrieveEvent')
+function retrieveMyEvent(token, callback) {
+  const logger = new Logger('retrieveOwnerEvent')
 
   logger.info('call')
 
@@ -13,7 +13,7 @@ function retrieveEvent(token, callback) {
 
   logger.info('request')
 
-  api.get('events', {
+  api.get('events/owner', {
     headers: {
       Authorization: `Bearer ${token}`
     }
@@ -38,4 +38,4 @@ function retrieveEvent(token, callback) {
   })
 }
 
-export default retrieveEvent
+export default retrieveMyEvent

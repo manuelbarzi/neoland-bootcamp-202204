@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import { MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
 
 function EventCreator() {
-  const logger = new Logger('Home')
+  const logger = new Logger('EventCreator')
 
   logger.info('call')
 
