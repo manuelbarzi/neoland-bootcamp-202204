@@ -20,10 +20,10 @@ export default function Register(props) {
           await registerUser(name, email, password)
 
           setFeedback({ level: 'success', message: 'Successfully registered' })
+          
           router.push('/login')
 
       } catch (error) {
-          console.error(error)
           setFeedback({ level: 'error', message: error.message })
       }
   }

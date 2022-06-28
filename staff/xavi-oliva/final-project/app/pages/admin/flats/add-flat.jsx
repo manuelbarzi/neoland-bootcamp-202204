@@ -3,11 +3,11 @@ import { PrimaryButton, Input, Section, Form, Textarea } from '../../../componen
 import { verifyTokenWithAPICall } from '../../helpers'
 import { useRouter } from 'next/router'
 import Apium from 'apium'
+import { FunctionalContext } from '../../../contexts/functional-context'
 
 export default function AddFlat({ token }) {
   const router = useRouter()
-
-  // const { handleFeedback } = useContext(Context)
+  const { setFeedback } = FunctionalContext.useFeedback()
 
   const handleFormSubmit = async event => {
     event.preventDefault()
@@ -21,13 +21,13 @@ export default function AddFlat({ token }) {
       event.target.reset()
 
       await createFlat(token, { title, description, address })
-      // handleFeedback
+      
+      setFeedback({ level: 'success', message: 'New flat added' })
 
       router.push('/admin')
 
     } catch (error) {
-      console.error(error)
-      // handleFeedback(error.message)
+      setFeedback({ level: 'error', message: error.message })
     }
   }
 

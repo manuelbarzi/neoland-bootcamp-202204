@@ -2,22 +2,24 @@ import { Div, Card, PrimaryButton, Section, CardContent, CardBookingList, CardCo
 import { retrieveFlat, deleteFlat, retrieveBookings, retrieveUser } from 'logic'
 import { verifyTokenWithAPICall } from '../helpers'
 import { useRouter } from 'next/router'
+import { FunctionalContext } from "../../contexts/functional-context";
 
 
 export default function Flat({ token, user, flat, bookings }) {
     const router = useRouter()
+    const { setFeedback } = FunctionalContext.useFeedback()
     
     const handleRemoveClick = async () => {
 
         try {
             await deleteFlat(token, flat._id)
-            // handleFeedback
+            
+            setFeedback({ level: 'success', message: 'Flat deleted' })
 
             router.push('/admin')
 
         } catch (error) {
-            console.error(error)
-            // handleFeedback(error.message)
+            setFeedback({ level: 'error', message: error.message })
         }            
     }
 

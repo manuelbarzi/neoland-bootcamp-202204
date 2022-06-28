@@ -1,21 +1,23 @@
 import { deleteBooking } from 'logic'
 import { DeleteButton } from '../../components'
 import Router from 'next/router'
+import { FunctionalContext } from '../../contexts/functional-context'
 
 export const CardBookingList = ({ className, children, token, flat, bookings, ...props }) => {
+    const { setFeedback } = FunctionalContext.useFeedback()
 
     const handleRemoveClick = async bookingId => {
 
         try {
             await deleteBooking(token, flat._id, bookingId)
-            // handleFeedback
+
+            setFeedback({ level: 'success', message: 'Booking deleted' })
 
             Router.reload(`/flats/${flat._id}/`)
 
 
         } catch (error) {
-            console.error(error)
-            // handleFeedback(error.message)
+            setFeedback({ level: 'error', message: error.message })
         }
     }
 

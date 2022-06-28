@@ -6,8 +6,8 @@ import { useRouter } from 'next/router'
 import { FunctionalContext } from "../contexts/functional-context"
 
 export default function Profile({ token, user }) {
-    const router = useRouter()
     const { setFeedback } = FunctionalContext.useFeedback()
+    const router = useRouter()
 
     const [view, setView] = useState(null)
 
@@ -39,10 +39,12 @@ export default function Profile({ token, user }) {
         try {
             updateUser(token, { name, surnames, phone })
 
+            setFeedback({ level: 'success', message: 'Name, Surnames and/or Phone successfully updated' })
+
             router.push('/admin')
 
         } catch (error) {
-            setFeedback({message: error.message, level: 1})
+            setFeedback({ level: 'error', message: error.message })
         }
     }
 
@@ -56,12 +58,12 @@ export default function Profile({ token, user }) {
         try {
             updateUserPassword(token, { oldPassword, password, repeatPassword })
 
-            setFeedback({message: 'successfully updated', level: 0})
+            setFeedback({ level: 'success', message: 'Password successfully updated' })
 
             router.push('/admin')
 
         } catch (error) {
-            console.error(error)
+            setFeedback({ level: 'error', message: error.message })
         }
     }
 
@@ -77,17 +79,14 @@ export default function Profile({ token, user }) {
         try {
             await unregisterUser(token, { password, repeatPassword })
 
-            console.log('successfully deleted')
-
-            // delete sessionStorage.token
             cookies.set('token')
+
+            setFeedback({ level: 'success', message: 'Successfully deleted, we are sorry to see you go!' })
+
             router.push('/login')
 
-            // handleFeedback('successfully logged in', 'succeed')
-
         } catch (error) {
-            console.error(error)
-            // handleFeedback(error.message)
+            setFeedback({ level: 'error', message: error.message })
         }
     }
 

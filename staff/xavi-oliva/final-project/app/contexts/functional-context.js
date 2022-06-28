@@ -25,7 +25,7 @@ const Provider = ({children}) => {
     return <Context.Provider value={{feedback, setFeedback}}>
         {children}
         { view && 
-        <Feedback>
+        <Feedback level={feedback.level} >
             <p>{feedback.message}</p>
         </Feedback>
         }

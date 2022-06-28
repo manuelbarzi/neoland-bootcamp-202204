@@ -27,10 +27,12 @@ export default function Login(props) {
       const token = await authenticateUser(email, password)
 
       document.cookie = `token=${token}; max-age=86400;`
-      setFeedback({ level: 'success', message: 'successfully logged in' })
+
+      setFeedback({ level: 'success', message: 'Successfully logged in' })
+
       router.push('/admin')
+
     } catch (error) {
-      // handleFeedback(error.message)
       setFeedback({ level: 'error', message: error.message })
     }
   }

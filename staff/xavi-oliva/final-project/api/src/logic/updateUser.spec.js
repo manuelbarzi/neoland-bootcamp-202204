@@ -8,35 +8,34 @@ describe('updateUser', () => {
     before(() => connect('mongodb://localhost:27017/flats-db-test'))
 
     beforeEach(() => User.deleteMany())
-    
+    afterEach(() => User.deleteMany())
+
+
     describe('when user already exists', () => {
-        let user
-
+        let user 
+        
         beforeEach(() => {
-            user = new User({ name: 'Papa Gayo', email: 'papa@gayo.com', password: '123123123' })
-
+            user = new User({ name: 'Pepe', email: 'jordi@email.com', password: '123123123' })
             return user.save()
         })
 
-        it('succeeds on correct user data', () =>
-            updateUser(user.id, 'Pepe Gayo', 'Fante', '234234234', '+34123123123')
+        it('succeeds on existing user', () => {
+            return updateUser(user.id, 'Diego', 'Surnames', '+34123123123')
                 .then(result => {
                     expect(result).to.be.undefined
-
                     return User.findById(user.id)
                 })
                 .then(user => {
-                    expect(user.name).to.equal('Pepe Gayo')
-                    expect(user.surnames).to.equal('Fante')
-                    expect(user.password).to.equal('234234234')
+                    expect(user.name).to.equal('Diego')
+                    expect(user.surnames).to.equal('Surnames')
                     expect(user.phone).to.equal('+34123123123')
                 })
-        )
+        })
 
         it('fails on incorrect user id', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateUser(wrongId, 'Pepe Gayo', 'Fante', '234234234', '+34123123123')
+            return updateUser(wrongId, 'Diego', 'Surnames', '+34123123123')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })
@@ -51,7 +50,7 @@ describe('updateUser', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return updateUser(unexistingUserId, 'Pepe Gayo', 'Fante', '234234234', '+34123123123')
+            return updateUser(unexistingUserId, 'Diego', 'Surnames', '+34123123123')
                 .then(result => {
                     throw new Error('should not reach this point')
                 })
@@ -62,7 +61,7 @@ describe('updateUser', () => {
         })
     })
 
-    afterEach(() => User.deleteMany())
 
     after(() => disconnect())
+
 })
