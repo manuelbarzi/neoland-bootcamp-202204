@@ -3,7 +3,6 @@ const { Clock, User } = require("../models");
 const { validateId } = require("validator");
 
 function retrieveClocks(userId) {
-  debugger;
   validateId(userId);
   return User.findById(userId)
     .then((user) => {

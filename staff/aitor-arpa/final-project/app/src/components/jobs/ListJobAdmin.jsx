@@ -42,6 +42,6 @@ export default function CardJobList(props) {
       ))}
     </ul>
   ) : (
-    <h1 className="Center logo">Dont have jobs </h1>
+    <h1 className="center logo">Dont have jobs </h1>
   );
 }

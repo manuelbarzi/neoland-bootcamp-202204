@@ -36,8 +36,8 @@ export default function FormRegister() {
   };
 
   return (
-    <div className="Center">
-      <form onSubmit={handelRegisterUser} className="Form">
+    <div className="center_forms">
+      <form onSubmit={handelRegisterUser} className="form">
         <input
           className="borderDawn"
           type="username"
@@ -74,10 +74,7 @@ export default function FormRegister() {
           name="address"
           placeholder="Addres"
         ></input>
-        <select name="role">
-          <option value="" disabled selected>
-            Rol
-          </option>
+        <select name="role" defaultValue="worker">
           <option value="admin">Admin</option>
           <option value="worker">Trabajador</option>
         </select>

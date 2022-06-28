@@ -3,13 +3,11 @@ const { validateId } = require("validator");
 const { AuthError, NotFoundError } = require("errors");
 
 function deleteJob(adminId, jobId) {
-  debugger;
   validateId(adminId);
   validateId(jobId);
 
   return User.findById(adminId)
     .then((user) => {
-      debugger;
       if (!user) throw new NotFoundError(`User with ${adminId} not found`);
 
       if (user.role === "worker")

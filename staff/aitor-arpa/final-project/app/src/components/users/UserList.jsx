@@ -11,7 +11,6 @@ export default function UserList(props) {
   const loadworkers = () => {
     try {
       const role = "worker";
-      debugger;
       retrieveUsersRol(sessionStorage.token, role)
         .then((workers) => {
           setWorkers(workers);

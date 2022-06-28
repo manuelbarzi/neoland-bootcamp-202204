@@ -12,7 +12,7 @@ export default withTokenAndRol(function ProfileAdmin() {
         element={
           <div>
             <Logout />
-            <h1 className="logo"> User </h1>
+
             <FormProfile />
             <div>
               <NavbarAdmin />

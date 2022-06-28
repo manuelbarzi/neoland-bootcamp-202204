@@ -35,6 +35,6 @@ export default function FormProfile() {
       address={user.address}
     />
   ) : (
-    <p> Datos incompletos </p>
+    <h1 className="logo"> Datos incompletos </h1>
   );
 }

@@ -34,10 +34,10 @@ export default function ClockListAdmin() {
   };
 
   return clocks && clocks.length ? (
-    <ul className="scroll-container ">
-      {clocks.map((clock) => (
+    <ul className=" ">
+      {clocks.map((clock, i) => (
         <div className="gaps ">
-          <li key={clock.id} className="gridTwo_small">
+          <li key={i} className="gridTwo_small">
             <input
               id="prodId"
               name="clocId"
@@ -89,6 +89,6 @@ export default function ClockListAdmin() {
       ))}
     </ul>
   ) : (
-    <h1 className="Center logo">No tienes horas guardadas</h1>
+    <h1 className="center logo">No tienes horas guardadas</h1>
   );
 }

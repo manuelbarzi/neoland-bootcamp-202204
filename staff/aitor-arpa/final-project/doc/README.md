@@ -47,13 +47,13 @@ Está diseñada para resolver la comunicación entre trabajador y sus tareas a r
 - description
 - address
 - duration (Number)
-- workers ([ObjectId (User)])
+- workers (ObjectId (User))
 
 #### Clock
 
 - id (ObjectId)
-- user (ObjectId)
-- job (ObjectId, Optional)
+- user (ObjectId (User))
+- job (ObjectId, (Job))
 - timein (Date)
 - timeout (Date)
 
@@ -71,9 +71,9 @@ Está diseñada para resolver la comunicación entre trabajador y sus tareas a r
 
 ## TODOs
 
-- TODO controlar todas las llamadas a logica dentro de los compos con un try-catch (manejo de errores y feedback al usuario a traves de un panel (toaster). mirar ClockRegister y aplicarlo igual en todos los compos)
 - TODO completar documentacion, mas diagramas (README.md)
 - TODO finalizar testing logic server side
 - TODO implementar reports
 - TODO implementar pausas de trabajos (boton pause)
 - TODO remake toast styles
+- TODO implementar msa estilos

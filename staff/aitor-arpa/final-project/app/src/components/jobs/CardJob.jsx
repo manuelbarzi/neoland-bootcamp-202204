@@ -4,9 +4,8 @@ import clockUserInJob from "../../logic/clockUserInJob";
 import clockUserOutJob from "../../logic/clockUserOutJob";
 import toast, { Toaster } from "react-hot-toast";
 import "./CardJob.sass";
-import { useState } from "react";
+
 export default function CardJob(props) {
-  const [clock, setClockId] = useState();
   const RegisterClockJobIn = (event) => {
     try {
       event.preventDefault();

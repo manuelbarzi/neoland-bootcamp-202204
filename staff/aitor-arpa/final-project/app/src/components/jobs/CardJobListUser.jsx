@@ -25,9 +25,9 @@ export default function CardJobListUser(props) {
   };
 
   return jobs && jobs.length > 0 ? (
-    <ul className="scroll-container">
+    <ul>
       {jobs.map((job, i) => (
-        <li key={i}>
+        <li key={i} className="cadjob">
           <CardJob
             jobid={job.id}
             title={job.title}
@@ -38,6 +38,6 @@ export default function CardJobListUser(props) {
       ))}
     </ul>
   ) : (
-    <h1 className="Center logo">No tienes trabajos asignados</h1>
+    <h1 className="center logo">No tienes trabajos asignados</h1>
   );
 }

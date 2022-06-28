@@ -37,6 +37,6 @@ export default function CardJobList() {
       ))}
     </ul>
   ) : (
-    <h1 className="Center logo">No tienes trabajos asignados</h1>
+    <h1 className="center logo">No tienes trabajos asignados</h1>
   );
 }

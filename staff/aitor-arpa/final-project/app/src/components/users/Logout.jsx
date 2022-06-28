@@ -10,7 +10,7 @@ export default function Logout() {
   };
 
   return (
-    <div className="pos">
+    <div>
       <button className="logout" onClick={ClickLogOut}>
         Logout
       </button>

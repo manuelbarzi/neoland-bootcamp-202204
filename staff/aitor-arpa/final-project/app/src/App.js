@@ -26,7 +26,7 @@ export default function App() {
 
         {/* ----- ADMIN ----- */}
         <Route path="/admin" element={<HomeAdmin />} />
-        <Route path="admin/profile" element={<ProfileAdmin />} />
+        <Route path="admin/profile/*" element={<ProfileAdmin />} />
         <Route path="admin/clock/*" element={<ClockAdmin />} />
         <Route path="admin/job" element={<JobsAdmin />} />
         <Route path="admin/user" element={<Users />} />

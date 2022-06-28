@@ -30,10 +30,10 @@ function FormLogin(props) {
   };
 
   return (
-    <div className="Center">
+    <div className="center">
       <h3 className="logo"> CONTROL Z</h3>
 
-      <form onSubmit={handelUserLogin} className="Form">
+      <form onSubmit={handelUserLogin} className="form">
         <input
           className="borderDawn"
           type="username"

@@ -30,8 +30,8 @@ export default function CardUser(props) {
   };
 
   return (
-    <div className="center_form ">
-      <form className="Center">
+    <div className="center_form center_top ">
+      <form className="center gap20">
         <input className="borderDawn" type="hidden" name="id" />
         <input
           className="borderDawn"

@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node src"
+    "start": "node src",
+    "test": "npx mocha src/logic/*.spec.js"
   },
   "keywords": [],
   "author": "",

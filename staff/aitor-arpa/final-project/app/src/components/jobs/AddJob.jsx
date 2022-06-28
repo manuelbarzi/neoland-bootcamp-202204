@@ -3,6 +3,7 @@ import newJob from "../../images/addJob.png";
 import addJob from "../../logic/addJob";
 import retrieveUsersRol from "../../logic/retrieveUsersRol";
 import { useState, useEffect } from "react";
+import "./AddJob.sass";
 
 export default function AddJob(props) {
   useEffect(() => {
@@ -45,7 +46,7 @@ export default function AddJob(props) {
   };
 
   return (
-    <div>
+    <div className="cardadd">
       <form className="border_radius_medium" onSubmit={handelsaveJob}>
         <div className="gridTwo_reverse">
           <input className="borderDawn" type="hidden" name="jobId" />

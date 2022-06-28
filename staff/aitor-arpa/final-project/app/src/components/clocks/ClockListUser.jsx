@@ -6,6 +6,7 @@ import clockUserOut from "../../logic/clockUserOut";
 import In from "../../images/entrada.png";
 import "./ClockRegister.sass";
 import clockUserIn from "../../logic/clockUserIn";
+import "./ClockListUser.sass";
 
 export default function ClockListUser(props) {
   const [clocks, setClocks] = useState(null);
@@ -14,12 +15,7 @@ export default function ClockListUser(props) {
     hour: "numeric",
     minute: "numeric",
   }; // long cambia a texto
-  const day = {
-    day: "numeric",
-    month: "numeric",
-    /*  year: "numeric", */
-    weekday: "long",
-  };
+
   useEffect(() => {
     loadClocks();
   }, []);
@@ -75,41 +71,35 @@ export default function ClockListUser(props) {
   return (
     <>
       {clocks && !!clocks.length && (
-        <div className="">
+        <div>
           <ul>
             {clocks.map((clock, i) => (
-              <li key={clock.id + i} className="">
+              <li key={clock.id + i}>
                 <form onSubmit={registerTimeOut}>
-                  <input
-                    name="clockId"
-                    value={clock.id}
-                    disa="true"
-                    type="hidden"
-                  />
+                  <input name="clockId" value={clock.id} type="hidden" />
                   <li />
-                  <label>Out:</label>
-                  <p>
+
+                  <p className="cadclock">
+                    In:{" "}
+                    {new Date(clock.timein).toLocaleDateString(
+                      "es-ES",
+                      timeOptions
+                    )}
+                    {" -"}
+                    {"Out:"}{" "}
                     {!clock.timeout
-                      ? "-"
+                      ? " No clocked"
                       : new Date(clock.timeout).toLocaleDateString(
                           "es-ES",
                           timeOptions
                         )}
                   </p>
 
-                  <label>In:</label>
-                  <li>
-                    <p>
-                      {new Date(clock.timein).toLocaleDateString(
-                        "es-ES",
-                        timeOptions
-                      )}
-                    </p>
-                  </li>
+                  <li></li>
                   {clock.timeout ? (
                     <></>
                   ) : (
-                    <div className="Center">
+                    <div>
                       <button type="onsubmit">
                         <img src={exit} alt=""></img>
                       </button>
@@ -124,9 +114,9 @@ export default function ClockListUser(props) {
       )}
       {!clocks ||
         (!clocks.some((clock) => !clock.timeout) && (
-          <div className="center_row">
+          <div>
             <button className="btn " onClick={registerTimeIn}>
-              <img src={In} alt="" disa></img>
+              <img src={In} alt=""></img>
             </button>
           </div>
         ))}

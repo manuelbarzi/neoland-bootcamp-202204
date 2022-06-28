@@ -6,7 +6,6 @@ const {
 } = require("validator");
 
 function UpdateJob(token, jobId, title, description, address, workers) {
-  debugger;
   isJwtValid(token);
   validateId(jobId);
   validateStringNotEmptyOrBlank(description);
@@ -14,7 +13,6 @@ function UpdateJob(token, jobId, title, description, address, workers) {
   validateStringNotEmptyOrBlank(address);
 
   const api = new Apium(process.env.REACT_APP_API_URL);
-  debugger;
   return api
     .post("jobs", {
       headers: {
@@ -25,7 +23,6 @@ function UpdateJob(token, jobId, title, description, address, workers) {
     })
     .then(({ status, payload }) => {
       if (status === 201) {
-        debugger;
         const { data } = JSON.parse(payload);
 
         return data;

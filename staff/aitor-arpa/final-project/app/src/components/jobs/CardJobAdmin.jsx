@@ -56,7 +56,6 @@ export default function CardJobAdmin(props) {
       )
         .then((jobid) => {
           toast.success(`job edit`);
-          debugger;
           props.ondeleteclicked();
         })
         .catch((error) => {

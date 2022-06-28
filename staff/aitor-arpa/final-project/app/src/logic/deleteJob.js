@@ -2,7 +2,6 @@ import Apium from "apium";
 const { isJwtValid } = require("validator");
 
 function deleteJob(token, jobId) {
-  debugger;
   isJwtValid(token);
   const api = new Apium(process.env.REACT_APP_API_URL);
 
