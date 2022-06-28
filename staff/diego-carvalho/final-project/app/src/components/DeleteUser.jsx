@@ -4,6 +4,7 @@ import Logger from 'vendor/Loggy'
 import Context from './Context'
 import deleteUser from '../logic/deleteUser'
 
+
 function DeleteUser() {//passar props como parametro
   const logger = new Logger('DeleteUser')
 
@@ -36,6 +37,7 @@ function DeleteUser() {//passar props como parametro
   logger.info('render')
 
   return <div>
+
     <form className="DeleteUser__form" onSubmit={handleFormSubmit}>
       <input className="Input Input__light" type="password" name="password" placeholder="password" />
 

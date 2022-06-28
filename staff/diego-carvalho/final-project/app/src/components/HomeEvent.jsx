@@ -19,10 +19,11 @@ function HomeEvent(props) {
           handleFeedback({ level: 'error', message: error.message })
 
           return
+
         }
         onSignUp(event.id)
-        handleFeedback({ level: 'success', message: 'Apuntado' })
       })
+    handleFeedback({ level: 'success', message: 'Apuntado' })
   }
 
   logger.info('render')

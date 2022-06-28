@@ -9,4 +9,3 @@ function Feedback({ level, message, onTimeout }) {
 }
 
 export default Feedback
-
