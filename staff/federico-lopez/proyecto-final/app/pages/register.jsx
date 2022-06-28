@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Link from 'next/link'
-import { registerUser } from 'logic'
+import { registerUser } from '../logic'
 import { useRouter } from 'next/router'
 import { verifyTokenWithAPICall } from '../helpers'
 import { FlexColSection, Logo, BlueAnchor, RegisterForm, Context } from '../components'
@@ -33,7 +33,7 @@ export default function Register(props) {
             <Logo className="w-72 h-72 drop-shadow-custom-logo rounded-full bg-white" />
             <RegisterForm className="px-4" onSubmit={onFormSubmit}/>
             <div className="w-full gap-2 flex justify-center">
-                <p class="text-myblack text-xs">Already have an account ?</p>
+                <p className="text-myblack text-xs">Already have an account ?</p>
                 <Link href="/login">
                     <BlueAnchor>Log In</BlueAnchor>
                 </Link>

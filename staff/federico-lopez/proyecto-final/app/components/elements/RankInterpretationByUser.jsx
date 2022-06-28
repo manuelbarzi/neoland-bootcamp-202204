@@ -9,7 +9,7 @@ export function RankInterpretationByUser({ onRankClick, rankByUser, userLoggedIn
     }
 
     return <>
-        {userLoggedIn && <div class="w-full flex justify-between">
+        {userLoggedIn && <div className="w-full flex justify-between">
             <p className="text-myblack font-medium">Rate this interpretation:</p>
             <div className="flex justify-center items-center">
 

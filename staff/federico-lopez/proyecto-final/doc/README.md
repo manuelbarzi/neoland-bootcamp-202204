@@ -9,18 +9,25 @@ PItchUs is a social media for musicians who want to play and share song interpre
 ## Funcional Description
 
 ### Use Cases
-- Register an User
-- Edit the User profile
-- Change Password
+- Register an user
+- Edit the user profile
+- Change password
 - Unregister an User
 - Publish an interpretation
-- Explore personalized interpretations connecting with the Spotify User Account
-- Search an interpretation
-- Rank an interpretation
+- Explore personalized interpretations connecting with the Spotify user account
+- Search interpretations of an Artist or a Song
+- Rate an interpretation
+- Update an interpretation rate
+- Remove an interpretation rate
 
 ### Wireframes
 
 ## Technical Description
+
+
+
+
+## Technologies
 - React
 - NextJS
 - Tailwind

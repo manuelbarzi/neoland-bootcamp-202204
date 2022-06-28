@@ -31,7 +31,6 @@ export function Dialog({ level, title, description, button1, button2, onCloseCli
                 <button
                     className="w-full p-4 text-myblue flex justify-center items-center"
                     onClick={function () {
-                        debugger
                         onCloseClick()
                         onCloseDialog()
                     }}

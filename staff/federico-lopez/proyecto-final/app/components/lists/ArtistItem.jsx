@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { ArtistIconImage } from '..'
+import { ArtistIconImage } from '../../components'
 
 export const ArtistItem = ({ className, children, artist, onClick, ...props }) => {
     return (
         <li 
         className={`w-full h-14 bg-primary shadow-custom-items ${className}`}
-        key={artist.id}
         onClick={onClick} 
         {...props} >
             
