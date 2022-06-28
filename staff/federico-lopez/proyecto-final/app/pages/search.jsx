@@ -8,30 +8,19 @@ export default function Search({ token }) {
     const [artistsAndSongs, setArtistsAndSongs] = useState(null)
 
     const waiting = 0
-    // const onFormSubmit = async event => {
-    //     event.preventDefault()
-
-    //     const query = event.target.search.value
-
-    //     try {
-    //         const artistsAndSongsResults = await retrieveArtistsAndSongs(query)
-
-    //         console.log(artistsAndSongsResults)
-    //     } catch (error) {
-    //         console.error(error)
-    //     }
-    // }
-
-    // const onFormSubmit = event => {
-    //     event.preventDefault()
-    // }
 
     const onChangeQueryTimeout = async (query, waitingPreviousValue) => {
         debugger
         if (waitingPreviousValue === waiting) {
+            try {
+
+            
             const artistsAndSongsFounded = await retrieveArtistsAndSongs(query)
 
             setArtistsAndSongs(artistsAndSongsFounded)
+            } catch(error) {
+                
+            }
         }
     }
 
