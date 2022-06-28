@@ -1,9 +1,12 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { SearchLink, HomeLink, CreateInterPretationLink, UserSessionLink } from '../../components'
+import { SearchLink, HomeLink, CreateInterPretationLink, UserSessionLink, Context } from '../../components'
+import { useContext } from 'react'
 
 export function Footer({ userLoggedIn, page }) {
+    const { handleCloseDialogClick } = useContext(Context)
+    
     const [pageHome, setPageHome] = useState(false)
     const [pageSearch, setPageSearch] = useState(false)
     const [pageCreateInterpretation, setPageCreateInterpretation] = useState(false)
@@ -26,24 +29,12 @@ export function Footer({ userLoggedIn, page }) {
         }
     }, [])
 
-
-    // return <footer className="w-full h-20 fixed bottom-0 bg-white shadow-custom-footer flex justify-center" >
-    //     <nav className="w-4/5 flex justify-between items-center">
-    //         <HomeLink pageOn={pageHome} />
-    //         <SearchLink pageOn={pageSearch} />
-    //         <CreateInterPretationLink pageOn={pageCreateInterpretation }/>
-    //         <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} />
-    //     </nav>
-    // </footer>
-
     return <footer className="w-full h-20 bg-white shadow-custom-footer flex justify-center" >
         <nav className="w-4/5 flex justify-between items-center">
-            <HomeLink pageOn={pageHome} />
-            <SearchLink pageOn={pageSearch} />
-            <CreateInterPretationLink pageOn={pageCreateInterpretation }/>
-            <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} />
+            <HomeLink pageOn={pageHome} onClick={handleCloseDialogClick} />
+            <SearchLink pageOn={pageSearch} onClick={handleCloseDialogClick} />
+            <CreateInterPretationLink pageOn={pageCreateInterpretation} onClick={handleCloseDialogClick} userLoggedIn={userLoggedIn} />
+            <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} onClick={handleCloseDialogClick} />
         </nav>
     </footer>
-
-
 }

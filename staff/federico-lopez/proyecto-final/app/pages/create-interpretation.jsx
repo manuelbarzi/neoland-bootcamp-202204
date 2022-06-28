@@ -261,7 +261,7 @@ export default function CreateInterpretation({ token }) {
 
             </FlexColSection>
 
-            <Footer page="create-interpretation" />
+            <Footer page="create-interpretation" userLoggedIn={!!token}/>
         </div>
     )
     {

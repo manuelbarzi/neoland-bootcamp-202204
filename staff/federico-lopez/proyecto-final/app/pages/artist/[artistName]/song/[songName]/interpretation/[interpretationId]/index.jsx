@@ -137,7 +137,7 @@ export default function Interpretation({ token, userId, interpretation, song }) 
 
                     </FlexColSection>
                 </div>
-                <Footer />
+                <Footer userLoggedIn={!!token} />
             </div>
             {chordView &&
                 <Slider chord={chordView} onCloseChordClick={onCloseChordClick} >

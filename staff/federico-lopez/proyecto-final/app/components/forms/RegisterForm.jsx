@@ -1,9 +1,12 @@
 import { SecondaryButton, Fieldset, Input, PasswordInput, Label, CheckboxInput, BlueAnchor } from '..'
 import Link from 'next/link'
 
-export function RegisterForm({ className, children, ...props }) {
+export function RegisterForm({ className, children, onSubmit, ...props }) {
     return (
-        <form className={`w-full flex flex-col items-around gap-5 ${className}`} {...props}>
+        <form 
+        className={`w-full flex flex-col items-around gap-5 ${className}`}
+        onSubmit={onSubmit}
+        {...props}>
             <div className="w-full flex flex-col items-start gap-4">
                 <Fieldset className="w-full flex flex-col">
                     <Label className="font-medium" htmlFor="username">Username</Label>

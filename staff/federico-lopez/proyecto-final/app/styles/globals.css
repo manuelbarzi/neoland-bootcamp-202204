@@ -32,6 +32,27 @@
         #FF9F0A 100%
       );
     }
+    .bg-gradient-purple {
+        background: linear-gradient(
+            50.99deg,
+            #5E5CE6 0%,
+            #EF476F 100%
+        );
+    }
+    .bg-gradient-yellow {
+        background: linear-gradient(
+            50.99deg,
+            #FF9F0A 0%,
+            #27A080 100%
+        );
+    }
+    .bg-gradient-green {
+        background: linear-gradient(
+            50.99deg,
+            #27A080 0%,
+            #5E5CE6 100%
+        );
+    }
 }
 
 /* @layer components {

@@ -29,10 +29,9 @@ export default function Register(props) {
     }
 
     return (
-        <FlexColSection className="min-h-screen bg-primary gap-5 justify-center items-center"
-            onSubmit={onFormSubmit}>
+        <FlexColSection className="min-h-screen bg-primary gap-5 justify-center items-center">
             <Logo className="w-72 h-72 drop-shadow-custom-logo rounded-full bg-white" />
-            <RegisterForm className="px-4"/>
+            <RegisterForm className="px-4" onSubmit={onFormSubmit}/>
             <div className="w-full gap-2 flex justify-center">
                 <p class="text-myblack text-xs">Already have an account ?</p>
                 <Link href="/login">

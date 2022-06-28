@@ -1,9 +1,12 @@
 import { SecondaryButton, Fieldset, Input, PasswordInput, BlueAnchor, CheckboxInput, Label } from '..'
 import Link from 'next/link'
 
-export function LoginForm({ className, children, ...props }) {
+export function LoginForm({ className, children, onSubmit, ...props }) {
     return (
-        <form className={`w-full flex flex-col items-center gap-10 ${className}`} {...props}>
+        <form
+            className={`w-full flex flex-col items-center gap-10 ${className}`}
+            {...props}
+            onSubmit={onSubmit}>
             <div className="w-full flex flex-col gap-4">
                 <Fieldset className="w-full flex flex-col">
                     <Label className="font-medium" htmlFor="email">Email</Label>

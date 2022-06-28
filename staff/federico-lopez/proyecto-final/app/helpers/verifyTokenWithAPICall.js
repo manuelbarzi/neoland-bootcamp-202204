@@ -3,7 +3,6 @@ import Apium from '../vendor/Apium'
 import { context } from '../logic'
 
 export async function verifyTokenWithAPICall(req, res) {
-    debugger
     const cookies = new Cookies(req, res)
 
     const token = cookies.get('token')
@@ -19,6 +18,7 @@ export async function verifyTokenWithAPICall(req, res) {
 
         if (status === 200) {
             if (req.url.includes('/login') || req.url.includes('/register')) {
+
                 res.writeHead(307, { Location: '/' })
                 res.end()
             } else {
@@ -29,20 +29,27 @@ export async function verifyTokenWithAPICall(req, res) {
         } else {
             cookies.set('token')
 
-            if (req.url.includes('/edit-profile') || req.url.includes('/create-interpretation') || req.url.includes('/change-password')) {
+            if (req.url.includes('/profile/settings')
+                || req.url.includes('/profile/edit')
+                || req.url.includes('/profile/change-password')
+                || req.url.includes('/profile/delete-account')
+                || req.url.includes('/create-interpretation')) {
 
-                //TODO FEEDBACKS IN THIS CASES
                 res.writeHead(307, { Location: '/login' })
                 res.end()
             }
-            //TODO FEEDBACKS
         }
     }
 
-    if (req.url.includes('/edit-profile') || req.url.includes('/create-interpretation') || req.url.includes('/change-password')) {
+    if (req.url.includes('/profile/settings')
+        || req.url.includes('/profile/edit')
+        || req.url.includes('/profile/change-password')
+        || req.url.includes('/profile/delete-account')
+        || req.url.includes('/create-interpretation')) {
+
         res.writeHead(307, { Location: '/login' })
         res.end()
-    }
 
-    return
+        return
+    }
 }

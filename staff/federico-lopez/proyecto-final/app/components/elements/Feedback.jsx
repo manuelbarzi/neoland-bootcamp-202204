@@ -2,7 +2,7 @@ import { FeedbackImage, CrossImage } from "../images"
 
 export function Feedback({ level, title, description, onTimeout, onCloseClick }) {
     if (level !== 'error') {
-        setTimeout(onTimeout, 2000)
+        setTimeout(onTimeout, 3000)
     }
 
     const onCloseImageClick = () => {

@@ -1,11 +1,11 @@
 import Link from 'next/link'
+import { verifyTokenWithAPICall } from '../../../../../helpers'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { Title, Title2, Title3, ChevronLeftImage, SongIconImage, FavoriteImage, Footer, FlexColSection, InterpretationsList, Tag, ButtonBlue, ChevronUpImage } from '../../../../../components'
-import { retrieveSong, retrieveInterpretationsFromSong, context } from '../../../../../logic'
-import Apium from '../../../../../vendor/Apium'
+import { retrieveSong, retrieveInterpretationsFromSong } from '../../../../../logic'
 
-export default function Song({ interpretations, song }) {
+export default function Song({ interpretations, song, token }) {
     const router = useRouter()
 
     const [likedSong, setLikedSong] = useState(false)
@@ -57,7 +57,9 @@ export default function Song({ interpretations, song }) {
                         <h3 className="text-xl text-myblack font-bold">Interpretations</h3>
                         <p className="text-xs text-mygrey">({interpretations.length})</p>
                     </div>
-                    <ButtonBlue>Add New</ButtonBlue>
+                    <Link href='/create-interpretation'>
+                        <ButtonBlue>Add New</ButtonBlue>
+                    </Link>
                 </div>
 
 
@@ -70,12 +72,13 @@ export default function Song({ interpretations, song }) {
 
             </FlexColSection>
         </div>
-        <Footer />
+        <Footer userLoggedIn={!!token} />
     </div>
 }
 
-export async function getServerSideProps({ params }) {
-    const api = new Apium(context.API_URL)
+export async function getServerSideProps({ params, req, res }) {
+    const { token } = await verifyTokenWithAPICall(req, res)
+
 
     const [interpretations, song] = await Promise.all([
         retrieveInterpretationsFromSong(params.songName, params.artistName),
@@ -85,7 +88,8 @@ export async function getServerSideProps({ params }) {
     return {
         props: {
             interpretations,
-            song
+            song,
+            token
         }
     }
 }

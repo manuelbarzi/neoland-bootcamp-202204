@@ -1,7 +1,7 @@
 import Link from "next/link";
 const querystring = require('query-string');
 
-export function Dialog({ level, title, description, button1, button2, onCloseClick }) {
+export function Dialog({ level, title, description, button1, button2, onCloseClick, onCloseDialog }) {
     const client_id = '93f6f6ebc007423fa83d846f4713a03a'
     const redirect_uri = 'http://localhost:3000/'
 
@@ -9,7 +9,7 @@ export function Dialog({ level, title, description, button1, button2, onCloseCli
     const scope = 'user-read-private user-read-email user-top-read user-read-recently-played user-read-playback-position playlist-read-collaborative user-read-playback-state user-follow-read user-read-currently-playing user-library-read playlist-read-private'
 
     return (
-        <div className="fixed bottom-20 w-[358px] pt-8 px-4 pb-2 rounded-3xl flex flex-col gap-6">
+        <div className="fixed w-[358px] top-1/2 left-1/2 [transform:translate(-50%,-50%)] pt-8 px-4 pb-2 rounded-3xl bg-white flex flex-col gap-6">
             <div className="w-full flex flex-col gap-4">
                 <h4 className="w-full flex items-center justify-center text-xl font-bold text-myblack">{title}</h4>
                 <p className="w-full text-center text-mygrey">{description}</p>
@@ -30,7 +30,11 @@ export function Dialog({ level, title, description, button1, button2, onCloseCli
 
                 <button
                     className="w-full p-4 text-myblue flex justify-center items-center"
-                    onClick={onCloseClick}
+                    onClick={function () {
+                        debugger
+                        onCloseClick()
+                        onCloseDialog()
+                    }}
                 >{button2}</button>
             </div>
         </div >

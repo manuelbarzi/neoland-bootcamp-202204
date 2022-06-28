@@ -31,10 +31,9 @@ export default function Login(props) {
         }
     }
     return (
-        <FlexColSection className="min-h-screen bg-primary gap-10 justify-center items-center"
-            onSubmit={onFormSubmit}>
+        <FlexColSection className="min-h-screen bg-primary gap-10 justify-center items-center">
             <Logo className="w-72 h-72 drop-shadow-custom-logo rounded-full bg-white" />
-            <LoginForm className="px-4"/>
+            <LoginForm className="px-4" onSubmit={onFormSubmit}/>
         </FlexColSection>
     )
 }

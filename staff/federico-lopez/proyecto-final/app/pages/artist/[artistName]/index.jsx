@@ -1,9 +1,11 @@
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ArtistIconImage, ArtistsAndSongsResultsList, ChevronLeftImage, FavoriteImage, FlexColSection, Footer, Title2, Title, ButtonBlue } from '../../../components'
 import { retrieveSongsOfArtist } from 'logic'
 import { useState } from 'react'
+import { verifyTokenWithAPICall } from '../../../helpers'
 
-export default function Artist({ songs }) {
+export default function Artist({ token, songs }) {
     const router = useRouter()
 
     const [likedArtist, setLikedArtist] = useState(false)
@@ -36,20 +38,24 @@ export default function Artist({ songs }) {
         <FlexColSection className="items-center">
             <div className="w-full h-14 px-4 bg-primary flex items-center justify-between">
                 <h3 className="text-xl text-myblack font-bold">Songs</h3>
-                <ButtonBlue>Add New Song</ButtonBlue>
+                <Link href='/create-interpretation'>
+                    <ButtonBlue>Add New Song</ButtonBlue>
+                </Link>
             </div>
             <ArtistsAndSongsResultsList songs={songs} />
         </FlexColSection>
-        <Footer />
+        <Footer userLoggedIn={!!token} />
     </div>
 }
 
-export async function getServerSideProps({ params }) {
+export async function getServerSideProps({ params, req, res }) {
+    const { token } = await verifyTokenWithAPICall(req, res)
+
     const songs = await retrieveSongsOfArtist(params.artistName)
 
     return {
         props: {
-            songs
+            token, songs
         }
     }
 }

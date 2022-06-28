@@ -1,18 +1,14 @@
 import { removeCookie } from '../helpers'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
 
-export default function Logout(props) {
-    const router = useRouter()
-
-    useEffect(() => {
-        router.push('/')
-    })
-    return <>LogOut...</>
+export default function Logout() {
+    return <></>
 }
 
 export async function getServerSideProps({ req, res }) {
     await removeCookie(req, res, 'token')
+
+    res.writeHead(307, { Location: '/login' })
+    res.end()
 
     return {
         props: {}

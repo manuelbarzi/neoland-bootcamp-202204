@@ -70,7 +70,7 @@ export default function Search({ token }) {
                 <ArtistsAndSongsResultsList results={artistsAndSongs} />}
 
         </FlexColSection>
-        <Footer userRegistered={!!token} page="search" ></Footer>
+        <Footer userLoggedIn={!!token} page="search" ></Footer>
     </div>
 }
 
