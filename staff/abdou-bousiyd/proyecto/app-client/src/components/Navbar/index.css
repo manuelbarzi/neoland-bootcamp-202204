@@ -8,6 +8,7 @@
     padding: 0rem 1.5rem;
     position: sticky;
     top: 0;
+    z-index: 1;
 }
 
 .header__Logo {
@@ -162,5 +163,8 @@
     display: none;
 }
 .material-icons__None{
+    display: none;
+}
+.header__content__btns__NoneBtn{
     display: none;
 }

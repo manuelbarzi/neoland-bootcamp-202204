@@ -10,7 +10,8 @@
     "start-watch-inspect": "nodemon --inspect-brk src",
     "test": "npx mocha src/logic/*.spec.js",
     "test-inspect": "npx mocha --inspect-brk src/**/*.spec.js",
-    "test:coverage": "jest --coverage"
+    "test:coverage": "jest --coverage",
+    "test-report": "nyc --reporter=html npx mocha src/logic/*.js"
   },
   "keywords": [],
   "author": "",
@@ -19,7 +20,8 @@
     "chai": "^4.3.6",
     "jest": "^28.1.1",
     "mocha": "^10.0.0",
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.16",
+    "nyc": "^15.1.0"
   },
   "dependencies": {
     "body-parser": "^1.20.0",

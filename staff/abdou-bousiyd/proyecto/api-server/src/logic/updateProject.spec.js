@@ -37,7 +37,7 @@ describe('updateProject', () => {
                     })
                     .then(project2 =>{ 
                         expect(project2.title).to.equal('new project 2')
-                        expect(project2.code).to.equal('<h2>Hola mundo</h2>')
+                        expect(project2.code).to.equal('<p>Hola mundo</p>')
                     })
             )
         })

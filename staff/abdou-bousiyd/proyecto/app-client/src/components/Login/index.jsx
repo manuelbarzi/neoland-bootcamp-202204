@@ -3,6 +3,7 @@ import { useNavigate,Link } from "react-router-dom";
 import authenticateUser from '../../logic/authenticateUser'
 import Alert from '../Alert'
 import '../Login/index.sass'
+import NavBar from "../Navbar";
 
 
 const Login = ({toggleTitle, loadUser}) => {
@@ -43,6 +44,7 @@ const Login = ({toggleTitle, loadUser}) => {
         }
     }
     return(<>
+        <NavBar />
         <form className='login' onSubmit={handleSubmit}>
 
             <div className='login__auth'>

@@ -7,6 +7,10 @@ function retrievePens() {
     .then((projects) => {
       if (!projects)
         throw new NotFoundError(`projects does not exist`);
+        // project.id = project._id.toString()
+
+        // delete project._id
+        // delete project.__v
 
       return projects;
     });

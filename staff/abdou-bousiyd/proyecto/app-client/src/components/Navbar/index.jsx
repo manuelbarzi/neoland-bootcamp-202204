@@ -54,7 +54,7 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                 
             <ul className="header__content__links">
 
-                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__heartNone"}`}
+                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register" || location === "/") && "header__content__links__item__heartNone"}`}
                   onClick={handleLikeClick}
                 >
                   <div className="header__content__links__item__likes">
@@ -65,25 +65,19 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                   </div>
                 </li>
 
-                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__downloadNone"}`}
+                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register") && "header__content__links__item__downloadNone"}`}
                     onClick={download}
                 >
                     <span className="material-icons">get_app</span>
                 </li>
-                
-                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__skypackNone"}` }
-                    onClick={toggleSkypack}
-                >
-                    <span className="material-icons">rocket_launch</span>
-                </li>
 
-                <li className={`header__content__links__item ${( location === "/dashboards" || location === "/pens" )&& "header__content__links__item__codeNone"}`}
+                <li className={`header__content__links__item ${( location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register")&& "header__content__links__item__codeNone"}`}
                     onClick={toggle}
                 >
                     <span className="material-icons">data_object</span>
                 </li>
 
-                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens") && "header__content__links__item__addNone"}`}
+                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/pens" || location === "/login" || location === "/register") && "header__content__links__item__addNone"}`}
                     onClick={toggleTitle}
                 >
                     <span className="material-icons">add</span>
@@ -91,18 +85,20 @@ const Sidebar = ({ toggleSkypack, download, toggle, toggleTitle, name, projectId
                 <li className={`header__content__links__item ${(location === "/" || location === "/project" || location === `/previewProject/${projectId}`) && "header__content__links__item__addNone"}`}
                     onClick={handleToProject}
                 >
-                    <span className="material-icons">arrow_back</span>
+                    <span class="material-symbols-outlined">dashboard_customize</span>
                 </li>
-                <li className={`header__content__links__item ${location === "/dashboards" && "header__content__links__item__tikcodeNone"}`}
+                {name && 
+                <li className={`header__content__links__item ${(location === "/dashboards" || location === "/login" || location === "/register" )&& "header__content__links__item__tikcodeNone"}`}
                     onClick={handleToDashboard}
                 >
-                    <span className="material-icons">visibility</span>
-                </li>
+                  <span className="material-icons">visibility</span>
+                </li>}
             </ul>
             {!name && (
             <div className="header__content__btns">
-                <button className="header__content__btns__btn"  onClick={handleToRegister}> Sign Up </button>
-                <button className="header__content__btns__btn" onClick={handleToLogin} >Log In </button>
+                <button className={`header__content__btns__btn ${(location === "/login" || location === "/register") && "header__content__btns__NoneBtn"}`} 
+                  onClick={handleToRegister}> Sign Up </button>
+                <button className={`header__content__btns__btn ${(location === "/login" || location === "/register") && "header__content__btns__NoneBtn"}`}  onClick={handleToLogin} >Log In </button>
             </div>
             )}
 

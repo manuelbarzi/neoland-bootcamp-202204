@@ -3,7 +3,7 @@ const { User } = require('../models')
 const retrieveUser = require('./retrieveUser')
 const { expect } = require('chai')
 
-describe('retrieve', () => {
+describe('retrieveUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
     beforeEach(() => User.deleteMany())
