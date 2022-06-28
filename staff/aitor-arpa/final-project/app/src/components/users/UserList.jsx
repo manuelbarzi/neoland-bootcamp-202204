@@ -28,7 +28,7 @@ export default function UserList(props) {
     workers && (
       <select name="workers">
         {workers.map((worker) => (
-          <option key={worker._id} value={worker.name}>
+          <option key={worker.id} value={worker.name}>
             {worker.name}
           </option>
         ))}

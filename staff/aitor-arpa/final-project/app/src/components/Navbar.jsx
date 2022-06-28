@@ -8,7 +8,7 @@ import home from "../images/home.png";
 export default function Navbar() {
   return (
     <nav className="navbar">
-      <Link to="/clock">
+      <Link to="/clocks">
         <img src={clock} alt=""></img>
       </Link>
       <Link to="/">

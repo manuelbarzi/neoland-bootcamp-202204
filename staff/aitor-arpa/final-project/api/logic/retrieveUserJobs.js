@@ -7,19 +7,17 @@ function retrieveUserJobs(userId) {
 
   return User.findById(userId)
     .then((user) => {
-      debugger;
       if (!user)
         throw new NotFoundError(`user with id ${userId} does not exist`);
 
-      return Job.find({ user: userId });
+      return Job.find({ worker: userId }).lean();
     })
     .then((jobs) => {
-      if (!jobs) return [];
       jobs.forEach((job) => {
-        const doc = job._doc;
-        delete doc._v;
+        job.id = job._id.toString();
+        delete job._id;
 
-        return doc;
+        delete job.__v;
       });
 
       return jobs;

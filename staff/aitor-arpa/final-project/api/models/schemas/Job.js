@@ -17,12 +17,10 @@ const Job = new Schema({
     type: String,
   },
 
-  workers: [
-    {
-      type: ObjectId,
-      ref: "User",
-    },
-  ],
+  worker: {
+    type: ObjectId,
+    ref: "User",
+  },
 });
 
 module.exports = Job;

@@ -84,7 +84,7 @@ export default function CardJobAdmin(props) {
             name="title"
             placeholder={props.title}
           />
-          <label>Des. :</label>
+          <label>Desc. :</label>
           <input
             className="borderDawn"
             type="text"

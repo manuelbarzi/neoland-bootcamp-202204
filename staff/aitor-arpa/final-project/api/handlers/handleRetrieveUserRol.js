@@ -7,7 +7,7 @@ module.exports = (req, res) => {
     const { userId } = verifyToken(req);
 
     const {
-      body: { role },
+      params: { role },
     } = req;
 
     retrieveUsersByRole(userId, role)

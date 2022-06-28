@@ -19,23 +19,23 @@ export default function CardJobList(props) {
           setJobs(jobs);
         })
         .catch((error) => {
-          toast.error(error);
+          toast.error(error.message);
         });
     } catch (error) {
-      toast.error(error);
+      toast.error(error.message);
     }
   };
 
   return jobs && jobs.length ? (
     <ul className="scroll_Job">
       {jobs.map((job) => (
-        <li key={job._id}>
+        <li key={job.id}>
           <CardJobAdmin
-            jobid={job._id}
+            jobid={job.id}
             title={job.title}
             description={job.description}
             address={job.address}
-            worker={job.workers}
+            worker={job.worker.name}
             ondeleteclicked={handedeletecliked}
           />
         </li>

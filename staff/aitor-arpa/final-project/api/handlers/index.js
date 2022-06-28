@@ -15,6 +15,7 @@ module.exports = {
   handleretrieveJobsUser: require("./handleretrieveJobsUser"),
   handleRetrieveJobs: require("./handleRetrieveJobs"),
   handleRetrieveUserRol: require("./handleRetrieveUserRol"),
-  handleretrieveCloks: require("./handleretrieveCloks"),
+  handleRetrieveClocks: require("./handleRetrieveClocks"),
   handleUpdateJob: require("./handleUpdateJob"),
+  handleRetrieveUserName: require("./handleRetrieveUserName"),
 };

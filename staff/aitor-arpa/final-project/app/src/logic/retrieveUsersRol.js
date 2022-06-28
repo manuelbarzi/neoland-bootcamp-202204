@@ -9,12 +9,10 @@ function retrieveUsersRol(token, role) {
   const api = new Apium(process.env.REACT_APP_API_URL);
 
   return api
-    .post("users/role", {
+    .get(`users/role/${role}`, {
       headers: {
         Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ role }),
     })
     .then(({ status, payload }) => {
       if (status === 200) {

@@ -8,7 +8,7 @@ function addJob(token, title, description, address, worker) {
   validateStringNotEmptyOrBlank(address);
 
   const api = new Apium(process.env.REACT_APP_API_URL);
-  debugger;
+
   return api
     .post("job", {
       headers: {

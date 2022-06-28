@@ -44,6 +44,3 @@ export const withTokenAndRol = (Component, token = true, rol = "admin") => {
   // redirect
   return Render;
 };
-// admin /admin/clok   /admin/*
-
-//worker  / clocks

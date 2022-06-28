@@ -24,12 +24,12 @@ export default function CardJobListUser(props) {
     }
   };
 
-  return jobs && jobs.length >= 0 ? (
+  return jobs && jobs.length > 0 ? (
     <ul className="scroll-container">
       {jobs.map((job, i) => (
         <li key={i}>
           <CardJob
-            jobid={job._id}
+            jobid={job.id}
             title={job.title}
             description={job.description}
             address={job.address}

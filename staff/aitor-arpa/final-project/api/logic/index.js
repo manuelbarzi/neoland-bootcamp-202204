@@ -14,8 +14,8 @@ const deleteJob = require("./deleteJob");
 const retrieveJobs = require("./retrieveAllJobs");
 const retrieveJobsUser = require("./retrieveUserJobs");
 const retrieveUsersByRole = require("./retrieveUsersByRole");
-const retrieveCloks = require("./retrieveCloks");
-const UpdateJob = require("./UpdateJob");
+const retrieveClocks = require("./retrieveClocks");
+const updateJob = require("./updateJob");
 
 module.exports = {
   createUser,
@@ -34,6 +34,6 @@ module.exports = {
   clockUserJobOut,
   retrieveClockJob,
   retrieveUsersByRole,
-  retrieveCloks,
-  UpdateJob,
+  retrieveClocks,
+  UpdateJob: updateJob,
 };

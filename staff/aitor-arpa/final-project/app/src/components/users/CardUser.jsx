@@ -37,35 +37,40 @@ export default function CardUser(props) {
           className="borderDawn"
           type="username"
           name="username"
-          placeholder={props.username}
+          placeholder="Username is empty"
+          value={props.username}
+          readOnly
         ></input>
 
         <input
           className="borderDawn"
           type="text"
-          disabled
           name="name"
-          placeholder={props.name}
+          placeholder="name is empty"
+          value={props.name}
+          readOnly
         ></input>
         <input
           className="borderDawn"
           type="text"
           name="nid"
-          placeholder="nid"
+          placeholder="nid is empty"
           value={props.nid}
+          readOnly
         ></input>
         <input
           className="borderDawn"
           type="email"
           name="email"
-          placeholder="email"
+          placeholder="email is empty"
           value={props.email}
+          readOnly
         ></input>
         <input
           className="borderDawn"
           type="text"
           name="address"
-          placeholder="Addres"
+          placeholder="Addres is empty"
           value={props.address}
         ></input>
       </form>

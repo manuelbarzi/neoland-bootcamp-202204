@@ -1,10 +1,12 @@
 import retrieveClocks from "../../logic/retrieveClocks";
+import retrieveUserName from "../../logic/retrieveUserName";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import "./ClockListAdmin.sass";
 
 export default function ClockListAdmin() {
-  const [clocks, setClok] = useState(null);
+  const [clocks, setClocks] = useState(null);
+
   const timeOptions = {
     hour: "numeric",
     minute: "numeric",
@@ -20,7 +22,8 @@ export default function ClockListAdmin() {
     try {
       retrieveClocks(sessionStorage.token)
         .then((clocks) => {
-          setClok(clocks);
+          setClocks(clocks);
+          return clocks;
         })
         .catch((error) => {
           toast.error(error);
@@ -34,11 +37,11 @@ export default function ClockListAdmin() {
     <ul className="scroll-container ">
       {clocks.map((clock) => (
         <div className="gaps ">
-          <li key={clock._id} className="gridTwo_small">
+          <li key={clock.id} className="gridTwo_small">
             <input
               id="prodId"
               name="clocId"
-              value={clock._id}
+              value={clock.id}
               disabled
               type="hidden"
             />
@@ -46,14 +49,14 @@ export default function ClockListAdmin() {
             <input
               name="job"
               className="borderDawn"
-              value={clock.job}
+              value={clock.job === null ? "-" : clock.job.title}
               disabled
             />
             <label>User:</label>
             <input
               name="user"
               className="borderDawn"
-              value={clock.user}
+              value={clock.user.name}
               disabled
             />
             <label>In:</label>
@@ -70,10 +73,14 @@ export default function ClockListAdmin() {
             <input
               name="timeout"
               className="borderDawn"
-              value={new Date(clock.timeout).toLocaleDateString(
-                "es-ES",
-                timeOptions
-              )}
+              value={
+                clock.timeout === null
+                  ? "-"
+                  : new Date(clock.timeout).toLocaleDateString(
+                      "es-ES",
+                      timeOptions
+                    )
+              }
               disabled
             />{" "}
             <li />

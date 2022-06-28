@@ -50,7 +50,7 @@ export default function CardJob(props) {
             className="borderDawn"
             type="hidden"
             name="jobid"
-            value={props._id}
+            value={props.id}
           />
 
           <label>Title :</label>
@@ -74,9 +74,11 @@ export default function CardJob(props) {
             name="address"
             defaultValue={props.address}
           />
-          <button className="btn_small" type="onsubmit">
-            <img src={play} alt=""></img>
-          </button>
+          {
+            <button className="btn_small" type="onsubmit">
+              <img src={play} alt=""></img>
+            </button>
+          }
           <button className="btn_small" onClick={RegisterClockJobOut}>
             <img src={stop} alt=""></img>
           </button>

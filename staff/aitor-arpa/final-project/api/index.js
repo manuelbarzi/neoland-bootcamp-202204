@@ -20,7 +20,7 @@ const {
   handleRetrieveJobs,
   handleRetrieveUserRol,
   handleUpdateUser,
-  handleretrieveCloks,
+  handleRetrieveClocks,
   handleUpdateJob,
 } = require("./handlers");
 
@@ -38,7 +38,7 @@ const {
   routes.post("/users/auth", jsonBodyParser, handleAuthenticateUser);
   routes.delete("/users", jsonBodyParser, handleDeleteUser);
   routes.get("/users", handleRetrieveUser);
-  routes.post("/users/role", jsonBodyParser, handleRetrieveUserRol);
+  routes.get("/users/role/:role", handleRetrieveUserRol);
   routes.post("/users/:id", jsonBodyParser, handleUpdateUser);
   /* JOB */
 
@@ -55,7 +55,7 @@ const {
   routes.post("/clock/:id", jsonBodyParser, handleClockUserOut);
   routes.get("/clock/job", jsonBodyParser, handleretrieveClockJob);
   routes.get("/clock", jsonBodyParser, handleretrieveClockUser);
-  routes.get("/clocks", jsonBodyParser, handleretrieveCloks);
+  routes.get("/clocks", jsonBodyParser, handleRetrieveClocks);
 
   api.use("/api", routes);
 

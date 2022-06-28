@@ -7,12 +7,16 @@ function retrieveClockUser(userid) {
   return User.findById(userid)
     .then((user) => {
       if (!user) throw new NotFoundError(`${userid} Not Found`);
-      return Clock.find({ user: userid, job: null });
+      return Clock.find({ user: userid, job: null }).lean();
     })
-    .then((clock) => {
-      if (!clock) throw new NotFoundError("search failed");
+    .then((clocks) => {
+      clocks.forEach((clock) => {
+        clock.id = clock._id.toString();
+        delete clock._id;
 
-      return clock;
+        delete clock.__v;
+      });
+      return clocks;
     });
 }
 

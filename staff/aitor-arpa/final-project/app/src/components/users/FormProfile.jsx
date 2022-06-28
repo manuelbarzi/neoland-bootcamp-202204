@@ -1,6 +1,5 @@
 import React from "react";
 import "./FormProfile.sass";
-import edit from "../../images/edit.png";
 import retrieveUser from "../../logic/retrieveUser";
 import toast from "react-hot-toast";
 import { useState, useEffect } from "react";

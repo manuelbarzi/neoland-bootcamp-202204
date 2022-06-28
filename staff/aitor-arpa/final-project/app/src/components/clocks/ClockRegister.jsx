@@ -14,19 +14,18 @@ export default function ClockRegister(props) {
           sessionStorage.clockUser = true;
         })
         .catch((error) => {
-          toast.error(`${error}`);
+          toast.error(`${error.message}`);
         });
     } catch (error) {
-      toast.error(`${error}`);
+      toast.error(`${error.message}`);
     }
   };
 
   return sessionStorage.clockUser ? (
     <div className="center_row">
-      <button className="btn off" onClick={registerTimeIn}>
+      <button className="btn " onClick={registerTimeIn}>
         <img src={In} alt="" disa></img>
       </button>
-      <Toaster />
     </div>
   ) : (
     <div className="center_row">

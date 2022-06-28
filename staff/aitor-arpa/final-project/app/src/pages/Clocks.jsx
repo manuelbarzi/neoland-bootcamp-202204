@@ -1,21 +1,19 @@
 import React from "react";
-import { Route, Routes, useNavigate } from "react-router-dom";
-import ClockAll from "../components/clocks/ClockAll";
-import ClockRegister from "../components/clocks/ClockRegister";
+import { Route, Routes } from "react-router-dom";
+import ClockListUser from "../components/clocks/ClockListUser";
+
 import Navbar from "../components/Navbar";
 import { withTokenAndRol } from "../container";
 
 export default withTokenAndRol(function Clocked() {
-  const navigate = useNavigate();
-
   return (
     <Routes>
       <Route
         index
         element={
           <div>
-            <ClockAll></ClockAll>
-            <ClockRegister></ClockRegister>
+            <ClockListUser></ClockListUser>
+
             <Navbar></Navbar>
           </div>
         }

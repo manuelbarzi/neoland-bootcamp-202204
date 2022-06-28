@@ -2,7 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import "./App.sass";
 import Login from "./pages/Login";
-import Clock from "./pages/Clock";
+import Clocks from "./pages/Clocks";
 import Profile from "./pages/Profile";
 import HomeAdmin from "./pages/HomeAdmin";
 import Home from "./pages/Home";
@@ -20,7 +20,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
 
         {/* ----- WORKER ----- */}
-        <Route path="/clock/*" element={<Clock />} />
+        <Route path="/clocks/*" element={<Clocks />} />
         <Route path="/job/*" element={<Jobs />} />
         <Route path="/profile/*" element={<Profile />} />
 
