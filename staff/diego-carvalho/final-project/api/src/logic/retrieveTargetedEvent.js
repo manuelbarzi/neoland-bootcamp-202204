@@ -2,6 +2,7 @@ const { User } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
+//TargetedEventList
 function retrieveTargetedEvent(userId) {
   validateStringNotEmptyNoSpaces(userId, 'user id')
 

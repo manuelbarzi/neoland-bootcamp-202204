@@ -11,7 +11,6 @@ module.exports = {
     handleUpdateEvent: require('./handleUpdateEvent'),
     handleDeleteEvent: require('./handleDeleteEvent'),
     handleAddEventToUser: require('./handleAddEventToUser'),
-    handleToggleUserToEvent: require('./handleToggleUserToEvent'),
     handleRetrieveTargetedEvent: require('./handleRetrieveTargetedEvent'),
     handleDeleteTargetedEvent: require('./handleDeleteTargetedEvent')
 }

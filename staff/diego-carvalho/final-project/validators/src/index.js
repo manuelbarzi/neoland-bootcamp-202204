@@ -59,12 +59,6 @@ function validatePassword(password, explain = 'password') {
         throw new FormatError(`${explain} length is lower than 8`)
 }
 
-function validateUsername(username) {
-    validateStringNotEmptyNoSpaces(username, 'username')
-
-    if (username.length < 4)
-        throw new FormatError('username length is lower than 4')
-}
 
 function validateFunction(func, explain = 'function') {
     if (typeof func !== 'function')
@@ -99,7 +93,6 @@ module.exports = {
     validateJwt,
     isJwtValid,
     validatePassword,
-    validateUsername,
     validateFunction,
     validateDate,
     validateNumber,

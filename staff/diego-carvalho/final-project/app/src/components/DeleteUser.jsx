@@ -3,12 +3,14 @@ import React from 'react'
 import Logger from 'vendor/Loggy'
 import Context from './Context'
 import deleteUser from '../logic/deleteUser'
+import { useNavigate } from 'react-router-dom'
 
-
-function DeleteUser() {//passar props como parametro
+function DeleteUser() {
   const logger = new Logger('DeleteUser')
 
   logger.info('call')
+
+  const navigate = useNavigate()
 
   const { handleFeedback } = useContext(Context)
 
@@ -24,13 +26,12 @@ function DeleteUser() {//passar props como parametro
 
           return
         }
-        //user props aqui
       })
 
     } catch (error) {
       handleFeedback({ level: 'error', message: error.message })
-      //delete sessionStorage.token
-      //location.reload()
+      delete sessionStorage.token
+      navigate('/login')
     }
   }
 
@@ -41,16 +42,11 @@ function DeleteUser() {//passar props como parametro
     <form className="DeleteUser__form" onSubmit={handleFormSubmit}>
       <input className="Input Input__light" type="password" name="password" placeholder="password" />
 
-      <button className="Button--no-border">Delete User</button>
+      <button className="Button--no-border" >Delete User</button>
     </form>
   </div>
 }
 export default DeleteUser
 
-//INFO
-
-/*The try statement lets you test a block of code for errors. The catch statement lets you handle the error. 
-The throw statement lets you create custom errors.
-The final statement lets you execute code, after try and catch, regardless of the result.*/
 
 

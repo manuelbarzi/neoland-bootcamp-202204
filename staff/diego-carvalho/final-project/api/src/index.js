@@ -14,7 +14,6 @@ const {
   handleUpdateEvent,
   handleDeleteEvent,
   handleAddEventToUser,
-  handleToggleUserToEvent,
   handleRetrieveTargetedEvent,
   handleDeleteTargetedEvent } = require('./handlers')
 
@@ -48,7 +47,6 @@ const { cors } = require('./helpers')
     routes.get('/events/owner', handleRetrieveOwnerEvent)//retrieveOwnerEvent
     routes.patch('/events/:eventId', jsonBodyParser, handleUpdateEvent)//updateEvent
     routes.delete('/events/:eventId', jsonBodyParser, handleDeleteEvent)//deleteEvent
-    routes.patch('/events/:eventId/participants', jsonBodyParser, handleToggleUserToEvent)//toggleUserToEvent
 
     api.use('/api', routes)//ruta
 

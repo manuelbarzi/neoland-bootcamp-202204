@@ -3,10 +3,36 @@ const { validateStringNotEmptyNoSpaces } = require("../validators")
 const { User, Event } = require('../models')
 
 function deleteTargetedEvent(userId, eventId) {
-  debugger
   validateStringNotEmptyNoSpaces(userId, 'user id')
   validateStringNotEmptyNoSpaces(eventId, 'event id')
-  return User.findById(userId)
+
+  return Promise.all([User.findById(userId), Event.findById(eventId)])
+    .then(([user, event]) => {
+      if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
+      if (!event) throw new NotFoundError(`event with id ${eventId} not found`)
+
+      const eventsIndex = user.events.findIndex(_eventId => _eventId.toString() === eventId)
+      if (eventsIndex === -1) throw new NotFoundError(`event with id ${eventId} does not exist`)
+
+      const participantsIndex = event.participants.findIndex(_userId => _userId.toString() === userId)
+      if (participantsIndex === -1) throw new NotFoundError(`user with id ${userId} does not exist`)
+
+      user.events.splice(eventsIndex, 1)
+      event.participants.splice(participantsIndex, 1)
+
+      return Promise.all([user.save(), event.save()])
+
+    })
+    .then(() => { })
+
+}
+
+module.exports = deleteTargetedEvent
+
+
+
+
+/* return User.findById(userId)
     .then((user) => {
       if (!user) throw new NotFoundError(`user id ${userId} does not found`)
 
@@ -29,9 +55,4 @@ function deleteTargetedEvent(userId, eventId) {
       event.participants.splice(index, 1)
 
       return event.save()
-    })
-    .then(() => { })
-
-}
-
-module.exports = deleteTargetedEvent
+    }) */

@@ -2,7 +2,7 @@ const { User, Event } = require('../models')
 const { NotFoundError } = require('../errors')
 const { validateStringNotEmptyNoSpaces } = require('../validators')
 
-
+//MyEventList
 function retrieveOwnerEvent(userId) {
   validateStringNotEmptyNoSpaces(userId, 'user id')
 
@@ -11,7 +11,7 @@ function retrieveOwnerEvent(userId) {
       if (!user)
         throw new NotFoundError(`owner with id ${userId} does not exist`)
 
-      return Event.find({ ownerEvent: userId }).populate('ownerEvent', 'name').lean()
+      return Event.find({ ownerEvent: userId }).populate('ownerEvent').lean()
     })
     .then(events => {
       events.forEach(event => {

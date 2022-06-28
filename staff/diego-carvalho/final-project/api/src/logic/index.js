@@ -9,7 +9,6 @@ const retrieveOwnerEvent = require('./retrieveOwnerEvent')
 const updateEvent = require('./updateEvent')
 const deleteEvent = require('./deleteEvent')
 const addEventToUser = require('./addEventToUser')
-const toggleUserToEvent = require('./toggleUserToEvent')
 const retrieveTargetedEvent = require('./retrieveTargetedEvent')
 const deleteTargetedEvent = require('./deleteTargetedEvent')
 
@@ -25,9 +24,6 @@ module.exports = {
     updateEvent,
     deleteEvent,
     addEventToUser,
-    toggleUserToEvent,
     retrieveTargetedEvent,
     deleteTargetedEvent
-
-
 }

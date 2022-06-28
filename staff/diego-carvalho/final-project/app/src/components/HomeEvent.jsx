@@ -4,6 +4,7 @@ import Context from './Context'
 import signUpToEvent from '../logic/signUpToEvent'
 import './HomeEvent.sass'
 import { MdPeople, MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
+import { useEffect } from 'react'
 
 function HomeEvent(props) {
   const logger = new Logger('HomeEvent')
@@ -17,7 +18,6 @@ function HomeEvent(props) {
       signUpToEvent(sessionStorage.token, event.id, error => {
         if (error) {
           handleFeedback({ level: 'error', message: error.message })
-
           return
 
         }

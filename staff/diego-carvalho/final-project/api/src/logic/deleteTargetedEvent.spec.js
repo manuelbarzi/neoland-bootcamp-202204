@@ -68,7 +68,7 @@ describe('deleteTargetedEvent', () => {
           })
           .catch(error => {
             expect(error).to.be.instanceOf(NotFoundError)
-            expect(error.message).to.equal(`event with id ${wrongId} does not exist`)
+            expect(error.message).to.equal(`event with id ${wrongId} not found`)
           })
       })
 
