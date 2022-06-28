@@ -9,7 +9,7 @@ function retrieveActivities(userId) {
         .then(user => {
             if (!user) throw new NotFoundError(`user with id ${userId} does not exist`)
     
-            return Activity.find({private: false}).sort({date: -1}).populate('user', 'name').lean()  
+            return Activity.find({private: false}).sort({date: -1}).populate('user', 'name foto').lean()  
         })     
         .then((activity)=>{
             

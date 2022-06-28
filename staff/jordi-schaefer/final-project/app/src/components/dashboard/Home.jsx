@@ -8,6 +8,7 @@ import Settings from '../settings/Settings'
 import ChangeName from '../settings/ChangeName'
 import ChangePassword from '../settings/ChangePassword'
 import ChangeEmail from '../settings/ChangeEmail'
+import ChangeFoto from '../settings/ChangeFoto'
 import DeleteUser from '../settings/DeleteUser'
 import DeleteActivity from '../settings/DeleteActivity'
 import retrieveUser from '../../logic/retrieveUser'
@@ -62,6 +63,7 @@ function Home(props) {
     const handleChangeNameClick = () => {setView('Change Name'); setBack('Settings')}
     const handleChangePasswordClick = () => {setView('Change Password'); setBack('Settings')}
     const handleChangeEmailClick = () => {setView('Change Email'); setBack('Settings')}
+    const handleChangeFotoClick = () => {setView('Change Foto'); setBack('Settings')}
     const handleDeleteActivityClick = () => {setView('Delete Activity'); setBack('Settings')}
     const handleDeleteUserClick = () => {setView('Delete User'); setBack('Settings')}
     
@@ -74,7 +76,7 @@ function Home(props) {
             handleHomeClick()
         else if (view === 'Settings')
             handleProfileClick()
-        else if (['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User'].includes(view))
+        else if (['Settings','Change Name','Change Password', 'Change Email', 'Change Foto', 'Delete Activity', 'Delete User'].includes(view))
             handleSettingClick()
     }
 
@@ -89,7 +91,7 @@ function Home(props) {
     return  isJwtValid(sessionStorage.token) ?
     <div className="Container Home__container overflow mw mh">
         <header className="Home__header">
-            {(['Settings','Change Name','Change Password', 'Change Email', 'Delete Activity', 'Delete User', 'Comments'].includes(view)) 
+            {(['Settings','Change Name','Change Password', 'Change Email', 'Change Foto', 'Delete Activity', 'Delete User', 'Comments'].includes(view)) 
                 && <button className="Home__container-back" onClick={handleBackClick}>
                     <span className="Home__icon-back material-symbols-outlined">arrow_back_ios_new</span>
                     <h2 className="Home__button-back">{back}</h2>
@@ -106,6 +108,7 @@ function Home(props) {
             {view === 'Settings' && <Settings onChangeNameClicked={handleChangeNameClick}
                 onChangePasswordClicked={handleChangePasswordClick}
                 onChangeEmailClicked={handleChangeEmailClick}
+                onChangeFotoClicked={handleChangeFotoClick}
                 onDeleteActivityClicked={handleDeleteActivityClick}
                 onLogoutClicked={handleLogoutClick}
                 onDeleteUserClicked={handleDeleteUserClick}/>}
@@ -113,6 +116,7 @@ function Home(props) {
             {view === 'Change Name' && <ChangeName onDataChanged={handleDataChanged}/>}
             {view === 'Change Password' && <ChangePassword onDataChanged={handleDataChanged}/>}
             {view === 'Change Email' && <ChangeEmail onDataChanged={handleDataChanged}/>}
+            {view === 'Change Foto' && <ChangeFoto onDataChanged={handleDataChanged}/>}
             {view === 'Delete User' && <DeleteUser onDeletedUser={props.onDeletedUser}/>} 
             {view === 'Delete Activity' && <DeleteActivity />}
 

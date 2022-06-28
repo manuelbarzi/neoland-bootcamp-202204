@@ -26,7 +26,7 @@ function ChangePassword(props) {
             <input className="Settings__input" type="password" name="password" placeholder=" Current password"/>
             <input className="Settings__input" type="password" name="newPassword" placeholder=" New password"/>
             <input className="Settings__input" type="password" name="newPasswordRepeat" placeholder=" Repeat new password"/>
-            <button className="Settings__buttom--submit">Save</button>
+            <button className="Settings__button-submit">Save</button>
         </form>
     </div>
 }

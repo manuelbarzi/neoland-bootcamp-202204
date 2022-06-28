@@ -21,7 +21,7 @@ function retrieveUser(token) {
         }
         else if (status === 200) {
             const data = JSON.parse(payload)
-            const user = { name: data.name, username: data.username }
+            const user = { name: data.name, username: data.username, foto: data.foto }
             return user
         }      
     })()

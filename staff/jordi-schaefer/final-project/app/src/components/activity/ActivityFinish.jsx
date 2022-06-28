@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import Context from '../Context'
 import { useNavigate } from 'react-router-dom'
 import updateActivity from '../../logic/updateActivity'
@@ -44,7 +44,6 @@ function ActivityFinish(props) {
         props.onContinueClicked()
     }
 
-
     
     const onImageChange = async(e) => {
         setImages([])
@@ -87,8 +86,6 @@ function ActivityFinish(props) {
         console.log('reducido')
         return resizedFiile;
     }
-
-    
 
     
     return  <div className="Container overflow mw mh">

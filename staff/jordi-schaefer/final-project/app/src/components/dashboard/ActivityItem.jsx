@@ -64,17 +64,22 @@ function ActivityItem (props) {
     
     return <div>
         <div className="ActivityItem__header">
-            <div className={"Header__container--name"}> 
-                <div className={"Header__container-resume"}>   
-                    <h2 className={"Header__name"}>{(user)? user.name: 'User deleted'}</h2>
-                    {editable && <button className="Header__button-resume" onClick={handleResumeClick}>resume</button>}
-                </div>
-                <div className={"Header__container--date"}>
-                    {activity.sport === "Ride" && <span className="Header__icon material-symbols-outlined" >directions_bike</span>}
-                    {activity.sport === "Hike" && <span className="Header__icon material-symbols-outlined" >hiking</span>}
-                    {activity.sport === "Ski" && <span className="Header__icon material-symbols-outlined" >downhill_skiing</span>}
-                    {activity.sport === "Snowshoe" && <span className="Header__icon material-symbols-outlined"  >snowshoeing</span>}
-                    <h2 className={"Header__date"}>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
+            <div className={"Header__container-name"}> 
+                <div className="Header__container-foto">
+                    {user && user.foto && <img className='Foto__view-activity' src={user.foto}/>}
+                    <div className={"Header__container-name-date"}> 
+                        <div className={"Header__container-resume"}>   
+                            <h2 className={"Header__name"}>{(user)? user.name: 'User deleted'}</h2>
+                            {editable && <button className="Header__button-resume" onClick={handleResumeClick}>resume</button>}
+                        </div>
+                        <div className={"Header__container--date"}>
+                            {activity.sport === "Ride" && <span className="Header__icon material-symbols-outlined" >directions_bike</span>}
+                            {activity.sport === "Hike" && <span className="Header__icon material-symbols-outlined" >hiking</span>}
+                            {activity.sport === "Ski" && <span className="Header__icon material-symbols-outlined" >downhill_skiing</span>}
+                            {activity.sport === "Snowshoe" && <span className="Header__icon material-symbols-outlined"  >snowshoeing</span>}
+                            <h2 className={"Header__date"}>{date.toLocaleDateString("es-ES", timeOptions)}</h2>
+                        </div>
+                    </div>
                 </div>
                 <h2 className={"Header__title"}>{title}</h2>
             </div>

@@ -3,10 +3,17 @@
 
 .Info__header
     background-color: base.$white
-    padding: 0.5rem 0rem 0.5rem 1rem
-
+    padding: 0.7rem 0rem 0.4rem 1rem
 .Info__container--name
-
+    display: flex
+    flex-direction: row
+    align-items: center
+    gap: 0.6rem
+.Info__foto
+    width: 3.1rem
+    height: 3.1rem
+    border-radius: 50%
+    object-fit: cover
 .Info__name
     font-size: 26px
     font-weight: 500
@@ -16,7 +23,7 @@
     display: flex
     flex-direction: row
     justify-content: space-between
-    margin-top: 0.5rem
+    margin-top: 0.2rem
 
 .Info__container--data
     width: 50%
@@ -34,7 +41,6 @@
     font-size: 27px
     font-weight: 400
     margin-top: -0.2rem
-
 
 @media only screen and (min-width: base.$width-dimensions)
     .Info__header

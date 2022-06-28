@@ -31,7 +31,7 @@ function ChangeEmail(props) {
         <form className="Container mw" onSubmit={handleSaveClick}>
             <input className="Settings__input" type="text" name="email" placeholder=" New email"/>
             <input className="Settings__input" type="text" name="confirmEmail" placeholder=" Confirm new email"/>
-            <button className="Settings__buttom--submit">Save</button>
+            <button className="Settings__button-submit">Save</button>
         </form>
     </div>
 }

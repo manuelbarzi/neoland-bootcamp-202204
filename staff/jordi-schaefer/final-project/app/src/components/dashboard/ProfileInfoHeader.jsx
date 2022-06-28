@@ -11,6 +11,7 @@ function ProfileInfoHeader ({activities}) {
     const navigate = useNavigate()
     const { handleFeedback } = useContext(Context)
     const [name, setName] = useState(null)
+    const [foto, setFoto] = useState(null)
 
     useEffect(() => {
         getUserName()
@@ -21,6 +22,7 @@ function ProfileInfoHeader ({activities}) {
         if (isJwtValid(sessionStorage.token)) {
             const result = await retrieveUser(sessionStorage.token)
             setName(result.name)
+            setFoto(result.foto)
         } else {
             navigate('/') 
         }}catch(error) {
@@ -32,7 +34,8 @@ function ProfileInfoHeader ({activities}) {
     
     return <div className='Info__header'>
 
-            <div className={"Info__container--name"}> 
+            <div className={"Info__container--name"}>
+                {foto && <img className="Info__foto" src={foto}/> }
                 <h2 className={"Info__name"}>{name}</h2>
             </div>
             <div className={"Info__container"}>   
