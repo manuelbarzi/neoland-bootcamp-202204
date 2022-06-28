@@ -4,7 +4,6 @@ import Context from './Context'
 import signUpToEvent from '../logic/signUpToEvent'
 import './HomeEvent.sass'
 import { MdPeople, MdOutlineLocationOn, MdCalendarToday } from "react-icons/md"
-import { useEffect } from 'react'
 
 function HomeEvent(props) {
   const logger = new Logger('HomeEvent')
@@ -21,7 +20,7 @@ function HomeEvent(props) {
           return
 
         }
-        onSignUp(event.id)
+        onSignUp()
       })
     handleFeedback({ level: 'success', message: 'Apuntado' })
   }
@@ -51,12 +50,13 @@ export default HomeEvent
 
 
 
-{/* <select name='select'>
-                <option value="category1">Category 1</option>
-                <option value="category2">Category 2</option>
-                <option value="category3">Category 3</option>
-</select> */}
 
-{/* <figure className=''>
-                <img src="hola" alt="" />
-            </figure> */}
+
+
+
+
+
+
+
+
+

@@ -26,12 +26,12 @@ function DeleteUser() {
 
           return
         }
+        delete sessionStorage.token
+        navigate('/login')
       })
 
     } catch (error) {
       handleFeedback({ level: 'error', message: error.message })
-      delete sessionStorage.token
-      navigate('/login')
     }
   }
 

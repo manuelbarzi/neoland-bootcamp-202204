@@ -32,7 +32,7 @@ function signUpToEvent(token, eventId, callback) {
         callback(new Error(data.error))
       } else if (status >= 500)
         callback(new Error('server error'))
-      else if (status === 201) {
+      else if (status === 200) {
         callback(null)
       }
     })
