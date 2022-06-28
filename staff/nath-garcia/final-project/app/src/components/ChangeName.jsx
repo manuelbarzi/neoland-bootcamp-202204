@@ -38,10 +38,10 @@ function ChangeName(props) {
    return <div>
    <form className="Container" onSubmit={handleFormSubmit}>
        <input type= "text" name="name" placeholder="New Name and surname" />
-       <button className="Button">Save</button>
+       <button className="Button" type='submit'>Save</button>
    </form>
    <div>
-       <button className="Button" onClick={handleClickBackToProfile}>Back</button>
+       <button className="Button" type="button" onClick={handleClickBackToProfile}>Back</button>
    </div>
 </div>
 

@@ -13,7 +13,7 @@ function retrieveMovements(token) {
 
     logger.info('request')
 
-    return api.get('users', {
+    return api.get('movements', {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -22,7 +22,10 @@ function retrieveMovements(token) {
         .then(({ status, payload }) => {
             if (status === 200) {
                 const data = JSON.parse(payload)
-                return data.token
+                data.forEach(element=> {
+                    element.date = new Date(element.date)
+                })
+                return data
             } else if (status >= 400 && status < 500) {
                 logger.warn('response - client error status ' + status)
 

@@ -2,75 +2,70 @@ import { useState, useContext, useEffect } from 'react'
 import Context from '../components/Context'
 import retrieveUser from '../logic/retrieveUser'
 import retrieveMovements from '../logic/retrieveMovements'
+import saveMovement from '../logic/saveMovement'
 import Profile from '../components/Profile'
 import Expenses from '../components/Expenses'
 import Income from '../components/Income'
+import AddMovement from './AddMovement'
 import './Home.sass'
 import { isJwtValid } from '../validators'
 import { useNavigate } from 'react-router-dom'
 import Logger from '../vendor/Loggy'
 
-function Home({ onUserLogout }) {
+function Home(props) {
     const logger = new Logger('Home')
 
     logger.info('call')
 
     const navigate = useNavigate()
-    const [view, setView] = useState('home')
+    const [view, setView] = useState(null)
     const [name, setName] = useState(null)
     const [movements, setMovements] = useState(null)
     const { handleFeedback } = useContext(Context)
 
     const handleLogoutClick = () => {
-        handleLogout()
+        onUserLoggedOut()
+    }
+
+    const onUserLoggedOut = () => {
+        delete sessionStorage.token
+
+        props.onUserLoggedOut()
     }
 
     const handleLogout = () => {
-       onUserLogout
+        delete sessionStorage.token
+        navigate("/login")
     }
 
+    const validateUser = async () => {
+        try {
+            const result = await retrieveUser(sessionStorage.token)
 
+            setView('expenses')
 
-    //const handleProfileClick = () => setView('profile')
-   // const handleClickExpenses = () => setView('expenses')
-   // const handleClickIncome = () => setView('income')
+            setName(result)
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
+    }
+
+    const handleBackClick = () => setView('expenses')
+    const handleProfileClick = () => setView('profile')
+    const handleClickExpenses = () => setView('expenses')
+    const handleClickIncome = () => setView('income')
+
 
     useEffect(() => {
         logger.info('componentDidMount')
 
         if (isJwtValid(sessionStorage.token))
-            retrieveUser(sessionStorage.token, (error, user) => {
-                if (error) {
-                    handleFeedback({ level: 'error', message: error.message })
-
-                    handleLogout()
-
-                    return
-                }
-
-                setName(user.name)
-                setView('expenses')
-            })
-        else navigate("/login")
+            validateUser()
     }, [])
 
-    const handleAddClick = () => {
-        saveMovement(sessionStorage.token, null, )
-    }
+    const handleAddClick = () => setView('addMovement')
 
-    useEffect(() => {
-        getMovements()
-    }, [view])
 
-    const getMovements = async () => {
-        try {
-            const result = await retrieveMovements(sessionStorage.token)
-
-            setMovements(result)
-        } catch (error) {
-            handleFeedback({ level: 'error', message: error.message })
-        }
-    }
 
     return isJwtValid(sessionStorage.token) ?
 
@@ -80,57 +75,29 @@ function Home({ onUserLogout }) {
                 <button className="Button Button--no-border Home__home Link Button--profile" onClick={handleProfileClick}>My profile </button>
             </header>
 
-            <main>
+            {view === 'profile' && <Profile onBackClick={handleBackClick} />}
+            {(view === 'expenses' || view === 'income') && <main>
                 <div className="Home__body Container Container--justify-start">
+                    <div className="Container--row Box--tag">
+                        <button className="Tag--expenses" onClick={handleClickExpenses}>EXPENSES</button>
+                        <button className="Tag--income" onClick={handleClickIncome}>INCOME</button>
+                    </div>
                     <div className="Box">
+                        {view === 'income' && <Income />}
+                        {view === 'expenses' && <Expenses />}
 
-                        <div className="expenses" onClick={handleClickExpenses}>EXPENSES</div>
-                        <div className="income" onClick={handleClickIncome}>INCOME</div>
-                        <button className="Plus">+</button>
+                        <button className="Plus" onClick={handleAddClick}>+</button>
                     </div>
                 </div>
-
-                {view === 'profile' && <Profile />}
-                
-            </main>
-
+            </main>}
+            {view === 'addMovement' && <AddMovement />}
             <footer className="Home__footer">
-                <div>
-                    <button className="Button Link Button--logout" onClick={handleLogoutClick}>Logout</button>
+                <div> 
+                <button className="Button Link Button--logout" onClick={handleLogout}>Logout</button>
                 </div>
             </footer>
         </div > : <></>
 
-    /*return isJwtValid(sessionStorage.token) ?
-
-        <div className="Home Container">
-
-            {view === 'home' && <header className="Home__header Container Container--row Container--spread-sides">
-                <button className="Button Button--no-border Home__home Link Button--profile" onClick={handleProfileClick}>My profile </button>
-            </header>}
-
-            <main>
-                {view === 'home' && <div className="Home__body Container Container--justify-start">
-                    <div className="Box">
-
-                        <div className="expenses" onClick={handleClickExpenses}>EXPENSES</div>
-                        <div className="income" onClick={handleClickIncome}>INCOME</div>
-                        <button className="Plus">+</button>
-                    </div>
-                </div>}
-
-                {view === 'profile' && <Profile />}
-                {view === 'expenses' && <Expenses />}
-                {view === 'income' && <Income />}
-            </main>
-
-            <footer className="Home__footer">
-                <div>
-                    <button className="Button Link Button--logout" onClick={handleLogoutClick}>Logout</button>
-                </div>
-            </footer>
-
-        </div > : <></>*/
 }
 
 export default Home

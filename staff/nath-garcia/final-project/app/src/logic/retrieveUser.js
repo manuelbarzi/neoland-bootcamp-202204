@@ -22,7 +22,7 @@ function retrieveUser(token) {
     .then(({status, payload}) => {
         if (status === 200) {
             const data = JSON.parse(payload)
-            return data.token
+            return data.name
         } else if (status >= 400 && status < 500) {
             logger.warn('response - client error status ' + status)
 

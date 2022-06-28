@@ -15,7 +15,10 @@ function Profile(props) {
     const navigate = useNavigate()
     // const { handleFeedback } = useContext(Context)
 
-
+    const handleBackClick = () => {
+        props.onBackClick()
+    }
+    
     const handleChangeName = () => setView('changeName')
     const handleChangeUsername = () => setView('changeUsername')
     const handleChangePassword = () => setView('changePassword')
@@ -24,20 +27,16 @@ function Profile(props) {
     const handleDeleteProfile = () => setView('deleteProfile')
 
 
-    const handleLogout = () => {
-        delete sessionStorage.token
-        navigate("/login")
-    }
-
     const handleClickedBackToProfile = () => setView('profile')
 
     const handleProfileChanged = () => setView('profile')
 
-    return <div className="" Profile>
+    return <div className="" >
 
         {view === 'profile' && <div>
             <header>
                 <div>
+                    <button onClick={handleBackClick}>Back</button>
                     <h1>Settings</h1>
                 </div>
             </header>

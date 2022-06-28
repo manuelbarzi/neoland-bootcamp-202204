@@ -40,6 +40,10 @@ body {
   justify-content: flex-start;
 }
 
+.Container--gap {
+  gap: 4rem !important;
+}
+
 .Button {
   margin: 0.5rem;
   font-size: 1.3rem;
@@ -79,6 +83,29 @@ body {
   text-align: center;
 }
 
+.Tag--expenses {
+  width: auto;
+  border: 1.5px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 2.5rem;
+}
+
+.Tag--income {
+  width: auto;
+  border: 1.5px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  cursor: pointer;
+  float: right;
+  margin-right: 2.5rem;
+}
+
 .Plus {
   border-radius: 50%;
   height: 50px;
@@ -86,6 +113,7 @@ body {
   font-size: 25px;
   border: none;
   background-color: #A0D995;
+  cursor: pointer;
 }
 
 .Input {
@@ -116,6 +144,7 @@ body {
 .Box {
   width: 85vw;
   height: 85vw;
+  min-height: 85vw;
   background-color: white;
   border-radius: 2rem;
   text-align: center;
@@ -125,6 +154,12 @@ body {
   justify-content: flex-end;
   padding-bottom: 20px;
   padding-right: 20px;
+  overflow-y: auto;
+}
+
+.Box--tag {
+  height: 2rem;
+  width: 85vw;
 }
 
 /*# sourceMappingURL=index.css.map */
