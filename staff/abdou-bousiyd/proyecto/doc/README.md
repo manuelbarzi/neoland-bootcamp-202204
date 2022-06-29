@@ -1,22 +1,45 @@
-# PitchUs
+# CodePen
 
 ## Intro
 
-![](https://media3.giphy.com/media/k0ijJhqrUP4T2EvmJ1/giphy.gif?cid=ecf05e47erc2aua9odet8z16q2vbwgdonasms8uqdzqov53g&rid=giphy.gif&ct=g)
+Bienvenidos a mi nuevo proyecto donde pongo en práctica los conocimientos que he adquirido durante el Bootcamp. Ha sido un viaje muy desafiante pero me siento muy orgulloso del trabajo realizado.
 
-The project is a clone of the popular Codepen web. Is an online community for testing and displaying user-created HTML, CSS, and JavaScript code snippets. It works as an online code editor and an open code learning environment, where developers can create code snippets, annotate "pens", share and test them.
+El proyecto es una replica de Codepen con mis propia implementaciones y funciones, que te permite escribir codigo [HTML, CSS, JS] obteniendo resultado a tiempo real, la idea del proyecto es compartes codigo entre los usuarios.
+
+También permite descargar el código escrito en un formato zip, y personalizar la configuración del editor.
+
+![](./img/inicial.png)
 
 ## Funcional Description
 
+- Crear un proyecto [HTML - JS - CSS].
+- Descargar el proyecto en formato zip.
+- Custumizar la configuración del editor.
+  - Cambiar el tamaño de la fuente (FontSize).
+  - Añadir o eliminar el Minimapa.
+  - Añadir o eliminar el Número de líneas.
+  - Cambiar el tema de los del editor (Colores).
+- Ver proyectos.
+- Eliminar proyecto.
+- Editar proyecto.
+- Editar el título del proyecto.
+- Añadir favoritos al proyecto.
+- Ver los proyectos de otros usuarios.
+- Entrar en los proyectos de otros usuarios.
+
 ### Use Cases
 
-- Create snippets [HTML - JS - CSS].
-- Download the code in zip format
-- Custumize editor settings.
-- Share project/pens
-- Login and register
-  - Add pens to favorite
-  - Save aon project
+![](./img/useCases.png)
+
+## Workflow
+
+### User
+
+![](./img/workflow-User.png)
+
+### Guest
+
+![](./img/workflow-Guest.png)
 
 ## Technical Description
 
@@ -45,12 +68,6 @@ The project is a clone of the popular Codepen web. Is an online community for te
 - text (String)
 - type (String, enum ['html', 'css', 'js'])
 
-// done
-Auth
-Create project and preview
-Custom Editor
+#### File
 
-// TODO
-More test cases
-Download project in zip format
-improve design
+![](./img/coverage.png)

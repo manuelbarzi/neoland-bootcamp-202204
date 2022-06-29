@@ -21,11 +21,6 @@ const Pens = () => {
 
   retrieveUser(sessionStorage.token, (error, user) => {
     if (error) {
-        setAlert(<Alert error message={error.message} />);
-        setTimeout(() => {
-        setAlert(null);
-        }, 4000);
-
         return;
     }
     setName(user.name);
