@@ -42,9 +42,9 @@ export default function CardJob(props) {
   };
 
   return (
-    <div className="card_Job_Pos ">
-      <form className="border_radius_medium" onSubmit={RegisterClockJobIn}>
-        <div className="gridTwo_reverse ">
+    <div>
+      <form onSubmit={RegisterClockJobIn} className="card_Job_Pos">
+        <div className="gridTwo_small ">
           <input
             className="borderDawn"
             type="hidden"

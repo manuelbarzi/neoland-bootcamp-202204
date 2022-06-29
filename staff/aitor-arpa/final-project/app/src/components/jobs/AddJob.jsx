@@ -47,8 +47,8 @@ export default function AddJob(props) {
 
   return (
     <div className="cardadd">
-      <form className="border_radius_medium" onSubmit={handelsaveJob}>
-        <div className="gridTwo_reverse">
+      <form onSubmit={handelsaveJob}>
+        <div className="gridTwo_25">
           <input className="borderDawn" type="hidden" name="jobId" />
           <label>Title :</label>
           <input className="borderDawn" type="text" name="title" />

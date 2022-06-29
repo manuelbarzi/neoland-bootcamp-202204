@@ -3,7 +3,6 @@ module.exports = {
   handleAuthenticateUser: require("./handleAuthenticateUser"),
   handleDeleteUser: require("./handleDeleteUser"),
   handleRetrieveUser: require("./handleRetrieveUser"),
-  handleUpdateUser: require("./handleUpdateUser"),
   handleAddJob: require("./handleAddJob"),
   handleDeleteJob: require("./handleDeleteJob"),
   handleClockUserIn: require("./handleClockUserIn"),

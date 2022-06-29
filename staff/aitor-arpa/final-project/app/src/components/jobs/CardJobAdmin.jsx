@@ -67,9 +67,9 @@ export default function CardJobAdmin(props) {
   };
 
   return (
-    <div className="card_Job_Pos ">
-      <form className="border_radius_medium" onSubmit={handelUpdateJob}>
-        <div className="gridTwo_reverse ">
+    <div className="card_Job_Pos">
+      <form onSubmit={handelUpdateJob}>
+        <div className="gridTwo_25 ">
           <input
             className="borderDawn"
             type="hidden"

@@ -4,7 +4,7 @@ const { connect, disconnect } = require("mongoose");
 const { expect } = require("chai");
 const { NotFoundError } = require("errors");
 
-describe("retrieveClockUse", () => {
+describe("retrieveClockUser", () => {
   before(() => connect("mongodb://localhost:27017/test")); // conexion a la base de datos
 
   beforeEach(() => {
@@ -37,17 +37,10 @@ describe("retrieveClockUse", () => {
       });
   });
 
-  it("sucees on user exist", () => {
-    return retrieveClockUser(usercloc.id).then((find) => {
-      expect(find).to.instanceOf(Array);
-      expect(find.length).to.be.equal(1);
-    });
-  });
-
-  it("sucees on user not exist", () => {
-    return retrieveClockUser(newjob.id).then((find) => {
+  it("error on user not exist", () => {
+    return retrieveClockUser(newjob.id).catch((find) => {
       expect(find).to.instanceOf(NotFoundError);
-      expect(find.message).to.be.equal("User Not Found");
+      expect(find.message).to.be.equal(`${newjob.id} Not Found`);
     });
   });
   after(() => disconnect());

@@ -39,7 +39,6 @@ const {
   routes.delete("/users", jsonBodyParser, handleDeleteUser);
   routes.get("/users", handleRetrieveUser);
   routes.get("/users/role/:role", handleRetrieveUserRol);
-  routes.post("/users/:id", jsonBodyParser, handleUpdateUser);
   /* JOB */
 
   routes.post("/job", jsonBodyParser, handleAddJob);

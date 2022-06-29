@@ -27,7 +27,7 @@ export default function CardJobListUser(props) {
   return jobs && jobs.length > 0 ? (
     <ul>
       {jobs.map((job, i) => (
-        <li key={i} className="cadjob">
+        <li key={i}>
           <CardJob
             jobid={job.id}
             title={job.title}

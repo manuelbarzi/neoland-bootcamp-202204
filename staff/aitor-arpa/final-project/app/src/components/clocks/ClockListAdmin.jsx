@@ -34,7 +34,7 @@ export default function ClockListAdmin() {
   };
 
   return clocks && clocks.length ? (
-    <ul className=" ">
+    <ul>
       {clocks.map((clock, i) => (
         <div className="gaps ">
           <li key={i} className="gridTwo_small">

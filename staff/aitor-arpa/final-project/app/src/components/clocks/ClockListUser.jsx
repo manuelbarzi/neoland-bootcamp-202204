@@ -72,14 +72,14 @@ export default function ClockListUser(props) {
     <>
       {clocks && !!clocks.length && (
         <div>
-          <ul>
+          <ul className="scroll-container ">
             {clocks.map((clock, i) => (
               <li key={clock.id + i}>
                 <form onSubmit={registerTimeOut}>
                   <input name="clockId" value={clock.id} type="hidden" />
                   <li />
 
-                  <p className="cadclock">
+                  <p className="cadclock ">
                     In:{" "}
                     {new Date(clock.timein).toLocaleDateString(
                       "es-ES",
@@ -99,8 +99,8 @@ export default function ClockListUser(props) {
                   {clock.timeout ? (
                     <></>
                   ) : (
-                    <div>
-                      <button type="onsubmit">
+                    <div className="flex_center">
+                      <button className="btn_red" type="onsubmit">
                         <img src={exit} alt=""></img>
                       </button>
                     </div>
@@ -114,8 +114,8 @@ export default function ClockListUser(props) {
       )}
       {!clocks ||
         (!clocks.some((clock) => !clock.timeout) && (
-          <div>
-            <button className="btn " onClick={registerTimeIn}>
+          <div className="flex_center">
+            <button className="btn_green" onClick={registerTimeIn}>
               <img src={In} alt=""></img>
             </button>
           </div>

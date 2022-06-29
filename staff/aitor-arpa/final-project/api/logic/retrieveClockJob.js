@@ -10,11 +10,11 @@ function retrieveClockJob(userid, jobid) {
       if (!user) throw new NotFoundError("User Not Found");
       return Clock.find({ job: jobid, user: userid });
     })
-    .then((job) => {
-      if (!job) throw new NotFoundError("Clock Not Found");
-      if (job <= 0) return [];
+    .then((clock) => {
+      if (!clock) throw new NotFoundError("Clock Not Found");
+      if (clock <= 0) return [];
 
-      return job;
+      return clock;
     });
 }
 

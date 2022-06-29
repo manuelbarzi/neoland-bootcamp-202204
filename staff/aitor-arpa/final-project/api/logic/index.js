@@ -1,7 +1,7 @@
 const createUser = require("./createUser");
 const authenticateUser = require("./authenticateUser");
 const retrieveUser = require("./retrieveUser");
-const updateUser = require("./updateUser");
+
 const unregisterUser = require("./unregisterUser");
 const addJob = require("./addJob");
 const clockUserIn = require("./clockUserIn");
@@ -22,7 +22,6 @@ module.exports = {
   authenticateUser,
   retrieveUser,
   unregisterUser,
-  updateUser,
   addJob,
   deleteJob,
   retrieveJobs,
