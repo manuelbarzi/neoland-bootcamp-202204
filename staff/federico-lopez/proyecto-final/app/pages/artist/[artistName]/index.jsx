@@ -46,7 +46,9 @@ export default function Artist({ token, songs }) {
             <div className="w-full h-14 px-4 bg-primary flex items-center justify-between">
                 <h3 className="text-xl text-myblack font-bold">Songs</h3>
                 <Link href='/create-interpretation'>
-                    <ButtonBlue onClick={handleOnNewSongClick}>Add New Song</ButtonBlue>
+                    <a>
+                        <ButtonBlue onClick={handleOnNewSongClick}>Add New Song</ButtonBlue>
+                    </a>
                 </Link>
             </div>
             <ArtistsAndSongsResultsList songs={songs} />

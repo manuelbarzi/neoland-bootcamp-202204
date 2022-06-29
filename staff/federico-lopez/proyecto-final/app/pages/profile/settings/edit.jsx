@@ -46,11 +46,19 @@ export default function EditProfile({ token, user }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    const { token } = await verifyTokenWithAPICall(req, res)
+    const obj = await verifyTokenWithAPICall(req, res)
 
-    const user = await retrieveUser(token)
+    if (obj) {
+        const { token } = obj
 
-    return {
-        props: { user, token }
+        const user = await retrieveUser(token)
+
+        return {
+            props: { token, user }
+        }
+    } else {
+        return {
+            props: {}
+        }
     }
 }

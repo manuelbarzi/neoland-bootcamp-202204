@@ -64,7 +64,9 @@ export default function Song({ interpretations, song, token }) {
                         <p className="text-xs text-mygrey">({interpretations.length})</p>
                     </div>
                     <Link href='/create-interpretation'>
-                        <ButtonBlue onClick={handleOnNewInterpretationClick} >Add New</ButtonBlue>
+                        <a>
+                            <ButtonBlue onClick={handleOnNewInterpretationClick} >Add New</ButtonBlue>
+                        </a>
                     </Link>
                 </div>
 
