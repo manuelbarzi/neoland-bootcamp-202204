@@ -47,7 +47,7 @@ const HeatMap = () => {
     }, 2000);
 
     return () => {
-      clearTimeout(refresh);
+      clearInterval(refresh);
     };
 
   }, [geolocation])

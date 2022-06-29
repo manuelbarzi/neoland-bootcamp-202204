@@ -5,42 +5,40 @@ import CardItem from './CardItem';
 function Cards() {
   return (
     <div className="cards">
-      <h1>Check out these EPIC Destinations!</h1>
+      <h1>Check out Our Funcionalities!</h1>
       <div className="cards__container">
         <div className="cards__wrapper">
           <ul className="cards__items">
             <CardItem
-              src="images/img-1.jpg"
-              text="Set Sail in the Atlantic Ocean visiting Uncharted Waters"
-              label="Mystery"
-              path="/services"
+              src="images/landing/img-1.jpg"
+              text="En caso de enfrentar un escenario de peligro pide ayuda!"
+              label="Heat Map"
+              path="/HeatMap"
             />
-            <CardItem
+            {/* <CardItem
               src="images/img-1.jpg"
-              text="Experience Football on Top of the Himilayan Mountains"
-              label="Adventure"
-              path="/products"
+              text="Experience"
+              label=""
+              path="/"
             />
           </ul>
           <ul className="cards__items">
             <CardItem
               src="images/img-1.jpg"
-              text="Set Sail in the Atlantic Ocean visiting Uncharted Waters"
               label="Mystery"
-              path="/services"
+              path="/"
             />
             <CardItem
               src="images/img-1.jpg"
-              text="Experience Football on Top of the Himilayan Mountains"
               label="Adventure"
-              path="/products"
+              path="/"
             />
             <CardItem
               src="images/img-1.jpg"
-              text="Ride through the Sahara Desert on a guided camel tour"
-              label="Adrenaline"
+              text=""
+              label=""
               path="/sign-up"
-            />
+            /> */}
           </ul>
         </div>
       </div>

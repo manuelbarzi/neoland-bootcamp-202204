@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { useNavigate,Link } from "react-router-dom";
 import authenticateUser from '../../logic/authenticateUser'
 import Alert from '../Alert/Alert'
+import NavBar from '../Landing/Navbar'
+
 import './Login.sass'
 
 
@@ -42,6 +44,7 @@ const Login = () => {
 
 
     return(<>
+     <NavBar />
         <form className='login' onSubmit={handleSubmit}>
 
             <div className='login__auth'>
@@ -73,7 +76,7 @@ const Login = () => {
 
                 <div className='login__auth__btns'>
                     <button className='login__auth__btns__login'>Login</button>
-                    <button className='login__auth__btns__toRegister' to='/register'>Register</button>
+                    <Link className='login__auth__btns__toRegister link' to='/register'>Register</Link>
                 </div>
             </div>
 

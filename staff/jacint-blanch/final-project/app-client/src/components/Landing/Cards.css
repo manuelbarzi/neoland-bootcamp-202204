@@ -23,8 +23,9 @@ h1 {
 
 .cards__items {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
   margin-bottom: 24px;
+  list-style: none;
   
 }
 
@@ -46,7 +47,6 @@ h1 {
   border-radius: 10px;
   overflow: hidden;
   text-decoration: none;
-  margin: 30px;
 }
 
 .cards__item__pic-wrap {
