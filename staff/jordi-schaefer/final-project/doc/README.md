@@ -1,4 +1,5 @@
-# My App
+# Stravita
+Strava a manita
 
 ## Intro
 
@@ -48,20 +49,20 @@ It's a social media where users can comment and like each other's activities
 #
 ## Technical Description
 
-The user can record points during the activity, once they click the start button the first point is recorded and showed in the map, next points could be recorded with the record button, and again with the finish button one last point is also recorded.
+The user can record points during the activity, once they click the start button the first point is recorded and shown on the map, the next points could be recorded with the record button, and again with the finish button, one last point is also recorded.
 
-There is a hide posibility to record automaticaly for every new found position
-To use this funtion user have to click 6 time in the upper right corner, and one button will appear.
+There is a hide possibility to record automatically for every new found position
+To use this function user have to click 6 times in the upper right corner, and one button will appear.
 
-Once the user finish the activity the title is requiered, other imputs are optional and sport could be changed again or maintain the first selection.
+Once the user completes the activity the title is required, other inputs are optional and the sport can be changed again or maintain the first selection.
 
-If the activity stops in the middle of process it will be saved as a private, but if it ends with the correct process, and user does not select anythyns, by defoult will be public.
+If the activity stops in the middle of the process it will be saved as a private, but if it ends with the correct process, and user does not select anything, by default will be public.
 
-User could resume an activity in his personal profile within the last 6 hours, the activity will be opened with all the points and data saved
+User will be able to resume activities in his personal profile within the last 6 hours, the activity will be opened with all the points and data saved
 
-User could change profile Foto in settings, there is a defaulf Foto for every new user registered
+User can change profile Foto in settings, there is a default Foto for new users registered
 
-Activities could be deleted in personal profile -> settings -> delete activities
+Activities can be deleted in personal profile -> settings -> delete activities
 
 
 ### Data Model

@@ -17,7 +17,7 @@ function MapView({points}) {
     const length = points.length
     
     if (length > 1) { // calculate the midle point between the first and last point
-        first = [points[0].latitude, points[1].longitude]
+        first = [points[0].latitude, points[0].longitude]
         last = [points[length-1].latitude, points[length-1].longitude]
 
         let n=0
@@ -28,7 +28,7 @@ function MapView({points}) {
         const lng = n/length
 
         centerPosition = [lat, lng]
-        markerPosition = [points[0].latitude, points[1].longitude]
+        markerPosition = [points[0].latitude, points[0].longitude]
 
         dis = calculateDistanceBetweenTwoPoints(first, last)/1000
         
@@ -49,7 +49,7 @@ function MapView({points}) {
             center={centerPosition} 
             zoom={ (dis > 20)? 10: (dis > 7)? 11: (dis > 3.5)? 12: (dis > 2.5)? 13: 14 } 
             zoomControl={false}
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
             attributionControl={false}
             doubleClickZoom={false}
             dragging={false}
