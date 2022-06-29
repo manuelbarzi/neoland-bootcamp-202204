@@ -5,7 +5,6 @@ import retrieveMyEvent from '../logic/retrieveMyEvent'
 import MyEvent from './MyEvent'
 import './MyEventList.sass'
 
-
 function MyEventList({ timestamp }) {
   const logger = new Logger('MyEventList')
 
