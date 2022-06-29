@@ -1,24 +1,46 @@
+## Safetyium
+
+![](https://media.giphy.com/media/81xwEHX23zhvy/giphy.gif)
+
 ## Intro
 
-![](https://media0.giphy.com/media/AJwnLEsQyT9oA/giphy.gif?cid=ecf05e47p6toyqjoc1r3ljv7n75a7hkps1enc5use3py1t7i&rid=giphy.gif&ct=g)
+Safetyium es una aplicación cuyo objetivo es mantenerte seguro allí donde vas permitiendote pedir ayuda y interactuar con otros usuarios en cualquier momento de posible peligro.
 
-
-Hands-free personal safety app that keeps you safe wherever you go and helps advert an emergency from occurring in the first place. If you are in danger you can touch the SOS button and it will appear a message at anyone that has the app near you.
-
-The app is integrated with public safety agencies to provide you with security wherever and whenever you need it.
-
-It also has a ranking with the users that have helped resolve more cases.
 
 ## Funcional Description
 
+- Landing
+- Login y Register
+- Ver Ubicacion actual 
+- Ver incidencias de otros usuarios
+- Crear Incidencias
+- Chat de las incidencias
+- Ver historial del chat y interactuar
+
 ### Use Cases
-- Login and register.
-- Contact safety agencies.
-- Ranking more active users.
-- A heat map.
-- Ask for help.
+
+![](./images/Use_Cases.png)
+
+## Flow Charts
+
+Watch other users incidences
+
+![](./images/Users_Incidents.png)
+
+Create Incidence
+
+![](./images/Create_incidence.png)
+
+Incidence Chat
+
+![](./images/Incidence_Chat.png)
+
 
 ## Technical Description
+
+### Blocks
+
+![](./images/blocks.png)
 
 ### Data Model
 
@@ -26,32 +48,32 @@ It also has a ranking with the users that have helped resolve more cases.
 - id: (ObjectId)
 - username: (String)
 - name: (String)
-- email: (String)
 - password: (String)
-- mobile: (String)
 
 #### Message
 - id (ObjectId)
 - user (ObjectId)
 - text (String)
-- date (Date)
 
 #### Incidence
 
-    - id: (ObjectId)
-    - user: (ObjectId) userid
-    - altitude (String)
-    - longitude (String)
-    - description
-    - date (Date)
+- id: (ObjectId)
+- user: (ObjectId) userid
+- altitude (String)
+- longitude (String)
+- description
 
-TODO 
+## Technologies
 
-<!-- - Figma (Tomorrow)
-- Hacer diagrama 
-- Investigar  -->
+- Javascript
+- React
+- CSS
+- SASS
+- HTML
+- Express
+- Mongo
+- Node
 
-- Proteger las rutas privadas front y back (solo si hay token el usuario puede acceder)
 
-- 
+
 
