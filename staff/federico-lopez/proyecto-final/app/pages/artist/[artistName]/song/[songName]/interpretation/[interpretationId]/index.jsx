@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState, useContext } from "react"
 import { Context, Title, Title2, Title3, ChevronLeftImage, Footer, Slider, FlexColSection, InterpretationIconImage, SaveFavoriteImage, AvatarDemoImage, ChordButton, CircleChordButton, ExpandImage, RateYellowImage, RateYellowFullImage, RankInterpretationByUser } from '../../../../../../../components'
-import { retrieveInterpretationFromSong, retrieveSong, toggleOrUpdateRankToInterpretation } from 'logic'
+import { retrieveInterpretationFromSong, retrieveSong, toggleOrUpdateRankToInterpretation } from '../../../../../../../logic'
 import { verifyTokenWithAPICall, getChords, generateInterpretation, generateChordImages } from "../../../../../../../helpers"
 
 export default function Interpretation({ token, userId, interpretation, song }) {
@@ -58,14 +58,14 @@ export default function Interpretation({ token, userId, interpretation, song }) 
     return (
         <>
             <div className={'flex flex-col h-screen' + (chordView ? ' brightness-50' : '')}>
-                <header className="w-full fixed top-0 bg-white px-4 pt-4 pb-1 gap-4 shadow-custom-items z-50">
+                <header className="w-full bg-white px-4 pt-4 pb-1 gap-4 shadow-custom-items z-50">
                     <div className="flex flex-col gap-4">
                         <button className="w-8 h-8" onClick={onBackClick} >
                             <ChevronLeftImage />
                         </button>
                         <div className="flex flex-col justify-between gap-2">
                             <div className="flex gap-2">
-                                <InterpretationIconImage className="w-6 h-6 flex items-center justify-center" grey={true} />
+                                <InterpretationIconImage className="w-6 h-6 flex items-center justify-center" color="grey" />
                                 <Title2>Interpretation</Title2>
                             </div>
                             <div className="flex justify-between items-center">
@@ -82,7 +82,7 @@ export default function Interpretation({ token, userId, interpretation, song }) 
                     </div>
                 </header>
 
-                <div className="mb-4 pt-[204px] bg-primary flex-1 overflow-y-auto ">
+                <div className="bg-primary flex-1 overflow-y-auto ">
                     <FlexColSection className="px-4 items-center">
 
                         <div className="w-full py-4 flex flex-col gap-2">

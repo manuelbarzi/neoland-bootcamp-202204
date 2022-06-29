@@ -24,13 +24,29 @@ PItchUs is a social media for musicians who want to play and share song interpre
 
 ## Technical Description
 
+## Create Interpretations
+PitchUs allows users to publish their interpretations of songs just writing a simple string. Using a database and a regex, the app detect the chords along the string and offer the possibility to see how the chords can be played using an interface provided by react-chords library develop by @tombatossals.
 
+The user that creates a new interpretation can choose an artist or a song already interpreted by other user, or can create new artists and songs.
 
+### Spotify Integration
+PitchUs has an integration with Spotify-API that allow users to provide their data to the application. PitchUs uses this information to take the favorite artists of the user and offering access to their interpretations in the home page. The Spotify session is save in the database, so the user could have a personalized activity no matter the navigator or device they are using.
+
+### Search
+The search functionality was develop to retrieve all the songs and artist that matches with the query tiped by the user. To do do that a regex was used in MongoDB.
+
+### Rating
+The application also offers the possibility to rate the interpretations of others users and change o modify a previous rate.
+
+### Server Side Rendering
+PitchUs runs on Next.js. We decide to use this technology to make the application more appropiate to be indexed for SEO in order to be scalable.
 
 ## Technologies
 - React
 - NextJS
 - Tailwind
+- Express
+- MongoDB
 
 ### Data Model
 

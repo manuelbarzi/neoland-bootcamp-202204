@@ -41,31 +41,32 @@ module.exports = async (userId, access_token) => {
 
             return artist
         })
-        debugger
 
-        const topArtistsFromSpotifyReducedString = topArtistsFromSpotify.reduce((previousValue, currentValue) => {
-            return previousValue + '|' + currentValue
-        })
-
-        const topArtistsFromSpotifyRegex = new RegExp(topArtistsFromSpotifyReducedString)
-
-        let topArtists = await Artist.find({ name: { $regex:  topArtistsFromSpotifyRegex, $options: 'i' } }).lean()
-
-        topArtists = topArtists.map(artist => {
-            artist.id = artist._id.toString()
-            delete artist._id
-            delete artist.__v
-            delete artist.country
-            delete artist.genres
-
-            return artist
-        })
-
-        return topArtists
-    } else {
+        if(topArtistsFromSpotify.length > 0) {
+            const topArtistsFromSpotifyReducedString = topArtistsFromSpotify.reduce((previousValue, currentValue) => {
+                return previousValue + '|' + currentValue
+            })
+    
+            const topArtistsFromSpotifyRegex = new RegExp(topArtistsFromSpotifyReducedString)
+    
+            let topArtists = await Artist.find({ name: { $regex:  topArtistsFromSpotifyRegex, $options: 'i' } }).lean()
+    
+            topArtists = topArtists.map(artist => {
+                artist.id = artist._id.toString()
+                delete artist._id
+                delete artist.__v
+                delete artist.country
+                delete artist.genres
+    
+                return artist
+            })
+    
+            return topArtists
+        } else {
+            return []
+        }
+    } else 
         throw new Error(`Error in top artists with Spotify`)
-    }
-
     //TODO CONTINUE HANDLE ERRORS
 }
 
