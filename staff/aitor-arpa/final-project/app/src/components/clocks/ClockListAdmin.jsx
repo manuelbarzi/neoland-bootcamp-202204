@@ -89,6 +89,6 @@ export default function ClockListAdmin() {
       ))}
     </ul>
   ) : (
-    <h1 className="center logo">No tienes horas guardadas</h1>
+    <h1 className="center logo">you have no hours saved</h1>
   );
 }

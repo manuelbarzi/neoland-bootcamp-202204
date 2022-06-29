@@ -69,7 +69,7 @@ export default function ClockListUser(props) {
   };
 
   return (
-    <>
+    <div style={{ transform: "translateY(-50px)" }}>
       {clocks && !!clocks.length && (
         <div>
           <ul className="scroll-container ">
@@ -120,6 +120,6 @@ export default function ClockListUser(props) {
             </button>
           </div>
         ))}
-    </>
+    </div>
   );
 }

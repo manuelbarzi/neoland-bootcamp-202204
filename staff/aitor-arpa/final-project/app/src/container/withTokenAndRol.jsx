@@ -1,7 +1,6 @@
 import { Navigate, useLocation } from "react-router-dom";
 import getUserRole from "../logic/getUserRole";
 
-// withToken
 export const withTokenAndRol = (Component, token = true, rol = "admin") => {
   const deleteSessionStorageAndGoToLogin = () => {
     delete sessionStorage.token;
