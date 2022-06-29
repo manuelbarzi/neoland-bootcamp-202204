@@ -11,7 +11,7 @@ export default withTokenAndRol(function Clocked() {
       <Route
         index
         element={
-          <div>
+          <div className="list_padding">
             <ClockListAdmin />
 
             <NavbarAdmin />

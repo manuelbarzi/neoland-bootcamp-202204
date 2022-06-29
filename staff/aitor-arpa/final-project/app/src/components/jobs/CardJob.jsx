@@ -44,7 +44,7 @@ export default function CardJob(props) {
   return (
     <div>
       <form onSubmit={RegisterClockJobIn} className="card_Job_Pos">
-        <div className="gridTwo_small ">
+        <div className="gridTwo_25 ">
           <input
             className="borderDawn"
             type="hidden"

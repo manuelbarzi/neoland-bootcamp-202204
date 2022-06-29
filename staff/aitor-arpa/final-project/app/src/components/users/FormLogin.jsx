@@ -48,7 +48,7 @@ function FormLogin(props) {
           placeholder="contraseña"
           required
         ></input>
-        <button className="btn">Login</button>
+        <button className="btn_green">Login</button>
       </form>
       <Toaster />
     </div>
