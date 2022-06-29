@@ -23,7 +23,7 @@ TODO list use cases
 
 ### Wireframes
 
-TODO show wireframes (screens) images
+https://www.figma.com/file/AQZYdznaHRVHYu8XpqM5wx/final-project?node-id=0%3A1
 
 
 ## Technical Description

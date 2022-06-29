@@ -90,7 +90,7 @@ function Home(props) {
                     </div>
                 </div>
             </main>}
-            {view === 'addMovement' && <AddMovement />}
+            {view === 'addMovement' && <AddMovement onBackClick={handleClickExpenses} />}
             <footer className="Home__footer">
                 <div> 
                 <button className="Button Link Button--logout" onClick={handleLogout}>Logout</button>

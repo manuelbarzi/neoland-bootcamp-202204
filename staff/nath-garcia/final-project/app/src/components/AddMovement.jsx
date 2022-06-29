@@ -1,6 +1,6 @@
 import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
-import retrieveMovements from "../logic/retrieveMovements"
+import saveMovement from "../logic/saveMovement"
 import Context from './Context'
 
 function AddMovement(props) {
@@ -18,18 +18,20 @@ function AddMovement(props) {
     const handleFormSubmit = event => {
         event.preventDefault()
         const amount = event.target.amount.value
+        const type = event.target.type.value
         const category = event.target.category.value
         const concept = event.target.concept.value
         const account = event.target.account.value
         const date = event.target.date.value;
-        (async () => {
-            try {
-                await retrieveMovements(amount, category, concept, account, date)
+        try {
+            saveMovement(sessionStorage.token, Number(amount), type, Number(category), concept, account, date, (error) => {
+                if (error) return handleFeedback({ level: 'error', message: error.message })
                 navigate('/')
-            } catch (error) {
-                handleFeedback({ level: 'error', message: error.message })
-            }
-        })();
+            })
+        } catch (error) {
+            handleFeedback({ level: 'error', message: error.message })
+        }
+       
     }
 
     return <div>
@@ -37,36 +39,41 @@ function AddMovement(props) {
         {view === 'AddMovement' && <div>
             <button className="Button Button--light" onClick={handleBackClick}>Back</button>
             <form className="Container" onSubmit={handleFormSubmit}>
-            <label> <input className="Input Input--light" type="number" name="amount" placeholder="amount" /> €</label>
+           
+            <select className="Input Input--light" id="type" name="type">
+                <option value="outcome">Outcome</option>
+                <option value="income">Income</option>
+            </select>
                 <select className="Input Input--light" id="category" name="category">
-                    <option>Home</option>
-                    <option>Feeding</option>
-                    <option>Beaty</option>
-                    <option>Education</option>
-                    <option>Tansportation</option>
-                    <option>Leisure</option>
-                    <option>Health</option>
-                    <option>Routines</option>
-                    <option>Other expenses</option>
-                    <option>Salary</option>
-                    <option>Saving</option>
-                    <option>Interests</option>
-                    <option>Gift</option>
-                    <option>Return</option>
-                    <option>Other income</option>
+                    <option value="0">Home</option>
+                    <option value="1">Feeding</option>
+                    <option value="2">Beaty</option>
+                    <option value="3">Education</option>
+                    <option value="4">Tansportation</option>
+                    <option value="5">Leisure</option>
+                    <option value="6">Health</option>
+                    <option value="7">Routines</option>
+                    <option value="8">Other expenses</option>
+                    <option value="9">Salary</option>
+                    <option value="10">Saving</option>
+                    <option value="11">Interests</option>
+                    <option value="12">Gift</option>
+                    <option value="13">Return</option>
+                    <option value="14">Other income</option>
                 </select>
-                <textarea className="Input Input--light" placeholder="Concept ..."> </textarea>
-                <select className="Input Input--light">
-                    <option>Bank account</option>
-                    <option>Credit card</option>
-                    <option>Debit card</option>
+                <textarea name="concept" className="Input Input--light" placeholder="Concept ..."> </textarea>
+                <label> <input className="Input Input--light" type="number" name="amount" placeholder="amount" /> €</label>
+                <select name="account" className="Input Input--light">
+                    <option>BankAccount</option>
+                    <option>Creditard</option>
+                    <option>Debitard</option>
                     <option>Paypal</option>
                     <option>Cash</option>
                     <option>Other</option>
                 </select>
-                <input className="Input Input--light" type="date" name="email" placeholder="email" />
+                <input className="Input Input--light" type="date" name="date" placeholder="email" />
                 
-                <button className="Button Button--light">Save</button>
+                <button type="submit" className="Button Button--light">Save</button>
                 
             </form>
 
