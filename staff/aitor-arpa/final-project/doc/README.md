@@ -71,9 +71,10 @@ Está diseñada para resolver la comunicación entre trabajador y sus tareas a r
 
 ## TODOs
 
-- TODO completar documentacion, mas diagramas (README.md)
+- TODO completar documentacion, diagramas con las modificacion (README.md)
+- TODO Agregar figma correspondiente
 - TODO finalizar testing logic server side
 - TODO implementar reports
 - TODO implementar pausas de trabajos (boton pause)
 - TODO remake toast styles
-- TODO implementar msa estilos
+- TODO implementar mas estilos
