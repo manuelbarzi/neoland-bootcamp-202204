@@ -44,7 +44,7 @@ const Settings = ({editorOptions: options, handleOnOptionsChanged}) => {
 
             <label className='Settings__Options__FontSize'>
                 <label>Font Size :</label>
-                <input type="number" placeholder='14' name="fontSize" onChange={handleOnchange} />
+                <input type="number" placeholder='16' name="fontSize" onChange={handleOnchange} />
             </label>
 
             <label className='Settings__Options__Minimap'>

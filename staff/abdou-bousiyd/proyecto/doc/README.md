@@ -4,7 +4,7 @@
 
 Bienvenidos a mi nuevo proyecto donde pongo en práctica los conocimientos que he adquirido durante el Bootcamp. Ha sido un viaje muy desafiante pero me siento muy orgulloso del trabajo realizado.
 
-El proyecto es una replica de Codepen con mis propia implementaciones y funciones, que te permite escribir codigo [HTML, CSS, JS] obteniendo resultado a tiempo real, la idea del proyecto es compartes codigo entre los usuarios.
+El proyecto es una replica de Codepen con mis propia implementaciones y funciones, que te permite escribir codigo [HTML, CSS, JS] obteniendo resultado a tiempo real. La idea del proyecto es compartir codigo entre los usuarios.
 
 También permite descargar el código escrito en un formato zip, y personalizar la configuración del editor.
 
@@ -42,6 +42,9 @@ También permite descargar el código escrito en un formato zip, y personalizar 
 ![](./img/workflow-Guest.png)
 
 ## Technical Description
+## Blocks
+
+![](./img/Blocks.png)
 
 ### Data Model
 
@@ -71,3 +74,5 @@ También permite descargar el código escrito en un formato zip, y personalizar 
 #### File
 
 ![](./img/coverage.png)
+
+![](./img/coverage1.png)

@@ -9,12 +9,11 @@ import Modal from "../Modal";
 import Settings from "../Settings";
 import ProjectTitle from "../ProjectTitle";
 import Alert from "../Alert";
-import { isJwtValid } from "../../validators";
 import retrieveUser from "../../logic/retrieveUser";
 import saveProject from "../../logic/saveProject";
 import retrieveProject from "../../logic/retrieveProject";
 import Login from "../Login";
-import { FILE_NAME, EXTENSIONS, DEFAULT_VALUES } from "../../constants";
+import { FILE_NAME, EXTENSIONS, DEFAULT_VALUES } from "../../constants/index";
 
 import "./splitGrid.css";
 import "./index.sass";
@@ -100,18 +99,11 @@ const Project = () => {
         return;
       }
     });
-    console.log('saved')
-
   }
 
   const loadUser = (openModal) => {
     retrieveUser(sessionStorage.token, (error, user) => {
       if (error) {
-        setAlert(<Alert error message={error.message} />);
-        setTimeout(() => {
-          setAlert(null);
-        }, 4000);
-
         return;
       }
       setName(user.name);
@@ -229,6 +221,7 @@ const Project = () => {
   const handleDownload = () => {
     setDownload(true)
   }
+  // import react from 'https://cdn.skypack.dev/react';
 
   const renderPreview = `
     <!DOCTYPE html>
@@ -241,7 +234,6 @@ const Project = () => {
       </head>
       <body>${editorValues.html}</body>
       <script type="module">
-        import react from 'https://cdn.skypack.dev/react';
         ${editorValues.js}
       </script>
     </html>
