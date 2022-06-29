@@ -76,6 +76,11 @@ body {
   border: none !important;
 }
 
+.Button--back {
+  width: auto;
+  float: right;
+}
+
 .Link {
   font-size: 1.3rem;
   background-color: transparent;
@@ -160,6 +165,14 @@ body {
 .Box--tag {
   height: 2rem;
   width: 85vw;
+}
+
+.Box--back {
+  height: 150px;
+}
+
+.Box--profile {
+  height: 90vw;
 }
 
 /*# sourceMappingURL=index.css.map */

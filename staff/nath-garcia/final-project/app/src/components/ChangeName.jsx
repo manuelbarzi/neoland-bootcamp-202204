@@ -7,7 +7,7 @@ import { isJwtValid } from '../validators'
 
 function ChangeName(props) {
 
-    const logger = new Logger ('change name')
+    const logger = new Logger('change name')
     logger.info('call')
 
     const { handleFeedback } = useContext(Context)
@@ -29,31 +29,20 @@ function ChangeName(props) {
         })();
     }
 
-    const handleClickBackToProfile = event => {
-        event.preventDefault()
-        props.onProfileChanged()
+    const handleBackClick = () => {
+        props.onBackClick()
     }
 
-   logger.info('render')
-   return <div>
-   <form className="Container" onSubmit={handleFormSubmit}>
-       <input type= "text" name="name" placeholder="New Name and surname" />
-       <button className="Button" type='submit'>Save</button>
-   </form>
-   <div>
-       <button className="Button" type="button" onClick={handleClickBackToProfile}>Back</button>
-   </div>
-</div>
-
-    /*return isJwtValid(sessionStorage.token) ? <></> : <div>
-        <form className="Container" onSubmit={handleFormSubmit}>
-            <input type= "text" name="name" placeholder="New Name and surname" />
-            <button className="Button">Save</button>
-        </form>
-        <div>
-            <button className="Button" onClick={handleClickBackToProfile}>Back</button>
+    logger.info('render')
+    return <div>
+        <div className="Box--back">
+            <button className="Button Link Button-back" type="button" onClick={handleBackClick}>Back</button>
         </div>
-    </div>*/
+        <form className="Container" onSubmit={handleFormSubmit}>
+            <input type="text" name="name" placeholder="New Name and surname" />
+            <button className="Button Button--light" type='submit'>Save</button>
+        </form>
+    </div>
 }
 
 export default ChangeName
