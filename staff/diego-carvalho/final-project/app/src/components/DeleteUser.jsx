@@ -11,7 +11,6 @@ function DeleteUser() {
   logger.info('call')
 
   const navigate = useNavigate()
-
   const { handleFeedback } = useContext(Context)
 
   const handleFormSubmit = event => {

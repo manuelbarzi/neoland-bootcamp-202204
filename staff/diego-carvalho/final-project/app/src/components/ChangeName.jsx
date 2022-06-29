@@ -5,7 +5,6 @@ import Context from './Context'
 import updateUserName from '../logic/updateUserName'
 import './Profile.sass'
 import './Feedback.sass'
-import { useNavigate } from 'react-router-dom'
 
 function ChangeName() {
   const logger = new Logger('ChangeName')
@@ -43,6 +42,7 @@ function ChangeName() {
     </form>
   </div>
 }
+
 export default ChangeName
 
 

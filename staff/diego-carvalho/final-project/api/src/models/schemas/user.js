@@ -1,31 +1,31 @@
 const { Schema, Types: { ObjectId } } = require('mongoose')
 
 const user = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
+  name: {
+    type: String,
+    required: true
+  },
 
-    email: {
-        type: String,
-        required: true,
-        unique: true
-    },
+  email: {
+    type: String,
+    required: true,
+    unique: true
+  },
 
-    password: {
-        type: String,
+  password: {
+    type: String,
 
-    },
+  },
 
-    owner: [{
-        type: ObjectId,
-        ref: 'User'
-    }],
+  owner: [{
+    type: ObjectId,
+    ref: 'User'
+  }],
 
-    events: [{
-        type: ObjectId,
-        ref: 'Event'
-    }]
+  events: [{
+    type: ObjectId,
+    ref: 'Event'
+  }]
 
 })
 

@@ -53,12 +53,6 @@ function EventCreator() {
 
         <MdCalendarToday className="icons EventCreator__icon" />
         <textarea className='EventCreator__Input' type="text" name='eventDate' placeholder='Indica la fecha y hora del evento' />
-        {/* 
-        <select className='EventCreator__categories' name='category'>
-          <option value="category1">Actividad deportiva</option>
-          <option value="category2">Actividad social</option>
-          <option value="category3">Medio Ambiente</option>
-        </select> */}
 
         <button className="EventCreator__button">Save</button>
 
