@@ -1,0 +1,11 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #7a7b7c;
+
+  }
+  .app {
+      width: 100%;
+      display: flex;
+  }
+  

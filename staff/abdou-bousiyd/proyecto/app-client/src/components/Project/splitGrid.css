@@ -1,0 +1,36 @@
+.grid {
+    display: grid;
+    grid-template-rows: 50% 10px 50%;
+    grid-template-columns: 50% 10px 50%;
+    height: 100vh;
+    height: calc(100vh - 49px);
+}
+.gutter-col {
+    grid-row: 1/-1;
+    cursor: col-resize;
+}
+
+.gutter-col-1 {
+    grid-column: 1;
+}
+
+.gutter-row {
+    grid-column: 1/-1;
+    cursor: row-resize;
+}
+
+.gutter-row-1 {
+    grid-row: 1;
+}
+
+.vertical-gutter {
+    grid-area: 1 / 2 / 4 / 2;
+    cursor: row-resize;
+    background-color: #7a7b7c;;
+}
+
+.horizontal-gutter {
+    grid-area: 2 / 1 / 2 / 4;
+    cursor: col-resize;
+    background-color: #7a7b7c;;
+}

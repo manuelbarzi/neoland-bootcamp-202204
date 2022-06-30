@@ -1,0 +1,76 @@
+.login 
+    // background: #f9faff
+    color: #3a3c47
+    display: flex
+    flex-direction: column
+    align-items: center
+    height: 100vh
+    @media(max-width: 458px) 
+        margin: 0 18px
+        background: #fff
+        max-width: 260px
+        padding: 50px 50px
+    
+
+    &__auth 
+        margin-top: 100px
+        font-family: 'Open Sans', sans-serif
+        background: #f9faff
+        max-width: 360px
+        width: 100%
+        padding: 50px 40px
+        border: 1px solid #e1e2f0
+        border-radius: 4px
+        box-shadow: 0 0 5px 0 rgba(42, 45, 48, 0.12)
+        transition: all 0.3s ease
+        display: flex
+        flex-direction: column
+        justify-content: center
+        line-height: 1.6
+        &__title 
+            color: black
+            display: flex
+            justify-content: center
+            margin-top: 40px
+        &__Row
+            display: flex
+            flex-direction: column
+            margin-bottom: 20px
+        &__Row label 
+            font-size: 14px
+            color: #8086a9
+        &__Row input 
+            flex: 1
+            padding: 13px
+            border: 1px solid #d6d8e6
+            border-radius: 4px
+            font-size: 16px
+            transition: all 0.2s ease-out
+        &__Row input:focus 
+            outline: none
+            box-shadow: inset 2px 2px 5px 0 rgba(42, 45, 48, 0.12)
+        &__Row input::placeholder
+            color: #7a7672
+        &__link 
+            display:block
+            text-decoration:none
+            padding:10px 15px
+            display: flex
+            justify-content: flex-end
+            margin: 25px 10px
+            font-size: 18px
+            color: #15C39A
+        &__link:hover 
+            color: #06372c
+        &__btn 
+            width: 100%
+            padding: 12px
+            font-size: 18px
+            background: #15C39A
+            color: #fff
+            border: none
+            border-radius: 100px
+            cursor: pointer
+            font-family: 'Open Sans', sans-serif
+            margin-top: 15px
+            transition: background 0.2s ease-out
