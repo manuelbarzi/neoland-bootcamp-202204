@@ -157,7 +157,7 @@ const Dashboards = () => {
               <div className="Dash__Container__Items">
                 <div className="Dash__Container__Item">
                   <h1 className="Dash__Container__Item__Title" onClick={() => previewProject(id)}>
-                  {/* <a className="Dash__Container__Item__Author">Author: {name}</a> */}
+                  {/* <h1 className="Dash__Container__Item__Author">{name}</h1> */}
                     <span>{title}</span>
                   </h1>
                   {editDashId === id && (

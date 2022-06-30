@@ -53,7 +53,6 @@ También permite descargar el código escrito en un formato zip, y personalizar 
 - id (ObjectId)
 - username (String)
 - name (String)
-- email (String)
 - password (String)
 - favProjects ([ObjectId (Project)])
 
@@ -71,7 +70,7 @@ También permite descargar el código escrito en un formato zip, y personalizar 
 - text (String)
 - type (String, enum ['html', 'css', 'js'])
 
-#### File
+#### Testing
 
 ![](./img/coverage.png)
 
