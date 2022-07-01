@@ -9,8 +9,8 @@ This web-**Application** is designed to record different mountain activities wit
 It is a social network where users can comment and like each other's activities.
 
 
-<img src="images/screen-welcome.png" width="200">|<img src="images/screen-home-0.png" width="200">|<img src="images/screen-home-2.png" width="200">
-<img src="images/screen-register-0.png" width="200">|<img src="images/screen-register-1.png" width="200">|<img src="images/screen-profile-0.png" width="200">
+<img src="images/screen-welcome.png" width="200">| |<img src="images/screen-home-0.png" width="200">| |<img src="images/screen-home-2.png" width="200">
+<img src="images/screen-register-0.png" width="200">| |<img src="images/screen-register-1.png" width="200">| |<img src="images/screen-profile-0.png" width="200">
 
 
 ## Functional Description
@@ -21,7 +21,7 @@ It is a social network where users can comment and like each other's activities.
     - record diferents positions and altitude
     - show live data (distance, time, elevation, points in map)
     - save sport, dificult, text and photos
-    - hide button to record points automaticaly
+    - hidden button to record points automatically
 - Resume activities made within the last 6 hours
     - upload new o diferent information if its needed
 - List activities from all users
