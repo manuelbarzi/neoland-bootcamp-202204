@@ -47,9 +47,9 @@ It is a social network where users can comment and like each other's activities.
 [Figma url]
 
 
-<img src="images/Component-1.png" width="250">
+<img src="images/Component-1.png" width="320">
 
-<img src="images/Component-2.png" width="510">
+<img src="images/Component-2.png" width="650">
 
 #
 ## Technical Description
