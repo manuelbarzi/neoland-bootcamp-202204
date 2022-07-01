@@ -9,7 +9,8 @@
     "start-watch": "nodemon src",
     "test": "npx mocha src/logic/*.spec.js",
     "test-inspect": "npx mocha --inspect-brk src/logic/*.spec.js",
-    "test-coverage": "npx nyc --reporter=text --reporter=html mocha src/logic/*.spec.js"
+    "test-coverage": "npx nyc --reporter=html mocha src/logic/*.spec.js",
+    "test-coverage-complete": "npx nyc --reporter=text --reporter=html mocha src/logic/*.spec.js"
   },
   "keywords": [],
   "author": "",

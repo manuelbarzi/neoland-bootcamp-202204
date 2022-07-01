@@ -11,12 +11,15 @@ function registerUser(name, username, password, email) {
 
     return bcrypt.hash(password, 10)
         .then(hash => User.create({ name, username, password: hash, email }))
-        .then(() => { })
-        .catch(error => {    
-            if (error.code = 11000)
+        .then(() => {})
+        .catch((error) => {    
+            const code = error.code
+            if(code === 11000) {
                 throw new ConflictError(`user with username ${username} already exists`)
-            
-            throw error
+            }
+            else {
+                throw error
+            }            
         })
 }
 

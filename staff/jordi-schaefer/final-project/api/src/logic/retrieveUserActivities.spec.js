@@ -71,9 +71,6 @@ describe('retrieveUserActivities', () => {
             const wrongId = new ObjectId().toString()
 
             return retrieveUserActivities(wrongId)
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${wrongId} does not exist`)

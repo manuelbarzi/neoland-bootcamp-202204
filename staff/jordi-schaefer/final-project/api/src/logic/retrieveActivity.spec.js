@@ -52,9 +52,6 @@ describe('retrieveActivity', () => {
             const wrongId = new ObjectId().toString()
 
             return retrieveActivity(userId, wrongId)
-            .then(() => {
-                throw new Error('should not reach this point')
-            })
             .catch(error => {
                 expect(error).to.be.instanceOf(NotFoundError)
                 expect(error.message).to.equal(`Activity with id ${wrongId} does not exist`)
@@ -70,9 +67,6 @@ describe('retrieveActivity', () => {
             const wrongId = new ObjectId().toString()
 
             return retrieveActivity(wrongId, wrongId)
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${wrongId} does not exist`)

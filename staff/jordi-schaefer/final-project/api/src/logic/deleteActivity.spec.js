@@ -29,7 +29,7 @@ describe('deleteActivity', () => {
                 .then((result)=> {
                     activityId = result.id
 
-                    return deleteActivity(userId, activityId) // llamo a nuestra funcion
+                    return deleteActivity(userId, activityId)
                 }) 
                 .then((result)=>{
                     expect(result).to.be.undefined
@@ -46,9 +46,6 @@ describe('deleteActivity', () => {
             const wrongId = new ObjectId().toString()
 
             return deleteActivity(userId, wrongId)
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`activity with id ${wrongId} does not exist`)
@@ -63,7 +60,7 @@ describe('deleteActivity', () => {
                 .then((result)=> {
                     activityId = result.id
     
-                    return deleteActivity(userId, activityId) // llamo a nuestra funcion
+                    return deleteActivity(userId, activityId)
                 }) 
                 .then(() => {
                     throw new Error('should not reach this point')
@@ -86,11 +83,8 @@ describe('deleteActivity', () => {
                 .then((result)=> {
                     activityId = result.id
 
-                    return deleteActivity(userId, activityId) // llamo a nuestra funcion
+                    return deleteActivity(userId, activityId)
                 }) 
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${userId} does not exist`)

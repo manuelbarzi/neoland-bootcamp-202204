@@ -31,7 +31,7 @@ describe('saveActivity', () => {
             afterEach(() => Activity.deleteMany())
 
             it('succeeds on correct user data', () => {
-                return saveActivity(user.id, activity.id, 'My new activity', 'description', true, 'Ride', 'Easy')
+                return saveActivity(user.id, activity.id, 'My new activity', 'description', true, 'Ride', 'Easy', ['Image'])
                     .then(result => {
                         expect(result).to.be.undefined
 
@@ -44,6 +44,7 @@ describe('saveActivity', () => {
                         expect(activity.private).to.equal(true)
                         expect(activity.sport).to.equal('Ride')
                         expect(activity.dificult).to.equal('Easy')
+                        expect(activity.images[0]).to.equal('Image')
                         expect(activity.date).to.be.instanceOf(Date)
                     })
             })
@@ -53,7 +54,7 @@ describe('saveActivity', () => {
         it('fails on incorrect activity id', () => {
             const wrongId = new ObjectId().toString()
 
-            return saveActivity(user.id, wrongId, 'My activity', 'description', true, 'Ride', 'Easy')
+            return saveActivity(user.id, wrongId, 'My activity', 'description', true, 'Ride', 'Easy', ['Image'])
                 .then(() => {
                     throw new Error('should not reach this point')
                 })
@@ -68,7 +69,7 @@ describe('saveActivity', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return saveActivity(unexistingUserId, unexistingUserId, 'My activity', 'description', true, 'Ride', 'Easy')
+            return saveActivity(unexistingUserId, unexistingUserId, 'My activity', 'description', true, 'Ride', 'Easy', ['Image'])
                 .then(() => {
                     throw new Error('should not reach this point')
                 })

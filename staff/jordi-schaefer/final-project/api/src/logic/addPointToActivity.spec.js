@@ -47,6 +47,23 @@ describe('addPointToActivity', () => {
                             })
                     })
             })
+
+            it('succeeds on corret data but no altitude', () => {
+                return addPointToActivity(user.id, activity.id, 25, 15, null)
+                    .then(pointId => {
+                        expect(pointId).to.be.a('string')
+
+                        return Activity.findById(activity.id)
+                        .then(activity => {
+                            const point= activity.points.find(point => point._id.toString() === pointId)
+                            
+                                expect(point.latitude).to.be.equal(25)
+                                expect(point.longitude).to.be.equal(15)
+                                expect(point.altitude).to.be.equal(557)
+                                expect(point.date).to.be.instanceOf(Date)
+                            })
+                    })
+            })
             
         })
 

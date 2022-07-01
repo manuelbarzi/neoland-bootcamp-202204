@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Activity, Comment } = require('../models')
-const { NotFoundError } = require('errors')
+const { NotFoundError, AuthError } = require('errors')
 const deleteComment = require('./deleteComment')
 const { expect } = require('chai')
 require('dotenv').config()
@@ -53,6 +53,15 @@ describe('deleteComment', () => {
                         expect(comment).to.be.undefined
                     })
                 })
+
+                it('fails when user does not own comment', () => {
+                    const wrongId = new ObjectId().toString()
+                    return deleteComment(user.id, activity.id, comment.id)
+                        .catch(error => {
+                            expect(error).to.be.instanceOf(AuthError)
+                            expect(error.message).to.equal(`comment does not belong to user with id ${user.id}`)
+                        })
+                })
             })
 
 
@@ -62,9 +71,6 @@ describe('deleteComment', () => {
                     const wrongId = new ObjectId().toString()
                         
                     return deleteComment(user2.id, activity.id, wrongId)
-                        .then(() => {
-                            throw new Error('should not reach this point')
-                        })
                         .catch(error => {
                             expect(error).to.be.instanceOf(NotFoundError)
                             expect(error.message).to.equal(`comment with id ${wrongId} does not exist`)
@@ -76,17 +82,26 @@ describe('deleteComment', () => {
 
             it('fails without activity', () => {
                 const wrongId = new ObjectId().toString()
-                debugger
                 return deleteComment(user2.id, wrongId, wrongId)
-                    .then(() => {
-                        throw new Error('should not reach this point')
-                    })
                     .catch(error => {
                         expect(error).to.be.instanceOf(NotFoundError)
                         expect(error.message).to.equal(`activity with id ${wrongId} does not exist`)
                     })
             })
 
+        })
+
+    })
+
+    describe('When user does not exist', () => {
+
+        it('fails without activity', () => {
+            const wrongId = new ObjectId().toString()
+            return deleteComment(wrongId, wrongId, wrongId)
+                .catch(error => {
+                    expect(error).to.be.instanceOf(NotFoundError)
+                    expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
+                })
         })
 
     })

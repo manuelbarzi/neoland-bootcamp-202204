@@ -17,12 +17,12 @@ describe('updateUserData', () => {
         let user 
         
         beforeEach(() => {
-            user = new User({ name: 'Jordi', username: 'jorgesito', password: '12121212', email: 'jordi@gmail.com' })
+            user = new User({ name: 'Jordi', username: 'jorgesito', password: '12121212', email: 'jordi@gmail.com', foto: 'foto' })
             return user.save()
         })
 
         it('succeeds on existing user', () => {
-            return updateUserData(user.id, 'Diego', '00001111', 'diego@gmail.com')
+            return updateUserData(user.id, 'Diego', '00001111', 'diego@gmail.com', 'foto2')
                 .then(result => {
                     expect(result).to.be.undefined
                     return User.findById(user.id)
@@ -31,6 +31,7 @@ describe('updateUserData', () => {
                     expect(user.name).to.equal('Diego')
                     expect(user.password).to.equal('00001111')
                     expect(user.email).to.equal('diego@gmail.com')
+                    expect(user.foto).to.equal('foto2')
                 })
         })
 
@@ -38,10 +39,7 @@ describe('updateUserData', () => {
         it('fails on incorrect user id', () => {
             const wrongId = new ObjectId().toString()
 
-            return updateUserData(wrongId, 'Diego', '00001111', 'diego@gmail.com')
-                .then(result => {
-                    throw new Error('should not reach this point')
-                })
+            return updateUserData(wrongId, 'Diego', '00001111', 'diego@gmail.com', 'foto2')
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
@@ -57,10 +55,7 @@ describe('updateUserData', () => {
         it('fails on unexisting user id', () => {
             const unexistingUserId = new ObjectId().toString()
 
-            return updateUserData(unexistingUserId, 'Diego', '00001111', 'diego@gmail.com')
-                .then(result => {
-                    throw new Error('should not reach this point')
-                })
+            return updateUserData(unexistingUserId, 'Diego', '00001111', 'diego@gmail.com', 'foto2')
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)

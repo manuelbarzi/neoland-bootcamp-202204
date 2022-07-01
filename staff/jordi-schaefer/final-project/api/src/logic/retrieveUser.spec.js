@@ -35,9 +35,6 @@ describe('retrieveUser', () => {
             const wrongId = new ObjectId().toString()
 
             return retrieveUser(wrongId)
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${wrongId} does not exist`)
@@ -50,9 +47,6 @@ describe('retrieveUser', () => {
             const unexistingUserId = new ObjectId().toString()
 
             return retrieveUser(unexistingUserId)
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${unexistingUserId} does not exist`)

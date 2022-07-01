@@ -50,15 +50,38 @@ describe('toggleLikeOnActivity', () => {
             })
         })
 
+        describe('When activity and like already exists', () => {
+            let activity
+
+            beforeEach(() => {
+                activity = new Activity({ user: user.id, title: 'mi actividad', sport: 'Ride' , likes: [user2.id]})
+                return activity.save()
+            })
+
+            afterEach(() => Activity.deleteMany())
+
+            describe('When activity already exists', () => {
+                it('succeeds on corret data', () => {
+                    return toggleLikeOnActivity(user2.id, activity.id)
+                        .then(result => {
+                            expect(result).to.be.undefined
+
+                            return Activity.findById(activity.id)
+                            .then(activity => {
+                            
+                                expect(activity.likes.length).to.be.equal(0)
+                                })
+                        })
+                })
+            })
+        })
+
         describe('When activity does not exists', () => { 
 
             it('fails without activity', () => {
                 const wrongId = new ObjectId().toString()
                 
                 return toggleLikeOnActivity(user2.id, wrongId)
-                    .then(() => {
-                        throw new Error('should not reach this point')
-                    })
                     .catch(error => {
                         expect(error).to.be.instanceOf(NotFoundError)
                         expect(error.message).to.equal(`Activity with id ${wrongId} does not exist`)
@@ -84,9 +107,6 @@ describe('toggleLikeOnActivity', () => {
                 const wrongId = new ObjectId().toString()
                 
                 return toggleLikeOnActivity(wrongId, activity.id)
-                    .then(() => {
-                        throw new Error('should not reach this point')
-                    })
                     .catch(error => {
                         expect(error).to.be.instanceOf(NotFoundError)
                         expect(error.message).to.equal(`user with id ${wrongId} does not exist`)

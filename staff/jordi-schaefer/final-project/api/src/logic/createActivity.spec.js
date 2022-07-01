@@ -40,9 +40,6 @@ describe('createActivity', () => {
             const wrongId = new ObjectId().toString()
             
             return createActivity(wrongId, 'Ride')
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(NotFoundError)
                     expect(error.message).to.equal(`user with id ${wrongId} does not exist`)

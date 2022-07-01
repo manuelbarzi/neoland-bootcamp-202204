@@ -3,12 +3,19 @@ Strava a manita
 
 ## Intro
 
-![](https://media.giphy.com/media/l2Je9zHYveK012EVi/giphy.gif)
 
-This **App** is made to record different mountain activities with the main focus in the altitude
-from the start point to the end
+This **Application** is designed to record different mountain activities with the main focus on altitude and distance from start point to finish.
 
-It's a social media where users can comment and like each other's activities
+It is a social network where users can comment and like each other's activities.
+
+
+<img src="images/screen-welcome.png" width="200"> 
+<img src="images/screen-home-0.png" width="200">
+<img src="images/screen-home-2.png" width="200">
+
+<img src="images/screen-register-0.png" width="200">
+<img src="images/screen-register-1.png" width="200">
+<img src="images/screen-profile-0.png" width="200">
 
 
 ## Functional Description
@@ -19,6 +26,7 @@ It's a social media where users can comment and like each other's activities
     - record diferents positions and altitude
     - show live data (distance, time, elevation, points in map)
     - save sport, dificult, text and photos
+    - hide button to record points automaticaly
 - Resume activities made within the last 6 hours
     - upload new o diferent information if its needed
 - List activities from all users
@@ -44,6 +52,7 @@ It's a social media where users can comment and like each other's activities
 
 
 <img src="images/Component-1.png" width="250">
+
 <img src="images/Component-2.png" width="510">
 
 #
@@ -64,9 +73,13 @@ User can change profile Foto in settings, there is a default Foto for new users 
 
 Activities can be deleted in personal profile -> settings -> delete activities
 
+## Technologies
+- React
+- JavaScript
+- Node JS
+- MongoDB
 
 ### Data Model
-
 User, Activity, Point, Comment
 
 #### User
@@ -103,3 +116,10 @@ User, Activity, Point, Comment
 - user (ObjectId)
 - text (String)
 - date (Date)
+
+### Testing
+ - Mocha - Chai
+
+![](images/Testing-1.png)
+![](images/Testing-2.png)
+![](images/Testing-3.png)

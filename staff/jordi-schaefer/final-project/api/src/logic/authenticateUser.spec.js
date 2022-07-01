@@ -35,9 +35,6 @@ describe('authenticateUser', () => {
 
         it('fails on incorrect password', () =>
             authenticateUser('Jorgesito', '123123123-wrong')
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(AuthError)
                     expect(error.message).to.equal('wrong credentials')
@@ -46,9 +43,6 @@ describe('authenticateUser', () => {
 
         it('fails on incorrect username', () =>
             authenticateUser('Jorgesito-wrong', '123123123')
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(AuthError)
                     expect(error.message).to.equal('wrong credentials')
@@ -59,9 +53,6 @@ describe('authenticateUser', () => {
     describe('when user does not exist', () => {
         it('fails on credentials from non-existing user', () =>
             authenticateUser('Jorgesito', '123123123')
-                .then(() => {
-                    throw new Error('should not reach this point')
-                })
                 .catch(error => {
                     expect(error).to.be.instanceOf(AuthError)
                     expect(error.message).to.equal('wrong credentials')
