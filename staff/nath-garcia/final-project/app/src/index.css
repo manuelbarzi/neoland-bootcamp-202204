@@ -1,0 +1,178 @@
+@import url("https://fonts.googleapis.com/css2?family=Bad+Script&display=swap");
+h1, h2, h3 {
+  font-size: inherit;
+}
+
+a {
+  color: violet;
+  text-decoration: none;
+}
+
+* {
+  font-family: Bad Script;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.Container--row {
+  flex-direction: row;
+}
+
+.Container--spread-sides {
+  justify-content: space-between;
+}
+
+.Container--justify-start {
+  justify-content: flex-start;
+}
+
+.Container--gap {
+  gap: 4rem !important;
+}
+
+.Button {
+  margin: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.Button {
+  button: 1px solid black;
+  border: 1.5px solid #3A5673;
+  border-radius: 0.25rem;
+  background-color: #3A5673;
+  cursor: pointer;
+  color: #3A5673;
+  width: 230px;
+}
+
+.Button--light {
+  border-color: white;
+  color: #F8E5E6;
+}
+
+.Button--logout {
+  width: auto;
+  margin-right: 1rem;
+  float: right;
+  border: none !important;
+}
+
+.Button--profile {
+  width: auto;
+  border: none !important;
+}
+
+.Button--back {
+  width: auto;
+  float: right;
+}
+
+.Link {
+  font-size: 1.3rem;
+  background-color: transparent;
+  border: 1.5px solid;
+  text-align: center;
+}
+
+.Tag--expenses {
+  width: auto;
+  border: 1.5px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  cursor: pointer;
+  margin-left: 2.5rem;
+}
+
+.Tag--income {
+  width: auto;
+  border: 1.5px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  cursor: pointer;
+  float: right;
+  margin-right: 2.5rem;
+}
+
+.Plus {
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+  font-size: 25px;
+  border: none;
+  background-color: #A0D995;
+  cursor: pointer;
+}
+
+.Input {
+  margin: 0.5rem;
+  font-size: 1.3rem;
+}
+
+.Input {
+  border: 1.5px solid;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  background-color: transparent;
+  cursor: pointer;
+  color: black;
+  text-align: center;
+}
+
+.Input--light {
+  border-color: #3A5673;
+  color: #3A5673;
+}
+
+.Input--light::placeholder {
+  color: #3A5673;
+}
+
+.Box {
+  width: 85vw;
+  height: 85vw;
+  min-height: 85vw;
+  background-color: white;
+  border-radius: 2rem;
+  text-align: center;
+  display: flex;
+  box-shadow: inset 0 -40px 40px rgba(0, 0, 0, 0.2), inset 0 25px 10px rgba(0, 0, 0, 0.2), 0 5px 6px 5px rgba(0, 0, 0, 0.2);
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding-bottom: 20px;
+  padding-right: 20px;
+  overflow-y: scroll;
+}
+
+.Box--tag {
+  height: 2rem;
+  width: 85vw;
+}
+
+.Box--back {
+  height: 150px;
+}
+
+.Box--profile {
+  height: 90vw;
+}
+
+/*# sourceMappingURL=index.css.map */
