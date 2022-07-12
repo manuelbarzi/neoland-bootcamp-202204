@@ -1,6 +1,7 @@
 const { User } = require('../models')
 const { ConflictError } = require('errors')
 const { validateUsername, validateEmail, validatePassword } = require('validators')
+const bcrypt = require('bcryptjs')
 
 module.exports = async (username, email, password) => {
     validateUsername(username)
@@ -8,7 +9,9 @@ module.exports = async (username, email, password) => {
     validatePassword(password)
 
     try {
-        await User.create({ username, email, password })
+        const hash = await bcrypt.hash(password, 10)
+        
+        await User.create({ username, email, password: hash })
 
     } catch(error) {
         if (error.message.includes('duplicate key error')) {

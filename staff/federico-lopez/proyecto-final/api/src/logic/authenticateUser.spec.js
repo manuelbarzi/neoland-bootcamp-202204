@@ -3,6 +3,7 @@ const { User } = require('../models')
 const { AuthError } = require('errors')
 const { authenticateUser } = require('./')
 const { expect } = require('chai')
+const bcrypt = require('bcryptjs')
 
 describe('authenticateUser', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
@@ -13,7 +14,9 @@ describe('authenticateUser', () => {
         let user
 
         beforeEach(async () => {
-            user = new User({ email: 'papagayo@gmail.com', username: 'papagayo', password: 'Passw0rd' })
+            const hash = await bcrypt.hash('Passw0rd', 10)
+
+            user = new User({ email: 'papagayo@gmail.com', username: 'papagayo', password: hash })
 
             await user.save()
         })

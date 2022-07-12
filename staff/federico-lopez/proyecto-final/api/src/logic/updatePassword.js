@@ -2,7 +2,7 @@ const { User } = require('../models')
 const { NotFoundError, AuthError } = require('errors')
 const { validatePassword} = require('validators')
 const { validateObjectId } = require('../validators')
-
+const bcrypt = require('bcryptjs')
 
 module.exports = async (userId, oldPassword, password) => {
     validateObjectId(userId)
@@ -14,10 +14,14 @@ module.exports = async (userId, oldPassword, password) => {
     const user = await User.findById(userId)
 
     if(!user) throw new NotFoundError(`user with id ${userId} not found`)
-    
-    if(user.password !== oldPassword) throw new AuthError('wrong credentials')
 
-    const result = await User.updateOne({ _id: userId }, { $set: { password } })
+    const match = await bcrypt.compare(oldPassword, user.password)
+    
+    if(!match) throw new AuthError('wrong credentials')
+
+    const hash = await bcrypt.hash(password, 10)
+
+    const result = await User.updateOne({ _id: userId }, { $set: { password: hash } })
 
     if (result.matchedCount === 0) throw new NotFoundError(`user with id ${userId} not found`)
 }

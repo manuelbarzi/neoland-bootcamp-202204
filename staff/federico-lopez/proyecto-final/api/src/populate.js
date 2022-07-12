@@ -1,6 +1,7 @@
 const { connect, disconnect } = require('mongoose')
 const { User, Artist, Song, Interpretation, Rank } = require('./models')
 const { laRazonContent1, laRazonContent2, demasiadoContent1, sinSenalContent1, ojosAsiContent1, aTuLadoContent1 } = require('./populateSources')
+const bcrypt = require('bcryptjs')
 
 ;(async () => {
         try {
@@ -14,10 +15,11 @@ const { laRazonContent1, laRazonContent2, demasiadoContent1, sinSenalContent1, o
             ])
 
             /* CREATE USERS */
+            const hash = await bcrypt.hash('Passw0rd', 10)
 
-            const userPepito = await User.create({ email: 'pepitogrillo@pitch-us.com', username: 'pepigri', password: 'Passw0rd' })
-            const userWendy = await User.create({ email: 'wendybread@pitch-us.com', username: 'wendy', password: 'Passw0rd' })
-            const userJohn = await User.create({ email: 'johndoed@pitch-us.com', username: 'john', password: 'Passw0rd' })
+            const userPepito = await User.create({ email: 'pepitogrillo@pitch-us.com', username: 'pepigri', password: hash })
+            const userWendy = await User.create({ email: 'wendybread@pitch-us.com', username: 'wendy', password: hash })
+            const userJohn = await User.create({ email: 'johndoed@pitch-us.com', username: 'john', password: hash })
 
             /* CREATE ARTISTS */
 

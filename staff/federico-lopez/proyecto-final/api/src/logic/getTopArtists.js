@@ -65,9 +65,12 @@ module.exports = async (userId, access_token) => {
         } else {
             return []
         }
-    } else 
+    } else {
+        console.log(payload)
+     
         throw new Error(`Error in top artists with Spotify`)
-    //TODO CONTINUE HANDLE ERRORS
+        //TODO CONTINUE HANDLE ERRORS
+    }
 }
 
 

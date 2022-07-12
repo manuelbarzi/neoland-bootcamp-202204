@@ -2,10 +2,10 @@ const { expect } = require('chai')
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { AuthError, NotFoundError } = require('errors')
 const { User } = require('../models')
-const { unregisterUser } = require('./')
+const { updatePassword } = require('./')
 const bcrypt = require('bcryptjs')
 
-describe('unregisterUser', () => {
+describe('updatePassword', () => {
     before(() => connect('mongodb://localhost:27017/notes-db-test'))
 
     beforeEach(() => User.deleteMany())
@@ -22,16 +22,16 @@ describe('unregisterUser', () => {
         })
 
         it('succeeds on correct password and token', async () => {
-            await unregisterUser(user.id, 'Passw0rd')
+            await updatePassword(user.id, 'Passw0rd', 'newPassw0rd')
 
-            const result = await User.findById(user.id)
+            const userFounded = await User.findById(user.id)
 
-            expect(result).to.be.null
+            expect(bcrypt.compareSync('newPassw0rd', userFounded.password)).to.be.true
         })
 
         it('fails on incorrect password and correct token', async () => {
             try {
-                await unregisterUser(user.id, 'Wr0ngPass')
+                await updatePassword(user.id, 'Wr0ngPass', 'newPassw0rd')
 
                 throw new Error('it should not reach this point')
             } catch (error) {
@@ -44,7 +44,7 @@ describe('unregisterUser', () => {
             const wrongUserId = new ObjectId().toString()
 
             try {
-                await unregisterUser(wrongUserId, 'Passw0rd')
+                await updatePassword(wrongUserId, 'Passw0rd', 'newPassw0rd')
 
                 throw new Error('it should not reach this point')
 
@@ -60,7 +60,7 @@ describe('unregisterUser', () => {
             const wrongUserId = new ObjectId().toString()
 
             try {
-                await unregisterUser(wrongUserId, 'Passw0rd')
+                await updatePassword(wrongUserId, 'wrong-Passw0rd', 'newPassw0rd')
                 throw new Error('it should not reach this point')
 
             } catch (error) {

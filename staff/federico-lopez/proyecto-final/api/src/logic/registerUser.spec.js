@@ -3,14 +3,17 @@ const { User } = require('../models')
 const { ConflictError } = require('errors')
 const { registerUser } = require('./')
 const { expect } = require('chai')
+const bcrypt = require('bcryptjs')
 
 describe('registerUser', () => {
     before(() => connect('mongodb://localhost:27017/pitch-us-test'))
+    
+    beforeEach(async () => {
+        await User.deleteMany()
 
-    beforeEach(() => {
-        User.deleteMany()
-
-        User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: 'Passw0rd' })
+        const hash = await bcrypt.hash('Passw0rd', 10)
+        
+        await User.create({ username: 'wendypan', email: 'wendypan@gmail.com', password: hash })
     })
 
     it('succeeds on correct credentials', async () => {
@@ -22,7 +25,7 @@ describe('registerUser', () => {
 
         expect(user.username).to.equal('peterpan')
         expect(user.email).to.equal('peterpan@gmail.com')
-        expect(user.password).to.equal('Passw0rd')
+        expect(bcrypt.compareSync('Passw0rd', user.password)).to.be.true
     })
 
     it('fails when username already exists', async () => {
@@ -45,7 +48,7 @@ describe('registerUser', () => {
         }
     })
 
-    afterEach(() => User.deleteMany())
+    afterEach(async () => await User.deleteMany())
 
     after(() => disconnect())
 })
