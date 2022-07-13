@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ArtistIconImage, ArtistsAndSongsResultsList, ChevronLeftImage, FavoriteImage, FlexColSection, Footer, Title2, Title, ButtonBlue, Context } from '../../../components'
 import { retrieveSongsOfArtist } from '../../../logic'
-import { useContext, useState } from 'react'
+import { isValidElement, useContext, useState } from 'react'
 import { verifyTokenWithAPICall } from '../../../helpers'
 
 export default function Artist({ token, songs }) {

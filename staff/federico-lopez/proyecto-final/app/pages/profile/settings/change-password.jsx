@@ -68,17 +68,9 @@ export default function ChangePassword({ token }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
+    const { token } = await verifyTokenWithAPICall(req, res)
 
-    if(obj) {
-        const { token } = obj
-    
-        return {
-            props: { token }
-        }
-    } else {
-        return {
-            props: {}
-        }
+    return {
+        props: { token }
     }
 }

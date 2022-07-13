@@ -2,8 +2,8 @@ import Link from "next/link";
 const querystring = require('query-string');
 
 export function Dialog({ level, title, description, button1, button2, onCloseClick, onCloseDialog }) {
-    const client_id = '93f6f6ebc007423fa83d846f4713a03a'
-    const redirect_uri = 'http://localhost:3000/'
+    const client_id = 'b7ecd28f242443eb8ab8fd656dea2659'
+    const redirect_uri = 'https://pitch-us.vercel.app/'
 
     const state = Math.random() * 10000;
     const scope = 'user-read-private user-read-email user-top-read user-read-recently-played user-read-playback-position playlist-read-collaborative user-read-playback-state user-follow-read user-read-currently-playing user-library-read playlist-read-private'
@@ -31,6 +31,7 @@ export function Dialog({ level, title, description, button1, button2, onCloseCli
                 <button
                     className="w-full p-4 text-myblue flex justify-center items-center"
                     onClick={function () {
+                        debugger
                         onCloseClick()
                         onCloseDialog()
                     }}

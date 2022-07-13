@@ -17,3 +17,4 @@ export function Slider({ className, children, chord, onCloseChordClick, ...props
         </div>
     )
 }
+

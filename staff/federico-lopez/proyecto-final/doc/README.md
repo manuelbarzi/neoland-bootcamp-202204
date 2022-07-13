@@ -88,7 +88,7 @@ PitchUs runs on Next.js. We decide to use this technology to make the applicatio
 #### Rank
 - id (ObjectId)
 - user (ObjectId)
-- amout (Number)
+- amount (Number)
 
 #### Comment - TODO
 - id (ObjectId)

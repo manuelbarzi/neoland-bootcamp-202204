@@ -59,7 +59,7 @@ export default function Settings({ token, user }) {
                 >Log Out</button>
 
             </FlexColSection>
-
+            
             <Footer userLoggedIn={!!token} page="user-session" />
         </div>
 
@@ -68,19 +68,11 @@ export default function Settings({ token, user }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
+    const { token } = await verifyTokenWithAPICall(req, res)
 
-    if (obj) {
-        const { token } = obj
+    const user = await retrieveUser(token)
 
-        const user = await retrieveUser(token)
-
-        return {
-            props: { token, user }
-        }
-    } else {
-        return {
-            props: {}
-        }
+    return {
+        props: { user, token }
     }
 }
