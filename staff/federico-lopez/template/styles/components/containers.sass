@@ -1,0 +1,195 @@
+.container 
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.container__logo 
+    margin: 5rem 0 1rem
+    width: 15rem
+    height: 15rem
+    display: flex
+    align-items: center
+    justify-content: center
+
+.container__logo_login 
+    width: 11.25rem
+    height: 11.25rem
+
+.container__text 
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.container__buttons 
+    height: 100%
+    display: flex
+    flex-direction: column
+    align-items: center
+
+.container__buttons_gap 
+    gap: 1.5rem
+
+.container_sign-up 
+    justify-content: center
+
+.container-home
+    height: 100%
+    gap: 1rem
+
+.container-home__container-cards
+    height: 90%
+
+.container-cards
+    gap: 3px
+    justify-content: center
+
+    @media (min-width: 660px)
+        margin: 0 auto
+        display: grid
+        grid-template: repeat(6, 218px) / repeat(3, 218px)
+        width: 600px
+        gap: 6px
+    
+    @media(min-width: 770px)
+        grid-template: repeat(6, 254px) / repeat(3, 254px)
+        gap: 8px
+
+    @media(min-width: 1024px)
+        grid-template: repeat(6, 338px) / repeat(3, 338px)
+        gap: 9px
+    
+    @media(min-width: 1130px)
+        grid-template: repeat(6, 373px) / repeat(3, 373px)
+        gap: 10px
+
+    &__item
+        height: 100%
+        width: 330px
+        display: flex
+        justify-content: flex-start
+        align-items: flex-end
+        background-image: url(https://fakeimg.pl/756x373/5580ff/000/)
+        background-size: cover
+
+        @media (min-width: 660px)
+            width: 100%
+
+            // CHANGING IMAGES
+            // background-image: url(https://fakeimg.pl/442x218/5580ff/000/)
+            
+            &:nth-child(1)
+                grid-area: 1 / 1 / span 2 / span 1
+                
+            &:nth-child(2)
+                grid-area: 1 / 2 / span 1 / span 2
+            
+            &:nth-child(3)
+                grid-area: 2 / 2 / span 1 / span 2
+            
+            &:nth-child(4)
+                grid-area: 3 / 1 / span 1 / span 2
+
+            &:nth-child(5)
+                grid-area: 3 / 3 / span 2 / span 1
+
+            &:nth-child(6)
+                grid-area: 4 / 1 / span 1 / span 2
+            
+            &:nth-child(7)
+                grid-area: 5 / 1 / span 2 / span 1
+
+            &:nth-child(8)
+                grid-area: 5 / 2 / span 1 / span 2
+            
+            &:nth-child(9)
+                grid-area: 6 / 2 / span 1 / span 2
+        
+        // CHANGING IMAGES
+        // @media (min-width: 770px)
+        //     background-image: url(https://fakeimg.pl/516x254/5580ff/000/)
+        
+        // @media (min-width: 1024px)
+        //     background-image: url(https://fakeimg.pl/685x338/5580ff/000/)
+
+        &_col
+            background-image: url(https://fakeimg.pl/373x756/5580ff/000/)
+            // CHANGING IMAGES
+            // @media (min-width: 660px)
+            //     background-image: url(https://fakeimg.pl/218x442/5580ff/000/)
+
+            // @media (min-width: 770px)
+            //     background-image: url(https://fakeimg.pl/254x516/5580ff/000/)
+
+            // @media (min-width: 1024px)
+            //     background-image: url(https://fakeimg.pl/338x685/5580ff/000/)
+
+        &::after
+            @media (min-width: 1024px)
+                content: ""
+                margin: 0
+                padding: 0
+                border-bottom: 169px solid rgba(255,255,255, 0.8)
+                border-right: 100px solid transparent
+
+            @media (min-width: 1130px)
+                border-right-width: 110px
+                border-bottom-width: 186px 
+
+
+            
+        &__subitem
+            height: 60%
+            width: 50%
+            background-color: rgba(255,255,255, 0.8)
+            display: flex
+            align-content: center
+            justify-content: center
+
+            @media (min-width: 660px)
+                align-content: flex-start
+                justify-content: flex-start
+                flex-direction: column
+            
+            &_col
+                @media (min-width: 660px)
+                    height: 49%
+                    width: 100%
+                
+                @media (min-width: 1024px)
+                    height: 24.5%
+                    width: 80%
+
+            &_row
+                @media (min-width: 660px)
+                    height: 100%
+                    width: 50%
+            
+                @media (min-width: 1024px)
+                    height: 50%
+                    width: 35%
+
+                &_right
+                    @media (min-width: 660px)
+                        margin-left: 50%
+
+            & h2
+                display: flex
+                align-items: center
+                font-size: 20px
+
+                @media (min-width: 660px)
+                    margin: 10% 10%
+            
+            & p
+                margin-left: 10%
+                margin-right: 10%
+                display: none
+
+                @media (min-width: 660px)
+                    display: block
+                    
+                
+
+                
