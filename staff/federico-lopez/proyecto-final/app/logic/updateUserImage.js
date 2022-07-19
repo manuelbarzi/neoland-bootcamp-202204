@@ -13,7 +13,7 @@ export async function updateUserImage(token, file) {
     const options = {
         maxSizeMB: 1,
         maxWidthOrHeight: 1920,
-        useWebWorker: true,
+        useWebWorker: true,   
     }
 
     const compressedFile = await imageCompression(file, options)
@@ -25,14 +25,13 @@ export async function updateUserImage(token, file) {
     formData.append('file', compressedFile)
 
     const api = new Apium(context.API_URL)
-    debugger
 
     const { status, payload } = await api.patch(
         'users/image',
         {
             headers: {
                 Authorization: `Bearer ${token}`,
-                'Content-Type': 'multipart/form-data'
+                // 'Content-Type': 'multipart/form-data'
             },
             body: formData
         })

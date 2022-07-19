@@ -19,16 +19,19 @@ const user = new Schema({
         unique: true
     },
     firstName: {
-        type: String,
+        type: String
     },
     lastName: {
-        type: String,
+        type: String
     },
     dateOfBirth: {
         type: Date
     },
     spotifySession: {
         type: Object
+    },
+    profileImage: {
+        type: String
     }
 })
 

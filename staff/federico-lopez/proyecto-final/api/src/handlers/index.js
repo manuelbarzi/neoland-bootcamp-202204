@@ -8,6 +8,7 @@ module.exports = {
     handleRetrieveUser: require('./handleRetrieveUser'),
     handleUpdateUser: require('./handleUpdateUser'),
     handleUpdateUserImage: require('./handleUpdateUserImage'),
+    handleGetUserImage: require('./handleGetUserImage'),
     handleUnregisterUser: require('./handleUnregisterUser'),
 
     /* VALIDATE TOKEN */

@@ -12,6 +12,7 @@ const {
     handleRetrieveUser,
     handleUpdateUser,
     handleUpdateUserImage,
+    handleGetUserImage,
     handleUnregisterUser,
 
     /* TOKEN */
@@ -83,6 +84,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.patch('/users/image', handleUpdateUserImage)
+        routes.get('/users/:userId/image', handleGetUserImage)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
         /* ARTISTS */

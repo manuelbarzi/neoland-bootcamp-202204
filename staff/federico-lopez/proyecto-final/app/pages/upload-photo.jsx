@@ -7,12 +7,12 @@ export default function UploadPhoto({ token }) {
     const [file, setFile] = useState({ isTypeAllowed: true, isSizeAllowed: true, size: null })
 
     const handleFileChange = event => {
-        const file = event.target.files[0]
+        const fileUpload = event.target.files[0]
 
-        const { isTypeAllowed, isSizeAllowed } = verifyFile(file)
+        const { isTypeAllowed, isSizeAllowed } = verifyFile(fileUpload)
 
         if (!isSizeAllowed) {
-            const size = returnFileSize(file.size)
+            const size = returnFileSize(fileUpload.size)
 
             setFile({ isSizeAllowed, isTypeAllowed, size })
         } else {
@@ -23,12 +23,12 @@ export default function UploadPhoto({ token }) {
     const handleFormSubmit = async event => {
         event.preventDefault()
 
-        const file = event.target.profileImage.files[0]
+        if(!file.isSizeAllowed || !file.isTypeAllowed) return
 
-        // TODO validate type and size and handle feedback
-        
+        const fileUpload = event.target.profileImage.files[0]
+      
         try {
-            updateUserImage(token, file)
+            updateUserImage(token, fileUpload)
         } catch(error) {
             //TODO handle feedback
         }
