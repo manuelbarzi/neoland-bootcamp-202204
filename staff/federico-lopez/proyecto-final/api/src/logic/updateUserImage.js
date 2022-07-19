@@ -52,6 +52,7 @@ module.exports = (userId, contentType, stream) => {
                 //     expires: Date.now() + 1000 * 60 * 60
                 // };
                 // const obj = await bucket.file(newFilename).getSignedUrl(options)
+
                 debugger
                 const readStream = bucket.file(newFilename).createReadStream()
 
