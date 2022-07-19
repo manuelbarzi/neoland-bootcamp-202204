@@ -6,6 +6,7 @@ module.exports = {
     updatePassword: require('./updatePassword'),
     retrieveUser: require('./retrieveUser'),
     updateUser: require('./updateUser'),
+    updateUserImage: require('./updateUserImage'),
     unregisterUser: require('./unregisterUser'),
 
     /* ARTISTS */

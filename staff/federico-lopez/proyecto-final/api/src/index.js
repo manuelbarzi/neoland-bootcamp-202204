@@ -1,6 +1,8 @@
 require('dotenv').config()
 const express = require('express')
 const bodyParser = require('body-parser')
+const admin = require("firebase-admin")
+const serviceAccount = require("./config/firebase-key.json")
 const { connect, disconnect } = require('mongoose')
 const {
     /* USERS */
@@ -9,6 +11,7 @@ const {
     handleUpdatePassword,
     handleRetrieveUser,
     handleUpdateUser,
+    handleUpdateUserImage,
     handleUnregisterUser,
 
     /* TOKEN */
@@ -37,13 +40,17 @@ const {
     handleToggleOrUpdateRankToInterpretation,
 
     /* SPOTIFY */
-    handleRequestSpotifyAccesToken,
     handleCheckSpotifySession
 } = require('./handlers')
 
 var XMLHttpRequest = require('xhr2');
 
 global.XMLHttpRequest = XMLHttpRequest
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    storageBucket: 'gs://pitch-us-b4005.appspot.com'
+});
 
 const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
@@ -75,6 +82,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users/auth', jsonBodyParser, handleUpdatePassword)
         routes.get('/users', handleRetrieveUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
+        routes.patch('/users/image', handleUpdateUserImage)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
         /* ARTISTS */

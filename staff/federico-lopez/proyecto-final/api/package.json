@@ -21,10 +21,12 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.0",
+    "busboy": "^1.6.0",
     "data": "file:../data",
     "dotenv": "^16.0.1",
     "errors": "file:../errors",
     "express": "^4.18.1",
+    "firebase-admin": "^11.0.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.3.5",
     "nodemon": "^2.0.16",
