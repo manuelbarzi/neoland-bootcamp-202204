@@ -7,6 +7,7 @@ module.exports = {
     retrieveUser: require('./retrieveUser'),
     updateUser: require('./updateUser'),
     updateUserImage: require('./updateUserImage'),
+    toggleFollow: require('./toggleFollow'),
     getUserImage: require('./getUserImage'),
     unregisterUser: require('./unregisterUser'),
 

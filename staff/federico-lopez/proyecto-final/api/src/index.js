@@ -13,6 +13,7 @@ const {
     handleUpdateUser,
     handleUpdateUserImage,
     handleGetUserImage,
+    handleToggleFollow,
     handleUnregisterUser,
 
     /* TOKEN */
@@ -50,7 +51,7 @@ global.XMLHttpRequest = XMLHttpRequest
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
-    storageBucket: 'gs://pitch-us-b4005.appspot.com'
+    storageBucket: process.env.FIREBASE_STORAGE_BUCKET
 });
 
 const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
@@ -85,6 +86,7 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.patch('/users/image', handleUpdateUserImage)
         routes.get('/users/:userId/image', handleGetUserImage)
+        routes.post('/users/:userIdToFollowOrUnfollow/follow', handleToggleFollow)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
         /* ARTISTS */

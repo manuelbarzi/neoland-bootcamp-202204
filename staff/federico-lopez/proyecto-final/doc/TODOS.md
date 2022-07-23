@@ -12,5 +12,9 @@
 - UX/UI (not measurable)
 - Correct endpoints (1 day) --> See with Manu
 - Testing (2 days)
+- Document functions (5 days)
+- Add throw errors in tests
 
 ## TOTAL: 40 days
+
+- Follow users: array of followers and array of following. See ref users. How to deal with unregisterUser

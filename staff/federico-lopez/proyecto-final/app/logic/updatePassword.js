@@ -1,7 +1,6 @@
 import { AuthError, ConflictError } from 'errors'
 import { validateJWT, validatePassword } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from '.'
 
 export async function updatePassword(token, oldPassword, password, repeatPassword) {
     validateJWT(token)
@@ -12,7 +11,7 @@ export async function updatePassword(token, oldPassword, password, repeatPasswor
     if (password !== repeatPassword) throw new ConflictError('new password and new password repeat do not match')
     if (oldPassword === password) throw new ConflictError('previous and new password are the same')
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.patch(
         'users/auth',

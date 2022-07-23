@@ -1,5 +1,4 @@
 import { validateJWT } from 'validators'
-import { context } from '.'
 import Apium from '../vendor/Apium'
 
 export async function requestSpotifyAccessToken(token, code, state) {
@@ -7,7 +6,7 @@ export async function requestSpotifyAccessToken(token, code, state) {
     // TODO VALIDATE CODE
     // TODO VALIDATE STATE
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         'spotify/auth',

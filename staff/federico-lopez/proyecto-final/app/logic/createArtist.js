@@ -1,6 +1,5 @@
 import { validateJWT, validateStringNotEmptyOrBlank, validateGenres, validateCountryCode } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function createArtist(token, name, genres, country) {
     validateJWT(token)
@@ -8,7 +7,7 @@ export async function createArtist(token, name, genres, country) {
     if (genres) validateGenres(genres)
     if (country) validateCountryCode(country)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         'artists',

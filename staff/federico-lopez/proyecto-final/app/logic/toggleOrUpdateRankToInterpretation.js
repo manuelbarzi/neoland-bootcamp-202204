@@ -1,6 +1,5 @@
 import { validateJWT, validateStringNotEmptyNoSpaces, validateRank } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function toggleOrUpdateRankToInterpretation(token, songId, interpretationId, amount) {
     validateJWT(token)
@@ -8,7 +7,7 @@ export async function toggleOrUpdateRankToInterpretation(token, songId, interpre
     validateStringNotEmptyNoSpaces(interpretationId)
     validateRank(amount)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         `/rank/songs/${songId}/interpretations/${interpretationId}`,

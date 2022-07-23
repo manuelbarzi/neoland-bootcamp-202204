@@ -1,12 +1,11 @@
 import { validatePassword, validateEmail } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function authenticateUser(email, password) {
     validateEmail(email)
     validatePassword(password)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         'users/auth',

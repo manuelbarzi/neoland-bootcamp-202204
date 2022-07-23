@@ -1,6 +1,5 @@
 import { validateJWT, validateStringNotEmptyOrBlank, validateGenres, validateDate, validateStringNotEmptyNoSpaces } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function createSong(token, { artist, name, genres, album, date }) {
     validateJWT(token)
@@ -10,7 +9,7 @@ export async function createSong(token, { artist, name, genres, album, date }) {
     if (album) validateStringNotEmptyOrBlank(album, 'album')
     if (date) validateDate(date)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         'songs',

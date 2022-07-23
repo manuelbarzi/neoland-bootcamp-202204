@@ -1,7 +1,6 @@
 import { validateFile, validateJWT } from 'validators'
 import imageCompression from 'browser-image-compression'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function updateUserImage(token, file) {
     debugger
@@ -24,7 +23,7 @@ export async function updateUserImage(token, file) {
 
     formData.append('file', compressedFile)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.patch(
         'users/image',

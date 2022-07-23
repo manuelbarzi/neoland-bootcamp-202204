@@ -1,11 +1,10 @@
 import { validateJWT } from 'validators'
-import { context } from '.'
 import Apium from '../vendor/Apium'
 
 export async function getTopArtists(token) {
     validateJWT(token)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         'artists/top',

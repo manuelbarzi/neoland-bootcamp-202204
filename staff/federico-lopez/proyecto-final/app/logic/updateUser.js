@@ -1,6 +1,5 @@
 import { validateJWT, validateStringNotEmptyOrBlank, validateDateOfBirth } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function updateUser(token, { firstName, lastName, dateOfBirth }) {
     validateJWT(token)
@@ -8,7 +7,7 @@ export async function updateUser(token, { firstName, lastName, dateOfBirth }) {
     if (lastName) validateStringNotEmptyOrBlank(lastName, 'last name')
     if (dateOfBirth) validateDateOfBirth(dateOfBirth)
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.patch(
         'users',

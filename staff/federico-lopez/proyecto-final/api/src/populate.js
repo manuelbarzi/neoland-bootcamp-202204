@@ -21,6 +21,13 @@ const bcrypt = require('bcryptjs')
             const userWendy = await User.create({ email: 'wendybread@pitch-us.com', username: 'wendy', password: hash })
             const userJohn = await User.create({ email: 'johndoed@pitch-us.com', username: 'john', password: hash })
 
+            /* ADD FOLLOWERS AND FOLLOWING */
+
+            userPepito.following.push(userWendy._id)
+            userWendy.followers.push(userPepito._id)
+
+            userPepito.save()
+            userWendy.save()
             /* CREATE ARTISTS */
 
             const artistLaRenga = await Artist.create({ name: 'La Renga', genres: [Artist.ROCK], country: 'AR' })

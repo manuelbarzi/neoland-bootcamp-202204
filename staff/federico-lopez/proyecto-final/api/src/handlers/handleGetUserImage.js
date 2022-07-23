@@ -5,10 +5,10 @@ module.exports = async (req, res) => {
     try {
         const { params: { userId } } = req
 
-        getUserImage(userId, res)
+        await getUserImage(userId, res)
         
         res.status(200).send()
-        
+
     } catch (error) {
         handleErrorsAndRespond(error, res)
     }

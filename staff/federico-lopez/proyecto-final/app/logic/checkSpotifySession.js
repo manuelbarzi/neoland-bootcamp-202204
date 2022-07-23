@@ -1,12 +1,11 @@
 import { validateJWT } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function checkSpotifySession(token, code) {
     validateJWT(token)
     //TODO VALIDATE CODE
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     let url = 'spotify/auth'
 

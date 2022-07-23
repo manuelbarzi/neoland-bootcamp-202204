@@ -1,7 +1,6 @@
 import { AuthError } from 'errors'
 import { validatePassword, validateUsername, validateEmail } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function registerUser(username, email, password, repeatPassword) {
     validateUsername(username)
@@ -11,7 +10,7 @@ export async function registerUser(username, email, password, repeatPassword) {
 
     if (password !== repeatPassword) throw new AuthError('password and new password do not match')
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
         'users',

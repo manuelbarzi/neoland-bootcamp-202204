@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { verifyTokenWithAPICall, returnFileSize } from '../helpers'
-import { verifyFile } from '../utils'
-import { updateUserImage } from '../logic'
+import { verifyTokenWithAPICall, returnFileSize } from '../../../helpers'
+import { verifyFile } from '../../../utils'
+import { updateUserImage } from '../../../logic'
 
 export default function UploadPhoto({ token }) {
     const [file, setFile] = useState({ isTypeAllowed: true, isSizeAllowed: true, size: null })

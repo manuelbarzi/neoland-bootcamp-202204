@@ -9,7 +9,7 @@ export async function verifyTokenWithAPICall(req, res) {
     console.log(token || 'no hay token')
     if (token) {
         console.log('line 11')
-        const api = new Apium(context.API_URL)
+        const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
         const { status, payload } = await api.get('users/auth', {
             headers: {

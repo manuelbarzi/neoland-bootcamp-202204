@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose')
+const { Schema, Types: { ObjectId } } = require('mongoose')
 
 const user = new Schema({
     username: {
@@ -32,6 +32,14 @@ const user = new Schema({
     },
     profileImage: {
         type: String
+    },
+    following: {
+        type: [ObjectId],
+        ref: 'User'
+    },
+    followers: {
+        type: [ObjectId],
+        ref: 'User'
     }
 })
 

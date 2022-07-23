@@ -5,7 +5,7 @@ import { Context, Title, Title2, Title3, ChevronLeftImage, Footer, Slider, FlexC
 import { retrieveInterpretationFromSong, retrieveSong, toggleOrUpdateRankToInterpretation } from '../../../../../../../logic'
 import { verifyTokenWithAPICall, getChords, generateInterpretation, generateChordImages } from "../../../../../../../helpers"
 
-export default function Interpretation({ token, userId, interpretation, song }) {
+export default function Interpretation({ token, userId, interpretation, song, interpreterId }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
@@ -75,7 +75,10 @@ export default function Interpretation({ token, userId, interpretation, song }) 
                         </div>
                         <Link href="#">
                             <a className="w-fit flex items-center gap-1">
-                                <AvatarDemoImage />
+                                <img
+                                    className="w-12 h-12 rounded-full"
+                                    src={`http://localhost:8080/api/users/${interpreterId}/image`}
+                                />
                                 <Title3 className="mb-3">{username}</Title3>
                             </a>
                         </Link>
@@ -129,7 +132,7 @@ export default function Interpretation({ token, userId, interpretation, song }) 
                                 </div>
                             </div>
 
-                            {userId !== interpretation.user._id && 
+                            {userId !== interpretation.user._id &&
                                 <RankInterpretationByUser onRankClick={onRankClick} userLoggedIn={userId ? true : false} rankByUser={rankByUser} />
                             }
 
@@ -155,6 +158,10 @@ export async function getServerSideProps({ req, res, params: { songName, artistN
         retrieveSong(songName, artistName)
     ])
 
+    const interpreterId = interpretation.user._id
+
+    debugger
+
     if (obj) {
         const { token, userId } = obj
 
@@ -163,14 +170,16 @@ export async function getServerSideProps({ req, res, params: { songName, artistN
                 token,
                 userId,
                 interpretation,
-                song
+                song,
+                interpreterId
             }
         }
     } else {
         return {
             props: {
                 interpretation,
-                song
+                song,
+                interpreterId
             }
         }
     }

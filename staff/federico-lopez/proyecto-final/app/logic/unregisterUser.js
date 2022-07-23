@@ -1,6 +1,5 @@
 import { validateJWT, validatePassword } from 'validators'
 import Apium from '../vendor/Apium'
-import { context } from './context'
 
 export async function unregisterUser(token, password, passwordRepeat) {
     validateJWT(token)
@@ -9,7 +8,7 @@ export async function unregisterUser(token, password, passwordRepeat) {
 
     if (password !== passwordRepeat) throw new Error('password and password repeat do not match')
 
-    const api = new Apium(context.API_URL)
+    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { payload, status } = await api.delete(
         'users',

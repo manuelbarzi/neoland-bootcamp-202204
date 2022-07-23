@@ -4,8 +4,9 @@ import { verifyTokenWithAPICall } from '../../../helpers'
 import { useRouter } from 'next/router'
 import { AvatarDemo64Image, ChevronRightImage, Context, FlexColSection, Footer, Header } from '../../../components'
 import { useContext } from 'react'
+import { decodeJWTPayload } from '../../../utils'
 
-export default function Settings({ token, user }) {
+export default function Settings({ token, user, userId }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
@@ -23,7 +24,9 @@ export default function Settings({ token, user }) {
             <FlexColSection className="flex-1 overflow-y-auto">
 
                 <div className="w-full px-4 pt-2 flex gap-4 items-center border-b border-b-inputBg">
-                    <AvatarDemo64Image />
+                    <img
+                        className="w-16 h-16 rounded-full" 
+                        src={`http://localhost:8080/api/users/${userId}/image`} />
                     <p className="text-myblack font-bold">{user.username}</p>
                 </div>
 
@@ -33,6 +36,14 @@ export default function Settings({ token, user }) {
                 <Link href='/profile/settings/edit'>
                     <a className="w-full pl-10 pr-2 py-2 flex justify-between items-center border-b border-b-inputBg">
                         <p className="py-2 text-mygrey font-medium text-sm">Personal Information</p>
+                        <div><ChevronRightImage className="w-6 h-6" />
+                        </div>
+                    </a>
+                </Link>
+
+                <Link href='/profile/settings/upload-photo'>
+                    <a className="w-full pl-10 pr-2 py-2 flex justify-between items-center border-b border-b-inputBg">
+                        <p className="py-2 text-mygrey font-medium text-sm">Change Photo/Avatar</p>
                         <div><ChevronRightImage className="w-6 h-6" />
                         </div>
                     </a>
@@ -70,9 +81,12 @@ export default function Settings({ token, user }) {
 export async function getServerSideProps({ req, res }) {
     const { token } = await verifyTokenWithAPICall(req, res)
 
+    const userId = decodeJWTPayload(token)
+
     const user = await retrieveUser(token)
 
+    debugger
     return {
-        props: { user, token }
+        props: { token, user, userId }
     }
 }
