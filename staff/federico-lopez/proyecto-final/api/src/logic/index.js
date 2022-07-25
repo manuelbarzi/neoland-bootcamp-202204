@@ -33,6 +33,10 @@ module.exports = {
 
     /* RANK */
     toggleOrUpdateRankToInterpretation: require('./toggleOrUpdateRankToInterpretation'),
+    
+    /* COMMENTS */
+    addCommentToInterpretation: require('./addCommentToInterpretation'),
+    removeCommentFromInterpretation: require('./removeCommentFromInterpretation'),
 
     /* SPOTIFY */
     checkSpotifySession: require('./checkSpotifySession'),

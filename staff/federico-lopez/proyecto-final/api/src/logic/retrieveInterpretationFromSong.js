@@ -3,7 +3,6 @@ const { validateObjectId } = require('../validators')
 const { NotFoundError } = require('errors')
 
 module.exports = async interpretationId => {
-    debugger
     validateObjectId(interpretationId)
 
     const song = await Song.findOne({ 'interpretations._id': { $eq: interpretationId } }).populate({ path: 'interpretations', populate: { path: 'user', select: 'username' } }).lean()

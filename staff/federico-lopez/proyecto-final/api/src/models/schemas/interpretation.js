@@ -19,7 +19,7 @@ const interpretation = new Schema({
         default: Date.now
     },
     ranks: [rank],
-    comments: [comment],
+    comments: [comment]
 })
 
 module.exports = interpretation

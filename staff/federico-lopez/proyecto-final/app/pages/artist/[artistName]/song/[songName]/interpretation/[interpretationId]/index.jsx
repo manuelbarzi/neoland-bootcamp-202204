@@ -17,6 +17,7 @@ export default function Interpretation({ token, userId, interpretation, song, in
     const [rankByUser, setRankByUser] = useState(rankByUserRetrieved ? rankByUserRetrieved.amount : null)
 
     const artistName = song.artist.name
+    const songName = song.name
     const username = interpretation.user.username
 
     const rankAmountSum = interpretation.ranks.reduce((previousValue, currentValue) => {
@@ -107,7 +108,11 @@ export default function Interpretation({ token, userId, interpretation, song, in
                         <div className="w-full flex flex-col gap-2">
                             <div className="w-full flex justify-between items-center">
                                 <p className="text-xl font-bold my-grey">Interpretation</p>
-                                <ExpandImage className="w-8 h-8" />
+                                
+                                <Link href={`/artist/${artistName.split(' ').join('-').toLowerCase()}/song/${songName.split(' ').join('-').toLowerCase()}/interpretation/${interpretation.id}/full-screen`} >
+                                    <a><ExpandImage className="w-8 h-8" /></a>
+                                </Link>
+
                             </div>
 
                             <article className="w-full p-2 h-64 border border-inputBg bg-white overflow-y-scroll">

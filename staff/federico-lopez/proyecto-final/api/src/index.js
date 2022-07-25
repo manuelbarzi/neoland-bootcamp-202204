@@ -41,6 +41,10 @@ const {
     /* RANK */
     handleToggleOrUpdateRankToInterpretation,
 
+    /* COMMENT */
+    handleAddCommentToInterpretation,
+    handleRemoveCommentFromInterpretation,
+
     /* SPOTIFY */
     handleCheckSpotifySession
 } = require('./handlers')
@@ -110,6 +114,10 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
 
         /* RANK */
         routes.post('/rank/songs/:songId/interpretations/:interpretationId', jsonBodyParser, handleToggleOrUpdateRankToInterpretation)
+
+        /* COMMENT */
+        routes.post('/interpretations/:interpretationId/comments', jsonBodyParser, handleAddCommentToInterpretation)
+        routes.delete('/interpretations/:interpretationId/comments/:commentId', jsonBodyParser, handleRemoveCommentFromInterpretation)
 
         /* SPOTIFY */
         routes.post('/spotify/auth', jsonBodyParser, handleCheckSpotifySession)

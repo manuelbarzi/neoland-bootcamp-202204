@@ -1,6 +1,6 @@
 module.exports = {
     validateString: require('./validateString'),
-    validateStringNotEmptyOrBlank: require('./validateStringNoteEmptyOrBlank'),
+    validateStringNotEmptyOrBlank: require('./validateStringNotEmptyOrBlank'),
     validateStringNotEmptyNoSpaces: require('./validateStringNotEmptyNoSpaces'),
     validateUsername: require('./validateUsername'),
     validateEmail: require('./validateEmail'),

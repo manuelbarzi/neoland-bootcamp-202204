@@ -37,6 +37,10 @@ module.exports = {
     /* RANK */
     handleToggleOrUpdateRankToInterpretation: require('./handleToggleOrUpdateRankToInterpretation'),
 
+    /* COMMENTS */
+    handleAddCommentToInterpretation: require('./handleAddCommentToInterpretation'),
+    handleRemoveCommentFromInterpretation: require('./handleRemoveCommentFromInterpretation'),
+
     /* SPOTIFY */
     handleRequestSpotifyAccesToken: require('./handleRequestSpotifyAccesToken'),
     handleCheckSpotifySession: require('./handleCheckSpotifySession')

@@ -1,6 +1,6 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { User, Artist, Song } = require('../models')
-const { NotFoundError, AuthError, FormatError } = require('errors')
+const { NotFoundError, FormatError } = require('errors')
 const { addInterpretationToSong } = require('.')
 const { expect } = require('chai')
 const { validateObjectId } = require('../validators')
@@ -67,7 +67,7 @@ describe('addInterpretationToSong', () => {
             const wrongSongId = new ObjectId().toString()
 
             try {
-                const result = await addInterpretationToSong(user._id.toString(), wrongSongId, content)
+                await addInterpretationToSong(user._id.toString(), wrongSongId, content)
 
                 throw new Error('it should not reach this point')
             } catch (error) {
