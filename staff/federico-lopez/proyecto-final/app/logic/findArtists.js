@@ -1,13 +1,13 @@
 import { validateStringNotEmptyOrBlank } from 'validators'
 import Apium from '../vendor/Apium'
 
-export async function retrieveArtistsAndSongs(query) {
+export async function findArtists(query) {
     validateStringNotEmptyOrBlank(query)
 
     const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.get(
-        `search?q=${query}`)
+        `artists?q=${query}`)
 
     const data = JSON.parse(payload)
 

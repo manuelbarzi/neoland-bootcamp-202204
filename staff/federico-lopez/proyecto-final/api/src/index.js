@@ -21,17 +21,17 @@ const {
 
     /* ARTISTS */
     handleCreateArtist,
-    handleRetrieveArtists,
+    handlefindArtists,
     handleGetTopArtists,
 
     /* SONGS */
     handleCreateSong,
-    handleRetrieveSongs,
+    handlefindSongs,
     handleRetrieveSongsOfArtist,
     handleRetrieveSong,
 
     /* ARTISTS AND SONGS */
-    handleRetrieveArtistsAndSongs,
+    handleFindArtistsSongsAndUsers,
 
     /* INTERPRETATIONS */
     handleAddInterpretationToSong,
@@ -90,34 +90,38 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.patch('/users/image', handleUpdateUserImage)
         routes.get('/users/:userId/image', handleGetUserImage)
+        // GET OWN IMAGE
         routes.post('/users/:userIdToFollowOrUnfollow/follow', handleToggleFollow)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
         /* ARTISTS */
         routes.post('/artists', jsonBodyParser, handleCreateArtist)
-        routes.get('/artists', handleRetrieveArtists)
+        routes.get('/artists', handlefindArtists)
+
         routes.post('/artists/top', jsonBodyParser, handleGetTopArtists)
 
         /* SONGS */
         routes.post('/songs', jsonBodyParser, handleCreateSong)
-        routes.get('/songs', handleRetrieveSongs)
-        routes.get('/songs/:songName/:artistName', handleRetrieveSong)
-        routes.get('/songs/:artistName', handleRetrieveSongsOfArtist)
-
-        /* ARTISTS AND SONGS */
-        routes.get('/search', handleRetrieveArtistsAndSongs)
-
+        routes.get('/songs', handlefindSongs)
+        routes.get('/artists/:artistName/songs/:songName', handleRetrieveSong)
+        routes.get('/artists/:artistName/songs', handleRetrieveSongsOfArtist)
+       
         /* INTERPRETATIONS */
         routes.post('/songs/:songId/interpretations', jsonBodyParser, handleAddInterpretationToSong)
-        routes.get('/songs/:songName/:artistName/interpretations', handleRetrieveInterpretationsFromSong)
-        routes.get('/songs/:songName/artists/:artistName/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
+        routes.get('/artists/:artistName/songs/:songName/interpretations', handleRetrieveInterpretationsFromSong)
+        routes.get('/artists/:artistNae/songs/:songName/interpretations/:interpretationId', handleRetrieveInterpretationFromSong)
+        
+        /* ARTISTS AND SONGS */
+        routes.get('/search', handleFindArtistsSongsAndUsers)
+        // FIND - DESDE EL HANDLE LLAMAR 3 LÓGICAS - PARÁMETRO DE CATEGORY
+        // AGGREGATION FRAMEWORK - CURSORES EN BASE DE DATOS PARA STREAMEAR
 
         /* RANK */
-        routes.post('/rank/songs/:songId/interpretations/:interpretationId', jsonBodyParser, handleToggleOrUpdateRankToInterpretation)
+        routes.post('/songs/:songId/interpretations/:interpretationId/rank', jsonBodyParser, handleToggleOrUpdateRankToInterpretation)
 
         /* COMMENT */
-        routes.post('/interpretations/:interpretationId/comments', jsonBodyParser, handleAddCommentToInterpretation)
-        routes.delete('/interpretations/:interpretationId/comments/:commentId', jsonBodyParser, handleRemoveCommentFromInterpretation)
+        routes.post('/songs/:songId/interpretations/:interpretationId/comments', jsonBodyParser, handleAddCommentToInterpretation)
+        routes.delete('/songs/:songId/interpretations/:interpretationId/comments/:commentId', jsonBodyParser, handleRemoveCommentFromInterpretation)
 
         /* SPOTIFY */
         routes.post('/spotify/auth', jsonBodyParser, handleCheckSpotifySession)

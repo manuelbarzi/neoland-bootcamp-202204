@@ -1,5 +1,5 @@
-import { Header, Footer, FlexColSection, ChevronRightImage, AuxiliarDiv, AuxiliarDivSearch, ArtistItem, SongItem, Context } from '../components'
-import { verifyTokenWithAPICall } from '../helpers'
+import { Header, Footer, FlexColSection, ChevronRightImage, ChevronLeftImage, CircleChordButton, AuxiliarDiv, AuxiliarDivSearch, ArtistItem, SongItem, Context } from '../components'
+import { verifyTokenWithAPICall, getChords, generateInterpretation } from '../helpers'
 import { retrieveArtists, retrieveSongsOfArtist, addInterpretationToSong, createSong, createArtist } from '../logic'
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
@@ -15,6 +15,9 @@ export default function CreateInterpretation({ token }) {
     const [songsOfArtist, setSongsOfArtist] = useState(null)
     const [songsDisplayed, setSongsDisplayed] = useState(null)
     const [song, setSong] = useState(null)
+
+    const [preview, setPreview] = useState(false)
+    const [interpretationContent, setInterpretationContent] = useState('')
 
     const router = useRouter()
 
@@ -127,10 +130,27 @@ export default function CreateInterpretation({ token }) {
         setSongState('active')
     }
 
-    const onSubmitInterpretation = async event => {
+    const onPreviewInterpretation = async event => {
         event.preventDefault()
 
         const content = event.target.textarea.value
+
+        if (content.length < 200) {
+            handleFeedback('info', 'Interpretation shorter than required', 'Interpretation content should have at least 200 characters')
+
+            return
+        }
+
+        setInterpretationContent(content)
+
+        setPreview(true)
+    }
+
+    const onEditInterpretation = async () => setPreview(false)
+
+    const onSubmitInterpretation = async event => {
+        debugger
+        event.preventDefault()
 
         try {
             if (!artist.id) {
@@ -142,7 +162,7 @@ export default function CreateInterpretation({ token }) {
                 song.id = await createSong(token, { artist: artist.id, name: song.name })
             }
 
-            const interpretationId = await addInterpretationToSong(token, song.id, content)
+            const interpretationId = await addInterpretationToSong(token, song.id, interpretationContent)
 
             handleFeedback('success', 'Interpretation created!', 'Redirecting to your new interpretation')
 
@@ -154,34 +174,33 @@ export default function CreateInterpretation({ token }) {
 
     return (
         <div className="flex flex-col h-screen">
-            <Header title="Add New" />
-            <FlexColSection className="bg-primary flex-1 overflow-y-auto">
+            {!preview ? <><Header title="Add New" />
+                <FlexColSection className="bg-primary flex-1 overflow-y-auto">
 
-                <div className="w-full p-4 flex gap-2">
-                    {
-                        !artist ?
-                            <>
-                                <AuxiliarDiv color="blue" type="artist" />
-                                <AuxiliarDiv color="light-blue" type="song" />
-                                <AuxiliarDiv color="light-blue" type="interpretation" />
-                            </>
-                            :
-                            !song ?
+                    <div className="w-full p-4 flex gap-2">
+                        {
+                            !artist ?
                                 <>
-                                    <AuxiliarDiv color="white" type="artist" />
-                                    <AuxiliarDiv color="blue" type="song" />
+                                    <AuxiliarDiv color="blue" type="artist" />
+                                    <AuxiliarDiv color="light-blue" type="song" />
                                     <AuxiliarDiv color="light-blue" type="interpretation" />
                                 </>
                                 :
-                                <>
-                                    <AuxiliarDiv color="white" type="artist" />
-                                    <AuxiliarDiv color="white" type="song" />
-                                    <AuxiliarDiv color="blue" type="interpretation" />
-                                </>
-                    }
-                </div>
+                                !song ?
+                                    <>
+                                        <AuxiliarDiv color="white" type="artist" />
+                                        <AuxiliarDiv color="blue" type="song" />
+                                        <AuxiliarDiv color="light-blue" type="interpretation" />
+                                    </>
+                                    :
+                                    <>
+                                        <AuxiliarDiv color="white" type="artist" />
+                                        <AuxiliarDiv color="white" type="song" />
+                                        <AuxiliarDiv color="blue" type="interpretation" />
+                                    </>
+                        }
+                    </div>
 
-                {
                     <AuxiliarDivSearch
                         state={artistState}
                         type="artist"
@@ -191,24 +210,20 @@ export default function CreateInterpretation({ token }) {
                         onCreate={onClickCreateArtist}
                         query={queryArtist}
                     />
-                }
 
+                    {artistsDisplayed && <ul>{
+                        artistsDisplayed.map(artist => {
+                            return <ArtistItem
+                                className="px-2"
+                                artist={artist}
+                                key={artist.id}
+                                onClick={function () {
+                                    onClickArtist(artist)
+                                }} />
+                        })}
+                    </ul>
+                    }
 
-                {artistsDisplayed && <ul>{
-                    artistsDisplayed.map(artist => {
-                        return <ArtistItem
-                            className="px-2"
-                            artist={artist}
-                            key={artist.id}
-                            onClick={function () {
-                                onClickArtist(artist)
-                            }} />
-                    })}
-                </ul>
-                }
-
-
-                {
                     <AuxiliarDivSearch
                         state={songState}
                         type="song"
@@ -219,49 +234,98 @@ export default function CreateInterpretation({ token }) {
                         query={querySong}
                     />
 
-                }
+                    {songsDisplayed && <ul>{
+                        songsDisplayed.map(song => {
+                            return <SongItem
+                                className="px-2"
+                                song={song}
+                                key={song.id}
+                                onClick={function () {
+                                    onClickSong(song)
+                                }}
+                            />
+                        })}
+                    </ul>
+                    }
 
 
-                {songsDisplayed && <ul>{
-                    songsDisplayed.map(song => {
-                        return <SongItem
-                            className="px-2"
-                            song={song}
-                            key={song.id}
-                            onClick={function () {
-                                onClickSong(song)
-                            }}
-                        />
-                    })}
-                </ul>
-                }
+                    {!song ?
+                        <div className="mt-6 w-full px-4 gap-1">
+                            <h3 className="font-medium text-placeholder">Interpretation</h3>
+                            <div className="w-full h-80 border border-inputBg rounded bg-white">
 
-
-                {!song ?
-                    <div className="mt-6 w-full px-4 gap-1">
-                        <h3 className="font-medium text-placeholder">Interpretation</h3>
-                        <div className="w-full h-80 border border-inputBg rounded bg-white">
-
+                            </div>
                         </div>
-                    </div>
-                    :
-                    <form
-                        className="w-full px-4 gap-1"
-                        onSubmit={onSubmitInterpretation}>
+                        :
+                        <form
+                            className="w-full px-4 gap-1"
+                            onSubmit={onPreviewInterpretation}>
 
-                        <h3 className="font-medium text-myblack">Write (or paste) here your interpretation</h3>
-                        <textarea className="w-full h-80 border border-inputBg rounded p-2 bg-white focus:outline-none text-sm text-myblack" name="textarea" />
+                            <h3 className="font-medium text-myblack">Write (or paste) here your interpretation</h3>
+                            <textarea
+                                className="w-full h-80 border border-inputBg rounded p-2 bg-white focus:outline-none text-sm text-myblack"
+                                name="textarea"
+                                defaultValue={interpretationContent}
+                            />
+
+                            <div className="mt-3 flex items-center justify-center">
+                                <button className="w-44 rounded-full bg-mygreen py-4 flex justify-center items-center gap-4">
+                                    <p className="font-medium text-white">Show Preview</p>
+                                    <ChevronRightImage className="mt-0.5 w-6 h-6" color="white" />
+                                </button>
+                            </div>
+                        </form>
+                    }
+
+                </FlexColSection>
+            </>
+
+                :
+
+                <>
+                    <Header title="Preview" />
+                    <FlexColSection className="bg-primary flex-1 overflow-y-auto p-4">
+
+                        <div className="w-full py-4 flex flex-col gap-2">
+                            <h3 className="flex items-center text-xl text-myblack font-bold">Chords</h3>
+                            <div className="w-full flex flex-wrap gap-2">
+                                {getChords(interpretationContent).map((chord, index) => {
+                                    return (
+                                        <CircleChordButton key={index * 10}>{chord}</CircleChordButton>
+                                    )
+                                })}
+                            </div>
+                        </div>
+
+                        <article className="w-full p-2 h-64 border border-inputBg bg-white overflow-y-scroll">
+
+                            {generateInterpretation(interpretationContent)}
+
+                        </article>
 
                         <div className="mt-3 flex items-center justify-center">
-                            <button className="w-44 rounded-full bg-mygreen py-4 flex justify-center items-center gap-4">
+                            <button
+                                className="w-44 rounded-full bg-white py-4 flex justify-center items-center gap-4"
+                                onClick={onEditInterpretation}>
+
+                                <ChevronLeftImage className="mt-0.5 w-6 h-6" color="blue" />
+                                <p className="font-medium text-myblue">Edit</p>
+
+                            </button>
+
+                            <button
+                                className="w-44 rounded-full bg-mygreen py-4 flex justify-center items-center gap-4"
+                                onClick={onSubmitInterpretation}>
+
                                 <p className="font-medium text-white">Publish</p>
                                 <ChevronRightImage className="mt-0.5 w-6 h-6" color="white" />
+
                             </button>
                         </div>
-                    </form>
-                }
 
-            </FlexColSection>
+                    </FlexColSection>
+                </>
+            }
 
             <Footer page="create-interpretation" userLoggedIn={!!token} />
         </div>
@@ -273,7 +337,7 @@ export async function getServerSideProps({ req, res }) {
 
     if (obj) {
         const { token } = obj
-     
+
         return {
             props: { token }
         }

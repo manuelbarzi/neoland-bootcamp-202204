@@ -1,8 +1,8 @@
 import { SearchImage, CrossInCircleImage } from "../../components"
 
-export function AuxiliarDivSearch({ className, children, state, type, content, onChange, onEditClick, onCreate, query, ...props }) {
+export function AuxiliarDivSearch({ className, children, state, type, content, onChange, onEditClick, onCreate, query, ref, ...props }) {
     return (
-        <div className="px-4 mb-4 flex flex-col gap-1">
+        <div className="px-4 mb-4 flex flex-col gap-1" ref={ref}>
             <p className={"font-medium" + (state === 'inactive' ? ' text-placeholder' : ' text-myblack')}>
                 {(type === 'artist' && state !== 'inactive' && state && 'closed' && state !== 'intermediate') ? 'Pick an Artist'
                     : type === 'artist' ? 'Artist'
@@ -46,6 +46,7 @@ export function AuxiliarDivSearch({ className, children, state, type, content, o
                         <p className="w-full bg-white text-sm text-placeholder" />
                     </div>
             }
+        {children}
         </div>
     )
 }

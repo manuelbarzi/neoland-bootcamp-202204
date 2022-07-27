@@ -42,21 +42,21 @@ describe('addCommentToInterpretation', () => {
     it('succeed on existing user, artist, song and interpretation', async () => {
         const commentText = 'This is the comment'
 
-        const commentId = await addCommentToInterpretation(user._id.toString(), interpretation._id.toString(), commentText)
+        const commentId = await addCommentToInterpretation(user._id.toString(), song._id.toString(), interpretation._id.toString(), commentText)
 
         validateObjectId(commentId)
 
-        const song = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
 
-        expect(song.interpretations[0].comments).to.have.lengthOf(1)
-        expect(song.interpretations[0].comments[0].user.toString()).to.equal(user._id.toString())
-        expect(song.interpretations[0].comments[0].text).to.equal(commentText)
-        expect(song.interpretations[0].comments[0].date).to.exists
+        expect(songFounded.interpretations[0].comments).to.have.lengthOf(1)
+        expect(songFounded.interpretations[0].comments[0].user.toString()).to.equal(user._id.toString())
+        expect(songFounded.interpretations[0].comments[0].text).to.equal(commentText)
+        expect(songFounded.interpretations[0].comments[0].date).to.exists
     })
 
     it('fails on existing user, artist, song and interpretation, but empty text', async () => {
         try {
-            await addCommentToInterpretation(user._id.toString(), interpretation._id.toString(), '')
+            await addCommentToInterpretation(user._id.toString(), song._id.toString(), interpretation._id.toString(), '')
 
             throw new Error('it should not reach this point')
 
@@ -65,16 +65,16 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal('comment is empty')
         }
 
-        const song = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
 
-        expect(song.interpretations[0].comments).to.have.lengthOf(0)
+        expect(songFounded.interpretations[0].comments).to.have.lengthOf(0)
     })
 
     it('fails on existing user, artist and song, but unexisting interpretationId', async () => {
         const wrongId = new ObjectId().toString()
         
         try {
-            await addCommentToInterpretation(user._id.toString(), wrongId, 'This is the comment')
+            await addCommentToInterpretation(user._id.toString(), song._id.toString(), wrongId, 'This is the comment')
 
             throw new Error('it should not reach this point')
 
@@ -83,16 +83,16 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`interpretation with id ${wrongId} not found`)
         }
 
-        const song = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
 
-        expect(song.interpretations[0].comments).to.have.lengthOf(0)
+        expect(songFounded.interpretations[0].comments).to.have.lengthOf(0)
     })
 
     it('fails on unexisting user', async () => {
         const wrongId = new ObjectId().toString()
         
         try {
-            await addCommentToInterpretation(wrongId, interpretation._id.toString(), 'This is the comment')
+            await addCommentToInterpretation(wrongId, interpretation._id.toString(), song._id.toString(), 'This is the comment')
 
             throw new Error('it should not reach this point')
 
@@ -101,9 +101,9 @@ describe('addCommentToInterpretation', () => {
             expect(error.message).to.equal(`user with id ${wrongId} not found`)
         }
 
-        const song = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
+        const songFounded = await Song.findOne({ 'interpretations._id': { $eq: interpretation.id } }).populate({ path: 'interpretations', populate: { path: 'comments' } }).lean()
 
-        expect(song.interpretations[0].comments).to.have.lengthOf(0)
+        expect(songFounded.interpretations[0].comments).to.have.lengthOf(0)
     })
 
     afterEach(async () => {

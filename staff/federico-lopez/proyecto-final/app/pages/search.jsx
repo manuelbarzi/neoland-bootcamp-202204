@@ -1,23 +1,24 @@
-import { retrieveArtistsAndSongs } from '../logic'
+import { findArtistsSongsAndUsers } from '../logic'
 import { Header, Footer, SearchForm, FlexColSection } from '../components'
 import { verifyTokenWithAPICall } from '../helpers'
 import { useState } from 'react'
-import { ArtistsAndSongsResultsList } from "../components"
+import { ArtistsSongsAndUsersResultsList } from "../components"
 
 export default function Search({ token }) {
-    const [artistsAndSongs, setArtistsAndSongs] = useState(null)
+    const [artistsSongsAndUsers, setArtistsSongsAndUsers] = useState(null)
 
     const waiting = 0
 
     const onChangeQueryTimeout = async (query, waitingPreviousValue) => {
         
         if (waitingPreviousValue === waiting) {
+            debugger
             try {
 
             
-            const artistsAndSongsFounded = await retrieveArtistsAndSongs(query)
+            const artistsSongsAndUsersFounded = await findArtistsSongsAndUsers(query)
 
-            setArtistsAndSongs(artistsAndSongsFounded)
+            setArtistsSongsAndUsers(artistsSongsAndUsersFounded)
             } catch(error) {
                 
             }
@@ -39,12 +40,12 @@ export default function Search({ token }) {
         } else {
             waiting ++
             
-            setArtistsAndSongs(null)
+            setArtistsSongsAndUsers(null)
         }
     }
 
     const onCancelClick = async event => {
-        setArtistsAndSongs(null)
+        setArtistsSongsAndUsers(null)
     }
 
     return <div className="flex flex-col h-screen">
@@ -55,8 +56,8 @@ export default function Search({ token }) {
                 onChangeInput={onChangeQuery}
                 onCancelClick={onCancelClick} />
 
-            {artistsAndSongs &&
-                <ArtistsAndSongsResultsList results={artistsAndSongs} />}
+            {artistsSongsAndUsers &&
+                <ArtistsSongsAndUsersResultsList results={artistsSongsAndUsers} />}
 
         </FlexColSection>
         <Footer userLoggedIn={!!token} page="search" ></Footer>

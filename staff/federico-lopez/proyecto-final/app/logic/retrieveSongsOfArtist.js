@@ -7,7 +7,7 @@ validateStringNotEmptyOrBlank(artistName)
     const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.get(
-        `songs/${artistName}`)
+        `artists/${artistName}/songs`)
 
     const data = JSON.parse(payload)
     

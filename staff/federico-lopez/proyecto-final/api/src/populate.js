@@ -3,7 +3,7 @@ const { User, Artist, Song, Interpretation, Rank } = require('./models')
 const { laRazonContent1, laRazonContent2, demasiadoContent1, sinSenalContent1, ojosAsiContent1, aTuLadoContent1 } = require('./populateSources')
 const bcrypt = require('bcryptjs')
 
-;(async () => {
+    ; (async () => {
         try {
             await connect('mongodb://localhost:27017/pitch-us')
 
@@ -20,6 +20,7 @@ const bcrypt = require('bcryptjs')
             const userPepito = await User.create({ email: 'pepitogrillo@pitch-us.com', username: 'pepigri', password: hash })
             const userWendy = await User.create({ email: 'wendybread@pitch-us.com', username: 'wendy', password: hash })
             const userJohn = await User.create({ email: 'johndoed@pitch-us.com', username: 'john', password: hash })
+            User.create({ email: 'renguera79@gmail.com', username: 'renguera', password: hash })
 
             /* ADD FOLLOWERS AND FOLLOWING */
 

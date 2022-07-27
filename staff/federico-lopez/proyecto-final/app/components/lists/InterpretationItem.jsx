@@ -4,7 +4,7 @@ import { RankImage } from '../images'
 export const InterpretationItem = ({ className, children, interpretation, artistName, songName, ...props }) => {
     const rankAmountSum = interpretation.ranks.reduce((previousValue, currentValue) => {
         return previousValue + currentValue.amount
-    }, 0)
+    }, 0).toFixed(1)
 
     const rankAverage = rankAmountSum / interpretation.ranks.length
 

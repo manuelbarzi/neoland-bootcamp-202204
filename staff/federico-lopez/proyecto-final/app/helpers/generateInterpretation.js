@@ -43,7 +43,8 @@ export function generateInterpretation(interpretation, handlerChordClick) {
                     onClick={event => {
                         event.preventDefault()
 
-                        handlerChordClick(chord)
+                        if(handlerChordClick) 
+                            handlerChordClick(chord) 
                     }}
                     >{chord}
                 </ChordButton>

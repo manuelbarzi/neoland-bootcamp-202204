@@ -8,7 +8,7 @@ export async function retrieveSong(songName, artistName) {
     const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.get(
-        `songs/${songName}/${artistName}`)
+        `artists/${artistName}/songs/${songName}`)
 
     const data = JSON.parse(payload)
         

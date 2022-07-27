@@ -10,7 +10,7 @@ export async function toggleOrUpdateRankToInterpretation(token, songId, interpre
     const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
     const { status, payload } = await api.post(
-        `/rank/songs/${songId}/interpretations/${interpretationId}`,
+        `songs/${songId}/interpretations/${interpretationId}/rank`,
         {
             headers: {
                 Authorization: `Bearer ${token}`,

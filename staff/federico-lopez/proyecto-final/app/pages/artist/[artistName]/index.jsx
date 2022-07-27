@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { ArtistIconImage, ArtistsAndSongsResultsList, ChevronLeftImage, FavoriteImage, FlexColSection, Footer, Title2, Title, ButtonBlue, Context } from '../../../components'
+import { ArtistIconImage, ArtistsSongsAndUsersResultsList, ChevronLeftImage, FavoriteImage, FlexColSection, Footer, Title2, Title, ButtonBlue, Context } from '../../../components'
 import { retrieveSongsOfArtist } from '../../../logic'
-import { isValidElement, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import { verifyTokenWithAPICall } from '../../../helpers'
 
 export default function Artist({ token, songs }) {
@@ -51,7 +51,7 @@ export default function Artist({ token, songs }) {
                     </a>
                 </Link>
             </div>
-            <ArtistsAndSongsResultsList songs={songs} />
+            <ArtistsSongsAndUsersResultsList songs={songs} />
         </FlexColSection>
         <Footer userLoggedIn={!!token} />
     </div>
@@ -59,7 +59,7 @@ export default function Artist({ token, songs }) {
 
 export async function getServerSideProps({ params, req, res }) {
     const obj = await verifyTokenWithAPICall(req, res)
-
+    debugger
     const songs = await retrieveSongsOfArtist(params.artistName)
 
     if (obj) {

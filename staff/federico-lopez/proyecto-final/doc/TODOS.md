@@ -14,11 +14,13 @@
 - Interpretation expanded page.
 - Create Interpretation preview.
 - Add throw errors in tests.
-- Lists in createinterpretation
+- Search Users
+
+- Lists in createinterpretation --> how put them overlapping - GRID?
 
 - Comments --> FRONT
 - Follow --> FRONT
-
+- Profile --> FRONT
 
 ## TOTAL: 40 days
 

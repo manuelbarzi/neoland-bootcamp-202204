@@ -5,9 +5,9 @@ module.exports = async (req, res) => {
     try {
         const userId = verifyToken(req)
 
-        const { body: { text }, params: { interpretationId } } = req
+        const { body: { text }, params: { songId, interpretationId } } = req
 
-        const commentId = await addCommentToInterpretation(userId, interpretationId, text)
+        const commentId = await addCommentToInterpretation(userId, songId, interpretationId, text)
 
         res.status(201).json({ commentId })
     } catch (error) {

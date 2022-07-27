@@ -1,13 +1,13 @@
-const { retrieveArtistsAndSongs } = require('../logic')
+const { findArtist } = require('../logic')
 const { handleErrorsAndRespond } = require('./helpers')
 
 module.exports = async (req, res) => {
     try {
         const { query: { q: query } } = req
 
-        const results = await retrieveArtistsAndSongs(query)
+        const artistsResults = await findArtist(query)
         
-        res.status(200).json(results)
+        res.status(200).json(artistsResults)
         
     } catch (error) {
         handleErrorsAndRespond(error, res)

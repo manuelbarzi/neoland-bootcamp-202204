@@ -17,17 +17,17 @@ module.exports = {
 
     /* ARTISTS */
     handleCreateArtist: require('./handleCreateArtist'),
-    handleRetrieveArtists: require('./handleRetrieveArtists'),
+    handlefindArtists: require('./handlefindArtists'),
     handleGetTopArtists: require('./handleGetTopArtists'),
 
     /* SONGS */
     handleCreateSong: require('./handleCreateSong'),
-    handleRetrieveSongs: require('./handleRetrieveSongs'),
+    handlefindSongs: require('./handlefindSongs'),
     handleRetrieveSong: require('./handleRetrieveSong'),
     handleRetrieveSongsOfArtist: require('./handleRetrieveSongsOfArtist'),
     
     /* ARTISTS AND SONGS */
-    handleRetrieveArtistsAndSongs: require('./handleRetrieveArtistsAndSongs'),
+    handleFindArtistsSongsAndUsers: require('./handleFindArtistsSongsAndUsers'),
 
     /* INTERPRETATIONS */
     handleAddInterpretationToSong: require('./handleAddInterpretationToSong'),

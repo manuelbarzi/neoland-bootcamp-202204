@@ -13,17 +13,17 @@ module.exports = {
 
     /* ARTISTS */
     createArtist: require('./createArtist'),
-    retrieveArtists: require('./retrieveArtists'),
+    findArtists: require('./findArtists'),
     getTopArtists: require('./getTopArtists'),
 
     /* SONGS */
     createSong: require('./createSong'),
-    retrieveSongs: require('./retrieveSongs'),
+    findSongs: require('./findSongs'),
     retrieveSongsOfArtist: require('./retrieveSongsOfArtist'),
     retrieveSong: require('./retrieveSong'),
 
-    /* ARTISTS AND SONGS */
-    retrieveArtistsAndSongs: require('./retrieveArtistsAndSongs'),
+    /* SEARCH */
+    findArtistsSongsAndUsers: require('./findArtistsSongsAndUsers'),
 
     /* INTEPRRETATIONS */
     addInterpretationToSong: require('./addInterpretationToSong'),
