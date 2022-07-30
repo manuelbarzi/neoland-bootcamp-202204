@@ -17,5 +17,6 @@ module.exports = {
     validateDateOfBirth: require('./validateDateOfBirth'),
     validateInterpretationContent: require('./validateInterpretationContent'),
     validateRank: require('./validateRank'),
-    validateFile: require('./validateFile')
+    validateFile: require('./validateFile'),
+    validateCategory: require('./validateCategory')
 }

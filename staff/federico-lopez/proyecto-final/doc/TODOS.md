@@ -1,27 +1,29 @@
 # TODOS PitchUs
 
-- Add User Image (2 days)
-
 - Handle Genres
 - Profile of users (3 days)
 - HTML Semantics (2/3 days)
 - SEO (2 days)
 - Components (3 days)
 - UX/UI (not measurable)
-- Correct endpoints (1 day) --> See with Manu
-- Testing (2 days)
+- Testing (2 days). - Add throw errors in tests.
 - Document functions (5 days)
-- Interpretation expanded page.
-- Create Interpretation preview.
-- Add throw errors in tests.
-- Search Users
+- Fix getSSProps
+- RETRIEVE INTERPRETATIONS FROM USER
+- BUSCARSE A SÍ MISMO EN EL BUSCADOR
 
 - Lists in createinterpretation --> how put them overlapping - GRID?
 
+- GUARDAR EN CACHÉ LA RESPUESTA A LA LLAMADA DE RETRIEVE USER
+
 - Comments --> FRONT
 - Follow --> FRONT
+- Create interpretation preview --> FRONT
+- Expand interpretation --> FRONT
 - Profile --> FRONT
 
 ## TOTAL: 40 days
 
 - Follow users: array of followers and array of following. See ref users. How to deal with unregisterUser
+
+- Aggregation framework.

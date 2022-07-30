@@ -2,10 +2,10 @@ import { useContext } from 'react'
 import Link from 'next/link'
 import { registerUser } from '../logic'
 import { useRouter } from 'next/router'
-import { verifyTokenWithAPICall } from '../helpers'
+import { verifyTokenAndRedirect } from '../helpers'
 import { FlexColSection, Logo, BlueAnchor, RegisterForm, Context } from '../components'
 
-export default function Register(props) {
+export default function Register() {
     const { handleFeedback } = useContext(Context)
     const router = useRouter()
 
@@ -31,7 +31,7 @@ export default function Register(props) {
     return (
         <FlexColSection className="min-h-screen bg-primary gap-5 justify-center items-center">
             <Logo className="w-72 h-72 drop-shadow-custom-logo rounded-full bg-white" />
-            <RegisterForm className="px-4" onSubmit={onFormSubmit}/>
+            <RegisterForm className="px-4" onSubmit={onFormSubmit} />
             <div className="w-full gap-2 flex justify-center">
                 <p className="text-myblack text-xs">Already have an account ?</p>
                 <Link href="/login">
@@ -43,9 +43,7 @@ export default function Register(props) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    await verifyTokenWithAPICall(req, res)
+    await verifyTokenAndRedirect(req, res)
 
-    return {
-        props: {}
-    }
+    return { props: {} }
 }

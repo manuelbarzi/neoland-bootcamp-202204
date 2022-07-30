@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { verifyTokenWithAPICall } from '../../../../../helpers'
+import { verifyTokenAndRedirect } from '../../../../../helpers'
 import { useRouter } from 'next/router'
 import { useContext, useState } from 'react'
 import { Title, Title2, Title3, ChevronLeftImage, SongIconImage, FavoriteImage, Footer, FlexColSection, InterpretationsList, Tag, ButtonBlue, Context } from '../../../../../components'
-import { retrieveSong, retrieveInterpretationsFromSong } from '../../../../../logic'
+import { retrieveSong, retrieveInterpretationsFromSong, retrieveUser } from '../../../../../logic'
 
-export default function Song({ interpretations, song, token }) {
+export default function Song({ interpretations, song, user }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
@@ -15,7 +15,7 @@ export default function Song({ interpretations, song, token }) {
     const artistName = song.artist.name
 
     const handleOnNewInterpretationClick = () => {
-        if (!token)
+        if (!user)
             handleFeedback('info', 'Login needed', 'You should log in to create an interpretation')
     }
 
@@ -80,36 +80,23 @@ export default function Song({ interpretations, song, token }) {
 
             </FlexColSection>
         </div>
-        <Footer userLoggedIn={!!token} />
+        <Footer user={user} />
     </div>
 }
 
 export async function getServerSideProps({ params, req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
-
+    const token = await verifyTokenAndRedirect(req, res)
 
     const [interpretations, song] = await Promise.all([
         retrieveInterpretationsFromSong(params.songName, params.artistName),
         retrieveSong(params.songName, params.artistName)
     ])
 
-    if (obj) {
-        const { token } = obj
+    if (token) {
+        const user = await retrieveUser(token)
 
-        return {
-            props: {
-                token,
-                song,
-                interpretations
-            }
-        }
-    } else {
-        return {
-            props: {
-                song,
-                interpretations
-            }
-        }
-    }
+        return { props: { token, user, song, interpretations } }
+
+    } else return { props: { song, interpretations } }
 }
 

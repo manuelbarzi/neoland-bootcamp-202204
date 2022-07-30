@@ -1,9 +1,9 @@
 const { connect, disconnect } = require('mongoose')
 const { Song, Artist } = require('../models')
-const { retrieveSongs } = require('./')
+const { findSongs } = require('./')
 const { expect } = require('chai')
 
-describe('retrieveSongs', () => {
+describe('findSongs', () => {
     before(() => connect('mongodb://localhost:27017/pitch-us-test'))
 
     beforeEach(async () => {
@@ -22,7 +22,7 @@ describe('retrieveSongs', () => {
     })
 
     it('succeeds on existing artists and songs and two matches', async () => {
-        const result = await retrieveSongs('la')
+        const result = await findSongs('la')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(2)
@@ -47,7 +47,7 @@ describe('retrieveSongs', () => {
     })
 
     it('succeeds on existing artists and songs and one match', async () => {
-        const result = await retrieveSongs('demasiado')
+        const result = await findSongs('demasiado')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(1)
@@ -63,7 +63,7 @@ describe('retrieveSongs', () => {
     })
 
     it('succeeds on existing artists and songs, but no matches', async () => {
-        const result = await retrieveSongs('zZzZ')
+        const result = await findSongs('zZzZ')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(0)

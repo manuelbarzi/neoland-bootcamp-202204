@@ -10,7 +10,7 @@ export const UserItem = ({ className, children, user, onClick, ...props }) => {
         {...props}>
             
             {!onClick ?
-             <Link href="#" >
+             <Link href={`/profile/${user.username}`} >
                 <div className="w-full h-full px-4 flex gap-4 items-center">
                     <UserIcon className="w-6 h-6" />
                     <div className="h-full w-full flex flex-col justify-center">

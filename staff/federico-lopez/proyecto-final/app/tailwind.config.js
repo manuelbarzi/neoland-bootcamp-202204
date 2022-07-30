@@ -32,7 +32,8 @@ module.exports = {
         secondarygrey: "#8E8E93",
         purpleBg: "#F2F2FD",
         mymagenta: "#EF476F",
-        mymagentaLight: "#FEF0F3"
+        mymagentaLight: "#FEF0F3",
+        myviolet: "#7B61FF",
       },
       fontFamily: {
         "sans": ["Roboto", ...defaultTheme.fontFamily.sans]

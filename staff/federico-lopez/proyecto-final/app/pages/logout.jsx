@@ -10,8 +10,6 @@ export async function getServerSideProps({ req, res }) {
     res.writeHead(307, { Location: '/login' })
     res.end()
 
-    return {
-        props: {}
-    }
+    return { props: {} }
 }
 

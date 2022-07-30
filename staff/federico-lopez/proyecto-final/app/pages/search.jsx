@@ -1,28 +1,35 @@
-import { findArtistsSongsAndUsers } from '../logic'
+import { findArtistsSongsAndUsers, retrieveUser } from '../logic'
 import { Header, Footer, SearchForm, FlexColSection } from '../components'
-import { verifyTokenWithAPICall } from '../helpers'
-import { useState } from 'react'
+import { verifyTokenAndRedirect } from '../helpers'
+import { useEffect, useState } from 'react'
 import { ArtistsSongsAndUsersResultsList } from "../components"
 
-export default function Search({ token }) {
+export default function Search({ user }) {
     const [artistsSongsAndUsers, setArtistsSongsAndUsers] = useState(null)
+    const [tag, setTag] = useState('all')
+    const [queryState, setQueryState] = useState(null)
 
     const waiting = 0
 
-    const onChangeQueryTimeout = async (query, waitingPreviousValue) => {
-        
-        if (waitingPreviousValue === waiting) {
-            debugger
-            try {
+    const onSearchSubmit = async event => {
+        if (event)
+            event.preventDefault()
 
-            
-            const artistsSongsAndUsersFounded = await findArtistsSongsAndUsers(query)
+        try {
+            const artistsSongsAndUsersFounded = await findArtistsSongsAndUsers(queryState, tag)
 
             setArtistsSongsAndUsers(artistsSongsAndUsersFounded)
-            } catch(error) {
-                
-            }
+        } catch (error) {
+            // TODO HANDLE FEEDBACK
         }
+    }
+
+    useEffect(() => {
+        if (queryState) onSearchSubmit()
+    }, [queryState, tag])
+
+    const onChangeQueryTimeout = async (query, waitingPreviousValue) => {
+        if (waitingPreviousValue === waiting) setQueryState(query)
     }
 
     const onChangeQuery = async event => {
@@ -30,7 +37,7 @@ export default function Search({ token }) {
 
         if (query.length > 2) {
             const waitingActualValue = waiting + 1
-            
+
             waiting++
 
             setTimeout(function () {
@@ -38,45 +45,57 @@ export default function Search({ token }) {
             }, 500)
 
         } else {
-            waiting ++
-            
+            waiting++
+
             setArtistsSongsAndUsers(null)
+
+            if (queryState !== null) setQueryState(null)
         }
     }
 
-    const onCancelClick = async event => {
-        setArtistsSongsAndUsers(null)
-    }
+    const onCancelClick = () => setArtistsSongsAndUsers(null)
+
+    const handleOnAllTagClick = () => setTag('all')
+
+    const handleOnArtistsTagClick = () => setTag('artists')
+
+    const handleOnSongsTagClick = () => setTag('songs')
+
+    const handleOnUsersTagClick = () => setTag('users')
 
     return <div className="flex flex-col h-screen">
         <Header className="pb-2" title="Search" />
         <FlexColSection className="py-4 flex-1 overflow-y-auto items-center gap-4" >
 
-            <SearchForm className="px-4"
+            <SearchForm className="px-4" tag={tag}
                 onChangeInput={onChangeQuery}
-                onCancelClick={onCancelClick} />
+                onCancelClick={onCancelClick}
+                onAllTagClick={handleOnAllTagClick}
+                onArtistsTagClick={handleOnArtistsTagClick}
+                onSongsTagClick={handleOnSongsTagClick}
+                onUsersTagClick={handleOnUsersTagClick} />
 
             {artistsSongsAndUsers &&
-                <ArtistsSongsAndUsersResultsList results={artistsSongsAndUsers} />}
+                <ArtistsSongsAndUsersResultsList
+                    results={tag === 'all' ? artistsSongsAndUsers
+                        : tag === 'artists' ? { artists: artistsSongsAndUsers.artists }
+                            : tag === 'songs' ? { songs: artistsSongsAndUsers.songs }
+                                : { users: artistsSongsAndUsers.users }}
+                />}
 
         </FlexColSection>
-        <Footer userLoggedIn={!!token} page="search" ></Footer>
+        <Footer user={user} page="search" ></Footer>
     </div>
 }
 
 
 export async function getServerSideProps({ req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
-    
-    if (obj) {
-        const { token } = obj
-     
-        return {
-            props: { token }
-        }
-    } else {
-        return {
-            props: {}
-        }
-    }
+    const token = await verifyTokenAndRedirect(req, res)
+
+    if (token) {
+        const user = await retrieveUser(token)
+
+        return { props: { user } }
+
+    } else return { props: {} }
 }

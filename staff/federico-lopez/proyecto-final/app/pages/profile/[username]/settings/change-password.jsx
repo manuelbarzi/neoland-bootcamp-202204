@@ -1,11 +1,11 @@
 import Link from 'next/link'
-import { Context, ChevronLeftImage, Fieldset, Input, Label, FlexColSection, Footer } from '../../../components'
-import { updatePassword } from '../../../logic'
-import { verifyTokenWithAPICall } from '../../../helpers'
+import { Context, ChevronLeftImage, Fieldset, Input, Label, FlexColSection, Footer } from '../../../../components'
+import { retrieveUser, updatePassword } from '../../../../logic'
+import { verifyTokenAndRedirect } from '../../../../helpers'
 import { useContext } from 'react'
 import { useRouter } from 'next/router'
 
-export default function ChangePassword({ token }) {
+export default function ChangePassword({ token, user }) {
     const { handleFeedback } = useContext(Context)
     const router = useRouter()
 
@@ -32,7 +32,7 @@ export default function ChangePassword({ token }) {
     return (
         <div className="flex flex-col h-screen">
             <header className="shadow-custom-items pt-7 px-4 pb-4">
-                <Link href='/profile/settings'>
+                <Link href={`/profile/${user.username}/settings`}>
                     <ChevronLeftImage className="w-8 h-8 float-left" />
                 </Link>
                 <h1 className="text-xl text-mygrey font-bold">Change Password</h1>
@@ -62,15 +62,15 @@ export default function ChangePassword({ token }) {
                 </form>
 
             </FlexColSection>
-            <Footer page="user-session" userLoggedIn={!!token} />
+            <Footer page="user-session" user={user} />
         </div>
     )
 }
 
 export async function getServerSideProps({ req, res }) {
-    const { token } = await verifyTokenWithAPICall(req, res)
+    const token = await verifyTokenAndRedirect(req, res)
 
-    return {
-        props: { token }
-    }
+    const user = await retrieveUser(token)
+
+    return { props: { token, user } }
 }

@@ -10,6 +10,8 @@ const {
     handleAuthenticateUser,
     handleUpdatePassword,
     handleRetrieveUser,
+    handleRetrieveUserByUsername,
+    handleRetrieveInterpretationsOfUser,
     handleUpdateUser,
     handleUpdateUserImage,
     handleGetUserImage,
@@ -87,10 +89,11 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         routes.get('/users/auth', handleValidateToken)
         routes.patch('/users/auth', jsonBodyParser, handleUpdatePassword)
         routes.get('/users', handleRetrieveUser)
+        routes.get('/users/:username/profile', handleRetrieveUserByUsername)
+        routes.get('/users/:userId/interpretations', handleRetrieveInterpretationsOfUser)
         routes.patch('/users', jsonBodyParser, handleUpdateUser)
         routes.patch('/users/image', handleUpdateUserImage)
         routes.get('/users/:userId/image', handleGetUserImage)
-        // GET OWN IMAGE
         routes.post('/users/:userIdToFollowOrUnfollow/follow', handleToggleFollow)
         routes.delete('/users', jsonBodyParser, handleUnregisterUser)
 
@@ -113,8 +116,6 @@ const { env: { MONGODB_URL, PORT = 8080 }, argv: [, , port = PORT] } = process
         
         /* ARTISTS AND SONGS */
         routes.get('/search', handleFindArtistsSongsAndUsers)
-        // FIND - DESDE EL HANDLE LLAMAR 3 LÓGICAS - PARÁMETRO DE CATEGORY
-        // AGGREGATION FRAMEWORK - CURSORES EN BASE DE DATOS PARA STREAMEAR
 
         /* RANK */
         routes.post('/songs/:songId/interpretations/:interpretationId/rank', jsonBodyParser, handleToggleOrUpdateRankToInterpretation)

@@ -1,12 +1,12 @@
 import Link from 'next/link'
-import { retrieveUser } from '../../../logic'
-import { verifyTokenWithAPICall } from '../../../helpers'
+import { retrieveUser } from '../../../../logic'
+import { verifyTokenAndRedirect } from '../../../../helpers'
 import { useRouter } from 'next/router'
-import { AvatarDemo64Image, ChevronRightImage, Context, FlexColSection, Footer, Header } from '../../../components'
+import { ChevronRightImage, Context, FlexColSection, Footer, Header } from '../../../../components'
 import { useContext } from 'react'
-import { decodeJWTPayload } from '../../../utils'
+import { decodeJWTPayload } from '../../../../utils'
 
-export default function Settings({ token, user, userId }) {
+export default function Settings({ user }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
@@ -23,17 +23,17 @@ export default function Settings({ token, user, userId }) {
 
             <FlexColSection className="flex-1 overflow-y-auto">
 
-                <div className="w-full px-4 pt-2 flex gap-4 items-center border-b border-b-inputBg">
+                <figure className="w-full px-4 pt-2 flex gap-4 items-center border-b border-b-inputBg">
                     <img
-                        className="w-16 h-16 rounded-full" 
-                        src={`http://localhost:8080/api/users/${userId}/image`} />
+                        className="w-16 h-16 rounded-full"
+                        src={`http://localhost:8080/api/users/${user.id}/image`} />
                     <p className="text-myblack font-bold">{user.username}</p>
-                </div>
+                </figure>
 
                 <div className="px-4 py-2 flex items-center border-b border-b-inputBg">
                     <p className="py-2 text-myblack font-medium">Account Settings</p>
                 </div>
-                <Link href='/profile/settings/edit'>
+                <Link href={`/profile/${user.username}/settings/edit`}>
                     <a className="w-full pl-10 pr-2 py-2 flex justify-between items-center border-b border-b-inputBg">
                         <p className="py-2 text-mygrey font-medium text-sm">Personal Information</p>
                         <div><ChevronRightImage className="w-6 h-6" />
@@ -41,7 +41,7 @@ export default function Settings({ token, user, userId }) {
                     </a>
                 </Link>
 
-                <Link href='/profile/settings/upload-photo'>
+                <Link href={`/profile/${user.username}/settings/upload-photo`}>
                     <a className="w-full pl-10 pr-2 py-2 flex justify-between items-center border-b border-b-inputBg">
                         <p className="py-2 text-mygrey font-medium text-sm">Change Photo/Avatar</p>
                         <div><ChevronRightImage className="w-6 h-6" />
@@ -49,14 +49,14 @@ export default function Settings({ token, user, userId }) {
                     </a>
                 </Link>
 
-                <Link href="/profile/settings/change-password">
+                <Link href={`/profile/${user.username}/settings/change-password`}>
                     <a className="w-full pl-10 pr-2 py-2 flex justify-between items-center border-b border-b-inputBg">
                         <p className="py-2 text-mygrey font-medium text-sm">Change Password</p>
                         <div><ChevronRightImage className="w-6 h-6" />
                         </div>
                     </a>
                 </Link>
-                <Link href="/profile/settings/delete-account">
+                <Link href={`/profile/${user.username}/settings/delete-account`}>
                     <a className="w-full pl-10 pr-2 py-2 flex justify-between items-center border-b border-b-inputBg">
                         <p className="py-2 text-mygrey font-medium text-sm">Delete Account</p>
                         <div><ChevronRightImage className="w-6 h-6" />
@@ -70,8 +70,8 @@ export default function Settings({ token, user, userId }) {
                 >Log Out</button>
 
             </FlexColSection>
-            
-            <Footer userLoggedIn={!!token} page="user-session" />
+
+            <Footer user={user} page="user-session" />
         </div>
 
     )
@@ -79,14 +79,9 @@ export default function Settings({ token, user, userId }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    const { token } = await verifyTokenWithAPICall(req, res)
-
-    const userId = decodeJWTPayload(token)
+    const token = await verifyTokenAndRedirect(req, res)
 
     const user = await retrieveUser(token)
 
-    debugger
-    return {
-        props: { token, user, userId }
-    }
+    return { props: { user } }
 }

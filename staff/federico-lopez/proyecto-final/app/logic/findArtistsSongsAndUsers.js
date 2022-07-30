@@ -1,19 +1,34 @@
 import { validateStringNotEmptyOrBlank } from 'validators'
 import Apium from '../vendor/Apium'
 
-export async function findArtistsSongsAndUsers(query) {
-    validateStringNotEmptyOrBlank(query)
+export const findArtistsSongsAndUsers = (() => {
+    let _query, _category, _results
 
-    const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
+    return async function(query, category) {
+        debugger
+        validateStringNotEmptyOrBlank(query)
+        validateStringNotEmptyOrBlank(category)
 
-    const { status, payload } = await api.get(
-        `search?q=${query}`)
+        if (query !== _query || (_category !== 'all' && category !== _category)) {
+            _query = query
+            _category = category
 
-    const data = JSON.parse(payload)
+            const api = new Apium(process.env.NEXT_PUBLIC_API_URL)
 
-    if (status === 200) return data
+            const { status, payload } = await api.get(
+                `search?q=${query}&category=${category}`)
 
-    else if (status >= 400 && status < 500) throw new Error(data.error)
+            const data = JSON.parse(payload)
 
-    else if (status >= 500) throw new Error('server error')
-}
+            if (status === 200) {
+                _results = data
+            }
+
+            else if (status >= 400 && status < 500) throw new Error(data.error)
+
+            else if (status >= 500) throw new Error('server error')
+        }
+
+        return _results
+    }
+})()

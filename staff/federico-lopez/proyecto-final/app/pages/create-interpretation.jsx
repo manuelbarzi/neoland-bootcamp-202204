@@ -1,10 +1,10 @@
 import { Header, Footer, FlexColSection, ChevronRightImage, ChevronLeftImage, CircleChordButton, AuxiliarDiv, AuxiliarDivSearch, ArtistItem, SongItem, Context } from '../components'
-import { verifyTokenWithAPICall, getChords, generateInterpretation } from '../helpers'
-import { retrieveArtists, retrieveSongsOfArtist, addInterpretationToSong, createSong, createArtist } from '../logic'
+import { verifyTokenAndRedirect, getChords, generateInterpretation } from '../helpers'
+import { findArtists, retrieveSongsOfArtist, addInterpretationToSong, createSong, retrieveUser, createArtist } from '../logic'
 import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 
-export default function CreateInterpretation({ token }) {
+export default function CreateInterpretation({ token, user }) {
     const [artistState, setArtistState] = useState('active')
     const [queryArtist, setQueryArtist] = useState(null)
     const [artistsDisplayed, setArtistsDisplayed] = useState(null)
@@ -30,7 +30,7 @@ export default function CreateInterpretation({ token }) {
             setQueryArtist(query)
 
             try {
-                const artists = await retrieveArtists(query)
+                const artists = await findArtists(query)
 
                 if (artists.length === 0)
                     setArtistState('create')
@@ -327,23 +327,15 @@ export default function CreateInterpretation({ token }) {
                 </>
             }
 
-            <Footer page="create-interpretation" userLoggedIn={!!token} />
+            <Footer page="create-interpretation" user={user} />
         </div>
     )
 }
 
 export async function getServerSideProps({ req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
+    const token = await verifyTokenAndRedirect(req, res)
 
-    if (obj) {
-        const { token } = obj
+    const user = await retrieveUser(token)
 
-        return {
-            props: { token }
-        }
-    } else {
-        return {
-            props: {}
-        }
-    }
+    return { props: { token, user } }
 }

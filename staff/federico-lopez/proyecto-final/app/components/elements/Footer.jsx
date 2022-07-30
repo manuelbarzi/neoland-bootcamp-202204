@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { SearchLink, HomeLink, CreateInterPretationLink, UserSessionLink, Context } from '../../components'
 import { useContext } from 'react'
 
-export function Footer({ userLoggedIn, page }) {
+export function Footer({ user, page }) {
     const { handleCloseDialogClick } = useContext(Context)
     
     const [pageHome, setPageHome] = useState(false)
@@ -31,8 +31,8 @@ export function Footer({ userLoggedIn, page }) {
         <nav className="w-4/5 flex justify-between items-center">
             <HomeLink pageOn={pageHome} onClick={handleCloseDialogClick} />
             <SearchLink pageOn={pageSearch} onClick={handleCloseDialogClick} />
-            <CreateInterPretationLink pageOn={pageCreateInterpretation} onClick={handleCloseDialogClick} userLoggedIn={userLoggedIn} />
-            <UserSessionLink userLoggedIn={userLoggedIn} pageOn={pageUserSession} onClick={handleCloseDialogClick} />
+            <CreateInterPretationLink pageOn={pageCreateInterpretation} onClick={handleCloseDialogClick} userLoggedIn={!!user} />
+            <UserSessionLink user={user} pageOn={pageUserSession} onClick={handleCloseDialogClick} />
         </nav>
     </footer>
 }

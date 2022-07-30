@@ -1,9 +1,9 @@
 const { connect, disconnect, Types: { ObjectId } } = require('mongoose')
 const { Artist } = require('../models')
-const { retrieveArtists } = require('./')
+const { findArtists } = require('./')
 const { expect } = require('chai')
 
-describe('retrieveArtists', () => {
+describe('findArtists', () => {
     before(() => connect('mongodb://localhost:27017/pitch-us-test'))
 
     beforeEach(async () => {
@@ -16,7 +16,7 @@ describe('retrieveArtists', () => {
     })
 
     it('succeeds on existing artists and three matches in lower case', async () => {
-        const result = await retrieveArtists('la')
+        const result = await findArtists('la')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(3)
@@ -39,7 +39,7 @@ describe('retrieveArtists', () => {
     })
 
     it('succeeds on existing artists and three matches in upper case', async () => {
-        const result = await retrieveArtists('LA')
+        const result = await findArtists('LA')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(3)
@@ -62,7 +62,7 @@ describe('retrieveArtists', () => {
     })
 
     it('succeeds on existing artists and one match', async () => {
-        const result = await retrieveArtists('chi')
+        const result = await findArtists('chi')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(1)
@@ -76,7 +76,7 @@ describe('retrieveArtists', () => {
     })
 
     it('succeeds on existing artists and no matches', async () => {
-        const result = await retrieveArtists('zZzZ')
+        const result = await findArtists('zZzZ')
 
         expect(result).to.be.instanceOf(Array)
         expect(result).to.have.length(0)

@@ -1,11 +1,11 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ArtistIconImage, ArtistsSongsAndUsersResultsList, ChevronLeftImage, FavoriteImage, FlexColSection, Footer, Title2, Title, ButtonBlue, Context } from '../../../components'
-import { retrieveSongsOfArtist } from '../../../logic'
+import { retrieveSongsOfArtist, retrieveUser } from '../../../logic'
 import { useContext, useState } from 'react'
-import { verifyTokenWithAPICall } from '../../../helpers'
+import { verifyTokenAndRedirect } from '../../../helpers'
 
-export default function Artist({ token, songs }) {
+export default function Artist({ songs, user }) {
     const router = useRouter()
 
     const { handleFeedback } = useContext(Context)
@@ -15,7 +15,7 @@ export default function Artist({ token, songs }) {
     const artist = songs[0].artist.name
 
     const handleOnNewSongClick = () => {
-        if (!token)
+        if (!user)
             handleFeedback('info', 'Login needed', 'You should log in to create an interpretation')
     }
 
@@ -53,28 +53,19 @@ export default function Artist({ token, songs }) {
             </div>
             <ArtistsSongsAndUsersResultsList songs={songs} />
         </FlexColSection>
-        <Footer userLoggedIn={!!token} />
+        <Footer user={user} />
     </div>
 }
 
 export async function getServerSideProps({ params, req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
-    debugger
+    const token = await verifyTokenAndRedirect(req, res)
+
     const songs = await retrieveSongsOfArtist(params.artistName)
 
-    if (obj) {
-        const { token } = obj
+    if (token) {
+        const user = await retrieveUser(token)
 
-        return {
-            props: {
-                token, songs
-            }
-        }
-    } else {
-        return {
-            props: {
-                songs
-            }
-        }
-    }
+        return { props: { songs, user } }
+        
+    } else return { props: { songs } }
 }

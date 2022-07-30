@@ -1,12 +1,13 @@
 import { useState } from 'react'
-import { verifyTokenWithAPICall, returnFileSize } from '../../../helpers'
-import { verifyFile } from '../../../utils'
-import { updateUserImage } from '../../../logic'
+import { verifyTokenAndRedirect, returnFileSize } from '../../../../helpers'
+import { verifyFile } from '../../../../utils'
+import { updateUserImage } from '../../../../logic'
 
 export default function UploadPhoto({ token }) {
     const [file, setFile] = useState({ isTypeAllowed: true, isSizeAllowed: true, size: null })
 
     const handleFileChange = event => {
+        debugger
         const fileUpload = event.target.files[0]
 
         const { isTypeAllowed, isSizeAllowed } = verifyFile(fileUpload)
@@ -23,13 +24,13 @@ export default function UploadPhoto({ token }) {
     const handleFormSubmit = async event => {
         event.preventDefault()
 
-        if(!file.isSizeAllowed || !file.isTypeAllowed) return
+        if (!file.isSizeAllowed || !file.isTypeAllowed) return
 
         const fileUpload = event.target.profileImage.files[0]
-      
+
         try {
             updateUserImage(token, fileUpload)
-        } catch(error) {
+        } catch (error) {
             //TODO handle feedback
         }
     }
@@ -52,17 +53,7 @@ export default function UploadPhoto({ token }) {
 }
 
 export async function getServerSideProps({ req, res }) {
-    const obj = await verifyTokenWithAPICall(req, res)
+    const token = await verifyTokenAndRedirect(req, res)
 
-    if (obj) {
-        const { token } = obj
-
-        return {
-            props: { token }
-        }
-    } else {
-        return {
-            props: {}
-        }
-    }
+    return { props: { token } }
 }

@@ -1,12 +1,10 @@
-import { Dialog, FlexColSection, Footer, Header, Context, Title2 } from "../components"
-import { verifyTokenWithAPICall } from "../helpers"
-import { checkSpotifySession, getTopArtists } from '../logic'
-import { useContext, useEffect, useState } from "react"
+import { FlexColSection, Footer, Header, Context, Title2 } from "../components"
+import { verifyTokenAndRedirect } from "../helpers"
+import { checkSpotifySession, getTopArtists, retrieveUser } from '../logic'
+import { useContext, useState } from "react"
 import Link from "next/link";
 
-const querystring = require('query-string');
-
-export default function Home({ token, isSessionActive, topArtists }) {
+export default function Home({ isSessionActive, topArtists, user }) {
   const [dialogOpen, setDialogOpen] = useState(false)
 
   const { handleDialog } = useContext(Context)
@@ -15,7 +13,7 @@ export default function Home({ token, isSessionActive, topArtists }) {
     setDialogOpen('close')
   }
 
-  if (token && !dialogOpen && !isSessionActive) {
+  if (user && !dialogOpen && !isSessionActive) {
     handleDialog({
       title: 'Personalize your experience!',
       description: 'Connect now your Spotify account to easily find your favorites songs and artists.',
@@ -26,7 +24,7 @@ export default function Home({ token, isSessionActive, topArtists }) {
 
     setDialogOpen(true)
   }
-  
+
   return (
     <div className={'flex flex-col h-screen'}>
       <Header title="Explore" />
@@ -42,13 +40,13 @@ export default function Home({ token, isSessionActive, topArtists }) {
               {topArtists.map((artist, index) => {
                 return (
 
-                  <li 
-                    className={'min-w-[112px] h-28 rounded-lg ' + 
-                    (index % 4 === 0 ? 'bg-gradient-orange' : index % 4 === 1 ? 'bg-gradient-purple' : index % 4 === 2 ? 'bg-gradient-yellow' : 'bg-gradient-green')}
+                  <li
+                    className={'min-w-[112px] h-28 rounded-lg ' +
+                      (index % 4 === 0 ? 'bg-gradient-orange' : index % 4 === 1 ? 'bg-gradient-purple' : index % 4 === 2 ? 'bg-gradient-yellow' : 'bg-gradient-green')}
                     key={index}>
-                      <Link href={`/artist/${artist.name}`}>
+                    <Link href={`/artist/${artist.name}`}>
                       <a className="w-full h-full p-2 flex items-end text-xl font-bold text-white">{artist.name}</a>
-                      </Link>
+                    </Link>
                   </li>
 
                 )
@@ -59,73 +57,39 @@ export default function Home({ token, isSessionActive, topArtists }) {
         }
       </FlexColSection>
 
-      <Footer userLoggedIn={!!token} page="home" />
+      <Footer user={user} page="home" />
     </div>
   )
 }
 
 export async function getServerSideProps(ctx) {
   const { req, res } = ctx
-  
-  const obj = await verifyTokenWithAPICall(req, res)
 
-  if (obj) {
-    console.log('home 73')
-    const { token } = obj
+  const token = await verifyTokenAndRedirect(req, res)
+
+  if (token) {
+    const user = await retrieveUser(token)
 
     if (ctx.query.code) {
-      console.log('home 77')
       const isSessionActive = await checkSpotifySession(token, ctx.query.code)
 
       if (isSessionActive) {
         const topArtists = await getTopArtists(token)
-        console.log('home 82')
-        return {
-          props: {
-            'token': token,
-            'topArtists': topArtists,
-            'isSessionActive': isSessionActive
-          }
-        }
 
-      } else {
-        console.log('home 92')
-        return {
-          props: {
-            'token': token,
-            'isSessionActive': isSessionActive
-          }
-        }
-      }
+        return { props: { topArtists, isSessionActive, user } }
+
+      } else return { props: { isSessionActive, user } }
+
     } else {
-      console.log('home 101')
       const isSessionActive = await checkSpotifySession(token)
 
       if (isSessionActive) {
-        console.log('home 105')
         const topArtists = await getTopArtists(token)
 
-        return {
-          props: {
-            'token': token,
-            'topArtists': topArtists,
-            'isSessionActive': isSessionActive
-          }
-        }
-      } else {
-        console.log('home 116')
-        return {
-          props: {
-            'token': token,
-            'isSessionActive': isSessionActive
-          }
-        }
-      }
+        return { props: { topArtists, isSessionActive, user } }
+
+      } else return { props: { isSessionActive, user } }
     }
-  } else {
-    console.log('home 126')
-    return {
-      props: {}
-    }
-  }
+
+  } else return { props: {} }
 }

@@ -1,12 +1,9 @@
 import Link from 'next/link'
+import { calculateInterpretationRankAverage } from '../../helpers'
 import { RankImage } from '../images'
 
 export const InterpretationItem = ({ className, children, interpretation, artistName, songName, ...props }) => {
-    const rankAmountSum = interpretation.ranks.reduce((previousValue, currentValue) => {
-        return previousValue + currentValue.amount
-    }, 0).toFixed(1)
-
-    const rankAverage = rankAmountSum / interpretation.ranks.length
+    const rankAverage = calculateInterpretationRankAverage(interpretation.ranks)
 
     return (
         <li className={`w-full h-14 bg-primary shadow-custom-items ${className}`} {...props} >

@@ -1,11 +1,10 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useState, useContext } from "react"
-import { Context, CrossGreyImage, Title2, Title3, ChevronLeftImage, Footer, Slider, FlexColSection, InterpretationIconImage, SaveFavoriteImage, AvatarDemoImage, ChordButton, CircleChordButton, ExpandImage, RateYellowImage, RateYellowFullImage, RankInterpretationByUser } from '../../../../../../../components'
-import { retrieveInterpretationFromSong, retrieveSong, toggleOrUpdateRankToInterpretation } from '../../../../../../../logic'
-import { verifyTokenWithAPICall, getChords, generateInterpretation, generateChordImages } from "../../../../../../../helpers"
+import { useState } from "react"
+import { CrossGreyImage, Slider, RankInterpretationByUser } from '../../../../../../../components'
+import { retrieveInterpretationFromSong, retrieveSong } from '../../../../../../../logic'
+import { generateInterpretation, generateChordImages } from "../../../../../../../helpers"
 
-export default function FullScreenInterpretation({ token, userId, interpretation, song }) {
+export default function FullScreenInterpretation({ interpretation, song }) {
     const [chordView, setChordView] = useState(null)
 
     const songName = song.name
@@ -39,31 +38,11 @@ export default function FullScreenInterpretation({ token, userId, interpretation
     )
 }
 
-export async function getServerSideProps({ req, res, params: { songName, artistName, interpretationId } }) {
-    const obj = await verifyTokenWithAPICall(req, res)
-
+export async function getServerSideProps({ params: { songName, artistName, interpretationId } }) {
     const [interpretation, song] = await Promise.all([
         retrieveInterpretationFromSong(songName, artistName, interpretationId),
         retrieveSong(songName, artistName)
     ])
 
-    if (obj) {
-        const { token, userId } = obj
-
-        return {
-            props: {
-                token,
-                userId,
-                interpretation,
-                song,
-            }
-        }
-    } else {
-        return {
-            props: {
-                interpretation,
-                song,
-            }
-        }
-    }
+    return { props: { interpretation, song } }
 }

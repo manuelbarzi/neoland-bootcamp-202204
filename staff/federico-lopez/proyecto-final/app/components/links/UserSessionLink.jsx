@@ -1,9 +1,9 @@
 import Link from 'next/link'
 import { UserSessionImage } from "../../components"
 
-export const UserSessionLink = ({ className, children, userLoggedIn, pageOn, onClick, ...props }) => {
+export const UserSessionLink = ({ className, children, user, pageOn, onClick, ...props }) => {
     return (
-        <Link href={userLoggedIn ? '/profile/settings' : '/login'} className={`${className}`} {...props}>
+        <Link href={user ? `/profile/${user.username}` : '/login'} className={`${className}`} {...props}>
             <a onClick={onClick}>
                 <UserSessionImage pageOn={pageOn} />
             </a>

@@ -28,7 +28,10 @@ export function LoginForm({ className, children, onSubmit, ...props }) {
             <div className="w-full gap-2 flex justify-center">
                 <p className="text-myblack text-xs">{"Don't have an account ?"}</p>
                 <Link href="/register">
-                    <BlueAnchor>Sign Up</BlueAnchor>
+                    <a
+                        className={`text-xs text-myblue font-bold ${className}`}>
+                        Sign Up
+                    </a>
                 </Link>
             </div>
         </form>
